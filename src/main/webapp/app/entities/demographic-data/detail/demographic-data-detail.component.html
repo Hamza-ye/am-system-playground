@@ -1,0 +1,134 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="demographicData">
+      <h2 data-cy="demographicDataDetailsHeading">
+        <span appTranslate="amSystemPlaygroundApp.demographicData.detail.title">Demographic Data</span>
+      </h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ demographicData.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.created">Created</span></dt>
+        <dd>
+          <span>{{ demographicData.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ demographicData.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.date">Date</span></dt>
+        <dd>
+          <span>{{ demographicData.date | formatMediumDate }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.level">Level</span></dt>
+        <dd>
+          <span appTranslate="{{ 'amSystemPlaygroundApp.DemographicDataLevel.' + demographicData.level }}">{{
+            demographicData.level
+          }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.totalPopulation">Total Population</span></dt>
+        <dd>
+          <span>{{ demographicData.totalPopulation }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.malePopulation">Male Population</span></dt>
+        <dd>
+          <span>{{ demographicData.malePopulation }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.femalePopulation">Female Population</span></dt>
+        <dd>
+          <span>{{ demographicData.femalePopulation }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.lessThan5Population">Less Than 5 Population</span></dt>
+        <dd>
+          <span>{{ demographicData.lessThan5Population }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.greaterThan5Population">Greater Than 5 Population</span></dt>
+        <dd>
+          <span>{{ demographicData.greaterThan5Population }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.bw5And15Population">Bw 5 And 15 Population</span></dt>
+        <dd>
+          <span>{{ demographicData.bw5And15Population }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.greaterThan15Population">Greater Than 15 Population</span></dt>
+        <dd>
+          <span>{{ demographicData.greaterThan15Population }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.household">Household</span></dt>
+        <dd>
+          <span>{{ demographicData.household }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.houses">Houses</span></dt>
+        <dd>
+          <span>{{ demographicData.houses }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.healthFacilities">Health Facilities</span></dt>
+        <dd>
+          <span>{{ demographicData.healthFacilities }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.avgNoOfRooms">Avg No Of Rooms</span></dt>
+        <dd>
+          <span>{{ demographicData.avgNoOfRooms }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.avgRoomArea">Avg Room Area</span></dt>
+        <dd>
+          <span>{{ demographicData.avgRoomArea }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.avgHouseArea">Avg House Area</span></dt>
+        <dd>
+          <span>{{ demographicData.avgHouseArea }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.individualsPerHousehold">Individuals Per Household</span></dt>
+        <dd>
+          <span>{{ demographicData.individualsPerHousehold }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.populationGrowthRate">Population Growth Rate</span></dt>
+        <dd>
+          <span>{{ demographicData.populationGrowthRate }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.comment">Comment</span></dt>
+        <dd>
+          <span>{{ demographicData.comment }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.organisationUnit">Organisation Unit</span></dt>
+        <dd>
+          <div *ngIf="demographicData.organisationUnit">
+            <a [routerLink]="['/organisation-unit', demographicData.organisationUnit?.id, 'view']">{{
+              demographicData.organisationUnit?.name
+            }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.user">User</span></dt>
+        <dd>
+          <span>{{ demographicData.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ demographicData.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.source">Source</span></dt>
+        <dd>
+          <div *ngIf="demographicData.source">
+            <a [routerLink]="['/demographic-data-source', demographicData.source?.id, 'view']">{{ demographicData.source?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/demographic-data', demographicData.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

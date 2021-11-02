@@ -1,0 +1,89 @@
+{
+  "name": "WHMovement",
+  "fields": [
+    {
+      "fieldName": "movementType",
+      "fieldType": "MovementType",
+      "fieldValues": "IN,OUT,RECONCILIATION_IN,RECONCILIATION_OUT",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "quantity",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "reconciliationSource",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "reconciliationDestination",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "confirmedByOtherSide",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "wHMovement",
+      "relationshipName": "user",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "wHMovement",
+      "relationshipName": "lastUpdatedBy",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "workingDay",
+      "otherEntityRelationshipName": "wHMovement",
+      "relationshipValidateRules": "required",
+      "relationshipName": "day",
+      "otherEntityField": "dayLabel"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "warehouse",
+      "otherEntityRelationshipName": "initiatedMovement",
+      "relationshipValidateRules": "required",
+      "relationshipName": "initiatedWH",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "warehouse",
+      "otherEntityRelationshipName": "notInitiatedMovement",
+      "relationshipName": "theOtherSideWH",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "team",
+      "otherEntityRelationshipName": "whMovement",
+      "relationshipName": "team",
+      "otherEntityField": "name"
+    }
+  ],
+  "entityTableName": "wh_movement",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211031234320"
+}

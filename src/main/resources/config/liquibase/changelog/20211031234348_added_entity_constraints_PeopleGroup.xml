@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity PeopleGroup.
+    -->
+    <changeSet id="20211031234348-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="people_group"
+                                 constraintName="fk_people_group__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+                                 baseTableName="people_group"
+                                 constraintName="fk_people_group__last_updated_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="people_group_id"
+                                 baseTableName="rel_people_group__member"
+                                 constraintName="fk_rel_people_group__member__people_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="people_group"/>
+
+        <addForeignKeyConstraint baseColumnNames="member_id"
+                                 baseTableName="rel_people_group__member"
+                                 constraintName="fk_rel_people_group__member__member_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+        <addForeignKeyConstraint baseColumnNames="people_group_id"
+                                 baseTableName="rel_people_group__managed_by_group"
+                                 constraintName="fk_rel_people_group__managed_by_group__people_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="people_group"/>
+
+        <addForeignKeyConstraint baseColumnNames="managed_by_group_id"
+                                 baseTableName="rel_people_group__managed_by_group"
+                                 constraintName="fk_rel_people_group__managed_by_group__managed_by_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="people_group"/>
+    </changeSet>
+</databaseChangeLog>

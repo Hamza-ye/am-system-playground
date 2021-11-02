@@ -1,0 +1,77 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="team">
+      <h2 data-cy="teamDetailsHeading"><span appTranslate="amSystemPlaygroundApp.team.detail.title">Team</span></h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ team.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.team.uid">Uid</span></dt>
+        <dd>
+          <span>{{ team.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.team.code">Code</span></dt>
+        <dd>
+          <span>{{ team.code }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.team.name">Name</span></dt>
+        <dd>
+          <span>{{ team.name }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.team.created">Created</span></dt>
+        <dd>
+          <span>{{ team.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.team.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ team.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.team.teamNo">Team No</span></dt>
+        <dd>
+          <span>{{ team.teamNo }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.team.teamType">Team Type</span></dt>
+        <dd>
+          <span appTranslate="{{ 'amSystemPlaygroundApp.TeamType.' + team.teamType }}">{{ team.teamType }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.team.user">User</span></dt>
+        <dd>
+          <span>{{ team.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.team.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ team.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.team.person">Person</span></dt>
+        <dd>
+          <div *ngIf="team.person">
+            <a [routerLink]="['/person', team.person?.id, 'view']">{{ team.person?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.team.assignedToWarehouse">Assigned To Warehouse</span></dt>
+        <dd>
+          <span *ngFor="let assignedToWarehouse of team.assignedToWarehouses; let last = last">
+            <a [routerLink]="['/warehouse', assignedToWarehouse?.id, 'view']">{{ assignedToWarehouse.name }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/team', team.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

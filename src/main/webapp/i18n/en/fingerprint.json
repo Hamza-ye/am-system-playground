@@ -1,0 +1,32 @@
+{
+  "amSystemPlaygroundApp": {
+    "fingerprint": {
+      "home": {
+        "title": "Fingerprints",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Fingerprint",
+        "createOrEditLabel": "Create or edit a Fingerprint",
+        "notFound": "No Fingerprints found"
+      },
+      "created": "A new Fingerprint is created with identifier {{ param }}",
+      "updated": "A Fingerprint is updated with identifier {{ param }}",
+      "deleted": "A Fingerprint is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Fingerprint {{ id }}?"
+      },
+      "detail": {
+        "title": "Fingerprint"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "description": "Description",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "fingerprintUrl": "Fingerprint Url",
+      "fingerprintOwner": "Fingerprint Owner",
+      "user": "User",
+      "lastUpdatedBy": "Last Updated By",
+      "family": "Family"
+    }
+  }
+}

@@ -1,0 +1,109 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="person">
+      <h2 data-cy="personDetailsHeading"><span appTranslate="amSystemPlaygroundApp.person.detail.title">Person</span></h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ person.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.person.uid">Uid</span></dt>
+        <dd>
+          <span>{{ person.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.person.code">Code</span></dt>
+        <dd>
+          <span>{{ person.code }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.person.name">Name</span></dt>
+        <dd>
+          <span>{{ person.name }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.person.created">Created</span></dt>
+        <dd>
+          <span>{{ person.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.person.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ person.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.person.uuid">Uuid</span></dt>
+        <dd>
+          <span>{{ person.uuid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.person.gender">Gender</span></dt>
+        <dd>
+          <span appTranslate="{{ 'amSystemPlaygroundApp.Gender.' + person.gender }}">{{ person.gender }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.person.mobile">Mobile</span></dt>
+        <dd>
+          <span>{{ person.mobile }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.person.lastLogin">Last Login</span></dt>
+        <dd>
+          <span>{{ person.lastLogin | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.person.login">Login</span></dt>
+        <dd>
+          <span>{{ person.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.person.selfRegistered">Self Registered</span></dt>
+        <dd>
+          <span>{{ person.selfRegistered }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.person.disabled">Disabled</span></dt>
+        <dd>
+          <span>{{ person.disabled }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.person.userInfo">User Info</span></dt>
+        <dd>
+          <span>{{ person.userInfo?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.person.user">User</span></dt>
+        <dd>
+          <span>{{ person.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.person.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ person.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.person.organisationUnit">Organisation Unit</span></dt>
+        <dd>
+          <span *ngFor="let organisationUnit of person.organisationUnits; let last = last">
+            <a [routerLink]="['/organisation-unit', organisationUnit?.id, 'view']">{{ organisationUnit.name }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.person.dataViewOrganisationUnit">Data View Organisation Unit</span></dt>
+        <dd>
+          <span *ngFor="let dataViewOrganisationUnit of person.dataViewOrganisationUnits; let last = last">
+            <a [routerLink]="['/organisation-unit', dataViewOrganisationUnit?.id, 'view']">{{ dataViewOrganisationUnit.name }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.person.personAuthorityGroups">Person Authority Groups</span></dt>
+        <dd>
+          <span *ngFor="let personAuthorityGroups of person.personAuthorityGroups; let last = last">
+            <a [routerLink]="['/person-authority-group', personAuthorityGroups?.id, 'view']">{{ personAuthorityGroups.name }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/person', person.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

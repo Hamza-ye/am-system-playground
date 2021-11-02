@@ -1,0 +1,66 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="fingerprint">
+      <h2 data-cy="fingerprintDetailsHeading"><span appTranslate="amSystemPlaygroundApp.fingerprint.detail.title">Fingerprint</span></h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ fingerprint.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.fingerprint.uid">Uid</span></dt>
+        <dd>
+          <span>{{ fingerprint.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.fingerprint.description">Description</span></dt>
+        <dd>
+          <span>{{ fingerprint.description }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.fingerprint.created">Created</span></dt>
+        <dd>
+          <span>{{ fingerprint.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.fingerprint.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ fingerprint.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.fingerprint.fingerprintUrl">Fingerprint Url</span></dt>
+        <dd>
+          <span>{{ fingerprint.fingerprintUrl }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.fingerprint.fingerprintOwner">Fingerprint Owner</span></dt>
+        <dd>
+          <span>{{ fingerprint.fingerprintOwner }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.fingerprint.user">User</span></dt>
+        <dd>
+          <span>{{ fingerprint.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.fingerprint.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ fingerprint.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.fingerprint.family">Family</span></dt>
+        <dd>
+          <div *ngIf="fingerprint.family">
+            <a [routerLink]="['/family', fingerprint.family?.id, 'view']">{{ fingerprint.family?.familyNo }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/fingerprint', fingerprint.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

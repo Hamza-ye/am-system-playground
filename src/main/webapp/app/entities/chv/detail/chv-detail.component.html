@@ -1,0 +1,84 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="cHV">
+      <h2 data-cy="cHVDetailsHeading"><span appTranslate="amSystemPlaygroundApp.cHV.detail.title">CHV</span></h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ cHV.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHV.uid">Uid</span></dt>
+        <dd>
+          <span>{{ cHV.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHV.code">Code</span></dt>
+        <dd>
+          <span>{{ cHV.code }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHV.description">Description</span></dt>
+        <dd>
+          <span>{{ cHV.description }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHV.created">Created</span></dt>
+        <dd>
+          <span>{{ cHV.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHV.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ cHV.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHV.mobile">Mobile</span></dt>
+        <dd>
+          <span>{{ cHV.mobile }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHV.person">Person</span></dt>
+        <dd>
+          <div *ngIf="cHV.person">
+            <a [routerLink]="['/person', cHV.person?.id, 'view']">{{ cHV.person?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHV.district">District</span></dt>
+        <dd>
+          <div *ngIf="cHV.district">
+            <a [routerLink]="['/organisation-unit', cHV.district?.id, 'view']">{{ cHV.district?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHV.homeSubvillage">Home Subvillage</span></dt>
+        <dd>
+          <div *ngIf="cHV.homeSubvillage">
+            <a [routerLink]="['/organisation-unit', cHV.homeSubvillage?.id, 'view']">{{ cHV.homeSubvillage?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHV.managedByHf">Managed By Hf</span></dt>
+        <dd>
+          <div *ngIf="cHV.managedByHf">
+            <a [routerLink]="['/organisation-unit', cHV.managedByHf?.id, 'view']">{{ cHV.managedByHf?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHV.user">User</span></dt>
+        <dd>
+          <span>{{ cHV.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHV.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ cHV.lastUpdatedBy?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/chv', cHV.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

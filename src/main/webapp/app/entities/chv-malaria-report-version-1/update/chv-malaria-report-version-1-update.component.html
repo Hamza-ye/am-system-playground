@@ -1,0 +1,388 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="app-chv-malaria-report-version-1-heading"
+        data-cy="CHVMalariaReportVersion1CreateUpdateHeading"
+        appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.home.createOrEditLabel"
+      >
+        Create or edit a CHV Malaria Report Version 1
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" appTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.uid" for="field_uid">Uid</label>
+          <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
+          <div *ngIf="editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('uid')?.errors?.required" appTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('uid')?.errors?.maxlength"
+              appTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 11 }"
+            >
+              This field cannot be longer than 11 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.created" for="field_created"
+            >Created</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_created"
+              data-cy="created"
+              type="datetime-local"
+              class="form-control"
+              name="created"
+              formControlName="created"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.lastUpdated"
+            for="field_lastUpdated"
+            >Last Updated</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastUpdated"
+              data-cy="lastUpdated"
+              type="datetime-local"
+              class="form-control"
+              name="lastUpdated"
+              formControlName="lastUpdated"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.tested" for="field_tested"
+            >Tested</label
+          >
+          <input type="number" class="form-control" name="tested" id="field_tested" data-cy="tested" formControlName="tested" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.positive" for="field_positive"
+            >Positive</label
+          >
+          <input type="number" class="form-control" name="positive" id="field_positive" data-cy="positive" formControlName="positive" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.drugsGiven" for="field_drugsGiven"
+            >Drugs Given</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="drugsGiven"
+            id="field_drugsGiven"
+            data-cy="drugsGiven"
+            formControlName="drugsGiven"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.suppsGiven" for="field_suppsGiven"
+            >Supps Given</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="suppsGiven"
+            id="field_suppsGiven"
+            data-cy="suppsGiven"
+            formControlName="suppsGiven"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.rdtBalance" for="field_rdtBalance"
+            >Rdt Balance</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="rdtBalance"
+            id="field_rdtBalance"
+            data-cy="rdtBalance"
+            formControlName="rdtBalance"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.rdtReceived"
+            for="field_rdtReceived"
+            >Rdt Received</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="rdtReceived"
+            id="field_rdtReceived"
+            data-cy="rdtReceived"
+            formControlName="rdtReceived"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.rdtUsed" for="field_rdtUsed"
+            >Rdt Used</label
+          >
+          <input type="number" class="form-control" name="rdtUsed" id="field_rdtUsed" data-cy="rdtUsed" formControlName="rdtUsed" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.rdtDamagedLost"
+            for="field_rdtDamagedLost"
+            >Rdt Damaged Lost</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="rdtDamagedLost"
+            id="field_rdtDamagedLost"
+            data-cy="rdtDamagedLost"
+            formControlName="rdtDamagedLost"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.drugsBalance"
+            for="field_drugsBalance"
+            >Drugs Balance</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="drugsBalance"
+            id="field_drugsBalance"
+            data-cy="drugsBalance"
+            formControlName="drugsBalance"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.drugsReceived"
+            for="field_drugsReceived"
+            >Drugs Received</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="drugsReceived"
+            id="field_drugsReceived"
+            data-cy="drugsReceived"
+            formControlName="drugsReceived"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.drugsUsed" for="field_drugsUsed"
+            >Drugs Used</label
+          >
+          <input type="number" class="form-control" name="drugsUsed" id="field_drugsUsed" data-cy="drugsUsed" formControlName="drugsUsed" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.drugsDamagedLost"
+            for="field_drugsDamagedLost"
+            >Drugs Damaged Lost</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="drugsDamagedLost"
+            id="field_drugsDamagedLost"
+            data-cy="drugsDamagedLost"
+            formControlName="drugsDamagedLost"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.suppsBalance"
+            for="field_suppsBalance"
+            >Supps Balance</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="suppsBalance"
+            id="field_suppsBalance"
+            data-cy="suppsBalance"
+            formControlName="suppsBalance"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.suppsReceived"
+            for="field_suppsReceived"
+            >Supps Received</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="suppsReceived"
+            id="field_suppsReceived"
+            data-cy="suppsReceived"
+            formControlName="suppsReceived"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.suppsUsed" for="field_suppsUsed"
+            >Supps Used</label
+          >
+          <input type="number" class="form-control" name="suppsUsed" id="field_suppsUsed" data-cy="suppsUsed" formControlName="suppsUsed" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.suppsDamagedLost"
+            for="field_suppsDamagedLost"
+            >Supps Damaged Lost</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="suppsDamagedLost"
+            id="field_suppsDamagedLost"
+            data-cy="suppsDamagedLost"
+            formControlName="suppsDamagedLost"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.comment" for="field_comment"
+            >Comment</label
+          >
+          <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.lastUpdatedBy"
+            for="field_lastUpdatedBy"
+            >Last Updated By</label
+          >
+          <select
+            class="form-control"
+            id="field_lastUpdatedBy"
+            data-cy="lastUpdatedBy"
+            name="lastUpdatedBy"
+            formControlName="lastUpdatedBy"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('lastUpdatedBy')!.value?.id ? editForm.get('lastUpdatedBy')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.chv" for="field_chv">Chv</label>
+          <select class="form-control" id="field_chv" data-cy="chv" name="chv" formControlName="chv">
+            <option *ngIf="!editForm.get('chv')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="cHVOption.id === editForm.get('chv')!.value?.id ? editForm.get('chv')!.value : cHVOption"
+              *ngFor="let cHVOption of cHVSSharedCollection; trackBy: trackCHVById"
+            >
+              {{ cHVOption.code }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['chv'])!.invalid && (editForm.get(['chv'])!.dirty || editForm.get(['chv'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['chv'])?.errors?.required" appTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.period" for="field_period"
+            >Period</label
+          >
+          <select class="form-control" id="field_period" data-cy="period" name="period" formControlName="period">
+            <option *ngIf="!editForm.get('period')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="periodOption.id === editForm.get('period')!.value?.id ? editForm.get('period')!.value : periodOption"
+              *ngFor="let periodOption of periodsSharedCollection; trackBy: trackPeriodById"
+            >
+              {{ periodOption.name }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['period'])!.invalid && (editForm.get(['period'])!.dirty || editForm.get(['period'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['period'])?.errors?.required" appTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

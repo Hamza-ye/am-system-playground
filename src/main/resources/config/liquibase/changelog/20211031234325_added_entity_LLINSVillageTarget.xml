@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity LLINSVillageTarget.
+    -->
+    <changeSet id="20211031234325-1" author="jhipster">
+        <createTable tableName="llins_village_target">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uid" type="varchar(11)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="ux_llins_village_target__uid" />
+            </column>
+            <column name="created" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_updated" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="residents_individuals" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="idps_individuals" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="residents_families" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="idps_families" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="no_of_days_needed" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="quantity" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="organisation_unit_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_updated_by_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="day_planned_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="status_of_coverage_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="team_assigned_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="llins_village_target" columnName="created" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="llins_village_target" columnName="last_updated" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20211031234325-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/llins_village_target.csv"
+                  separator=";"
+                  tableName="llins_village_target">
+            <column name="id" type="numeric"/>
+            <column name="uid" type="string"/>
+            <column name="created" type="${datetimeType}"/>
+            <column name="last_updated" type="${datetimeType}"/>
+            <column name="residents_individuals" type="numeric"/>
+            <column name="idps_individuals" type="numeric"/>
+            <column name="residents_families" type="numeric"/>
+            <column name="idps_families" type="numeric"/>
+            <column name="no_of_days_needed" type="numeric"/>
+            <column name="quantity" type="numeric"/>
+            <column name="organisation_unit_id" type="numeric"/>
+            <column name="day_planned_id" type="numeric"/>
+            <column name="team_assigned_id" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

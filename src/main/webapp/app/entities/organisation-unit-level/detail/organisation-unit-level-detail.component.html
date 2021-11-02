@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="organisationUnitLevel">
+      <h2 data-cy="organisationUnitLevelDetailsHeading">
+        <span appTranslate="amSystemPlaygroundApp.organisationUnitLevel.detail.title">Organisation Unit Level</span>
+      </h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ organisationUnitLevel.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnitLevel.uid">Uid</span></dt>
+        <dd>
+          <span>{{ organisationUnitLevel.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnitLevel.code">Code</span></dt>
+        <dd>
+          <span>{{ organisationUnitLevel.code }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnitLevel.name">Name</span></dt>
+        <dd>
+          <span>{{ organisationUnitLevel.name }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnitLevel.created">Created</span></dt>
+        <dd>
+          <span>{{ organisationUnitLevel.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnitLevel.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ organisationUnitLevel.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnitLevel.level">Level</span></dt>
+        <dd>
+          <span>{{ organisationUnitLevel.level }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnitLevel.offlineLevels">Offline Levels</span></dt>
+        <dd>
+          <span>{{ organisationUnitLevel.offlineLevels }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/organisation-unit-level', organisationUnitLevel.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

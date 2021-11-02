@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity CHVMalariaReportVersion1.
+    -->
+    <changeSet id="20211031234342-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="chv_malaria_report_version_1"
+                                 constraintName="fk_chv_malaria_report_version_1__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+                                 baseTableName="chv_malaria_report_version_1"
+                                 constraintName="fk_chv_malaria_report_version_1__last_updated_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="chv_id"
+                                 baseTableName="chv_malaria_report_version_1"
+                                 constraintName="fk_chv_malaria_report_version_1__chv_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="chv"/>
+
+        <addForeignKeyConstraint baseColumnNames="period_id"
+                                 baseTableName="chv_malaria_report_version_1"
+                                 constraintName="fk_chv_malaria_report_version_1__period_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="period"/>
+    </changeSet>
+</databaseChangeLog>

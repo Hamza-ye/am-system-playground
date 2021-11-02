@@ -1,0 +1,34 @@
+{
+  "amSystemPlaygroundApp": {
+    "malariaUnitStaffMember": {
+      "home": {
+        "title": "Malaria Unit Staff Members",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Malaria Unit Staff Member",
+        "createOrEditLabel": "Create or edit a Malaria Unit Staff Member",
+        "notFound": "No Malaria Unit Staff Members found"
+      },
+      "created": "A new Malaria Unit Staff Member is created with identifier {{ param }}",
+      "updated": "A Malaria Unit Staff Member is updated with identifier {{ param }}",
+      "deleted": "A Malaria Unit Staff Member is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Malaria Unit Staff Member {{ id }}?"
+      },
+      "detail": {
+        "title": "Malaria Unit Staff Member"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "description": "Description",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "memberNo": "Member No",
+      "memberType": "Member Type",
+      "user": "User",
+      "lastUpdatedBy": "Last Updated By",
+      "person": "Person",
+      "malariaUnit": "Malaria Unit"
+    }
+  }
+}

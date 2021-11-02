@@ -1,0 +1,74 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="peopleGroup">
+      <h2 data-cy="peopleGroupDetailsHeading"><span appTranslate="amSystemPlaygroundApp.peopleGroup.detail.title">People Group</span></h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ peopleGroup.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.peopleGroup.uid">Uid</span></dt>
+        <dd>
+          <span>{{ peopleGroup.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.peopleGroup.code">Code</span></dt>
+        <dd>
+          <span>{{ peopleGroup.code }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.peopleGroup.name">Name</span></dt>
+        <dd>
+          <span>{{ peopleGroup.name }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.peopleGroup.created">Created</span></dt>
+        <dd>
+          <span>{{ peopleGroup.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.peopleGroup.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ peopleGroup.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.peopleGroup.uuid">Uuid</span></dt>
+        <dd>
+          <span>{{ peopleGroup.uuid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.peopleGroup.user">User</span></dt>
+        <dd>
+          <span>{{ peopleGroup.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.peopleGroup.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ peopleGroup.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.peopleGroup.member">Member</span></dt>
+        <dd>
+          <span *ngFor="let member of peopleGroup.members; let last = last">
+            <a [routerLink]="['/person', member?.id, 'view']">{{ member.name }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.peopleGroup.managedByGroup">Managed By Group</span></dt>
+        <dd>
+          <span *ngFor="let managedByGroup of peopleGroup.managedByGroups; let last = last">
+            <a [routerLink]="['/people-group', managedByGroup?.id, 'view']">{{ managedByGroup.name }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/people-group', peopleGroup.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

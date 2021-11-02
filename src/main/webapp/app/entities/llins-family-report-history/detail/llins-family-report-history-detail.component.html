@@ -1,0 +1,100 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="lLINSFamilyReportHistory">
+      <h2 data-cy="lLINSFamilyReportHistoryDetailsHeading">
+        <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.detail.title">LLINS Family Report History</span>
+      </h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyReportHistory.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.uid">Uid</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyReportHistory.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.created">Created</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyReportHistory.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyReportHistory.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.documentNo">Document No</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyReportHistory.documentNo }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.maleIndividuals">Male Individuals</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyReportHistory.maleIndividuals }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.femaleIndividuals">Female Individuals</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyReportHistory.femaleIndividuals }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.lessThan5Males">Less Than 5 Males</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyReportHistory.lessThan5Males }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.lessThan5Females">Less Than 5 Females</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyReportHistory.lessThan5Females }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.pregnantWomen">Pregnant Women</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyReportHistory.pregnantWomen }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.quantityReceived">Quantity Received</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyReportHistory.quantityReceived }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.familyType">Family Type</span></dt>
+        <dd>
+          <span appTranslate="{{ 'amSystemPlaygroundApp.FamilyType.' + lLINSFamilyReportHistory.familyType }}">{{
+            lLINSFamilyReportHistory.familyType
+          }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.user">User</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyReportHistory.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyReportHistory.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.dayReached">Day Reached</span></dt>
+        <dd>
+          <div *ngIf="lLINSFamilyReportHistory.dayReached">
+            <a [routerLink]="['/working-day', lLINSFamilyReportHistory.dayReached?.id, 'view']">{{
+              lLINSFamilyReportHistory.dayReached?.dayLabel
+            }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.llinsFamilyReport">Llins Family Report</span></dt>
+        <dd>
+          <div *ngIf="lLINSFamilyReportHistory.llinsFamilyReport">
+            <a [routerLink]="['/llins-family-report', lLINSFamilyReportHistory.llinsFamilyReport?.id, 'view']">{{
+              lLINSFamilyReportHistory.llinsFamilyReport?.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/llins-family-report-history', lLINSFamilyReportHistory.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

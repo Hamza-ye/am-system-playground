@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity DataSet.
+    -->
+    <changeSet id="20211031234350-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="period_type_id"
+                                 baseTableName="data_set"
+                                 constraintName="fk_data_set__period_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="period_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="notification_recipients_id"
+                                 baseTableName="data_set"
+                                 constraintName="fk_data_set__notification_recipients_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="people_group"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="data_set"
+                                 constraintName="fk_data_set__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+                                 baseTableName="data_set"
+                                 constraintName="fk_data_set__last_updated_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="data_set_id"
+                                 baseTableName="rel_data_set__source"
+                                 constraintName="fk_rel_data_set__source__data_set_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="data_set"/>
+
+        <addForeignKeyConstraint baseColumnNames="source_id"
+                                 baseTableName="rel_data_set__source"
+                                 constraintName="fk_rel_data_set__source__source_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organisation_unit"/>
+    </changeSet>
+</databaseChangeLog>

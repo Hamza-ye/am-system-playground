@@ -1,0 +1,40 @@
+{
+  "amSystemPlaygroundApp": {
+    "dengueCasesReport": {
+      "home": {
+        "title": "Dengue Cases Reports",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Dengue Cases Report",
+        "createOrEditLabel": "Create or edit a Dengue Cases Report",
+        "notFound": "No Dengue Cases Reports found"
+      },
+      "created": "A new Dengue Cases Report is created with identifier {{ param }}",
+      "updated": "A Dengue Cases Report is updated with identifier {{ param }}",
+      "deleted": "A Dengue Cases Report is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Dengue Cases Report {{ id }}?"
+      },
+      "detail": {
+        "title": "Dengue Cases Report"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "rdtTested": "Rdt Tested",
+      "rdtPositive": "Rdt Positive",
+      "probableCases": "Probable Cases",
+      "inpatientCases": "Inpatient Cases",
+      "deathCases": "Death Cases",
+      "treated": "Treated",
+      "suspectedCases": "Suspected Cases",
+      "comment": "Comment",
+      "user": "User",
+      "lastUpdatedBy": "Last Updated By",
+      "reportClass": "Report Class",
+      "period": "Period",
+      "dataSet": "Data Set",
+      "organisationUnit": "Organisation Unit"
+    }
+  }
+}

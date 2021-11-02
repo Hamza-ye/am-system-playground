@@ -1,0 +1,132 @@
+<div>
+  <h2 id="page-heading" data-cy="FamilyHeading">
+    <span appTranslate="amSystemPlaygroundApp.family.home.title">Families</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.family.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-family"
+        [routerLink]="['/family/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.family.home.createLabel"> Create a new Family </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="families?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.family.home.notFound">No families found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="families && families.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" appSortBy="uid">
+            <span appTranslate="amSystemPlaygroundApp.family.uid">Uid</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="code">
+            <span appTranslate="amSystemPlaygroundApp.family.code">Code</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="name">
+            <span appTranslate="amSystemPlaygroundApp.family.name">Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="created">
+            <span appTranslate="amSystemPlaygroundApp.family.created">Created</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdated">
+            <span appTranslate="amSystemPlaygroundApp.family.lastUpdated">Last Updated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="familyNo">
+            <span appTranslate="amSystemPlaygroundApp.family.familyNo">Family No</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="address">
+            <span appTranslate="amSystemPlaygroundApp.family.address">Address</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="organisationUnit.name">
+            <span appTranslate="amSystemPlaygroundApp.family.organisationUnit">Organisation Unit</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="user.login">
+            <span appTranslate="amSystemPlaygroundApp.family.user">User</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdatedBy.login">
+            <span appTranslate="amSystemPlaygroundApp.family.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let family of families; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/family', family.id, 'view']">{{ family.id }}</a>
+          </td>
+          <td>{{ family.uid }}</td>
+          <td>{{ family.code }}</td>
+          <td>{{ family.name }}</td>
+          <td>{{ family.created | formatMediumDatetime }}</td>
+          <td>{{ family.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ family.familyNo }}</td>
+          <td>{{ family.address }}</td>
+          <td>
+            <div *ngIf="family.organisationUnit">
+              <a [routerLink]="['/organisation-unit', family.organisationUnit?.id, 'view']">{{ family.organisationUnit?.name }}</a>
+            </div>
+          </td>
+          <td>
+            {{ family.user?.login }}
+          </td>
+          <td>
+            {{ family.lastUpdatedBy?.login }}
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/family', family.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/family', family.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(family)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="families && families.length > 0">
+    <div class="row justify-content-center">
+      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="dengueCasesReport">
+      <h2 data-cy="dengueCasesReportDetailsHeading">
+        <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.detail.title">Dengue Cases Report</span>
+      </h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ dengueCasesReport.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.uid">Uid</span></dt>
+        <dd>
+          <span>{{ dengueCasesReport.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.created">Created</span></dt>
+        <dd>
+          <span>{{ dengueCasesReport.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ dengueCasesReport.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.rdtTested">Rdt Tested</span></dt>
+        <dd>
+          <span>{{ dengueCasesReport.rdtTested }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.rdtPositive">Rdt Positive</span></dt>
+        <dd>
+          <span>{{ dengueCasesReport.rdtPositive }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.probableCases">Probable Cases</span></dt>
+        <dd>
+          <span>{{ dengueCasesReport.probableCases }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.inpatientCases">Inpatient Cases</span></dt>
+        <dd>
+          <span>{{ dengueCasesReport.inpatientCases }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.deathCases">Death Cases</span></dt>
+        <dd>
+          <span>{{ dengueCasesReport.deathCases }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.treated">Treated</span></dt>
+        <dd>
+          <span>{{ dengueCasesReport.treated }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.suspectedCases">Suspected Cases</span></dt>
+        <dd>
+          <span>{{ dengueCasesReport.suspectedCases }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.comment">Comment</span></dt>
+        <dd>
+          <span>{{ dengueCasesReport.comment }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.user">User</span></dt>
+        <dd>
+          <span>{{ dengueCasesReport.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ dengueCasesReport.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.reportClass">Report Class</span></dt>
+        <dd>
+          <div *ngIf="dengueCasesReport.reportClass">
+            <a [routerLink]="['/cases-report-class', dengueCasesReport.reportClass?.id, 'view']">{{
+              dengueCasesReport.reportClass?.name
+            }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.period">Period</span></dt>
+        <dd>
+          <div *ngIf="dengueCasesReport.period">
+            <a [routerLink]="['/period', dengueCasesReport.period?.id, 'view']">{{ dengueCasesReport.period?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.dataSet">Data Set</span></dt>
+        <dd>
+          <div *ngIf="dengueCasesReport.dataSet">
+            <a [routerLink]="['/data-set', dengueCasesReport.dataSet?.id, 'view']">{{ dengueCasesReport.dataSet?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.organisationUnit">Organisation Unit</span></dt>
+        <dd>
+          <div *ngIf="dengueCasesReport.organisationUnit">
+            <a [routerLink]="['/organisation-unit', dengueCasesReport.organisationUnit?.id, 'view']">{{
+              dengueCasesReport.organisationUnit?.name
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/dengue-cases-report', dengueCasesReport.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

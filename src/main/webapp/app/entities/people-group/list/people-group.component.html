@@ -1,0 +1,110 @@
+<div>
+  <h2 id="page-heading" data-cy="PeopleGroupHeading">
+    <span appTranslate="amSystemPlaygroundApp.peopleGroup.home.title">People Groups</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.peopleGroup.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-people-group"
+        [routerLink]="['/people-group/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.peopleGroup.home.createLabel"> Create a new People Group </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="peopleGroups?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.peopleGroup.home.notFound">No peopleGroups found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="peopleGroups && peopleGroups.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.code">Code</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.name">Name</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.uuid">Uuid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.member">Member</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.managedByGroup">Managed By Group</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let peopleGroup of peopleGroups; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/people-group', peopleGroup.id, 'view']">{{ peopleGroup.id }}</a>
+          </td>
+          <td>{{ peopleGroup.uid }}</td>
+          <td>{{ peopleGroup.code }}</td>
+          <td>{{ peopleGroup.name }}</td>
+          <td>{{ peopleGroup.created | formatMediumDatetime }}</td>
+          <td>{{ peopleGroup.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ peopleGroup.uuid }}</td>
+          <td>
+            {{ peopleGroup.user?.login }}
+          </td>
+          <td>
+            {{ peopleGroup.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <span *ngFor="let member of peopleGroup.members; let last = last">
+              <a class="form-control-static" [routerLink]="['/person', member.id, 'view']">{{ member.name }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <span *ngFor="let managedByGroup of peopleGroup.managedByGroups; let last = last">
+              <a class="form-control-static" [routerLink]="['/people-group', managedByGroup.id, 'view']">{{ managedByGroup.name }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/people-group', peopleGroup.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/people-group', peopleGroup.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(peopleGroup)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,106 @@
+{
+  "name": "CHV",
+  "fields": [
+    {
+      "fieldName": "uid",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "11"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastUpdated",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "mobile",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "person",
+      "otherEntityRelationshipName": "cHV",
+      "relationshipName": "person",
+      "otherEntityField": "name",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "organisationUnit",
+      "otherEntityRelationshipName": "assignedChv",
+      "javadoc": "When OrgUnit is subvillage, Which CHV covers it",
+      "relationshipName": "coveredSubVillage",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisationUnit",
+      "otherEntityRelationshipName": "cHV",
+      "relationshipValidateRules": "required",
+      "javadoc": "The district CHV belongs to it When OrgUnit is district",
+      "relationshipName": "district",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisationUnit",
+      "otherEntityRelationshipName": "cHV",
+      "javadoc": "When OrgUnit is SubVillage, What CHV it is home to",
+      "relationshipName": "homeSubvillage",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisationUnit",
+      "otherEntityRelationshipName": "cHV",
+      "javadoc": "When OrgUnit is HealthFacility, What CHV it manage",
+      "relationshipName": "managedByHf",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "cHV",
+      "relationshipName": "user",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "cHV",
+      "relationshipName": "lastUpdatedBy",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "cHVTeam",
+      "otherEntityRelationshipName": "responsibleForChv",
+      "relationshipName": "supervisionTeam",
+      "ownerSide": false
+    }
+  ],
+  "entityTableName": "chv",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211031234340"
+}

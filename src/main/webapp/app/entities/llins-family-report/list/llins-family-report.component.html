@@ -1,0 +1,188 @@
+<div>
+  <h2 id="page-heading" data-cy="LLINSFamilyReportHeading">
+    <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.home.title">LLINS Family Reports</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-llins-family-report"
+        [routerLink]="['/llins-family-report/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.home.createLabel"> Create a new LLINS Family Report </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="lLINSFamilyReports?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.home.notFound">No lLINSFamilyReports found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="lLINSFamilyReports && lLINSFamilyReports.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" appSortBy="uid">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.uid">Uid</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="created">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.created">Created</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdated">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.lastUpdated">Last Updated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="checkNo">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.checkNo">Check No</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="maleIndividuals">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.maleIndividuals">Male Individuals</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="femaleIndividuals">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.femaleIndividuals">Female Individuals</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lessThan5Males">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.lessThan5Males">Less Than 5 Males</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lessThan5Females">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.lessThan5Females">Less Than 5 Females</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="pregnantWomen">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.pregnantWomen">Pregnant Women</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="quantityReceived">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.quantityReceived">Quantity Received</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="familyType">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.familyType">Family Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="comment">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.comment">Comment</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="user.login">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.user">User</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdatedBy.login">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.lastUpdatedBy">Last Updated By</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="dayReached.dayLabel">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.dayReached">Day Reached</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="targetDetails.id">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.targetDetails">Target Details</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="executingTeam.name">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.executingTeam">Executing Team</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let lLINSFamilyReport of lLINSFamilyReports; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/llins-family-report', lLINSFamilyReport.id, 'view']">{{ lLINSFamilyReport.id }}</a>
+          </td>
+          <td>{{ lLINSFamilyReport.uid }}</td>
+          <td>{{ lLINSFamilyReport.created | formatMediumDatetime }}</td>
+          <td>{{ lLINSFamilyReport.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ lLINSFamilyReport.checkNo }}</td>
+          <td>{{ lLINSFamilyReport.maleIndividuals }}</td>
+          <td>{{ lLINSFamilyReport.femaleIndividuals }}</td>
+          <td>{{ lLINSFamilyReport.lessThan5Males }}</td>
+          <td>{{ lLINSFamilyReport.lessThan5Females }}</td>
+          <td>{{ lLINSFamilyReport.pregnantWomen }}</td>
+          <td>{{ lLINSFamilyReport.quantityReceived }}</td>
+          <td appTranslate="{{ 'amSystemPlaygroundApp.FamilyType.' + lLINSFamilyReport.familyType }}">
+            {{ lLINSFamilyReport.familyType }}
+          </td>
+          <td>{{ lLINSFamilyReport.comment }}</td>
+          <td>
+            {{ lLINSFamilyReport.user?.login }}
+          </td>
+          <td>
+            {{ lLINSFamilyReport.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <div *ngIf="lLINSFamilyReport.dayReached">
+              <a [routerLink]="['/working-day', lLINSFamilyReport.dayReached?.id, 'view']">{{ lLINSFamilyReport.dayReached?.dayLabel }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="lLINSFamilyReport.targetDetails">
+              <a [routerLink]="['/llins-family-target', lLINSFamilyReport.targetDetails?.id, 'view']">{{
+                lLINSFamilyReport.targetDetails?.id
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="lLINSFamilyReport.executingTeam">
+              <a [routerLink]="['/team', lLINSFamilyReport.executingTeam?.id, 'view']">{{ lLINSFamilyReport.executingTeam?.name }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/llins-family-report', lLINSFamilyReport.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/llins-family-report', lLINSFamilyReport.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(lLINSFamilyReport)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="lLINSFamilyReports && lLINSFamilyReports.length > 0">
+    <div class="row justify-content-center">
+      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

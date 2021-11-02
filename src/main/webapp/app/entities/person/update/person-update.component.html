@@ -1,0 +1,262 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="app-person-heading" data-cy="PersonCreateUpdateHeading" appTranslate="amSystemPlaygroundApp.person.home.createOrEditLabel">
+        Create or edit a Person
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" appTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.person.uid" for="field_uid">Uid</label>
+          <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
+          <div *ngIf="editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('uid')?.errors?.required" appTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('uid')?.errors?.maxlength"
+              appTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 11 }"
+            >
+              This field cannot be longer than 11 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.person.code" for="field_code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.person.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.person.created" for="field_created">Created</label>
+          <div class="d-flex">
+            <input
+              id="field_created"
+              data-cy="created"
+              type="datetime-local"
+              class="form-control"
+              name="created"
+              formControlName="created"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.person.lastUpdated" for="field_lastUpdated"
+            >Last Updated</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastUpdated"
+              data-cy="lastUpdated"
+              type="datetime-local"
+              class="form-control"
+              name="lastUpdated"
+              formControlName="lastUpdated"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.person.uuid" for="field_uuid">Uuid</label>
+          <input type="text" class="form-control" name="uuid" id="field_uuid" data-cy="uuid" formControlName="uuid" />
+          <div *ngIf="editForm.get('uuid')!.invalid && (editForm.get('uuid')!.dirty || editForm.get('uuid')!.touched)"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.person.gender" for="field_gender">Gender</label>
+          <select class="form-control" name="gender" formControlName="gender" id="field_gender" data-cy="gender">
+            <option [ngValue]="null">{{ 'amSystemPlaygroundApp.Gender.null' | translate }}</option>
+            <option value="MALE">{{ 'amSystemPlaygroundApp.Gender.MALE' | translate }}</option>
+            <option value="FEMALE">{{ 'amSystemPlaygroundApp.Gender.FEMALE' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.person.mobile" for="field_mobile">Mobile</label>
+          <input type="text" class="form-control" name="mobile" id="field_mobile" data-cy="mobile" formControlName="mobile" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.person.lastLogin" for="field_lastLogin">Last Login</label>
+          <div class="d-flex">
+            <input
+              id="field_lastLogin"
+              data-cy="lastLogin"
+              type="datetime-local"
+              class="form-control"
+              name="lastLogin"
+              formControlName="lastLogin"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.person.login" for="field_login">Login</label>
+          <input type="text" class="form-control" name="login" id="field_login" data-cy="login" formControlName="login" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.person.selfRegistered" for="field_selfRegistered"
+            >Self Registered</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="selfRegistered"
+            id="field_selfRegistered"
+            data-cy="selfRegistered"
+            formControlName="selfRegistered"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.person.disabled" for="field_disabled">Disabled</label>
+          <input type="checkbox" class="form-check" name="disabled" id="field_disabled" data-cy="disabled" formControlName="disabled" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.person.userInfo" for="field_userInfo">User Info</label>
+          <select class="form-control" id="field_userInfo" data-cy="userInfo" name="userInfo" formControlName="userInfo">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('userInfo')!.value?.id ? editForm.get('userInfo')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.person.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.person.lastUpdatedBy" for="field_lastUpdatedBy"
+            >Last Updated By</label
+          >
+          <select
+            class="form-control"
+            id="field_lastUpdatedBy"
+            data-cy="lastUpdatedBy"
+            name="lastUpdatedBy"
+            formControlName="lastUpdatedBy"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('lastUpdatedBy')!.value?.id ? editForm.get('lastUpdatedBy')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label appTranslate="amSystemPlaygroundApp.person.organisationUnit" for="field_organisationUnits">Organisation Unit</label>
+          <select
+            class="form-control"
+            id="field_organisationUnits"
+            data-cy="organisationUnit"
+            multiple
+            name="organisationUnits"
+            formControlName="organisationUnits"
+          >
+            <option
+              [ngValue]="getSelectedOrganisationUnit(organisationUnitOption, editForm.get('organisationUnits')!.value)"
+              *ngFor="let organisationUnitOption of organisationUnitsSharedCollection; trackBy: trackOrganisationUnitById"
+            >
+              {{ organisationUnitOption.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label appTranslate="amSystemPlaygroundApp.person.dataViewOrganisationUnit" for="field_dataViewOrganisationUnits"
+            >Data View Organisation Unit</label
+          >
+          <select
+            class="form-control"
+            id="field_dataViewOrganisationUnits"
+            data-cy="dataViewOrganisationUnit"
+            multiple
+            name="dataViewOrganisationUnits"
+            formControlName="dataViewOrganisationUnits"
+          >
+            <option
+              [ngValue]="getSelectedOrganisationUnit(organisationUnitOption, editForm.get('dataViewOrganisationUnits')!.value)"
+              *ngFor="let organisationUnitOption of organisationUnitsSharedCollection; trackBy: trackOrganisationUnitById"
+            >
+              {{ organisationUnitOption.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label appTranslate="amSystemPlaygroundApp.person.personAuthorityGroups" for="field_personAuthorityGroups"
+            >Person Authority Groups</label
+          >
+          <select
+            class="form-control"
+            id="field_personAuthorityGroups"
+            data-cy="personAuthorityGroups"
+            multiple
+            name="personAuthorityGroups"
+            formControlName="personAuthorityGroups"
+          >
+            <option
+              [ngValue]="getSelectedPersonAuthorityGroup(personAuthorityGroupOption, editForm.get('personAuthorityGroups')!.value)"
+              *ngFor="let personAuthorityGroupOption of personAuthorityGroupsSharedCollection; trackBy: trackPersonAuthorityGroupById"
+            >
+              {{ personAuthorityGroupOption.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

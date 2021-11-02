@@ -1,0 +1,132 @@
+<div>
+  <h2 id="page-heading" data-cy="LLINSVillageReportHeading">
+    <span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.home.title">LLINS Village Reports</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-llins-village-report"
+        [routerLink]="['/llins-village-report/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.home.createLabel"> Create a new LLINS Village Report </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="lLINSVillageReports?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.home.notFound">No lLINSVillageReports found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="lLINSVillageReports && lLINSVillageReports.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.houses">Houses</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.residentHousehold">Resident Household</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.idpsHousehold">Idps Household</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.maleIndividuals">Male Individuals</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.femaleIndividuals">Female Individuals</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.lessThan5Males">Less Than 5 Males</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.lessThan5Females">Less Than 5 Females</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.pregnantWomen">Pregnant Women</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.quantityReceived">Quantity Received</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.comment">Comment</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.dayReached">Day Reached</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.targetDetails">Target Details</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.executingTeam">Executing Team</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let lLINSVillageReport of lLINSVillageReports; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/llins-village-report', lLINSVillageReport.id, 'view']">{{ lLINSVillageReport.id }}</a>
+          </td>
+          <td>{{ lLINSVillageReport.uid }}</td>
+          <td>{{ lLINSVillageReport.created | formatMediumDatetime }}</td>
+          <td>{{ lLINSVillageReport.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ lLINSVillageReport.houses }}</td>
+          <td>{{ lLINSVillageReport.residentHousehold }}</td>
+          <td>{{ lLINSVillageReport.idpsHousehold }}</td>
+          <td>{{ lLINSVillageReport.maleIndividuals }}</td>
+          <td>{{ lLINSVillageReport.femaleIndividuals }}</td>
+          <td>{{ lLINSVillageReport.lessThan5Males }}</td>
+          <td>{{ lLINSVillageReport.lessThan5Females }}</td>
+          <td>{{ lLINSVillageReport.pregnantWomen }}</td>
+          <td>{{ lLINSVillageReport.quantityReceived }}</td>
+          <td>{{ lLINSVillageReport.comment }}</td>
+          <td>
+            {{ lLINSVillageReport.user?.login }}
+          </td>
+          <td>
+            {{ lLINSVillageReport.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <div *ngIf="lLINSVillageReport.dayReached">
+              <a [routerLink]="['/working-day', lLINSVillageReport.dayReached?.id, 'view']">{{
+                lLINSVillageReport.dayReached?.dayLabel
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="lLINSVillageReport.targetDetails">
+              <a [routerLink]="['/llins-village-target', lLINSVillageReport.targetDetails?.id, 'view']">{{
+                lLINSVillageReport.targetDetails?.id
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="lLINSVillageReport.executingTeam">
+              <a [routerLink]="['/team', lLINSVillageReport.executingTeam?.id, 'view']">{{ lLINSVillageReport.executingTeam?.name }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/llins-village-report', lLINSVillageReport.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/llins-village-report', lLINSVillageReport.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(lLINSVillageReport)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

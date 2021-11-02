@@ -1,0 +1,35 @@
+{
+  "amSystemPlaygroundApp": {
+    "wHMovement": {
+      "home": {
+        "title": "WH Movements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new WH Movement",
+        "createOrEditLabel": "Create or edit a WH Movement",
+        "notFound": "No WH Movements found"
+      },
+      "created": "A new WH Movement is created with identifier {{ param }}",
+      "updated": "A WH Movement is updated with identifier {{ param }}",
+      "deleted": "A WH Movement is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete WH Movement {{ id }}?"
+      },
+      "detail": {
+        "title": "WH Movement"
+      },
+      "id": "ID",
+      "movementType": "Movement Type",
+      "quantity": "Quantity",
+      "reconciliationSource": "Reconciliation Source",
+      "reconciliationDestination": "Reconciliation Destination",
+      "confirmedByOtherSide": "Confirmed By Other Side",
+      "comment": "Comment",
+      "user": "User",
+      "lastUpdatedBy": "Last Updated By",
+      "day": "Day",
+      "initiatedWH": "Initiated WH",
+      "theOtherSideWH": "The Other Side WH",
+      "team": "Team"
+    }
+  }
+}

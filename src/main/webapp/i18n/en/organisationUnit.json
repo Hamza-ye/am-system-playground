@@ -1,0 +1,55 @@
+{
+  "amSystemPlaygroundApp": {
+    "organisationUnit": {
+      "home": {
+        "title": "Organisation Units",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Organisation Unit",
+        "createOrEditLabel": "Create or edit a Organisation Unit",
+        "notFound": "No Organisation Units found"
+      },
+      "created": "A new Organisation Unit is created with identifier {{ param }}",
+      "updated": "A Organisation Unit is updated with identifier {{ param }}",
+      "deleted": "A Organisation Unit is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Organisation Unit {{ id }}?"
+      },
+      "detail": {
+        "title": "Organisation Unit"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "name": "Name",
+      "shortName": "Short Name",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "path": "Path",
+      "hierarchyLevel": "Hierarchy Level",
+      "openingDate": "Opening Date",
+      "comment": "Comment",
+      "closedDate": "Closed Date",
+      "url": "Url",
+      "contactPerson": "Contact Person",
+      "address": "Address",
+      "email": "Email",
+      "phoneNumber": "Phone Number",
+      "organisationUnitType": "Organisation Unit Type",
+      "malariaReport": "Malaria Report",
+      "dengueReport": "Dengue Report",
+      "parent": "Parent",
+      "hfHomeSubVillage": "Hf Home Sub Village",
+      "coveredByHf": "Covered By Hf",
+      "user": "User",
+      "lastUpdatedBy": "Last Updated By",
+      "malariaUnit": "Malaria Unit",
+      "assignedChv": "Assigned Chv",
+      "children": "Children",
+      "demographicData": "Demographic Data",
+      "group": "Group",
+      "person": "Person",
+      "dataViewPerson": "Data View Person",
+      "dataSet": "Data Set"
+    }
+  }
+}

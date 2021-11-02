@@ -1,0 +1,193 @@
+{
+  "name": "OrganisationUnit",
+  "fields": [
+    {
+      "fieldName": "uid",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "11"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "shortName",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastUpdated",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "path",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "hierarchyLevel",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "openingDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "closedDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "url",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contactPerson",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "organisationUnitType",
+      "fieldType": "OrganisationUnitType",
+      "fieldValues": "COUNTRY,GOV,DISTRICT,VILLAGE,SUBVILLAGE,HEALTH_FACILITY",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "malariaCasesReport",
+      "otherEntityRelationshipName": "organisationUnit",
+      "relationshipName": "malariaReport"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "dengueCasesReport",
+      "otherEntityRelationshipName": "organisationUnit",
+      "relationshipName": "dengueReport"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisationUnit",
+      "otherEntityRelationshipName": "children",
+      "relationshipName": "parent",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisationUnit",
+      "otherEntityRelationshipName": "organisationUnit",
+      "javadoc": "When OrgUnit is HealthFacility, what its home subvillage",
+      "relationshipName": "hfHomeSubVillage"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisationUnit",
+      "otherEntityRelationshipName": "organisationUnit",
+      "javadoc": "When OrgUnit is HealthFacility, what villages it covers",
+      "relationshipName": "coveredByHf",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "organisationUnit",
+      "relationshipName": "user",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "organisationUnit",
+      "relationshipName": "lastUpdatedBy",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "malariaUnit",
+      "otherEntityRelationshipName": "organisationUnit",
+      "relationshipName": "malariaUnit"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "cHV",
+      "otherEntityRelationshipName": "coveredSubVillage",
+      "relationshipName": "assignedChv"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "organisationUnit",
+      "otherEntityRelationshipName": "parent",
+      "relationshipName": "children",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "demographicData",
+      "otherEntityRelationshipName": "organisationUnit",
+      "relationshipName": "demographicData"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "organisationUnitGroup",
+      "otherEntityRelationshipName": "member",
+      "relationshipName": "group",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "person",
+      "otherEntityRelationshipName": "organisationUnit",
+      "relationshipName": "person",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "person",
+      "otherEntityRelationshipName": "dataViewOrganisationUnit",
+      "relationshipName": "dataViewPerson",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "dataSet",
+      "otherEntityRelationshipName": "source",
+      "relationshipName": "dataSet",
+      "ownerSide": false
+    }
+  ],
+  "entityTableName": "organisation_unit",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211031234344"
+}

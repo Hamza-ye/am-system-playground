@@ -1,0 +1,215 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="app-team-heading" data-cy="TeamCreateUpdateHeading" appTranslate="amSystemPlaygroundApp.team.home.createOrEditLabel">
+        Create or edit a Team
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" appTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.team.uid" for="field_uid">Uid</label>
+          <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
+          <div *ngIf="editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('uid')?.errors?.required" appTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('uid')?.errors?.maxlength"
+              appTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 11 }"
+            >
+              This field cannot be longer than 11 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.team.code" for="field_code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.team.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.team.created" for="field_created">Created</label>
+          <div class="d-flex">
+            <input
+              id="field_created"
+              data-cy="created"
+              type="datetime-local"
+              class="form-control"
+              name="created"
+              formControlName="created"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.team.lastUpdated" for="field_lastUpdated"
+            >Last Updated</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastUpdated"
+              data-cy="lastUpdated"
+              type="datetime-local"
+              class="form-control"
+              name="lastUpdated"
+              formControlName="lastUpdated"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.team.teamNo" for="field_teamNo">Team No</label>
+          <input type="number" class="form-control" name="teamNo" id="field_teamNo" data-cy="teamNo" formControlName="teamNo" />
+          <div *ngIf="editForm.get('teamNo')!.invalid && (editForm.get('teamNo')!.dirty || editForm.get('teamNo')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('teamNo')?.errors?.required" appTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('teamNo')?.errors?.min"
+              appTranslate="entity.validation.min"
+              [translateValues]="{ min: 1 }"
+            >
+              This field should be at least 1.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('teamNo')?.errors?.number" appTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.team.teamType" for="field_teamType">Team Type</label>
+          <select class="form-control" name="teamType" formControlName="teamType" id="field_teamType" data-cy="teamType">
+            <option [ngValue]="null">{{ 'amSystemPlaygroundApp.TeamType.null' | translate }}</option>
+            <option value="FIELD_TEAM_LEADER">{{ 'amSystemPlaygroundApp.TeamType.FIELD_TEAM_LEADER' | translate }}</option>
+            <option value="WH_SUPERVISOR">{{ 'amSystemPlaygroundApp.TeamType.WH_SUPERVISOR' | translate }}</option>
+            <option value="OR_MEMBER">{{ 'amSystemPlaygroundApp.TeamType.OR_MEMBER' | translate }}</option>
+            <option value="REVIEW_TEAM_MEMBER">{{ 'amSystemPlaygroundApp.TeamType.REVIEW_TEAM_MEMBER' | translate }}</option>
+            <option value="HEAD_OF_OR">{{ 'amSystemPlaygroundApp.TeamType.HEAD_OF_OR' | translate }}</option>
+            <option value="EVALUATION">{{ 'amSystemPlaygroundApp.TeamType.EVALUATION' | translate }}</option>
+            <option value="HEAD_OF_CAMPAIGN">{{ 'amSystemPlaygroundApp.TeamType.HEAD_OF_CAMPAIGN' | translate }}</option>
+            <option value="FINANCE">{{ 'amSystemPlaygroundApp.TeamType.FINANCE' | translate }}</option>
+            <option value="TRANSPORTATION_AND_MOVEMENT">
+              {{ 'amSystemPlaygroundApp.TeamType.TRANSPORTATION_AND_MOVEMENT' | translate }}
+            </option>
+            <option value="PARTNER">{{ 'amSystemPlaygroundApp.TeamType.PARTNER' | translate }}</option>
+            <option value="MOH">{{ 'amSystemPlaygroundApp.TeamType.MOH' | translate }}</option>
+            <option value="WORKER">{{ 'amSystemPlaygroundApp.TeamType.WORKER' | translate }}</option>
+            <option value="DRIVER">{{ 'amSystemPlaygroundApp.TeamType.DRIVER' | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('teamType')!.invalid && (editForm.get('teamType')!.dirty || editForm.get('teamType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('teamType')?.errors?.required"
+              appTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.team.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.team.lastUpdatedBy" for="field_lastUpdatedBy"
+            >Last Updated By</label
+          >
+          <select
+            class="form-control"
+            id="field_lastUpdatedBy"
+            data-cy="lastUpdatedBy"
+            name="lastUpdatedBy"
+            formControlName="lastUpdatedBy"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('lastUpdatedBy')!.value?.id ? editForm.get('lastUpdatedBy')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.team.person" for="field_person">Person</label>
+          <select class="form-control" id="field_person" data-cy="person" name="person" formControlName="person">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="personOption.id === editForm.get('person')!.value?.id ? editForm.get('person')!.value : personOption"
+              *ngFor="let personOption of peopleSharedCollection; trackBy: trackPersonById"
+            >
+              {{ personOption.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label appTranslate="amSystemPlaygroundApp.team.assignedToWarehouse" for="field_assignedToWarehouses"
+            >Assigned To Warehouse</label
+          >
+          <select
+            class="form-control"
+            id="field_assignedToWarehouses"
+            data-cy="assignedToWarehouse"
+            multiple
+            name="assignedToWarehouses"
+            formControlName="assignedToWarehouses"
+          >
+            <option
+              [ngValue]="getSelectedWarehouse(warehouseOption, editForm.get('assignedToWarehouses')!.value)"
+              *ngFor="let warehouseOption of warehousesSharedCollection; trackBy: trackWarehouseById"
+            >
+              {{ warehouseOption.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

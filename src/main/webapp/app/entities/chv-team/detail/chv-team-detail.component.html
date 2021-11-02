@@ -1,0 +1,81 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="cHVTeam">
+      <h2 data-cy="cHVTeamDetailsHeading"><span appTranslate="amSystemPlaygroundApp.cHVTeam.detail.title">CHV Team</span></h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ cHVTeam.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHVTeam.uid">Uid</span></dt>
+        <dd>
+          <span>{{ cHVTeam.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHVTeam.code">Code</span></dt>
+        <dd>
+          <span>{{ cHVTeam.code }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHVTeam.name">Name</span></dt>
+        <dd>
+          <span>{{ cHVTeam.name }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHVTeam.description">Description</span></dt>
+        <dd>
+          <span>{{ cHVTeam.description }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHVTeam.created">Created</span></dt>
+        <dd>
+          <span>{{ cHVTeam.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHVTeam.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ cHVTeam.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHVTeam.teamNo">Team No</span></dt>
+        <dd>
+          <span>{{ cHVTeam.teamNo }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHVTeam.teamType">Team Type</span></dt>
+        <dd>
+          <span appTranslate="{{ 'amSystemPlaygroundApp.CHVTeamType.' + cHVTeam.teamType }}">{{ cHVTeam.teamType }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHVTeam.user">User</span></dt>
+        <dd>
+          <span>{{ cHVTeam.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHVTeam.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ cHVTeam.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHVTeam.person">Person</span></dt>
+        <dd>
+          <div *ngIf="cHVTeam.person">
+            <a [routerLink]="['/person', cHVTeam.person?.id, 'view']">{{ cHVTeam.person?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHVTeam.responsibleForChv">Responsible For Chv</span></dt>
+        <dd>
+          <span *ngFor="let responsibleForChv of cHVTeam.responsibleForChvs; let last = last">
+            <a [routerLink]="['/chv', responsibleForChv?.id, 'view']">{{ responsibleForChv.code }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/chv-team', cHVTeam.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity OrganisationUnitGroupSet.
+    -->
+    <changeSet id="20211031234346-1" author="jhipster">
+        <createTable tableName="orgunit_groupset">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uid" type="varchar(11)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="ux_orgunit_groupset__uid" />
+            </column>
+            <column name="code" type="varchar(255)">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_orgunit_groupset__code" />
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="created" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_updated" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="compulsory" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="include_subhierarchy_in_analytics" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_updated_by_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="orgunit_groupset" columnName="created" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="orgunit_groupset" columnName="last_updated" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <changeSet id="20211031234346-1-relations" author="jhipster">
+
+        <createTable tableName="rel_orgunit_groupset__organisation_unit_group">
+            <column name="organisation_unit_group_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="orgunit_groupset_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="orgunit_groupset_id, organisation_unit_group_id" tableName="rel_orgunit_groupset__organisation_unit_group"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20211031234346-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/orgunit_groupset.csv"
+                  separator=";"
+                  tableName="orgunit_groupset">
+            <column name="id" type="numeric"/>
+            <column name="uid" type="string"/>
+            <column name="code" type="string"/>
+            <column name="name" type="string"/>
+            <column name="created" type="${datetimeType}"/>
+            <column name="last_updated" type="${datetimeType}"/>
+            <column name="compulsory" type="boolean"/>
+            <column name="include_subhierarchy_in_analytics" type="boolean"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

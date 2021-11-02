@@ -1,0 +1,39 @@
+{
+  "amSystemPlaygroundApp": {
+    "team": {
+      "home": {
+        "title": "Teams",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Team",
+        "createOrEditLabel": "Create or edit a Team",
+        "notFound": "No Teams found"
+      },
+      "created": "A new Team is created with identifier {{ param }}",
+      "updated": "A Team is updated with identifier {{ param }}",
+      "deleted": "A Team is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Team {{ id }}?"
+      },
+      "detail": {
+        "title": "Team"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "name": "Name",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "teamNo": "Team No",
+      "teamType": "Team Type",
+      "whMovement": "Wh Movement",
+      "llinsVillageTarget": "Llins Village Target",
+      "llinsVillageReport": "Llins Village Report",
+      "llinsFamilyTarget": "Llins Family Target",
+      "llinsFamilyReport": "Llins Family Report",
+      "user": "User",
+      "lastUpdatedBy": "Last Updated By",
+      "person": "Person",
+      "assignedToWarehouse": "Assigned To Warehouse"
+    }
+  }
+}

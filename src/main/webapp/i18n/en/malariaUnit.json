@@ -1,0 +1,34 @@
+{
+  "amSystemPlaygroundApp": {
+    "malariaUnit": {
+      "home": {
+        "title": "Malaria Units",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Malaria Unit",
+        "createOrEditLabel": "Create or edit a Malaria Unit",
+        "notFound": "No Malaria Units found"
+      },
+      "created": "A new Malaria Unit is created with identifier {{ param }}",
+      "updated": "A Malaria Unit is updated with identifier {{ param }}",
+      "deleted": "A Malaria Unit is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Malaria Unit {{ id }}?"
+      },
+      "detail": {
+        "title": "Malaria Unit"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "name": "Name",
+      "shortName": "Short Name",
+      "description": "Description",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "organisationUnit": "Organisation Unit",
+      "malariaUnitStaffMember": "Malaria Unit Staff Member",
+      "user": "User",
+      "lastUpdatedBy": "Last Updated By"
+    }
+  }
+}

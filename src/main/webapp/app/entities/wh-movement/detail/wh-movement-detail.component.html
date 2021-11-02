@@ -1,0 +1,84 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="wHMovement">
+      <h2 data-cy="wHMovementDetailsHeading"><span appTranslate="amSystemPlaygroundApp.wHMovement.detail.title">WH Movement</span></h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ wHMovement.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.wHMovement.movementType">Movement Type</span></dt>
+        <dd>
+          <span appTranslate="{{ 'amSystemPlaygroundApp.MovementType.' + wHMovement.movementType }}">{{ wHMovement.movementType }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.wHMovement.quantity">Quantity</span></dt>
+        <dd>
+          <span>{{ wHMovement.quantity }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.wHMovement.reconciliationSource">Reconciliation Source</span></dt>
+        <dd>
+          <span>{{ wHMovement.reconciliationSource }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.wHMovement.reconciliationDestination">Reconciliation Destination</span></dt>
+        <dd>
+          <span>{{ wHMovement.reconciliationDestination }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.wHMovement.confirmedByOtherSide">Confirmed By Other Side</span></dt>
+        <dd>
+          <span>{{ wHMovement.confirmedByOtherSide }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.wHMovement.comment">Comment</span></dt>
+        <dd>
+          <span>{{ wHMovement.comment }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.wHMovement.user">User</span></dt>
+        <dd>
+          <span>{{ wHMovement.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.wHMovement.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ wHMovement.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.wHMovement.day">Day</span></dt>
+        <dd>
+          <div *ngIf="wHMovement.day">
+            <a [routerLink]="['/working-day', wHMovement.day?.id, 'view']">{{ wHMovement.day?.dayLabel }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.wHMovement.initiatedWH">Initiated WH</span></dt>
+        <dd>
+          <div *ngIf="wHMovement.initiatedWH">
+            <a [routerLink]="['/warehouse', wHMovement.initiatedWH?.id, 'view']">{{ wHMovement.initiatedWH?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.wHMovement.theOtherSideWH">The Other Side WH</span></dt>
+        <dd>
+          <div *ngIf="wHMovement.theOtherSideWH">
+            <a [routerLink]="['/warehouse', wHMovement.theOtherSideWH?.id, 'view']">{{ wHMovement.theOtherSideWH?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.wHMovement.team">Team</span></dt>
+        <dd>
+          <div *ngIf="wHMovement.team">
+            <a [routerLink]="['/team', wHMovement.team?.id, 'view']">{{ wHMovement.team?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/wh-movement', wHMovement.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

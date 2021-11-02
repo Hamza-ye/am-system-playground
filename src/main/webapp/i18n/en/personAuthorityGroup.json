@@ -1,0 +1,32 @@
+{
+  "amSystemPlaygroundApp": {
+    "personAuthorityGroup": {
+      "home": {
+        "title": "Person Authority Groups",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Person Authority Group",
+        "createOrEditLabel": "Create or edit a Person Authority Group",
+        "notFound": "No Person Authority Groups found"
+      },
+      "created": "A new Person Authority Group is created with identifier {{ param }}",
+      "updated": "A Person Authority Group is updated with identifier {{ param }}",
+      "deleted": "A Person Authority Group is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Person Authority Group {{ id }}?"
+      },
+      "detail": {
+        "title": "Person Authority Group"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "name": "Name",
+      "description": "Description",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "user": "User",
+      "lastUpdatedBy": "Last Updated By",
+      "member": "Member"
+    }
+  }
+}

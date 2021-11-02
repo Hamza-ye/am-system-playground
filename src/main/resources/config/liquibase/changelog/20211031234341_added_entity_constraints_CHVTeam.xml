@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity CHVTeam.
+    -->
+    <changeSet id="20211031234341-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="chv_team"
+                                 constraintName="fk_chv_team__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+                                 baseTableName="chv_team"
+                                 constraintName="fk_chv_team__last_updated_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="chv_team"
+                                 constraintName="fk_chv_team__person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+        <addForeignKeyConstraint baseColumnNames="chv_team_id"
+                                 baseTableName="rel_chv_team__responsible_for_chv"
+                                 constraintName="fk_rel_chv_team__responsible_for_chv__chv_team_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="chv_team"/>
+
+        <addForeignKeyConstraint baseColumnNames="responsible_for_chv_id"
+                                 baseTableName="rel_chv_team__responsible_for_chv"
+                                 constraintName="fk_rel_chv_team__responsible_for_chv__responsible_for_chv_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="chv"/>
+    </changeSet>
+</databaseChangeLog>

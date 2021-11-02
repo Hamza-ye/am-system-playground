@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity OrganisationUnit.
+    -->
+    <changeSet id="20211031234344-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="parent_id"
+                                 baseTableName="organisation_unit"
+                                 constraintName="fk_organisation_unit__parent_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organisation_unit"/>
+
+        <addForeignKeyConstraint baseColumnNames="hf_home_sub_village_id"
+                                 baseTableName="organisation_unit"
+                                 constraintName="fk_organisation_unit__hf_home_sub_village_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organisation_unit"/>
+
+        <addForeignKeyConstraint baseColumnNames="covered_by_hf_id"
+                                 baseTableName="organisation_unit"
+                                 constraintName="fk_organisation_unit__covered_by_hf_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organisation_unit"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="organisation_unit"
+                                 constraintName="fk_organisation_unit__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+                                 baseTableName="organisation_unit"
+                                 constraintName="fk_organisation_unit__last_updated_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="malaria_unit_id"
+                                 baseTableName="organisation_unit"
+                                 constraintName="fk_organisation_unit__malaria_unit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="malaria_unit"/>
+
+        <addForeignKeyConstraint baseColumnNames="assigned_chv_id"
+                                 baseTableName="organisation_unit"
+                                 constraintName="fk_organisation_unit__assigned_chv_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="chv"/>
+    </changeSet>
+</databaseChangeLog>

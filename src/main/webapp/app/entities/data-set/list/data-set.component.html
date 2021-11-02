@@ -1,0 +1,121 @@
+<div>
+  <h2 id="page-heading" data-cy="DataSetHeading">
+    <span appTranslate="amSystemPlaygroundApp.dataSet.home.title">Data Sets</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.dataSet.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-data-set"
+        [routerLink]="['/data-set/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.dataSet.home.createLabel"> Create a new Data Set </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="dataSets?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.dataSet.home.notFound">No dataSets found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="dataSets && dataSets.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.code">Code</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.name">Name</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.shortName">Short Name</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.description">Description</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.expiryDays">Expiry Days</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.timelyDays">Timely Days</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.periodType">Period Type</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.notificationRecipients">Notification Recipients</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.source">Source</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dataSet of dataSets; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/data-set', dataSet.id, 'view']">{{ dataSet.id }}</a>
+          </td>
+          <td>{{ dataSet.uid }}</td>
+          <td>{{ dataSet.code }}</td>
+          <td>{{ dataSet.name }}</td>
+          <td>{{ dataSet.shortName }}</td>
+          <td>{{ dataSet.description }}</td>
+          <td>{{ dataSet.created | formatMediumDatetime }}</td>
+          <td>{{ dataSet.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ dataSet.expiryDays }}</td>
+          <td>{{ dataSet.timelyDays }}</td>
+          <td>
+            <div *ngIf="dataSet.periodType">
+              <a [routerLink]="['/period-type', dataSet.periodType?.id, 'view']">{{ dataSet.periodType?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="dataSet.notificationRecipients">
+              <a [routerLink]="['/people-group', dataSet.notificationRecipients?.id, 'view']">{{ dataSet.notificationRecipients?.name }}</a>
+            </div>
+          </td>
+          <td>
+            {{ dataSet.user?.login }}
+          </td>
+          <td>
+            {{ dataSet.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <span *ngFor="let source of dataSet.sources; let last = last">
+              <a class="form-control-static" [routerLink]="['/organisation-unit', source.id, 'view']">{{ source.name }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/data-set', dataSet.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/data-set', dataSet.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(dataSet)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

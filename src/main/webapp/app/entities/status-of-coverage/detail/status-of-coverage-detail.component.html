@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="statusOfCoverage">
+      <h2 data-cy="statusOfCoverageDetailsHeading">
+        <span appTranslate="amSystemPlaygroundApp.statusOfCoverage.detail.title">Status Of Coverage</span>
+      </h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ statusOfCoverage.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.statusOfCoverage.code">Code</span></dt>
+        <dd>
+          <span>{{ statusOfCoverage.code }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.statusOfCoverage.status">Status</span></dt>
+        <dd>
+          <span>{{ statusOfCoverage.status }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.statusOfCoverage.user">User</span></dt>
+        <dd>
+          <span>{{ statusOfCoverage.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.statusOfCoverage.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ statusOfCoverage.lastUpdatedBy?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/status-of-coverage', statusOfCoverage.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

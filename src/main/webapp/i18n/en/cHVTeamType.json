@@ -1,0 +1,13 @@
+{
+  "amSystemPlaygroundApp": {
+    "CHVTeamType": {
+      "null": "",
+      "SUPERVISOR": "SUPERVISOR",
+      "EVALUATION": "EVALUATION",
+      "HEAD_OF_ACTIVITY": "HEAD_OF_ACTIVITY",
+      "FINANCE": "FINANCE",
+      "PARTNER": "PARTNER",
+      "MOH": "MOH"
+    }
+  }
+}

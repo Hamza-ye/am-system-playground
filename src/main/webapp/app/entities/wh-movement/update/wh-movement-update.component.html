@@ -1,0 +1,263 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="app-wh-movement-heading"
+        data-cy="WHMovementCreateUpdateHeading"
+        appTranslate="amSystemPlaygroundApp.wHMovement.home.createOrEditLabel"
+      >
+        Create or edit a WH Movement
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" appTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.wHMovement.movementType" for="field_movementType"
+            >Movement Type</label
+          >
+          <select class="form-control" name="movementType" formControlName="movementType" id="field_movementType" data-cy="movementType">
+            <option [ngValue]="null">{{ 'amSystemPlaygroundApp.MovementType.null' | translate }}</option>
+            <option value="IN">{{ 'amSystemPlaygroundApp.MovementType.IN' | translate }}</option>
+            <option value="OUT">{{ 'amSystemPlaygroundApp.MovementType.OUT' | translate }}</option>
+            <option value="RECONCILIATION_IN">{{ 'amSystemPlaygroundApp.MovementType.RECONCILIATION_IN' | translate }}</option>
+            <option value="RECONCILIATION_OUT">{{ 'amSystemPlaygroundApp.MovementType.RECONCILIATION_OUT' | translate }}</option>
+          </select>
+          <div
+            *ngIf="editForm.get('movementType')!.invalid && (editForm.get('movementType')!.dirty || editForm.get('movementType')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('movementType')?.errors?.required"
+              appTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.wHMovement.quantity" for="field_quantity">Quantity</label>
+          <input type="number" class="form-control" name="quantity" id="field_quantity" data-cy="quantity" formControlName="quantity" />
+          <div *ngIf="editForm.get('quantity')!.invalid && (editForm.get('quantity')!.dirty || editForm.get('quantity')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('quantity')?.errors?.required"
+              appTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('quantity')?.errors?.min"
+              appTranslate="entity.validation.min"
+              [translateValues]="{ min: 0 }"
+            >
+              This field should be at least 0.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('quantity')?.errors?.number"
+              appTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.wHMovement.reconciliationSource"
+            for="field_reconciliationSource"
+            >Reconciliation Source</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="reconciliationSource"
+            id="field_reconciliationSource"
+            data-cy="reconciliationSource"
+            formControlName="reconciliationSource"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.wHMovement.reconciliationDestination"
+            for="field_reconciliationDestination"
+            >Reconciliation Destination</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="reconciliationDestination"
+            id="field_reconciliationDestination"
+            data-cy="reconciliationDestination"
+            formControlName="reconciliationDestination"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.wHMovement.confirmedByOtherSide"
+            for="field_confirmedByOtherSide"
+            >Confirmed By Other Side</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="confirmedByOtherSide"
+            id="field_confirmedByOtherSide"
+            data-cy="confirmedByOtherSide"
+            formControlName="confirmedByOtherSide"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.wHMovement.comment" for="field_comment">Comment</label>
+          <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.wHMovement.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.wHMovement.lastUpdatedBy" for="field_lastUpdatedBy"
+            >Last Updated By</label
+          >
+          <select
+            class="form-control"
+            id="field_lastUpdatedBy"
+            data-cy="lastUpdatedBy"
+            name="lastUpdatedBy"
+            formControlName="lastUpdatedBy"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('lastUpdatedBy')!.value?.id ? editForm.get('lastUpdatedBy')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.wHMovement.day" for="field_day">Day</label>
+          <select class="form-control" id="field_day" data-cy="day" name="day" formControlName="day">
+            <option *ngIf="!editForm.get('day')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="workingDayOption.id === editForm.get('day')!.value?.id ? editForm.get('day')!.value : workingDayOption"
+              *ngFor="let workingDayOption of workingDaysSharedCollection; trackBy: trackWorkingDayById"
+            >
+              {{ workingDayOption.dayLabel }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['day'])!.invalid && (editForm.get(['day'])!.dirty || editForm.get(['day'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['day'])?.errors?.required" appTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.wHMovement.initiatedWH" for="field_initiatedWH"
+            >Initiated WH</label
+          >
+          <select class="form-control" id="field_initiatedWH" data-cy="initiatedWH" name="initiatedWH" formControlName="initiatedWH">
+            <option *ngIf="!editForm.get('initiatedWH')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="
+                warehouseOption.id === editForm.get('initiatedWH')!.value?.id ? editForm.get('initiatedWH')!.value : warehouseOption
+              "
+              *ngFor="let warehouseOption of warehousesSharedCollection; trackBy: trackWarehouseById"
+            >
+              {{ warehouseOption.name }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="editForm.get(['initiatedWH'])!.invalid && (editForm.get(['initiatedWH'])!.dirty || editForm.get(['initiatedWH'])!.touched)"
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['initiatedWH'])?.errors?.required"
+            appTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.wHMovement.theOtherSideWH" for="field_theOtherSideWH"
+            >The Other Side WH</label
+          >
+          <select
+            class="form-control"
+            id="field_theOtherSideWH"
+            data-cy="theOtherSideWH"
+            name="theOtherSideWH"
+            formControlName="theOtherSideWH"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                warehouseOption.id === editForm.get('theOtherSideWH')!.value?.id ? editForm.get('theOtherSideWH')!.value : warehouseOption
+              "
+              *ngFor="let warehouseOption of warehousesSharedCollection; trackBy: trackWarehouseById"
+            >
+              {{ warehouseOption.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.wHMovement.team" for="field_team">Team</label>
+          <select class="form-control" id="field_team" data-cy="team" name="team" formControlName="team">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="teamOption.id === editForm.get('team')!.value?.id ? editForm.get('team')!.value : teamOption"
+              *ngFor="let teamOption of teamsSharedCollection; trackBy: trackTeamById"
+            >
+              {{ teamOption.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

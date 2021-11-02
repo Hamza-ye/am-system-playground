@@ -1,0 +1,32 @@
+{
+  "amSystemPlaygroundApp": {
+    "casesReportClass": {
+      "home": {
+        "title": "Cases Report Classes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Cases Report Class",
+        "createOrEditLabel": "Create or edit a Cases Report Class",
+        "notFound": "No Cases Report Classes found"
+      },
+      "created": "A new Cases Report Class is created with identifier {{ param }}",
+      "updated": "A Cases Report Class is updated with identifier {{ param }}",
+      "deleted": "A Cases Report Class is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Cases Report Class {{ id }}?"
+      },
+      "detail": {
+        "title": "Cases Report Class"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "name": "Name",
+      "shortName": "Short Name",
+      "description": "Description",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "user": "User",
+      "lastUpdatedBy": "Last Updated By"
+    }
+  }
+}

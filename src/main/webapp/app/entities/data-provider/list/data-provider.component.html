@@ -1,0 +1,104 @@
+<div>
+  <h2 id="page-heading" data-cy="DataProviderHeading">
+    <span appTranslate="amSystemPlaygroundApp.dataProvider.home.title">Data Providers</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.dataProvider.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-data-provider"
+        [routerLink]="['/data-provider/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.dataProvider.home.createLabel"> Create a new Data Provider </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="dataProviders?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.dataProvider.home.notFound">No dataProviders found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="dataProviders && dataProviders.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataProvider.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataProvider.code">Code</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataProvider.name">Name</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataProvider.description">Description</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataProvider.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataProvider.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataProvider.mobile">Mobile</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataProvider.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataProvider.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataProvider.family">Family</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dataProvider of dataProviders; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/data-provider', dataProvider.id, 'view']">{{ dataProvider.id }}</a>
+          </td>
+          <td>{{ dataProvider.uid }}</td>
+          <td>{{ dataProvider.code }}</td>
+          <td>{{ dataProvider.name }}</td>
+          <td>{{ dataProvider.description }}</td>
+          <td>{{ dataProvider.created | formatMediumDatetime }}</td>
+          <td>{{ dataProvider.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ dataProvider.mobile }}</td>
+          <td>
+            {{ dataProvider.user?.login }}
+          </td>
+          <td>
+            {{ dataProvider.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <div *ngIf="dataProvider.family">
+              <a [routerLink]="['/family', dataProvider.family?.id, 'view']">{{ dataProvider.family?.familyNo }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/data-provider', dataProvider.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/data-provider', dataProvider.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(dataProvider)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

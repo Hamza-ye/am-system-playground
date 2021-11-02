@@ -1,0 +1,20 @@
+{
+  "amSystemPlaygroundApp": {
+    "TeamType": {
+      "null": "",
+      "FIELD_TEAM_LEADER": "FIELD_TEAM_LEADER",
+      "WH_SUPERVISOR": "WH_SUPERVISOR",
+      "OR_MEMBER": "OR_MEMBER",
+      "REVIEW_TEAM_MEMBER": "REVIEW_TEAM_MEMBER",
+      "HEAD_OF_OR": "HEAD_OF_OR",
+      "EVALUATION": "EVALUATION",
+      "HEAD_OF_CAMPAIGN": "HEAD_OF_CAMPAIGN",
+      "FINANCE": "FINANCE",
+      "TRANSPORTATION_AND_MOVEMENT": "TRANSPORTATION_AND_MOVEMENT",
+      "PARTNER": "PARTNER",
+      "MOH": "MOH",
+      "WORKER": "WORKER",
+      "DRIVER": "DRIVER"
+    }
+  }
+}

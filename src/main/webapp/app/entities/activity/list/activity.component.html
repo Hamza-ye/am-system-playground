@@ -1,0 +1,154 @@
+<div>
+  <h2 id="page-heading" data-cy="ActivityHeading">
+    <span appTranslate="amSystemPlaygroundApp.activity.home.title">Activities</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.activity.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-activity"
+        [routerLink]="['/activity/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.activity.home.createLabel"> Create a new Activity </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="activities?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.activity.home.notFound">No activities found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="activities && activities.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" appSortBy="uid">
+            <span appTranslate="amSystemPlaygroundApp.activity.uid">Uid</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="code">
+            <span appTranslate="amSystemPlaygroundApp.activity.code">Code</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="name">
+            <span appTranslate="amSystemPlaygroundApp.activity.name">Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="created">
+            <span appTranslate="amSystemPlaygroundApp.activity.created">Created</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdated">
+            <span appTranslate="amSystemPlaygroundApp.activity.lastUpdated">Last Updated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="startDate">
+            <span appTranslate="amSystemPlaygroundApp.activity.startDate">Start Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="endDate">
+            <span appTranslate="amSystemPlaygroundApp.activity.endDate">End Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="noOfDays">
+            <span appTranslate="amSystemPlaygroundApp.activity.noOfDays">No Of Days</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="active">
+            <span appTranslate="amSystemPlaygroundApp.activity.active">Active</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="isDisplayed">
+            <span appTranslate="amSystemPlaygroundApp.activity.isDisplayed">Is Displayed</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="user.login">
+            <span appTranslate="amSystemPlaygroundApp.activity.user">User</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdatedBy.login">
+            <span appTranslate="amSystemPlaygroundApp.activity.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="project.name">
+            <span appTranslate="amSystemPlaygroundApp.activity.project">Project</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let activity of activities; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/activity', activity.id, 'view']">{{ activity.id }}</a>
+          </td>
+          <td>{{ activity.uid }}</td>
+          <td>{{ activity.code }}</td>
+          <td>{{ activity.name }}</td>
+          <td>{{ activity.created | formatMediumDatetime }}</td>
+          <td>{{ activity.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ activity.startDate | formatMediumDate }}</td>
+          <td>{{ activity.endDate | formatMediumDate }}</td>
+          <td>{{ activity.noOfDays }}</td>
+          <td>{{ activity.active }}</td>
+          <td>{{ activity.isDisplayed }}</td>
+          <td>
+            {{ activity.user?.login }}
+          </td>
+          <td>
+            {{ activity.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <div *ngIf="activity.project">
+              <a [routerLink]="['/project', activity.project?.id, 'view']">{{ activity.project?.name }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/activity', activity.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/activity', activity.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(activity)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="activities && activities.length > 0">
+    <div class="row justify-content-center">
+      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

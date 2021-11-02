@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="personAuthorityGroup">
+      <h2 data-cy="personAuthorityGroupDetailsHeading">
+        <span appTranslate="amSystemPlaygroundApp.personAuthorityGroup.detail.title">Person Authority Group</span>
+      </h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ personAuthorityGroup.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.personAuthorityGroup.uid">Uid</span></dt>
+        <dd>
+          <span>{{ personAuthorityGroup.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.personAuthorityGroup.code">Code</span></dt>
+        <dd>
+          <span>{{ personAuthorityGroup.code }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.personAuthorityGroup.name">Name</span></dt>
+        <dd>
+          <span>{{ personAuthorityGroup.name }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.personAuthorityGroup.description">Description</span></dt>
+        <dd>
+          <span>{{ personAuthorityGroup.description }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.personAuthorityGroup.created">Created</span></dt>
+        <dd>
+          <span>{{ personAuthorityGroup.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.personAuthorityGroup.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ personAuthorityGroup.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.personAuthorityGroup.user">User</span></dt>
+        <dd>
+          <span>{{ personAuthorityGroup.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.personAuthorityGroup.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ personAuthorityGroup.lastUpdatedBy?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/person-authority-group', personAuthorityGroup.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

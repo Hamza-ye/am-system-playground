@@ -1,0 +1,140 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="organisationUnit">
+      <h2 data-cy="organisationUnitDetailsHeading">
+        <span appTranslate="amSystemPlaygroundApp.organisationUnit.detail.title">Organisation Unit</span>
+      </h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ organisationUnit.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.uid">Uid</span></dt>
+        <dd>
+          <span>{{ organisationUnit.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.code">Code</span></dt>
+        <dd>
+          <span>{{ organisationUnit.code }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.name">Name</span></dt>
+        <dd>
+          <span>{{ organisationUnit.name }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.shortName">Short Name</span></dt>
+        <dd>
+          <span>{{ organisationUnit.shortName }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.created">Created</span></dt>
+        <dd>
+          <span>{{ organisationUnit.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ organisationUnit.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.path">Path</span></dt>
+        <dd>
+          <span>{{ organisationUnit.path }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.hierarchyLevel">Hierarchy Level</span></dt>
+        <dd>
+          <span>{{ organisationUnit.hierarchyLevel }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.openingDate">Opening Date</span></dt>
+        <dd>
+          <span>{{ organisationUnit.openingDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.comment">Comment</span></dt>
+        <dd>
+          <span>{{ organisationUnit.comment }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.closedDate">Closed Date</span></dt>
+        <dd>
+          <span>{{ organisationUnit.closedDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.url">Url</span></dt>
+        <dd>
+          <span>{{ organisationUnit.url }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.contactPerson">Contact Person</span></dt>
+        <dd>
+          <span>{{ organisationUnit.contactPerson }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.address">Address</span></dt>
+        <dd>
+          <span>{{ organisationUnit.address }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.email">Email</span></dt>
+        <dd>
+          <span>{{ organisationUnit.email }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.phoneNumber">Phone Number</span></dt>
+        <dd>
+          <span>{{ organisationUnit.phoneNumber }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.organisationUnitType">Organisation Unit Type</span></dt>
+        <dd>
+          <span appTranslate="{{ 'amSystemPlaygroundApp.OrganisationUnitType.' + organisationUnit.organisationUnitType }}">{{
+            organisationUnit.organisationUnitType
+          }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.parent">Parent</span></dt>
+        <dd>
+          <div *ngIf="organisationUnit.parent">
+            <a [routerLink]="['/organisation-unit', organisationUnit.parent?.id, 'view']">{{ organisationUnit.parent?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.hfHomeSubVillage">Hf Home Sub Village</span></dt>
+        <dd>
+          <div *ngIf="organisationUnit.hfHomeSubVillage">
+            <a [routerLink]="['/organisation-unit', organisationUnit.hfHomeSubVillage?.id, 'view']">{{
+              organisationUnit.hfHomeSubVillage?.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.coveredByHf">Covered By Hf</span></dt>
+        <dd>
+          <div *ngIf="organisationUnit.coveredByHf">
+            <a [routerLink]="['/organisation-unit', organisationUnit.coveredByHf?.id, 'view']">{{ organisationUnit.coveredByHf?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.user">User</span></dt>
+        <dd>
+          <span>{{ organisationUnit.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ organisationUnit.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.malariaUnit">Malaria Unit</span></dt>
+        <dd>
+          <div *ngIf="organisationUnit.malariaUnit">
+            <a [routerLink]="['/malaria-unit', organisationUnit.malariaUnit?.id, 'view']">{{ organisationUnit.malariaUnit?.id }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.assignedChv">Assigned Chv</span></dt>
+        <dd>
+          <div *ngIf="organisationUnit.assignedChv">
+            <a [routerLink]="['/chv', organisationUnit.assignedChv?.id, 'view']">{{ organisationUnit.assignedChv?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/organisation-unit', organisationUnit.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

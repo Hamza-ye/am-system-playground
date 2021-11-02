@@ -1,0 +1,34 @@
+{
+  "amSystemPlaygroundApp": {
+    "peopleGroup": {
+      "home": {
+        "title": "People Groups",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new People Group",
+        "createOrEditLabel": "Create or edit a People Group",
+        "notFound": "No People Groups found"
+      },
+      "created": "A new People Group is created with identifier {{ param }}",
+      "updated": "A People Group is updated with identifier {{ param }}",
+      "deleted": "A People Group is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete People Group {{ id }}?"
+      },
+      "detail": {
+        "title": "People Group"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "name": "Name",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "uuid": "Uuid",
+      "user": "User",
+      "lastUpdatedBy": "Last Updated By",
+      "member": "Member",
+      "managedByGroup": "Managed By Group",
+      "managedGroup": "Managed Group"
+    }
+  }
+}

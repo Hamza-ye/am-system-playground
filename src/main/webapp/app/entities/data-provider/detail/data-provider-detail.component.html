@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="dataProvider">
+      <h2 data-cy="dataProviderDetailsHeading">
+        <span appTranslate="amSystemPlaygroundApp.dataProvider.detail.title">Data Provider</span>
+      </h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ dataProvider.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataProvider.uid">Uid</span></dt>
+        <dd>
+          <span>{{ dataProvider.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataProvider.code">Code</span></dt>
+        <dd>
+          <span>{{ dataProvider.code }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataProvider.name">Name</span></dt>
+        <dd>
+          <span>{{ dataProvider.name }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataProvider.description">Description</span></dt>
+        <dd>
+          <span>{{ dataProvider.description }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataProvider.created">Created</span></dt>
+        <dd>
+          <span>{{ dataProvider.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataProvider.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ dataProvider.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataProvider.mobile">Mobile</span></dt>
+        <dd>
+          <span>{{ dataProvider.mobile }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataProvider.user">User</span></dt>
+        <dd>
+          <span>{{ dataProvider.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataProvider.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ dataProvider.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataProvider.family">Family</span></dt>
+        <dd>
+          <div *ngIf="dataProvider.family">
+            <a [routerLink]="['/family', dataProvider.family?.id, 'view']">{{ dataProvider.family?.familyNo }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/data-provider', dataProvider.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

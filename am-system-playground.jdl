@@ -1,0 +1,918 @@
+entity Project(project) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ created Instant
+ lastUpdated Instant
+ isDisplayed Boolean 
+} 
+
+entity Activity(activity) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ created Instant
+ lastUpdated Instant
+
+ startDate LocalDate required
+
+ endDate LocalDate required
+
+ noOfDays Integer min(0)
+
+ active Boolean
+
+ isDisplayed Boolean
+}
+
+entity DemographicData(demographic_data) {
+ //uid String required unique maxlength(11)
+ //code String unique
+ //name String
+ created Instant
+ lastUpdated Instant
+ 
+ date LocalDate required
+ level DemographicDataLevel
+ totalPopulation Integer
+ malePopulation Integer
+ femalePopulation Integer
+ lessThan5Population Integer
+ greaterThan5Population Integer
+ bw5And15Population Integer
+ greaterThan15Population Integer
+ household Integer
+ houses Integer
+ healthFacilities Integer
+ avgNoOfRooms BigDecimal
+ avgRoomArea BigDecimal
+ avgHouseArea BigDecimal
+ individualsPerHousehold BigDecimal
+ populationGrowthRate BigDecimal
+
+ comment String
+}
+ 
+enum DemographicDataLevel {
+ SUBVILLAGE_LEVEL, DISTRICT_LEVEL 
+}
+
+entity DemographicDataSource(demographic_data_source) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ created Instant
+ lastUpdated Instant
+}
+
+entity Person(person) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ created Instant
+ lastUpdated Instant
+ uuid UUID unique
+ gender Gender
+ mobile String
+ lastLogin Instant
+ login String
+ selfRegistered Boolean
+ disabled Boolean
+}
+
+enum Gender {
+ MALE, FEMALE
+}
+
+entity Team(team) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ created Instant
+ lastUpdated Instant
+ 
+ teamNo Integer required min(1)
+ teamType TeamType required
+}
+
+entity Warehouse(warehouse) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ created Instant
+ lastUpdated Instant
+ 
+ whNo Integer required min(1)
+ initialBalancePlan BigDecimal required min(0)
+ initialBalanceActual BigDecimal required min(0)
+}
+
+entity WHMovement(wh_movement) {
+ movementType MovementType required
+ quantity Integer required min(0)
+
+ reconciliationSource String
+
+ reconciliationDestination String
+
+ confirmedByOtherSide Boolean
+
+ comment String
+}
+
+enum MovementType {
+ IN, OUT, RECONCILIATION_IN, RECONCILIATION_OUT
+}
+
+enum TeamType {
+ FIELD_TEAM_LEADER, WH_SUPERVISOR, OR_MEMBER, REVIEW_TEAM_MEMBER, 
+ HEAD_OF_OR, EVALUATION, HEAD_OF_CAMPAIGN, FINANCE, 
+ TRANSPORTATION_AND_MOVEMENT, PARTNER, MOH, WORKER, DRIVER
+}
+
+entity Family(family) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ created Instant
+ lastUpdated Instant
+ 
+ familyNo Integer required
+ address String
+}
+
+enum FamilyType {
+	RESIDENT, IDPS
+}
+
+entity FamilyHead(family_head) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ description String
+ created Instant
+ lastUpdated Instant
+ 
+ mobile String
+}
+
+entity DataProvider(data_provider) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ description String
+ created Instant
+ lastUpdated Instant
+ 
+ mobile String
+}
+
+entity Fingerprint(fingerprint) {
+ uid String required unique maxlength(11)
+ //code String unique
+ //name String
+ description String
+ created Instant
+ lastUpdated Instant
+ 
+ fingerprintUrl String
+ fingerprintOwner String
+}
+
+entity LLINSVillageTarget(llins_village_target) {
+ uid String required unique maxlength(11)
+ //code String unique
+ //name String
+ created Instant
+ lastUpdated Instant
+ 
+ residentsIndividuals Integer required min(0)
+ idpsIndividuals Integer required min(0)
+ residentsFamilies Integer required min(0)
+ idpsFamilies Integer required min(0)
+ noOfDaysNeeded Integer min(0)
+ quantity Integer required min(0)
+}
+
+entity StatusOfCoverage(status_of_coverage) {
+ code String unique required
+ status String required unique
+}
+
+enum StatusOfVillageTarget {
+ REACHED_COMPLETED, REACHED_NOT_COMPLETED_YET, 
+ NOT_REACHED_YET, DESERTED_LOCATION, 
+ ARMED_CONFLICT, OUT_OF_STOCK, 
+ NOT_COVERED_OTHER
+}
+
+entity LLINSFamilyTarget(llins_family_target) {
+ uid String required unique maxlength(11)
+ //code String unique
+ //name String
+ created Instant
+ lastUpdated Instant
+ 
+ residentsIndividualsPlanned Integer required min(0)
+ idpsIndividualsPlanned Integer required min(0)
+ quantityPlanned Integer required min(0)
+ familyType FamilyType required
+ statusOfFamilyTarget StatusOfFamilyTarget required
+}
+
+enum StatusOfFamilyTarget {
+ REACHED, NOT_REACHED_YET, FAMILY_MOVED, FAMILY_NOT_EXIST, FAMILY_REFUSED,
+ NOT_COVERED_OTHER
+}
+
+entity LLINSFamilyReport(llins_family_report) {
+ uid String required unique maxlength(11)
+ //code String unique
+ //name String
+ created Instant
+ lastUpdated Instant
+ 
+ checkNo Integer
+ maleIndividuals Integer required min(0)
+ femaleIndividuals Integer required min(0)
+ lessThan5Males Integer required min(0)
+ lessThan5Females Integer required min(0)
+ pregnantWomen Integer required min(0)
+ quantityReceived Integer required min(0)
+ familyType FamilyType required
+ comment String
+}
+
+entity LLINSVillageReport(llins_village_report) {
+ uid String required unique maxlength(11)
+ //code String unique
+ //name String
+ created Instant
+ lastUpdated Instant
+ 
+ houses Integer required min(0)
+ residentHousehold Integer required min(0)
+ idpsHousehold Integer required min(0)
+ maleIndividuals Integer min(0)
+ femaleIndividuals Integer min(0)
+ lessThan5Males Integer min(0)
+ lessThan5Females Integer min(0)
+ pregnantWomen Integer min(0)
+ quantityReceived Integer required min(0)
+ comment String
+}
+
+entity LLINSFamilyReportHistory(llins_family_report_history) {
+ uid String required unique maxlength(11)
+ //code String unique
+ //name String
+ created Instant
+ lastUpdated Instant
+ 
+ documentNo Integer
+
+ maleIndividuals Integer min(0)
+
+ femaleIndividuals Integer min(0)
+
+ lessThan5Males Integer min(0)
+
+ lessThan5Females Integer min(0)
+
+ pregnantWomen Integer min(0)
+
+ quantityReceived Integer min(0)
+
+ familyType FamilyType required
+}
+
+entity LLINSVillageReportHistory(llins_village_report_history) {
+ uid String required unique maxlength(11)
+ //code String unique
+ //name String
+ created Instant
+ lastUpdated Instant
+ 
+ houses Integer required min(0)
+ residentHousehold Integer required min(0)
+ idpsHousehold Integer required min(0)
+ maleIndividuals Integer min(0)
+ femaleIndividuals Integer min(0)
+ lessThan5Males Integer min(0)
+ lessThan5Females Integer min(0)
+ pregnantWomen Integer min(0)
+ quantityReceived Integer required min(0)
+}
+
+entity WorkingDay(working_day) {
+ dayNo Integer required unique min(0)
+ dayLabel String required unique maxlength(20)
+}
+
+// ---------------------------------------------------
+// CHV PART ------------------------------------------
+// CHV PART ------------------------------------------
+// CHV PART ------------------------------------------
+// CHV PART ------------------------------------------
+
+entity MalariaUnit(malaria_unit) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ shortName String maxlength(50)
+ description String
+ created Instant
+ lastUpdated Instant
+}
+
+entity MalariaUnitStaffMember(malaria_unit_staff_member) {
+ uid String required unique maxlength(11)
+ code String unique
+ //name String
+ description String
+ created Instant
+ lastUpdated Instant
+ 
+ memberNo Integer required
+ memberType MalariaUnitMemberType required
+}
+
+enum MalariaUnitMemberType {
+ ADMIN, LAP, DOCTOR, ENTOMOLOGIST, MEMBER, OTHER
+}
+
+entity PeriodType(period_type) {
+ name String
+}
+
+entity Period(period) {
+ //uid String required unique maxlength(11)
+ //code String unique
+ name String
+ //shortName String maxlength(50)
+ //created Instant
+ //lastUpdated Instant
+
+ startDate LocalDate required
+
+ endDate LocalDate required
+}
+
+entity MalariaCasesReport(malaria_cases_report) {
+ uid String required unique maxlength(11)
+ //code String unique
+ //name String
+ created Instant
+ lastUpdated Instant
+ 
+ rdtTested Integer
+ rdtPositive Integer
+ rdtPf Integer
+ rdtPv Integer
+ rdtPother Integer
+ microTested Integer
+ microPositive Integer
+ microPf Integer
+ microPv Integer
+ microMix Integer
+ microPother Integer
+ probableCases Integer
+ inpatientCases Integer
+ deathCases Integer
+ treated Integer
+ suspectedCases Integer
+ totalFrequents Integer
+ comment String
+}
+
+entity DengueCasesReport(dengue_cases_report) {
+ uid String required unique maxlength(11)
+ //code String unique
+ //name String
+ created Instant
+ lastUpdated Instant
+ 
+  rdtTested Integer
+  rdtPositive Integer
+  probableCases Integer
+  inpatientCases Integer
+  deathCases Integer
+  treated Integer
+  suspectedCases Integer
+  comment String
+}
+
+entity CasesReportClass(cases_report_class) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ shortName String maxlength(50)
+ description String
+ created Instant
+ lastUpdated Instant
+}
+
+entity CHV(chv) {
+ uid String required unique maxlength(11)
+ code String unique
+ //name String
+ description String
+ created Instant
+ lastUpdated Instant
+ 
+ mobile String // pattern(/^\D\d{0,10}\D/)
+}
+
+entity CHVTeam(chv_team) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ description String
+ created Instant
+ lastUpdated Instant
+ 
+ teamNo String required unique pattern(/^[0-9]{1,12}/)
+ teamType CHVTeamType required
+}
+
+enum CHVTeamType {
+ SUPERVISOR, EVALUATION, HEAD_OF_ACTIVITY, FINANCE, 
+ PARTNER, MOH
+}
+
+entity CHVMalariaReportVersion1(chv_malaria_report_version1) {
+ uid String required unique maxlength(11)
+ //code String unique
+ //name String
+ created Instant
+ lastUpdated Instant
+ 
+  tested Integer
+  positive Integer
+  drugsGiven Integer
+  suppsGiven Integer
+  rdtBalance Integer
+  rdtReceived Integer
+  rdtUsed Integer
+  rdtDamagedLost Integer
+  
+  drugsBalance Integer
+  drugsReceived Integer
+  drugsUsed Integer
+  drugsDamagedLost Integer
+  
+  suppsBalance Integer
+  suppsReceived Integer
+  suppsUsed Integer
+  suppsDamagedLost Integer
+  comment String
+}
+
+entity CHVMalariaCaseReport(chv_malaria_case_report) {
+ uid String required unique maxlength(11)
+ //code String unique
+ //name String
+ created Instant
+ lastUpdated Instant
+ 
+  date LocalDate
+  individualName String
+  gender Gender
+  isPregnant Boolean
+  malariaTestResult MalariaTestResult
+  drugsGiven Integer
+  suppsGiven Integer
+  referral Boolean
+  barImageUrl String
+  comment String
+}
+
+enum MalariaTestResult {
+ POSITIVE, NEGATIVE
+}
+
+entity OrganisationUnit(organisation_unit) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ shortName String maxlength(50)
+ //description String
+ created Instant
+ lastUpdated Instant
+ path String
+ hierarchyLevel Integer
+ openingDate LocalDate
+ comment String
+ closedDate LocalDate
+ url String
+ contactPerson String
+ address String
+ email String
+ phoneNumber String
+ organisationUnitType OrganisationUnitType required
+}
+
+entity OrganisationUnitGroup(orgunit_group) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ shortName String maxlength(50)
+ //description String
+ created Instant
+ lastUpdated Instant
+ symbol String
+ color String
+}
+
+entity OrganisationUnitGroupSet(orgunit_groupset) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ //shortName String maxlength(50)
+ //description String
+ created Instant
+ lastUpdated Instant
+ compulsory Boolean
+ includeSubhierarchyInAnalytics Boolean
+}
+
+entity OrganisationUnitLevel(orgunit_level) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ created Instant
+ lastUpdated Instant
+ level Integer
+ offlineLevels Integer
+}
+
+enum OrganisationUnitType {
+ COUNTRY, GOV, DISTRICT, VILLAGE, SUBVILLAGE, HEALTH_FACILITY
+}
+entity PeopleGroup(people_group) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ created Instant
+ lastUpdated Instant
+ 
+ uuid UUID
+}
+
+entity PersonAuthorityGroup(person_authority_group) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ description String
+ created Instant
+ lastUpdated Instant 
+}
+
+entity DataSet(data_set) {
+ uid String required unique maxlength(11)
+ code String unique
+ name String
+ shortName String maxlength(50)
+ description String
+ created Instant
+ lastUpdated Instant
+ expiryDays Integer
+ timelyDays Integer
+}
+
+entity DataInputPeriod(data_input_period) {
+ openingDate LocalDate
+ closingDate LocalDate
+}
+
+entity RelativePeriods(relative_periods) {
+ thisDay Boolean
+ yesterday Boolean
+ last3Days Boolean
+ last7Days Boolean
+ last14Days Boolean
+ thisMonth Boolean
+ lastMonth Boolean
+ thisBimonth Boolean
+ lastBimonth Boolean
+ thisQuarter Boolean
+ lastQuarter Boolean
+ thisSixMonth Boolean
+ lastSixMonth Boolean
+ weeksThisYear Boolean
+ monthsThisYear Boolean
+ biMonthsThisYear Boolean
+ quartersThisYear Boolean
+ thisYear Boolean
+ monthsLastYear Boolean
+ quartersLastYear Boolean
+ lastYear Boolean
+ last5Years Boolean
+ last12Months Boolean
+ last6Months Boolean
+ last3Months Boolean
+ last6BiMonths Boolean
+ last4Quarters Boolean
+ last2SixMonths Boolean
+ thisFinancialYear Boolean
+ lastFinancialYear Boolean
+ last5FinancialYears Boolean
+ thisWeek Boolean
+ lastWeek Boolean
+ thisBiWeek Boolean
+ lastBiWeek Boolean
+ last4Weeks Boolean
+ last4BiWeeks Boolean
+ last12Weeks Boolean
+ last52Weeks Boolean
+}
+//entity Discussion(discussion) {
+// uid String required unique maxlength(11)
+// code String unique
+// name String
+// shortName String maxlength(50)
+// description String
+// created Instant
+// lastUpdated Instant
+ 
+// text String
+// likes Integer
+//}
+
+//entity DiscussionComment(discussion_comment) {
+// uid String required unique maxlength(11)
+// code String unique
+// name String
+// shortName String maxlength(50)
+// description String
+// created Instant
+// lastUpdated Instant
+// text String
+//}
+
+relationship ManyToMany {
+  //OrganisationUnit{parent(name)} to OrganisationUnit{children}
+  OrganisationUnitGroup{member(name)} to OrganisationUnit{group}
+  OrganisationUnitGroupSet{organisationUnitGroup(name)} to OrganisationUnitGroup{groupSet}
+  
+  Person{organisationUnit(name)} to OrganisationUnit{person}
+  
+  /**
+  * TODO Later Delete the relation from orgUnit side
+  */
+  Person{dataViewOrganisationUnit(name)} to OrganisationUnit{dataViewPerson}
+  
+  Person{personAuthorityGroups(name)} to PersonAuthorityGroup{member}
+  //PersonAuthorityGroup{authority(name)} to Authority
+  
+  PeopleGroup{member(name)} to Person{group}
+  PeopleGroup{managedByGroup(name)} to PeopleGroup{managedGroup}
+  
+  DataSet{source(name)} to OrganisationUnit{dataSet}
+}
+
+relationship ManyToOne {
+ OrganisationUnit{parent(name)} to OrganisationUnit{children(name)}
+ Family{organisationUnit(name) required} to OrganisationUnit
+ LLINSVillageTarget{organisationUnit(name) required} to OrganisationUnit
+ //LLINSFamilyTarget{organisationUnit(name)} to OrganisationUnit
+ DemographicData{organisationUnit(name)} to OrganisationUnit{demographicData}
+ 
+ DataSet{periodType(name)} to PeriodType
+ DataInputPeriod{period(name)} to Period
+ 
+ DataSet{notificationRecipients(name)} to PeopleGroup
+ //////////////////////////////////////////////////////////////////////////
+ // District{chv} to CHV{district(name) required}
+ /**
+  * The district CHV belongs to it When OrgUnit is district
+  */
+ CHV{district(name) required} to OrganisationUnit
+ 
+ // SubVillage{livingHereChv} to CHV{homeSubvillage(name)}
+ /**
+  * When OrgUnit is SubVillage, What CHV it is home to
+  */
+ CHV{homeSubvillage(name)} to OrganisationUnit // removed required
+ 
+ // HealthFacility{chv} to CHV{healthFacility(name)}
+ /**
+  * When OrgUnit is HealthFacility, What CHV it manage
+  */
+ CHV{managedByHf(name)} to OrganisationUnit
+ 
+ //SubVillage{healthFacility} to HealthFacility{homeSubVillage(name)}
+ /**
+  * When OrgUnit is HealthFacility, what its home subvillage
+  */
+ OrganisationUnit{hfHomeSubVillage} to OrganisationUnit
+ 
+ //HealthFacility{coveredSubVillage} to SubVillage{healthFacilityAssignedTo(name)}
+ /**
+  * When OrgUnit is HealthFacility, what villages it covers
+  */
+ OrganisationUnit{coveredByHf(name)} to OrganisationUnit
+ 
+ CHVMalariaCaseReport{subVillage(name)} to OrganisationUnit
+}
+relationship OneToMany {
+ //Discussion{comment} to DiscussionComment
+ MalariaUnit{organisationUnit(name)} to OrganisationUnit
+ 
+ DataSet{malariaCasesReport} to MalariaCasesReport{dataSet(name)}
+ DataSet{dengueCasesReport} to DengueCasesReport{dataSet(name)}
+ OrganisationUnit{malariaReport} to MalariaCasesReport{organisationUnit(name)}
+ OrganisationUnit{dengueReport} to DengueCasesReport{organisationUnit(name)}
+ 
+ // CHV{coveredSubVillage(name)} to SubVillage{assignedChv}
+ /**
+  * When OrgUnit is subvillage, Which CHV covers it
+  */
+ CHV{coveredSubVillage(name)} to OrganisationUnit{assignedChv} // coveredSubVillage
+}
+
+relationship ManyToOne {
+ // Created By
+ Project{user(login)} to User
+ Activity{user(login)} to User
+ DemographicData{user(login)} to User
+ DemographicDataSource{user(login)} to User
+ Person{user(login)} to User
+ Team{user(login)} to User
+ Warehouse{user(login)} to User
+ WHMovement{user(login)} to User
+ Family{user(login)} to User
+ FamilyHead{user(login)} to User
+ DataProvider{user(login)} to User
+ Fingerprint{user(login)} to User
+ LLINSVillageTarget{user(login)} to User
+ StatusOfCoverage{user(login)} to User
+ LLINSFamilyTarget{user(login)} to User
+ LLINSFamilyReport{user(login)} to User
+ LLINSVillageReport{user(login)} to User
+ LLINSFamilyReportHistory{user(login)} to User
+ LLINSVillageReportHistory{user(login)} to User
+ MalariaUnit{user(login)} to User
+ MalariaUnitStaffMember{user(login)} to User
+ //Period{user(login)} to User
+ MalariaCasesReport{user(login)} to User
+ DengueCasesReport{user(login)} to User
+ CasesReportClass{user(login)} to User
+ CHV{user(login)} to User
+ CHVTeam{user(login)} to User
+ CHVMalariaReportVersion1{user(login)} to User
+ CHVMalariaCaseReport{user(login)} to User
+ OrganisationUnit{user(login)} to User
+ OrganisationUnitGroup{user(login)} to User
+ OrganisationUnitGroupSet{user(login)} to User
+ PeopleGroup{user(login)} to User
+ PersonAuthorityGroup{user(login)} to User
+ DataSet{user(login)} to User
+ 
+ // Updated By
+ Project{lastUpdatedBy(login)} to User
+ Activity{lastUpdatedBy(login)} to User
+ DemographicData{lastUpdatedBy(login)} to User
+ DemographicDataSource{lastUpdatedBy(login)} to User
+ Person{lastUpdatedBy(login)} to User
+ Team{lastUpdatedBy(login)} to User
+ Warehouse{lastUpdatedBy(login)} to User
+ WHMovement{lastUpdatedBy(login)} to User
+ Family{lastUpdatedBy(login)} to User
+ FamilyHead{lastUpdatedBy(login)} to User
+ DataProvider{lastUpdatedBy(login)} to User
+ Fingerprint{lastUpdatedBy(login)} to User
+ LLINSVillageTarget{lastUpdatedBy(login)} to User
+ StatusOfCoverage{lastUpdatedBy(login)} to User
+ LLINSFamilyTarget{lastUpdatedBy(login)} to User
+ LLINSFamilyReport{lastUpdatedBy(login)} to User
+ LLINSVillageReport{lastUpdatedBy(login)} to User
+ LLINSFamilyReportHistory{lastUpdatedBy(login)} to User
+ LLINSVillageReportHistory{lastUpdatedBy(login)} to User
+ MalariaUnit{lastUpdatedBy(login)} to User
+ MalariaUnitStaffMember{lastUpdatedBy(login)} to User
+ //Period{lastUpdatedBy(login)} to User
+ MalariaCasesReport{lastUpdatedBy(login)} to User
+ DengueCasesReport{lastUpdatedBy(login)} to User
+ CasesReportClass{lastUpdatedBy(login)} to User
+ CHV{lastUpdatedBy(login)} to User
+ CHVTeam{lastUpdatedBy(login)} to User
+ CHVMalariaReportVersion1{lastUpdatedBy(login)} to User
+ CHVMalariaCaseReport{lastUpdatedBy(login)} to User
+ OrganisationUnit{lastUpdatedBy(login)} to User
+ OrganisationUnitGroup{lastUpdatedBy(login)} to User
+ OrganisationUnitGroupSet{lastUpdatedBy(login)} to User
+ PeopleGroup{lastUpdatedBy(login)} to User
+ PersonAuthorityGroup{lastUpdatedBy(login)} to User
+ DataSet{lastUpdatedBy(login)} to User
+}
+
+relationship OneToOne {
+ Person{userInfo(login)} to User
+ CHV{person(name)} to Person
+}
+
+relationship OneToMany { 
+ Project{activity} to Activity{project(name) required}
+ 
+ Activity{warehouse} to Warehouse{activity(name) required}
+ // Activity{team} to Team{activity(name)} // removed required
+
+ //Governorate{district} to District{governorate(name) required}
+ //District{subDistrict} to SubDistrict{district(name) required}
+ //SubDistrict{village} to Village{subDistrict(name) required}
+ //Village{subVillage} to SubVillage{village(name) required}
+ //SubVillage{family} to Family{subvillage(name) required}
+
+ Family{familyHead} to FamilyHead{family(familyNo) required}
+ Family{dataProvider} to DataProvider{family(familyNo)}
+ Family{fingerprint} to Fingerprint{family(familyNo)}
+ 
+ Warehouse{initiatedMovement} to WHMovement{initiatedWH(name) required}
+ Warehouse{notInitiatedMovement} to WHMovement{theOtherSideWH(name)}
+ Team{whMovement} to WHMovement{team(name)}
+ 
+ LLINSVillageTarget{llinsVillageReport} to LLINSVillageReport{targetDetails}
+
+ LLINSFamilyTarget{llinsFamilyReport} to LLINSFamilyReport{targetDetails}
+ 
+ //SubVillage{llinsVillageTarget} to LLINSVillageTarget{subvillage(name) required}
+
+ //SubVillage{llinsFamilyTarget} to LLINSFamilyTarget{subvillage(name)} // removed required
+ 
+ Family{llinsFamilyTarget} to LLINSFamilyTarget{family(familyNo) required}
+ 
+ Team{llinsVillageTarget} to LLINSVillageTarget{teamAssigned(name) required}
+ Team{llinsVillageReport} to LLINSVillageReport{executingTeam(name) required}
+ Team{llinsFamilyTarget} to LLINSFamilyTarget{teamAssigned(name) required}
+ Team{llinsFamilyReport} to LLINSFamilyReport{executingTeam(name) required}
+ 
+ //Warehouse{llinsVillageTarget} to LLINSVillageTarget{warehouse(name)} // removed required
+ //Warehouse{llinsFamilyTarget} to LLINSFamilyTarget{warehouse(name)} // removed required
+ 
+ LLINSVillageReport{llinsVillageReportHistory} to LLINSVillageReportHistory{llinsVillageReport required}
+ LLINSFamilyReport{llinsFamilyReportHistory} to LLINSFamilyReportHistory{llinsFamilyReport required}
+ 
+ DemographicDataSource{demographicData} to DemographicData{source(name) required}
+ //SubVillage{demographicData} to DemographicData{subvillage(name)}
+ //District{districtDemographicData} to DemographicData{district(name)}
+ // CHV PART ----------------------------
+ // MalariaUnit{district} to District{malariaUnit(name) required}
+ MalariaUnit{malariaUnitStaffMember} to MalariaUnitStaffMember{malariaUnit(name) required}
+ //Person{malariaUnitStaffMember} to MalariaUnitStaffMember{person(name)}
+ //MalariaUnit{healthFacility} to HealthFacility{malariaUnit(name) required}
+ 
+ //District{healthFacility} to HealthFacility{district(name) required}
+ //SubVillage{healthFacility} to HealthFacility{homeSubVillage(name)}
+ //HealthFacility{coveredSubVillage} to SubVillage{healthFacilityAssignedTo(name)}
+ //HealthFacility{contact} to HealthFacilityContact{healthFacility(name) required}
+ //HealthFacility{malariaReport} to MalariaCasesReport{healthFacility(name)}
+ //HealthFacility{dengueReport} to DengueCasesReport{healthFacility(name)}
+ //ReportingSource to MalariaCasesReport{reportingSource(name) required}
+ //ReportingSource to DengueCasesReport{reportingSource(name) required}
+ 
+ //CHV{coveredSubVillage(name)} to SubVillage{assignedChv}
+ //District{chv} to CHV{district(name) required}
+ //SubVillage{livingHereChv} to CHV{homeSubvillage(name)} // removed required
+ //HealthFacility{chv} to CHV{healthFacility(name)}
+
+}
+
+relationship ManyToOne {
+ CHVMalariaReportVersion1{chv(code) required} to CHV
+ CHVMalariaCaseReport{chv(code) required} to CHV
+ 
+ Team{person(name)} to Person
+ CHVTeam{person(name)} to Person
+ MalariaUnitStaffMember{person(name)} to Person
+ CHVMalariaCaseReport{reportClass(name) required} to CasesReportClass
+ MalariaCasesReport{reportClass(name) required} to CasesReportClass
+ DengueCasesReport{reportClass(name) required} to CasesReportClass
+ 
+ Period{periodType required} to PeriodType
+ MalariaCasesReport{period(name) required} to Period
+ CHVMalariaReportVersion1{period(name) required} to Period
+ DengueCasesReport{period(name) required} to Period
+ 
+ LLINSVillageTarget{dayPlanned(dayLabel) required} to WorkingDay
+ LLINSFamilyTarget{dayPlanned(dayLabel) required} to WorkingDay
+ LLINSFamilyReport{dayReached(dayLabel) required} to WorkingDay
+ LLINSFamilyReportHistory{dayReached(dayLabel) required} to WorkingDay
+ LLINSVillageReport{dayReached(dayLabel) required} to WorkingDay
+ LLINSVillageReportHistory{dayReached(dayLabel) required} to WorkingDay
+ LLINSVillageTarget{statusOfCoverage(status)} to StatusOfCoverage
+ WHMovement{day(dayLabel) required} to WorkingDay
+}
+
+relationship ManyToMany {
+ // When Team is a Field_Supervisor he can be assigned to only one WH
+ Team{assignedToWarehouse(name)} to Warehouse{team}
+ 
+ CHVTeam{responsibleForChv(code)} to CHV{supervisionTeam}
+}
+
+service * with serviceImpl
+        
+paginate Project, Activity, Warehouse, WHMovement, 
+	Team, Person, LLINSVillageTarget, 
+	LLINSFamilyTarget, Family, FamilyHead, LLINSFamilyReport with pagination

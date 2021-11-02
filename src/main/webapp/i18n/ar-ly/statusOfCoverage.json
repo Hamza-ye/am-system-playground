@@ -1,0 +1,27 @@
+{
+  "amSystemPlaygroundApp": {
+    "statusOfCoverage": {
+      "home": {
+        "title": "Status Of Coverages",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Status Of Coverage",
+        "createOrEditLabel": "Create or edit a Status Of Coverage",
+        "notFound": "No Status Of Coverages found"
+      },
+      "created": "A new Status Of Coverage is created with identifier {{ param }}",
+      "updated": "A Status Of Coverage is updated with identifier {{ param }}",
+      "deleted": "A Status Of Coverage is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Status Of Coverage {{ id }}?"
+      },
+      "detail": {
+        "title": "Status Of Coverage"
+      },
+      "id": "ID",
+      "code": "Code",
+      "status": "Status",
+      "user": "User",
+      "lastUpdatedBy": "Last Updated By"
+    }
+  }
+}

@@ -1,0 +1,102 @@
+<div>
+  <h2 id="page-heading" data-cy="FingerprintHeading">
+    <span appTranslate="amSystemPlaygroundApp.fingerprint.home.title">Fingerprints</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.fingerprint.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-fingerprint"
+        [routerLink]="['/fingerprint/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.fingerprint.home.createLabel"> Create a new Fingerprint </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="fingerprints?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.fingerprint.home.notFound">No fingerprints found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="fingerprints && fingerprints.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.fingerprint.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.fingerprint.description">Description</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.fingerprint.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.fingerprint.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.fingerprint.fingerprintUrl">Fingerprint Url</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.fingerprint.fingerprintOwner">Fingerprint Owner</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.fingerprint.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.fingerprint.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.fingerprint.family">Family</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fingerprint of fingerprints; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/fingerprint', fingerprint.id, 'view']">{{ fingerprint.id }}</a>
+          </td>
+          <td>{{ fingerprint.uid }}</td>
+          <td>{{ fingerprint.description }}</td>
+          <td>{{ fingerprint.created | formatMediumDatetime }}</td>
+          <td>{{ fingerprint.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ fingerprint.fingerprintUrl }}</td>
+          <td>{{ fingerprint.fingerprintOwner }}</td>
+          <td>
+            {{ fingerprint.user?.login }}
+          </td>
+          <td>
+            {{ fingerprint.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <div *ngIf="fingerprint.family">
+              <a [routerLink]="['/family', fingerprint.family?.id, 'view']">{{ fingerprint.family?.familyNo }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/fingerprint', fingerprint.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/fingerprint', fingerprint.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(fingerprint)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

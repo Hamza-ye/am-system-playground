@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity LLINSFamilyReport.
+    -->
+    <changeSet id="20211031234328-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="llins_family_report"
+                                 constraintName="fk_llins_family_report__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+                                 baseTableName="llins_family_report"
+                                 constraintName="fk_llins_family_report__last_updated_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="day_reached_id"
+                                 baseTableName="llins_family_report"
+                                 constraintName="fk_llins_family_report__day_reached_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="working_day"/>
+
+        <addForeignKeyConstraint baseColumnNames="target_details_id"
+                                 baseTableName="llins_family_report"
+                                 constraintName="fk_llins_family_report__target_details_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="llins_family_target"/>
+
+        <addForeignKeyConstraint baseColumnNames="executing_team_id"
+                                 baseTableName="llins_family_report"
+                                 constraintName="fk_llins_family_report__executing_team_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="team"/>
+    </changeSet>
+</databaseChangeLog>

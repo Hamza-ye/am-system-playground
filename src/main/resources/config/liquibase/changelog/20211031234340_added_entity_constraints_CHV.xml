@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity CHV.
+    -->
+    <changeSet id="20211031234340-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="chv"
+                                 constraintName="fk_chv__person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+        <addForeignKeyConstraint baseColumnNames="district_id"
+                                 baseTableName="chv"
+                                 constraintName="fk_chv__district_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organisation_unit"/>
+
+        <addForeignKeyConstraint baseColumnNames="home_subvillage_id"
+                                 baseTableName="chv"
+                                 constraintName="fk_chv__home_subvillage_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organisation_unit"/>
+
+        <addForeignKeyConstraint baseColumnNames="managed_by_hf_id"
+                                 baseTableName="chv"
+                                 constraintName="fk_chv__managed_by_hf_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organisation_unit"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="chv"
+                                 constraintName="fk_chv__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+                                 baseTableName="chv"
+                                 constraintName="fk_chv__last_updated_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+    </changeSet>
+</databaseChangeLog>

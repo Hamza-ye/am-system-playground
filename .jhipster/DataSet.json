@@ -1,0 +1,106 @@
+{
+  "name": "DataSet",
+  "fields": [
+    {
+      "fieldName": "uid",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "11"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "shortName",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastUpdated",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "expiryDays",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "timelyDays",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "malariaCasesReport",
+      "otherEntityRelationshipName": "dataSet",
+      "relationshipName": "malariaCasesReport"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "dengueCasesReport",
+      "otherEntityRelationshipName": "dataSet",
+      "relationshipName": "dengueCasesReport"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "periodType",
+      "otherEntityRelationshipName": "dataSet",
+      "relationshipName": "periodType",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "peopleGroup",
+      "otherEntityRelationshipName": "dataSet",
+      "relationshipName": "notificationRecipients",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "dataSet",
+      "relationshipName": "user",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "dataSet",
+      "relationshipName": "lastUpdatedBy",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "organisationUnit",
+      "otherEntityRelationshipName": "dataSet",
+      "relationshipName": "source",
+      "otherEntityField": "name",
+      "ownerSide": true
+    }
+  ],
+  "entityTableName": "data_set",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211031234350"
+}

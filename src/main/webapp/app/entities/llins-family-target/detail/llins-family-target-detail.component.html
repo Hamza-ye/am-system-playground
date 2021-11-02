@@ -1,0 +1,94 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="lLINSFamilyTarget">
+      <h2 data-cy="lLINSFamilyTargetDetailsHeading">
+        <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.detail.title">LLINS Family Target</span>
+      </h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyTarget.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.uid">Uid</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyTarget.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.created">Created</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyTarget.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyTarget.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt>
+          <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.residentsIndividualsPlanned">Residents Individuals Planned</span>
+        </dt>
+        <dd>
+          <span>{{ lLINSFamilyTarget.residentsIndividualsPlanned }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.idpsIndividualsPlanned">Idps Individuals Planned</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyTarget.idpsIndividualsPlanned }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.quantityPlanned">Quantity Planned</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyTarget.quantityPlanned }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.familyType">Family Type</span></dt>
+        <dd>
+          <span appTranslate="{{ 'amSystemPlaygroundApp.FamilyType.' + lLINSFamilyTarget.familyType }}">{{
+            lLINSFamilyTarget.familyType
+          }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.statusOfFamilyTarget">Status Of Family Target</span></dt>
+        <dd>
+          <span appTranslate="{{ 'amSystemPlaygroundApp.StatusOfFamilyTarget.' + lLINSFamilyTarget.statusOfFamilyTarget }}">{{
+            lLINSFamilyTarget.statusOfFamilyTarget
+          }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.user">User</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyTarget.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ lLINSFamilyTarget.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.dayPlanned">Day Planned</span></dt>
+        <dd>
+          <div *ngIf="lLINSFamilyTarget.dayPlanned">
+            <a [routerLink]="['/working-day', lLINSFamilyTarget.dayPlanned?.id, 'view']">{{ lLINSFamilyTarget.dayPlanned?.dayLabel }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.family">Family</span></dt>
+        <dd>
+          <div *ngIf="lLINSFamilyTarget.family">
+            <a [routerLink]="['/family', lLINSFamilyTarget.family?.id, 'view']">{{ lLINSFamilyTarget.family?.familyNo }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.teamAssigned">Team Assigned</span></dt>
+        <dd>
+          <div *ngIf="lLINSFamilyTarget.teamAssigned">
+            <a [routerLink]="['/team', lLINSFamilyTarget.teamAssigned?.id, 'view']">{{ lLINSFamilyTarget.teamAssigned?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/llins-family-target', lLINSFamilyTarget.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

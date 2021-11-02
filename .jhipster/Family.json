@@ -1,0 +1,95 @@
+{
+  "name": "Family",
+  "fields": [
+    {
+      "fieldName": "uid",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "11"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastUpdated",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "familyNo",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "familyHead",
+      "otherEntityRelationshipName": "family",
+      "relationshipName": "familyHead"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "dataProvider",
+      "otherEntityRelationshipName": "family",
+      "relationshipName": "dataProvider"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "fingerprint",
+      "otherEntityRelationshipName": "family",
+      "relationshipName": "fingerprint"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "lLINSFamilyTarget",
+      "otherEntityRelationshipName": "family",
+      "relationshipName": "llinsFamilyTarget"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisationUnit",
+      "otherEntityRelationshipName": "family",
+      "relationshipValidateRules": "required",
+      "relationshipName": "organisationUnit",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "family",
+      "relationshipName": "user",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "family",
+      "relationshipName": "lastUpdatedBy",
+      "otherEntityField": "login"
+    }
+  ],
+  "entityTableName": "family",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211031234321"
+}

@@ -1,0 +1,82 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="malariaUnitStaffMember">
+      <h2 data-cy="malariaUnitStaffMemberDetailsHeading">
+        <span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.detail.title">Malaria Unit Staff Member</span>
+      </h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ malariaUnitStaffMember.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.uid">Uid</span></dt>
+        <dd>
+          <span>{{ malariaUnitStaffMember.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.code">Code</span></dt>
+        <dd>
+          <span>{{ malariaUnitStaffMember.code }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.description">Description</span></dt>
+        <dd>
+          <span>{{ malariaUnitStaffMember.description }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.created">Created</span></dt>
+        <dd>
+          <span>{{ malariaUnitStaffMember.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ malariaUnitStaffMember.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.memberNo">Member No</span></dt>
+        <dd>
+          <span>{{ malariaUnitStaffMember.memberNo }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.memberType">Member Type</span></dt>
+        <dd>
+          <span appTranslate="{{ 'amSystemPlaygroundApp.MalariaUnitMemberType.' + malariaUnitStaffMember.memberType }}">{{
+            malariaUnitStaffMember.memberType
+          }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.user">User</span></dt>
+        <dd>
+          <span>{{ malariaUnitStaffMember.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ malariaUnitStaffMember.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.person">Person</span></dt>
+        <dd>
+          <div *ngIf="malariaUnitStaffMember.person">
+            <a [routerLink]="['/person', malariaUnitStaffMember.person?.id, 'view']">{{ malariaUnitStaffMember.person?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.malariaUnit">Malaria Unit</span></dt>
+        <dd>
+          <div *ngIf="malariaUnitStaffMember.malariaUnit">
+            <a [routerLink]="['/malaria-unit', malariaUnitStaffMember.malariaUnit?.id, 'view']">{{
+              malariaUnitStaffMember.malariaUnit?.name
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/malaria-unit-staff-member', malariaUnitStaffMember.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

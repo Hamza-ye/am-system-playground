@@ -1,0 +1,37 @@
+{
+  "amSystemPlaygroundApp": {
+    "family": {
+      "home": {
+        "title": "Families",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Family",
+        "createOrEditLabel": "Create or edit a Family",
+        "notFound": "No Families found"
+      },
+      "created": "A new Family is created with identifier {{ param }}",
+      "updated": "A Family is updated with identifier {{ param }}",
+      "deleted": "A Family is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Family {{ id }}?"
+      },
+      "detail": {
+        "title": "Family"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "name": "Name",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "familyNo": "Family No",
+      "address": "Address",
+      "familyHead": "Family Head",
+      "dataProvider": "Data Provider",
+      "fingerprint": "Fingerprint",
+      "llinsFamilyTarget": "Llins Family Target",
+      "organisationUnit": "Organisation Unit",
+      "user": "User",
+      "lastUpdatedBy": "Last Updated By"
+    }
+  }
+}

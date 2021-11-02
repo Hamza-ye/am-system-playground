@@ -1,0 +1,147 @@
+{
+  "name": "MalariaCasesReport",
+  "fields": [
+    {
+      "fieldName": "uid",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "11"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastUpdated",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "rdtTested",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "rdtPositive",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "rdtPf",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "rdtPv",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "rdtPother",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "microTested",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "microPositive",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "microPf",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "microPv",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "microMix",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "microPother",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "probableCases",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "inpatientCases",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "deathCases",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "treated",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "suspectedCases",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "totalFrequents",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "malariaCasesReport",
+      "relationshipName": "user",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "malariaCasesReport",
+      "relationshipName": "lastUpdatedBy",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "casesReportClass",
+      "otherEntityRelationshipName": "malariaCasesReport",
+      "relationshipValidateRules": "required",
+      "relationshipName": "reportClass",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "period",
+      "otherEntityRelationshipName": "malariaCasesReport",
+      "relationshipValidateRules": "required",
+      "relationshipName": "period",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "dataSet",
+      "otherEntityRelationshipName": "malariaCasesReport",
+      "relationshipName": "dataSet",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisationUnit",
+      "otherEntityRelationshipName": "malariaReport",
+      "relationshipName": "organisationUnit",
+      "otherEntityField": "name"
+    }
+  ],
+  "entityTableName": "malaria_cases_report",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211031234337"
+}

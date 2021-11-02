@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Person.
+    -->
+    <changeSet id="20211031234317-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_info_id"
+                                 baseTableName="person"
+                                 constraintName="fk_person__user_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="person"
+                                 constraintName="fk_person__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+                                 baseTableName="person"
+                                 constraintName="fk_person__last_updated_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="rel_person__organisation_unit"
+                                 constraintName="fk_rel_person__organisation_unit__person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+        <addForeignKeyConstraint baseColumnNames="organisation_unit_id"
+                                 baseTableName="rel_person__organisation_unit"
+                                 constraintName="fk_rel_person__organisation_unit__organisation_unit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organisation_unit"/>
+
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="rel_person__data_view_organisation_unit"
+                                 constraintName="fk_rel_person__data_view_organisation_unit__person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+        <addForeignKeyConstraint baseColumnNames="data_view_organisation_unit_id"
+                                 baseTableName="rel_person__data_view_organisation_unit"
+                                 constraintName="fk_rel_person__data_view_organi__data_view_organisation_u_a6_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organisation_unit"/>
+
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="rel_person__person_authority_groups"
+                                 constraintName="fk_rel_person__person_authority_groups__person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+        <addForeignKeyConstraint baseColumnNames="person_authority_groups_id"
+                                 baseTableName="rel_person__person_authority_groups"
+                                 constraintName="fk_rel_person__person_authority__person_authority_groups_4a_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person_authority_group"/>
+    </changeSet>
+</databaseChangeLog>

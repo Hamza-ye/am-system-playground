@@ -1,0 +1,123 @@
+{
+  "name": "LLINSFamilyReport",
+  "fields": [
+    {
+      "fieldName": "uid",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "11"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastUpdated",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "checkNo",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "maleIndividuals",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "femaleIndividuals",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "lessThan5Males",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "lessThan5Females",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "pregnantWomen",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "quantityReceived",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "familyType",
+      "fieldType": "FamilyType",
+      "fieldValues": "RESIDENT,IDPS",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "lLINSFamilyReportHistory",
+      "otherEntityRelationshipName": "llinsFamilyReport",
+      "relationshipName": "llinsFamilyReportHistory"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "lLINSFamilyReport",
+      "relationshipName": "user",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "lLINSFamilyReport",
+      "relationshipName": "lastUpdatedBy",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "workingDay",
+      "otherEntityRelationshipName": "lLINSFamilyReport",
+      "relationshipValidateRules": "required",
+      "relationshipName": "dayReached",
+      "otherEntityField": "dayLabel"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "lLINSFamilyTarget",
+      "otherEntityRelationshipName": "llinsFamilyReport",
+      "relationshipName": "targetDetails"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "team",
+      "otherEntityRelationshipName": "llinsFamilyReport",
+      "relationshipValidateRules": "required",
+      "relationshipName": "executingTeam",
+      "otherEntityField": "name"
+    }
+  ],
+  "entityTableName": "llins_family_report",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211031234328"
+}

@@ -1,0 +1,237 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="app-malaria-unit-staff-member-heading"
+        data-cy="MalariaUnitStaffMemberCreateUpdateHeading"
+        appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.home.createOrEditLabel"
+      >
+        Create or edit a Malaria Unit Staff Member
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" appTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.uid" for="field_uid">Uid</label>
+          <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
+          <div *ngIf="editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('uid')?.errors?.required" appTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('uid')?.errors?.maxlength"
+              appTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 11 }"
+            >
+              This field cannot be longer than 11 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.code" for="field_code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.description" for="field_description"
+            >Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.created" for="field_created"
+            >Created</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_created"
+              data-cy="created"
+              type="datetime-local"
+              class="form-control"
+              name="created"
+              formControlName="created"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.lastUpdated" for="field_lastUpdated"
+            >Last Updated</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastUpdated"
+              data-cy="lastUpdated"
+              type="datetime-local"
+              class="form-control"
+              name="lastUpdated"
+              formControlName="lastUpdated"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.memberNo" for="field_memberNo"
+            >Member No</label
+          >
+          <input type="number" class="form-control" name="memberNo" id="field_memberNo" data-cy="memberNo" formControlName="memberNo" />
+          <div *ngIf="editForm.get('memberNo')!.invalid && (editForm.get('memberNo')!.dirty || editForm.get('memberNo')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('memberNo')?.errors?.required"
+              appTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('memberNo')?.errors?.number"
+              appTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.memberType" for="field_memberType"
+            >Member Type</label
+          >
+          <select class="form-control" name="memberType" formControlName="memberType" id="field_memberType" data-cy="memberType">
+            <option [ngValue]="null">{{ 'amSystemPlaygroundApp.MalariaUnitMemberType.null' | translate }}</option>
+            <option value="ADMIN">{{ 'amSystemPlaygroundApp.MalariaUnitMemberType.ADMIN' | translate }}</option>
+            <option value="LAP">{{ 'amSystemPlaygroundApp.MalariaUnitMemberType.LAP' | translate }}</option>
+            <option value="DOCTOR">{{ 'amSystemPlaygroundApp.MalariaUnitMemberType.DOCTOR' | translate }}</option>
+            <option value="ENTOMOLOGIST">{{ 'amSystemPlaygroundApp.MalariaUnitMemberType.ENTOMOLOGIST' | translate }}</option>
+            <option value="MEMBER">{{ 'amSystemPlaygroundApp.MalariaUnitMemberType.MEMBER' | translate }}</option>
+            <option value="OTHER">{{ 'amSystemPlaygroundApp.MalariaUnitMemberType.OTHER' | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('memberType')!.invalid && (editForm.get('memberType')!.dirty || editForm.get('memberType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('memberType')?.errors?.required"
+              appTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.lastUpdatedBy"
+            for="field_lastUpdatedBy"
+            >Last Updated By</label
+          >
+          <select
+            class="form-control"
+            id="field_lastUpdatedBy"
+            data-cy="lastUpdatedBy"
+            name="lastUpdatedBy"
+            formControlName="lastUpdatedBy"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('lastUpdatedBy')!.value?.id ? editForm.get('lastUpdatedBy')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.person" for="field_person"
+            >Person</label
+          >
+          <select class="form-control" id="field_person" data-cy="person" name="person" formControlName="person">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="personOption.id === editForm.get('person')!.value?.id ? editForm.get('person')!.value : personOption"
+              *ngFor="let personOption of peopleSharedCollection; trackBy: trackPersonById"
+            >
+              {{ personOption.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.malariaUnit" for="field_malariaUnit"
+            >Malaria Unit</label
+          >
+          <select class="form-control" id="field_malariaUnit" data-cy="malariaUnit" name="malariaUnit" formControlName="malariaUnit">
+            <option *ngIf="!editForm.get('malariaUnit')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="
+                malariaUnitOption.id === editForm.get('malariaUnit')!.value?.id ? editForm.get('malariaUnit')!.value : malariaUnitOption
+              "
+              *ngFor="let malariaUnitOption of malariaUnitsSharedCollection; trackBy: trackMalariaUnitById"
+            >
+              {{ malariaUnitOption.name }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="editForm.get(['malariaUnit'])!.invalid && (editForm.get(['malariaUnit'])!.dirty || editForm.get(['malariaUnit'])!.touched)"
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['malariaUnit'])?.errors?.required"
+            appTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="dataSet">
+      <h2 data-cy="dataSetDetailsHeading"><span appTranslate="amSystemPlaygroundApp.dataSet.detail.title">Data Set</span></h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ dataSet.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataSet.uid">Uid</span></dt>
+        <dd>
+          <span>{{ dataSet.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataSet.code">Code</span></dt>
+        <dd>
+          <span>{{ dataSet.code }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataSet.name">Name</span></dt>
+        <dd>
+          <span>{{ dataSet.name }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataSet.shortName">Short Name</span></dt>
+        <dd>
+          <span>{{ dataSet.shortName }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataSet.description">Description</span></dt>
+        <dd>
+          <span>{{ dataSet.description }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataSet.created">Created</span></dt>
+        <dd>
+          <span>{{ dataSet.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataSet.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ dataSet.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataSet.expiryDays">Expiry Days</span></dt>
+        <dd>
+          <span>{{ dataSet.expiryDays }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataSet.timelyDays">Timely Days</span></dt>
+        <dd>
+          <span>{{ dataSet.timelyDays }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataSet.periodType">Period Type</span></dt>
+        <dd>
+          <div *ngIf="dataSet.periodType">
+            <a [routerLink]="['/period-type', dataSet.periodType?.id, 'view']">{{ dataSet.periodType?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataSet.notificationRecipients">Notification Recipients</span></dt>
+        <dd>
+          <div *ngIf="dataSet.notificationRecipients">
+            <a [routerLink]="['/people-group', dataSet.notificationRecipients?.id, 'view']">{{ dataSet.notificationRecipients?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataSet.user">User</span></dt>
+        <dd>
+          <span>{{ dataSet.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataSet.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ dataSet.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataSet.source">Source</span></dt>
+        <dd>
+          <span *ngFor="let source of dataSet.sources; let last = last">
+            <a [routerLink]="['/organisation-unit', source?.id, 'view']">{{ source.name }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/data-set', dataSet.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

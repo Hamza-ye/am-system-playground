@@ -1,0 +1,513 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="app-llins-family-report-heading"
+        data-cy="LLINSFamilyReportCreateUpdateHeading"
+        appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.home.createOrEditLabel"
+      >
+        Create or edit a LLINS Family Report
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" appTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.uid" for="field_uid">Uid</label>
+          <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
+          <div *ngIf="editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('uid')?.errors?.required" appTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('uid')?.errors?.maxlength"
+              appTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 11 }"
+            >
+              This field cannot be longer than 11 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.created" for="field_created"
+            >Created</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_created"
+              data-cy="created"
+              type="datetime-local"
+              class="form-control"
+              name="created"
+              formControlName="created"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.lastUpdated" for="field_lastUpdated"
+            >Last Updated</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastUpdated"
+              data-cy="lastUpdated"
+              type="datetime-local"
+              class="form-control"
+              name="lastUpdated"
+              formControlName="lastUpdated"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.checkNo" for="field_checkNo"
+            >Check No</label
+          >
+          <input type="number" class="form-control" name="checkNo" id="field_checkNo" data-cy="checkNo" formControlName="checkNo" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.maleIndividuals"
+            for="field_maleIndividuals"
+            >Male Individuals</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="maleIndividuals"
+            id="field_maleIndividuals"
+            data-cy="maleIndividuals"
+            formControlName="maleIndividuals"
+          />
+          <div
+            *ngIf="
+              editForm.get('maleIndividuals')!.invalid &&
+              (editForm.get('maleIndividuals')!.dirty || editForm.get('maleIndividuals')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('maleIndividuals')?.errors?.required"
+              appTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('maleIndividuals')?.errors?.min"
+              appTranslate="entity.validation.min"
+              [translateValues]="{ min: 0 }"
+            >
+              This field should be at least 0.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('maleIndividuals')?.errors?.number"
+              appTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.femaleIndividuals"
+            for="field_femaleIndividuals"
+            >Female Individuals</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="femaleIndividuals"
+            id="field_femaleIndividuals"
+            data-cy="femaleIndividuals"
+            formControlName="femaleIndividuals"
+          />
+          <div
+            *ngIf="
+              editForm.get('femaleIndividuals')!.invalid &&
+              (editForm.get('femaleIndividuals')!.dirty || editForm.get('femaleIndividuals')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('femaleIndividuals')?.errors?.required"
+              appTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('femaleIndividuals')?.errors?.min"
+              appTranslate="entity.validation.min"
+              [translateValues]="{ min: 0 }"
+            >
+              This field should be at least 0.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('femaleIndividuals')?.errors?.number"
+              appTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.lessThan5Males" for="field_lessThan5Males"
+            >Less Than 5 Males</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="lessThan5Males"
+            id="field_lessThan5Males"
+            data-cy="lessThan5Males"
+            formControlName="lessThan5Males"
+          />
+          <div
+            *ngIf="
+              editForm.get('lessThan5Males')!.invalid && (editForm.get('lessThan5Males')!.dirty || editForm.get('lessThan5Males')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('lessThan5Males')?.errors?.required"
+              appTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('lessThan5Males')?.errors?.min"
+              appTranslate="entity.validation.min"
+              [translateValues]="{ min: 0 }"
+            >
+              This field should be at least 0.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('lessThan5Males')?.errors?.number"
+              appTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.lessThan5Females"
+            for="field_lessThan5Females"
+            >Less Than 5 Females</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="lessThan5Females"
+            id="field_lessThan5Females"
+            data-cy="lessThan5Females"
+            formControlName="lessThan5Females"
+          />
+          <div
+            *ngIf="
+              editForm.get('lessThan5Females')!.invalid &&
+              (editForm.get('lessThan5Females')!.dirty || editForm.get('lessThan5Females')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('lessThan5Females')?.errors?.required"
+              appTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('lessThan5Females')?.errors?.min"
+              appTranslate="entity.validation.min"
+              [translateValues]="{ min: 0 }"
+            >
+              This field should be at least 0.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('lessThan5Females')?.errors?.number"
+              appTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.pregnantWomen" for="field_pregnantWomen"
+            >Pregnant Women</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="pregnantWomen"
+            id="field_pregnantWomen"
+            data-cy="pregnantWomen"
+            formControlName="pregnantWomen"
+          />
+          <div
+            *ngIf="
+              editForm.get('pregnantWomen')!.invalid && (editForm.get('pregnantWomen')!.dirty || editForm.get('pregnantWomen')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('pregnantWomen')?.errors?.required"
+              appTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('pregnantWomen')?.errors?.min"
+              appTranslate="entity.validation.min"
+              [translateValues]="{ min: 0 }"
+            >
+              This field should be at least 0.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('pregnantWomen')?.errors?.number"
+              appTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.quantityReceived"
+            for="field_quantityReceived"
+            >Quantity Received</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="quantityReceived"
+            id="field_quantityReceived"
+            data-cy="quantityReceived"
+            formControlName="quantityReceived"
+          />
+          <div
+            *ngIf="
+              editForm.get('quantityReceived')!.invalid &&
+              (editForm.get('quantityReceived')!.dirty || editForm.get('quantityReceived')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('quantityReceived')?.errors?.required"
+              appTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('quantityReceived')?.errors?.min"
+              appTranslate="entity.validation.min"
+              [translateValues]="{ min: 0 }"
+            >
+              This field should be at least 0.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('quantityReceived')?.errors?.number"
+              appTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.familyType" for="field_familyType"
+            >Family Type</label
+          >
+          <select class="form-control" name="familyType" formControlName="familyType" id="field_familyType" data-cy="familyType">
+            <option [ngValue]="null">{{ 'amSystemPlaygroundApp.FamilyType.null' | translate }}</option>
+            <option value="RESIDENT">{{ 'amSystemPlaygroundApp.FamilyType.RESIDENT' | translate }}</option>
+            <option value="IDPS">{{ 'amSystemPlaygroundApp.FamilyType.IDPS' | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('familyType')!.invalid && (editForm.get('familyType')!.dirty || editForm.get('familyType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('familyType')?.errors?.required"
+              appTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.comment" for="field_comment"
+            >Comment</label
+          >
+          <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.lastUpdatedBy" for="field_lastUpdatedBy"
+            >Last Updated By</label
+          >
+          <select
+            class="form-control"
+            id="field_lastUpdatedBy"
+            data-cy="lastUpdatedBy"
+            name="lastUpdatedBy"
+            formControlName="lastUpdatedBy"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('lastUpdatedBy')!.value?.id ? editForm.get('lastUpdatedBy')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.dayReached" for="field_dayReached"
+            >Day Reached</label
+          >
+          <select class="form-control" id="field_dayReached" data-cy="dayReached" name="dayReached" formControlName="dayReached">
+            <option *ngIf="!editForm.get('dayReached')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="
+                workingDayOption.id === editForm.get('dayReached')!.value?.id ? editForm.get('dayReached')!.value : workingDayOption
+              "
+              *ngFor="let workingDayOption of workingDaysSharedCollection; trackBy: trackWorkingDayById"
+            >
+              {{ workingDayOption.dayLabel }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="editForm.get(['dayReached'])!.invalid && (editForm.get(['dayReached'])!.dirty || editForm.get(['dayReached'])!.touched)"
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['dayReached'])?.errors?.required"
+            appTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.targetDetails" for="field_targetDetails"
+            >Target Details</label
+          >
+          <select
+            class="form-control"
+            id="field_targetDetails"
+            data-cy="targetDetails"
+            name="targetDetails"
+            formControlName="targetDetails"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                lLINSFamilyTargetOption.id === editForm.get('targetDetails')!.value?.id
+                  ? editForm.get('targetDetails')!.value
+                  : lLINSFamilyTargetOption
+              "
+              *ngFor="let lLINSFamilyTargetOption of lLINSFamilyTargetsSharedCollection; trackBy: trackLLINSFamilyTargetById"
+            >
+              {{ lLINSFamilyTargetOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.executingTeam" for="field_executingTeam"
+            >Executing Team</label
+          >
+          <select
+            class="form-control"
+            id="field_executingTeam"
+            data-cy="executingTeam"
+            name="executingTeam"
+            formControlName="executingTeam"
+          >
+            <option *ngIf="!editForm.get('executingTeam')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="teamOption.id === editForm.get('executingTeam')!.value?.id ? editForm.get('executingTeam')!.value : teamOption"
+              *ngFor="let teamOption of teamsSharedCollection; trackBy: trackTeamById"
+            >
+              {{ teamOption.name }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="
+            editForm.get(['executingTeam'])!.invalid && (editForm.get(['executingTeam'])!.dirty || editForm.get(['executingTeam'])!.touched)
+          "
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['executingTeam'])?.errors?.required"
+            appTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="lLINSVillageReport">
+      <h2 data-cy="lLINSVillageReportDetailsHeading">
+        <span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.detail.title">LLINS Village Report</span>
+      </h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ lLINSVillageReport.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.uid">Uid</span></dt>
+        <dd>
+          <span>{{ lLINSVillageReport.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.created">Created</span></dt>
+        <dd>
+          <span>{{ lLINSVillageReport.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ lLINSVillageReport.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.houses">Houses</span></dt>
+        <dd>
+          <span>{{ lLINSVillageReport.houses }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.residentHousehold">Resident Household</span></dt>
+        <dd>
+          <span>{{ lLINSVillageReport.residentHousehold }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.idpsHousehold">Idps Household</span></dt>
+        <dd>
+          <span>{{ lLINSVillageReport.idpsHousehold }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.maleIndividuals">Male Individuals</span></dt>
+        <dd>
+          <span>{{ lLINSVillageReport.maleIndividuals }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.femaleIndividuals">Female Individuals</span></dt>
+        <dd>
+          <span>{{ lLINSVillageReport.femaleIndividuals }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.lessThan5Males">Less Than 5 Males</span></dt>
+        <dd>
+          <span>{{ lLINSVillageReport.lessThan5Males }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.lessThan5Females">Less Than 5 Females</span></dt>
+        <dd>
+          <span>{{ lLINSVillageReport.lessThan5Females }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.pregnantWomen">Pregnant Women</span></dt>
+        <dd>
+          <span>{{ lLINSVillageReport.pregnantWomen }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.quantityReceived">Quantity Received</span></dt>
+        <dd>
+          <span>{{ lLINSVillageReport.quantityReceived }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.comment">Comment</span></dt>
+        <dd>
+          <span>{{ lLINSVillageReport.comment }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.user">User</span></dt>
+        <dd>
+          <span>{{ lLINSVillageReport.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ lLINSVillageReport.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.dayReached">Day Reached</span></dt>
+        <dd>
+          <div *ngIf="lLINSVillageReport.dayReached">
+            <a [routerLink]="['/working-day', lLINSVillageReport.dayReached?.id, 'view']">{{ lLINSVillageReport.dayReached?.dayLabel }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.targetDetails">Target Details</span></dt>
+        <dd>
+          <div *ngIf="lLINSVillageReport.targetDetails">
+            <a [routerLink]="['/llins-village-target', lLINSVillageReport.targetDetails?.id, 'view']">{{
+              lLINSVillageReport.targetDetails?.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageReport.executingTeam">Executing Team</span></dt>
+        <dd>
+          <div *ngIf="lLINSVillageReport.executingTeam">
+            <a [routerLink]="['/team', lLINSVillageReport.executingTeam?.id, 'view']">{{ lLINSVillageReport.executingTeam?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/llins-village-report', lLINSVillageReport.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,128 @@
+{
+  "name": "DemographicData",
+  "fields": [
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastUpdated",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "level",
+      "fieldType": "DemographicDataLevel",
+      "fieldValues": "SUBVILLAGE_LEVEL,DISTRICT_LEVEL"
+    },
+    {
+      "fieldName": "totalPopulation",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "malePopulation",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "femalePopulation",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "lessThan5Population",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "greaterThan5Population",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "bw5And15Population",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "greaterThan15Population",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "household",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "houses",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "healthFacilities",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "avgNoOfRooms",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "avgRoomArea",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "avgHouseArea",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "individualsPerHousehold",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "populationGrowthRate",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisationUnit",
+      "otherEntityRelationshipName": "demographicData",
+      "relationshipName": "organisationUnit",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "demographicData",
+      "relationshipName": "user",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "demographicData",
+      "relationshipName": "lastUpdatedBy",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "demographicDataSource",
+      "otherEntityRelationshipName": "demographicData",
+      "relationshipValidateRules": "required",
+      "relationshipName": "source",
+      "otherEntityField": "name"
+    }
+  ],
+  "entityTableName": "demographic_data",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211031234315"
+}

@@ -1,0 +1,9 @@
+export enum MovementType {
+  IN = 'IN',
+
+  OUT = 'OUT',
+
+  RECONCILIATION_IN = 'RECONCILIATION_IN',
+
+  RECONCILIATION_OUT = 'RECONCILIATION_OUT',
+}

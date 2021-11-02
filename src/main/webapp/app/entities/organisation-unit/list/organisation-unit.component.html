@@ -1,0 +1,156 @@
+<div>
+  <h2 id="page-heading" data-cy="OrganisationUnitHeading">
+    <span appTranslate="amSystemPlaygroundApp.organisationUnit.home.title">Organisation Units</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.organisationUnit.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-organisation-unit"
+        [routerLink]="['/organisation-unit/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.organisationUnit.home.createLabel"> Create a new Organisation Unit </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="organisationUnits?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.organisationUnit.home.notFound">No organisationUnits found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="organisationUnits && organisationUnits.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.code">Code</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.name">Name</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.shortName">Short Name</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.path">Path</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.hierarchyLevel">Hierarchy Level</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.openingDate">Opening Date</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.comment">Comment</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.closedDate">Closed Date</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.url">Url</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.contactPerson">Contact Person</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.address">Address</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.email">Email</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.phoneNumber">Phone Number</span></th>
+          <th scope="col">
+            <span appTranslate="amSystemPlaygroundApp.organisationUnit.organisationUnitType">Organisation Unit Type</span>
+          </th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.parent">Parent</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.hfHomeSubVillage">Hf Home Sub Village</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.coveredByHf">Covered By Hf</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.malariaUnit">Malaria Unit</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.assignedChv">Assigned Chv</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let organisationUnit of organisationUnits; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/organisation-unit', organisationUnit.id, 'view']">{{ organisationUnit.id }}</a>
+          </td>
+          <td>{{ organisationUnit.uid }}</td>
+          <td>{{ organisationUnit.code }}</td>
+          <td>{{ organisationUnit.name }}</td>
+          <td>{{ organisationUnit.shortName }}</td>
+          <td>{{ organisationUnit.created | formatMediumDatetime }}</td>
+          <td>{{ organisationUnit.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ organisationUnit.path }}</td>
+          <td>{{ organisationUnit.hierarchyLevel }}</td>
+          <td>{{ organisationUnit.openingDate | formatMediumDate }}</td>
+          <td>{{ organisationUnit.comment }}</td>
+          <td>{{ organisationUnit.closedDate | formatMediumDate }}</td>
+          <td>{{ organisationUnit.url }}</td>
+          <td>{{ organisationUnit.contactPerson }}</td>
+          <td>{{ organisationUnit.address }}</td>
+          <td>{{ organisationUnit.email }}</td>
+          <td>{{ organisationUnit.phoneNumber }}</td>
+          <td appTranslate="{{ 'amSystemPlaygroundApp.OrganisationUnitType.' + organisationUnit.organisationUnitType }}">
+            {{ organisationUnit.organisationUnitType }}
+          </td>
+          <td>
+            <div *ngIf="organisationUnit.parent">
+              <a [routerLink]="['/organisation-unit', organisationUnit.parent?.id, 'view']">{{ organisationUnit.parent?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="organisationUnit.hfHomeSubVillage">
+              <a [routerLink]="['/organisation-unit', organisationUnit.hfHomeSubVillage?.id, 'view']">{{
+                organisationUnit.hfHomeSubVillage?.id
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="organisationUnit.coveredByHf">
+              <a [routerLink]="['/organisation-unit', organisationUnit.coveredByHf?.id, 'view']">{{
+                organisationUnit.coveredByHf?.name
+              }}</a>
+            </div>
+          </td>
+          <td>
+            {{ organisationUnit.user?.login }}
+          </td>
+          <td>
+            {{ organisationUnit.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <div *ngIf="organisationUnit.malariaUnit">
+              <a [routerLink]="['/malaria-unit', organisationUnit.malariaUnit?.id, 'view']">{{ organisationUnit.malariaUnit?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="organisationUnit.assignedChv">
+              <a [routerLink]="['/chv', organisationUnit.assignedChv?.id, 'view']">{{ organisationUnit.assignedChv?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/organisation-unit', organisationUnit.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/organisation-unit', organisationUnit.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(organisationUnit)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

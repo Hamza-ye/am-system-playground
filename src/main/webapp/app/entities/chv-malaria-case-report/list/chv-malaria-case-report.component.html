@@ -1,0 +1,134 @@
+<div>
+  <h2 id="page-heading" data-cy="CHVMalariaCaseReportHeading">
+    <span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.home.title">CHV Malaria Case Reports</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-chv-malaria-case-report"
+        [routerLink]="['/chv-malaria-case-report/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.home.createLabel"> Create a new CHV Malaria Case Report </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="cHVMalariaCaseReports?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.home.notFound">No cHVMalariaCaseReports found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="cHVMalariaCaseReports && cHVMalariaCaseReports.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.date">Date</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.individualName">Individual Name</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.gender">Gender</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.isPregnant">Is Pregnant</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.malariaTestResult">Malaria Test Result</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.drugsGiven">Drugs Given</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.suppsGiven">Supps Given</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.referral">Referral</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.barImageUrl">Bar Image Url</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.comment">Comment</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.subVillage">Sub Village</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.chv">Chv</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.reportClass">Report Class</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cHVMalariaCaseReport of cHVMalariaCaseReports; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/chv-malaria-case-report', cHVMalariaCaseReport.id, 'view']">{{ cHVMalariaCaseReport.id }}</a>
+          </td>
+          <td>{{ cHVMalariaCaseReport.uid }}</td>
+          <td>{{ cHVMalariaCaseReport.created | formatMediumDatetime }}</td>
+          <td>{{ cHVMalariaCaseReport.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ cHVMalariaCaseReport.date | formatMediumDate }}</td>
+          <td>{{ cHVMalariaCaseReport.individualName }}</td>
+          <td appTranslate="{{ 'amSystemPlaygroundApp.Gender.' + cHVMalariaCaseReport.gender }}">{{ cHVMalariaCaseReport.gender }}</td>
+          <td>{{ cHVMalariaCaseReport.isPregnant }}</td>
+          <td appTranslate="{{ 'amSystemPlaygroundApp.MalariaTestResult.' + cHVMalariaCaseReport.malariaTestResult }}">
+            {{ cHVMalariaCaseReport.malariaTestResult }}
+          </td>
+          <td>{{ cHVMalariaCaseReport.drugsGiven }}</td>
+          <td>{{ cHVMalariaCaseReport.suppsGiven }}</td>
+          <td>{{ cHVMalariaCaseReport.referral }}</td>
+          <td>{{ cHVMalariaCaseReport.barImageUrl }}</td>
+          <td>{{ cHVMalariaCaseReport.comment }}</td>
+          <td>
+            <div *ngIf="cHVMalariaCaseReport.subVillage">
+              <a [routerLink]="['/organisation-unit', cHVMalariaCaseReport.subVillage?.id, 'view']">{{
+                cHVMalariaCaseReport.subVillage?.name
+              }}</a>
+            </div>
+          </td>
+          <td>
+            {{ cHVMalariaCaseReport.user?.login }}
+          </td>
+          <td>
+            {{ cHVMalariaCaseReport.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <div *ngIf="cHVMalariaCaseReport.chv">
+              <a [routerLink]="['/chv', cHVMalariaCaseReport.chv?.id, 'view']">{{ cHVMalariaCaseReport.chv?.code }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="cHVMalariaCaseReport.reportClass">
+              <a [routerLink]="['/cases-report-class', cHVMalariaCaseReport.reportClass?.id, 'view']">{{
+                cHVMalariaCaseReport.reportClass?.name
+              }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/chv-malaria-case-report', cHVMalariaCaseReport.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/chv-malaria-case-report', cHVMalariaCaseReport.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(cHVMalariaCaseReport)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

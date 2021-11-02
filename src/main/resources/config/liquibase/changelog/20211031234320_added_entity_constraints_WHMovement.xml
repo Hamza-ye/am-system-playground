@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity WHMovement.
+    -->
+    <changeSet id="20211031234320-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="wh_movement"
+                                 constraintName="fk_wh_movement__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+                                 baseTableName="wh_movement"
+                                 constraintName="fk_wh_movement__last_updated_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="day_id"
+                                 baseTableName="wh_movement"
+                                 constraintName="fk_wh_movement__day_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="working_day"/>
+
+        <addForeignKeyConstraint baseColumnNames="initiatedwh_id"
+                                 baseTableName="wh_movement"
+                                 constraintName="fk_wh_movement__initiatedwh_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="warehouse"/>
+
+        <addForeignKeyConstraint baseColumnNames="the_other_sidewh_id"
+                                 baseTableName="wh_movement"
+                                 constraintName="fk_wh_movement__the_other_sidewh_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="warehouse"/>
+
+        <addForeignKeyConstraint baseColumnNames="team_id"
+                                 baseTableName="wh_movement"
+                                 constraintName="fk_wh_movement__team_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="team"/>
+    </changeSet>
+</databaseChangeLog>

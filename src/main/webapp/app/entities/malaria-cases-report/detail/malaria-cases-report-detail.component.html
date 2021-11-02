@@ -1,0 +1,150 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="malariaCasesReport">
+      <h2 data-cy="malariaCasesReportDetailsHeading">
+        <span appTranslate="amSystemPlaygroundApp.malariaCasesReport.detail.title">Malaria Cases Report</span>
+      </h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.uid">Uid</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.created">Created</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.rdtTested">Rdt Tested</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.rdtTested }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.rdtPositive">Rdt Positive</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.rdtPositive }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.rdtPf">Rdt Pf</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.rdtPf }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.rdtPv">Rdt Pv</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.rdtPv }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.rdtPother">Rdt Pother</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.rdtPother }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.microTested">Micro Tested</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.microTested }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.microPositive">Micro Positive</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.microPositive }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.microPf">Micro Pf</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.microPf }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.microPv">Micro Pv</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.microPv }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.microMix">Micro Mix</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.microMix }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.microPother">Micro Pother</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.microPother }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.probableCases">Probable Cases</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.probableCases }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.inpatientCases">Inpatient Cases</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.inpatientCases }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.deathCases">Death Cases</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.deathCases }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.treated">Treated</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.treated }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.suspectedCases">Suspected Cases</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.suspectedCases }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.totalFrequents">Total Frequents</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.totalFrequents }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.comment">Comment</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.comment }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.user">User</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ malariaCasesReport.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.reportClass">Report Class</span></dt>
+        <dd>
+          <div *ngIf="malariaCasesReport.reportClass">
+            <a [routerLink]="['/cases-report-class', malariaCasesReport.reportClass?.id, 'view']">{{
+              malariaCasesReport.reportClass?.name
+            }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.period">Period</span></dt>
+        <dd>
+          <div *ngIf="malariaCasesReport.period">
+            <a [routerLink]="['/period', malariaCasesReport.period?.id, 'view']">{{ malariaCasesReport.period?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.dataSet">Data Set</span></dt>
+        <dd>
+          <div *ngIf="malariaCasesReport.dataSet">
+            <a [routerLink]="['/data-set', malariaCasesReport.dataSet?.id, 'view']">{{ malariaCasesReport.dataSet?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.organisationUnit">Organisation Unit</span></dt>
+        <dd>
+          <div *ngIf="malariaCasesReport.organisationUnit">
+            <a [routerLink]="['/organisation-unit', malariaCasesReport.organisationUnit?.id, 'view']">{{
+              malariaCasesReport.organisationUnit?.name
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/malaria-cases-report', malariaCasesReport.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

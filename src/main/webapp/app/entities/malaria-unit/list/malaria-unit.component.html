@@ -1,0 +1,98 @@
+<div>
+  <h2 id="page-heading" data-cy="MalariaUnitHeading">
+    <span appTranslate="amSystemPlaygroundApp.malariaUnit.home.title">Malaria Units</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.malariaUnit.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-malaria-unit"
+        [routerLink]="['/malaria-unit/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.malariaUnit.home.createLabel"> Create a new Malaria Unit </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="malariaUnits?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.malariaUnit.home.notFound">No malariaUnits found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="malariaUnits && malariaUnits.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.code">Code</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.name">Name</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.shortName">Short Name</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.description">Description</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let malariaUnit of malariaUnits; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/malaria-unit', malariaUnit.id, 'view']">{{ malariaUnit.id }}</a>
+          </td>
+          <td>{{ malariaUnit.uid }}</td>
+          <td>{{ malariaUnit.code }}</td>
+          <td>{{ malariaUnit.name }}</td>
+          <td>{{ malariaUnit.shortName }}</td>
+          <td>{{ malariaUnit.description }}</td>
+          <td>{{ malariaUnit.created | formatMediumDatetime }}</td>
+          <td>{{ malariaUnit.lastUpdated | formatMediumDatetime }}</td>
+          <td>
+            {{ malariaUnit.user?.login }}
+          </td>
+          <td>
+            {{ malariaUnit.lastUpdatedBy?.login }}
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/malaria-unit', malariaUnit.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/malaria-unit', malariaUnit.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(malariaUnit)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

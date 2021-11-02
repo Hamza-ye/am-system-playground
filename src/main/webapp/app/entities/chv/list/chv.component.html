@@ -1,0 +1,110 @@
+<div>
+  <h2 id="page-heading" data-cy="CHVHeading">
+    <span appTranslate="amSystemPlaygroundApp.cHV.home.title">CHVS</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.cHV.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-chv"
+        [routerLink]="['/chv/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.cHV.home.createLabel"> Create a new CHV </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="cHVS?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.cHV.home.notFound">No cHVS found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="cHVS && cHVS.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.code">Code</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.description">Description</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.mobile">Mobile</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.person">Person</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.district">District</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.homeSubvillage">Home Subvillage</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.managedByHf">Managed By Hf</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cHV of cHVS; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/chv', cHV.id, 'view']">{{ cHV.id }}</a>
+          </td>
+          <td>{{ cHV.uid }}</td>
+          <td>{{ cHV.code }}</td>
+          <td>{{ cHV.description }}</td>
+          <td>{{ cHV.created | formatMediumDatetime }}</td>
+          <td>{{ cHV.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ cHV.mobile }}</td>
+          <td>
+            <div *ngIf="cHV.person">
+              <a [routerLink]="['/person', cHV.person?.id, 'view']">{{ cHV.person?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="cHV.district">
+              <a [routerLink]="['/organisation-unit', cHV.district?.id, 'view']">{{ cHV.district?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="cHV.homeSubvillage">
+              <a [routerLink]="['/organisation-unit', cHV.homeSubvillage?.id, 'view']">{{ cHV.homeSubvillage?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="cHV.managedByHf">
+              <a [routerLink]="['/organisation-unit', cHV.managedByHf?.id, 'view']">{{ cHV.managedByHf?.name }}</a>
+            </div>
+          </td>
+          <td>
+            {{ cHV.user?.login }}
+          </td>
+          <td>
+            {{ cHV.lastUpdatedBy?.login }}
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/chv', cHV.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/chv', cHV.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(cHV)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

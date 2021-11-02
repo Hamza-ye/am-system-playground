@@ -1,0 +1,102 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="lLINSVillageTarget">
+      <h2 data-cy="lLINSVillageTargetDetailsHeading">
+        <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.detail.title">LLINS Village Target</span>
+      </h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ lLINSVillageTarget.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.uid">Uid</span></dt>
+        <dd>
+          <span>{{ lLINSVillageTarget.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.created">Created</span></dt>
+        <dd>
+          <span>{{ lLINSVillageTarget.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ lLINSVillageTarget.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.residentsIndividuals">Residents Individuals</span></dt>
+        <dd>
+          <span>{{ lLINSVillageTarget.residentsIndividuals }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.idpsIndividuals">Idps Individuals</span></dt>
+        <dd>
+          <span>{{ lLINSVillageTarget.idpsIndividuals }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.residentsFamilies">Residents Families</span></dt>
+        <dd>
+          <span>{{ lLINSVillageTarget.residentsFamilies }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.idpsFamilies">Idps Families</span></dt>
+        <dd>
+          <span>{{ lLINSVillageTarget.idpsFamilies }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.noOfDaysNeeded">No Of Days Needed</span></dt>
+        <dd>
+          <span>{{ lLINSVillageTarget.noOfDaysNeeded }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.quantity">Quantity</span></dt>
+        <dd>
+          <span>{{ lLINSVillageTarget.quantity }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.organisationUnit">Organisation Unit</span></dt>
+        <dd>
+          <div *ngIf="lLINSVillageTarget.organisationUnit">
+            <a [routerLink]="['/organisation-unit', lLINSVillageTarget.organisationUnit?.id, 'view']">{{
+              lLINSVillageTarget.organisationUnit?.name
+            }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.user">User</span></dt>
+        <dd>
+          <span>{{ lLINSVillageTarget.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ lLINSVillageTarget.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.dayPlanned">Day Planned</span></dt>
+        <dd>
+          <div *ngIf="lLINSVillageTarget.dayPlanned">
+            <a [routerLink]="['/working-day', lLINSVillageTarget.dayPlanned?.id, 'view']">{{ lLINSVillageTarget.dayPlanned?.dayLabel }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.statusOfCoverage">Status Of Coverage</span></dt>
+        <dd>
+          <div *ngIf="lLINSVillageTarget.statusOfCoverage">
+            <a [routerLink]="['/status-of-coverage', lLINSVillageTarget.statusOfCoverage?.id, 'view']">{{
+              lLINSVillageTarget.statusOfCoverage?.status
+            }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.teamAssigned">Team Assigned</span></dt>
+        <dd>
+          <div *ngIf="lLINSVillageTarget.teamAssigned">
+            <a [routerLink]="['/team', lLINSVillageTarget.teamAssigned?.id, 'view']">{{ lLINSVillageTarget.teamAssigned?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/llins-village-target', lLINSVillageTarget.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

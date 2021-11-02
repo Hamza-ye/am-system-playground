@@ -1,0 +1,28 @@
+{
+  "name": "WorkingDay",
+  "fields": [
+    {
+      "fieldName": "dayNo",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "unique", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "dayLabel",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "20"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "working_day",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211031234332"
+}

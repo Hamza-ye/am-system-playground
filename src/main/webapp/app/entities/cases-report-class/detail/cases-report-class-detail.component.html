@@ -1,0 +1,66 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="casesReportClass">
+      <h2 data-cy="casesReportClassDetailsHeading">
+        <span appTranslate="amSystemPlaygroundApp.casesReportClass.detail.title">Cases Report Class</span>
+      </h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ casesReportClass.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.casesReportClass.uid">Uid</span></dt>
+        <dd>
+          <span>{{ casesReportClass.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.casesReportClass.code">Code</span></dt>
+        <dd>
+          <span>{{ casesReportClass.code }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.casesReportClass.name">Name</span></dt>
+        <dd>
+          <span>{{ casesReportClass.name }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.casesReportClass.shortName">Short Name</span></dt>
+        <dd>
+          <span>{{ casesReportClass.shortName }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.casesReportClass.description">Description</span></dt>
+        <dd>
+          <span>{{ casesReportClass.description }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.casesReportClass.created">Created</span></dt>
+        <dd>
+          <span>{{ casesReportClass.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.casesReportClass.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ casesReportClass.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.casesReportClass.user">User</span></dt>
+        <dd>
+          <span>{{ casesReportClass.user?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.casesReportClass.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ casesReportClass.lastUpdatedBy?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/cases-report-class', casesReportClass.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

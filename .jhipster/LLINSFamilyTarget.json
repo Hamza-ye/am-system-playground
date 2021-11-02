@@ -1,0 +1,105 @@
+{
+  "name": "LLINSFamilyTarget",
+  "fields": [
+    {
+      "fieldName": "uid",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "11"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastUpdated",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "residentsIndividualsPlanned",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "idpsIndividualsPlanned",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "quantityPlanned",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "familyType",
+      "fieldType": "FamilyType",
+      "fieldValues": "RESIDENT,IDPS",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "statusOfFamilyTarget",
+      "fieldType": "StatusOfFamilyTarget",
+      "fieldValues": "REACHED,NOT_REACHED_YET,FAMILY_MOVED,FAMILY_NOT_EXIST,FAMILY_REFUSED,NOT_COVERED_OTHER",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "lLINSFamilyReport",
+      "otherEntityRelationshipName": "targetDetails",
+      "relationshipName": "llinsFamilyReport"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "lLINSFamilyTarget",
+      "relationshipName": "user",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "lLINSFamilyTarget",
+      "relationshipName": "lastUpdatedBy",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "workingDay",
+      "otherEntityRelationshipName": "lLINSFamilyTarget",
+      "relationshipValidateRules": "required",
+      "relationshipName": "dayPlanned",
+      "otherEntityField": "dayLabel"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "family",
+      "otherEntityRelationshipName": "llinsFamilyTarget",
+      "relationshipValidateRules": "required",
+      "relationshipName": "family",
+      "otherEntityField": "familyNo"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "team",
+      "otherEntityRelationshipName": "llinsFamilyTarget",
+      "relationshipValidateRules": "required",
+      "relationshipName": "teamAssigned",
+      "otherEntityField": "name"
+    }
+  ],
+  "entityTableName": "llins_family_target",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211031234327"
+}

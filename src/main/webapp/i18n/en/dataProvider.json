@@ -1,0 +1,33 @@
+{
+  "amSystemPlaygroundApp": {
+    "dataProvider": {
+      "home": {
+        "title": "Data Providers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Data Provider",
+        "createOrEditLabel": "Create or edit a Data Provider",
+        "notFound": "No Data Providers found"
+      },
+      "created": "A new Data Provider is created with identifier {{ param }}",
+      "updated": "A Data Provider is updated with identifier {{ param }}",
+      "deleted": "A Data Provider is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Data Provider {{ id }}?"
+      },
+      "detail": {
+        "title": "Data Provider"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "name": "Name",
+      "description": "Description",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "mobile": "Mobile",
+      "user": "User",
+      "lastUpdatedBy": "Last Updated By",
+      "family": "Family"
+    }
+  }
+}

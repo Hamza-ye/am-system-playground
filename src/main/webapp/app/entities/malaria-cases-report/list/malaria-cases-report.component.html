@@ -1,0 +1,154 @@
+<div>
+  <h2 id="page-heading" data-cy="MalariaCasesReportHeading">
+    <span appTranslate="amSystemPlaygroundApp.malariaCasesReport.home.title">Malaria Cases Reports</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.malariaCasesReport.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-malaria-cases-report"
+        [routerLink]="['/malaria-cases-report/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.malariaCasesReport.home.createLabel"> Create a new Malaria Cases Report </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="malariaCasesReports?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.malariaCasesReport.home.notFound">No malariaCasesReports found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="malariaCasesReports && malariaCasesReports.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.rdtTested">Rdt Tested</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.rdtPositive">Rdt Positive</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.rdtPf">Rdt Pf</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.rdtPv">Rdt Pv</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.rdtPother">Rdt Pother</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.microTested">Micro Tested</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.microPositive">Micro Positive</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.microPf">Micro Pf</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.microPv">Micro Pv</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.microMix">Micro Mix</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.microPother">Micro Pother</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.probableCases">Probable Cases</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.inpatientCases">Inpatient Cases</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.deathCases">Death Cases</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.treated">Treated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.suspectedCases">Suspected Cases</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.totalFrequents">Total Frequents</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.comment">Comment</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.reportClass">Report Class</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.period">Period</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.dataSet">Data Set</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.organisationUnit">Organisation Unit</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let malariaCasesReport of malariaCasesReports; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/malaria-cases-report', malariaCasesReport.id, 'view']">{{ malariaCasesReport.id }}</a>
+          </td>
+          <td>{{ malariaCasesReport.uid }}</td>
+          <td>{{ malariaCasesReport.created | formatMediumDatetime }}</td>
+          <td>{{ malariaCasesReport.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ malariaCasesReport.rdtTested }}</td>
+          <td>{{ malariaCasesReport.rdtPositive }}</td>
+          <td>{{ malariaCasesReport.rdtPf }}</td>
+          <td>{{ malariaCasesReport.rdtPv }}</td>
+          <td>{{ malariaCasesReport.rdtPother }}</td>
+          <td>{{ malariaCasesReport.microTested }}</td>
+          <td>{{ malariaCasesReport.microPositive }}</td>
+          <td>{{ malariaCasesReport.microPf }}</td>
+          <td>{{ malariaCasesReport.microPv }}</td>
+          <td>{{ malariaCasesReport.microMix }}</td>
+          <td>{{ malariaCasesReport.microPother }}</td>
+          <td>{{ malariaCasesReport.probableCases }}</td>
+          <td>{{ malariaCasesReport.inpatientCases }}</td>
+          <td>{{ malariaCasesReport.deathCases }}</td>
+          <td>{{ malariaCasesReport.treated }}</td>
+          <td>{{ malariaCasesReport.suspectedCases }}</td>
+          <td>{{ malariaCasesReport.totalFrequents }}</td>
+          <td>{{ malariaCasesReport.comment }}</td>
+          <td>
+            {{ malariaCasesReport.user?.login }}
+          </td>
+          <td>
+            {{ malariaCasesReport.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <div *ngIf="malariaCasesReport.reportClass">
+              <a [routerLink]="['/cases-report-class', malariaCasesReport.reportClass?.id, 'view']">{{
+                malariaCasesReport.reportClass?.name
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="malariaCasesReport.period">
+              <a [routerLink]="['/period', malariaCasesReport.period?.id, 'view']">{{ malariaCasesReport.period?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="malariaCasesReport.dataSet">
+              <a [routerLink]="['/data-set', malariaCasesReport.dataSet?.id, 'view']">{{ malariaCasesReport.dataSet?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="malariaCasesReport.organisationUnit">
+              <a [routerLink]="['/organisation-unit', malariaCasesReport.organisationUnit?.id, 'view']">{{
+                malariaCasesReport.organisationUnit?.name
+              }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/malaria-cases-report', malariaCasesReport.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/malaria-cases-report', malariaCasesReport.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(malariaCasesReport)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

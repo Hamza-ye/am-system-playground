@@ -1,0 +1,13 @@
+{
+  "amSystemPlaygroundApp": {
+    "MalariaUnitMemberType": {
+      "null": "",
+      "ADMIN": "ADMIN",
+      "LAP": "LAP",
+      "DOCTOR": "DOCTOR",
+      "ENTOMOLOGIST": "ENTOMOLOGIST",
+      "MEMBER": "MEMBER",
+      "OTHER": "OTHER"
+    }
+  }
+}

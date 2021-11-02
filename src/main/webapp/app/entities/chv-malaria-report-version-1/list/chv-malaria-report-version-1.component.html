@@ -1,0 +1,142 @@
+<div>
+  <h2 id="page-heading" data-cy="CHVMalariaReportVersion1Heading">
+    <span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.home.title">CHV Malaria Report Version 1 S</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-chv-malaria-report-version-1"
+        [routerLink]="['/chv-malaria-report-version-1/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.home.createLabel">
+          Create a new CHV Malaria Report Version 1
+        </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="cHVMalariaReportVersion1s?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.home.notFound">No cHVMalariaReportVersion1s found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="cHVMalariaReportVersion1s && cHVMalariaReportVersion1s.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.tested">Tested</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.positive">Positive</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.drugsGiven">Drugs Given</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.suppsGiven">Supps Given</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.rdtBalance">Rdt Balance</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.rdtReceived">Rdt Received</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.rdtUsed">Rdt Used</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.rdtDamagedLost">Rdt Damaged Lost</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.drugsBalance">Drugs Balance</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.drugsReceived">Drugs Received</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.drugsUsed">Drugs Used</span></th>
+          <th scope="col">
+            <span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.drugsDamagedLost">Drugs Damaged Lost</span>
+          </th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.suppsBalance">Supps Balance</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.suppsReceived">Supps Received</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.suppsUsed">Supps Used</span></th>
+          <th scope="col">
+            <span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.suppsDamagedLost">Supps Damaged Lost</span>
+          </th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.comment">Comment</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.chv">Chv</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.period">Period</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cHVMalariaReportVersion1 of cHVMalariaReportVersion1s; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/chv-malaria-report-version-1', cHVMalariaReportVersion1.id, 'view']">{{ cHVMalariaReportVersion1.id }}</a>
+          </td>
+          <td>{{ cHVMalariaReportVersion1.uid }}</td>
+          <td>{{ cHVMalariaReportVersion1.created | formatMediumDatetime }}</td>
+          <td>{{ cHVMalariaReportVersion1.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ cHVMalariaReportVersion1.tested }}</td>
+          <td>{{ cHVMalariaReportVersion1.positive }}</td>
+          <td>{{ cHVMalariaReportVersion1.drugsGiven }}</td>
+          <td>{{ cHVMalariaReportVersion1.suppsGiven }}</td>
+          <td>{{ cHVMalariaReportVersion1.rdtBalance }}</td>
+          <td>{{ cHVMalariaReportVersion1.rdtReceived }}</td>
+          <td>{{ cHVMalariaReportVersion1.rdtUsed }}</td>
+          <td>{{ cHVMalariaReportVersion1.rdtDamagedLost }}</td>
+          <td>{{ cHVMalariaReportVersion1.drugsBalance }}</td>
+          <td>{{ cHVMalariaReportVersion1.drugsReceived }}</td>
+          <td>{{ cHVMalariaReportVersion1.drugsUsed }}</td>
+          <td>{{ cHVMalariaReportVersion1.drugsDamagedLost }}</td>
+          <td>{{ cHVMalariaReportVersion1.suppsBalance }}</td>
+          <td>{{ cHVMalariaReportVersion1.suppsReceived }}</td>
+          <td>{{ cHVMalariaReportVersion1.suppsUsed }}</td>
+          <td>{{ cHVMalariaReportVersion1.suppsDamagedLost }}</td>
+          <td>{{ cHVMalariaReportVersion1.comment }}</td>
+          <td>
+            {{ cHVMalariaReportVersion1.user?.login }}
+          </td>
+          <td>
+            {{ cHVMalariaReportVersion1.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <div *ngIf="cHVMalariaReportVersion1.chv">
+              <a [routerLink]="['/chv', cHVMalariaReportVersion1.chv?.id, 'view']">{{ cHVMalariaReportVersion1.chv?.code }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="cHVMalariaReportVersion1.period">
+              <a [routerLink]="['/period', cHVMalariaReportVersion1.period?.id, 'view']">{{ cHVMalariaReportVersion1.period?.name }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/chv-malaria-report-version-1', cHVMalariaReportVersion1.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/chv-malaria-report-version-1', cHVMalariaReportVersion1.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(cHVMalariaReportVersion1)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

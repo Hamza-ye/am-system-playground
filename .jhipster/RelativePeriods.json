@@ -1,0 +1,172 @@
+{
+  "name": "RelativePeriods",
+  "fields": [
+    {
+      "fieldName": "thisDay",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "yesterday",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "last3Days",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "last7Days",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "last14Days",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "thisMonth",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "lastMonth",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "thisBimonth",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "lastBimonth",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "thisQuarter",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "lastQuarter",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "thisSixMonth",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "lastSixMonth",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "weeksThisYear",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "monthsThisYear",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "biMonthsThisYear",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "quartersThisYear",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "thisYear",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "monthsLastYear",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "quartersLastYear",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "lastYear",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "last5Years",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "last12Months",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "last6Months",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "last3Months",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "last6BiMonths",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "last4Quarters",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "last2SixMonths",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "thisFinancialYear",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "lastFinancialYear",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "last5FinancialYears",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "thisWeek",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "lastWeek",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "thisBiWeek",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "lastBiWeek",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "last4Weeks",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "last4BiWeeks",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "last12Weeks",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "last52Weeks",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "relative_periods",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211031234352"
+}

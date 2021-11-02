@@ -1,0 +1,107 @@
+<div>
+  <h2 id="page-heading" data-cy="OrganisationUnitGroupHeading">
+    <span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.home.title">Organisation Unit Groups</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-organisation-unit-group"
+        [routerLink]="['/organisation-unit-group/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.home.createLabel"> Create a new Organisation Unit Group </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="organisationUnitGroups?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.home.notFound">No organisationUnitGroups found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="organisationUnitGroups && organisationUnitGroups.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.code">Code</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.name">Name</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.shortName">Short Name</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.symbol">Symbol</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.color">Color</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.member">Member</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let organisationUnitGroup of organisationUnitGroups; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/organisation-unit-group', organisationUnitGroup.id, 'view']">{{ organisationUnitGroup.id }}</a>
+          </td>
+          <td>{{ organisationUnitGroup.uid }}</td>
+          <td>{{ organisationUnitGroup.code }}</td>
+          <td>{{ organisationUnitGroup.name }}</td>
+          <td>{{ organisationUnitGroup.shortName }}</td>
+          <td>{{ organisationUnitGroup.created | formatMediumDatetime }}</td>
+          <td>{{ organisationUnitGroup.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ organisationUnitGroup.symbol }}</td>
+          <td>{{ organisationUnitGroup.color }}</td>
+          <td>
+            {{ organisationUnitGroup.user?.login }}
+          </td>
+          <td>
+            {{ organisationUnitGroup.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <span *ngFor="let member of organisationUnitGroup.members; let last = last">
+              <a class="form-control-static" [routerLink]="['/organisation-unit', member.id, 'view']">{{ member.name }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/organisation-unit-group', organisationUnitGroup.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/organisation-unit-group', organisationUnitGroup.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(organisationUnitGroup)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

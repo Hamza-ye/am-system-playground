@@ -1,0 +1,134 @@
+<div>
+  <h2 id="page-heading" data-cy="DengueCasesReportHeading">
+    <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.home.title">Dengue Cases Reports</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-dengue-cases-report"
+        [routerLink]="['/dengue-cases-report/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.home.createLabel"> Create a new Dengue Cases Report </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="dengueCasesReports?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.home.notFound">No dengueCasesReports found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="dengueCasesReports && dengueCasesReports.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.rdtTested">Rdt Tested</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.rdtPositive">Rdt Positive</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.probableCases">Probable Cases</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.inpatientCases">Inpatient Cases</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.deathCases">Death Cases</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.treated">Treated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.suspectedCases">Suspected Cases</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.comment">Comment</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.reportClass">Report Class</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.period">Period</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.dataSet">Data Set</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.organisationUnit">Organisation Unit</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dengueCasesReport of dengueCasesReports; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/dengue-cases-report', dengueCasesReport.id, 'view']">{{ dengueCasesReport.id }}</a>
+          </td>
+          <td>{{ dengueCasesReport.uid }}</td>
+          <td>{{ dengueCasesReport.created | formatMediumDatetime }}</td>
+          <td>{{ dengueCasesReport.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ dengueCasesReport.rdtTested }}</td>
+          <td>{{ dengueCasesReport.rdtPositive }}</td>
+          <td>{{ dengueCasesReport.probableCases }}</td>
+          <td>{{ dengueCasesReport.inpatientCases }}</td>
+          <td>{{ dengueCasesReport.deathCases }}</td>
+          <td>{{ dengueCasesReport.treated }}</td>
+          <td>{{ dengueCasesReport.suspectedCases }}</td>
+          <td>{{ dengueCasesReport.comment }}</td>
+          <td>
+            {{ dengueCasesReport.user?.login }}
+          </td>
+          <td>
+            {{ dengueCasesReport.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <div *ngIf="dengueCasesReport.reportClass">
+              <a [routerLink]="['/cases-report-class', dengueCasesReport.reportClass?.id, 'view']">{{
+                dengueCasesReport.reportClass?.name
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="dengueCasesReport.period">
+              <a [routerLink]="['/period', dengueCasesReport.period?.id, 'view']">{{ dengueCasesReport.period?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="dengueCasesReport.dataSet">
+              <a [routerLink]="['/data-set', dengueCasesReport.dataSet?.id, 'view']">{{ dengueCasesReport.dataSet?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="dengueCasesReport.organisationUnit">
+              <a [routerLink]="['/organisation-unit', dengueCasesReport.organisationUnit?.id, 'view']">{{
+                dengueCasesReport.organisationUnit?.name
+              }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/dengue-cases-report', dengueCasesReport.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/dengue-cases-report', dengueCasesReport.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(dengueCasesReport)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

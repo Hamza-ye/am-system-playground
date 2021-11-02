@@ -1,0 +1,50 @@
+{
+  "amSystemPlaygroundApp": {
+    "malariaCasesReport": {
+      "home": {
+        "title": "Malaria Cases Reports",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Malaria Cases Report",
+        "createOrEditLabel": "Create or edit a Malaria Cases Report",
+        "notFound": "No Malaria Cases Reports found"
+      },
+      "created": "A new Malaria Cases Report is created with identifier {{ param }}",
+      "updated": "A Malaria Cases Report is updated with identifier {{ param }}",
+      "deleted": "A Malaria Cases Report is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Malaria Cases Report {{ id }}?"
+      },
+      "detail": {
+        "title": "Malaria Cases Report"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "rdtTested": "Rdt Tested",
+      "rdtPositive": "Rdt Positive",
+      "rdtPf": "Rdt Pf",
+      "rdtPv": "Rdt Pv",
+      "rdtPother": "Rdt Pother",
+      "microTested": "Micro Tested",
+      "microPositive": "Micro Positive",
+      "microPf": "Micro Pf",
+      "microPv": "Micro Pv",
+      "microMix": "Micro Mix",
+      "microPother": "Micro Pother",
+      "probableCases": "Probable Cases",
+      "inpatientCases": "Inpatient Cases",
+      "deathCases": "Death Cases",
+      "treated": "Treated",
+      "suspectedCases": "Suspected Cases",
+      "totalFrequents": "Total Frequents",
+      "comment": "Comment",
+      "user": "User",
+      "lastUpdatedBy": "Last Updated By",
+      "reportClass": "Report Class",
+      "period": "Period",
+      "dataSet": "Data Set",
+      "organisationUnit": "Organisation Unit"
+    }
+  }
+}

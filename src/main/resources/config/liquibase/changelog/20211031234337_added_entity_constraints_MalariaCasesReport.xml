@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity MalariaCasesReport.
+    -->
+    <changeSet id="20211031234337-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="malaria_cases_report"
+                                 constraintName="fk_malaria_cases_report__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+                                 baseTableName="malaria_cases_report"
+                                 constraintName="fk_malaria_cases_report__last_updated_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="report_class_id"
+                                 baseTableName="malaria_cases_report"
+                                 constraintName="fk_malaria_cases_report__report_class_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cases_report_class"/>
+
+        <addForeignKeyConstraint baseColumnNames="period_id"
+                                 baseTableName="malaria_cases_report"
+                                 constraintName="fk_malaria_cases_report__period_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="period"/>
+
+        <addForeignKeyConstraint baseColumnNames="data_set_id"
+                                 baseTableName="malaria_cases_report"
+                                 constraintName="fk_malaria_cases_report__data_set_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="data_set"/>
+
+        <addForeignKeyConstraint baseColumnNames="organisation_unit_id"
+                                 baseTableName="malaria_cases_report"
+                                 constraintName="fk_malaria_cases_report__organisation_unit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organisation_unit"/>
+    </changeSet>
+</databaseChangeLog>

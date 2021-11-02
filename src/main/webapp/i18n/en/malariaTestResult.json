@@ -1,0 +1,9 @@
+{
+  "amSystemPlaygroundApp": {
+    "MalariaTestResult": {
+      "null": "",
+      "POSITIVE": "POSITIVE",
+      "NEGATIVE": "NEGATIVE"
+    }
+  }
+}

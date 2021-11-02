@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity LLINSVillageTarget.
+    -->
+    <changeSet id="20211031234325-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="organisation_unit_id"
+                                 baseTableName="llins_village_target"
+                                 constraintName="fk_llins_village_target__organisation_unit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organisation_unit"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="llins_village_target"
+                                 constraintName="fk_llins_village_target__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+                                 baseTableName="llins_village_target"
+                                 constraintName="fk_llins_village_target__last_updated_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="day_planned_id"
+                                 baseTableName="llins_village_target"
+                                 constraintName="fk_llins_village_target__day_planned_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="working_day"/>
+
+        <addForeignKeyConstraint baseColumnNames="status_of_coverage_id"
+                                 baseTableName="llins_village_target"
+                                 constraintName="fk_llins_village_target__status_of_coverage_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="status_of_coverage"/>
+
+        <addForeignKeyConstraint baseColumnNames="team_assigned_id"
+                                 baseTableName="llins_village_target"
+                                 constraintName="fk_llins_village_target__team_assigned_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="team"/>
+    </changeSet>
+</databaseChangeLog>

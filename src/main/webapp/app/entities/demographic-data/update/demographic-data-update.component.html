@@ -1,0 +1,410 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="app-demographic-data-heading"
+        data-cy="DemographicDataCreateUpdateHeading"
+        appTranslate="amSystemPlaygroundApp.demographicData.home.createOrEditLabel"
+      >
+        Create or edit a Demographic Data
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" appTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.demographicData.created" for="field_created">Created</label>
+          <div class="d-flex">
+            <input
+              id="field_created"
+              data-cy="created"
+              type="datetime-local"
+              class="form-control"
+              name="created"
+              formControlName="created"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.demographicData.lastUpdated" for="field_lastUpdated"
+            >Last Updated</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastUpdated"
+              data-cy="lastUpdated"
+              type="datetime-local"
+              class="form-control"
+              name="lastUpdated"
+              formControlName="lastUpdated"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.demographicData.date" for="field_date">Date</label>
+          <div class="input-group">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="text"
+              class="form-control"
+              name="date"
+              ngbDatepicker
+              #dateDp="ngbDatepicker"
+              formControlName="date"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+          <div *ngIf="editForm.get('date')!.invalid && (editForm.get('date')!.dirty || editForm.get('date')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('date')?.errors?.required" appTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.demographicData.level" for="field_level">Level</label>
+          <select class="form-control" name="level" formControlName="level" id="field_level" data-cy="level">
+            <option [ngValue]="null">{{ 'amSystemPlaygroundApp.DemographicDataLevel.null' | translate }}</option>
+            <option value="SUBVILLAGE_LEVEL">{{ 'amSystemPlaygroundApp.DemographicDataLevel.SUBVILLAGE_LEVEL' | translate }}</option>
+            <option value="DISTRICT_LEVEL">{{ 'amSystemPlaygroundApp.DemographicDataLevel.DISTRICT_LEVEL' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.demographicData.totalPopulation" for="field_totalPopulation"
+            >Total Population</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="totalPopulation"
+            id="field_totalPopulation"
+            data-cy="totalPopulation"
+            formControlName="totalPopulation"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.demographicData.malePopulation" for="field_malePopulation"
+            >Male Population</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="malePopulation"
+            id="field_malePopulation"
+            data-cy="malePopulation"
+            formControlName="malePopulation"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.demographicData.femalePopulation"
+            for="field_femalePopulation"
+            >Female Population</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="femalePopulation"
+            id="field_femalePopulation"
+            data-cy="femalePopulation"
+            formControlName="femalePopulation"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.demographicData.lessThan5Population"
+            for="field_lessThan5Population"
+            >Less Than 5 Population</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="lessThan5Population"
+            id="field_lessThan5Population"
+            data-cy="lessThan5Population"
+            formControlName="lessThan5Population"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.demographicData.greaterThan5Population"
+            for="field_greaterThan5Population"
+            >Greater Than 5 Population</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="greaterThan5Population"
+            id="field_greaterThan5Population"
+            data-cy="greaterThan5Population"
+            formControlName="greaterThan5Population"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.demographicData.bw5And15Population"
+            for="field_bw5And15Population"
+            >Bw 5 And 15 Population</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="bw5And15Population"
+            id="field_bw5And15Population"
+            data-cy="bw5And15Population"
+            formControlName="bw5And15Population"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.demographicData.greaterThan15Population"
+            for="field_greaterThan15Population"
+            >Greater Than 15 Population</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="greaterThan15Population"
+            id="field_greaterThan15Population"
+            data-cy="greaterThan15Population"
+            formControlName="greaterThan15Population"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.demographicData.household" for="field_household"
+            >Household</label
+          >
+          <input type="number" class="form-control" name="household" id="field_household" data-cy="household" formControlName="household" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.demographicData.houses" for="field_houses">Houses</label>
+          <input type="number" class="form-control" name="houses" id="field_houses" data-cy="houses" formControlName="houses" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.demographicData.healthFacilities"
+            for="field_healthFacilities"
+            >Health Facilities</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="healthFacilities"
+            id="field_healthFacilities"
+            data-cy="healthFacilities"
+            formControlName="healthFacilities"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.demographicData.avgNoOfRooms" for="field_avgNoOfRooms"
+            >Avg No Of Rooms</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="avgNoOfRooms"
+            id="field_avgNoOfRooms"
+            data-cy="avgNoOfRooms"
+            formControlName="avgNoOfRooms"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.demographicData.avgRoomArea" for="field_avgRoomArea"
+            >Avg Room Area</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="avgRoomArea"
+            id="field_avgRoomArea"
+            data-cy="avgRoomArea"
+            formControlName="avgRoomArea"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.demographicData.avgHouseArea" for="field_avgHouseArea"
+            >Avg House Area</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="avgHouseArea"
+            id="field_avgHouseArea"
+            data-cy="avgHouseArea"
+            formControlName="avgHouseArea"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.demographicData.individualsPerHousehold"
+            for="field_individualsPerHousehold"
+            >Individuals Per Household</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="individualsPerHousehold"
+            id="field_individualsPerHousehold"
+            data-cy="individualsPerHousehold"
+            formControlName="individualsPerHousehold"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.demographicData.populationGrowthRate"
+            for="field_populationGrowthRate"
+            >Population Growth Rate</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="populationGrowthRate"
+            id="field_populationGrowthRate"
+            data-cy="populationGrowthRate"
+            formControlName="populationGrowthRate"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.demographicData.comment" for="field_comment">Comment</label>
+          <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.demographicData.organisationUnit"
+            for="field_organisationUnit"
+            >Organisation Unit</label
+          >
+          <select
+            class="form-control"
+            id="field_organisationUnit"
+            data-cy="organisationUnit"
+            name="organisationUnit"
+            formControlName="organisationUnit"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                organisationUnitOption.id === editForm.get('organisationUnit')!.value?.id
+                  ? editForm.get('organisationUnit')!.value
+                  : organisationUnitOption
+              "
+              *ngFor="let organisationUnitOption of organisationUnitsSharedCollection; trackBy: trackOrganisationUnitById"
+            >
+              {{ organisationUnitOption.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.demographicData.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.demographicData.lastUpdatedBy" for="field_lastUpdatedBy"
+            >Last Updated By</label
+          >
+          <select
+            class="form-control"
+            id="field_lastUpdatedBy"
+            data-cy="lastUpdatedBy"
+            name="lastUpdatedBy"
+            formControlName="lastUpdatedBy"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('lastUpdatedBy')!.value?.id ? editForm.get('lastUpdatedBy')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.demographicData.source" for="field_source">Source</label>
+          <select class="form-control" id="field_source" data-cy="source" name="source" formControlName="source">
+            <option *ngIf="!editForm.get('source')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="
+                demographicDataSourceOption.id === editForm.get('source')!.value?.id
+                  ? editForm.get('source')!.value
+                  : demographicDataSourceOption
+              "
+              *ngFor="let demographicDataSourceOption of demographicDataSourcesSharedCollection; trackBy: trackDemographicDataSourceById"
+            >
+              {{ demographicDataSourceOption.name }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['source'])!.invalid && (editForm.get(['source'])!.dirty || editForm.get(['source'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['source'])?.errors?.required" appTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,144 @@
+<div>
+  <h2 id="page-heading" data-cy="DemographicDataHeading">
+    <span appTranslate="amSystemPlaygroundApp.demographicData.home.title">Demographic Data</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.demographicData.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-demographic-data"
+        [routerLink]="['/demographic-data/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.demographicData.home.createLabel"> Create a new Demographic Data </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="demographicData?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.demographicData.home.notFound">No demographicData found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="demographicData && demographicData.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.date">Date</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.level">Level</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.totalPopulation">Total Population</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.malePopulation">Male Population</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.femalePopulation">Female Population</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.lessThan5Population">Less Than 5 Population</span></th>
+          <th scope="col">
+            <span appTranslate="amSystemPlaygroundApp.demographicData.greaterThan5Population">Greater Than 5 Population</span>
+          </th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.bw5And15Population">Bw 5 And 15 Population</span></th>
+          <th scope="col">
+            <span appTranslate="amSystemPlaygroundApp.demographicData.greaterThan15Population">Greater Than 15 Population</span>
+          </th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.household">Household</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.houses">Houses</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.healthFacilities">Health Facilities</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.avgNoOfRooms">Avg No Of Rooms</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.avgRoomArea">Avg Room Area</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.avgHouseArea">Avg House Area</span></th>
+          <th scope="col">
+            <span appTranslate="amSystemPlaygroundApp.demographicData.individualsPerHousehold">Individuals Per Household</span>
+          </th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.populationGrowthRate">Population Growth Rate</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.comment">Comment</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.organisationUnit">Organisation Unit</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.source">Source</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let demographicData of demographicData; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/demographic-data', demographicData.id, 'view']">{{ demographicData.id }}</a>
+          </td>
+          <td>{{ demographicData.created | formatMediumDatetime }}</td>
+          <td>{{ demographicData.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ demographicData.date | formatMediumDate }}</td>
+          <td appTranslate="{{ 'amSystemPlaygroundApp.DemographicDataLevel.' + demographicData.level }}">{{ demographicData.level }}</td>
+          <td>{{ demographicData.totalPopulation }}</td>
+          <td>{{ demographicData.malePopulation }}</td>
+          <td>{{ demographicData.femalePopulation }}</td>
+          <td>{{ demographicData.lessThan5Population }}</td>
+          <td>{{ demographicData.greaterThan5Population }}</td>
+          <td>{{ demographicData.bw5And15Population }}</td>
+          <td>{{ demographicData.greaterThan15Population }}</td>
+          <td>{{ demographicData.household }}</td>
+          <td>{{ demographicData.houses }}</td>
+          <td>{{ demographicData.healthFacilities }}</td>
+          <td>{{ demographicData.avgNoOfRooms }}</td>
+          <td>{{ demographicData.avgRoomArea }}</td>
+          <td>{{ demographicData.avgHouseArea }}</td>
+          <td>{{ demographicData.individualsPerHousehold }}</td>
+          <td>{{ demographicData.populationGrowthRate }}</td>
+          <td>{{ demographicData.comment }}</td>
+          <td>
+            <div *ngIf="demographicData.organisationUnit">
+              <a [routerLink]="['/organisation-unit', demographicData.organisationUnit?.id, 'view']">{{
+                demographicData.organisationUnit?.name
+              }}</a>
+            </div>
+          </td>
+          <td>
+            {{ demographicData.user?.login }}
+          </td>
+          <td>
+            {{ demographicData.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <div *ngIf="demographicData.source">
+              <a [routerLink]="['/demographic-data-source', demographicData.source?.id, 'view']">{{ demographicData.source?.name }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/demographic-data', demographicData.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/demographic-data', demographicData.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(demographicData)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

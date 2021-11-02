@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity MalariaUnitStaffMember.
+    -->
+    <changeSet id="20211031234334-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="malaria_unit_staff_member"
+                                 constraintName="fk_malaria_unit_staff_member__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+                                 baseTableName="malaria_unit_staff_member"
+                                 constraintName="fk_malaria_unit_staff_member__last_updated_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="malaria_unit_staff_member"
+                                 constraintName="fk_malaria_unit_staff_member__person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+        <addForeignKeyConstraint baseColumnNames="malaria_unit_id"
+                                 baseTableName="malaria_unit_staff_member"
+                                 constraintName="fk_malaria_unit_staff_member__malaria_unit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="malaria_unit"/>
+    </changeSet>
+</databaseChangeLog>

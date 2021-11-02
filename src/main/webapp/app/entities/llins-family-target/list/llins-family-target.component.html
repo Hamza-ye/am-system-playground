@@ -1,0 +1,171 @@
+<div>
+  <h2 id="page-heading" data-cy="LLINSFamilyTargetHeading">
+    <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.home.title">LLINS Family Targets</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-llins-family-target"
+        [routerLink]="['/llins-family-target/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.home.createLabel"> Create a new LLINS Family Target </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="lLINSFamilyTargets?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.home.notFound">No lLINSFamilyTargets found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="lLINSFamilyTargets && lLINSFamilyTargets.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" appSortBy="uid">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.uid">Uid</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="created">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.created">Created</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdated">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.lastUpdated">Last Updated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="residentsIndividualsPlanned">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.residentsIndividualsPlanned">Residents Individuals Planned</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="idpsIndividualsPlanned">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.idpsIndividualsPlanned">Idps Individuals Planned</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="quantityPlanned">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.quantityPlanned">Quantity Planned</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="familyType">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.familyType">Family Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="statusOfFamilyTarget">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.statusOfFamilyTarget">Status Of Family Target</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="user.login">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.user">User</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdatedBy.login">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.lastUpdatedBy">Last Updated By</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="dayPlanned.dayLabel">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.dayPlanned">Day Planned</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="family.familyNo">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.family">Family</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="teamAssigned.name">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.teamAssigned">Team Assigned</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let lLINSFamilyTarget of lLINSFamilyTargets; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/llins-family-target', lLINSFamilyTarget.id, 'view']">{{ lLINSFamilyTarget.id }}</a>
+          </td>
+          <td>{{ lLINSFamilyTarget.uid }}</td>
+          <td>{{ lLINSFamilyTarget.created | formatMediumDatetime }}</td>
+          <td>{{ lLINSFamilyTarget.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ lLINSFamilyTarget.residentsIndividualsPlanned }}</td>
+          <td>{{ lLINSFamilyTarget.idpsIndividualsPlanned }}</td>
+          <td>{{ lLINSFamilyTarget.quantityPlanned }}</td>
+          <td appTranslate="{{ 'amSystemPlaygroundApp.FamilyType.' + lLINSFamilyTarget.familyType }}">
+            {{ lLINSFamilyTarget.familyType }}
+          </td>
+          <td appTranslate="{{ 'amSystemPlaygroundApp.StatusOfFamilyTarget.' + lLINSFamilyTarget.statusOfFamilyTarget }}">
+            {{ lLINSFamilyTarget.statusOfFamilyTarget }}
+          </td>
+          <td>
+            {{ lLINSFamilyTarget.user?.login }}
+          </td>
+          <td>
+            {{ lLINSFamilyTarget.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <div *ngIf="lLINSFamilyTarget.dayPlanned">
+              <a [routerLink]="['/working-day', lLINSFamilyTarget.dayPlanned?.id, 'view']">{{ lLINSFamilyTarget.dayPlanned?.dayLabel }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="lLINSFamilyTarget.family">
+              <a [routerLink]="['/family', lLINSFamilyTarget.family?.id, 'view']">{{ lLINSFamilyTarget.family?.familyNo }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="lLINSFamilyTarget.teamAssigned">
+              <a [routerLink]="['/team', lLINSFamilyTarget.teamAssigned?.id, 'view']">{{ lLINSFamilyTarget.teamAssigned?.name }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/llins-family-target', lLINSFamilyTarget.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/llins-family-target', lLINSFamilyTarget.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(lLINSFamilyTarget)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="lLINSFamilyTargets && lLINSFamilyTargets.length > 0">
+    <div class="row justify-content-center">
+      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>
