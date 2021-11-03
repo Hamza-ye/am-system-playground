@@ -8,39 +8,39 @@
     -->
     <changeSet id="20211031234348-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="user_id"
+        <addForeignKeyConstraint baseColumnNames="created_by"
                                  baseTableName="people_group"
-                                 constraintName="fk_people_group__user_id"
+                                 constraintName="fk_people_group_created_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
-        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+        <addForeignKeyConstraint baseColumnNames="last_updated_by"
                                  baseTableName="people_group"
-                                 constraintName="fk_people_group__last_updated_by_id"
+                                 constraintName="fk_people_group__last_updated_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
         <addForeignKeyConstraint baseColumnNames="people_group_id"
-                                 baseTableName="rel_people_group__member"
-                                 constraintName="fk_rel_people_group__member__people_group_id"
+                                 baseTableName="people_group_members"
+                                 constraintName="fk_people_group_members__people_group_id"
                                  referencedColumnNames="id"
                                  referencedTableName="people_group"/>
 
-        <addForeignKeyConstraint baseColumnNames="member_id"
-                                 baseTableName="rel_people_group__member"
-                                 constraintName="fk_rel_people_group__member__member_id"
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="people_group_members"
+                                 constraintName="fk_people_group_members__person_id"
                                  referencedColumnNames="id"
                                  referencedTableName="person"/>
 
-        <addForeignKeyConstraint baseColumnNames="people_group_id"
-                                 baseTableName="rel_people_group__managed_by_group"
-                                 constraintName="fk_rel_people_group__managed_by_group__people_group_id"
+        <addForeignKeyConstraint baseColumnNames="managed_group_id"
+                                 baseTableName="people_group_managed"
+                                 constraintName="fk_people_group_managed__managed_group_id"
                                  referencedColumnNames="id"
                                  referencedTableName="people_group"/>
 
         <addForeignKeyConstraint baseColumnNames="managed_by_group_id"
-                                 baseTableName="rel_people_group__managed_by_group"
-                                 constraintName="fk_rel_people_group__managed_by_group__managed_by_group_id"
+                                 baseTableName="people_group_managed"
+                                 constraintName="fk_people_group_managed__managed_by_group_id"
                                  referencedColumnNames="id"
                                  referencedTableName="people_group"/>
     </changeSet>

@@ -1,6 +1,6 @@
 package org.nmcpye.activitiesmanagement.repository;
 
-import org.nmcpye.activitiesmanagement.domain.OrganisationUnitLevel;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitLevel;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 

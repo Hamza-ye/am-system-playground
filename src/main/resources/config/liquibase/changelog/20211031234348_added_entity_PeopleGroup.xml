@@ -32,10 +32,10 @@
             <column name="uuid" type="${uuidType}">
                 <constraints nullable="true" />
             </column>
-            <column name="user_id" type="bigint">
+            <column name="created_by" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="last_updated_by_id" type="bigint">
+            <column name="last_updated_by" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -46,27 +46,27 @@
 
     <changeSet id="20211031234348-1-relations" author="jhipster">
 
-        <createTable tableName="rel_people_group__member">
-            <column name="member_id" type="bigint">
+        <createTable tableName="people_group_members">
+            <column name="people_group_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="people_group_id" type="bigint">
+            <column name="person_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="people_group_id, member_id" tableName="rel_people_group__member"/>
+        <addPrimaryKey columnNames="people_group_id, person_id" tableName="people_group_members"/>
 
-        <createTable tableName="rel_people_group__managed_by_group">
+        <createTable tableName="people_group_managed">
+            <column name="managed_group_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
             <column name="managed_by_group_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="people_group_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
         </createTable>
 
-        <addPrimaryKey columnNames="people_group_id, managed_by_group_id" tableName="rel_people_group__managed_by_group"/>
+        <addPrimaryKey columnNames="managed_group_id, managed_by_group_id" tableName="people_group_managed"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

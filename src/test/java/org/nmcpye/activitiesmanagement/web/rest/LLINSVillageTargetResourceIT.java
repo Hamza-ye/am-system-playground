@@ -15,7 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.nmcpye.activitiesmanagement.IntegrationTest;
 import org.nmcpye.activitiesmanagement.domain.LLINSVillageTarget;
-import org.nmcpye.activitiesmanagement.domain.OrganisationUnit;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.Team;
 import org.nmcpye.activitiesmanagement.domain.WorkingDay;
 import org.nmcpye.activitiesmanagement.repository.LLINSVillageTargetRepository;

@@ -1,7 +1,6 @@
 package org.nmcpye.activitiesmanagement.service.impl;
 
-import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.Person;
+import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.repository.PersonRepository;
 import org.nmcpye.activitiesmanagement.service.PersonService;
 import org.slf4j.Logger;
@@ -10,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 /**
  * Service Implementation for managing {@link Person}.
@@ -70,12 +71,10 @@ public class PersonServiceImpl implements PersonService {
                     if (person.getLogin() != null) {
                         existingPerson.setLogin(person.getLogin());
                     }
-                    if (person.getSelfRegistered() != null) {
-                        existingPerson.setSelfRegistered(person.getSelfRegistered());
-                    }
-                    if (person.getDisabled() != null) {
-                        existingPerson.setDisabled(person.getDisabled());
-                    }
+
+                    existingPerson.setSelfRegistered(person.isSelfRegistered());
+
+                    existingPerson.setDisabled(person.isDisabled());
 
                     return existingPerson;
                 }

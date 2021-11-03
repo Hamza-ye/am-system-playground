@@ -1,13 +1,8 @@
 package org.nmcpye.activitiesmanagement.web.rest;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.PeriodType;
-import org.nmcpye.activitiesmanagement.repository.PeriodTypeRepository;
-import org.nmcpye.activitiesmanagement.service.PeriodTypeService;
+import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
+import org.nmcpye.activitiesmanagement.extended.period.PeriodService;
+import org.nmcpye.activitiesmanagement.extended.period.PeriodStore;
 import org.nmcpye.activitiesmanagement.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 /**
- * REST controller for managing {@link org.nmcpye.activitiesmanagement.domain.PeriodType}.
+ * REST controller for managing {@link org.nmcpye.activitiesmanagement.domain.period.PeriodType}.
  */
 @RestController
 @RequestMapping("/api")
@@ -31,13 +34,13 @@ public class PeriodTypeResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final PeriodTypeService periodTypeService;
+    private final PeriodService periodService;
 
-    private final PeriodTypeRepository periodTypeRepository;
+    private final PeriodStore periodStore;
 
-    public PeriodTypeResource(PeriodTypeService periodTypeService, PeriodTypeRepository periodTypeRepository) {
-        this.periodTypeService = periodTypeService;
-        this.periodTypeRepository = periodTypeRepository;
+    public PeriodTypeResource(PeriodService periodService, PeriodStore periodStore) {
+        this.periodService = periodService;
+        this.periodStore = periodStore;
     }
 
     /**
@@ -48,15 +51,15 @@ public class PeriodTypeResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/period-types")
-    public ResponseEntity<PeriodType> createPeriodType(@RequestBody PeriodType periodType) throws URISyntaxException {
+    public ResponseEntity<PeriodType> createPeriodType(@Valid @RequestBody PeriodType periodType) throws URISyntaxException {
         log.debug("REST request to save PeriodType : {}", periodType);
-        if (periodType.getId() != null) {
+        if (periodType.getId() != 0) {
             throw new BadRequestAlertException("A new periodType cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        PeriodType result = periodTypeService.save(periodType);
+        PeriodType result = periodService.getPeriodType(periodType.getId());
         return ResponseEntity
             .created(new URI("/api/period-types/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, Integer.toString(periodType.getId())))
             .body(result);
     }
 
@@ -72,25 +75,25 @@ public class PeriodTypeResource {
      */
     @PutMapping("/period-types/{id}")
     public ResponseEntity<PeriodType> updatePeriodType(
-        @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody PeriodType periodType
+        @PathVariable(value = "id", required = false) final int id,
+        @Valid @RequestBody PeriodType periodType
     ) throws URISyntaxException {
         log.debug("REST request to update PeriodType : {}, {}", id, periodType);
-        if (periodType.getId() == null) {
+        if (periodType.getId() == 0) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         if (!Objects.equals(id, periodType.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        if (!periodTypeRepository.existsById(id)) {
+        if (periodStore.getPeriodType(id) != null) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        PeriodType result = periodTypeService.save(periodType);
+        PeriodType result = periodService.getPeriodType(periodType.getId());
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, periodType.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, Integer.toString(periodType.getId())))
             .body(result);
     }
 
@@ -107,26 +110,26 @@ public class PeriodTypeResource {
      */
     @PatchMapping(value = "/period-types/{id}", consumes = "application/merge-patch+json")
     public ResponseEntity<PeriodType> partialUpdatePeriodType(
-        @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody PeriodType periodType
+        @PathVariable(value = "id", required = false) final int id,
+        @NotNull @RequestBody PeriodType periodType
     ) throws URISyntaxException {
         log.debug("REST request to partial update PeriodType partially : {}, {}", id, periodType);
-        if (periodType.getId() == null) {
+        if (periodType.getId() == 0) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         if (!Objects.equals(id, periodType.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        if (!periodTypeRepository.existsById(id)) {
+        if (periodStore.getPeriodType(id) != null) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<PeriodType> result = periodTypeService.partialUpdate(periodType);
+        Optional<PeriodType> result = Optional.of(periodService.getPeriodType(periodType.getId()));
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, periodType.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, Integer.toString(periodType.getId()))
         );
     }
 
@@ -138,7 +141,7 @@ public class PeriodTypeResource {
     @GetMapping("/period-types")
     public List<PeriodType> getAllPeriodTypes() {
         log.debug("REST request to get all PeriodTypes");
-        return periodTypeService.findAll();
+        return periodService.getAllPeriodTypes();
     }
 
     /**
@@ -148,9 +151,9 @@ public class PeriodTypeResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the periodType, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/period-types/{id}")
-    public ResponseEntity<PeriodType> getPeriodType(@PathVariable Long id) {
+    public ResponseEntity<PeriodType> getPeriodType(@PathVariable int id) {
         log.debug("REST request to get PeriodType : {}", id);
-        Optional<PeriodType> periodType = periodTypeService.findOne(id);
+        Optional<PeriodType> periodType = Optional.of(periodService.getPeriodType(id));
         return ResponseUtil.wrapOrNotFound(periodType);
     }
 
@@ -163,7 +166,7 @@ public class PeriodTypeResource {
     @DeleteMapping("/period-types/{id}")
     public ResponseEntity<Void> deletePeriodType(@PathVariable Long id) {
         log.debug("REST request to delete PeriodType : {}", id);
-        periodTypeService.delete(id);
+        periodService.delete(id);
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))

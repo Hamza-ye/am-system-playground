@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet author="Hamza (generated)" id="1635284049386-22">
+        <createTable tableName="job_configuration">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="job_configurationPK"/>
+            </column>
+            <column name="code" type="VARCHAR(255)"/>
+            <column name="created" type="TIMESTAMP"/>
+            <column name="last_updated" type="TIMESTAMP"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="uid" type="VARCHAR(11)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cron_expression" type="VARCHAR(255)"/>
+            <column name="delay" type="INT"/>
+            <column name="enabled" type="BOOLEAN"/>
+            <column name="in_memory_job" type="BOOLEAN"/>
+            <column name="job_parameters" type="json"/>
+            <column name="job_status" type="VARCHAR(255)"/>
+            <column name="job_type" type="VARCHAR(255)"/>
+            <column name="last_executed" type="TIMESTAMP"/>
+            <column name="last_executed_status" type="VARCHAR(255)"/>
+            <column name="last_runtime_executed" type="VARCHAR(255)"/>
+            <column name="leader_only_job" type="BOOLEAN"/>
+            <column name="next_execution_time" type="TIMESTAMP"/>
+            <column name="user_uid" type="VARCHAR(255)"/>
+            <column name="last_updated_by" type="BIGINT"/>
+            <column name="created_by" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Hamza (generated)" id="1635284049386-78">
+        <addUniqueConstraint columnNames="code" constraintName="UC_JOB_CONFIGURATIONCODE_COL" tableName="job_configuration"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1635284049386-80">
+        <addUniqueConstraint columnNames="uid" constraintName="UC_JOB_CONFIGURATIONUID_COL" tableName="job_configuration"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1635284049386-125">
+        <addForeignKeyConstraint baseColumnNames="last_updated_by" baseTableName="job_configuration" constraintName="FK3kmu28pf706w7yw3iv071v7aa" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1635284049386-195">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="job_configuration" constraintName="FKne6hcnpe014kape3ua0j4qvjl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+
+    <!--<changeSet id="load_app_user_data" author="Hamza">-->
+        <!--<loadData-->
+            <!--file="config/liquibase/data/user.csv"-->
+            <!--separator=";"-->
+            <!--tableName="app_user">-->
+            <!--<column name="id" type="numeric"/>-->
+            <!--<column name="activated" type="boolean"/>-->
+            <!--<column name="created_date" type="timestamp"/>-->
+        <!--</loadData>-->
+    <!--</changeSet>-->
+
+</databaseChangeLog>

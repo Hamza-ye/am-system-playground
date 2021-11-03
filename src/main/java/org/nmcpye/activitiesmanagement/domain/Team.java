@@ -10,6 +10,7 @@ import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.enumeration.TeamType;
+import org.nmcpye.activitiesmanagement.domain.person.Person;
 
 /**
  * A Team.

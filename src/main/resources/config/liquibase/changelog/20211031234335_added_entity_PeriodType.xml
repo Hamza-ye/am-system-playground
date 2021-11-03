@@ -11,7 +11,7 @@
     -->
     <changeSet id="20211031234335-1" author="jhipster">
         <createTable tableName="period_type">
-            <column name="id" type="bigint">
+            <column name="id" type="integer">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
@@ -33,7 +33,7 @@
     -->
     <changeSet id="20211031234335-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/period_type.csv"
+                  file="config/liquibase/fake-data/extended/period_type.csv"
                   separator=";"
                   tableName="period_type">
             <column name="id" type="numeric"/>

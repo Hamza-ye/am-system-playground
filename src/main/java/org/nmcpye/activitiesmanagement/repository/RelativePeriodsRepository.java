@@ -1,6 +1,6 @@
 package org.nmcpye.activitiesmanagement.repository;
 
-import org.nmcpye.activitiesmanagement.domain.RelativePeriods;
+import org.nmcpye.activitiesmanagement.domain.period.RelativePeriods;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 

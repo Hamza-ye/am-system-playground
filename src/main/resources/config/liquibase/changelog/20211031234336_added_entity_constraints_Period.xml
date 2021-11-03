@@ -13,5 +13,21 @@
                                  constraintName="fk_period__period_type_id"
                                  referencedColumnNames="id"
                                  referencedTableName="period_type"/>
+
+        <!--Extended-->
+        <addForeignKeyConstraint baseColumnNames="created_by"
+                                 baseTableName="period"
+                                 constraintName="fk_period__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="last_updated_by"
+                                 baseTableName="period"
+                                 constraintName="fk_period__last_updated_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1635554862551-141">
+        <addUniqueConstraint columnNames="period_type_id, start_date, end_date" constraintName="UX_period_type_start_end_date" tableName="period"/>
     </changeSet>
 </databaseChangeLog>

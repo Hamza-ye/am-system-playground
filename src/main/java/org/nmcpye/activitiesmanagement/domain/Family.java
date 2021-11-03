@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 
 /**
  * A Family.

@@ -1,14 +1,19 @@
 package org.nmcpye.activitiesmanagement.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.io.Serializable;
-import java.time.Instant;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import javax.validation.constraints.*;
+
+import com.google.common.collect.Sets;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
+import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
+import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
+import org.nmcpye.activitiesmanagement.extended.common.BaseDimensionalItemObject;
+import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 
 /**
  * A DataSet.
@@ -16,38 +21,37 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "data_set")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class DataSet implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
-    private Long id;
-
-    @NotNull
-    @Size(max = 11)
-    @Column(name = "uid", length = 11, nullable = false, unique = true)
-    private String uid;
-
-    @Column(name = "code", unique = true)
-    private String code;
-
-    @Column(name = "name")
-    private String name;
-
-    @Size(max = 50)
-    @Column(name = "short_name", length = 50)
-    private String shortName;
-
-    @Column(name = "description")
-    private String description;
-
-    @Column(name = "created")
-    private Instant created;
-
-    @Column(name = "last_updated")
-    private Instant lastUpdated;
+public class DataSet extends BaseDimensionalItemObject
+    implements MetadataObject {
+//
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+//    @SequenceGenerator(name = "sequenceGenerator")
+//    private Long id;
+//
+//    @NotNull
+//    @Size(max = 11)
+//    @Column(name = "uid", length = 11, nullable = false, unique = true)
+//    private String uid;
+//
+//    @Column(name = "code", unique = true)
+//    private String code;
+//
+//    @Column(name = "name")
+//    private String name;
+//
+//    @Size(max = 50)
+//    @Column(name = "short_name", length = 50)
+//    private String shortName;
+//
+//    @Column(name = "description")
+//    private String description;
+//
+//    @Column(name = "created")
+//    private Instant created;
+//
+//    @Column(name = "last_updated")
+//    private Instant lastUpdated;
 
     @Column(name = "expiry_days")
     private Integer expiryDays;
@@ -81,7 +85,7 @@ public class DataSet implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(
-        name = "rel_data_set__source",
+        name = "data_set_source",
         joinColumns = @JoinColumn(name = "data_set_id"),
         inverseJoinColumns = @JoinColumn(name = "source_id")
     )
@@ -106,6 +110,33 @@ public class DataSet implements Serializable {
         allowSetters = true
     )
     private Set<OrganisationUnit> sources = new HashSet<>();
+
+    public DataSet()
+    {
+    }
+
+    public DataSet( String name )
+    {
+        this.name = name;
+    }
+
+    public DataSet( String name, PeriodType periodType )
+    {
+        this( name );
+        this.periodType = periodType;
+    }
+
+    public DataSet( String name, String shortName, PeriodType periodType )
+    {
+        this( name, periodType );
+        this.shortName = shortName;
+    }
+
+    public DataSet( String name, String shortName, String code, PeriodType periodType )
+    {
+        this( name, shortName, periodType );
+        this.code = code;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -186,29 +217,29 @@ public class DataSet implements Serializable {
         this.description = description;
     }
 
-    public Instant getCreated() {
+    public Date getCreated() {
         return this.created;
     }
 
-    public DataSet created(Instant created) {
+    public DataSet created(Date created) {
         this.created = created;
         return this;
     }
 
-    public void setCreated(Instant created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 
-    public Instant getLastUpdated() {
+    public Date getLastUpdated() {
         return this.lastUpdated;
     }
 
-    public DataSet lastUpdated(Instant lastUpdated) {
+    public DataSet lastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
         return this;
     }
 
-    public void setLastUpdated(Instant lastUpdated) {
+    public void setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
 
@@ -361,16 +392,39 @@ public class DataSet implements Serializable {
         return this;
     }
 
-    public DataSet addSource(OrganisationUnit organisationUnit) {
+    public DataSet addOrganisationUnit(OrganisationUnit organisationUnit) {
         this.sources.add(organisationUnit);
         organisationUnit.getDataSets().add(this);
         return this;
     }
 
-    public DataSet removeSource(OrganisationUnit organisationUnit) {
+    public DataSet removeOrganisationUnit(OrganisationUnit organisationUnit) {
         this.sources.remove(organisationUnit);
         organisationUnit.getDataSets().remove(this);
         return this;
+    }
+
+    public void removeAllOrganisationUnits() {
+        for (OrganisationUnit unit : sources) {
+            unit.getDataSets().remove(this);
+        }
+
+        sources.clear();
+    }
+
+    public void updateOrganisationUnits(Set<OrganisationUnit> updates) {
+        Set<OrganisationUnit> toRemove = Sets.difference(sources, updates);
+        Set<OrganisationUnit> toAdd = Sets.difference(updates, sources);
+
+        toRemove.forEach(u -> u.getDataSets().remove(this));
+        toAdd.forEach(u -> u.getDataSets().add(this));
+
+        sources.clear();
+        sources.addAll(updates);
+    }
+
+    public boolean hasOrganisationUnit(OrganisationUnit unit) {
+        return sources.contains(unit);
     }
 
     public void setSources(Set<OrganisationUnit> organisationUnits) {

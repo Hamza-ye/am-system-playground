@@ -11,126 +11,55 @@
     -->
     <changeSet id="20211031234352-1" author="jhipster">
         <createTable tableName="relative_periods">
-            <column name="id" type="bigint">
+            <column name="id" type="integer">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="this_day" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="yesterday" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_3_days" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_7_days" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_14_days" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="this_month" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_month" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="this_bimonth" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_bimonth" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="this_quarter" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_quarter" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="this_six_month" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_six_month" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="weeks_this_year" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="months_this_year" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="bi_months_this_year" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="quarters_this_year" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="this_year" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="months_last_year" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="quarters_last_year" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_year" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_5_years" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_12_months" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_6_months" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_3_months" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_6_bi_months" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_4_quarters" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_2_six_months" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="this_financial_year" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_financial_year" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_5_financial_years" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="this_week" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_week" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="this_bi_week" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_bi_week" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_4_weeks" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_4_bi_weeks" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_12_weeks" type="boolean">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_52_weeks" type="boolean">
-                <constraints nullable="true" />
-            </column>
+            <column name="this_day" type="boolean"/>
+            <column name="yesterday" type="boolean"/>
+            <column name="last_3_days" type="boolean"/>
+            <column name="last_7_days" type="boolean"/>
+            <column name="last_14_days" type="boolean"/>
+            <!--<column name="last_30_days" type="boolean"/>-->
+            <!--<column name="last_60_days" type="boolean"/>-->
+            <!--<column name="last_90_days" type="boolean"/>-->
+            <!--<column name="last_180_days" type="boolean"/>-->
+            <column name="this_month" type="boolean"/>
+            <column name="last_month" type="boolean"/>
+            <column name="this_bimonth" type="boolean"/>
+            <column name="last_bimonth" type="boolean"/>
+            <column name="this_quarter" type="boolean"/>
+            <column name="last_quarter" type="boolean"/>
+            <column name="this_six_month" type="boolean"/>
+            <column name="last_six_month" type="boolean"/>
+            <column name="weeks_this_year" type="boolean"/>
+            <column name="months_this_year" type="boolean"/>
+            <column name="bi_months_this_year" type="boolean"/>
+            <column name="quarters_this_year" type="boolean"/>
+            <column name="this_year" type="boolean"/>
+
+            <column name="months_last_year" type="boolean"/>
+            <column name="quarters_last_year" type="boolean"/>
+            <column name="last_year" type="boolean"/>
+
+            <column name="last_5_years" type="boolean"/>
+            <column name="last_12_months" type="boolean"/>
+            <column name="last_6_months" type="boolean"/>
+            <column name="last_3_months" type="boolean"/>
+            <column name="last_6_bi_months" type="boolean"/>
+            <column name="last_4_quarters" type="boolean"/>
+            <column name="last_2_six_months" type="boolean"/>
+            <column name="this_financial_year" type="boolean"/>
+            <column name="last_financial_year" type="boolean"/>
+            <column name="last_5_financial_years" type="boolean"/>
+
+            <column name="this_week" type="boolean"/>
+            <column name="last_week" type="boolean"/>
+            <column name="this_bi_week" type="boolean"/>
+            <column name="last_bi_week" type="boolean"/>
+            <column name="last_4_weeks" type="boolean"/>
+            <column name="last_4_bi_weeks" type="boolean"/>
+            <column name="last_12_weeks" type="boolean"/>
+            <column name="last_52_weeks" type="boolean"/>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>
@@ -158,8 +87,8 @@
             <column name="last_14_days" type="boolean"/>
             <column name="this_month" type="boolean"/>
             <column name="last_month" type="boolean"/>
-            <column name="this_bimonth" type="boolean"/>
-            <column name="last_bimonth" type="boolean"/>
+            <column name="this_bi_month" type="boolean"/>
+            <column name="last_bi_month" type="boolean"/>
             <column name="this_quarter" type="boolean"/>
             <column name="last_quarter" type="boolean"/>
             <column name="this_six_month" type="boolean"/>

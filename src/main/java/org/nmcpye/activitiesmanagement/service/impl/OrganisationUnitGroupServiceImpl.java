@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.OrganisationUnitGroup;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
 import org.nmcpye.activitiesmanagement.repository.OrganisationUnitGroupRepository;
 import org.nmcpye.activitiesmanagement.service.OrganisationUnitGroupService;
 import org.slf4j.Logger;

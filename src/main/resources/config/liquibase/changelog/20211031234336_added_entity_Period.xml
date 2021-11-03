@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
-                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 
     <!--
         Added the entity Period.
@@ -15,16 +13,35 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="true"/>
             </column>
             <column name="start_date" type="date">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
             <column name="end_date" type="date">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
-            <column name="period_type_id" type="bigint">
-                <constraints nullable="false" />
+            <column name="period_type_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+
+            <!--Extended-->
+            <column name="uid" type="varchar(11)"/>
+
+            <column name="code" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_updated" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_by" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_updated_by" type="bigint">
+                <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
@@ -42,9 +59,9 @@
     -->
     <changeSet id="20211031234336-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/period.csv"
-                  separator=";"
-                  tableName="period">
+            file="config/liquibase/fake-data/extended/period.csv"
+            separator=";"
+            tableName="period">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
             <column name="start_date" type="date"/>

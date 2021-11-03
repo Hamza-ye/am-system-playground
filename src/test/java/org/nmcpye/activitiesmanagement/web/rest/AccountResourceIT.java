@@ -247,10 +247,10 @@ class AccountResourceIT {
         secondUser.setEmail("alice2@example.com");
         secondUser.setImageUrl(firstUser.getImageUrl());
         secondUser.setLangKey(firstUser.getLangKey());
-        secondUser.setCreatedBy(firstUser.getCreatedBy());
-        secondUser.setCreatedDate(firstUser.getCreatedDate());
-        secondUser.setLastModifiedBy(firstUser.getLastModifiedBy());
-        secondUser.setLastModifiedDate(firstUser.getLastModifiedDate());
+        secondUser.setUser(firstUser.getUser());
+        secondUser.setCreated(firstUser.getCreated());
+        secondUser.setLastUpdatedBy(firstUser.getLastUpdatedBy());
+        secondUser.setLastUpdated(firstUser.getLastUpdated());
         secondUser.setAuthorities(new HashSet<>(firstUser.getAuthorities()));
 
         // First user

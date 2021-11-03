@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.repository;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.OrganisationUnitGroupSet;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroupSet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;

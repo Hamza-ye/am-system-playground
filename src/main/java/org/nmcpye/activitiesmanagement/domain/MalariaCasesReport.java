@@ -7,12 +7,19 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
+import org.nmcpye.activitiesmanagement.domain.period.Period;
 
 /**
  * A MalariaCasesReport.
  */
 @Entity
-@Table(name = "malaria_cases_report")
+@Table(
+    name = "malaria_cases_report",
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames =
+            {"data_set_id", "organisation_unit_id", "period_id", "report_class_id"})}
+)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class MalariaCasesReport implements Serializable {
 

@@ -1,15 +1,8 @@
 package org.nmcpye.activitiesmanagement.web.rest;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import org.nmcpye.activitiesmanagement.domain.Period;
-import org.nmcpye.activitiesmanagement.repository.PeriodRepository;
-import org.nmcpye.activitiesmanagement.service.PeriodService;
+import org.nmcpye.activitiesmanagement.domain.period.Period;
+import org.nmcpye.activitiesmanagement.extended.period.PeriodService;
+import org.nmcpye.activitiesmanagement.extended.period.PeriodStore;
 import org.nmcpye.activitiesmanagement.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 /**
- * REST controller for managing {@link org.nmcpye.activitiesmanagement.domain.Period}.
+ * REST controller for managing {@link Period}.
  */
 @RestController
 @RequestMapping("/api")
@@ -35,11 +36,11 @@ public class PeriodResource {
 
     private final PeriodService periodService;
 
-    private final PeriodRepository periodRepository;
+    private final PeriodStore periodStore;
 
-    public PeriodResource(PeriodService periodService, PeriodRepository periodRepository) {
+    public PeriodResource(PeriodService periodService, PeriodStore periodStore) {
         this.periodService = periodService;
-        this.periodRepository = periodRepository;
+        this.periodStore = periodStore;
     }
 
     /**
@@ -85,7 +86,9 @@ public class PeriodResource {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        if (!periodRepository.existsById(id)) {
+        Period period1 = periodService.getPeriod(id);
+
+        if (period1 == null) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
@@ -120,7 +123,9 @@ public class PeriodResource {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        if (!periodRepository.existsById(id)) {
+        Period period1 = periodService.getPeriod(id);
+
+        if (period1 == null) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 

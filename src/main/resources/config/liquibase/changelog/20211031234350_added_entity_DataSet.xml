@@ -41,16 +41,16 @@
             <column name="timely_days" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="period_type_id" type="bigint">
+            <column name="period_type_id" type="INTEGER">
                 <constraints nullable="true" />
             </column>
             <column name="notification_recipients_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="user_id" type="bigint">
+            <column name="created_by" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="last_updated_by_id" type="bigint">
+            <column name="last_updated_by" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -61,7 +61,7 @@
 
     <changeSet id="20211031234350-1-relations" author="jhipster">
 
-        <createTable tableName="rel_data_set__source">
+        <createTable tableName="data_set_source">
             <column name="source_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
@@ -70,7 +70,7 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="data_set_id, source_id" tableName="rel_data_set__source"/>
+        <addPrimaryKey columnNames="data_set_id, source_id" tableName="data_set_source"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

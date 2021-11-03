@@ -53,10 +53,10 @@
             <column name="user_info_id" type="bigint">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_person__user_info_id" />
             </column>
-            <column name="user_id" type="bigint">
+            <column name="created_by" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="last_updated_by_id" type="bigint">
+            <column name="last_updated_by" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -68,38 +68,39 @@
 
     <changeSet id="20211031234317-1-relations" author="jhipster">
 
-        <createTable tableName="rel_person__organisation_unit">
+        <createTable tableName="person_membership">
+            <column name="person_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
             <column name="organisation_unit_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="person_id, organisation_unit_id" tableName="person_membership"/>
+
+        <createTable tableName="person_data_view_orgunits">
             <column name="person_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="organisation_unit_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="person_id, organisation_unit_id" tableName="rel_person__organisation_unit"/>
+        <addPrimaryKey columnNames="person_id, organisation_unit_id" tableName="person_data_view_orgunits"/>
 
-        <createTable tableName="rel_person__data_view_organisation_unit">
-            <column name="data_view_organisation_unit_id" type="bigint">
+        <createTable tableName="person_role_members">
+            <column name="person_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="person_id" type="bigint">
+            <column name="person_role_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="person_id, data_view_organisation_unit_id" tableName="rel_person__data_view_organisation_unit"/>
+        <addPrimaryKey columnNames="person_id, person_role_id" tableName="person_role_members"/>
 
-        <createTable tableName="rel_person__person_authority_groups">
-            <column name="person_authority_groups_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="person_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="person_id, person_authority_groups_id" tableName="rel_person__person_authority_groups"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

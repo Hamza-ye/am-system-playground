@@ -9,6 +9,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -16,7 +17,7 @@ import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.nmcpye.activitiesmanagement.IntegrationTest;
-import org.nmcpye.activitiesmanagement.domain.OrganisationUnit;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.enumeration.OrganisationUnitType;
 import org.nmcpye.activitiesmanagement.repository.OrganisationUnitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,26 +47,27 @@ class OrganisationUnitResourceIT {
     private static final String DEFAULT_SHORT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_SHORT_NAME = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_CREATED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Date DEFAULT_CREATED = Date.from(Instant.ofEpochMilli(0L));
+    private static final Date UPDATED_CREATED = Date.from(Instant.now().truncatedTo(ChronoUnit.MILLIS));
 
-    private static final Instant DEFAULT_LAST_UPDATED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_LAST_UPDATED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Date DEFAULT_LAST_UPDATED = Date.from(Instant.ofEpochMilli(0L));
+    private static final Date UPDATED_LAST_UPDATED = Date.from(Instant.now().truncatedTo(ChronoUnit.MILLIS));
 
     private static final String DEFAULT_PATH = "AAAAAAAAAA";
     private static final String UPDATED_PATH = "BBBBBBBBBB";
 
     private static final Integer DEFAULT_HIERARCHY_LEVEL = 1;
     private static final Integer UPDATED_HIERARCHY_LEVEL = 2;
+    private static final ZoneId defaultZoneId = ZoneId.systemDefault();
 
-    private static final LocalDate DEFAULT_OPENING_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_OPENING_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final Date DEFAULT_OPENING_DATE = Date.from(LocalDate.ofEpochDay(0L).atStartOfDay(defaultZoneId).toInstant());
+    private static final Date UPDATED_OPENING_DATE = Date.from(LocalDate.now(ZoneId.systemDefault()).atStartOfDay(defaultZoneId).toInstant());
 
     private static final String DEFAULT_COMMENT = "AAAAAAAAAA";
     private static final String UPDATED_COMMENT = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_CLOSED_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_CLOSED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final Date DEFAULT_CLOSED_DATE = Date.from(LocalDate.ofEpochDay(0L).atStartOfDay(defaultZoneId).toInstant());
+    private static final Date UPDATED_CLOSED_DATE = Date.from(LocalDate.now(ZoneId.systemDefault()).atStartOfDay(defaultZoneId).toInstant());
 
     private static final String DEFAULT_URL = "AAAAAAAAAA";
     private static final String UPDATED_URL = "BBBBBBBBBB";

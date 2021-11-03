@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import org.nmcpye.activitiesmanagement.domain.OrganisationUnitGroup;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
 import org.nmcpye.activitiesmanagement.repository.OrganisationUnitGroupRepository;
 import org.nmcpye.activitiesmanagement.service.OrganisationUnitGroupService;
 import org.nmcpye.activitiesmanagement.web.rest.errors.BadRequestAlertException;
@@ -20,7 +20,7 @@ import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
- * REST controller for managing {@link org.nmcpye.activitiesmanagement.domain.OrganisationUnitGroup}.
+ * REST controller for managing {@link OrganisationUnitGroup}.
  */
 @RestController
 @RequestMapping("/api")

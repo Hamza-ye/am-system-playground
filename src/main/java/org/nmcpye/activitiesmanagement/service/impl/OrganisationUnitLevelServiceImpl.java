@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.OrganisationUnitLevel;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitLevel;
 import org.nmcpye.activitiesmanagement.repository.OrganisationUnitLevelRepository;
 import org.nmcpye.activitiesmanagement.service.OrganisationUnitLevelService;
 import org.slf4j.Logger;
@@ -54,9 +54,9 @@ public class OrganisationUnitLevelServiceImpl implements OrganisationUnitLevelSe
                     if (organisationUnitLevel.getLastUpdated() != null) {
                         existingOrganisationUnitLevel.setLastUpdated(organisationUnitLevel.getLastUpdated());
                     }
-                    if (organisationUnitLevel.getLevel() != null) {
+//                    if (organisationUnitLevel.getLevel() != null) {
                         existingOrganisationUnitLevel.setLevel(organisationUnitLevel.getLevel());
-                    }
+//                    }
                     if (organisationUnitLevel.getOfflineLevels() != null) {
                         existingOrganisationUnitLevel.setOfflineLevels(organisationUnitLevel.getOfflineLevels());
                     }

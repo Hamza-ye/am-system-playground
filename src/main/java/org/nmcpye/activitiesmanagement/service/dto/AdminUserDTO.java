@@ -1,12 +1,16 @@
 package org.nmcpye.activitiesmanagement.service.dto;
 
-import java.time.Instant;
-import java.util.Set;
-import java.util.stream.Collectors;
-import javax.validation.constraints.*;
 import org.nmcpye.activitiesmanagement.config.Constants;
 import org.nmcpye.activitiesmanagement.domain.Authority;
 import org.nmcpye.activitiesmanagement.domain.User;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import java.util.Date;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A DTO representing a user, with his authorities.
@@ -38,13 +42,13 @@ public class AdminUserDTO {
     @Size(min = 2, max = 10)
     private String langKey;
 
-    private String createdBy;
+    private User user;
 
-    private Instant createdDate;
+    private Date created;
 
-    private String lastModifiedBy;
+    private User lastUpdatedBy;
 
-    private Instant lastModifiedDate;
+    private Date lastUpdated;
 
     private Set<String> authorities;
 
@@ -61,10 +65,10 @@ public class AdminUserDTO {
         this.activated = user.isActivated();
         this.imageUrl = user.getImageUrl();
         this.langKey = user.getLangKey();
-        this.createdBy = user.getCreatedBy();
-        this.createdDate = user.getCreatedDate();
-        this.lastModifiedBy = user.getLastModifiedBy();
-        this.lastModifiedDate = user.getLastModifiedDate();
+        this.user = user.getUser();
+        this.created = user.getCreated();
+        this.lastUpdatedBy = user.getLastUpdatedBy();
+        this.lastUpdated = user.getLastUpdated();
         this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
     }
 
@@ -132,36 +136,36 @@ public class AdminUserDTO {
         this.langKey = langKey;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
+    public User getUser() {
+        return user;
     }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Instant getCreatedDate() {
-        return createdDate;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setCreatedDate(Instant createdDate) {
-        this.createdDate = createdDate;
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
+    public User getLastUpdatedBy() {
+        return lastUpdatedBy;
     }
 
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
+    public void setLastUpdatedBy(User lastUpdatedBy) {
+        this.lastUpdatedBy = lastUpdatedBy;
     }
 
-    public Instant getLastModifiedDate() {
-        return lastModifiedDate;
+    public Date getLastUpdated() {
+        return lastUpdated;
     }
 
-    public void setLastModifiedDate(Instant lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     public Set<String> getAuthorities() {
@@ -183,10 +187,10 @@ public class AdminUserDTO {
             ", imageUrl='" + imageUrl + '\'' +
             ", activated=" + activated +
             ", langKey='" + langKey + '\'' +
-            ", createdBy=" + createdBy +
-            ", createdDate=" + createdDate +
-            ", lastModifiedBy='" + lastModifiedBy + '\'' +
-            ", lastModifiedDate=" + lastModifiedDate +
+            ", createdBy=" + user +
+            ", createdDate=" + created +
+            ", lastModifiedBy='" + lastUpdatedBy + '\'' +
+            ", lastModifiedDate=" + lastUpdated +
             ", authorities=" + authorities +
             "}";
     }

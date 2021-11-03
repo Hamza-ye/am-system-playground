@@ -1,6 +1,7 @@
 package org.nmcpye.activitiesmanagement.repository;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.nmcpye.activitiesmanagement.domain.User;
@@ -22,7 +23,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findOneByActivationKey(String activationKey);
 
-    List<User> findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(Instant dateTime);
+    List<User> findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedBefore(Date dateTime);
 
     Optional<User> findOneByResetKey(String resetKey);
 

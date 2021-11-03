@@ -3,6 +3,7 @@ package org.nmcpye.activitiesmanagement.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -12,16 +13,12 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.nmcpye.activitiesmanagement.IntegrationTest;
-import org.nmcpye.activitiesmanagement.config.Constants;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.repository.UserRepository;
-import org.nmcpye.activitiesmanagement.service.dto.AdminUserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.auditing.AuditingHandler;
 import org.springframework.data.auditing.DateTimeProvider;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 import tech.jhipster.security.RandomUtil;
 
@@ -156,13 +153,13 @@ class UserServiceIT {
         user.setActivated(false);
         user.setActivationKey(RandomStringUtils.random(20));
         User dbUser = userRepository.saveAndFlush(user);
-        dbUser.setCreatedDate(now.minus(4, ChronoUnit.DAYS));
+        dbUser.setCreated(Date.from(now.minus(4, ChronoUnit.DAYS)));
         userRepository.saveAndFlush(user);
         Instant threeDaysAgo = now.minus(3, ChronoUnit.DAYS);
-        List<User> users = userRepository.findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(threeDaysAgo);
+        List<User> users = userRepository.findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedBefore(Date.from(threeDaysAgo));
         assertThat(users).isNotEmpty();
         userService.removeNotActivatedUsers();
-        users = userRepository.findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(threeDaysAgo);
+        users = userRepository.findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedBefore(Date.from(threeDaysAgo));
         assertThat(users).isEmpty();
     }
 
@@ -173,10 +170,10 @@ class UserServiceIT {
         when(dateTimeProvider.getNow()).thenReturn(Optional.of(now.minus(4, ChronoUnit.DAYS)));
         user.setActivated(false);
         User dbUser = userRepository.saveAndFlush(user);
-        dbUser.setCreatedDate(now.minus(4, ChronoUnit.DAYS));
+        dbUser.setCreated(Date.from(now.minus(4, ChronoUnit.DAYS)));
         userRepository.saveAndFlush(user);
         Instant threeDaysAgo = now.minus(3, ChronoUnit.DAYS);
-        List<User> users = userRepository.findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(threeDaysAgo);
+        List<User> users = userRepository.findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedBefore(Date.from(threeDaysAgo));
         assertThat(users).isEmpty();
         userService.removeNotActivatedUsers();
         Optional<User> maybeDbUser = userRepository.findById(dbUser.getId());

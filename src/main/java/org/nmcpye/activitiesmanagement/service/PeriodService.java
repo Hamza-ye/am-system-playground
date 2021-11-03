@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.service;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.Period;
+import org.nmcpye.activitiesmanagement.domain.period.Period;
 
 /**
  * Service Interface for managing {@link Period}.

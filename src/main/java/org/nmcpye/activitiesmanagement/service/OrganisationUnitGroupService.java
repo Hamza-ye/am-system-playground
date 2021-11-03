@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.service;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.OrganisationUnitGroup;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

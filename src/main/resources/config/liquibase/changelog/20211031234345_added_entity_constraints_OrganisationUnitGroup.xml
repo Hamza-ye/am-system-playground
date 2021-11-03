@@ -8,27 +8,27 @@
     -->
     <changeSet id="20211031234345-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="user_id"
+        <addForeignKeyConstraint baseColumnNames="created_by"
                                  baseTableName="orgunit_group"
-                                 constraintName="fk_orgunit_group__user_id"
+                                 constraintName="fk_orgunit_group_created_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
-        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+        <addForeignKeyConstraint baseColumnNames="last_updated_by"
                                  baseTableName="orgunit_group"
-                                 constraintName="fk_orgunit_group__last_updated_by_id"
+                                 constraintName="fk_orgunit_group__last_updated_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
         <addForeignKeyConstraint baseColumnNames="orgunit_group_id"
-                                 baseTableName="rel_orgunit_group__member"
-                                 constraintName="fk_rel_orgunit_group__member__orgunit_group_id"
+                                 baseTableName="orgunit_group_members"
+                                 constraintName="fk_orgunit_group_members__person_id"
                                  referencedColumnNames="id"
                                  referencedTableName="orgunit_group"/>
 
-        <addForeignKeyConstraint baseColumnNames="member_id"
-                                 baseTableName="rel_orgunit_group__member"
-                                 constraintName="fk_rel_orgunit_group__member__member_id"
+        <addForeignKeyConstraint baseColumnNames="organisation_unit_id"
+                                 baseTableName="orgunit_group_members"
+                                 constraintName="fk_orgunit_group_members__organisation_unit_id"
                                  referencedColumnNames="id"
                                  referencedTableName="organisation_unit"/>
     </changeSet>

@@ -74,10 +74,10 @@
             <column name="covered_by_hf_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="user_id" type="bigint">
+            <column name="created_by" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="last_updated_by_id" type="bigint">
+            <column name="last_updated_by" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="malaria_unit_id" type="bigint">
@@ -86,8 +86,23 @@
             <column name="assigned_chv_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+
+            <column name="geometry" type="geometry(GEOMETRY, 4326)">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+
+        <createIndex indexName="in_organisationunit_path" tableName="organisation_unit">
+            <column name="path"/>
+        </createIndex>
+        <createIndex indexName="in_organisationunit_hierarchylevel" tableName="organisation_unit">
+            <column name="hierarchy_level"/>
+        </createIndex>
+        <createIndex indexName="in_parent_id" tableName="organisation_unit">
+            <column name="parent_id"/>
+        </createIndex>
+
         <dropDefaultValue tableName="organisation_unit" columnName="created" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="organisation_unit" columnName="last_updated" columnDataType="${datetimeType}"/>
     </changeSet>

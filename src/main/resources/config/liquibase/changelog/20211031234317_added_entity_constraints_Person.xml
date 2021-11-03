@@ -14,52 +14,53 @@
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
-        <addForeignKeyConstraint baseColumnNames="user_id"
+        <addForeignKeyConstraint baseColumnNames="created_by"
                                  baseTableName="person"
                                  constraintName="fk_person__user_id"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
-        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+        <addForeignKeyConstraint baseColumnNames="last_updated_by"
                                  baseTableName="person"
                                  constraintName="fk_person__last_updated_by_id"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
         <addForeignKeyConstraint baseColumnNames="person_id"
-                                 baseTableName="rel_person__organisation_unit"
-                                 constraintName="fk_rel_person__organisation_unit__person_id"
+                                 baseTableName="person_role_members"
+                                 constraintName="fk_person_role_members__person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+        <addForeignKeyConstraint baseColumnNames="person_role_id"
+                                 baseTableName="person_role_members"
+                                 constraintName="fk_person_role_members__person_role_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person_authority_group"/>
+
+
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="person_membership"
+                                 constraintName="fk_person_membership__person_id"
                                  referencedColumnNames="id"
                                  referencedTableName="person"/>
 
         <addForeignKeyConstraint baseColumnNames="organisation_unit_id"
-                                 baseTableName="rel_person__organisation_unit"
-                                 constraintName="fk_rel_person__organisation_unit__organisation_unit_id"
+                                 baseTableName="person_membership"
+                                 constraintName="fk_person_membership__organisation_unit_id"
                                  referencedColumnNames="id"
                                  referencedTableName="organisation_unit"/>
 
         <addForeignKeyConstraint baseColumnNames="person_id"
-                                 baseTableName="rel_person__data_view_organisation_unit"
-                                 constraintName="fk_rel_person__data_view_organisation_unit__person_id"
+                                 baseTableName="person_data_view_orgunits"
+                                 constraintName="fk_person_data_view_orgunits__person_id"
                                  referencedColumnNames="id"
                                  referencedTableName="person"/>
 
-        <addForeignKeyConstraint baseColumnNames="data_view_organisation_unit_id"
-                                 baseTableName="rel_person__data_view_organisation_unit"
-                                 constraintName="fk_rel_person__data_view_organi__data_view_organisation_u_a6_id"
+        <addForeignKeyConstraint baseColumnNames="organisation_unit_id"
+                                 baseTableName="person_data_view_orgunits"
+                                 constraintName="fk_person_data_view_orgunits__organisation_unit_id"
                                  referencedColumnNames="id"
                                  referencedTableName="organisation_unit"/>
-
-        <addForeignKeyConstraint baseColumnNames="person_id"
-                                 baseTableName="rel_person__person_authority_groups"
-                                 constraintName="fk_rel_person__person_authority_groups__person_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="person"/>
-
-        <addForeignKeyConstraint baseColumnNames="person_authority_groups_id"
-                                 baseTableName="rel_person__person_authority_groups"
-                                 constraintName="fk_rel_person__person_authority__person_authority_groups_4a_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="person_authority_group"/>
     </changeSet>
 </databaseChangeLog>

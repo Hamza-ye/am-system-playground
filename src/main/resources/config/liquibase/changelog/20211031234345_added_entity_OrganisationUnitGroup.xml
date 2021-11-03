@@ -38,10 +38,15 @@
             <column name="color" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="user_id" type="bigint">
+            <column name="created_by" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="last_updated_by_id" type="bigint">
+            <column name="last_updated_by" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!--Extended-->
+            <column name="geometry" type="geometry(GEOMETRY, 4326)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -50,18 +55,18 @@
         <dropDefaultValue tableName="orgunit_group" columnName="last_updated" columnDataType="${datetimeType}"/>
     </changeSet>
 
-    <changeSet id="20211031234345-1-relations" author="jhipster">
+    <changeSet id="organisation-unit-members-relations" author="Hamza">
 
-        <createTable tableName="rel_orgunit_group__member">
-            <column name="member_id" type="bigint">
+        <createTable tableName="orgunit_group_members">
+            <column name="orgunit_group_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="orgunit_group_id" type="bigint">
+            <column name="organisation_unit_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="orgunit_group_id, member_id" tableName="rel_orgunit_group__member"/>
+        <addPrimaryKey columnNames="orgunit_group_id, organisation_unit_id" tableName="orgunit_group_members"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

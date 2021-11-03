@@ -1,7 +1,7 @@
 package org.nmcpye.activitiesmanagement.repository;
 
 import java.util.List;
-import org.nmcpye.activitiesmanagement.domain.OrganisationUnit;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 

@@ -35,30 +35,37 @@
             <column name="include_subhierarchy_in_analytics" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="user_id" type="bigint">
+            <column name="created_by" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="last_updated_by_id" type="bigint">
+            <column name="last_updated_by" type="bigint">
                 <constraints nullable="true" />
             </column>
+
+            <!--Extended-->
+            <column name="short_name" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
         <dropDefaultValue tableName="orgunit_groupset" columnName="created" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="orgunit_groupset" columnName="last_updated" columnDataType="${datetimeType}"/>
     </changeSet>
 
-    <changeSet id="20211031234346-1-relations" author="jhipster">
+    <changeSet id="orgunit_groupset_members-relations" author="Hamza">
 
-        <createTable tableName="rel_orgunit_groupset__organisation_unit_group">
-            <column name="organisation_unit_group_id" type="bigint">
+        <createTable tableName="orgunit_groupset_members">
+            <column name="orgunit_groupset_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="orgunit_groupset_id" type="bigint">
+            <column name="orgunit_group_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="orgunit_groupset_id, organisation_unit_group_id" tableName="rel_orgunit_groupset__organisation_unit_group"/>
+        <addPrimaryKey columnNames="orgunit_group_id, orgunit_groupset_id" tableName="orgunit_groupset_members"/>
+
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

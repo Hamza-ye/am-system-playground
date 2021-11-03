@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.service;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.PersonAuthorityGroup;
+import org.nmcpye.activitiesmanagement.domain.person.PersonAuthorityGroup;
 
 /**
  * Service Interface for managing {@link PersonAuthorityGroup}.

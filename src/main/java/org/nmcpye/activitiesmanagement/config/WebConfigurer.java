@@ -8,6 +8,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.*;
 import javax.servlet.*;
+
+import org.nmcpye.activitiesmanagement.extended.system.StartupListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.server.*;
@@ -48,6 +50,10 @@ public class WebConfigurer implements ServletContextInitializer, WebServerFactor
         }
 
         log.info("Web application fully configured");
+
+        // Extend add StartupListener to execute startup populators
+        // TODO Enable Later
+        servletContext.addListener(new StartupListener());
     }
 
     /**

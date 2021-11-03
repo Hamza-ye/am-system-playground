@@ -1,21 +1,29 @@
 package org.nmcpye.activitiesmanagement.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.io.Serializable;
-import java.time.Instant;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.config.Constants;
+import org.nmcpye.activitiesmanagement.domain.enumeration.Gender;
+import org.nmcpye.activitiesmanagement.domain.person.Person;
+import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
+import org.nmcpye.activitiesmanagement.extended.schema.PropertyType;
+import org.nmcpye.activitiesmanagement.extended.schema.annotation.Property;
+import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyRange;
+
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import java.time.Instant;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
 
 /**
  * A user.
@@ -23,7 +31,7 @@ import org.nmcpye.activitiesmanagement.config.Constants;
 @Entity
 @Table(name = "app_user")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class User extends AbstractAuditingEntity implements Serializable {
+public class User extends BaseIdentifiableObject implements MetadataObject {
 
     private static final long serialVersionUID = 1L;
 
@@ -40,7 +48,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @JsonIgnore
     @NotNull
-    @Size(min = 60, max = 60)
+    @Size(max = 60)
     @Column(name = "password_hash", length = 60, nullable = false)
     private String password;
 
@@ -92,6 +100,85 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
+
+    ///////////////////////////////////////////////////
+    //
+    // Extended Methods
+    //
+    ///////////////////////////////////////////////////
+
+    /**
+     * Required.
+     */
+    private String surname;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
+    private Gender gender;
+
+    @Column(name = "mobile")
+    private String mobile;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    Person person;
+
+    /**
+     * Returns the concatenated first name and surname.
+     */
+    @Override
+    public String getName() {
+        return firstName + " " + surname;
+    }
+
+    @JsonProperty
+    @PropertyRange(min = 2)
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    @JsonProperty
+    public Gender getGender() {
+        return this.gender;
+    }
+
+    public User gender(Gender gender) {
+        this.gender = gender;
+        return this;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    @JsonProperty
+    public String getMobile() {
+        return this.mobile;
+    }
+
+    public User mobile(String mobile) {
+        this.mobile = mobile;
+        return this;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    @JsonProperty
+//    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
+    @Property( required = Property.Value.TRUE, value = PropertyType.REFERENCE )
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
 
     public Long getId() {
         return id;

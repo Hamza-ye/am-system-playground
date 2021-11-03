@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.OrganisationUnitGroupSet;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroupSet;
 import org.nmcpye.activitiesmanagement.repository.OrganisationUnitGroupSetRepository;
 import org.nmcpye.activitiesmanagement.service.OrganisationUnitGroupSetService;
 import org.slf4j.Logger;
@@ -56,14 +56,11 @@ public class OrganisationUnitGroupSetServiceImpl implements OrganisationUnitGrou
                     if (organisationUnitGroupSet.getLastUpdated() != null) {
                         existingOrganisationUnitGroupSet.setLastUpdated(organisationUnitGroupSet.getLastUpdated());
                     }
-                    if (organisationUnitGroupSet.getCompulsory() != null) {
-                        existingOrganisationUnitGroupSet.setCompulsory(organisationUnitGroupSet.getCompulsory());
-                    }
-                    if (organisationUnitGroupSet.getIncludeSubhierarchyInAnalytics() != null) {
+                        existingOrganisationUnitGroupSet.setCompulsory(organisationUnitGroupSet.isCompulsory());
+
                         existingOrganisationUnitGroupSet.setIncludeSubhierarchyInAnalytics(
-                            organisationUnitGroupSet.getIncludeSubhierarchyInAnalytics()
+                            organisationUnitGroupSet.isIncludeSubhierarchyInAnalytics()
                         );
-                    }
 
                     return existingOrganisationUnitGroupSet;
                 }

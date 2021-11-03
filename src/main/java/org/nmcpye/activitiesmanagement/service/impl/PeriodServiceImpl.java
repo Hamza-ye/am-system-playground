@@ -1,14 +1,15 @@
 package org.nmcpye.activitiesmanagement.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.Period;
-import org.nmcpye.activitiesmanagement.repository.PeriodRepository;
+import org.nmcpye.activitiesmanagement.domain.period.Period;
+import org.nmcpye.activitiesmanagement.extended.repository.PeriodRepository;
 import org.nmcpye.activitiesmanagement.service.PeriodService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Service Implementation for managing {@link Period}.
@@ -39,8 +40,26 @@ public class PeriodServiceImpl implements PeriodService {
             .findById(period.getId())
             .map(
                 existingPeriod -> {
+                    if (period.getUid() != null) {
+                        existingPeriod.setUid(period.getUid());
+                    }
+                    if (period.getCode() != null) {
+                        existingPeriod.setCode(period.getCode());
+                    }
                     if (period.getName() != null) {
                         existingPeriod.setName(period.getName());
+                    }
+                    if (period.getShortName() != null) {
+                        existingPeriod.setShortName(period.getShortName());
+                    }
+                    if (period.getDescription() != null) {
+                        existingPeriod.setDescription(period.getDescription());
+                    }
+                    if (period.getCreated() != null) {
+                        existingPeriod.setCreated(period.getCreated());
+                    }
+                    if (period.getLastUpdated() != null) {
+                        existingPeriod.setLastUpdated(period.getLastUpdated());
                     }
                     if (period.getStartDate() != null) {
                         existingPeriod.setStartDate(period.getStartDate());

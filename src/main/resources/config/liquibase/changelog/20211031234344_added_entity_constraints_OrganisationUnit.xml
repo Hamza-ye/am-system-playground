@@ -26,15 +26,15 @@
                                  referencedColumnNames="id"
                                  referencedTableName="organisation_unit"/>
 
-        <addForeignKeyConstraint baseColumnNames="user_id"
+        <addForeignKeyConstraint baseColumnNames="created_by"
                                  baseTableName="organisation_unit"
-                                 constraintName="fk_organisation_unit__user_id"
+                                 constraintName="fk_organisation_unit_created_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
-        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+        <addForeignKeyConstraint baseColumnNames="last_updated_by"
                                  baseTableName="organisation_unit"
-                                 constraintName="fk_organisation_unit__last_updated_by_id"
+                                 constraintName="fk_organisation_unit__last_updated_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 

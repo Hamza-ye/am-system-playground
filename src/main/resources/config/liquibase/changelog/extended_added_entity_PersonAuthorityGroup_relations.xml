@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <!--
+        Add person_membership relation table.
+    -->
+    <changeSet id="extended-person_authority_group_authorities" author="Hamza">
+
+        <createTable tableName="person_authority_group_authorities">
+            <column name="authority_group_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authority" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="authority_group_id, authority" tableName="person_authority_group_authorities"/>
+
+    </changeSet>
+    <changeSet id="extended-person_authority_group_authorities_Constraints" author="Hamza">
+
+        <addForeignKeyConstraint baseColumnNames="authority_group_id"
+                                 baseTableName="person_authority_group_authorities"
+                                 constraintName="fk_person_authority_group_authorities__person_role_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person_authority_group"/>
+
+        <addForeignKeyConstraint baseColumnNames="authority"
+                                 baseTableName="person_authority_group_authorities"
+                                 constraintName="fk_person_role_members__authority_id"
+                                 referencedColumnNames="name"
+                                 referencedTableName="app_authority"/>
+
+    </changeSet>
+
+    <!--<changeSet id="add_key_to_authorities" author="Hamza">-->
+        <!--<addColumn tableName="app_authority">-->
+            <!--<column name="authority_group_id" type="bigint"/>-->
+        <!--</addColumn>-->
+
+        <!--<addForeignKeyConstraint-->
+            <!--baseTableName="app_authority"-->
+            <!--baseColumnNames="authority_group_id"-->
+            <!--constraintName="authority_authority_group_id"-->
+            <!--referencedTableName="Person_authority_group"-->
+            <!--referencedColumnNames="id" />-->
+    <!--</changeSet>-->
+</databaseChangeLog>

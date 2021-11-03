@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.service;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.OrganisationUnitLevel;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitLevel;
 
 /**
  * Service Interface for managing {@link OrganisationUnitLevel}.

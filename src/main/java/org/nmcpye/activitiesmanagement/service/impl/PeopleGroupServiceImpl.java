@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.PeopleGroup;
+import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
 import org.nmcpye.activitiesmanagement.repository.PeopleGroupRepository;
 import org.nmcpye.activitiesmanagement.service.PeopleGroupService;
 import org.slf4j.Logger;
