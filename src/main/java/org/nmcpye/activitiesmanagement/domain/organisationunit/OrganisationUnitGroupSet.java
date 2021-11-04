@@ -91,6 +91,11 @@ public class OrganisationUnitGroupSet extends BaseDimensionalObject implements M
         return dimensionName != null ? dimensionName : uid;
     }
 
+    @Override
+    public void setDimensionName(String dimensionName) {
+        this.dimensionName = dimensionName;
+    }
+
     public void addOrganisationUnitGroup(OrganisationUnitGroup organisationUnitGroup) {
         organisationUnitGroups.add(organisationUnitGroup);
         organisationUnitGroup.getGroupSets().add(this);
