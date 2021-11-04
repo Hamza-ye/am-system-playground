@@ -1,14 +1,15 @@
 package org.nmcpye.activitiesmanagement.extended.user;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-import javax.annotation.Nullable;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.domain.person.PersonAuthorityGroup;
 import org.nmcpye.activitiesmanagement.extended.feedback.ErrorReport;
+
+import javax.annotation.Nullable;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 public interface UserService {
     String ID = UserService.class.getName();

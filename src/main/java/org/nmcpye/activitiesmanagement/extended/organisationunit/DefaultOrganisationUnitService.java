@@ -1,11 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.organisationunit;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import com.google.common.collect.Sets;
-import java.awt.geom.Point2D;
-import java.util.*;
-import java.util.stream.Collectors;
 import org.apache.commons.lang3.ObjectUtils;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
@@ -15,13 +10,19 @@ import org.nmcpye.activitiesmanagement.extended.common.collection.ListUtils;
 import org.nmcpye.activitiesmanagement.extended.common.filter.FilterUtils;
 import org.nmcpye.activitiesmanagement.extended.hierarchy.HierarchyViolationException;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.comparator.OrganisationUnitLevelComparator;
-import org.nmcpye.activitiesmanagement.extended.system.filter.OrganisationUnitPolygonCoveringCoordinateFilter;
 import org.nmcpye.activitiesmanagement.extended.system.util.GeoUtils;
 import org.nmcpye.activitiesmanagement.extended.system.util.ValidationUtils;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.filter.OrganisationUnitPolygonCoveringCoordinateFilter;
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.awt.geom.Point2D;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service("org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitService")
 public class DefaultOrganisationUnitService implements OrganisationUnitService {

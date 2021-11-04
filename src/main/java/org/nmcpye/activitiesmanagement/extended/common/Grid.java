@@ -1,12 +1,13 @@
 package org.nmcpye.activitiesmanagement.extended.common;
 
+import net.sf.jasperreports.engine.JRDataSource;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
+
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import net.sf.jasperreports.engine.JRDataSource;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 /**
  * Represents a two-dimensional grid of Object-typed values organized in rows

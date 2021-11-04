@@ -1,14 +1,15 @@
 package org.nmcpye.activitiesmanagement.extended.service;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.domain.period.Period;
 import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
 import org.nmcpye.activitiesmanagement.domain.period.RelativePeriods;
 import org.nmcpye.activitiesmanagement.extended.i18n.I18nFormat;
 import org.nmcpye.activitiesmanagement.extended.period.PeriodHierarchy;
+
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 public interface PeriodService {
     String ID = PeriodService.class.getName();

@@ -1,12 +1,13 @@
 package org.nmcpye.activitiesmanagement.extended.common.calendar;
 
 import com.google.common.collect.Lists;
-import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.chrono.ISOChronology;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+
+import java.util.List;
 
 public abstract class AbstractCalendar implements Calendar {
 

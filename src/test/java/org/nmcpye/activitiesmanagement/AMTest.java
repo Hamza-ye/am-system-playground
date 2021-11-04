@@ -64,7 +64,7 @@ public abstract class AMTest extends AMConvenienceTest {
     // -------------------------------------------------------------------------
 
     private void executeStartupRoutines() throws Exception {
-        String id = "org.nmcpye.activitiesmanagement.extended.system.StartupRoutineExecutor";
+        String id = "StartupRoutineExecutor";
         log.info("################ executeStartupRoutines() #############");
         if (context != null && context.containsBean(id)) {
             Object object = context.getBean(id);

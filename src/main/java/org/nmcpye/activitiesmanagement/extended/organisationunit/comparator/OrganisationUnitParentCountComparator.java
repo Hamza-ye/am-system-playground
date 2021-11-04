@@ -1,8 +1,9 @@
 package org.nmcpye.activitiesmanagement.extended.organisationunit.comparator;
 
-import java.util.Comparator;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObject;
+
+import java.util.Comparator;
 
 public class OrganisationUnitParentCountComparator implements Comparator<IdentifiableObject> {
 

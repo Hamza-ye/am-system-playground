@@ -1,11 +1,12 @@
 package org.nmcpye.activitiesmanagement.extended.period;
 
-import java.util.Date;
-import java.util.List;
 import org.nmcpye.activitiesmanagement.domain.period.Period;
 import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
 import org.nmcpye.activitiesmanagement.domain.period.RelativePeriods;
 import org.nmcpye.activitiesmanagement.extended.common.GenericStore;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * Defines the functionality for persisting Periods and PeriodTypes.

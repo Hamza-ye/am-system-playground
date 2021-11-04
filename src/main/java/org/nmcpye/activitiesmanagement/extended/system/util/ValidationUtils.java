@@ -1,20 +1,19 @@
 package org.nmcpye.activitiesmanagement.extended.system.util;
 
-import static org.apache.commons.lang3.StringUtils.trimToEmpty;
-
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
+import org.apache.commons.validator.routines.DateValidator;
+import org.apache.commons.validator.routines.EmailValidator;
+import org.apache.commons.validator.routines.UrlValidator;
+import org.nmcpye.activitiesmanagement.extended.common.ValueType;
+import org.nmcpye.activitiesmanagement.extended.common.util.TextUtils;
+
 import java.awt.geom.Point2D;
 import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.apache.commons.validator.routines.DateValidator;
-import org.apache.commons.validator.routines.EmailValidator;
-import org.apache.commons.validator.routines.UrlValidator;
-import org.nmcpye.activitiesmanagement.extended.common.ValueType;
-import org.nmcpye.activitiesmanagement.extended.common.util.TextUtils;
 
 public class ValidationUtils {
 

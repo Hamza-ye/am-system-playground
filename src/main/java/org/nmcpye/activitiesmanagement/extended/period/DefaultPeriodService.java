@@ -1,10 +1,5 @@
 package org.nmcpye.activitiesmanagement.extended.period;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectUtils.getIdentifiers;
-
-import java.util.*;
-import java.util.concurrent.TimeUnit;
 import org.nmcpye.activitiesmanagement.domain.period.Period;
 import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
 import org.nmcpye.activitiesmanagement.domain.period.RelativePeriods;
@@ -14,6 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectUtils.getIdentifiers;
 
 @Service("org.nmcpye.activitiesmanagement.extended.period.PeriodService")
 public class DefaultPeriodService implements PeriodService {

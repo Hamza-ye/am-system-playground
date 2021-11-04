@@ -1,8 +1,9 @@
 package org.nmcpye.activitiesmanagement.extended.schema.schemamodule;
 
+import org.nmcpye.activitiesmanagement.extended.schema.Property;
+
 import java.util.List;
 import java.util.Map;
-import org.nmcpye.activitiesmanagement.extended.schema.Property;
 
 public interface PropertyIntrospectorService {
     /**

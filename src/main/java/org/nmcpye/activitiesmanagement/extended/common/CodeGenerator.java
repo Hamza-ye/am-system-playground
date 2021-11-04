@@ -1,9 +1,10 @@
 package org.nmcpye.activitiesmanagement.extended.common;
 
+import org.springframework.util.Base64Utils;
+
 import java.security.SecureRandom;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Pattern;
-import org.springframework.util.Base64Utils;
 
 public class CodeGenerator {
 

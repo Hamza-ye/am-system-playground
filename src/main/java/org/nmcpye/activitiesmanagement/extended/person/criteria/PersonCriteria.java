@@ -1,13 +1,14 @@
 package org.nmcpye.activitiesmanagement.extended.person.criteria;
 
-import java.io.Serializable;
-import java.util.Objects;
 import org.nmcpye.activitiesmanagement.domain.enumeration.Gender;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import tech.jhipster.service.Criteria;
 import tech.jhipster.service.filter.Filter;
 import tech.jhipster.service.filter.LongFilter;
 import tech.jhipster.service.filter.StringFilter;
+
+import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Criteria class for the {@link Person} entity. This class is used

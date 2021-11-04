@@ -1,4 +1,4 @@
-package org.nmcpye.activitiesmanagement.extended.system;
+package org.nmcpye.activitiesmanagement.extended.systemmodule.startup;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.TransactionStatus;

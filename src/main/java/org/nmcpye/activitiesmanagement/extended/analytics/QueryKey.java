@@ -1,10 +1,11 @@
 package org.nmcpye.activitiesmanagement.extended.analytics;
 
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang.StringUtils;
 
 public class QueryKey {
 

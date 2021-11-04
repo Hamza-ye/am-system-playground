@@ -1,8 +1,5 @@
 package org.nmcpye.activitiesmanagement.extended.common;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
 public class DimensionItemObjectValue {
 
     private final DimensionalItemObject dimensionalItemObject;

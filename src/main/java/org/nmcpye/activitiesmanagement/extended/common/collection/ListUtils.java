@@ -1,7 +1,8 @@
 package org.nmcpye.activitiesmanagement.extended.common.collection;
 
-import java.util.*;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 /**
  * Utility methods for list operations.

@@ -9,12 +9,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import java.io.IOException;
-import java.util.*;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.extended.common.CodeGenerator;
 import org.nmcpye.activitiesmanagement.extended.schema.AbstractPropertyTransformer;
+
+import java.io.IOException;
+import java.util.*;
 
 public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
 

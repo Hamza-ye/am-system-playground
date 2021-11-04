@@ -2,10 +2,11 @@ package org.nmcpye.activitiesmanagement.extended.scheduling.parameters;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.extended.feedback.ErrorReport;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobParameters;
 import org.nmcpye.activitiesmanagement.extended.scheduling.parameters.jackson.MetadataSyncJobParametersDeserializer;
+
+import java.util.Optional;
 
 @JsonDeserialize(using = MetadataSyncJobParametersDeserializer.class)
 public class MetadataSyncJobParameters implements JobParameters {

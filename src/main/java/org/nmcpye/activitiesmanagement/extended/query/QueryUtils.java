@@ -3,14 +3,13 @@ package org.nmcpye.activitiesmanagement.extended.query;
 import com.google.common.base.Enums;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
-import java.util.*;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.persistence.TypedQuery;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.nmcpye.activitiesmanagement.extended.schema.Property;
 import org.nmcpye.activitiesmanagement.extended.util.DateUtils;
+
+import javax.persistence.TypedQuery;
+import java.util.*;
 
 public final class QueryUtils {
 

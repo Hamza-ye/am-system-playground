@@ -1,11 +1,12 @@
-package org.nmcpye.activitiesmanagement.extended.common.config.jackson;
+package org.nmcpye.activitiesmanagement.extended.commonmodule.jackson;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import org.nmcpye.activitiesmanagement.extended.util.DateUtils;
+
 import java.io.IOException;
 import java.util.Date;
-import org.nmcpye.activitiesmanagement.extended.util.DateUtils;
 
 public class WriteDateStdSerializer extends JsonSerializer<Date> {
 

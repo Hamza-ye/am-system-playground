@@ -1,8 +1,9 @@
 package org.nmcpye.activitiesmanagement.extended.organisationunit;
 
-import java.util.*;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
+
+import java.util.*;
 
 /**
  * Class which encapsulates logic for the organisation unit hierarchy.

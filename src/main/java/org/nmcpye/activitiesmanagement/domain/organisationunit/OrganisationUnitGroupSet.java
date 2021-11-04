@@ -28,6 +28,20 @@ public class OrganisationUnitGroupSet extends BaseDimensionalObject implements M
     @Column(name = "description")
     protected String description;
 
+    /**
+     * Indicates whether this object should be handled as a data dimension.
+     */
+    @Column(name = "data_dimension")
+    protected boolean dataDimension = true;
+
+    /**
+     * The name of this dimension. For the dynamic dimensions this will be equal
+     * to dimension identifier. For the period dimension, this will reflect the
+     * period type. For the org unit dimension, this will reflect the level.
+     */
+    @Column(name = "dimension_name")
+    private String dimensionName;
+
     @Column(name = "compulsory")
     private Boolean compulsory;
 
@@ -60,6 +74,22 @@ public class OrganisationUnitGroupSet extends BaseDimensionalObject implements M
     // -------------------------------------------------------------------------
     // Logic
     // -------------------------------------------------------------------------
+
+    @Override
+    @JsonProperty
+    public boolean isDataDimension() {
+        return dataDimension;
+    }
+
+    @Override
+    public void setDataDimension(boolean dataDimension) {
+        this.dataDimension = dataDimension;
+    }
+
+    @Override
+    public String getDimensionName() {
+        return dimensionName != null ? dimensionName : uid;
+    }
 
     public void addOrganisationUnitGroup(OrganisationUnitGroup organisationUnitGroup) {
         organisationUnitGroups.add(organisationUnitGroup);

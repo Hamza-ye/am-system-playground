@@ -2,6 +2,7 @@ package org.nmcpye.activitiesmanagement.extended.common;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+
 import java.util.List;
 
 public class QueryFilter {

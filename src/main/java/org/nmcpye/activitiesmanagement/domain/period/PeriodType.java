@@ -13,8 +13,8 @@ import org.springframework.util.Assert;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.DayOfWeek;
-import java.util.*;
 import java.util.Calendar;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**

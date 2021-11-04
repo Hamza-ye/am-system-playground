@@ -1,12 +1,13 @@
 package org.nmcpye.activitiesmanagement.extended.system.util;
 
+import org.apache.commons.math3.util.Precision;
+import org.apache.commons.validator.routines.DoubleValidator;
+import org.apache.commons.validator.routines.IntegerValidator;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.regex.Pattern;
-import org.apache.commons.math3.util.Precision;
-import org.apache.commons.validator.routines.DoubleValidator;
-import org.apache.commons.validator.routines.IntegerValidator;
 
 public class MathUtils {
 

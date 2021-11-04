@@ -1,8 +1,9 @@
 package org.nmcpye.activitiesmanagement.extended.service;
 
-import java.util.List;
 import org.nmcpye.activitiesmanagement.extended.common.calendar.Calendar;
 import org.nmcpye.activitiesmanagement.extended.common.calendar.DateFormat;
+
+import java.util.List;
 
 /**
  * Simple service for returning all available calendars, and also giving the current system

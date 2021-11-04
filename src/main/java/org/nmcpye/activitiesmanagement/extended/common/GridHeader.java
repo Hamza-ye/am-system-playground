@@ -2,6 +2,7 @@ package org.nmcpye.activitiesmanagement.extended.common;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.ImmutableSet;
+
 import java.io.Serializable;
 
 public class GridHeader implements Serializable {

@@ -1,10 +1,11 @@
 package org.nmcpye.activitiesmanagement.extended.user;
 
-import java.util.List;
-import javax.annotation.Nullable;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectStore;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public interface UserStore extends IdentifiableObjectStore<User> {
     String ID = UserStore.class.getName();

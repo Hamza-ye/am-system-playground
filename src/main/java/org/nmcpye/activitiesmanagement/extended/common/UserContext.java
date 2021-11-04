@@ -1,9 +1,10 @@
 package org.nmcpye.activitiesmanagement.extended.common;
 
+import org.nmcpye.activitiesmanagement.domain.User;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import org.nmcpye.activitiesmanagement.domain.User;
 
 public final class UserContext {
 

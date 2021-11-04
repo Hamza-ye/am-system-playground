@@ -1,4 +1,4 @@
-package org.nmcpye.activitiesmanagement.extended.config;
+package org.nmcpye.activitiesmanagement.extended.config.commonmoduleconfig;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -9,25 +9,18 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.nmcpye.activitiesmanagement.extended.common.config.jackson.EmptyStringToNullStdDeserializer;
-import org.nmcpye.activitiesmanagement.extended.common.config.jackson.ParseDateStdDeserializer;
-import org.nmcpye.activitiesmanagement.extended.common.config.jackson.WriteDateStdSerializer;
+import org.nmcpye.activitiesmanagement.extended.commonmodule.jackson.EmptyStringToNullStdDeserializer;
+import org.nmcpye.activitiesmanagement.extended.commonmodule.jackson.ParseDateStdDeserializer;
+import org.nmcpye.activitiesmanagement.extended.commonmodule.jackson.WriteDateStdSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Hamza on 31/10/2021.
  */
-//@EnableWebMvc
 @Configuration
 public class JacksonObjectMapperConfig {
 

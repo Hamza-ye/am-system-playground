@@ -1,4 +1,4 @@
-package org.nmcpye.activitiesmanagement.extended.system;
+package org.nmcpye.activitiesmanagement.extended.systemmodule.startup;
 
 /**
  * Defines a startup routine which should be executed when the system is

@@ -1,7 +1,5 @@
 package org.nmcpye.activitiesmanagement.extended.scheduling.parameters.jackson;
 
-import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.core.ObjectCodec;
@@ -12,9 +10,12 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import java.io.IOException;
-import javax.annotation.Nonnull;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobParameters;
+
+import javax.annotation.Nonnull;
+import java.io.IOException;
+
+import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
 /**
  * Abstract deserializer for {@link JobParameters} that overcomes the limitations of

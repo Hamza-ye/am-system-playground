@@ -3,8 +3,9 @@ package org.nmcpye.activitiesmanagement.extended.common.adapter;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import java.io.IOException;
 import org.nmcpye.activitiesmanagement.domain.period.Period;
+
+import java.io.IOException;
 
 public class JacksonPeriodSerializer extends JsonSerializer<Period> {
 

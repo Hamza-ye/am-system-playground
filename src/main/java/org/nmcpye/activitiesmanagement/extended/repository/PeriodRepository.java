@@ -1,13 +1,14 @@
 package org.nmcpye.activitiesmanagement.extended.repository;
 
-import java.util.Date;
-import java.util.List;
 import org.nmcpye.activitiesmanagement.domain.period.Period;
 import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * Spring Data SQL repository for the Period entity.

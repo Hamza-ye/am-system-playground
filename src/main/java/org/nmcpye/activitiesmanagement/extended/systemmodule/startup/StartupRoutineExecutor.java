@@ -1,4 +1,4 @@
-package org.nmcpye.activitiesmanagement.extended.system;
+package org.nmcpye.activitiesmanagement.extended.systemmodule.startup;
 
 /**
  * Executes a collection of StartupRoutines when the system is started.

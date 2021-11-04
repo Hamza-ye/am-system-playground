@@ -1,12 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.service;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static org.nmcpye.activitiesmanagement.extended.common.ReflectionUtils.getRealClass;
-
 import com.google.common.collect.ImmutableMap;
-import java.util.*;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import org.nmcpye.activitiesmanagement.domain.User;
@@ -18,6 +12,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.*;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static org.nmcpye.activitiesmanagement.extended.common.ReflectionUtils.getRealClass;
 
 /**
  * Note that it is required for nameable object stores to have concrete implementation

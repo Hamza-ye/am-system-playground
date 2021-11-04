@@ -1,9 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.resourcetable.table;
 
-import static org.nmcpye.activitiesmanagement.extended.system.util.SqlUtils.quote;
-
 import com.google.common.collect.Lists;
-import java.util.*;
 import org.joda.time.DateTime;
 import org.nmcpye.activitiesmanagement.domain.period.Period;
 import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
@@ -14,6 +11,10 @@ import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTable;
 import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTableType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.*;
+
+import static org.nmcpye.activitiesmanagement.extended.system.util.SqlUtils.quote;
 
 public class PeriodResourceTable extends ResourceTable<Period> {
 

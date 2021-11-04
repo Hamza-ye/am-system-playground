@@ -1,10 +1,11 @@
 package org.nmcpye.activitiesmanagement.extended.hibernate.dialect;
 
-import java.sql.Types;
-import javax.inject.Inject;
 import org.hibernate.dialect.PostgreSQL10Dialect;
 import org.hibernate.type.descriptor.sql.BinaryTypeDescriptor;
 import org.hibernate.type.descriptor.sql.SqlTypeDescriptor;
+
+import javax.inject.Inject;
+import java.sql.Types;
 
 /**
  * <p>AMPostgresDialect class.</p>

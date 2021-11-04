@@ -1,7 +1,8 @@
 package org.nmcpye.activitiesmanagement.extended.common;
 
-import java.util.*;
 import org.nmcpye.activitiesmanagement.domain.User;
+
+import java.util.*;
 
 public interface IdentifiableObjectManager {
     String ID = IdentifiableObjectManager.class.getName();

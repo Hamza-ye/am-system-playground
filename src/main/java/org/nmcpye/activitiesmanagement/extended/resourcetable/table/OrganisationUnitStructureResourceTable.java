@@ -1,13 +1,14 @@
 package org.nmcpye.activitiesmanagement.extended.resourcetable.table;
 
-import static org.nmcpye.activitiesmanagement.extended.system.util.SqlUtils.quote;
-
 import com.google.common.collect.Lists;
-import java.util.*;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitService;
 import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTable;
 import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTableType;
+
+import java.util.*;
+
+import static org.nmcpye.activitiesmanagement.extended.system.util.SqlUtils.quote;
 
 public class OrganisationUnitStructureResourceTable extends ResourceTable<OrganisationUnit> {
 

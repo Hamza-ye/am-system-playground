@@ -1,10 +1,11 @@
 package org.nmcpye.activitiesmanagement.extended.period;
 
-import java.util.Calendar;
-import java.util.Date;
 import org.nmcpye.activitiesmanagement.extended.common.calendar.DateTimeUnit;
 import org.nmcpye.activitiesmanagement.extended.common.calendar.impl.Iso8601Calendar;
 import org.nmcpye.activitiesmanagement.extended.service.CalendarService;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * An abstraction over a calendar implementation, expects input to be in whatever the current system

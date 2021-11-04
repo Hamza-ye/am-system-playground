@@ -1,13 +1,13 @@
 package org.nmcpye.activitiesmanagement.extended.hibernate;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Function;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
 
 /*
  * Copyright (c) 2004-2020, University of Oslo

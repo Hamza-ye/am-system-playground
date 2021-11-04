@@ -1,8 +1,9 @@
 package org.nmcpye.activitiesmanagement.extended.resourcetable;
 
+import org.nmcpye.activitiesmanagement.extended.common.CodeGenerator;
+
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.extended.common.CodeGenerator;
 
 public abstract class ResourceTable<T> {
 
@@ -43,12 +44,12 @@ public abstract class ResourceTable<T> {
     }
 
     public final String getDropTableStatement() {
-        return "drop table " + getTableName() + ";";
+        return "drop table if exists " + getTableName() + ";";
     }
 
     public final String getDropTempTableStatement() {
         //        return "drop table " + getTempTableName() + ";";
-        return "drop table if exists" + getTempTableName() + ";";
+        return "drop table if exists " + getTempTableName() + ";";
     }
 
     public final String getRenameTempTableStatement() {

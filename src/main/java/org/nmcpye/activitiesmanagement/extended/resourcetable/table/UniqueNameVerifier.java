@@ -1,10 +1,11 @@
 package org.nmcpye.activitiesmanagement.extended.resourcetable.table;
 
-import static org.nmcpye.activitiesmanagement.extended.system.util.SqlUtils.quote;
+import org.nmcpye.activitiesmanagement.extended.common.BaseNameableObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.nmcpye.activitiesmanagement.extended.common.BaseNameableObject;
+
+import static org.nmcpye.activitiesmanagement.extended.system.util.SqlUtils.quote;
 
 public class UniqueNameVerifier {
 

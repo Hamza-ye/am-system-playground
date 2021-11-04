@@ -1,10 +1,11 @@
 package org.nmcpye.activitiesmanagement.extended.person;
 
-import java.util.Collection;
-import java.util.List;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
+
+import java.util.Collection;
+import java.util.List;
 
 public interface PeopleGroupService {
     String ID = PeopleGroupService.class.getName();

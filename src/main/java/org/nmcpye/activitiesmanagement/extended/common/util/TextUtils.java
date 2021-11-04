@@ -1,11 +1,12 @@
 package org.nmcpye.activitiesmanagement.extended.common.util;
 
+import org.apache.commons.lang3.StringUtils;
+import org.nmcpye.activitiesmanagement.extended.common.collection.ListUtils;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import org.apache.commons.lang3.StringUtils;
-import org.nmcpye.activitiesmanagement.extended.common.collection.ListUtils;
 
 /**
  * Utility class with methods for managing strings.

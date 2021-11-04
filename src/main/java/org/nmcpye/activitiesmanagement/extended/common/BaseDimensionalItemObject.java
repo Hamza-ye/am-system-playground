@@ -1,8 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.common;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
 import org.nmcpye.activitiesmanagement.extended.analytics.AggregationType;
 
 //@MappedSuperclass

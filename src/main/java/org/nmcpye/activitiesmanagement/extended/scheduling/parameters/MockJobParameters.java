@@ -1,9 +1,10 @@
 package org.nmcpye.activitiesmanagement.extended.scheduling.parameters;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.extended.feedback.ErrorReport;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobParameters;
+
+import java.util.Optional;
 
 public class MockJobParameters implements JobParameters {
 

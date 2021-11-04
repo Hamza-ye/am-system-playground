@@ -1,12 +1,5 @@
 package org.nmcpye.activitiesmanagement.extended.resourcetable.table;
 
-import static org.nmcpye.activitiesmanagement.extended.system.util.SqlUtils.quote;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import org.nmcpye.activitiesmanagement.domain.period.DailyPeriodType;
 import org.nmcpye.activitiesmanagement.domain.period.Period;
 import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
@@ -15,6 +8,14 @@ import org.nmcpye.activitiesmanagement.extended.common.collection.UniqueArrayLis
 import org.nmcpye.activitiesmanagement.extended.period.Cal;
 import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTable;
 import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTableType;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static org.nmcpye.activitiesmanagement.extended.system.util.SqlUtils.quote;
 
 public class DatePeriodResourceTable extends ResourceTable<Period> {
 

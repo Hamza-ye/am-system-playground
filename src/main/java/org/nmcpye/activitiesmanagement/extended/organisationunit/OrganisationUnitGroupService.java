@@ -1,10 +1,11 @@
 package org.nmcpye.activitiesmanagement.extended.organisationunit;
 
-import java.util.Collection;
-import java.util.List;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroupSet;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Defines methods for working with OrganisationUnitGroups and

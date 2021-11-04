@@ -3,16 +3,6 @@ package org.nmcpye.activitiesmanagement.extended.schema.schemamodule;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Primitives;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import lombok.extern.slf4j.Slf4j;
 import org.nmcpye.activitiesmanagement.extended.common.EmbeddedObject;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.NameableObject;
@@ -22,6 +12,16 @@ import org.nmcpye.activitiesmanagement.extended.schema.Property;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 public class NodePropertyIntrospectorService extends AbstractPropertyIntrospectorService {
 

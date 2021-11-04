@@ -1,9 +1,10 @@
 package org.nmcpye.activitiesmanagement.extended.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.nmcpye.activitiesmanagement.domain.User;
+
 import java.io.Serializable;
 import java.util.Date;
-import org.nmcpye.activitiesmanagement.domain.User;
 
 public interface IdentifiableObject extends Comparable<IdentifiableObject>, Serializable {
     Long getId();

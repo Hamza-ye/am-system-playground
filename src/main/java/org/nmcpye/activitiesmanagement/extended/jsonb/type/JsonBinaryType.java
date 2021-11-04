@@ -9,6 +9,15 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.util.TokenBuffer;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.hibernate.HibernateException;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
+import org.hibernate.usertype.ParameterizedType;
+import org.hibernate.usertype.UserType;
+import org.nmcpye.activitiesmanagement.extended.commonmodule.jackson.EmptyStringToNullStdDeserializer;
+import org.nmcpye.activitiesmanagement.extended.commonmodule.jackson.ParseDateStdDeserializer;
+import org.nmcpye.activitiesmanagement.extended.commonmodule.jackson.WriteDateStdSerializer;
+import org.postgresql.util.PGobject;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
@@ -17,14 +26,6 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Date;
 import java.util.Properties;
-import org.hibernate.HibernateException;
-import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.usertype.ParameterizedType;
-import org.hibernate.usertype.UserType;
-import org.nmcpye.activitiesmanagement.extended.common.config.jackson.EmptyStringToNullStdDeserializer;
-import org.nmcpye.activitiesmanagement.extended.common.config.jackson.ParseDateStdDeserializer;
-import org.nmcpye.activitiesmanagement.extended.common.config.jackson.WriteDateStdSerializer;
-import org.postgresql.util.PGobject;
 
 public class JsonBinaryType implements UserType, ParameterizedType {
 

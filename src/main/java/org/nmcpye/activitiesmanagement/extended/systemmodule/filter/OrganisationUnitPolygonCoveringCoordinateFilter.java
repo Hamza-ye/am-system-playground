@@ -1,4 +1,4 @@
-package org.nmcpye.activitiesmanagement.extended.system.filter;
+package org.nmcpye.activitiesmanagement.extended.systemmodule.filter;
 
 import com.vividsolutions.jts.geom.Geometry;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.FeatureType;

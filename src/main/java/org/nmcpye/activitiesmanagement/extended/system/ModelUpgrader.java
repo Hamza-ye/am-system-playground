@@ -1,9 +1,10 @@
 package org.nmcpye.activitiesmanagement.extended.system;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitService;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.startup.TransactionContextStartupRoutine;
 import org.springframework.stereotype.Component;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @Component
 public class ModelUpgrader extends TransactionContextStartupRoutine {
@@ -23,6 +24,7 @@ public class ModelUpgrader extends TransactionContextStartupRoutine {
 
     @Override
     public void executeInTransaction() {
-        organisationUnitService.updatePaths();
+//        organisationUnitService.updatePaths();
+        organisationUnitService.forceUpdatePaths();
     }
 }

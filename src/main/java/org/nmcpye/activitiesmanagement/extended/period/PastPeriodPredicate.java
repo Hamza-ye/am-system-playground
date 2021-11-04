@@ -1,10 +1,11 @@
 package org.nmcpye.activitiesmanagement.extended.period;
 
-import java.util.Calendar;
-import java.util.Date;
 import org.apache.commons.collections4.Predicate;
 import org.nmcpye.activitiesmanagement.domain.period.Period;
 import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class PastPeriodPredicate implements Predicate {
 

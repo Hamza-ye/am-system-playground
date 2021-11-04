@@ -3,12 +3,13 @@ package org.nmcpye.activitiesmanagement.extended.common;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroupSet;
 import org.nmcpye.activitiesmanagement.extended.analytics.AggregationType;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public interface DimensionalObject extends NameableObject {
     String DATA_X_DIM_ID = "dx"; // in, de, ds, do

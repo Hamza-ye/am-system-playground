@@ -1,12 +1,13 @@
 package org.nmcpye.activitiesmanagement.extended.person;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
-import javax.annotation.Nullable;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.domain.person.PersonAuthorityGroup;
+
+import javax.annotation.Nullable;
+import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
 
 public interface PersonServiceExtended {
     String ID = PersonServiceExtended.class.getName();

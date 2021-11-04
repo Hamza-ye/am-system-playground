@@ -1,10 +1,11 @@
 package org.nmcpye.activitiesmanagement.extended.person;
 
-import java.util.List;
-import java.util.UUID;
-import javax.annotation.Nullable;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectStore;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Hamza on 20/10/2021.

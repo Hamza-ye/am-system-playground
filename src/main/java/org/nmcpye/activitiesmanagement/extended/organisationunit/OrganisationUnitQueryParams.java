@@ -1,11 +1,12 @@
 package org.nmcpye.activitiesmanagement.extended.organisationunit;
 
 import com.google.common.base.MoreObjects;
-import java.util.HashSet;
-import java.util.Set;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
 import org.nmcpye.activitiesmanagement.extended.common.SortProperty;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class OrganisationUnitQueryParams {
 

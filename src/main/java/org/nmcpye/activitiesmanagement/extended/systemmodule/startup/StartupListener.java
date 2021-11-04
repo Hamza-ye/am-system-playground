@@ -1,16 +1,17 @@
-package org.nmcpye.activitiesmanagement.extended.system;
+package org.nmcpye.activitiesmanagement.extended.systemmodule.startup;
 
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Enumeration;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 import org.nmcpye.activitiesmanagement.extended.common.DebugUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Enumeration;
 
 /**
  * Implementation of {@link javax.servlet.ServletContextListener} which hooks

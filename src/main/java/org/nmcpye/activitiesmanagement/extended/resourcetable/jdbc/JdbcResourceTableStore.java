@@ -1,10 +1,5 @@
 package org.nmcpye.activitiesmanagement.extended.resourcetable.jdbc;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.List;
-import java.util.Optional;
-import lombok.extern.slf4j.Slf4j;
 import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTable;
 import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTableStore;
 import org.nmcpye.activitiesmanagement.extended.system.util.Clock;
@@ -12,6 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service("org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTableStore")
 public class JdbcResourceTableStore implements ResourceTableStore {

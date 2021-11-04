@@ -1,10 +1,11 @@
 package org.nmcpye.activitiesmanagement.extended.user;
 
 import com.google.common.base.MoreObjects;
-import java.util.*;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
+
+import java.util.*;
 
 public class UserQueryParams {
 

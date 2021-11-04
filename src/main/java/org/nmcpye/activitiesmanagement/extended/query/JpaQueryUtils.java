@@ -1,8 +1,9 @@
 package org.nmcpye.activitiesmanagement.extended.query;
 
-import java.util.function.Function;
-import javax.persistence.criteria.*;
 import org.springframework.context.i18n.LocaleContextHolder;
+
+import javax.persistence.criteria.*;
+import java.util.function.Function;
 
 public class JpaQueryUtils {
 

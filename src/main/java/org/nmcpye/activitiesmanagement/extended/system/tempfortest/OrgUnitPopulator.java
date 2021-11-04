@@ -1,22 +1,25 @@
 package org.nmcpye.activitiesmanagement.extended.system.tempfortest;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import com.google.common.collect.Sets;
 import com.vividsolutions.jts.geom.Geometry;
-import java.util.Date;
 import org.joda.time.DateTime;
 import org.nmcpye.activitiesmanagement.domain.enumeration.OrganisationUnitType;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
 import org.nmcpye.activitiesmanagement.extended.common.CodeGenerator;
-import org.nmcpye.activitiesmanagement.extended.organisationunit.*;
-import org.nmcpye.activitiesmanagement.extended.system.TransactionContextStartupRoutine;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitGroupService;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitGroupStore;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitService;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitStore;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.startup.TransactionContextStartupRoutine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
-@Component
+import java.util.Date;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
+//@Component
 public class OrgUnitPopulator extends TransactionContextStartupRoutine {
 
     // -------------------------------------------------------------------------
@@ -100,20 +103,20 @@ public class OrgUnitPopulator extends TransactionContextStartupRoutine {
         unit.setParent(parent);
         parent.getChildren().add(unit);
 
-        int level = unit.getLevel();
+        int level = unit.getHierarchyLevel();
 
         switch (level) {
             case 1:
                 unit.setOrganisationUnitType(OrganisationUnitType.COUNTRY);
                 break;
             case 2:
-                unit.setOrganisationUnitType(OrganisationUnitType.DISTRICT);
+                unit.setOrganisationUnitType(OrganisationUnitType.GOV);
                 break;
             case 3:
-                unit.setOrganisationUnitType(OrganisationUnitType.HEALTH_FACILITY);
+                unit.setOrganisationUnitType(OrganisationUnitType.DISTRICT);
                 break;
             case 4:
-                unit.setOrganisationUnitType(OrganisationUnitType.VILLAGE);
+                unit.setOrganisationUnitType(OrganisationUnitType.HEALTH_FACILITY);
                 break;
             case 5:
                 unit.setOrganisationUnitType(OrganisationUnitType.SUBVILLAGE);

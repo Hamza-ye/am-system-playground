@@ -1,15 +1,16 @@
 package org.nmcpye.activitiesmanagement.extended.resourcetable.table;
 
-import static org.nmcpye.activitiesmanagement.extended.common.util.TextUtils.removeLastComma;
-import static org.nmcpye.activitiesmanagement.extended.system.util.SqlUtils.quote;
-
 import com.google.common.collect.Lists;
-import java.util.List;
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroupSet;
 import org.nmcpye.activitiesmanagement.extended.common.util.TextUtils;
 import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTable;
 import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTableType;
+
+import java.util.List;
+import java.util.Optional;
+
+import static org.nmcpye.activitiesmanagement.extended.common.util.TextUtils.removeLastComma;
+import static org.nmcpye.activitiesmanagement.extended.system.util.SqlUtils.quote;
 
 public class OrganisationUnitGroupSetResourceTable extends ResourceTable<OrganisationUnitGroupSet> {
 
@@ -58,30 +59,30 @@ public class OrganisationUnitGroupSetResourceTable extends ResourceTable<Organis
             "insert into " +
             getTempTableName() +
             " " +
-            "select ou.organisationunitid as organisationunitid, ou.name as organisationunitname, null as startdate, ";
+            "select ou.id as organisationunitid, ou.name as organisationunitname, null as startdate, ";
 
         for (OrganisationUnitGroupSet groupSet : objects) {
             if (!groupSet.isIncludeSubhierarchyInAnalytics()) {
                 sql +=
                     "(" +
-                    "select oug.name from orgunitgroup oug " +
-                    "inner join orgunitgroupmembers ougm on ougm.orgunitgroupid = oug.orgunitgroupid " +
-                    "inner join orgunitgroupsetmembers ougsm on ougsm.orgunitgroupid = ougm.orgunitgroupid and ougsm.orgunitgroupsetid = " +
+                    "select oug.name from orgunit_group oug " +
+                    "inner join orgunit_group_members ougm on ougm.orgunit_group_id = oug.id " +
+                    "inner join orgunit_groupset_members ougsm on ougsm.orgunit_group_id = ougm.orgunit_group_id and ougsm.orgunit_groupset_id = " +
                     groupSet.getId() +
                     " " +
-                    "where ougm.organisationunitid = ou.organisationunitid " +
+                    "where ougm.organisation_unit_id = ou.id " +
                     "limit 1) as " +
                     quote(groupSet.getName()) +
                     ", ";
 
                 sql +=
                     "(" +
-                    "select oug.uid from orgunitgroup oug " +
-                    "inner join orgunitgroupmembers ougm on ougm.orgunitgroupid = oug.orgunitgroupid " +
-                    "inner join orgunitgroupsetmembers ougsm on ougsm.orgunitgroupid = ougm.orgunitgroupid and ougsm.orgunitgroupsetid = " +
+                    "select oug.uid from orgunit_group oug " +
+                    "inner join orgunit_group_members ougm on ougm.orgunit_group_id = oug.id " +
+                    "inner join orgunit_groupset_members ougsm on ougsm.orgunit_group_id = ougm.orgunit_group_id and ougsm.orgunit_groupset_id = " +
                     groupSet.getId() +
                     " " +
-                    "where ougm.organisationunitid = ou.organisationunitid " +
+                    "where ougm.organisation_unit_id = ou.id " +
                     "limit 1) as " +
                     quote(groupSet.getUid()) +
                     ", ";
@@ -90,11 +91,11 @@ public class OrganisationUnitGroupSetResourceTable extends ResourceTable<Organis
 
                 for (int i = organisationUnitLevels; i > 0; i--) {
                     sql +=
-                        "(select oug.name from orgunitgroup oug " +
-                        "inner join orgunitgroupmembers ougm on ougm.orgunitgroupid = oug.orgunitgroupid and ougm.organisationunitid = ous.idlevel" +
+                        "(select oug.name from orgunit_group oug " +
+                        "inner join orgunit_group_members ougm on ougm.orgunit_group_id = oug.id and ougm.organisation_unit_id = ous.idlevel" +
                         i +
                         " " +
-                        "inner join orgunitgroupsetmembers ougsm on ougsm.orgunitgroupid = ougm.orgunitgroupid and ougsm.orgunitgroupsetid = " +
+                        "inner join orgunit_groupset_members ougsm on ougsm.orgunit_group_id = ougm.orgunit_group_id and ougsm.orgunit_groupset_id = " +
                         groupSet.getId() +
                         " " +
                         "limit 1),";
@@ -110,11 +111,11 @@ public class OrganisationUnitGroupSetResourceTable extends ResourceTable<Organis
 
                 for (int i = organisationUnitLevels; i > 0; i--) {
                     sql +=
-                        "(select oug.uid from orgunitgroup oug " +
-                        "inner join orgunitgroupmembers ougm on ougm.orgunitgroupid = oug.orgunitgroupid and ougm.organisationunitid = ous.idlevel" +
+                        "(select oug.uid from orgunit_group oug " +
+                        "inner join orgunit_group_members ougm on ougm.orgunit_group_id = oug.id and ougm.organisation_unit_id = ous.idlevel" +
                         i +
                         " " +
-                        "inner join orgunitgroupsetmembers ougsm on ougsm.orgunitgroupid = ougm.orgunitgroupid and ougsm.orgunitgroupsetid = " +
+                        "inner join orgunit_groupset_members ougsm on ougsm.orgunit_group_id = ougm.orgunit_group_id and ougsm.orgunit_groupset_id = " +
                         groupSet.getId() +
                         " " +
                         "limit 1),";
@@ -129,7 +130,7 @@ public class OrganisationUnitGroupSetResourceTable extends ResourceTable<Organis
         }
 
         sql = removeLastComma(sql) + " ";
-        sql += "from organisationunit ou " + "inner join _orgunitstructure ous on ous.organisationunitid = ou.organisationunitid";
+        sql += "from organisation_unit ou " + "inner join _orgunitstructure ous on ous.organisationunitid = ou.id";
 
         return Optional.of(sql);
     }

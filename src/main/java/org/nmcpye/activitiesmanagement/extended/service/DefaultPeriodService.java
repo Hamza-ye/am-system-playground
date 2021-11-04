@@ -1,12 +1,7 @@
 package org.nmcpye.activitiesmanagement.extended.service;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 import org.nmcpye.activitiesmanagement.domain.period.Period;
 import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
 import org.nmcpye.activitiesmanagement.domain.period.RelativePeriods;
@@ -20,6 +15,12 @@ import org.nmcpye.activitiesmanagement.extended.util.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 //@Service
 public class DefaultPeriodService implements PeriodService {

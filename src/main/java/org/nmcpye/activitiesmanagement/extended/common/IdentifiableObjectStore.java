@@ -1,10 +1,11 @@
 package org.nmcpye.activitiesmanagement.extended.common;
 
+import org.nmcpye.activitiesmanagement.domain.User;
+
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
-import org.nmcpye.activitiesmanagement.domain.User;
 
 public interface IdentifiableObjectStore<T> extends GenericStore<T> {
     /**

@@ -1,9 +1,10 @@
 package org.nmcpye.activitiesmanagement.extended.scheduling;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.nmcpye.activitiesmanagement.extended.schema.Property;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.nmcpye.activitiesmanagement.extended.schema.Property;
 
 /**
  * Class which represents information about a job type.

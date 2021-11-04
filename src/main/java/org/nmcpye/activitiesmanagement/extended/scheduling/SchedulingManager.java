@@ -1,11 +1,12 @@
 package org.nmcpye.activitiesmanagement.extended.scheduling;
 
+import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.springframework.util.concurrent.ListenableFuture;
+
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ScheduledFuture;
-import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
-import org.springframework.util.concurrent.ListenableFuture;
 
 /**
  * Interface for scheduling jobs.

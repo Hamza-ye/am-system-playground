@@ -1,8 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.common;
 
 import com.google.common.collect.Maps;
-import java.util.*;
-import java.util.stream.Collectors;
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -13,6 +11,9 @@ import org.nmcpye.activitiesmanagement.domain.period.WeeklyAbstractPeriodType;
 import org.nmcpye.activitiesmanagement.extended.common.calendar.Calendar;
 import org.nmcpye.activitiesmanagement.extended.common.calendar.DateTimeUnit;
 import org.springframework.util.Assert;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class IdentifiableObjectUtils {
 

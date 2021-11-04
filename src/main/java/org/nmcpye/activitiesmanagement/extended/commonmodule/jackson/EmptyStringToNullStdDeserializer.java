@@ -1,10 +1,11 @@
-package org.nmcpye.activitiesmanagement.extended.common.config.jackson;
+package org.nmcpye.activitiesmanagement.extended.commonmodule.jackson;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import java.io.IOException;
 import org.springframework.util.StringUtils;
+
+import java.io.IOException;
 
 public class EmptyStringToNullStdDeserializer extends JsonDeserializer<String> {
 

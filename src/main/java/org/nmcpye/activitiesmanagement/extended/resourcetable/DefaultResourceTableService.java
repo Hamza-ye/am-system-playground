@@ -1,7 +1,5 @@
 package org.nmcpye.activitiesmanagement.extended.resourcetable;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroupSet;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectManager;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitService;
@@ -14,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service("org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTableService")
 public class DefaultResourceTableService implements ResourceTableService {
@@ -67,13 +67,6 @@ public class DefaultResourceTableService implements ResourceTableService {
     @Override
     @Transactional
     public void generateOrganisationUnitGroupSetTable() {
-        resourceTableStore.generateResourceTable(
-            new OrganisationUnitGroupSetResourceTable(
-                idObjectManager.getDataDimensionsNoAcl(OrganisationUnitGroupSet.class),
-                true,
-                organisationUnitService.getNumberOfOrganisationalLevels()
-            )
-        );
         resourceTableStore.generateResourceTable(
             new OrganisationUnitGroupSetResourceTable(
                 idObjectManager.getDataDimensionsNoAcl(OrganisationUnitGroupSet.class),

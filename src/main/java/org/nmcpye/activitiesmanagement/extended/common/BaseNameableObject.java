@@ -2,10 +2,10 @@ package org.nmcpye.activitiesmanagement.extended.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.Size;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyRange;
+
+import javax.persistence.Column;
+import javax.validation.constraints.Size;
 
 //@MappedSuperclass
 public class BaseNameableObject extends BaseIdentifiableObject implements NameableObject {

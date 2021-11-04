@@ -1,4 +1,4 @@
-package org.nmcpye.activitiesmanagement.extended.system.objectmapper;
+package org.nmcpye.activitiesmanagement.extended.systemmodule.objectmapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

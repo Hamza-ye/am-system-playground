@@ -1,9 +1,10 @@
 package org.nmcpye.activitiesmanagement.extended.scheduling;
 
-import java.util.List;
-import java.util.Map;
 import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
 import org.nmcpye.activitiesmanagement.extended.schema.Property;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Simple service for {@link JobConfiguration} objects.

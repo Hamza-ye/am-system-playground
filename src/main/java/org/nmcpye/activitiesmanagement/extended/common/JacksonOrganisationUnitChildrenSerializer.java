@@ -3,10 +3,11 @@ package org.nmcpye.activitiesmanagement.extended.common;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
+
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 
 public class JacksonOrganisationUnitChildrenSerializer extends JsonSerializer<OrganisationUnit> {
 

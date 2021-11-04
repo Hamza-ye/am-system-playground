@@ -2,6 +2,14 @@ package org.nmcpye.activitiesmanagement.extended.util;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import org.joda.time.*;
+import org.joda.time.format.*;
+import org.nmcpye.activitiesmanagement.domain.period.Period;
+import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
+import org.nmcpye.activitiesmanagement.extended.common.calendar.DateTimeUnit;
+import org.nmcpye.activitiesmanagement.extended.i18n.I18nFormat;
+import org.springframework.util.StringUtils;
+
 import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.Instant;
@@ -11,13 +19,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.joda.time.*;
-import org.joda.time.format.*;
-import org.nmcpye.activitiesmanagement.domain.period.Period;
-import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
-import org.nmcpye.activitiesmanagement.extended.common.calendar.DateTimeUnit;
-import org.nmcpye.activitiesmanagement.extended.i18n.I18nFormat;
-import org.springframework.util.StringUtils;
 
 public class DateUtils {
 

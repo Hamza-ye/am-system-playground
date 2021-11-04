@@ -1,19 +1,5 @@
 package org.nmcpye.activitiesmanagement.extended.scheduling.schedulingcoremodule;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static org.nmcpye.activitiesmanagement.extended.scheduling.JobStatus.DISABLED;
-import static org.nmcpye.activitiesmanagement.extended.util.DateUtils.getMediumDateString;
-
-import java.time.Duration;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.ScheduledFuture;
 import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
 import org.nmcpye.activitiesmanagement.extended.scheduling.*;
 import org.slf4j.Logger;
@@ -25,6 +11,21 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
+
+import java.time.Duration;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ScheduledFuture;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static org.nmcpye.activitiesmanagement.extended.scheduling.JobStatus.DISABLED;
+import static org.nmcpye.activitiesmanagement.extended.util.DateUtils.getMediumDateString;
 
 /**
  * Cron refers to the cron expression used for scheduling. Key refers to the key

@@ -1,12 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.person;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static org.nmcpye.activitiesmanagement.extended.common.CodeGenerator.isValidUid;
-import static org.nmcpye.activitiesmanagement.extended.system.util.ValidationUtils.uuidIsValid;
-
 import com.google.common.collect.Lists;
-import java.util.*;
-import javax.annotation.Nullable;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
@@ -20,6 +14,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Nullable;
+import java.util.*;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static org.nmcpye.activitiesmanagement.extended.common.CodeGenerator.isValidUid;
+import static org.nmcpye.activitiesmanagement.extended.system.util.ValidationUtils.uuidIsValid;
 
 @Lazy
 @Service("org.nmcpye.activitiesmanagement.extended.person.PersonServiceExtended")

@@ -1,20 +1,16 @@
 package org.nmcpye.activitiesmanagement.extended.scheduling.schedulingcoremodule;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Primitives;
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.Field;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectStore;
 import org.nmcpye.activitiesmanagement.extended.common.util.TextUtils;
-import org.nmcpye.activitiesmanagement.extended.scheduling.*;
+import org.nmcpye.activitiesmanagement.extended.scheduling.JobConfigurationService;
+import org.nmcpye.activitiesmanagement.extended.scheduling.JobStatus;
+import org.nmcpye.activitiesmanagement.extended.scheduling.JobType;
+import org.nmcpye.activitiesmanagement.extended.scheduling.JobTypeInfo;
 import org.nmcpye.activitiesmanagement.extended.schema.Property;
 import org.nmcpye.activitiesmanagement.extended.schema.schemamodule.NodePropertyIntrospectorService;
 import org.slf4j.Logger;
@@ -22,6 +18,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service("jobConfigurationService")
 public class DefaultJobConfigurationService implements JobConfigurationService {

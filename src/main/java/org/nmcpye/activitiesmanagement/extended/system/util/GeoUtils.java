@@ -4,16 +4,17 @@ import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.geom.Polygon;
-import java.awt.geom.Point2D;
-import java.io.IOException;
-import java.io.StringReader;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.geotools.geojson.geom.GeometryJSON;
 import org.geotools.referencing.GeodeticCalculator;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.FeatureType;
 import org.nmcpye.activitiesmanagement.extended.common.coordinate.CoordinateUtils;
+
+import java.awt.geom.Point2D;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GeoUtils {
 

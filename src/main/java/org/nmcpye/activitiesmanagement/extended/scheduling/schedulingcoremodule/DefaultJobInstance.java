@@ -1,7 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.scheduling.schedulingcoremodule;
 
 import com.google.common.base.Preconditions;
-import java.util.Date;
 import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
 import org.nmcpye.activitiesmanagement.extended.common.DebugUtils;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobInstance;
@@ -11,6 +10,8 @@ import org.nmcpye.activitiesmanagement.extended.system.util.Clock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 @Component("org.nmcpye.activitiesmanagement.extended.scheduling.JobInstance")
 public class DefaultJobInstance implements JobInstance {

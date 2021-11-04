@@ -1,8 +1,9 @@
-package org.nmcpye.activitiesmanagement.extended.system.objectmapper;
+package org.nmcpye.activitiesmanagement.extended.systemmodule.objectmapper;
+
+import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitRelationship;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitRelationship;
 
 /**
  * @author Lars Helge Overland

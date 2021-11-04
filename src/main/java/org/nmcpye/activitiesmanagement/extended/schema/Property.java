@@ -2,13 +2,14 @@ package org.nmcpye.activitiesmanagement.extended.schema;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Objects;
 import org.nmcpye.activitiesmanagement.extended.common.EmbeddedObject;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.NameableObject;
 import org.springframework.core.Ordered;
+
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.Objects;
 
 public class Property implements Ordered, Klass {
 

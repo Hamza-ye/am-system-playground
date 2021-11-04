@@ -1,14 +1,7 @@
 package org.nmcpye.activitiesmanagement.extended.service;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import javax.annotation.PostConstruct;
 import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
 import org.nmcpye.activitiesmanagement.extended.common.calendar.Calendar;
 import org.nmcpye.activitiesmanagement.extended.common.calendar.CalendarComparator;
@@ -18,6 +11,14 @@ import org.nmcpye.activitiesmanagement.extended.common.calendar.impl.Iso8601Cale
 import org.nmcpye.activitiesmanagement.extended.period.Cal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service
 public class DefaultCalendarService implements CalendarService {

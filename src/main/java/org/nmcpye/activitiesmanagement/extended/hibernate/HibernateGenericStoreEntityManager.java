@@ -1,20 +1,17 @@
 package org.nmcpye.activitiesmanagement.extended.hibernate;
 
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import javax.persistence.EntityManager;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
 import org.hibernate.annotations.QueryHints;
 import org.nmcpye.activitiesmanagement.extended.common.AuditLogUtil;
 import org.nmcpye.activitiesmanagement.extended.common.GenericStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import javax.persistence.*;
+import javax.persistence.criteria.*;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class HibernateGenericStoreEntityManager<T> implements GenericStore<T> {
 

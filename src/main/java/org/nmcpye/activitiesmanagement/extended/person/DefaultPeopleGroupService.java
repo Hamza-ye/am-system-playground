@@ -1,10 +1,5 @@
 package org.nmcpye.activitiesmanagement.extended.person;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
@@ -14,6 +9,12 @@ import org.nmcpye.activitiesmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service("org.nmcpye.activitiesmanagement.extended.person.PeopleGroupService")
 public class DefaultPeopleGroupService implements PeopleGroupService {

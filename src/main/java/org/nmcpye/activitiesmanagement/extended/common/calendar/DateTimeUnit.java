@@ -1,11 +1,12 @@
 package org.nmcpye.activitiesmanagement.extended.common.calendar;
 
 import com.google.common.base.MoreObjects;
-import java.util.Date;
-import java.util.TimeZone;
-import javax.validation.constraints.NotNull;
 import org.joda.time.*;
 import org.joda.time.chrono.ISOChronology;
+
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Class representing a specific calendar date.

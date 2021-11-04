@@ -2,15 +2,16 @@ package org.nmcpye.activitiesmanagement.extended.common.coordinate;
 
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.io.geojson.GeoJsonWriter;
+import org.apache.commons.lang3.StringUtils;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.CoordinatesTuple;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.FeatureType;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.apache.commons.lang3.StringUtils;
-import org.nmcpye.activitiesmanagement.domain.organisationunit.CoordinatesTuple;
-import org.nmcpye.activitiesmanagement.domain.organisationunit.FeatureType;
-import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 
 public class CoordinateUtils {
 

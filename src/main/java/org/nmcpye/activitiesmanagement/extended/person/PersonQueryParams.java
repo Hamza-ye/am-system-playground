@@ -1,11 +1,12 @@
 package org.nmcpye.activitiesmanagement.extended.person;
 
 import com.google.common.base.MoreObjects;
-import java.util.*;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
+
+import java.util.*;
 
 public class PersonQueryParams {
 

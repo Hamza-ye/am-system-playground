@@ -1,6 +1,12 @@
 package org.nmcpye.activitiesmanagement.extended.common.calendar;
 
 import com.google.common.collect.Maps;
+import org.nmcpye.activitiesmanagement.domain.period.BiWeeklyPeriodType;
+import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
+import org.nmcpye.activitiesmanagement.domain.period.WeeklyAbstractPeriodType;
+import org.nmcpye.activitiesmanagement.extended.common.calendar.impl.Iso8601Calendar;
+import org.nmcpye.activitiesmanagement.extended.service.CalendarService;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
@@ -8,11 +14,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
-import org.nmcpye.activitiesmanagement.domain.period.BiWeeklyPeriodType;
-import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
-import org.nmcpye.activitiesmanagement.domain.period.WeeklyAbstractPeriodType;
-import org.nmcpye.activitiesmanagement.extended.common.calendar.impl.Iso8601Calendar;
-import org.nmcpye.activitiesmanagement.extended.service.CalendarService;
 
 public class DateUnitPeriodTypeParser implements PeriodTypeParser {
 

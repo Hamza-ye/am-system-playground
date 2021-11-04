@@ -1,11 +1,12 @@
 package org.nmcpye.activitiesmanagement.extended.system.util;
 
 import com.google.common.collect.Sets;
+import org.springframework.util.Assert;
+
 import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Set;
-import org.springframework.util.Assert;
 
 /**
  * Utilities for SQL operations, compatible with PostgreSQL

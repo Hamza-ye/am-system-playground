@@ -1,16 +1,17 @@
 package org.nmcpye.activitiesmanagement.extended.common;
 
-import static org.nmcpye.activitiesmanagement.extended.common.DimensionalObject.*;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.apache.commons.collections4.ListUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.nmcpye.activitiesmanagement.extended.common.comparator.ObjectStringValueComparator;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import org.apache.commons.collections4.ListUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.nmcpye.activitiesmanagement.extended.common.comparator.ObjectStringValueComparator;
+
+import static org.nmcpye.activitiesmanagement.extended.common.DimensionalObject.*;
 
 public class DimensionalObjectUtils {
 

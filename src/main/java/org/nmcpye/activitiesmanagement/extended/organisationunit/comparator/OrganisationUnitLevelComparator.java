@@ -1,7 +1,8 @@
 package org.nmcpye.activitiesmanagement.extended.organisationunit.comparator;
 
-import java.util.Comparator;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitLevel;
+
+import java.util.Comparator;
 
 public class OrganisationUnitLevelComparator implements Comparator<OrganisationUnitLevel> {
 

@@ -1,16 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.common.hibernate;
 
 import com.google.common.collect.Lists;
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import org.apache.commons.lang3.StringUtils;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.extended.common.AuditLogUtil;
@@ -29,6 +19,17 @@ import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class HibernateIdentifiableObjectStoreEM<T extends BaseIdentifiableObject>
     extends HibernateGenericStoreEntityManager<T>

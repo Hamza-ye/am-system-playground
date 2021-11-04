@@ -1,8 +1,9 @@
 package org.nmcpye.activitiesmanagement.extended.period.comparator;
 
-import java.util.Comparator;
 import org.nmcpye.activitiesmanagement.domain.period.Period;
 import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
+
+import java.util.Comparator;
 
 /**
  * Sorts periods ascending based on the start date, then the end date, i.e. the earliest

@@ -1,10 +1,7 @@
 package org.nmcpye.activitiesmanagement.extended.config;
 
-import org.nmcpye.activitiesmanagement.extended.period.PeriodStore;
-import org.nmcpye.activitiesmanagement.extended.repository.PeriodTypeRepository;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobConfigurationService;
 import org.nmcpye.activitiesmanagement.extended.scheduling.SchedulingManager;
-import org.nmcpye.activitiesmanagement.extended.system.PeriodTypePopulator;
 import org.nmcpye.activitiesmanagement.extended.system.SchedulerStart;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

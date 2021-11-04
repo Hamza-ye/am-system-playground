@@ -1,8 +1,5 @@
 package org.nmcpye.activitiesmanagement.extended.organisationunit;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.*;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroupSet;
@@ -11,6 +8,10 @@ import org.nmcpye.activitiesmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.*;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service("org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitGroupService")
 public class DefaultOrganisationUnitGroupService implements OrganisationUnitGroupService {

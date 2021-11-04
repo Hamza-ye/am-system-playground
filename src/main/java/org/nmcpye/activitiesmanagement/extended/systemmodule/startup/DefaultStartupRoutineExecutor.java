@@ -1,17 +1,18 @@
-package org.nmcpye.activitiesmanagement.extended.system;
+package org.nmcpye.activitiesmanagement.extended.systemmodule.startup;
 
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * Default implementation of StartupRoutineExecutor. The execute method will
  * execute the added StartupRoutines ordered by their run levels.
  *
  */
-@Component("org.nmcpye.activitiesmanagement.extended.system.StartupRoutineExecutor")
+@Component("org.nmcpye.activitiesmanagement.extended.systemmodule.startup.StartupRoutineExecutor")
 public class DefaultStartupRoutineExecutor implements StartupRoutineExecutor {
 
     private final Logger log = LoggerFactory.getLogger(DefaultStartupRoutineExecutor.class);
@@ -19,8 +20,12 @@ public class DefaultStartupRoutineExecutor implements StartupRoutineExecutor {
     private static final String TRUE = "true";
     private static final String SKIP_PROP = "am.skip.startup";
 
+    private final List<StartupRoutine> startupRoutines;
+
     @Autowired(required = false)
-    private List<StartupRoutine> startupRoutines;
+    public DefaultStartupRoutineExecutor(List<StartupRoutine> startupRoutines) {
+        this.startupRoutines = startupRoutines;
+    }
 
     // -------------------------------------------------------------------------
     // Execute

@@ -1,19 +1,20 @@
 package org.nmcpye.activitiesmanagement.extended.system;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static org.nmcpye.activitiesmanagement.extended.scheduling.JobStatus.FAILED;
-import static org.nmcpye.activitiesmanagement.extended.scheduling.JobStatus.SCHEDULED;
-import static org.nmcpye.activitiesmanagement.extended.scheduling.JobType.*;
+import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.nmcpye.activitiesmanagement.extended.scheduling.JobConfigurationService;
+import org.nmcpye.activitiesmanagement.extended.scheduling.SchedulingManager;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.startup.AbstractStartupRoutine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
-import org.nmcpye.activitiesmanagement.extended.scheduling.JobConfigurationService;
-import org.nmcpye.activitiesmanagement.extended.scheduling.SchedulingManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static org.nmcpye.activitiesmanagement.extended.scheduling.JobStatus.FAILED;
+import static org.nmcpye.activitiesmanagement.extended.scheduling.JobStatus.SCHEDULED;
 
 /**
  * Reschedule old jobs and execute jobs which were scheduled when the server was
@@ -128,17 +129,17 @@ public class SchedulerStart extends AbstractStartupRoutine {
 
     private void addDefaultJobs(List<JobConfiguration> jobConfigurations) {
         log.info("Setting up default jobs.");
-        if (verifyNoJobExist(DEFAULT_FILE_RESOURCE_CLEANUP, jobConfigurations)) {
-            JobConfiguration fileResourceCleanUp = new JobConfiguration(
-                DEFAULT_FILE_RESOURCE_CLEANUP,
-                FILE_RESOURCE_CLEANUP,
-                CRON_DAILY_2AM,
-                null
-            );
-            fileResourceCleanUp.setUid(DEFAULT_FILE_RESOURCE_CLEANUP_UID);
-            fileResourceCleanUp.setLeaderOnlyJob(true);
-            addAndScheduleJob(fileResourceCleanUp);
-        }
+//        if (verifyNoJobExist(DEFAULT_FILE_RESOURCE_CLEANUP, jobConfigurations)) {
+//            JobConfiguration fileResourceCleanUp = new JobConfiguration(
+//                DEFAULT_FILE_RESOURCE_CLEANUP,
+//                FILE_RESOURCE_CLEANUP,
+//                CRON_DAILY_2AM,
+//                null
+//            );
+//            fileResourceCleanUp.setUid(DEFAULT_FILE_RESOURCE_CLEANUP_UID);
+//            fileResourceCleanUp.setLeaderOnlyJob(true);
+//            addAndScheduleJob(fileResourceCleanUp);
+//        }
 
         //        if ( verifyNoJobExist( DEFAULT_DATA_STATISTICS, jobConfigurations ) )
         //        {
@@ -150,29 +151,29 @@ public class SchedulerStart extends AbstractStartupRoutine {
         //            addAndScheduleJob( dataStatistics );
         //        }
 
-        if (verifyNoJobExist(DEFAULT_VALIDATION_RESULTS_NOTIFICATION, jobConfigurations)) {
-            JobConfiguration validationResultNotification = new JobConfiguration(
-                DEFAULT_VALIDATION_RESULTS_NOTIFICATION,
-                VALIDATION_RESULTS_NOTIFICATION,
-                CRON_DAILY_7AM,
-                null
-            );
-            validationResultNotification.setLeaderOnlyJob(true);
-            validationResultNotification.setUid(DEFAULT_VALIDATION_RESULTS_NOTIFICATION_UID);
-            addAndScheduleJob(validationResultNotification);
-        }
+//        if (verifyNoJobExist(DEFAULT_VALIDATION_RESULTS_NOTIFICATION, jobConfigurations)) {
+//            JobConfiguration validationResultNotification = new JobConfiguration(
+//                DEFAULT_VALIDATION_RESULTS_NOTIFICATION,
+//                VALIDATION_RESULTS_NOTIFICATION,
+//                CRON_DAILY_7AM,
+//                null
+//            );
+//            validationResultNotification.setLeaderOnlyJob(true);
+//            validationResultNotification.setUid(DEFAULT_VALIDATION_RESULTS_NOTIFICATION_UID);
+//            addAndScheduleJob(validationResultNotification);
+//        }
 
-        if (verifyNoJobExist(DEFAULT_CREDENTIALS_EXPIRY_ALERT, jobConfigurations)) {
-            JobConfiguration credentialsExpiryAlert = new JobConfiguration(
-                DEFAULT_CREDENTIALS_EXPIRY_ALERT,
-                CREDENTIALS_EXPIRY_ALERT,
-                CRON_DAILY_2AM,
-                null
-            );
-            credentialsExpiryAlert.setLeaderOnlyJob(true);
-            credentialsExpiryAlert.setUid(DEFAULT_CREDENTIALS_EXPIRY_ALERT_UID);
-            addAndScheduleJob(credentialsExpiryAlert);
-        }
+//        if (verifyNoJobExist(DEFAULT_CREDENTIALS_EXPIRY_ALERT, jobConfigurations)) {
+//            JobConfiguration credentialsExpiryAlert = new JobConfiguration(
+//                DEFAULT_CREDENTIALS_EXPIRY_ALERT,
+//                CREDENTIALS_EXPIRY_ALERT,
+//                CRON_DAILY_2AM,
+//                null
+//            );
+//            credentialsExpiryAlert.setLeaderOnlyJob(true);
+//            credentialsExpiryAlert.setUid(DEFAULT_CREDENTIALS_EXPIRY_ALERT_UID);
+//            addAndScheduleJob(credentialsExpiryAlert);
+//        }
 
         //        if ( verifyNoJobExist( DEFAULT_DATA_SET_NOTIFICATION, jobConfigurations ) )
         //        {
@@ -183,31 +184,31 @@ public class SchedulerStart extends AbstractStartupRoutine {
         //            addAndScheduleJob( dataSetNotification );
         //        }
 
-        if (verifyNoJobExist(DEFAULT_REMOVE_EXPIRED_RESERVED_VALUES, jobConfigurations)) {
-            JobConfiguration removeExpiredReservedValues = new JobConfiguration(
-                DEFAULT_REMOVE_EXPIRED_RESERVED_VALUES,
-                REMOVE_EXPIRED_RESERVED_VALUES,
-                CRON_HOURLY,
-                null
-            );
-            removeExpiredReservedValues.setLeaderOnlyJob(true);
-            removeExpiredReservedValues.setUid(DEFAULT_REMOVE_EXPIRED_RESERVED_VALUES_UID);
-            addAndScheduleJob(removeExpiredReservedValues);
-        }
+//        if (verifyNoJobExist(DEFAULT_REMOVE_EXPIRED_RESERVED_VALUES, jobConfigurations)) {
+//            JobConfiguration removeExpiredReservedValues = new JobConfiguration(
+//                DEFAULT_REMOVE_EXPIRED_RESERVED_VALUES,
+//                REMOVE_EXPIRED_RESERVED_VALUES,
+//                CRON_HOURLY,
+//                null
+//            );
+//            removeExpiredReservedValues.setLeaderOnlyJob(true);
+//            removeExpiredReservedValues.setUid(DEFAULT_REMOVE_EXPIRED_RESERVED_VALUES_UID);
+//            addAndScheduleJob(removeExpiredReservedValues);
+//        }
 
-        if (verifyNoJobExist(DEFAULT_LEADER_ELECTION, jobConfigurations) && "true".equalsIgnoreCase(redisEnabled)) {
-            JobConfiguration leaderElectionJobConfiguration = new JobConfiguration(
-                DEFAULT_LEADER_ELECTION,
-                LEADER_ELECTION,
-                String.format(LEADER_JOB_CRON_FORMAT, leaderElectionTime),
-                null
-            );
-            leaderElectionJobConfiguration.setLeaderOnlyJob(false);
-            leaderElectionJobConfiguration.setUid(DEFAULT_LEADER_ELECTION_UID);
-            addAndScheduleJob(leaderElectionJobConfiguration);
-        } else {
+//        if (verifyNoJobExist(DEFAULT_LEADER_ELECTION, jobConfigurations) && "true".equalsIgnoreCase(redisEnabled)) {
+//            JobConfiguration leaderElectionJobConfiguration = new JobConfiguration(
+//                DEFAULT_LEADER_ELECTION,
+//                LEADER_ELECTION,
+//                String.format(LEADER_JOB_CRON_FORMAT, leaderElectionTime),
+//                null
+//            );
+//            leaderElectionJobConfiguration.setLeaderOnlyJob(false);
+//            leaderElectionJobConfiguration.setUid(DEFAULT_LEADER_ELECTION_UID);
+//            addAndScheduleJob(leaderElectionJobConfiguration);
+//        } else {
             checkLeaderElectionJobConfiguration(jobConfigurations);
-        }
+//        }
     }
 
     private void checkLeaderElectionJobConfiguration(List<JobConfiguration> jobConfigurations) {

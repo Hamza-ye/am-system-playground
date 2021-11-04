@@ -1,7 +1,8 @@
 package org.nmcpye.activitiesmanagement.extended.hibernate.dialect;
 
-import java.sql.Types;
 import org.hibernate.dialect.H2Dialect;
+
+import java.sql.Types;
 
 /**
  * <p>AMH2Dialect class.</p>

@@ -8,16 +8,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.vividsolutions.jts.geom.Geometry;
 import io.swagger.annotations.ApiModelProperty;
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.*;
-import java.util.stream.Collectors;
-import javax.persistence.*;
-import javax.validation.constraints.*;
-
 import org.apache.commons.lang3.StringUtils;
 import org.geotools.geojson.geom.GeometryJSON;
 import org.hibernate.annotations.Cache;
@@ -32,6 +22,13 @@ import org.nmcpye.activitiesmanagement.extended.organisationunit.comparator.Orga
 import org.nmcpye.activitiesmanagement.extended.organisationunit.comparator.OrganisationUnitDisplayShortNameComparator;
 import org.nmcpye.activitiesmanagement.extended.schema.PropertyType;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.Property;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * A OrganisationUnit.

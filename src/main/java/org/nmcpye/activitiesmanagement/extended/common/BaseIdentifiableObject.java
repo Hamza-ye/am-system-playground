@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import java.util.Date;
-import javax.persistence.*;
-import javax.validation.constraints.Size;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.extended.common.annotation.Description;
 import org.nmcpye.activitiesmanagement.extended.schema.PropertyType;
@@ -14,6 +11,10 @@ import org.nmcpye.activitiesmanagement.extended.schema.annotation.Property;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyRange;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyTransformer;
 import org.nmcpye.activitiesmanagement.extended.schema.transformer.UserPropertyTransformer;
+
+import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.util.Date;
 
 @MappedSuperclass
 public class BaseIdentifiableObject implements IdentifiableObject {

@@ -1,11 +1,12 @@
 package org.nmcpye.activitiesmanagement.extended.organisationunit;
 
-import java.util.*;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitLevel;
 import org.nmcpye.activitiesmanagement.extended.hierarchy.HierarchyViolationException;
+
+import java.util.*;
 
 /**
  * Defines methods for working with OrganisationUnits.

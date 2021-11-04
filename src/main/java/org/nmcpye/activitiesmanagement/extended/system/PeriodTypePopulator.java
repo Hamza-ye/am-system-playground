@@ -1,15 +1,16 @@
 package org.nmcpye.activitiesmanagement.extended.system;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.Collection;
-import java.util.List;
 import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
-import org.nmcpye.activitiesmanagement.extended.period.PeriodStore;
 import org.nmcpye.activitiesmanagement.extended.repository.PeriodTypeRepository;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.startup.AbstractStartupRoutine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import java.util.Collection;
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @Component
 public class PeriodTypePopulator extends AbstractStartupRoutine {

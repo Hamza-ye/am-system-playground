@@ -1,11 +1,5 @@
 package org.nmcpye.activitiesmanagement.extended.user.hibernate;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.persistence.TypedQuery;
 import org.hibernate.annotations.QueryHints;
 import org.hibernate.query.Query;
 import org.nmcpye.activitiesmanagement.domain.User;
@@ -23,6 +17,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.persistence.TypedQuery;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Repository("org.nmcpye.activitiesmanagement.extended.user.UserStore")
 public class HibernateUserStore extends HibernateIdentifiableObjectStore<User> implements UserStore {

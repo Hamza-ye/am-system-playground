@@ -1,7 +1,8 @@
 package org.nmcpye.activitiesmanagement.extended.period;
 
-import java.util.*;
 import org.nmcpye.activitiesmanagement.domain.period.Period;
+
+import java.util.*;
 
 public class PeriodHierarchy {
 

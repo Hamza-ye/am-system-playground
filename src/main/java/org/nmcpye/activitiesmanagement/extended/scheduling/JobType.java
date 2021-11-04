@@ -1,8 +1,9 @@
 package org.nmcpye.activitiesmanagement.extended.scheduling;
 
-import java.util.Map;
 import org.nmcpye.activitiesmanagement.extended.scheduling.parameters.MetadataSyncJobParameters;
 import org.nmcpye.activitiesmanagement.extended.scheduling.parameters.MockJobParameters;
+
+import java.util.Map;
 
 /**
  * Enum describing the different jobs in the system. Each job has a key, class, configurable

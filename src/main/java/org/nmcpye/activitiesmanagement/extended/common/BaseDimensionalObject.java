@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.MoreObjects;
+import org.nmcpye.activitiesmanagement.extended.analytics.AggregationType;
+import org.nmcpye.activitiesmanagement.extended.analytics.QueryKey;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.nmcpye.activitiesmanagement.extended.analytics.AggregationType;
-import org.nmcpye.activitiesmanagement.extended.analytics.QueryKey;
 
 public class BaseDimensionalObject extends BaseNameableObject implements DimensionalObject {
 
