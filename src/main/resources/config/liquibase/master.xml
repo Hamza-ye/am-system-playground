@@ -101,6 +101,8 @@
     <include file="config/liquibase/changelog/extended_added_entity_User.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/extended_added_entity_jobConfiguration.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20211031234346_added_entity_OrganisationUnitGroupSet_add_dim_dimName.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/extended_added_entity_DataSet_DataInputPeriods_relationship.xml" relativeToChangelogFile="false"/>
+
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

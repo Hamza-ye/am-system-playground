@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <!--
+        Add DataSet_DataInputPeriods relation table.
+    -->
+    <changeSet id="extended-DataSet_DataInputPeriods_relation" author="Hamza">
+
+        <createTable tableName="data_set_data_input_periods">
+            <column name="data_set_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_input_period_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="data_set_id, data_input_period_id" tableName="data_set_data_input_periods"/>
+
+    </changeSet>
+
+    <changeSet id="extended-DataSet_DataInputPeriods_relation_Constraints" author="Hamza">
+
+        <addForeignKeyConstraint baseColumnNames="data_set_id"
+                                 baseTableName="data_set_data_input_periods"
+                                 constraintName="fk_data_set_data_input_periods_data_set_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="data_set"/>
+
+        <addForeignKeyConstraint baseColumnNames="data_input_period_id"
+                                 baseTableName="data_set_data_input_periods"
+                                 constraintName="fk_data_set_data_input_periods_data_input_period_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="data_input_period"/>
+
+    </changeSet>
+</databaseChangeLog>

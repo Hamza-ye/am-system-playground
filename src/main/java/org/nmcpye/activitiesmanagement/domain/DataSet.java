@@ -1,11 +1,9 @@
 package org.nmcpye.activitiesmanagement.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.*;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.Sets;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -13,7 +11,17 @@ import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
 import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
 import org.nmcpye.activitiesmanagement.extended.common.BaseDimensionalItemObject;
+import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
+import org.nmcpye.activitiesmanagement.extended.common.adapter.JacksonPeriodTypeDeserializer;
+import org.nmcpye.activitiesmanagement.extended.common.adapter.JacksonPeriodTypeSerializer;
+import org.nmcpye.activitiesmanagement.extended.schema.PropertyType;
+import org.nmcpye.activitiesmanagement.extended.schema.annotation.Property;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A DataSet.
@@ -59,21 +67,36 @@ public class DataSet extends BaseDimensionalItemObject
     @Column(name = "timely_days")
     private Integer timelyDays;
 
+    /**
+     * The dataInputPeriods is a set of periods with opening and closing dates, which determines the period
+     * of which data can belong (period) and at which dates (between opening and closing dates) actually registering
+     * this data is allowed. The same period can exist at the same time with different opening and closing dates to
+     * allow for multiple periods for registering data.
+     */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JoinTable(
+        name = "data_set_data_input_periods",
+        joinColumns = @JoinColumn(name = "data_set_id"),
+        inverseJoinColumns = @JoinColumn(name = "data_input_period_id")
+    )
+    private Set<DataInputPeriod> dataInputPeriods = new HashSet<>();
+
     @OneToMany(mappedBy = "dataSet")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "reportClass", "period", "dataSet", "organisationUnit" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {"user", "lastUpdatedBy", "reportClass", "period", "dataSet", "organisationUnit"}, allowSetters = true)
     private Set<MalariaCasesReport> malariaCasesReports = new HashSet<>();
 
     @OneToMany(mappedBy = "dataSet")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "reportClass", "period", "dataSet", "organisationUnit" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {"user", "lastUpdatedBy", "reportClass", "period", "dataSet", "organisationUnit"}, allowSetters = true)
     private Set<DengueCasesReport> dengueCasesReports = new HashSet<>();
 
     @ManyToOne
     private PeriodType periodType;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "members", "managedByGroups", "managedGroups" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {"user", "lastUpdatedBy", "members", "managedByGroups", "managedGroups"}, allowSetters = true)
     private PeopleGroup notificationRecipients;
 
     @ManyToOne
@@ -111,138 +134,134 @@ public class DataSet extends BaseDimensionalItemObject
     )
     private Set<OrganisationUnit> sources = new HashSet<>();
 
-    public DataSet()
-    {
+    public DataSet() {
     }
 
-    public DataSet( String name )
-    {
+    public DataSet(String name) {
         this.name = name;
     }
 
-    public DataSet( String name, PeriodType periodType )
-    {
-        this( name );
+    public DataSet(String name, PeriodType periodType) {
+        this(name);
         this.periodType = periodType;
     }
 
-    public DataSet( String name, String shortName, PeriodType periodType )
-    {
-        this( name, periodType );
+    public DataSet(String name, String shortName, PeriodType periodType) {
+        this(name, periodType);
         this.shortName = shortName;
     }
 
-    public DataSet( String name, String shortName, String code, PeriodType periodType )
-    {
-        this( name, shortName, periodType );
+    public DataSet(String name, String shortName, String code, PeriodType periodType) {
+        this(name, shortName, periodType);
         this.code = code;
     }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
-    public Long getId() {
-        return id;
-    }
+//    public Long getId() {
+//        return id;
+//    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public DataSet id(Long id) {
         this.id = id;
         return this;
     }
 
-    public String getUid() {
-        return this.uid;
-    }
+//    public String getUid() {
+//        return this.uid;
+//    }
 
     public DataSet uid(String uid) {
         this.uid = uid;
         return this;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    public String getCode() {
-        return this.code;
-    }
+//    public void setUid(String uid) {
+//        this.uid = uid;
+//    }
+//
+//    public String getCode() {
+//        return this.code;
+//    }
 
     public DataSet code(String code) {
         this.code = code;
         return this;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+//    public void setCode(String code) {
+//        this.code = code;
+//    }
 
-    public String getName() {
-        return this.name;
-    }
+//    public String getName() {
+//        return this.name;
+//    }
 
     public DataSet name(String name) {
         this.name = name;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
-    public String getShortName() {
-        return this.shortName;
-    }
+//    public String getShortName() {
+//        return this.shortName;
+//    }
 
     public DataSet shortName(String shortName) {
         this.shortName = shortName;
         return this;
     }
 
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
-    }
+//    public void setShortName(String shortName) {
+//        this.shortName = shortName;
+//    }
 
-    public String getDescription() {
-        return this.description;
-    }
+//    public String getDescription() {
+//        return this.description;
+//    }
 
     public DataSet description(String description) {
         this.description = description;
         return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
 
-    public Date getCreated() {
-        return this.created;
-    }
+//    public Date getCreated() {
+//        return this.created;
+//    }
 
     public DataSet created(Date created) {
         this.created = created;
         return this;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
-    }
+//    public void setCreated(Date created) {
+//        this.created = created;
+//    }
 
-    public Date getLastUpdated() {
-        return this.lastUpdated;
-    }
+//    public Date getLastUpdated() {
+//        return this.lastUpdated;
+//    }
 
     public DataSet lastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
         return this;
     }
 
-    public void setLastUpdated(Date lastUpdated) {
-        this.lastUpdated = lastUpdated;
-    }
+//    public void setLastUpdated(Date lastUpdated) {
+//        this.lastUpdated = lastUpdated;
+//    }
 
+    @JsonProperty
     public Integer getExpiryDays() {
         return this.expiryDays;
     }
@@ -256,6 +275,7 @@ public class DataSet extends BaseDimensionalItemObject
         this.expiryDays = expiryDays;
     }
 
+    @JsonProperty
     public Integer getTimelyDays() {
         return this.timelyDays;
     }
@@ -269,6 +289,8 @@ public class DataSet extends BaseDimensionalItemObject
         this.timelyDays = timelyDays;
     }
 
+    @JsonProperty
+//    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<MalariaCasesReport> getMalariaCasesReports() {
         return this.malariaCasesReports;
     }
@@ -300,6 +322,8 @@ public class DataSet extends BaseDimensionalItemObject
         this.malariaCasesReports = malariaCasesReports;
     }
 
+    @JsonProperty
+//    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<DengueCasesReport> getDengueCasesReports() {
         return this.dengueCasesReports;
     }
@@ -331,6 +355,10 @@ public class DataSet extends BaseDimensionalItemObject
         this.dengueCasesReports = dengueCasesReports;
     }
 
+    @JsonProperty
+    @JsonSerialize( using = JacksonPeriodTypeSerializer.class )
+    @JsonDeserialize( using = JacksonPeriodTypeDeserializer.class )
+    @Property( PropertyType.TEXT )
     public PeriodType getPeriodType() {
         return this.periodType;
     }
@@ -344,6 +372,8 @@ public class DataSet extends BaseDimensionalItemObject
         this.periodType = periodType;
     }
 
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public PeopleGroup getNotificationRecipients() {
         return this.notificationRecipients;
     }
@@ -357,32 +387,34 @@ public class DataSet extends BaseDimensionalItemObject
         this.notificationRecipients = peopleGroup;
     }
 
-    public User getUser() {
-        return this.user;
-    }
+//    public User getUser() {
+//        return this.user;
+//    }
 
     public DataSet user(User user) {
         this.setUser(user);
         return this;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
-    public User getLastUpdatedBy() {
-        return this.lastUpdatedBy;
-    }
+//    public User getLastUpdatedBy() {
+//        return this.lastUpdatedBy;
+//    }
 
     public DataSet lastUpdatedBy(User user) {
         this.setLastUpdatedBy(user);
         return this;
     }
 
-    public void setLastUpdatedBy(User user) {
-        this.lastUpdatedBy = user;
-    }
+//    public void setLastUpdatedBy(User user) {
+//        this.lastUpdatedBy = user;
+//    }
 
+    @JsonProperty(value = "organisationUnits")
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<OrganisationUnit> getSources() {
         return this.sources;
     }
@@ -431,39 +463,14 @@ public class DataSet extends BaseDimensionalItemObject
         this.sources = organisationUnits;
     }
 
+    @JsonProperty
+    public Set<DataInputPeriod> getDataInputPeriods() {
+        return dataInputPeriods;
+    }
+
+    public void setDataInputPeriods(Set<DataInputPeriod> dataInputPeriods) {
+        this.dataInputPeriods = dataInputPeriods;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof DataSet)) {
-            return false;
-        }
-        return id != null && id.equals(((DataSet) o).id);
-    }
-
-    @Override
-    public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return getClass().hashCode();
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "DataSet{" +
-            "id=" + getId() +
-            ", uid='" + getUid() + "'" +
-            ", code='" + getCode() + "'" +
-            ", name='" + getName() + "'" +
-            ", shortName='" + getShortName() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", created='" + getCreated() + "'" +
-            ", lastUpdated='" + getLastUpdated() + "'" +
-            ", expiryDays=" + getExpiryDays() +
-            ", timelyDays=" + getTimelyDays() +
-            "}";
-    }
 }
