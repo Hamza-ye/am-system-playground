@@ -5,10 +5,14 @@ import java.io.Serializable;
 import java.time.Instant;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.period.Period;
+import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
 
 /**
  * A MalariaCasesReport.
@@ -142,6 +146,7 @@ public class MalariaCasesReport implements Serializable {
     private OrganisationUnit organisationUnit;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+    @JsonProperty
     public Long getId() {
         return id;
     }
@@ -155,6 +160,7 @@ public class MalariaCasesReport implements Serializable {
         return this;
     }
 
+    @JsonProperty
     public String getUid() {
         return this.uid;
     }
@@ -168,6 +174,7 @@ public class MalariaCasesReport implements Serializable {
         this.uid = uid;
     }
 
+    @JsonProperty
     public Instant getCreated() {
         return this.created;
     }
@@ -181,6 +188,7 @@ public class MalariaCasesReport implements Serializable {
         this.created = created;
     }
 
+    @JsonProperty
     public Instant getLastUpdated() {
         return this.lastUpdated;
     }
@@ -194,6 +202,7 @@ public class MalariaCasesReport implements Serializable {
         this.lastUpdated = lastUpdated;
     }
 
+    @JsonProperty
     public Integer getRdtTested() {
         return this.rdtTested;
     }
@@ -207,6 +216,7 @@ public class MalariaCasesReport implements Serializable {
         this.rdtTested = rdtTested;
     }
 
+    @JsonProperty
     public Integer getRdtPositive() {
         return this.rdtPositive;
     }
@@ -220,6 +230,7 @@ public class MalariaCasesReport implements Serializable {
         this.rdtPositive = rdtPositive;
     }
 
+    @JsonProperty
     public Integer getRdtPf() {
         return this.rdtPf;
     }
@@ -233,6 +244,7 @@ public class MalariaCasesReport implements Serializable {
         this.rdtPf = rdtPf;
     }
 
+    @JsonProperty
     public Integer getRdtPv() {
         return this.rdtPv;
     }
@@ -246,6 +258,7 @@ public class MalariaCasesReport implements Serializable {
         this.rdtPv = rdtPv;
     }
 
+    @JsonProperty
     public Integer getRdtPother() {
         return this.rdtPother;
     }
@@ -259,6 +272,7 @@ public class MalariaCasesReport implements Serializable {
         this.rdtPother = rdtPother;
     }
 
+    @JsonProperty
     public Integer getMicroTested() {
         return this.microTested;
     }
@@ -272,6 +286,7 @@ public class MalariaCasesReport implements Serializable {
         this.microTested = microTested;
     }
 
+    @JsonProperty
     public Integer getMicroPositive() {
         return this.microPositive;
     }
@@ -285,6 +300,7 @@ public class MalariaCasesReport implements Serializable {
         this.microPositive = microPositive;
     }
 
+    @JsonProperty
     public Integer getMicroPf() {
         return this.microPf;
     }
@@ -298,6 +314,7 @@ public class MalariaCasesReport implements Serializable {
         this.microPf = microPf;
     }
 
+    @JsonProperty
     public Integer getMicroPv() {
         return this.microPv;
     }
@@ -311,6 +328,7 @@ public class MalariaCasesReport implements Serializable {
         this.microPv = microPv;
     }
 
+    @JsonProperty
     public Integer getMicroMix() {
         return this.microMix;
     }
@@ -324,6 +342,7 @@ public class MalariaCasesReport implements Serializable {
         this.microMix = microMix;
     }
 
+    @JsonProperty
     public Integer getMicroPother() {
         return this.microPother;
     }
@@ -337,6 +356,7 @@ public class MalariaCasesReport implements Serializable {
         this.microPother = microPother;
     }
 
+    @JsonProperty
     public Integer getProbableCases() {
         return this.probableCases;
     }
@@ -350,6 +370,7 @@ public class MalariaCasesReport implements Serializable {
         this.probableCases = probableCases;
     }
 
+    @JsonProperty
     public Integer getInpatientCases() {
         return this.inpatientCases;
     }
@@ -363,6 +384,7 @@ public class MalariaCasesReport implements Serializable {
         this.inpatientCases = inpatientCases;
     }
 
+    @JsonProperty
     public Integer getDeathCases() {
         return this.deathCases;
     }
@@ -376,6 +398,7 @@ public class MalariaCasesReport implements Serializable {
         this.deathCases = deathCases;
     }
 
+    @JsonProperty
     public Integer getTreated() {
         return this.treated;
     }
@@ -389,6 +412,7 @@ public class MalariaCasesReport implements Serializable {
         this.treated = treated;
     }
 
+    @JsonProperty
     public Integer getSuspectedCases() {
         return this.suspectedCases;
     }
@@ -402,6 +426,7 @@ public class MalariaCasesReport implements Serializable {
         this.suspectedCases = suspectedCases;
     }
 
+    @JsonProperty
     public Integer getTotalFrequents() {
         return this.totalFrequents;
     }
@@ -415,6 +440,7 @@ public class MalariaCasesReport implements Serializable {
         this.totalFrequents = totalFrequents;
     }
 
+    @JsonProperty
     public String getComment() {
         return this.comment;
     }
@@ -428,6 +454,7 @@ public class MalariaCasesReport implements Serializable {
         this.comment = comment;
     }
 
+    @JsonProperty
     public User getUser() {
         return this.user;
     }
@@ -441,6 +468,7 @@ public class MalariaCasesReport implements Serializable {
         this.user = user;
     }
 
+    @JsonProperty
     public User getLastUpdatedBy() {
         return this.lastUpdatedBy;
     }
@@ -454,6 +482,7 @@ public class MalariaCasesReport implements Serializable {
         this.lastUpdatedBy = user;
     }
 
+    @JsonProperty
     public CasesReportClass getReportClass() {
         return this.reportClass;
     }
@@ -467,6 +496,7 @@ public class MalariaCasesReport implements Serializable {
         this.reportClass = casesReportClass;
     }
 
+    @JsonProperty
     public Period getPeriod() {
         return this.period;
     }
@@ -480,6 +510,8 @@ public class MalariaCasesReport implements Serializable {
         this.period = period;
     }
 
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public DataSet getDataSet() {
         return this.dataSet;
     }
@@ -493,6 +525,8 @@ public class MalariaCasesReport implements Serializable {
         this.dataSet = dataSet;
     }
 
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public OrganisationUnit getOrganisationUnit() {
         return this.organisationUnit;
     }

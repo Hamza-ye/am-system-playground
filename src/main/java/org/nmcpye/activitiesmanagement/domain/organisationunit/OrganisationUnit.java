@@ -52,7 +52,7 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
 
     private static final String NAME_SEPARATOR = " / ";
 
-//    @Id
+    //    @Id
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
 //    @SequenceGenerator(name = "sequenceGenerator")
 //    private Long id;
@@ -117,12 +117,12 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
 
     @OneToMany(mappedBy = "organisationUnit")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "reportClass", "period", "dataSet", "organisationUnit" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {"user", "lastUpdatedBy", "reportClass", "period", "dataSet", "organisationUnit"}, allowSetters = true)
     private Set<MalariaCasesReport> malariaReports = new HashSet<>();
 
     @OneToMany(mappedBy = "organisationUnit")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "reportClass", "period", "dataSet", "organisationUnit" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {"user", "lastUpdatedBy", "reportClass", "period", "dataSet", "organisationUnit"}, allowSetters = true)
     private Set<DengueCasesReport> dengueReports = new HashSet<>();
 
     @ManyToOne
@@ -209,7 +209,7 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
     private User lastUpdatedBy;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "organisationUnits", "malariaUnitStaffMembers", "user", "lastUpdatedBy" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {"organisationUnits", "malariaUnitStaffMembers", "user", "lastUpdatedBy"}, allowSetters = true)
     private MalariaUnit malariaUnit;
 
     @ManyToOne
@@ -247,12 +247,12 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
 
     @OneToMany(mappedBy = "organisationUnit")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "organisationUnit", "user", "lastUpdatedBy", "source" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {"organisationUnit", "user", "lastUpdatedBy", "source"}, allowSetters = true)
     private Set<DemographicData> demographicData = new HashSet<>();
 
     @ManyToMany(mappedBy = "members")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "members", "groupSets" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {"user", "lastUpdatedBy", "members", "groupSets"}, allowSetters = true)
     private Set<OrganisationUnitGroup> groups = new HashSet<>();
 
     @ManyToMany(mappedBy = "organisationUnits")
@@ -278,7 +278,7 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
     @ManyToMany(mappedBy = "sources")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "malariaCasesReports", "dengueCasesReports", "periodType", "notificationRecipients", "user", "lastUpdatedBy", "sources" },
+        value = {"malariaCasesReports", "dengueCasesReports", "periodType", "notificationRecipients", "user", "lastUpdatedBy", "sources"},
         allowSetters = true
     )
     private Set<DataSet> dataSets = new HashSet<>();
@@ -310,12 +310,12 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
     }
 
     /**
-     * @param name OrgUnit name
-     * @param shortName OrgUnit short name
-     * @param code OrgUnit code
+     * @param name        OrgUnit name
+     * @param shortName   OrgUnit short name
+     * @param code        OrgUnit code
      * @param openingDate OrgUnit opening date
-     * @param closedDate OrgUnit closing date
-     * @param comment a comment
+     * @param closedDate  OrgUnit closing date
+     * @param comment     a comment
      */
     public OrganisationUnit(String name, String shortName, String code, Date openingDate, Date closedDate, String comment) {
         this(name);
@@ -327,13 +327,13 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
     }
 
     /**
-     * @param name OrgUnit name
-     * @param parent parent {@link OrganisationUnit}
-     * @param shortName OrgUnit short name
-     * @param code OrgUnit code
+     * @param name        OrgUnit name
+     * @param parent      parent {@link OrganisationUnit}
+     * @param shortName   OrgUnit short name
+     * @param code        OrgUnit code
      * @param openingDate OrgUnit opening date
-     * @param closedDate OrgUnit closing date
-     * @param comment a comment
+     * @param closedDate  OrgUnit closing date
+     * @param comment     a comment
      */
     public OrganisationUnit(
         String name,
@@ -414,7 +414,7 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
         return this;
     }
 
-//    @Override
+    //    @Override
 //    public void setName(String name) {
 //        this.name = name;
 //    }
@@ -539,19 +539,10 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
         return this;
     }
 
-///////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
-public void addOrganisationUnitGroup(OrganisationUnitGroup organisationUnitGroup) {
-    groups.add(organisationUnitGroup);
-    organisationUnitGroup.getMembers().add(this);
-}
+    public void addOrganisationUnitGroup(OrganisationUnitGroup organisationUnitGroup) {
+        groups.add(organisationUnitGroup);
+        organisationUnitGroup.getMembers().add(this);
+    }
 
     public void removeOrganisationUnitGroup(OrganisationUnitGroup organisationUnitGroup) {
         groups.remove(organisationUnitGroup);
@@ -896,7 +887,7 @@ public void addOrganisationUnitGroup(OrganisationUnitGroup organisationUnitGroup
      * Returns a string representing the graph of ancestors. The string is delimited
      * by "/". The ancestors are ordered by root first and represented by names.
      *
-     * @param roots the root organisation units, if null using real roots.
+     * @param roots       the root organisation units, if null using real roots.
      * @param includeThis whether to include this organisation unit in the graph.
      */
     public String getParentNameGraph(Collection<OrganisationUnit> roots, boolean includeThis) {
@@ -1061,7 +1052,7 @@ public void addOrganisationUnitGroup(OrganisationUnitGroup organisationUnitGroup
     }
 
     @JsonProperty
-    @Property( PropertyType.URL )
+    @Property(PropertyType.URL)
     public String getUrl() {
         return url;
     }
@@ -1502,7 +1493,7 @@ public void addOrganisationUnitGroup(OrganisationUnitGroup organisationUnitGroup
     }
 
     @JsonProperty
-    @JsonSerialize( contentAs = BaseIdentifiableObject.class )
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<DataSet> getDataSets() {
         return dataSets;
     }
