@@ -14,8 +14,8 @@ import java.util.Map;
  *
  */
 public enum JobType {
-    DATA_STATISTICS("dataStatisticsJob", false),
-    DATA_INTEGRITY("dataIntegrityJob", true),
+//    DATA_STATISTICS("dataStatisticsJob", false),
+//    DATA_INTEGRITY("dataIntegrityJob", true),
     RESOURCE_TABLE("resourceTableJob", true),
     //    ANALYTICS_TABLE( "analyticsTableJob", true, SchedulingType.CRON, AnalyticsJobParameters.class, ImmutableMap.of(
     //        "skipTableTypes", "/api/analytics/tableTypes" ) ),
@@ -24,14 +24,14 @@ public enum JobType {
     //    DATA_SYNC( "dataSyncJob", true, SchedulingType.CRON, DataSynchronizationJobParameters.class, null ),
     //    TRACKER_PROGRAMS_DATA_SYNC( "trackerProgramsDataSyncJob", true, SchedulingType.CRON, TrackerProgramsDataSynchronizationJobParameters.class, null ),
     //    EVENT_PROGRAMS_DATA_SYNC( "eventProgramsDataSyncJob", true, SchedulingType.CRON, EventProgramsDataSynchronizationJobParameters.class, null ),
-    FILE_RESOURCE_CLEANUP("fileResourceCleanUpJob", false),
+//    FILE_RESOURCE_CLEANUP("fileResourceCleanUpJob", false),
     //    IMAGE_PROCESSING( "imageProcessingJob", false ),
-    META_DATA_SYNC("metadataSyncJob", true, SchedulingType.CRON, MetadataSyncJobParameters.class, null),
+//    META_DATA_SYNC("metadataSyncJob", true, SchedulingType.CRON, MetadataSyncJobParameters.class, null),
     //    SMS_SEND( "sendSmsJob", false, SchedulingType.CRON, SmsJobParameters.class, null ),
-    SEND_SCHEDULED_MESSAGE("sendScheduledMessageJob", true),
-    PROGRAM_NOTIFICATIONS("programNotificationsJob", true),
-    VALIDATION_RESULTS_NOTIFICATION("validationResultNotificationJob", false),
-    CREDENTIALS_EXPIRY_ALERT("credentialsExpiryAlertJob", false),
+//    SEND_SCHEDULED_MESSAGE("sendScheduledMessageJob", true),
+//    PROGRAM_NOTIFICATIONS("programNotificationsJob", true),
+//    VALIDATION_RESULTS_NOTIFICATION("validationResultNotificationJob", false),
+//    CREDENTIALS_EXPIRY_ALERT("credentialsExpiryAlertJob", false),
     //    MONITORING( "monitoringJob", true, SchedulingType.CRON, MonitoringJobParameters.class, ImmutableMap.of(
     //        "relativePeriods", "/api/periodTypes/relativePeriodTypes", "validationRuleGroups", "/api/validationRuleGroups" ) ),
     //    PUSH_ANALYSIS( "pushAnalysisJob", true, SchedulingType.CRON, PushAnalysisJobParameters.class, ImmutableMap.of(
@@ -39,21 +39,21 @@ public enum JobType {
     //    PREDICTOR( "predictorJob", true, SchedulingType.CRON, PredictorJobParameters.class, ImmutableMap.of(
     //        "predictors", "/api/predictors", "predictorGroups", "/api/predictorGroups" ) ),
     //    DATA_SET_NOTIFICATION( "dataSetNotificationJob", false ),
-    REMOVE_EXPIRED_RESERVED_VALUES("removeExpiredReservedValuesJob", false),
+//    REMOVE_EXPIRED_RESERVED_VALUES("removeExpiredReservedValuesJob", false),
     //    TRACKER_IMPORT_JOB( "trackerImportJob", false ),
     //    TRACKER_IMPORT_NOTIFICATION_JOB( "trackerImportNotificationJob", false ),
     //    TRACKER_IMPORT_RULE_ENGINE_JOB( "trackerImportRuleEngineJob", false ),
 
     // Internal jobs
-    LEADER_ELECTION("leaderElectionJob", false),
-    LEADER_RENEWAL("leaderRenewalJob", false),
-    COMPLETE_DATA_SET_REGISTRATION_IMPORT(null, false),
-    DATAVALUE_IMPORT_INTERNAL(null, false),
-    METADATA_IMPORT(null, false),
-    DATAVALUE_IMPORT(null, false),
-    EVENT_IMPORT(null, false),
-    ENROLLMENT_IMPORT(null, false),
-    TEI_IMPORT(null, false),
+//    LEADER_ELECTION("leaderElectionJob", false),
+//    LEADER_RENEWAL("leaderRenewalJob", false),
+//    COMPLETE_DATA_SET_REGISTRATION_IMPORT(null, false),
+//    DATAVALUE_IMPORT_INTERNAL(null, false),
+//    METADATA_IMPORT(null, false),
+//    DATAVALUE_IMPORT(null, false),
+//    EVENT_IMPORT(null, false),
+//    ENROLLMENT_IMPORT(null, false),
+//    TEI_IMPORT(null, false),
 
     // Testing purposes
     MOCK("mockJob", false, SchedulingType.CRON, MockJobParameters.class, null),

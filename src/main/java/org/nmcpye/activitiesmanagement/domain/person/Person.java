@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 
 /**
  * A Person.
- *
  * @author Hamza Assada
  */
 @Entity

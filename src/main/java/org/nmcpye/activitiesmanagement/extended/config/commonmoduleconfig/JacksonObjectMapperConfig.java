@@ -14,6 +14,7 @@ import org.nmcpye.activitiesmanagement.extended.commonmodule.jackson.ParseDateSt
 import org.nmcpye.activitiesmanagement.extended.commonmodule.jackson.WriteDateStdSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 import java.util.Date;
@@ -24,14 +25,31 @@ import java.util.Date;
 @Configuration
 public class JacksonObjectMapperConfig {
 
+    /*
+     * Default JSON mapper
+     */
+    public static final ObjectMapper jsonMapper = configureMapper( new ObjectMapper() );
+
+    @Primary
+    @Bean( "jsonMapper" )
+    public ObjectMapper jsonMapper()
+    {
+        return jsonMapper;
+    }
+
     @Bean
     public MappingJackson2HttpMessageConverter jacksonMessageConverter(){
         MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
 
-        ObjectMapper mapper = configureMapper(new ObjectMapper(), false );
+//        ObjectMapper mapper = configureMapper(new ObjectMapper(), false );
 
-        messageConverter.setObjectMapper(mapper);
+        messageConverter.setObjectMapper(jsonMapper);
         return messageConverter;
+    }
+
+    private static ObjectMapper configureMapper( ObjectMapper objectMapper )
+    {
+        return configureMapper( objectMapper, false );
     }
 
     /**
