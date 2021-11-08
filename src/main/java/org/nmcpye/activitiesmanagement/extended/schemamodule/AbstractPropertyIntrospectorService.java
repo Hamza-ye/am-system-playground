@@ -1,4 +1,4 @@
-package org.nmcpye.activitiesmanagement.extended.schema.schemamodule;
+package org.nmcpye.activitiesmanagement.extended.schemamodule;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;

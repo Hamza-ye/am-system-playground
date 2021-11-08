@@ -12,7 +12,7 @@ import org.nmcpye.activitiesmanagement.extended.scheduling.JobStatus;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobType;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobTypeInfo;
 import org.nmcpye.activitiesmanagement.extended.schema.Property;
-import org.nmcpye.activitiesmanagement.extended.schema.schemamodule.NodePropertyIntrospectorService;
+import org.nmcpye.activitiesmanagement.extended.schemamodule.NodePropertyIntrospectorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;

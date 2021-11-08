@@ -1,11 +1,12 @@
-package org.nmcpye.activitiesmanagement.extended.schema.schemamodule;
+package org.nmcpye.activitiesmanagement.extended.schemamodule;
 
 import org.nmcpye.activitiesmanagement.extended.schema.Property;
 
 import java.util.List;
 import java.util.Map;
 
-public interface PropertyIntrospectorService {
+public interface PropertyIntrospectorService
+{
     /**
      * Returns all exposed properties on wanted class.
      *
