@@ -11,7 +11,7 @@ import org.nmcpye.activitiesmanagement.domain.period.RelativePeriods;
 import org.nmcpye.activitiesmanagement.extended.common.DebugUtils;
 import org.nmcpye.activitiesmanagement.extended.common.exception.InvalidIdentifierReferenceException;
 import org.nmcpye.activitiesmanagement.extended.common.hibernate.HibernateIdentifiableObjectStore;
-import org.nmcpye.activitiesmanagement.extended.hibernate.dbms.DbmsUtils;
+import org.nmcpye.activitiesmanagement.extended.hibernatemodule.dbms.DbmsUtils;
 import org.nmcpye.activitiesmanagement.extended.period.PeriodStore;
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;

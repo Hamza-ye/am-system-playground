@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
-import static org.nmcpye.activitiesmanagement.extended.system.util.SqlUtils.quote;
+import static org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.SqlUtils.quote;
 
 public class PeriodResourceTable extends ResourceTable<Period> {
 

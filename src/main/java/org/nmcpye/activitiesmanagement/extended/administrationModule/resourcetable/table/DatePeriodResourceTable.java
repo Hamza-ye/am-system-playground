@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static org.nmcpye.activitiesmanagement.extended.system.util.SqlUtils.quote;
+import static org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.SqlUtils.quote;
 
 public class DatePeriodResourceTable extends ResourceTable<Period> {
 

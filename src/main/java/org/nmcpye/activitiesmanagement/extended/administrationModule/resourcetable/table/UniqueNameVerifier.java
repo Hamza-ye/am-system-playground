@@ -5,7 +5,7 @@ import org.nmcpye.activitiesmanagement.extended.common.BaseNameableObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.nmcpye.activitiesmanagement.extended.system.util.SqlUtils.quote;
+import static org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.SqlUtils.quote;
 
 public class UniqueNameVerifier {
 

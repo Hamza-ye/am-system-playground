@@ -2,8 +2,8 @@ package org.nmcpye.activitiesmanagement.extended.web.rest;
 
 import org.nmcpye.activitiesmanagement.extended.render.RenderService;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobType;
-import org.nmcpye.activitiesmanagement.extended.systemmodule.notification.Notification;
-import org.nmcpye.activitiesmanagement.extended.systemmodule.notification.Notifier;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.system.notification.Notification;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.system.notification.Notifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

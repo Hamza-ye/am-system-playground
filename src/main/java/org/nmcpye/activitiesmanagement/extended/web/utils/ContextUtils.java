@@ -17,7 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.nmcpye.activitiesmanagement.extended.common.DimensionalObject;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectUtils;
-import org.nmcpye.activitiesmanagement.extended.system.util.CodecUtils;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.CodecUtils;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.InvalidMediaTypeException;

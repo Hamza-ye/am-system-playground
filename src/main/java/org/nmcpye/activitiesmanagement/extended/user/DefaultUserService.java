@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.nmcpye.activitiesmanagement.extended.common.CodeGenerator.isValidUid;
-import static org.nmcpye.activitiesmanagement.extended.system.util.ValidationUtils.uuidIsValid;
+import static org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.ValidationUtils.uuidIsValid;
 
 @Lazy
 @Service("org.nmcpye.activitiesmanagement.extended.user.UserService")

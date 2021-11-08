@@ -10,7 +10,7 @@ import org.nmcpye.activitiesmanagement.extended.common.util.TextUtils;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitHierarchy;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitQueryParams;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitStore;
-import org.nmcpye.activitiesmanagement.extended.systemmodule.objectmapper.OrganisationUnitRelationshipRowMapper;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.system.objectmapper.OrganisationUnitRelationshipRowMapper;
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

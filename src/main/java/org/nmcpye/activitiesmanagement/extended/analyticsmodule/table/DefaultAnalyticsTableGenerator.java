@@ -3,8 +3,8 @@ package org.nmcpye.activitiesmanagement.extended.analyticsmodule.table;
 import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
 import org.nmcpye.activitiesmanagement.extended.analyticsmodule.AnalyticsTableGenerator;
 import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.ResourceTableService;
-import org.nmcpye.activitiesmanagement.extended.system.util.Clock;
-import org.nmcpye.activitiesmanagement.extended.systemmodule.notification.Notifier;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.Clock;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.system.notification.Notifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static org.nmcpye.activitiesmanagement.extended.systemmodule.notification.NotificationLevel.ERROR;
-import static org.nmcpye.activitiesmanagement.extended.systemmodule.notification.NotificationLevel.INFO;
+import static org.nmcpye.activitiesmanagement.extended.systemmodule.system.notification.NotificationLevel.ERROR;
+import static org.nmcpye.activitiesmanagement.extended.systemmodule.system.notification.NotificationLevel.INFO;
 
 @Service("org.nmcpye.activitiesmanagement.extended.analyticsmodule.AnalyticsTableGenerator")
 public class DefaultAnalyticsTableGenerator

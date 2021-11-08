@@ -10,7 +10,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.SecondaryMetadataObject;
-import org.nmcpye.activitiesmanagement.extended.jsonb.type.JsonJobParametersType;
+import org.nmcpye.activitiesmanagement.extended.hibernatemodule.hibernate.jsonb.type.JsonJobParametersType;
 import org.nmcpye.activitiesmanagement.extended.scheduling.*;
 import org.nmcpye.activitiesmanagement.extended.scheduling.parameters.MetadataSyncJobParameters;
 import org.nmcpye.activitiesmanagement.extended.scheduling.parameters.jackson.JobConfigurationSanitizer;

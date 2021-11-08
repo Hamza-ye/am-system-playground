@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.extended.config;
 
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobConfigurationService;
 import org.nmcpye.activitiesmanagement.extended.scheduling.SchedulingManager;
-import org.nmcpye.activitiesmanagement.extended.system.SchedulerStart;
+import org.nmcpye.activitiesmanagement.extended.servicecoremodule.startup.SchedulerStart;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

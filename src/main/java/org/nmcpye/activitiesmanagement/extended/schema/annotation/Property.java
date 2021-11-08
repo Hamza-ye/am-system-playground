@@ -18,22 +18,37 @@ public @interface Property {
 
     Access access() default Access.READ_WRITE;
 
-    enum Value {
+    /**
+     * This is essentially a manual override to specify the
+     * {@link org.nmcpye.activitiesmanagement.extended.schema.Property#getFieldName()} of the annotated
+     * member.
+     *
+     * @return Name of the field this property is persisted as in case this is a
+     *         non persistent property which has a corresponding persistent
+     *         member.
+     */
+    String persistedAs() default "";
+
+    enum Value
+    {
         TRUE,
         FALSE,
-        DEFAULT,
+        DEFAULT
     }
 
-    enum Access {
+    enum Access
+    {
         READ_ONLY,
         WRITE_ONLY,
         READ_WRITE;
 
-        public boolean isReadable() {
+        public boolean isReadable()
+        {
             return READ_ONLY == this || READ_WRITE == this;
         }
 
-        public boolean isWritable() {
+        public boolean isWritable()
+        {
             return WRITE_ONLY == this || READ_WRITE == this;
         }
     }

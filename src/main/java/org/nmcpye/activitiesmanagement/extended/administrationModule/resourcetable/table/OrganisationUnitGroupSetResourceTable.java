@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.nmcpye.activitiesmanagement.extended.common.util.TextUtils.removeLastComma;
-import static org.nmcpye.activitiesmanagement.extended.system.util.SqlUtils.quote;
+import static org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.SqlUtils.quote;
 
 public class OrganisationUnitGroupSetResourceTable extends ResourceTable<OrganisationUnitGroupSet> {
 

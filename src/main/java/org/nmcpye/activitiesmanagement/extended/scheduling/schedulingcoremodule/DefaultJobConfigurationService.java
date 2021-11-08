@@ -5,14 +5,16 @@ import com.google.common.collect.Maps;
 import com.google.common.primitives.Primitives;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.nmcpye.activitiesmanagement.extended.common.EmbeddedObject;
+import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectStore;
+import org.nmcpye.activitiesmanagement.extended.common.NameableObject;
 import org.nmcpye.activitiesmanagement.extended.common.util.TextUtils;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobConfigurationService;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobStatus;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobType;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobTypeInfo;
 import org.nmcpye.activitiesmanagement.extended.schema.Property;
-import org.nmcpye.activitiesmanagement.extended.schemamodule.NodePropertyIntrospectorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,6 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -156,56 +160,81 @@ public class DefaultJobConfigurationService implements JobConfigurationService {
      * @param jobType the {@link JobType}.
      * @return a list of {@link Property}.
      */
-    private List<Property> getJobParameters(JobType jobType) {
+    private List<Property> getJobParameters( JobType jobType )
+    {
         List<Property> jobParameters = new ArrayList<>();
 
         Class<?> clazz = jobType.getJobParameters();
 
-        if (clazz == null) {
+        if ( clazz == null )
+        {
             return jobParameters;
         }
 
-        final Set<String> propertyNames = Stream
-            .of(PropertyUtils.getPropertyDescriptors(clazz))
-            .filter(
-                pd ->
-                    pd.getReadMethod() != null &&
-                    pd.getWriteMethod() != null &&
-                    pd.getReadMethod().getAnnotation(JsonProperty.class) != null
-            )
-            .map(PropertyDescriptor::getName)
-            .collect(Collectors.toSet());
+        final Set<String> propertyNames = Stream.of( PropertyUtils.getPropertyDescriptors( clazz ) )
+            .filter( pd -> pd.getReadMethod() != null && pd.getWriteMethod() != null
+                && pd.getReadMethod().getAnnotation( JsonProperty.class ) != null )
+            .map( PropertyDescriptor::getName )
+            .collect( Collectors.toSet() );
 
-        for (Field field : Stream
-            .of(clazz.getDeclaredFields())
-            .filter(f -> propertyNames.contains(f.getName()))
-            .collect(Collectors.toList())) {
-            Property property = new Property(Primitives.wrap(field.getType()), null, null);
-            property.setName(field.getName());
-            property.setFieldName(TextUtils.getPrettyPropertyName(field.getName()));
+        for ( Field field : Stream.of( clazz.getDeclaredFields() ).filter( f -> propertyNames.contains( f.getName() ) )
+            .collect( Collectors.toList() ) )
+        {
+            Property property = new Property( Primitives.wrap( field.getType() ), null, null );
+            property.setName( field.getName() );
+            property.setFieldName( TextUtils.getPrettyPropertyName( field.getName() ) );
 
-            try {
-                field.setAccessible(true);
-                property.setDefaultValue(field.get(jobType.getJobParameters().newInstance()));
-            } catch (IllegalAccessException | InstantiationException e) {
-                log.error("Fetching default value for JobParameters properties failed for property: " + field.getName(), e);
+            try
+            {
+                field.setAccessible( true );
+                property.setDefaultValue( field.get( jobType.getJobParameters().newInstance() ) );
+            }
+            catch ( IllegalAccessException | InstantiationException e )
+            {
+                log.error(
+                    "Fetching default value for JobParameters properties failed for property: " + field.getName(), e );
             }
 
             String relativeApiElements = jobType.getRelativeApiElements() != null
-                ? jobType.getRelativeApiElements().get(field.getName())
+                ? jobType.getRelativeApiElements().get( field.getName() )
                 : "";
 
-            if (relativeApiElements != null && !relativeApiElements.equals("")) {
-                property.setRelativeApiEndpoint(relativeApiElements);
+            if ( relativeApiElements != null && !relativeApiElements.equals( "" ) )
+            {
+                property.setRelativeApiEndpoint( relativeApiElements );
             }
 
-            if (Collection.class.isAssignableFrom(field.getType())) {
-                property = new NodePropertyIntrospectorService().setPropertyIfCollection(property, field, clazz);
+            if ( Collection.class.isAssignableFrom( field.getType() ) )
+            {
+                property = setPropertyIfCollection( property, field, clazz );
             }
 
-            jobParameters.add(property);
+            jobParameters.add( property );
         }
 
         return jobParameters;
+    }
+
+    private static Property setPropertyIfCollection( Property property, Field field, Class<?> klass )
+    {
+        property.setCollection( true );
+        property.setCollectionName( field.getName() );
+
+        Type type = field.getGenericType();
+
+        if ( type instanceof ParameterizedType)
+        {
+            ParameterizedType parameterizedType = (ParameterizedType) type;
+            Class<?> itemKlass = (Class<?>) parameterizedType.getActualTypeArguments()[0];
+            property.setItemKlass( itemKlass );
+
+            property.setIdentifiableObject( IdentifiableObject.class.isAssignableFrom( itemKlass ) );
+            property.setNameableObject( NameableObject.class.isAssignableFrom( itemKlass ) );
+            property.setEmbeddedObject( EmbeddedObject.class.isAssignableFrom( klass ) );
+//            property.setAnalyticalObject( AnalyticalObject.class.isAssignableFrom( klass ) );
+            property.setAnalyticalObject( false );
+        }
+
+        return property;
     }
 }

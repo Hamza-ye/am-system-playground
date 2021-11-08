@@ -18,7 +18,7 @@ import javax.persistence.PersistenceContext;
 import java.util.*;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static org.nmcpye.activitiesmanagement.extended.common.ReflectionUtils.getRealClass;
+import static org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.ReflectionUtils.getRealClass;
 
 /**
  * Note that it is required for nameable object stores to have concrete implementation

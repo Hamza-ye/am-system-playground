@@ -1,7 +1,7 @@
 package org.nmcpye.activitiesmanagement.extended.config.systemmoduleconfig;
 
-import org.nmcpye.activitiesmanagement.extended.systemmodule.notification.InMemoryNotifier;
-import org.nmcpye.activitiesmanagement.extended.systemmodule.notification.Notifier;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.system.notification.InMemoryNotifier;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.system.notification.Notifier;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

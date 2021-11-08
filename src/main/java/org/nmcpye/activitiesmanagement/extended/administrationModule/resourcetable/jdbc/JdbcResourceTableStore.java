@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.extended.administrationModule.resourceta
 
 import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.ResourceTable;
 import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.ResourceTableStore;
-import org.nmcpye.activitiesmanagement.extended.system.util.Clock;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.Clock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;

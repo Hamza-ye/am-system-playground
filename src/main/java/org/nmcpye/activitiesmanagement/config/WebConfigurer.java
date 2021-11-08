@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import javax.servlet.*;
 
-import org.nmcpye.activitiesmanagement.extended.systemmodule.startup.StartupListener;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.system.startup.StartupListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.server.*;

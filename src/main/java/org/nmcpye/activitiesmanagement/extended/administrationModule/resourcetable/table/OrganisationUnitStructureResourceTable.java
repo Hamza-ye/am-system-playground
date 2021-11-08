@@ -8,7 +8,7 @@ import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetab
 
 import java.util.*;
 
-import static org.nmcpye.activitiesmanagement.extended.system.util.SqlUtils.quote;
+import static org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.SqlUtils.quote;
 
 public class OrganisationUnitStructureResourceTable extends ResourceTable<OrganisationUnit> {
 

@@ -6,7 +6,7 @@ import org.nmcpye.activitiesmanagement.extended.common.DebugUtils;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobInstance;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobStatus;
 import org.nmcpye.activitiesmanagement.extended.scheduling.SchedulingManager;
-import org.nmcpye.activitiesmanagement.extended.system.util.Clock;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.Clock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
