@@ -1,4 +1,4 @@
-package org.nmcpye.activitiesmanagement.extended.config.commonmoduleconfig;
+package org.nmcpye.activitiesmanagement.extended.commonmodule.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;

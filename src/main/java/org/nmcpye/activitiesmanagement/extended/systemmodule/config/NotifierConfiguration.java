@@ -1,4 +1,4 @@
-package org.nmcpye.activitiesmanagement.extended.config.systemmoduleconfig;
+package org.nmcpye.activitiesmanagement.extended.systemmodule.config;
 
 import org.nmcpye.activitiesmanagement.extended.systemmodule.system.notification.InMemoryNotifier;
 import org.nmcpye.activitiesmanagement.extended.systemmodule.system.notification.Notifier;

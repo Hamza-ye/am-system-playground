@@ -1,4 +1,4 @@
-package org.nmcpye.activitiesmanagement.extended.config.jdbcmoduleconfig;
+package org.nmcpye.activitiesmanagement.extended.jdbcmodule.config;
 
 import org.nmcpye.activitiesmanagement.extended.jdbcmodule.dialect.StatementDialectFactoryBean;
 import org.nmcpye.activitiesmanagement.extended.jdbcmodule.statementbuilder.StatementBuilderFactoryBean;
