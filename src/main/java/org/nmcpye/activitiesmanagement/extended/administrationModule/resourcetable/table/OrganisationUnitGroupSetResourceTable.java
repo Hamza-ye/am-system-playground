@@ -1,10 +1,10 @@
-package org.nmcpye.activitiesmanagement.extended.resourcetable.table;
+package org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.table;
 
 import com.google.common.collect.Lists;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroupSet;
+import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.ResourceTable;
+import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.ResourceTableType;
 import org.nmcpye.activitiesmanagement.extended.common.util.TextUtils;
-import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTable;
-import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTableType;
 
 import java.util.List;
 import java.util.Optional;

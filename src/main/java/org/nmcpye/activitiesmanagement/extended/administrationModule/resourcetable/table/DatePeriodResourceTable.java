@@ -1,13 +1,13 @@
-package org.nmcpye.activitiesmanagement.extended.resourcetable.table;
+package org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.table;
 
 import org.nmcpye.activitiesmanagement.domain.period.DailyPeriodType;
 import org.nmcpye.activitiesmanagement.domain.period.Period;
 import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
+import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.ResourceTable;
+import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.ResourceTableType;
 import org.nmcpye.activitiesmanagement.extended.common.calendar.Calendar;
 import org.nmcpye.activitiesmanagement.extended.common.collection.UniqueArrayList;
 import org.nmcpye.activitiesmanagement.extended.period.Cal;
-import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTable;
-import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTableType;
 
 import java.util.ArrayList;
 import java.util.Date;

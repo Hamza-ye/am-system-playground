@@ -1,14 +1,14 @@
-package org.nmcpye.activitiesmanagement.extended.resourcetable.table;
+package org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.table;
 
 import com.google.common.collect.Lists;
 import org.joda.time.DateTime;
 import org.nmcpye.activitiesmanagement.domain.period.Period;
 import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
 import org.nmcpye.activitiesmanagement.domain.period.WeeklyAbstractPeriodType;
+import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.ResourceTable;
+import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.ResourceTableType;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectUtils;
 import org.nmcpye.activitiesmanagement.extended.common.calendar.Calendar;
-import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTable;
-import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTableType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

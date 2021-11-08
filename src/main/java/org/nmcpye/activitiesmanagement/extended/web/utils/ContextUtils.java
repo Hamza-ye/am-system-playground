@@ -106,7 +106,7 @@ public class ContextUtils
 //        configureResponse( response, contentType, filename, attachment, cacheControl );
 //    }
 
-    private void configureResponse( HttpServletResponse response, String contentType, String filename,
+    public void configureResponse( HttpServletResponse response, String contentType, String filename,
         boolean attachment, CacheControl cacheControl )
     {
         if ( contentType != null )

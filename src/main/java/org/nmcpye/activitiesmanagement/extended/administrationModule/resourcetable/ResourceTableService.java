@@ -1,4 +1,4 @@
-package org.nmcpye.activitiesmanagement.extended.resourcetable;
+package org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable;
 
 public interface ResourceTableService {
     String ID = ResourceTableService.class.getName();

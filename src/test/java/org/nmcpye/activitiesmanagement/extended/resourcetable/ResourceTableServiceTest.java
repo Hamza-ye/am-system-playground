@@ -7,6 +7,7 @@ import org.nmcpye.activitiesmanagement.IntegrationTest;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.period.MonthlyPeriodType;
 import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
+import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.ResourceTableService;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectManager;
 import org.nmcpye.activitiesmanagement.service.DataSetService;
 import org.springframework.beans.factory.annotation.Autowired;

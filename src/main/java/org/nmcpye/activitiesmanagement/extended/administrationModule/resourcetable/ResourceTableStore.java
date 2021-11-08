@@ -1,4 +1,4 @@
-package org.nmcpye.activitiesmanagement.extended.resourcetable;
+package org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable;
 
 import java.util.List;
 

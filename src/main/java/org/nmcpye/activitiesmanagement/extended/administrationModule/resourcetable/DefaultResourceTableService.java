@@ -1,13 +1,13 @@
-package org.nmcpye.activitiesmanagement.extended.resourcetable;
+package org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable;
 
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroupSet;
+import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.table.OrganisationUnitStructureResourceTable;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectManager;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitService;
 import org.nmcpye.activitiesmanagement.extended.period.PeriodService;
-import org.nmcpye.activitiesmanagement.extended.resourcetable.table.DatePeriodResourceTable;
-import org.nmcpye.activitiesmanagement.extended.resourcetable.table.OrganisationUnitGroupSetResourceTable;
-import org.nmcpye.activitiesmanagement.extended.resourcetable.table.OrganisationUnitStructureResourceTable;
-import org.nmcpye.activitiesmanagement.extended.resourcetable.table.PeriodResourceTable;
+import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.table.DatePeriodResourceTable;
+import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.table.OrganisationUnitGroupSetResourceTable;
+import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.table.PeriodResourceTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-@Service("org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTableService")
+@Service("ResourceTableService")
 public class DefaultResourceTableService implements ResourceTableService {
 
     private final Logger log = LoggerFactory.getLogger(DefaultResourceTableService.class);

@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.extended.analyticsmodule.table;
 
 import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
 import org.nmcpye.activitiesmanagement.extended.analyticsmodule.AnalyticsTableGenerator;
-import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTableService;
+import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.ResourceTableService;
 import org.nmcpye.activitiesmanagement.extended.system.util.Clock;
 import org.nmcpye.activitiesmanagement.extended.systemmodule.notification.Notifier;
 import org.slf4j.Logger;

@@ -1,7 +1,7 @@
-package org.nmcpye.activitiesmanagement.extended.resourcetable.jdbc;
+package org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.jdbc;
 
-import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTable;
-import org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTableStore;
+import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.ResourceTable;
+import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.ResourceTableStore;
 import org.nmcpye.activitiesmanagement.extended.system.util.Clock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-@Service("org.nmcpye.activitiesmanagement.extended.resourcetable.ResourceTableStore")
+@Service("ResourceTableStore")
 public class JdbcResourceTableStore implements ResourceTableStore {
 
     private final Logger log = LoggerFactory.getLogger(JdbcResourceTableStore.class);

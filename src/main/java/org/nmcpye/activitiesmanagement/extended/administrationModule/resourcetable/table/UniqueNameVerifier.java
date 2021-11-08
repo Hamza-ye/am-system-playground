@@ -1,4 +1,4 @@
-package org.nmcpye.activitiesmanagement.extended.resourcetable.table;
+package org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.table;
 
 import org.nmcpye.activitiesmanagement.extended.common.BaseNameableObject;
 

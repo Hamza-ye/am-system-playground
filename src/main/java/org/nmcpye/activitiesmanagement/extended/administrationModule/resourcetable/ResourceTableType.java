@@ -1,4 +1,4 @@
-package org.nmcpye.activitiesmanagement.extended.resourcetable;
+package org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable;
 
 public enum ResourceTableType {
     ORG_UNIT_STRUCTURE("_orgunitstructure"),
