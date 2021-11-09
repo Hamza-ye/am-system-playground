@@ -1,22 +1,35 @@
 package org.nmcpye.activitiesmanagement.extended.web.rest;
 
+import com.google.common.collect.Lists;
+import org.nmcpye.activitiesmanagement.extended.common.Grid;
+import org.nmcpye.activitiesmanagement.extended.dxf2module.webmessage.WebMessageException;
+import org.nmcpye.activitiesmanagement.extended.dxf2module.webmessage.WebMessageUtils;
 import org.nmcpye.activitiesmanagement.extended.sqlview.SqlView;
+import org.nmcpye.activitiesmanagement.extended.sqlview.SqlViewQuery;
 import org.nmcpye.activitiesmanagement.extended.sqlview.SqlViewService;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.system.grid.GridUtils;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.CodecUtils;
 import org.nmcpye.activitiesmanagement.extended.web.utils.ContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 //@RequestMapping( value = SqlViewSchemaDescriptor.API_ENDPOINT )
 public class SqlViewController
     extends AbstractCrudController<SqlView>
 {
-    @Autowired
-    private SqlViewService sqlViewService;
-
-    @Autowired
-    private ContextUtils contextUtils;
-
+//    @Autowired
+//    private SqlViewService sqlViewService;
+//
+//    @Autowired
+//    private ContextUtils contextUtils;
+//
 //    @Autowired
 //    private NodeService nodeService;
 //
@@ -178,8 +191,8 @@ public class SqlViewController
 //    }
 //
 //    @RequestMapping( value = "/{uid}/refresh", method = RequestMethod.POST )
-//    public void refreshMaterializedView( @PathVariable( "uid" ) String uid,
-//        HttpServletResponse response, HttpServletRequest request )
+//    public void refreshMaterializedView(@PathVariable( "uid" ) String uid,
+//                                        HttpServletResponse response, HttpServletRequest request )
 //        throws WebMessageException
 //    {
 //        SqlView sqlView = sqlViewService.getSqlViewByUid( uid );

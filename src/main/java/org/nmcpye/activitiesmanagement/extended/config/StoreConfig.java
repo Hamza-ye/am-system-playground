@@ -16,11 +16,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 //@EnableTransactionManagement
 public class StoreConfig {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
+
+    private final UserService userService;
 
     @Autowired
-    private UserService userService;
+    public StoreConfig(JdbcTemplate jdbcTemplate, UserService userService) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.userService = userService;
+    }
 
     @Bean("org.nmcpye.activitiesmanagement.extended.person.PeopleGroupStore")
     public HibernateIdentifiableObjectStore<PeopleGroup> userGroupStore() {
@@ -31,6 +35,7 @@ public class StoreConfig {
     public HibernateIdentifiableObjectStore<JobConfiguration> jobConfigurationStore() {
         return new HibernateIdentifiableObjectStore<>(jdbcTemplate, JobConfiguration.class, userService, true);
     }
+
     //    @Bean
     //    public SessionFactory sessionFactory(HibernateEntityManagerFactory hemf) {
     //        return hemf.getSessionFactory();
