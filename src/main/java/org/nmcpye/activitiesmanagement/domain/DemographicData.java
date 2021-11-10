@@ -97,6 +97,7 @@ public class DemographicData implements Serializable {
             "parent",
             "hfHomeSubVillage",
             "coveredByHf",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "malariaUnit",
@@ -120,7 +121,7 @@ public class DemographicData implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties(value = { "demographicData", "user", "lastUpdatedBy" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "demographicData", "user", "createdBy", "lastUpdatedBy" }, allowSetters = true)
     private DemographicDataSource source;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

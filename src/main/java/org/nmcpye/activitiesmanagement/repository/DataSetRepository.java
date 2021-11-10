@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface DataSetRepository extends JpaRepository<DataSet, Long> {
-    @Query("select dataSet from DataSet dataSet where dataSet.user.login = ?#{principal.username}")
+    @Query("select dataSet from DataSet dataSet where dataSet.createdBy.login = ?#{principal.username}")
     List<DataSet> findByUserIsCurrentUser();
 
     @Query("select dataSet from DataSet dataSet where dataSet.lastUpdatedBy.login = ?#{principal.username}")

@@ -78,6 +78,7 @@ public class CHVMalariaCaseReport implements Serializable {
             "parent",
             "hfHomeSubVillage",
             "coveredByHf",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "malariaUnit",
@@ -103,7 +104,7 @@ public class CHVMalariaCaseReport implements Serializable {
     @NotNull
     @JsonIgnoreProperties(
         value = {
-            "person", "coveredSubVillages", "district", "homeSubvillage", "managedByHf", "user", "lastUpdatedBy", "supervisionTeams",
+            "person", "coveredSubVillages", "district", "homeSubvillage", "managedByHf", "user", "createdBy", "lastUpdatedBy", "supervisionTeams",
         },
         allowSetters = true
     )
@@ -111,7 +112,7 @@ public class CHVMalariaCaseReport implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy" }, allowSetters = true)
     private CasesReportClass reportClass;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

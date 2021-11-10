@@ -50,7 +50,7 @@ public class CHV implements Serializable {
 
     @JsonIgnoreProperties(
         value = {
-            "userInfo", "user", "lastUpdatedBy", "organisationUnits", "dataViewOrganisationUnits", "personAuthorityGroups", "groups",
+            "userInfo", "user", "createdBy", "lastUpdatedBy", "organisationUnits", "dataViewOrganisationUnits", "personAuthorityGroups", "groups",
         },
         allowSetters = true
     )
@@ -71,6 +71,7 @@ public class CHV implements Serializable {
             "parent",
             "hfHomeSubVillage",
             "coveredByHf",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "malariaUnit",
@@ -99,6 +100,7 @@ public class CHV implements Serializable {
             "parent",
             "hfHomeSubVillage",
             "coveredByHf",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "malariaUnit",
@@ -126,6 +128,7 @@ public class CHV implements Serializable {
             "parent",
             "hfHomeSubVillage",
             "coveredByHf",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "malariaUnit",
@@ -153,6 +156,7 @@ public class CHV implements Serializable {
             "parent",
             "hfHomeSubVillage",
             "coveredByHf",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "malariaUnit",
@@ -176,7 +180,7 @@ public class CHV implements Serializable {
 
     @ManyToMany(mappedBy = "responsibleForChvs")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "person", "responsibleForChvs" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "person", "responsibleForChvs" }, allowSetters = true)
     private Set<CHVTeam> supervisionTeams = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

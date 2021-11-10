@@ -51,7 +51,7 @@ public class Fingerprint implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(
-        value = { "familyHeads", "dataProviders", "fingerprints", "llinsFamilyTargets", "organisationUnit", "user", "lastUpdatedBy" },
+        value = { "familyHeads", "dataProviders", "fingerprints", "llinsFamilyTargets", "organisationUnit", "user", "createdBy", "lastUpdatedBy" },
         allowSetters = true
     )
     private Family family;

@@ -21,6 +21,8 @@ import org.nmcpye.activitiesmanagement.extended.common.coordinate.CoordinateUtil
 import org.nmcpye.activitiesmanagement.extended.organisationunit.comparator.OrganisationUnitDisplayNameComparator;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.comparator.OrganisationUnitDisplayShortNameComparator;
 import org.nmcpye.activitiesmanagement.extended.schema.PropertyType;
+import org.nmcpye.activitiesmanagement.extended.schema.annotation.Gist;
+import org.nmcpye.activitiesmanagement.extended.schema.annotation.Gist.Include;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.Property;
 
 import javax.persistence.*;
@@ -117,12 +119,12 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
 
     @OneToMany(mappedBy = "organisationUnit")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = {"user", "lastUpdatedBy", "reportClass", "period", "dataSet", "organisationUnit"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"user", "createdBy", "lastUpdatedBy", "reportClass", "period", "dataSet", "organisationUnit"}, allowSetters = true)
     private Set<MalariaCasesReport> malariaReports = new HashSet<>();
 
     @OneToMany(mappedBy = "organisationUnit")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = {"user", "lastUpdatedBy", "reportClass", "period", "dataSet", "organisationUnit"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"user", "createdBy", "lastUpdatedBy", "reportClass", "period", "dataSet", "organisationUnit"}, allowSetters = true)
     private Set<DengueCasesReport> dengueReports = new HashSet<>();
 
     @ManyToOne
@@ -133,6 +135,7 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
             "parent",
             "hfHomeSubVillage",
             "coveredByHf",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "malariaUnit",
@@ -160,6 +163,7 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
             "parent",
             "hfHomeSubVillage",
             "coveredByHf",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "malariaUnit",
@@ -187,6 +191,7 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
             "parent",
             "hfHomeSubVillage",
             "coveredByHf",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "malariaUnit",
@@ -203,19 +208,13 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
     private OrganisationUnit coveredByHf;
 
     @ManyToOne
-    private User user;
-
-    @ManyToOne
-    private User lastUpdatedBy;
-
-    @ManyToOne
-    @JsonIgnoreProperties(value = {"organisationUnits", "malariaUnitStaffMembers", "user", "lastUpdatedBy"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"organisationUnits", "malariaUnitStaffMembers", "user", "createdBy", "lastUpdatedBy"}, allowSetters = true)
     private MalariaUnit malariaUnit;
 
     @ManyToOne
     @JsonIgnoreProperties(
         value = {
-            "person", "coveredSubVillages", "district", "homeSubvillage", "managedByHf", "user", "lastUpdatedBy", "supervisionTeams",
+            "person", "coveredSubVillages", "district", "homeSubvillage", "managedByHf", "user", "createdBy", "lastUpdatedBy", "supervisionTeams",
         },
         allowSetters = true
     )
@@ -230,6 +229,7 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
             "parent",
             "hfHomeSubVillage",
             "coveredByHf",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "malariaUnit",
@@ -247,19 +247,19 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
 
     @OneToMany(mappedBy = "organisationUnit")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = {"organisationUnit", "user", "lastUpdatedBy", "source"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"organisationUnit", "user", "createdBy", "lastUpdatedBy", "source"}, allowSetters = true)
     private Set<DemographicData> demographicData = new HashSet<>();
 
     @ManyToMany(mappedBy = "members")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = {"user", "lastUpdatedBy", "members", "groupSets"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"user", "createdBy", "lastUpdatedBy", "members", "groupSets"}, allowSetters = true)
     private Set<OrganisationUnitGroup> groups = new HashSet<>();
 
     @ManyToMany(mappedBy = "organisationUnits")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
         value = {
-            "userInfo", "user", "lastUpdatedBy", "organisationUnits", "dataViewOrganisationUnits", "personAuthorityGroups", "groups",
+            "userInfo", "user", "createdBy", "lastUpdatedBy", "organisationUnits", "dataViewOrganisationUnits", "personAuthorityGroups", "groups",
         },
         allowSetters = true
     )
@@ -269,7 +269,7 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
 //    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 //    @JsonIgnoreProperties(
 //        value = {
-//            "userInfo", "user", "lastUpdatedBy", "organisationUnits", "dataViewOrganisationUnits", "personAuthorityGroups", "groups",
+//            "userInfo", "user", "createdBy", "lastUpdatedBy", "organisationUnits", "dataViewOrganisationUnits", "personAuthorityGroups", "groups",
 //        },
 //        allowSetters = true
 //    )
@@ -278,7 +278,7 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
     @ManyToMany(mappedBy = "sources")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = {"malariaCasesReports", "dengueCasesReports", "periodType", "notificationRecipients", "user", "lastUpdatedBy", "sources"},
+        value = {"malariaCasesReports", "dengueCasesReports", "periodType", "notificationRecipients", "user", "createdBy", "lastUpdatedBy", "sources"},
         allowSetters = true
     )
     private Set<DataSet> dataSets = new HashSet<>();
@@ -1128,6 +1128,7 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
         this.people = people;
     }
 
+    @Gist( included = Include.FALSE )
     @JsonProperty
     public Geometry getGeometry() {
         return geometry;

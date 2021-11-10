@@ -55,7 +55,7 @@ public class OrganisationUnitGroupSet extends BaseDimensionalObject implements M
         joinColumns = @JoinColumn(name = "orgunit_groupset_id"),
         inverseJoinColumns = @JoinColumn(name = "orgunit_group_id")
     )
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "members", "groupSets" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "members", "groupSets" }, allowSetters = true)
     private Set<OrganisationUnitGroup> organisationUnitGroups = new HashSet<>();
 
     // -------------------------------------------------------------------------

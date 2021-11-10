@@ -28,7 +28,7 @@ public class Project extends BaseIdentifiableObject implements MetadataObject {
 
     @OneToMany(mappedBy = "project")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "warehouses", "user", "lastUpdatedBy", "project" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "warehouses", "user", "createdBy", "lastUpdatedBy", "project" }, allowSetters = true)
     private Set<Activity> activities = new HashSet<>();
 
     public Project id(Long id) {

@@ -59,6 +59,7 @@ public class MalariaUnit implements Serializable {
             "parent",
             "hfHomeSubVillage",
             "coveredByHf",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "malariaUnit",
@@ -76,7 +77,7 @@ public class MalariaUnit implements Serializable {
 
     @OneToMany(mappedBy = "malariaUnit")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "person", "malariaUnit" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "person", "malariaUnit" }, allowSetters = true)
     private Set<MalariaUnitStaffMember> malariaUnitStaffMembers = new HashSet<>();
 
     @ManyToOne

@@ -80,7 +80,7 @@ public class LLINSFamilyReportHistory implements Serializable {
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties(
-        value = { "llinsFamilyReportHistories", "user", "lastUpdatedBy", "dayReached", "targetDetails", "executingTeam" },
+        value = { "llinsFamilyReportHistories", "user", "createdBy", "lastUpdatedBy", "dayReached", "targetDetails", "executingTeam" },
         allowSetters = true
     )
     private LLINSFamilyReport llinsFamilyReport;

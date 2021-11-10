@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.extended.common.annotation.Description;
 import org.nmcpye.activitiesmanagement.extended.schema.PropertyType;
+import org.nmcpye.activitiesmanagement.extended.schema.annotation.Gist;
+import org.nmcpye.activitiesmanagement.extended.schema.annotation.Gist.Include;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.Property;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyRange;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyTransformer;
@@ -17,7 +19,8 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @MappedSuperclass
-public class BaseIdentifiableObject implements IdentifiableObject {
+public class BaseIdentifiableObject
+    extends BaseLinkableObject implements IdentifiableObject {
 
     /**
      * The database internal identifier for this Object.
@@ -65,7 +68,7 @@ public class BaseIdentifiableObject implements IdentifiableObject {
      */
     @ManyToOne
     @JoinColumn(name = "created_by")
-    protected User user;
+    protected User createdBy;
 
     /**
      * The i18n variant of the name. Not persisted.
@@ -138,6 +141,7 @@ public class BaseIdentifiableObject implements IdentifiableObject {
 
     @Override
     @JsonProperty(value = "id")
+    @Description( "The Unique Identifier for this Object." )
     @Property(value = PropertyType.IDENTIFIER, required = Property.Value.FALSE)
     @PropertyRange(min = 11, max = 11)
     public String getUid() {
@@ -150,6 +154,7 @@ public class BaseIdentifiableObject implements IdentifiableObject {
 
     @Override
     @JsonProperty
+    @Description( "The unique code for this Object." )
     @Property(PropertyType.IDENTIFIER)
     public String getCode() {
         return code;
@@ -161,6 +166,7 @@ public class BaseIdentifiableObject implements IdentifiableObject {
 
     @Override
     @JsonProperty
+    @Description( "The name of this Object. Required." )
     @PropertyRange(min = 1)
     public String getName() {
         return name;
@@ -220,16 +226,33 @@ public class BaseIdentifiableObject implements IdentifiableObject {
     }
 
     @Override
+    @Gist( included = Include.FALSE )
+    @JsonProperty
+    @JsonSerialize( using = UserPropertyTransformer.JacksonSerialize.class )
+    @JsonDeserialize( using = UserPropertyTransformer.JacksonDeserialize.class )
+    @PropertyTransformer( UserPropertyTransformer.class )
+    public User getCreatedBy()
+    {
+        return createdBy;
+    }
+
+    @Override
     @JsonProperty
     @JsonSerialize(using = UserPropertyTransformer.JacksonSerialize.class)
     @JsonDeserialize(using = UserPropertyTransformer.JacksonDeserialize.class)
     @PropertyTransformer(UserPropertyTransformer.class)
     public User getUser() {
-        return user;
+        return createdBy;
+    }
+
+    @Override
+    public void setCreatedBy( User createdBy )
+    {
+        this.createdBy = createdBy;
     }
 
     public void setUser(User user) {
-        this.user = user;
+        setCreatedBy( createdBy == null ? user : createdBy );
     }
 
     // -------------------------------------------------------------------------

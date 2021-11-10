@@ -44,7 +44,7 @@ public class DemographicDataSource implements Serializable {
 
     @OneToMany(mappedBy = "source")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "organisationUnit", "user", "lastUpdatedBy", "source" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "organisationUnit", "user", "createdBy", "lastUpdatedBy", "source" }, allowSetters = true)
     private Set<DemographicData> demographicData = new HashSet<>();
 
     @ManyToOne

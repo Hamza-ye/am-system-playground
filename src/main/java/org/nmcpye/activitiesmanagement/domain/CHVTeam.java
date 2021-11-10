@@ -66,7 +66,7 @@ public class CHVTeam implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(
         value = {
-            "userInfo", "user", "lastUpdatedBy", "organisationUnits", "dataViewOrganisationUnits", "personAuthorityGroups", "groups",
+            "userInfo", "user", "createdBy", "lastUpdatedBy", "organisationUnits", "dataViewOrganisationUnits", "personAuthorityGroups", "groups",
         },
         allowSetters = true
     )
@@ -81,7 +81,7 @@ public class CHVTeam implements Serializable {
     )
     @JsonIgnoreProperties(
         value = {
-            "person", "coveredSubVillages", "district", "homeSubvillage", "managedByHf", "user", "lastUpdatedBy", "supervisionTeams",
+            "person", "coveredSubVillages", "district", "homeSubvillage", "managedByHf", "user", "createdBy", "lastUpdatedBy", "supervisionTeams",
         },
         allowSetters = true
     )

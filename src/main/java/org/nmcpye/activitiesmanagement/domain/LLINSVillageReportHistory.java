@@ -87,7 +87,7 @@ public class LLINSVillageReportHistory implements Serializable {
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties(
-        value = { "llinsVillageReportHistories", "user", "lastUpdatedBy", "dayReached", "targetDetails", "executingTeam" },
+        value = { "llinsVillageReportHistories", "user", "createdBy", "lastUpdatedBy", "dayReached", "targetDetails", "executingTeam" },
         allowSetters = true
     )
     private LLINSVillageReport llinsVillageReport;

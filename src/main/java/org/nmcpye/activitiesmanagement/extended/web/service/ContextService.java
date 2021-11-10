@@ -39,16 +39,23 @@ public interface ContextService
     HttpServletRequest getRequest();
 
     /**
-     * Returns a list of values from a parameter, if the parameter doesn't exist, it will
-     * return a empty list.
+     * Returns a list of values from a parameter, if the parameter doesn't
+     * exist, it will return a empty list.
      *
      * @param name Parameter to get
      * @return List of parameter values, or empty if not found
      */
-    Set<String> getParameterValues(String name);
+    List<String> getParameterValues( String name );
 
     /**
      * Get all parameters as a map of key => values, supports more than one pr key (so values is a collection)
      */
     Map<String, List<String>> getParameterValuesMap();
+
+    /**
+     * Get a list of fields from request
+     */
+    List<String> getFieldsFromRequestOrAll();
+
+    List<String> getFieldsFromRequestOrElse( String s );
 }

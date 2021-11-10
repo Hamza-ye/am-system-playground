@@ -64,7 +64,7 @@ public class Activity implements Serializable {
     @OneToMany(mappedBy = "activity")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "initiatedMovements", "notInitiatedMovements", "user", "lastUpdatedBy", "activity", "teams" },
+        value = { "initiatedMovements", "notInitiatedMovements", "user", "createdBy", "lastUpdatedBy", "activity", "teams" },
         allowSetters = true
     )
     private Set<Warehouse> warehouses = new HashSet<>();
@@ -77,7 +77,7 @@ public class Activity implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties(value = { "activities", "user", "lastUpdatedBy" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "activities", "user", "createdBy", "lastUpdatedBy" }, allowSetters = true)
     private Project project;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

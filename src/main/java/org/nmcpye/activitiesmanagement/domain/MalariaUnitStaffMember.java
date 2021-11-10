@@ -60,7 +60,7 @@ public class MalariaUnitStaffMember implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(
         value = {
-            "userInfo", "user", "lastUpdatedBy", "organisationUnits", "dataViewOrganisationUnits", "personAuthorityGroups", "groups",
+            "userInfo", "user", "createdBy", "lastUpdatedBy", "organisationUnits", "dataViewOrganisationUnits", "personAuthorityGroups", "groups",
         },
         allowSetters = true
     )
@@ -68,7 +68,7 @@ public class MalariaUnitStaffMember implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties(value = { "organisationUnits", "malariaUnitStaffMembers", "user", "lastUpdatedBy" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "organisationUnits", "malariaUnitStaffMembers", "user", "createdBy", "lastUpdatedBy" }, allowSetters = true)
     private MalariaUnit malariaUnit;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

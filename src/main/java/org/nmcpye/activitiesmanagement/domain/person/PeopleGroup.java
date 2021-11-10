@@ -51,7 +51,7 @@ public class PeopleGroup extends BaseIdentifiableObject implements MetadataObjec
     )
     @JsonIgnoreProperties(
         value = {
-            "userInfo", "user", "lastUpdatedBy", "organisationUnits", "dataViewOrganisationUnits", "personAuthorityGroups", "groups",
+            "userInfo", "user", "createdBy", "lastUpdatedBy", "organisationUnits", "dataViewOrganisationUnits", "personAuthorityGroups", "groups",
         },
         allowSetters = true
     )
@@ -69,7 +69,7 @@ public class PeopleGroup extends BaseIdentifiableObject implements MetadataObjec
         joinColumns = @JoinColumn(name = "managed_group_id"),
         inverseJoinColumns = @JoinColumn(name = "managed_by_group_id")
     )
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "members", "managedByGroups", "managedGroups" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "members", "managedByGroups", "managedGroups" }, allowSetters = true)
     private Set<PeopleGroup> managedByGroups = new HashSet<>();
 
     /**
@@ -78,7 +78,7 @@ public class PeopleGroup extends BaseIdentifiableObject implements MetadataObjec
      */
     @ManyToMany(mappedBy = "managedByGroups")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "members", "managedByGroups", "managedGroups" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "members", "managedByGroups", "managedGroups" }, allowSetters = true)
     private Set<PeopleGroup> managedGroups = new HashSet<>();
 
     // -------------------------------------------------------------------------
@@ -148,17 +148,17 @@ public class PeopleGroup extends BaseIdentifiableObject implements MetadataObjec
     // Getters and setters
     // -------------------------------------------------------------------------
 
-    @Override
-    @JsonIgnore
-    public User getUser() {
-        return user;
-    }
-
-    @Override
-    @JsonIgnore
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    @Override
+//    @JsonIgnore
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    @Override
+//    @JsonIgnore
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public UUID getUuid() {
         return uuid;

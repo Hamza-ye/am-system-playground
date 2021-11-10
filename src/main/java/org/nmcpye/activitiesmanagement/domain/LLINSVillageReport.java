@@ -81,7 +81,7 @@ public class LLINSVillageReport implements Serializable {
 
     @OneToMany(mappedBy = "llinsVillageReport")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "dayReached", "llinsVillageReport" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "dayReached", "llinsVillageReport" }, allowSetters = true)
     private Set<LLINSVillageReportHistory> llinsVillageReportHistories = new HashSet<>();
 
     @ManyToOne
@@ -96,7 +96,7 @@ public class LLINSVillageReport implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(
-        value = { "llinsVillageReports", "organisationUnit", "user", "lastUpdatedBy", "dayPlanned", "statusOfCoverage", "teamAssigned" },
+        value = { "llinsVillageReports", "organisationUnit", "user", "createdBy", "lastUpdatedBy", "dayPlanned", "statusOfCoverage", "teamAssigned" },
         allowSetters = true
     )
     private LLINSVillageTarget targetDetails;
@@ -110,6 +110,7 @@ public class LLINSVillageReport implements Serializable {
             "llinsVillageReports",
             "llinsFamilyTargets",
             "llinsFamilyReports",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "person",

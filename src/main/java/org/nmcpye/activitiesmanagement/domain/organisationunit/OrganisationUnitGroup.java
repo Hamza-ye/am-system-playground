@@ -12,6 +12,8 @@ import org.nmcpye.activitiesmanagement.extended.common.DimensionItemType;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 import org.nmcpye.activitiesmanagement.extended.common.coordinate.CoordinateObject;
 import org.nmcpye.activitiesmanagement.extended.common.coordinate.CoordinateUtils;
+import org.nmcpye.activitiesmanagement.extended.schema.annotation.Gist;
+import org.nmcpye.activitiesmanagement.extended.schema.annotation.Gist.Include;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -52,6 +54,7 @@ public class OrganisationUnitGroup extends BaseDimensionalItemObject implements 
             "hfHomeSubVillage",
             "coveredByHf",
             "user",
+            "createdBy",
             "lastUpdatedBy",
             "malariaUnit",
             "assignedChv",
@@ -68,7 +71,7 @@ public class OrganisationUnitGroup extends BaseDimensionalItemObject implements 
 
     @ManyToMany(mappedBy = "organisationUnitGroups")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "organisationUnitGroups" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "organisationUnitGroups" }, allowSetters = true)
     private Set<OrganisationUnitGroupSet> groupSets = new HashSet<>();
 
     @Column(columnDefinition = "geometry(Geometry,4326)", nullable = true)
@@ -184,6 +187,7 @@ public class OrganisationUnitGroup extends BaseDimensionalItemObject implements 
         this.groupSets = groupSets;
     }
 
+    @Gist( included = Include.FALSE )
     @JsonProperty
     public Geometry getGeometry() {
         return geometry;

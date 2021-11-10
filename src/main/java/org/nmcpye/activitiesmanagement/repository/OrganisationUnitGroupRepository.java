@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrganisationUnitGroupRepository extends JpaRepository<OrganisationUnitGroup, Long> {
     @Query(
-        "select organisationUnitGroup from OrganisationUnitGroup organisationUnitGroup where organisationUnitGroup.user.login = ?#{principal.username}"
+        "select organisationUnitGroup from OrganisationUnitGroup organisationUnitGroup where organisationUnitGroup.createdBy.login = ?#{principal.username}"
     )
     List<OrganisationUnitGroup> findByUserIsCurrentUser();
 

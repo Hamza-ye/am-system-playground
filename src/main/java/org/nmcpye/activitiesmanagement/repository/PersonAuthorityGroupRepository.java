@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PersonAuthorityGroupRepository extends JpaRepository<PersonAuthorityGroup, Long> {
     @Query(
-        "select personAuthorityGroup from PersonAuthorityGroup personAuthorityGroup where personAuthorityGroup.user.login = ?#{principal.username}"
+        "select personAuthorityGroup from PersonAuthorityGroup personAuthorityGroup where personAuthorityGroup.createdBy.login = ?#{principal.username}"
     )
     List<PersonAuthorityGroup> findByUserIsCurrentUser();
 

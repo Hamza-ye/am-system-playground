@@ -96,7 +96,7 @@ public class CHVMalariaReportVersion1 implements Serializable {
     @NotNull
     @JsonIgnoreProperties(
         value = {
-            "person", "coveredSubVillages", "district", "homeSubvillage", "managedByHf", "user", "lastUpdatedBy", "supervisionTeams",
+            "person", "coveredSubVillages", "district", "homeSubvillage", "managedByHf", "user", "createdBy", "lastUpdatedBy", "supervisionTeams",
         },
         allowSetters = true
     )

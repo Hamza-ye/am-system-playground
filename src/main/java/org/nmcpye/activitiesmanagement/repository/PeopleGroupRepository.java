@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PeopleGroupRepository extends JpaRepository<PeopleGroup, Long> {
-    @Query("select peopleGroup from PeopleGroup peopleGroup where peopleGroup.user.login = ?#{principal.username}")
+    @Query("select peopleGroup from PeopleGroup peopleGroup where peopleGroup.createdBy.login = ?#{principal.username}")
     List<PeopleGroup> findByUserIsCurrentUser();
 
     @Query("select peopleGroup from PeopleGroup peopleGroup where peopleGroup.lastUpdatedBy.login = ?#{principal.username}")

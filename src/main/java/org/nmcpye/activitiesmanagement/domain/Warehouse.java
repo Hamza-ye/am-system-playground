@@ -60,12 +60,12 @@ public class Warehouse implements Serializable {
 
     @OneToMany(mappedBy = "initiatedWH")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "day", "initiatedWH", "theOtherSideWH", "team" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "day", "initiatedWH", "theOtherSideWH", "team" }, allowSetters = true)
     private Set<WHMovement> initiatedMovements = new HashSet<>();
 
     @OneToMany(mappedBy = "theOtherSideWH")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "day", "initiatedWH", "theOtherSideWH", "team" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "day", "initiatedWH", "theOtherSideWH", "team" }, allowSetters = true)
     private Set<WHMovement> notInitiatedMovements = new HashSet<>();
 
     @ManyToOne
@@ -76,7 +76,7 @@ public class Warehouse implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties(value = { "warehouses", "user", "lastUpdatedBy", "project" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "warehouses", "user", "createdBy", "lastUpdatedBy", "project" }, allowSetters = true)
     private Activity activity;
 
     @ManyToMany(mappedBy = "assignedToWarehouses")
@@ -88,6 +88,7 @@ public class Warehouse implements Serializable {
             "llinsVillageReports",
             "llinsFamilyTargets",
             "llinsFamilyReports",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "person",

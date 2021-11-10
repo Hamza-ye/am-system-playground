@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long> {
-    @Query("select person from Person person where person.user.login = ?#{principal.username}")
+    @Query("select person from Person person where person.createdBy.login = ?#{principal.username}")
     List<Person> findByUserIsCurrentUser();
 
     @Query("select person from Person person where person.lastUpdatedBy.login = ?#{principal.username}")

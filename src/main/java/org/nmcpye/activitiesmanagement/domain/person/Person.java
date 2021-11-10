@@ -73,6 +73,7 @@ public class Person extends BaseIdentifiableObject implements UserDetails, Metad
             "parent",
             "hfHomeSubVillage",
             "coveredByHf",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "malariaUnit",
@@ -107,6 +108,7 @@ public class Person extends BaseIdentifiableObject implements UserDetails, Metad
             "parent",
             "hfHomeSubVillage",
             "coveredByHf",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "malariaUnit",
@@ -130,12 +132,12 @@ public class Person extends BaseIdentifiableObject implements UserDetails, Metad
         joinColumns = @JoinColumn(name = "person_id"),
         inverseJoinColumns = @JoinColumn(name = "person_role_id")
     )
-    @JsonIgnoreProperties(value = {"user", "lastUpdatedBy", "members"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"user", "createdBy", "lastUpdatedBy", "members"}, allowSetters = true)
     private Set<PersonAuthorityGroup> personAuthorityGroups = new HashSet<>();
 
     @ManyToMany(mappedBy = "members")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = {"user", "lastUpdatedBy", "members", "managedByGroups", "managedGroups"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"user", "createdBy", "lastUpdatedBy", "members", "managedByGroups", "managedGroups"}, allowSetters = true)
     private Set<PeopleGroup> groups = new HashSet<>();
 
     /**
@@ -202,10 +204,10 @@ public class Person extends BaseIdentifiableObject implements UserDetails, Metad
             authorities.addAll(group.getAuthorities().stream().map(Authority::getName).collect(Collectors.toList()));
         }
 
-        if (user != null) {
-            authorities.removeAll(user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
+        if (userInfo != null) {
+            authorities.removeAll(userInfo.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
 
-            authorities.addAll(user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
+            authorities.addAll(userInfo.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
         }
 
         authorities = Collections.unmodifiableSet(authorities);
@@ -225,7 +227,7 @@ public class Person extends BaseIdentifiableObject implements UserDetails, Metad
             }
         }
 
-        if (user != null && user.getAuthorities() != null && !user.getAuthorities().isEmpty()) {
+        if (userInfo != null && userInfo.getAuthorities() != null && !userInfo.getAuthorities().isEmpty()) {
             return true;
         }
 
@@ -355,7 +357,7 @@ public class Person extends BaseIdentifiableObject implements UserDetails, Metad
      */
     @Override
     public String getName() {
-        return user != null ? user.getFirstName() : login;
+        return userInfo != null ? userInfo.getFirstName() : login;
     }
 
     /**

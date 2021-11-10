@@ -84,19 +84,19 @@ public class DataSet extends BaseDimensionalItemObject
 
     @OneToMany(mappedBy = "dataSet")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = {"user", "lastUpdatedBy", "reportClass", "period", "dataSet", "organisationUnit"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"user", "createdBy", "lastUpdatedBy", "reportClass", "period", "dataSet", "organisationUnit"}, allowSetters = true)
     private Set<MalariaCasesReport> malariaCasesReports = new HashSet<>();
 
     @OneToMany(mappedBy = "dataSet")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = {"user", "lastUpdatedBy", "reportClass", "period", "dataSet", "organisationUnit"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"user", "createdBy", "lastUpdatedBy", "reportClass", "period", "dataSet", "organisationUnit"}, allowSetters = true)
     private Set<DengueCasesReport> dengueCasesReports = new HashSet<>();
 
     @ManyToOne
     private PeriodType periodType;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = {"user", "lastUpdatedBy", "members", "managedByGroups", "managedGroups"}, allowSetters = true)
+    @JsonIgnoreProperties(value = {"user", "createdBy", "lastUpdatedBy", "members", "managedByGroups", "managedGroups"}, allowSetters = true)
     private PeopleGroup notificationRecipients;
 
     @ManyToOne
@@ -119,6 +119,7 @@ public class DataSet extends BaseDimensionalItemObject
             "parent",
             "hfHomeSubVillage",
             "coveredByHf",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "malariaUnit",

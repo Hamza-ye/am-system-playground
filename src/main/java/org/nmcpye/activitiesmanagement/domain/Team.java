@@ -56,13 +56,13 @@ public class Team implements Serializable {
 
     @OneToMany(mappedBy = "team")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "day", "initiatedWH", "theOtherSideWH", "team" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "day", "initiatedWH", "theOtherSideWH", "team" }, allowSetters = true)
     private Set<WHMovement> whMovements = new HashSet<>();
 
     @OneToMany(mappedBy = "teamAssigned")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "llinsVillageReports", "organisationUnit", "user", "lastUpdatedBy", "dayPlanned", "statusOfCoverage", "teamAssigned" },
+        value = { "llinsVillageReports", "organisationUnit", "user", "createdBy", "lastUpdatedBy", "dayPlanned", "statusOfCoverage", "teamAssigned" },
         allowSetters = true
     )
     private Set<LLINSVillageTarget> llinsVillageTargets = new HashSet<>();
@@ -70,7 +70,7 @@ public class Team implements Serializable {
     @OneToMany(mappedBy = "executingTeam")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "llinsVillageReportHistories", "user", "lastUpdatedBy", "dayReached", "targetDetails", "executingTeam" },
+        value = { "llinsVillageReportHistories", "user", "createdBy", "lastUpdatedBy", "dayReached", "targetDetails", "executingTeam" },
         allowSetters = true
     )
     private Set<LLINSVillageReport> llinsVillageReports = new HashSet<>();
@@ -78,7 +78,7 @@ public class Team implements Serializable {
     @OneToMany(mappedBy = "teamAssigned")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "llinsFamilyReports", "user", "lastUpdatedBy", "dayPlanned", "family", "teamAssigned" },
+        value = { "llinsFamilyReports", "user", "createdBy", "lastUpdatedBy", "dayPlanned", "family", "teamAssigned" },
         allowSetters = true
     )
     private Set<LLINSFamilyTarget> llinsFamilyTargets = new HashSet<>();
@@ -86,7 +86,7 @@ public class Team implements Serializable {
     @OneToMany(mappedBy = "executingTeam")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "llinsFamilyReportHistories", "user", "lastUpdatedBy", "dayReached", "targetDetails", "executingTeam" },
+        value = { "llinsFamilyReportHistories", "user", "createdBy", "lastUpdatedBy", "dayReached", "targetDetails", "executingTeam" },
         allowSetters = true
     )
     private Set<LLINSFamilyReport> llinsFamilyReports = new HashSet<>();
@@ -100,7 +100,7 @@ public class Team implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(
         value = {
-            "userInfo", "user", "lastUpdatedBy", "organisationUnits", "dataViewOrganisationUnits", "personAuthorityGroups", "groups",
+            "userInfo", "user", "createdBy", "lastUpdatedBy", "organisationUnits", "dataViewOrganisationUnits", "personAuthorityGroups", "groups",
         },
         allowSetters = true
     )
@@ -114,7 +114,7 @@ public class Team implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "assigned_to_warehouse_id")
     )
     @JsonIgnoreProperties(
-        value = { "initiatedMovements", "notInitiatedMovements", "user", "lastUpdatedBy", "activity", "teams" },
+        value = { "initiatedMovements", "notInitiatedMovements", "user", "createdBy", "lastUpdatedBy", "activity", "teams" },
         allowSetters = true
     )
     private Set<Warehouse> assignedToWarehouses = new HashSet<>();

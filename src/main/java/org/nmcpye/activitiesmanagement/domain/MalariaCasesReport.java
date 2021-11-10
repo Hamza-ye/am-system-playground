@@ -107,7 +107,7 @@ public class MalariaCasesReport implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy" }, allowSetters = true)
     private CasesReportClass reportClass;
 
     @ManyToOne(optional = false)
@@ -117,7 +117,7 @@ public class MalariaCasesReport implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(
-        value = { "malariaCasesReports", "dengueCasesReports", "periodType", "notificationRecipients", "user", "lastUpdatedBy", "sources" },
+        value = { "malariaCasesReports", "dengueCasesReports", "periodType", "notificationRecipients", "user", "createdBy", "lastUpdatedBy", "sources" },
         allowSetters = true
     )
     private DataSet dataSet;
@@ -130,6 +130,7 @@ public class MalariaCasesReport implements Serializable {
             "parent",
             "hfHomeSubVillage",
             "coveredByHf",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "malariaUnit",

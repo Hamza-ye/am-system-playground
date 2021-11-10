@@ -58,14 +58,14 @@ public class WHMovement implements Serializable {
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties(
-        value = { "initiatedMovements", "notInitiatedMovements", "user", "lastUpdatedBy", "activity", "teams" },
+        value = { "initiatedMovements", "notInitiatedMovements", "user", "createdBy", "lastUpdatedBy", "activity", "teams" },
         allowSetters = true
     )
     private Warehouse initiatedWH;
 
     @ManyToOne
     @JsonIgnoreProperties(
-        value = { "initiatedMovements", "notInitiatedMovements", "user", "lastUpdatedBy", "activity", "teams" },
+        value = { "initiatedMovements", "notInitiatedMovements", "user", "createdBy", "lastUpdatedBy", "activity", "teams" },
         allowSetters = true
     )
     private Warehouse theOtherSideWH;
@@ -78,6 +78,7 @@ public class WHMovement implements Serializable {
             "llinsVillageReports",
             "llinsFamilyTargets",
             "llinsFamilyReports",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "person",

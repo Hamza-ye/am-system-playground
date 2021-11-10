@@ -52,23 +52,23 @@ public class Family implements Serializable {
 
     @OneToMany(mappedBy = "family")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "family" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "family" }, allowSetters = true)
     private Set<FamilyHead> familyHeads = new HashSet<>();
 
     @OneToMany(mappedBy = "family")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "family" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "family" }, allowSetters = true)
     private Set<DataProvider> dataProviders = new HashSet<>();
 
     @OneToMany(mappedBy = "family")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "lastUpdatedBy", "family" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "family" }, allowSetters = true)
     private Set<Fingerprint> fingerprints = new HashSet<>();
 
     @OneToMany(mappedBy = "family")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "llinsFamilyReports", "user", "lastUpdatedBy", "dayPlanned", "family", "teamAssigned" },
+        value = { "llinsFamilyReports", "user", "createdBy", "lastUpdatedBy", "dayPlanned", "family", "teamAssigned" },
         allowSetters = true
     )
     private Set<LLINSFamilyTarget> llinsFamilyTargets = new HashSet<>();
@@ -82,6 +82,7 @@ public class Family implements Serializable {
             "parent",
             "hfHomeSubVillage",
             "coveredByHf",
+            "createdBy",
             "user",
             "lastUpdatedBy",
             "malariaUnit",

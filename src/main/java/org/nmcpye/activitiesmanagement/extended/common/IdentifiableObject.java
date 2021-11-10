@@ -6,10 +6,8 @@ import org.nmcpye.activitiesmanagement.domain.User;
 import java.io.Serializable;
 import java.util.Date;
 
-public interface IdentifiableObject extends Comparable<IdentifiableObject>, Serializable {
-    Long getId();
-
-    String getUid();
+public interface IdentifiableObject
+    extends PrimaryKeyObject, LinkableObject, Comparable<IdentifiableObject>, Serializable {
 
     String getCode();
 
@@ -27,7 +25,27 @@ public interface IdentifiableObject extends Comparable<IdentifiableObject>, Seri
     // Sharing
     //-----------------------------------------------------------------------------
 
+    /**
+     * Return User who created this object This field is immutable and must not
+     * be updated
+     */
+    User getCreatedBy();
+
+    /**
+     * @deprecated This method is replaced by {@link #getCreatedBy()} Currently
+     *             it is only used for web api backward compatibility
+     */
+    @Deprecated
     User getUser();
+
+    void setCreatedBy( User createdBy );
+
+    /**
+     * @deprecated This method is replaced by {@link #setCreatedBy(User)} ()}
+     *             Currently it is only used for web api backward compatibility
+     */
+    @Deprecated
+    void setUser( User user );
 
     //-----------------------------------------------------------------------------
     // Utility methods
