@@ -10,9 +10,10 @@ import org.nmcpye.activitiesmanagement.extended.common.collection.ListUtils;
 import org.nmcpye.activitiesmanagement.extended.common.filter.FilterUtils;
 import org.nmcpye.activitiesmanagement.extended.hierarchy.HierarchyViolationException;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.comparator.OrganisationUnitLevelComparator;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.pagingrepository.OrganisationUnitPagingRepository;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.system.filter.OrganisationUnitPolygonCoveringCoordinateFilter;
 import org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.GeoUtils;
 import org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.ValidationUtils;
-import org.nmcpye.activitiesmanagement.extended.systemmodule.system.filter.OrganisationUnitPolygonCoveringCoordinateFilter;
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class DefaultOrganisationUnitService implements OrganisationUnitService {
 
     private final Environment env;
 
-    private final OrganisationUnitStore organisationUnitStore;
+    private final OrganisationUnitPagingRepository organisationUnitStore;
 
     private final OrganisationUnitLevelStore organisationUnitLevelStore;
 
@@ -45,7 +46,7 @@ public class DefaultOrganisationUnitService implements OrganisationUnitService {
 
     public DefaultOrganisationUnitService(
         Environment env,
-        OrganisationUnitStore organisationUnitStore,
+        OrganisationUnitPagingRepository organisationUnitStore,
         OrganisationUnitLevelStore organisationUnitLevelStore,
         UserService userService
     ) {
@@ -87,7 +88,7 @@ public class DefaultOrganisationUnitService implements OrganisationUnitService {
     @Override
     @Transactional
     public Long addOrganisationUnit(OrganisationUnit organisationUnit) {
-        organisationUnitStore.save(organisationUnit);
+        organisationUnitStore.saveObject(organisationUnit);
         User user = userService.getUserWithAuthorities().orElse(null);
 
         if (organisationUnit.getParent() == null && user != null && user.getPerson() != null) {
@@ -280,9 +281,10 @@ public class DefaultOrganisationUnitService implements OrganisationUnitService {
     @Transactional(readOnly = true)
     public List<OrganisationUnit> getOrganisationUnitsAtOrgUnitLevels(
         Collection<OrganisationUnitLevel> levels,
-        Collection<OrganisationUnit> parents
-    ) {
-        return getOrganisationUnitsAtLevels(levels.stream().map(OrganisationUnitLevel::getLevel).collect(Collectors.toList()), parents);
+        Collection<OrganisationUnit> parents) {
+        return getOrganisationUnitsAtLevels(
+            levels.stream().map(OrganisationUnitLevel::getLevel).collect(Collectors.toList()),
+            parents);
     }
 
     @Override
@@ -330,9 +332,9 @@ public class DefaultOrganisationUnitService implements OrganisationUnitService {
     public boolean isInUserHierarchy(User user, OrganisationUnit organisationUnit) {
         if (
             user == null ||
-            user.getPerson() == null ||
-            user.getPerson().getOrganisationUnits() == null ||
-            user.getPerson().getOrganisationUnits().isEmpty()
+                user.getPerson() == null ||
+                user.getPerson().getOrganisationUnits() == null ||
+                user.getPerson().getOrganisationUnits().isEmpty()
         ) {
             return false;
         }
@@ -371,7 +373,7 @@ public class DefaultOrganisationUnitService implements OrganisationUnitService {
     @Override
     @Transactional
     public Long addOrganisationUnitLevel(OrganisationUnitLevel organisationUnitLevel) {
-        organisationUnitLevelStore.save(organisationUnitLevel);
+        organisationUnitLevelStore.saveObject(organisationUnitLevel);
         return organisationUnitLevel.getId();
     }
 

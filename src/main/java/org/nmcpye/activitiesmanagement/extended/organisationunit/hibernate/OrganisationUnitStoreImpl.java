@@ -1,7 +1,9 @@
 package org.nmcpye.activitiesmanagement.extended.organisationunit.hibernate;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.nmcpye.activitiesmanagement.domain.DataSet;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectUtils;
 import org.nmcpye.activitiesmanagement.extended.common.hibernate.HibernateIdentifiableObjectStore;
@@ -11,27 +13,26 @@ import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUni
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitQueryParams;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitStore;
 import org.nmcpye.activitiesmanagement.extended.systemmodule.system.objectmapper.OrganisationUnitRelationshipRowMapper;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.SqlUtils;
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
-@Repository("org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitStore")
-public class HibernateOrganisationUnitStore
+//@Repository("org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitStore")
+public class OrganisationUnitStoreImpl
     extends HibernateIdentifiableObjectStore<OrganisationUnit> implements OrganisationUnitStore {
 
-    private final Logger log = LoggerFactory.getLogger(HibernateOrganisationUnitStore.class);
+    private final Logger log = LoggerFactory.getLogger(OrganisationUnitStoreImpl.class);
 
     //    private final DbmsManager dbmsManager;
 
-    public HibernateOrganisationUnitStore(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher, UserService userService) {
+    public OrganisationUnitStoreImpl(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher, UserService userService) {
         super(jdbcTemplate, OrganisationUnit.class, userService, true);
         //        checkNotNull( dbmsManager );
 
@@ -146,52 +147,48 @@ public class HibernateOrganisationUnitStore
         return query.list();
     }
 
-    //    @Override
-    //    public Map<String, Set<String>> getOrganisationUnitDataSetAssocationMap( Collection<OrganisationUnit> organisationUnits, Collection<DataSet> dataSets )
-    //    {
-    //        SqlHelper hlp = new SqlHelper();
-    //
-    //        String sql = "select ou.uid as ou_uid, array_agg(ds.uid) as ds_uid " +
-    //            "from datasetsource d " +
-    //            "inner join organisationunit ou on ou.organisationunitid=d.sourceid " +
-    //            "inner join dataset ds on ds.datasetid=d.datasetid ";
-    //
-    //        if ( organisationUnits != null )
-    //        {
-    //            Assert.notEmpty( organisationUnits, "Organisation units cannot be empty" );
-    //
-    //            sql += hlp.whereAnd() + " (";
-    //
-    //            for ( OrganisationUnit unit : organisationUnits )
-    //            {
-    //                sql += "ou.path like '" + unit.getPath() + "%' or ";
-    //            }
-    //
-    //            sql = TextUtils.removeLastOr( sql ) + ") ";
-    //        }
-    //
-    //        if ( dataSets != null )
-    //        {
-    //            Assert.notEmpty( dataSets, "Data sets cannot be empty" );
-    //
-    //            sql += hlp.whereAnd() + " ds.datasetid in (" + StringUtils.join( IdentifiableObjectUtils.getIdentifiers( dataSets ), "," ) + ") ";
-    //        }
-    //
-    //        sql += "group by ou_uid";
-    //
-    //        log.info( "Org unit data set association map SQL: " + sql );
-    //
-    //        Map<String, Set<String>> map = new HashMap<>();
-    //
-    //        jdbcTemplate.query( sql, rs -> {
-    //            String organisationUnitId = rs.getString( "ou_uid" );
-    //            Set<String> dataSetIds = SqlUtils.getArrayAsSet( rs, "ds_uid" );
-    //
-    //            map.put( organisationUnitId, dataSetIds );
-    //        } );
-    //
-    //        return map;
-    //    }
+    @Override
+    public Map<String, Set<String>> getOrganisationUnitDataSetAssocationMap(Collection<OrganisationUnit> organisationUnits, Collection<DataSet> dataSets) {
+        SqlHelper hlp = new SqlHelper();
+
+        String sql = "select ou.uid as ou_uid, array_agg(ds.uid) as ds_uid " +
+            "from data_set_source d " +
+            "inner join organisation_unit ou on ou.id=d.source_id " +
+            "inner join data_set ds on ds.id=d.data_set_id ";
+
+        if (organisationUnits != null) {
+            Assert.notEmpty(organisationUnits, "Organisation units cannot be empty");
+
+            sql += hlp.whereAnd() + " (";
+
+            for (OrganisationUnit unit : organisationUnits) {
+                sql += "ou.path like '" + unit.getPath() + "%' or ";
+            }
+
+            sql = TextUtils.removeLastOr(sql) + ") ";
+        }
+
+        if (dataSets != null) {
+            Assert.notEmpty(dataSets, "Data sets cannot be empty");
+
+            sql += hlp.whereAnd() + " ds.id in (" + StringUtils.join(IdentifiableObjectUtils.getIdentifiers(dataSets), ",") + ") ";
+        }
+
+        sql += "group by ou_uid";
+
+        log.info("Org unit data set association map SQL: " + sql);
+
+        Map<String, Set<String>> map = new HashMap<>();
+
+        jdbcTemplate.query(sql, rs -> {
+            String organisationUnitId = rs.getString("ou_uid");
+            Set<String> dataSetIds = SqlUtils.getArrayAsSet(rs, "ds_uid");
+
+            map.put(organisationUnitId, dataSetIds);
+        });
+
+        return map;
+    }
 
     @Override
     public List<OrganisationUnit> getWithinCoordinateArea(double[] box) {

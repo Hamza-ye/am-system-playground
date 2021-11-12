@@ -4,6 +4,8 @@ import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroupSet;
 import org.nmcpye.activitiesmanagement.extended.common.filter.FilterUtils;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.pagingrepository.OrganisationUnitGroupPagingRepository;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.pagingrepository.OrganisationUnitGroupSetPagingRepository;
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,13 +22,13 @@ public class DefaultOrganisationUnitGroupService implements OrganisationUnitGrou
     // Dependencies
     // -------------------------------------------------------------------------
 
-    private final OrganisationUnitGroupStore organisationUnitGroupStore;
+    private final OrganisationUnitGroupPagingRepository organisationUnitGroupStore;
 
-    private final OrganisationUnitGroupSetStore organisationUnitGroupSetStore;
+    private final OrganisationUnitGroupSetPagingRepository organisationUnitGroupSetStore;
 
     public DefaultOrganisationUnitGroupService(
-        OrganisationUnitGroupStore organisationUnitGroupStore,
-        OrganisationUnitGroupSetStore organisationUnitGroupSetStore
+        OrganisationUnitGroupPagingRepository organisationUnitGroupStore,
+        OrganisationUnitGroupSetPagingRepository organisationUnitGroupSetStore
     ) {
         checkNotNull(organisationUnitGroupSetStore);
         checkNotNull(organisationUnitGroupStore);
@@ -48,7 +50,7 @@ public class DefaultOrganisationUnitGroupService implements OrganisationUnitGrou
     @Override
     @Transactional
     public Long addOrganisationUnitGroup(OrganisationUnitGroup organisationUnitGroup) {
-        organisationUnitGroupStore.save(organisationUnitGroup);
+        organisationUnitGroupStore.saveObject(organisationUnitGroup);
 
         return organisationUnitGroup.getId();
     }
@@ -96,7 +98,7 @@ public class DefaultOrganisationUnitGroupService implements OrganisationUnitGrou
     @Override
     @Transactional
     public Long addOrganisationUnitGroupSet(OrganisationUnitGroupSet organisationUnitGroupSet) {
-        organisationUnitGroupSetStore.save(organisationUnitGroupSet);
+        organisationUnitGroupSetStore.saveObject(organisationUnitGroupSet);
 
         return organisationUnitGroupSet.getId();
     }

@@ -7,12 +7,12 @@ import org.nmcpye.activitiesmanagement.service.UserService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-@Repository("org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitGroupSetStore")
-public class HibernateOrganisationUnitGroupSetStore
+//@Repository("org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitGroupSetStore")
+public class OrganisationUnitGroupSetStoreImpl
     extends HibernateIdentifiableObjectStore<OrganisationUnitGroupSet>
     implements OrganisationUnitGroupSetStore {
 
-    public HibernateOrganisationUnitGroupSetStore(JdbcTemplate jdbcTemplate, UserService userService) {
+    public OrganisationUnitGroupSetStoreImpl(JdbcTemplate jdbcTemplate, UserService userService) {
         super(jdbcTemplate, OrganisationUnitGroupSet.class, userService, true);
     }
 }

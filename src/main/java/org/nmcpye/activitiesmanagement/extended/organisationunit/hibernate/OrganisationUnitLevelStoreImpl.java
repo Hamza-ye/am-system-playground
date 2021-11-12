@@ -10,11 +10,11 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.criteria.CriteriaBuilder;
 
 @Repository("org.hisp.dhis.organisationunit.OrganisationUnitLevelStore")
-public class HibernateOrganisationUnitLevelStore
+public class OrganisationUnitLevelStoreImpl
     extends HibernateIdentifiableObjectStore<OrganisationUnitLevel>
     implements OrganisationUnitLevelStore {
 
-    public HibernateOrganisationUnitLevelStore(JdbcTemplate jdbcTemplate, UserService userService) {
+    public OrganisationUnitLevelStoreImpl(JdbcTemplate jdbcTemplate, UserService userService) {
         super(jdbcTemplate, OrganisationUnitLevel.class, userService, true);
     }
 
