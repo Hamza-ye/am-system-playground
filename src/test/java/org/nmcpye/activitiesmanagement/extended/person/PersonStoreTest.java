@@ -47,9 +47,9 @@ public class PersonStoreTest extends AMTest {
         userA.setOrganisationUnits(units);
         userB.setOrganisationUnits(units);
 
-        personStore.save(userA);
+        personStore.saveObject(userA);
         Long idA = userA.getId();
-        personStore.save(userB);
+        personStore.saveObject(userB);
         Long idB = userB.getId();
 
         assertEquals(userA, personStore.get(idA));
@@ -64,9 +64,9 @@ public class PersonStoreTest extends AMTest {
         Person userA = createUserCredentials('A', null);
         Person userB = createUserCredentials('B', null);
 
-        personStore.save(userA);
+        personStore.saveObject(userA);
         Long idA = userA.getId();
-        personStore.save(userB);
+        personStore.saveObject(userB);
         Long idB = userB.getId();
 
         assertEquals(userA, personStore.get(idA));
@@ -84,9 +84,9 @@ public class PersonStoreTest extends AMTest {
         Person userA = createUserCredentials('A', null);
         Person userB = createUserCredentials('B', null);
 
-        personStore.save(userA);
+        personStore.saveObject(userA);
         Long idA = userA.getId();
-        personStore.save(userB);
+        personStore.saveObject(userB);
         Long idB = userB.getId();
 
         assertEquals(userA, personStore.get(idA));

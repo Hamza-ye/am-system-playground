@@ -36,11 +36,11 @@ class PeriodStoreTest extends AMTest {
         Period periodA = new Period(periodTypeA, getDay(1), getDay(2));
         Period periodB = new Period(periodTypeA, getDay(2), getDay(3));
         Period periodC = new Period(periodTypeB, getDay(2), getDay(3));
-        periodStore.save(periodA);
+        periodStore.saveObject(periodA);
         Long idA = periodA.getId();
-        periodStore.save(periodB);
+        periodStore.saveObject(periodB);
         Long idB = periodB.getId();
-        periodStore.save(periodC);
+        periodStore.saveObject(periodC);
         Long idC = periodC.getId();
 
         periodA = periodStore.get(idA);
@@ -76,13 +76,13 @@ class PeriodStoreTest extends AMTest {
         Period periodB = new Period(periodTypeA, getDay(2), getDay(3));
         Period periodC = new Period(periodTypeB, getDay(2), getDay(3));
         Period periodD = new Period(periodTypeB, getDay(3), getDay(4));
-        periodStore.save(periodA);
+        periodStore.saveObject(periodA);
         Long idA = periodA.getId();
-        periodStore.save(periodB);
+        periodStore.saveObject(periodB);
         Long idB = periodB.getId();
-        periodStore.save(periodC);
+        periodStore.saveObject(periodC);
         Long idC = periodC.getId();
-        periodStore.save(periodD);
+        periodStore.saveObject(periodD);
         Long idD = periodD.getId();
 
         assertNotNull(periodStore.get(idA));
@@ -127,15 +127,15 @@ class PeriodStoreTest extends AMTest {
         Period periodC = new Period(periodTypeB, getDay(2), getDay(3));
         Period periodD = new Period(periodTypeB, getDay(3), getDay(4));
         Period periodE = new Period(periodTypeA, getDay(3), getDay(4));
-        periodStore.save(periodA);
+        periodStore.saveObject(periodA);
         Long idA = periodA.getId();
-        periodStore.save(periodB);
+        periodStore.saveObject(periodB);
         Long idB = periodB.getId();
-        periodStore.save(periodC);
+        periodStore.saveObject(periodC);
         Long idC = periodC.getId();
-        periodStore.save(periodD);
+        periodStore.saveObject(periodD);
         Long idD = periodD.getId();
-        periodStore.save(periodE);
+        periodStore.saveObject(periodE);
         Long idE = periodE.getId();
 
         periodA = periodStore.getPeriod(getDay(1), getDay(2), periodTypeA);
@@ -189,9 +189,9 @@ class PeriodStoreTest extends AMTest {
         Period periodB = new Period(periodType, getDay(1), getDay(2));
         Period periodC = new Period(periodType, getDay(2), getDay(3));
 
-        periodStore.save(periodA);
-        periodStore.save(periodB);
-        periodStore.save(periodC);
+        periodStore.saveObject(periodA);
+        periodStore.saveObject(periodB);
+        periodStore.saveObject(periodC);
 
         List<Period> periods = periodStore.getAll();
 
@@ -213,10 +213,10 @@ class PeriodStoreTest extends AMTest {
         Period periodB = new Period(periodTypeA, getDay(2), getDay(3));
         Period periodC = new Period(periodTypeB, getDay(2), getDay(3));
         Period periodD = new Period(periodTypeB, getDay(3), getDay(4));
-        periodStore.save(periodA);
-        periodStore.save(periodB);
-        periodStore.save(periodC);
-        periodStore.save(periodD);
+        periodStore.saveObject(periodA);
+        periodStore.saveObject(periodB);
+        periodStore.saveObject(periodC);
+        periodStore.saveObject(periodD);
 
         List<Period> periods = periodStore.getPeriodsBetweenDates(getDay(1), getDay(1));
         assertNotNull(periods);
@@ -255,11 +255,11 @@ class PeriodStoreTest extends AMTest {
         Period periodC = new Period(periodTypeB, getDay(2), getDay(3));
         Period periodD = new Period(periodTypeB, getDay(3), getDay(4));
         Period periodE = new Period(periodTypeB, getDay(1), getDay(4));
-        periodStore.save(periodA);
-        periodStore.save(periodB);
-        periodStore.save(periodC);
-        periodStore.save(periodD);
-        periodStore.save(periodE);
+        periodStore.saveObject(periodA);
+        periodStore.saveObject(periodB);
+        periodStore.saveObject(periodC);
+        periodStore.saveObject(periodD);
+        periodStore.saveObject(periodE);
 
         List<Period> periods = periodStore.getPeriodsBetweenOrSpanningDates(getDay(1), getDay(1));
         assertNotNull(periods);
@@ -300,8 +300,8 @@ class PeriodStoreTest extends AMTest {
 
         Period periodA = new Period(ypt, jan2006, dec2006);
         Period periodB = new Period(ypt, jan2007, dec2007);
-        periodStore.save(periodA);
-        periodStore.save(periodB);
+        periodStore.saveObject(periodA);
+        periodStore.saveObject(periodB);
 
         PeriodType mpt = PeriodType.getPeriodTypeByName(MonthlyPeriodType.NAME);
 
@@ -343,18 +343,18 @@ class PeriodStoreTest extends AMTest {
         Period periodM = new Period(mpt, novstart, novend);
         Period periodN = new Period(mpt, decstart, decend);
 
-        periodStore.save(periodC);
-        periodStore.save(periodD);
-        periodStore.save(periodE);
-        periodStore.save(periodF);
-        periodStore.save(periodG);
-        periodStore.save(periodH);
-        periodStore.save(periodI);
-        periodStore.save(periodJ);
-        periodStore.save(periodK);
-        periodStore.save(periodL);
-        periodStore.save(periodM);
-        periodStore.save(periodN);
+        periodStore.saveObject(periodC);
+        periodStore.saveObject(periodD);
+        periodStore.saveObject(periodE);
+        periodStore.saveObject(periodF);
+        periodStore.saveObject(periodG);
+        periodStore.saveObject(periodH);
+        periodStore.saveObject(periodI);
+        periodStore.saveObject(periodJ);
+        periodStore.saveObject(periodK);
+        periodStore.saveObject(periodL);
+        periodStore.saveObject(periodM);
+        periodStore.saveObject(periodN);
 
         List<Period> periodsA = periodStore.getIntersectingPeriodsByPeriodType(ypt, getDate(2006, 6, 1), getDate(2006, 11, 30));
         assertNotNull(periodsA);
@@ -380,16 +380,16 @@ class PeriodStoreTest extends AMTest {
         Period periodI = new Period(type, getDay(8), getDay(12));
         Period periodJ = new Period(type, getDay(2), getDay(12));
 
-        periodStore.save(periodA);
-        periodStore.save(periodB);
-        periodStore.save(periodC);
-        periodStore.save(periodD);
-        periodStore.save(periodE);
-        periodStore.save(periodF);
-        periodStore.save(periodG);
-        periodStore.save(periodH);
-        periodStore.save(periodI);
-        periodStore.save(periodJ);
+        periodStore.saveObject(periodA);
+        periodStore.saveObject(periodB);
+        periodStore.saveObject(periodC);
+        periodStore.saveObject(periodD);
+        periodStore.saveObject(periodE);
+        periodStore.saveObject(periodF);
+        periodStore.saveObject(periodG);
+        periodStore.saveObject(periodH);
+        periodStore.saveObject(periodI);
+        periodStore.saveObject(periodJ);
 
         List<Period> periods = periodStore.getIntersectingPeriods(getDay(4), getDay(10));
 
@@ -417,10 +417,10 @@ class PeriodStoreTest extends AMTest {
         Period periodB = new Period(periodTypeA, getDay(2), getDay(3));
         Period periodC = new Period(periodTypeA, getDay(3), getDay(4));
         Period periodD = new Period(periodTypeB, getDay(3), getDay(4));
-        periodStore.save(periodA);
-        periodStore.save(periodB);
-        periodStore.save(periodC);
-        periodStore.save(periodD);
+        periodStore.saveObject(periodA);
+        periodStore.saveObject(periodB);
+        periodStore.saveObject(periodC);
+        periodStore.saveObject(periodD);
 
         List<Period> periodsARef = new ArrayList<>();
         periodsARef.add(periodA);
