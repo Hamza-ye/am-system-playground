@@ -47,63 +47,63 @@ public class IdentifiableObjectManagerTest
 
     @Test
     public void testGetObjectWithIdScheme() {
-        OrganisationUnit dataElementA = createOrganisationUnit('A');
+        OrganisationUnit unitA = createOrganisationUnit('A');
 
-        organisationUnitService.addOrganisationUnit(dataElementA);
+        organisationUnitService.addOrganisationUnit(unitA);
 
-        assertEquals(dataElementA, identifiableObjectManager.getObject(OrganisationUnit.class, IdScheme.CODE, dataElementA.getCode()));
-        assertEquals(dataElementA, identifiableObjectManager.getObject(OrganisationUnit.class, IdScheme.UID, dataElementA.getUid()));
+        assertEquals(unitA, identifiableObjectManager.getObject(OrganisationUnit.class, IdScheme.CODE, unitA.getCode()));
+        assertEquals(unitA, identifiableObjectManager.getObject(OrganisationUnit.class, IdScheme.UID, unitA.getUid()));
     }
 
     @Test
     public void testGetObject() {
-        OrganisationUnit dataElementA = createOrganisationUnit('A');
-        OrganisationUnit dataElementB = createOrganisationUnit('B');
+        OrganisationUnit unitA = createOrganisationUnit('A');
+        OrganisationUnit unitB = createOrganisationUnit('B');
 
-        organisationUnitService.addOrganisationUnit(dataElementA);
-        long dataElementIdA = dataElementA.getId();
-        organisationUnitService.addOrganisationUnit(dataElementB);
-        long dataElementIdB = dataElementB.getId();
+        organisationUnitService.addOrganisationUnit(unitA);
+        long unitIdA = unitA.getId();
+        organisationUnitService.addOrganisationUnit(unitB);
+        long unitIdB = unitB.getId();
 
-        OrganisationUnitGroup dataElementGroupA = createOrganisationUnitGroup('A');
-        OrganisationUnitGroup dataElementGroupB = createOrganisationUnitGroup('B');
+        OrganisationUnitGroup unitGroupA = createOrganisationUnitGroup('A');
+        OrganisationUnitGroup unitGroupB = createOrganisationUnitGroup('B');
 
-        organisationUnitGroupService.addOrganisationUnitGroup(dataElementGroupA);
-        long dataElementGroupIdA = dataElementGroupA.getId();
-        organisationUnitGroupService.addOrganisationUnitGroup(dataElementGroupB);
-        long dataElementGroupIdB = dataElementGroupB.getId();
+        organisationUnitGroupService.addOrganisationUnitGroup(unitGroupA);
+        long unitGroupIdA = unitGroupA.getId();
+        organisationUnitGroupService.addOrganisationUnitGroup(unitGroupB);
+        long unitGroupIdB = unitGroupB.getId();
 
-        assertEquals(dataElementA, identifiableObjectManager.getObject(dataElementIdA, OrganisationUnit.class.getSimpleName()));
-        assertEquals(dataElementB, identifiableObjectManager.getObject(dataElementIdB, OrganisationUnit.class.getSimpleName()));
+        assertEquals(unitA, identifiableObjectManager.getObject(unitIdA, OrganisationUnit.class.getSimpleName()));
+        assertEquals(unitB, identifiableObjectManager.getObject(unitIdB, OrganisationUnit.class.getSimpleName()));
 
-        assertEquals(dataElementGroupA, identifiableObjectManager.getObject(dataElementGroupIdA, OrganisationUnitGroup.class.getSimpleName()));
-        assertEquals(dataElementGroupB, identifiableObjectManager.getObject(dataElementGroupIdB, OrganisationUnitGroup.class.getSimpleName()));
+        assertEquals(unitGroupA, identifiableObjectManager.getObject(unitGroupIdA, OrganisationUnitGroup.class.getSimpleName()));
+        assertEquals(unitGroupB, identifiableObjectManager.getObject(unitGroupIdB, OrganisationUnitGroup.class.getSimpleName()));
     }
 
     @Test
     public void testGetWithClasses() {
-        OrganisationUnit dataElementA = createOrganisationUnit('A');
-        OrganisationUnit dataElementB = createOrganisationUnit('B');
+        OrganisationUnit unitA = createOrganisationUnit('A');
+        OrganisationUnit unitB = createOrganisationUnit('B');
         ;
 
-        organisationUnitService.addOrganisationUnit(dataElementA);
-        organisationUnitService.addOrganisationUnit(dataElementB);
+        organisationUnitService.addOrganisationUnit(unitA);
+        organisationUnitService.addOrganisationUnit(unitB);
 
         Set<Class<? extends IdentifiableObject>> classes = ImmutableSet.<Class<? extends IdentifiableObject>>builder().
             add(Person.class).add(OrganisationUnit.class).add(OrganisationUnitGroup.class).build();
 
-        assertEquals(dataElementA, identifiableObjectManager.get(classes, dataElementA.getUid()));
-        assertEquals(dataElementB, identifiableObjectManager.get(classes, dataElementB.getUid()));
+        assertEquals(unitA, identifiableObjectManager.get(classes, unitA.getUid()));
+        assertEquals(unitB, identifiableObjectManager.get(classes, unitB.getUid()));
     }
 
 //    @Test
 //    public void publicAccessSetIfNoUser() {
-//        OrganisationUnit dataElement = createOrganisationUnit('A');
-//        identifiableObjectManager.save(dataElement);
+//        OrganisationUnit unit = createOrganisationUnit('A');
+//        identifiableObjectManager.save(unit);
 //
-//        assertNotNull(dataElement.getPublicAccess());
-//        assertFalse(AccessStringHelper.canRead(dataElement.getPublicAccess()));
-//        assertFalse(AccessStringHelper.canWrite(dataElement.getPublicAccess()));
+//        assertNotNull(unit.getPublicAccess());
+//        assertFalse(AccessStringHelper.canRead(unit.getPublicAccess()));
+//        assertFalse(AccessStringHelper.canWrite(unit.getPublicAccess()));
 //    }
 
     @Test
@@ -118,12 +118,12 @@ public class IdentifiableObjectManagerTest
 
     @Test
     public void getEqualToName() {
-        OrganisationUnit dataElement = createOrganisationUnit('A');
-        identifiableObjectManager.save(dataElement);
+        OrganisationUnit unit = createOrganisationUnit('A');
+        identifiableObjectManager.save(unit);
 
-        assertNotNull(identifiableObjectManager.getByName(OrganisationUnit.class, "DataElementA"));
-        assertNull(identifiableObjectManager.getByName(OrganisationUnit.class, "DataElementB"));
-        assertEquals(dataElement, identifiableObjectManager.getByName(OrganisationUnit.class, "DataElementA"));
+        assertNotNull(identifiableObjectManager.getByName(OrganisationUnit.class, "OrganisationUnitA"));
+        assertNull(identifiableObjectManager.getByName(OrganisationUnit.class, "OrganisationUnitB"));
+        assertEquals(unit, identifiableObjectManager.getByName(OrganisationUnit.class, "OrganisationUnitA"));
     }
 
     @Test
@@ -133,48 +133,48 @@ public class IdentifiableObjectManagerTest
         identifiableObjectManager.save(createOrganisationUnit('C'));
         identifiableObjectManager.save(createOrganisationUnit('A'));
 
-        List<OrganisationUnit> dataElements = new ArrayList<>(identifiableObjectManager.getAllSorted(OrganisationUnit.class));
+        List<OrganisationUnit> units = new ArrayList<>(identifiableObjectManager.getAllSorted(OrganisationUnit.class));
 
-        assertEquals(4, dataElements.size());
-        assertEquals("DataElementA", dataElements.get(0).getName());
-        assertEquals("DataElementB", dataElements.get(1).getName());
-        assertEquals("DataElementC", dataElements.get(2).getName());
-        assertEquals("DataElementD", dataElements.get(3).getName());
+        assertEquals(4, units.size());
+        assertEquals("OrganisationUnitA", units.get(0).getName());
+        assertEquals("OrganisationUnitB", units.get(1).getName());
+        assertEquals("OrganisationUnitC", units.get(2).getName());
+        assertEquals("OrganisationUnitD", units.get(3).getName());
     }
 
     @Test
     public void userIsCurrentIfNoUserSet() {
         User user = createUserAndInjectSecurityContext(true);
 
-        OrganisationUnit dataElement = createOrganisationUnit('A');
-        identifiableObjectManager.save(dataElement);
+        OrganisationUnit unit = createOrganisationUnit('A');
+        identifiableObjectManager.save(unit);
 
-        assertNotNull(dataElement.getUser());
-        assertEquals(user, dataElement.getUser());
+        assertNotNull(unit.getUser());
+        assertEquals(user, unit.getUser());
     }
 
 //    @Test
 //    public void userCanCreatePublic() {
 //        createUserAndInjectSecurityContext(false, "F_DATAELEMENT_PUBLIC_ADD");
 //
-//        OrganisationUnit dataElement = createOrganisationUnit('A');
-//        identifiableObjectManager.save(dataElement);
+//        OrganisationUnit unit = createOrganisationUnit('A');
+//        identifiableObjectManager.save(unit);
 //
-//        assertNotNull(dataElement.getPublicAccess());
-//        assertTrue(AccessStringHelper.canRead(dataElement.getPublicAccess()));
-//        assertTrue(AccessStringHelper.canWrite(dataElement.getPublicAccess()));
+//        assertNotNull(unit.getPublicAccess());
+//        assertTrue(AccessStringHelper.canRead(unit.getPublicAccess()));
+//        assertTrue(AccessStringHelper.canWrite(unit.getPublicAccess()));
 //    }
 //
 //    @Test
 //    public void userCanCreatePrivate() {
 //        createUserAndInjectSecurityContext(false, "F_DATAELEMENT_PRIVATE_ADD");
 //
-//        OrganisationUnit dataElement = createOrganisationUnit('A');
-//        identifiableObjectManager.save(dataElement);
+//        OrganisationUnit unit = createOrganisationUnit('A');
+//        identifiableObjectManager.save(unit);
 //
-//        assertNotNull(dataElement.getPublicAccess());
-//        assertFalse(AccessStringHelper.canRead(dataElement.getPublicAccess()));
-//        assertFalse(AccessStringHelper.canWrite(dataElement.getPublicAccess()));
+//        assertNotNull(unit.getPublicAccess());
+//        assertFalse(AccessStringHelper.canRead(unit.getPublicAccess()));
+//        assertFalse(AccessStringHelper.canWrite(unit.getPublicAccess()));
 //    }
 
 //    @Test(expected = CreateAccessDeniedException.class)
@@ -187,67 +187,67 @@ public class IdentifiableObjectManagerTest
 //    public void publicUserModifiedPublicAccessDEFAULT() {
 //        createUserAndInjectSecurityContext(false, "F_DATAELEMENT_PUBLIC_ADD");
 //
-//        OrganisationUnit dataElement = createOrganisationUnit('A');
-//        dataElement.setPublicAccess(AccessStringHelper.DEFAULT);
+//        OrganisationUnit unit = createOrganisationUnit('A');
+//        unit.setPublicAccess(AccessStringHelper.DEFAULT);
 //
-//        identifiableObjectManager.save(dataElement, false);
+//        identifiableObjectManager.save(unit, false);
 //
-//        assertFalse(AccessStringHelper.canRead(dataElement.getPublicAccess()));
-//        assertFalse(AccessStringHelper.canWrite(dataElement.getPublicAccess()));
+//        assertFalse(AccessStringHelper.canRead(unit.getPublicAccess()));
+//        assertFalse(AccessStringHelper.canWrite(unit.getPublicAccess()));
 //    }
 //
 //    @Test
 //    public void publicUserModifiedPublicAccessRW() {
 //        createUserAndInjectSecurityContext(false, "F_DATAELEMENT_PUBLIC_ADD");
 //
-//        OrganisationUnit dataElement = createOrganisationUnit('A');
-//        dataElement.setPublicAccess(AccessStringHelper.READ_WRITE);
+//        OrganisationUnit unit = createOrganisationUnit('A');
+//        unit.setPublicAccess(AccessStringHelper.READ_WRITE);
 //
-//        identifiableObjectManager.save(dataElement, false);
+//        identifiableObjectManager.save(unit, false);
 //    }
 //
 //    @Test(expected = CreateAccessDeniedException.class)
 //    public void privateUserModifiedPublicAccessRW() {
 //        createUserAndInjectSecurityContext(false, "F_DATAELEMENT_PRIVATE_ADD");
 //
-//        OrganisationUnit dataElement = createOrganisationUnit('A');
-//        dataElement.setPublicAccess(AccessStringHelper.READ_WRITE);
+//        OrganisationUnit unit = createOrganisationUnit('A');
+//        unit.setPublicAccess(AccessStringHelper.READ_WRITE);
 //
-//        identifiableObjectManager.save(dataElement, false);
+//        identifiableObjectManager.save(unit, false);
 //    }
 //
 //    @Test
 //    public void privateUserModifiedPublicAccessDEFAULT() {
 //        createUserAndInjectSecurityContext(false, "F_DATAELEMENT_PRIVATE_ADD");
 //
-//        OrganisationUnit dataElement = createOrganisationUnit('A');
-//        dataElement.setPublicAccess(AccessStringHelper.DEFAULT);
+//        OrganisationUnit unit = createOrganisationUnit('A');
+//        unit.setPublicAccess(AccessStringHelper.DEFAULT);
 //
-//        identifiableObjectManager.save(dataElement, false);
+//        identifiableObjectManager.save(unit, false);
 //    }
 //
 //    @Test(expected = UpdateAccessDeniedException.class)
 //    public void updateForPrivateUserDeniedAfterChangePublicAccessRW() {
 //        createUserAndInjectSecurityContext(false, "F_DATAELEMENT_PRIVATE_ADD");
 //
-//        OrganisationUnit dataElement = createOrganisationUnit('A');
-//        dataElement.setPublicAccess(AccessStringHelper.DEFAULT);
+//        OrganisationUnit unit = createOrganisationUnit('A');
+//        unit.setPublicAccess(AccessStringHelper.DEFAULT);
 //
-//        identifiableObjectManager.save(dataElement, false);
+//        identifiableObjectManager.save(unit, false);
 //
-//        dataElement.setPublicAccess(AccessStringHelper.READ_WRITE);
+//        unit.setPublicAccess(AccessStringHelper.READ_WRITE);
 //
-//        identifiableObjectManager.update(dataElement);
+//        identifiableObjectManager.update(unit);
 //    }
 //
 //    @Test(expected = CreateAccessDeniedException.class)
 //    public void userDeniedForPublicAdd() {
 //        createUserAndInjectSecurityContext(false);
 //
-//        OrganisationUnit dataElement = createOrganisationUnit('A');
-//        dataElement.setPublicAccess(AccessStringHelper.READ_WRITE);
+//        OrganisationUnit unit = createOrganisationUnit('A');
+//        unit.setPublicAccess(AccessStringHelper.READ_WRITE);
 //
-//        identifiableObjectManager.save(dataElement, false);
+//        identifiableObjectManager.save(unit, false);
 //    }
 //
 //    @Test(expected = DeleteAccessDeniedException.class)
@@ -257,14 +257,14 @@ public class IdentifiableObjectManagerTest
 //        User user = createUser('B');
 //        identifiableObjectManager.save(user);
 //
-//        OrganisationUnit dataElement = createOrganisationUnit('A');
-//        identifiableObjectManager.save(dataElement);
+//        OrganisationUnit unit = createOrganisationUnit('A');
+//        identifiableObjectManager.save(unit);
 //
-//        dataElement.setUser(user);
-//        dataElement.setPublicAccess(AccessStringHelper.DEFAULT);
-//        sessionFactory.getCurrentSession().update(dataElement);
+//        unit.setUser(user);
+//        unit.setPublicAccess(AccessStringHelper.DEFAULT);
+//        sessionFactory.getCurrentSession().update(unit);
 //
-//        identifiableObjectManager.delete(dataElement);
+//        identifiableObjectManager.delete(unit);
 //    }
 
     @Test
@@ -292,13 +292,13 @@ public class IdentifiableObjectManagerTest
 //
 //        assertEquals(4, identifiableObjectManager.getAll(OrganisationUnit.class).size());
 //
-//        List<OrganisationUnit> dataElements = new ArrayList<>(identifiableObjectManager.getAll(OrganisationUnit.class));
+//        List<OrganisationUnit> units = new ArrayList<>(identifiableObjectManager.getAll(OrganisationUnit.class));
 //
-//        for (OrganisationUnit dataElement : dataElements) {
-//            dataElement.setUser(user);
-//            dataElement.setPublicAccess(AccessStringHelper.DEFAULT);
+//        for (OrganisationUnit unit : units) {
+//            unit.setUser(user);
+//            unit.setPublicAccess(AccessStringHelper.DEFAULT);
 //
-//            sessionFactory.getCurrentSession().update(dataElement);
+//            sessionFactory.getCurrentSession().update(unit);
 //        }
 //
 //        assertEquals(0, identifiableObjectManager.getCount(OrganisationUnit.class));
@@ -323,11 +323,11 @@ public class IdentifiableObjectManagerTest
 //        assertEquals(4, identifiableObjectManager.getCount(OrganisationUnit.class));
 //        assertEquals(4, identifiableObjectManager.getAll(OrganisationUnit.class).size());
 //
-//        List<OrganisationUnit> dataElements = new ArrayList<>(identifiableObjectManager.getAll(OrganisationUnit.class));
+//        List<OrganisationUnit> units = new ArrayList<>(identifiableObjectManager.getAll(OrganisationUnit.class));
 //
-//        for (OrganisationUnit dataElement : dataElements) {
-//            dataElement.setUser(user);
-//            dataElement.setPublicAccess(AccessStringHelper.newInstance().build());
+//        for (OrganisationUnit unit : units) {
+//            unit.setUser(user);
+//            unit.setPublicAccess(AccessStringHelper.newInstance().build());
 //
 //            UserGroupAccess userGroupAccess = new UserGroupAccess();
 //            userGroupAccess.setAccess(AccessStringHelper.READ);
@@ -335,8 +335,8 @@ public class IdentifiableObjectManagerTest
 //
 //            sessionFactory.getCurrentSession().save(userGroupAccess);
 //
-//            dataElement.getUserGroupAccesses().add(userGroupAccess);
-//            sessionFactory.getCurrentSession().update(dataElement);
+//            unit.getUserGroupAccesses().add(userGroupAccess);
+//            sessionFactory.getCurrentSession().update(unit);
 //        }
 //
 //        assertEquals(4, identifiableObjectManager.getCount(OrganisationUnit.class));
@@ -345,47 +345,47 @@ public class IdentifiableObjectManagerTest
 
     @Test
     public void getByUidTest() {
-        OrganisationUnit dataElementA = createOrganisationUnit('A');
-        OrganisationUnit dataElementB = createOrganisationUnit('B');
+        OrganisationUnit unitA = createOrganisationUnit('A');
+        OrganisationUnit unitB = createOrganisationUnit('B');
         ;
-        OrganisationUnit dataElementC = createOrganisationUnit('C');
-        OrganisationUnit dataElementD = createOrganisationUnit('D');
+        OrganisationUnit unitC = createOrganisationUnit('C');
+        OrganisationUnit unitD = createOrganisationUnit('D');
 
-        identifiableObjectManager.save(dataElementA);
-        identifiableObjectManager.save(dataElementB);
-        identifiableObjectManager.save(dataElementC);
-        identifiableObjectManager.save(dataElementD);
+        identifiableObjectManager.save(unitA);
+        identifiableObjectManager.save(unitB);
+        identifiableObjectManager.save(unitC);
+        identifiableObjectManager.save(unitD);
 
-        List<OrganisationUnit> ab = identifiableObjectManager.getByUid(OrganisationUnit.class, Arrays.asList(dataElementA.getUid(), dataElementB.getUid()));
-        List<OrganisationUnit> cd = identifiableObjectManager.getByUid(OrganisationUnit.class, Arrays.asList(dataElementC.getUid(), dataElementD.getUid()));
+        List<OrganisationUnit> ab = identifiableObjectManager.getByUid(OrganisationUnit.class, Arrays.asList(unitA.getUid(), unitB.getUid()));
+        List<OrganisationUnit> cd = identifiableObjectManager.getByUid(OrganisationUnit.class, Arrays.asList(unitC.getUid(), unitD.getUid()));
 
-        assertTrue(ab.contains(dataElementA));
-        assertTrue(ab.contains(dataElementB));
-        assertFalse(ab.contains(dataElementC));
-        assertFalse(ab.contains(dataElementD));
+        assertTrue(ab.contains(unitA));
+        assertTrue(ab.contains(unitB));
+        assertFalse(ab.contains(unitC));
+        assertFalse(ab.contains(unitD));
 
-        assertFalse(cd.contains(dataElementA));
-        assertFalse(cd.contains(dataElementB));
-        assertTrue(cd.contains(dataElementC));
-        assertTrue(cd.contains(dataElementD));
+        assertFalse(cd.contains(unitA));
+        assertFalse(cd.contains(unitB));
+        assertTrue(cd.contains(unitC));
+        assertTrue(cd.contains(unitD));
     }
 
     @Test
     public void getByUidOrderedTest() {
-        OrganisationUnit dataElementA = createOrganisationUnit('A');
-        OrganisationUnit dataElementB = createOrganisationUnit('B');
+        OrganisationUnit unitA = createOrganisationUnit('A');
+        OrganisationUnit unitB = createOrganisationUnit('B');
         ;
-        OrganisationUnit dataElementC = createOrganisationUnit('C');
-        OrganisationUnit dataElementD = createOrganisationUnit('D');
+        OrganisationUnit unitC = createOrganisationUnit('C');
+        OrganisationUnit unitD = createOrganisationUnit('D');
 
-        identifiableObjectManager.save(dataElementA);
-        identifiableObjectManager.save(dataElementB);
-        identifiableObjectManager.save(dataElementC);
-        identifiableObjectManager.save(dataElementD);
+        identifiableObjectManager.save(unitA);
+        identifiableObjectManager.save(unitB);
+        identifiableObjectManager.save(unitC);
+        identifiableObjectManager.save(unitD);
 
-        List<String> uids = Arrays.asList(dataElementA.getUid(), dataElementC.getUid(), dataElementB.getUid(), dataElementD.getUid());
+        List<String> uids = Arrays.asList(unitA.getUid(), unitC.getUid(), unitB.getUid(), unitD.getUid());
 
-        List<OrganisationUnit> expected = new ArrayList<>(Arrays.asList(dataElementA, dataElementC, dataElementB, dataElementD));
+        List<OrganisationUnit> expected = new ArrayList<>(Arrays.asList(unitA, unitC, unitB, unitD));
 
         List<OrganisationUnit> actual = new ArrayList<>(identifiableObjectManager.getByUidOrdered(OrganisationUnit.class, uids));
 
@@ -394,63 +394,62 @@ public class IdentifiableObjectManagerTest
 
     @Test
     public void testGetByCode() {
-        OrganisationUnit dataElementA = createOrganisationUnit('A');
-        OrganisationUnit dataElementB = createOrganisationUnit('B');
+        OrganisationUnit unitA = createOrganisationUnit('A');
+        OrganisationUnit unitB = createOrganisationUnit('B');
         ;
-        OrganisationUnit dataElementC = createOrganisationUnit('C');
-        OrganisationUnit dataElementD = createOrganisationUnit('D');
+        OrganisationUnit unitC = createOrganisationUnit('C');
+        OrganisationUnit unitD = createOrganisationUnit('D');
 
-        dataElementA.setCode("DE_A");
-        dataElementB.setCode("DE_B");
-        dataElementC.setCode("DE_C");
-        dataElementD.setCode("DE_D");
+        unitA.setCode("DE_A");
+        unitB.setCode("DE_B");
+        unitC.setCode("DE_C");
+        unitD.setCode("DE_D");
 
-        identifiableObjectManager.save(dataElementA);
-        identifiableObjectManager.save(dataElementB);
-        identifiableObjectManager.save(dataElementC);
-        identifiableObjectManager.save(dataElementD);
+        identifiableObjectManager.save(unitA);
+        identifiableObjectManager.save(unitB);
+        identifiableObjectManager.save(unitC);
+        identifiableObjectManager.save(unitD);
 
-        List<OrganisationUnit> ab = identifiableObjectManager.getByCode(OrganisationUnit.class, Arrays.asList(dataElementA.getCode(), dataElementB.getCode()));
-        List<OrganisationUnit> cd = identifiableObjectManager.getByCode(OrganisationUnit.class, Arrays.asList(dataElementC.getCode(), dataElementD.getCode()));
+        List<OrganisationUnit> ab = identifiableObjectManager.getByCode(OrganisationUnit.class, Arrays.asList(unitA.getCode(), unitB.getCode()));
+        List<OrganisationUnit> cd = identifiableObjectManager.getByCode(OrganisationUnit.class, Arrays.asList(unitC.getCode(), unitD.getCode()));
 
-        assertTrue(ab.contains(dataElementA));
-        assertTrue(ab.contains(dataElementB));
-        assertFalse(ab.contains(dataElementC));
-        assertFalse(ab.contains(dataElementD));
+        assertTrue(ab.contains(unitA));
+        assertTrue(ab.contains(unitB));
+        assertFalse(ab.contains(unitC));
+        assertFalse(ab.contains(unitD));
 
-        assertFalse(cd.contains(dataElementA));
-        assertFalse(cd.contains(dataElementB));
-        assertTrue(cd.contains(dataElementC));
-        assertTrue(cd.contains(dataElementD));
+        assertFalse(cd.contains(unitA));
+        assertFalse(cd.contains(unitB));
+        assertTrue(cd.contains(unitC));
+        assertTrue(cd.contains(unitD));
     }
 
     @Test
     public void getByUidNoAcl() {
-        OrganisationUnit dataElementA = createOrganisationUnit('A');
-        OrganisationUnit dataElementB = createOrganisationUnit('B');
-        ;
-        OrganisationUnit dataElementC = createOrganisationUnit('C');
+        OrganisationUnit unitA = createOrganisationUnit('A');
+        OrganisationUnit unitB = createOrganisationUnit('B');
+        OrganisationUnit unitC = createOrganisationUnit('C');
 
-        dataElementA.setCode("DE_A");
-        dataElementB.setCode("DE_B");
-        dataElementC.setCode("DE_C");
+        unitA.setCode("OU_A");
+        unitB.setCode("OU_B");
+        unitC.setCode("OU_C");
 
-        OrganisationUnit unit1 = createOrganisationUnit('A');
+        Person person = createUserCredentials('A', null);
 
-        identifiableObjectManager.save(unit1);
+        identifiableObjectManager.save(person);
 
-        identifiableObjectManager.save(dataElementA);
-        identifiableObjectManager.save(dataElementB);
-        identifiableObjectManager.save(dataElementC);
+        identifiableObjectManager.save(unitA);
+        identifiableObjectManager.save(unitB);
+        identifiableObjectManager.save(unitC);
 
-        List<String> uids = Lists.newArrayList(dataElementA.getUid(), dataElementB.getUid(), dataElementC.getUid());
+        List<String> uids = Lists.newArrayList(unitA.getUid(), unitB.getUid(), unitC.getUid());
 
-        List<OrganisationUnit> dataElements = identifiableObjectManager.getNoAcl(OrganisationUnit.class, uids);
+        List<OrganisationUnit> units = identifiableObjectManager.getNoAcl(OrganisationUnit.class, uids);
 
-        assertEquals(3, dataElements.size());
-        assertTrue(dataElements.contains(dataElementA));
-        assertTrue(dataElements.contains(dataElementB));
-        assertTrue(dataElements.contains(dataElementC));
+        assertEquals(3, units.size());
+        assertTrue(units.contains(unitA));
+        assertTrue(units.contains(unitB));
+        assertTrue(units.contains(unitC));
     }
 
     @Test
@@ -474,17 +473,17 @@ public class IdentifiableObjectManagerTest
 
     @Test
     public void testGetIdMapIdScheme() {
-        OrganisationUnit dataElementA = createOrganisationUnit('A');
-        OrganisationUnit dataElementB = createOrganisationUnit('B');
+        OrganisationUnit unitA = createOrganisationUnit('A');
+        OrganisationUnit unitB = createOrganisationUnit('B');
         ;
 
-        organisationUnitService.addOrganisationUnit(dataElementA);
-        organisationUnitService.addOrganisationUnit(dataElementB);
+        organisationUnitService.addOrganisationUnit(unitA);
+        organisationUnitService.addOrganisationUnit(unitB);
 
         Map<String, OrganisationUnit> map = identifiableObjectManager.getIdMap(OrganisationUnit.class, IdScheme.CODE);
 
-        assertEquals(dataElementA, map.get("DataElementCodeA"));
-        assertEquals(dataElementB, map.get("DataElementCodeB"));
-        assertNull(map.get("DataElementCodeX"));
+        assertEquals(unitA, map.get("OrganisationUnitCodeA"));
+        assertEquals(unitB, map.get("OrganisationUnitCodeB"));
+        assertNull(map.get("OrganisationUnitCodeX"));
     }
 }
