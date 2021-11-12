@@ -10,7 +10,8 @@ import org.nmcpye.activitiesmanagement.extended.common.CodeGenerator;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitGroupService;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitGroupStore;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitService;
-import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitStore;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.pagingrepository.OrganisationUnitGroupPagingRepository;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.pagingrepository.OrganisationUnitPagingRepository;
 import org.nmcpye.activitiesmanagement.extended.systemmodule.system.startup.TransactionContextStartupRoutine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,13 +32,13 @@ public class OrgUnitPopulator extends TransactionContextStartupRoutine {
     protected static final String BASE_UID = "abcdefghij";
     protected static final String BASE_OU_UID = "oustupefgh";
 
-    private final OrganisationUnitStore orgUnitStore;
+    private final OrganisationUnitPagingRepository orgUnitStore;
 
     private final OrganisationUnitService organisationUnitService;
 
     private final OrganisationUnitGroupService organisationUnitGroupService;
 
-    private final OrganisationUnitGroupStore orgUnitGroupStore;
+    private final OrganisationUnitGroupPagingRepository orgUnitGroupStore;
 
     private static Date date;
 
@@ -47,10 +48,10 @@ public class OrgUnitPopulator extends TransactionContextStartupRoutine {
     }
 
     public OrgUnitPopulator(
-        OrganisationUnitStore orgUnitStore,
+        OrganisationUnitPagingRepository orgUnitStore,
         OrganisationUnitService organisationUnitService,
         OrganisationUnitGroupService organisationUnitGroupService,
-        OrganisationUnitGroupStore orgUnitGroupStore
+        OrganisationUnitGroupPagingRepository orgUnitGroupStore
     ) {
         this.organisationUnitService = organisationUnitService;
         this.organisationUnitGroupService = organisationUnitGroupService;
