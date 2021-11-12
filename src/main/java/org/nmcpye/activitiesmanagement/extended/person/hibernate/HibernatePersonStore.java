@@ -9,7 +9,7 @@ import org.nmcpye.activitiesmanagement.extended.common.util.SqlHelper;
 import org.nmcpye.activitiesmanagement.extended.common.util.TextUtils;
 import org.nmcpye.activitiesmanagement.extended.person.PersonQueryParams;
 import org.nmcpye.activitiesmanagement.extended.person.PersonStore;
-import org.nmcpye.activitiesmanagement.extended.query.QueryUtils;
+import org.nmcpye.activitiesmanagement.extended.servicecoremodule.query.QueryUtils;
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

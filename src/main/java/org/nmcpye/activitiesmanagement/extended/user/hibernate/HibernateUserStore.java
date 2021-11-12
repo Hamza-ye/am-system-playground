@@ -8,7 +8,7 @@ import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectUtils;
 import org.nmcpye.activitiesmanagement.extended.common.hibernate.HibernateIdentifiableObjectStore;
 import org.nmcpye.activitiesmanagement.extended.common.util.SqlHelper;
 import org.nmcpye.activitiesmanagement.extended.common.util.TextUtils;
-import org.nmcpye.activitiesmanagement.extended.query.QueryUtils;
+import org.nmcpye.activitiesmanagement.extended.servicecoremodule.query.QueryUtils;
 import org.nmcpye.activitiesmanagement.extended.user.UserQueryParams;
 import org.nmcpye.activitiesmanagement.extended.user.UserStore;
 import org.nmcpye.activitiesmanagement.service.UserService;

@@ -1,4 +1,4 @@
-package org.nmcpye.activitiesmanagement.extended.query;
+package org.nmcpye.activitiesmanagement.extended.servicecoremodule.query;
 
 public class QueryParserException extends RuntimeException {
 

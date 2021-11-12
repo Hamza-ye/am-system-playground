@@ -12,7 +12,7 @@ import org.nmcpye.activitiesmanagement.extended.hibernatemodule.hibernate.JpaQue
 import org.nmcpye.activitiesmanagement.extended.hibernatemodule.hibernate.exception.DeleteAccessDeniedException;
 import org.nmcpye.activitiesmanagement.extended.hibernatemodule.hibernate.exception.ReadAccessDeniedException;
 import org.nmcpye.activitiesmanagement.extended.hibernatemodule.hibernate.exception.UpdateAccessDeniedException;
-import org.nmcpye.activitiesmanagement.extended.query.JpaQueryUtils;
+import org.nmcpye.activitiesmanagement.extended.servicecoremodule.query.JpaQueryUtils;
 import org.nmcpye.activitiesmanagement.security.AuthoritiesConstants;
 import org.nmcpye.activitiesmanagement.security.SecurityUtils;
 import org.nmcpye.activitiesmanagement.service.UserService;
