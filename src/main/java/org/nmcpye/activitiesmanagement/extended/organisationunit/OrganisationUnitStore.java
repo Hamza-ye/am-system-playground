@@ -1,14 +1,13 @@
 package org.nmcpye.activitiesmanagement.extended.organisationunit;
 
+import org.nmcpye.activitiesmanagement.domain.DataSet;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectStore;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Defines methods for persisting OrganisationUnits.
- *
  */
 public interface OrganisationUnitStore
     extends IdentifiableObjectStore<OrganisationUnit> {
@@ -23,7 +22,7 @@ public interface OrganisationUnitStore
      *
      * @param lastUpdated OrganisationUnits from this date
      * @return a list of all OrganisationUnits, or an empty list if
-     *         there are no OrganisationUnits.
+     * there are no OrganisationUnits.
      */
     List<OrganisationUnit> getAllOrganisationUnitsByLastUpdated(Date lastUpdated);
 
@@ -32,7 +31,7 @@ public interface OrganisationUnitStore
      * OrganisationUnit with no parent/has the parent set to null.
      *
      * @return a list containing all root OrganisationUnits, or an empty
-     *         list if there are no OrganisationUnits.
+     * list if there are no OrganisationUnits.
      */
     List<OrganisationUnit> getRootOrganisationUnits();
 
@@ -48,8 +47,8 @@ public interface OrganisationUnitStore
      * sub-hierarchy of the given parent OrganisationUnit and members of
      * the given object based on the collection of the given collection name.
      *
-     * @param parent the parent OrganisationUnit.
-     * @param member the member object.
+     * @param parent         the parent OrganisationUnit.
+     * @param member         the member object.
      * @param collectionName the name of the collection.
      * @return the count of member OrganisationUnits.
      */
@@ -63,17 +62,16 @@ public interface OrganisationUnitStore
      */
     List<OrganisationUnit> getOrganisationUnits(OrganisationUnitQueryParams params);
 
-    //    /**
-    //     * Creates a mapping between organisation unit UID and set of data set UIDs
-    //     * being assigned to the organisation unit.
-    //     *
-    //     * @param organisationUnits the parent organisation units of the hierarchy to include,
-    //     *         ignored if null.
-    //     * @param dataSets the data set to include, ignored if null.
-    //     *
-    //     * @return a map of sets.
-    //     */
-    //    Map<String, Set<String>> getOrganisationUnitDataSetAssocationMap(Collection<OrganisationUnit> organisationUnits, Collection<DataSet> dataSets);
+    /**
+     * Creates a mapping between organisation unit UID and set of data set UIDs
+     * being assigned to the organisation unit.
+     *
+     * @param organisationUnits the parent organisation units of the hierarchy to include,
+     *                          ignored if null.
+     * @param dataSets          the data set to include, ignored if null.
+     * @return a map of sets.
+     */
+    Map<String, Set<String>> getOrganisationUnitDataSetAssocationMap(Collection<OrganisationUnit> organisationUnits, Collection<DataSet> dataSets);
 
     /**
      * Retrieves the objects where its coordinate is within the 4 area points.
@@ -83,7 +81,7 @@ public interface OrganisationUnitStore
      * Index 2: Minimum latitude (south edge of box shape)
      * Index 3: Minumum longitude (west edge of box shape)
      *
-     * @param box      the 4 area points.
+     * @param box the 4 area points.
      * @return a list of objects.
      */
     List<OrganisationUnit> getWithinCoordinateArea(double[] box);
