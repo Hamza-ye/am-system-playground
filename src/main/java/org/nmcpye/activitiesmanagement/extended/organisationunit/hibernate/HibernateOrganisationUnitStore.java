@@ -24,7 +24,8 @@ import java.util.Date;
 import java.util.List;
 
 @Repository("org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitStore")
-public class HibernateOrganisationUnitStore extends HibernateIdentifiableObjectStore<OrganisationUnit> implements OrganisationUnitStore {
+public class HibernateOrganisationUnitStore
+    extends HibernateIdentifiableObjectStore<OrganisationUnit> implements OrganisationUnitStore {
 
     private final Logger log = LoggerFactory.getLogger(HibernateOrganisationUnitStore.class);
 

@@ -10,7 +10,8 @@ import java.util.List;
  * Defines methods for persisting OrganisationUnits.
  *
  */
-public interface OrganisationUnitStore extends IdentifiableObjectStore<OrganisationUnit> {
+public interface OrganisationUnitStore
+    extends IdentifiableObjectStore<OrganisationUnit> {
     String ID = OrganisationUnitStore.class.getName();
 
     // -------------------------------------------------------------------------
