@@ -11,8 +11,8 @@ import javax.persistence.*;
 import java.util.*;
 import java.util.regex.Pattern;
 
-@Entity
-@Table(name = "Sql_view")
+//@Entity
+//@Table(name = "Sql_view")
 public class SqlView
     extends BaseIdentifiableObject
     implements MetadataObject

@@ -9,29 +9,27 @@ import java.util.Map;
  * {@link Property} values from a {@link Class} or additional information
  * associated with that {@link Class} to build a
  * {@link org.nmcpye.activitiesmanagement.extended.schema.Schema}.
- *
+ * <p>
  * The main sources of information are Hibernate, provided by
  * {@link HibernatePropertyIntrospector} and Jackson, provided by
  * {@link JacksonPropertyIntrospector}.
- *
+ * <p>
  * The baseline created by the main sources is enriched by the
  * {@link PropertyPropertyIntrospector} and
  * {@link TranslatablePropertyIntrospector} which look for optional annotations.
- *
  */
 @FunctionalInterface
-public interface PropertyIntrospector
-{
+public interface PropertyIntrospector {
 
     /**
      * Adds or modifies the provided {@link Property} map for the provided
      * {@link Class}.
      *
-     * @param klass The type to introspect
+     * @param klass      The type to introspect
      * @param properties the intermediate and result state.
-     *        {@link PropertyIntrospector} running before this one might already
-     *        have added to the provided map. This {@link PropertyIntrospector}
-     *        can add or modify the {@link Property} entries further.
+     *                   {@link PropertyIntrospector} running before this one might already
+     *                   have added to the provided map. This {@link PropertyIntrospector}
+     *                   can add or modify the {@link Property} entries further.
      */
     void introspect(Class<?> klass, Map<String, Property> properties);
 
@@ -40,13 +38,12 @@ public interface PropertyIntrospector
      *
      * @param next the {@link PropertyIntrospector} called after this one
      * @return A {@link PropertyIntrospector} that first calls this instance and
-     *         then the next instance
+     * then the next instance
      */
-    default PropertyIntrospector then(PropertyIntrospector next)
-    {
-        return ( klass, properties ) -> {
-            introspect( klass, properties );
-            next.introspect( klass, properties );
+    default PropertyIntrospector then(PropertyIntrospector next) {
+        return (klass, properties) -> {
+            introspect(klass, properties);
+            next.introspect(klass, properties);
         };
     }
 }

@@ -99,12 +99,6 @@ public class DataSet extends BaseDimensionalItemObject
     @JsonIgnoreProperties(value = {"user", "createdBy", "lastUpdatedBy", "members", "managedByGroups", "managedGroups"}, allowSetters = true)
     private PeopleGroup notificationRecipients;
 
-    @ManyToOne
-    private User user;
-
-    @ManyToOne
-    private User lastUpdatedBy;
-
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(

@@ -13,8 +13,7 @@ import java.util.Map;
  * @author Morten Olav Hansen <mortenoh@gmail.com>
  */
 @FunctionalInterface
-public interface PropertyIntrospectorService
-{
+public interface PropertyIntrospectorService {
 
     /**
      * Returns properties as a map property-name => Property class
@@ -30,9 +29,8 @@ public interface PropertyIntrospectorService
      * @param klass Class to get properties for
      * @return List of properties for Class
      */
-    default List<Property> getProperties(Class<?> klass)
-    {
-        return Lists.newArrayList( getPropertiesMap( klass ).values() );
+    default List<Property> getProperties(Class<?> klass) {
+        return Lists.newArrayList(getPropertiesMap(klass).values());
     }
 
 }

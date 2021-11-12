@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Project.
+    -->
+    <changeSet id="Extend_project_entity-1" author="Hamza">
+
+        <dropForeignKeyConstraint baseTableName="project" constraintName="fk_project__user_id"/>
+        <dropForeignKeyConstraint baseTableName="project" constraintName="fk_project__last_updated_by_id"/>
+
+        <renameColumn tableName="project" oldColumnName="user_id" newColumnName="created_by" />
+        <renameColumn tableName="project" oldColumnName="last_updated_by_id" newColumnName="last_updated_by" />
+
+    </changeSet>
+
+    <changeSet id="Extend_project_entity-2" author="Hamza">
+        <addForeignKeyConstraint baseColumnNames="created_by"
+                                 baseTableName="project"
+                                 constraintName="fk_project__created_by"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="last_updated_by"
+                                 baseTableName="project"
+                                 constraintName="fk_project__last_updated_by"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+    </changeSet>
+</databaseChangeLog>
