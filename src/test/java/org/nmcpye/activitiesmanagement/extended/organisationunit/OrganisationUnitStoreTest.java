@@ -7,6 +7,8 @@ import org.nmcpye.activitiesmanagement.IntegrationTest;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitLevel;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.pagingrepository.OrganisationUnitGroupPagingRepository;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.pagingrepository.OrganisationUnitPagingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -20,10 +22,10 @@ public class OrganisationUnitStoreTest extends AMTest {
     private OrganisationUnitLevelStore orgUnitLevelStore;
 
     @Autowired
-    private OrganisationUnitStore orgUnitStore;
+    private OrganisationUnitPagingRepository orgUnitStore;
 
     @Autowired
-    private OrganisationUnitGroupStore orgUnitGroupStore;
+    private OrganisationUnitGroupPagingRepository orgUnitGroupStore;
 
     //    @Autowired
     //    private IdentifiableObjectManager idObjectManager;
@@ -63,16 +65,16 @@ public class OrganisationUnitStoreTest extends AMTest {
     }
 
     public void testGetOrganisationUnitsWithoutGroups() {
-        orgUnitStore.save(ouA);
-        orgUnitStore.save(ouB);
-        orgUnitStore.save(ouC);
-        orgUnitStore.save(ouD);
-        orgUnitStore.save(ouE);
+        orgUnitStore.saveObject(ouA);
+        orgUnitStore.saveObject(ouB);
+        orgUnitStore.saveObject(ouC);
+        orgUnitStore.saveObject(ouD);
+        orgUnitStore.saveObject(ouE);
 
         ougA.addOrganisationUnit(ouA);
         ougA.addOrganisationUnit(ouB);
 
-        orgUnitGroupStore.save(ougA);
+        orgUnitGroupStore.saveObject(ougA);
 
         //        idObjectManager.save( ougA );
 
@@ -112,18 +114,18 @@ public class OrganisationUnitStoreTest extends AMTest {
 
     @Test
     public void testGetOrganisationUnits() {
-        orgUnitStore.save(ouA);
-        orgUnitStore.save(ouB);
-        orgUnitStore.save(ouC);
-        orgUnitStore.save(ouD);
-        orgUnitStore.save(ouE);
-        orgUnitStore.save(ouF);
-        orgUnitStore.save(ouG);
+        orgUnitStore.saveObject(ouA);
+        orgUnitStore.saveObject(ouB);
+        orgUnitStore.saveObject(ouC);
+        orgUnitStore.saveObject(ouD);
+        orgUnitStore.saveObject(ouE);
+        orgUnitStore.saveObject(ouF);
+        orgUnitStore.saveObject(ouG);
 
         ougA.getMembers().addAll(Sets.newHashSet(ouD, ouF));
         ougB.getMembers().addAll(Sets.newHashSet(ouE, ouG));
-        orgUnitGroupStore.save(ougA);
-        orgUnitGroupStore.save(ougB);
+        orgUnitGroupStore.saveObject(ougA);
+        orgUnitGroupStore.saveObject(ougB);
 
         orgUnitStore.forceUpdatePaths();
 
@@ -281,9 +283,9 @@ public class OrganisationUnitStoreTest extends AMTest {
         OrganisationUnitLevel levelA = new OrganisationUnitLevel(1, "National");
         OrganisationUnitLevel levelB = new OrganisationUnitLevel(2, "District");
 
-        orgUnitLevelStore.save(levelA);
+        orgUnitLevelStore.saveObject(levelA);
         long idA = levelA.getId();
-        orgUnitLevelStore.save(levelB);
+        orgUnitLevelStore.saveObject(levelB);
         long idB = levelB.getId();
 
         assertEquals(levelA, orgUnitLevelStore.get(idA));
@@ -295,8 +297,8 @@ public class OrganisationUnitStoreTest extends AMTest {
         OrganisationUnitLevel levelA = new OrganisationUnitLevel(1, "National");
         OrganisationUnitLevel levelB = new OrganisationUnitLevel(2, "District");
 
-        orgUnitLevelStore.save(levelA);
-        orgUnitLevelStore.save(levelB);
+        orgUnitLevelStore.saveObject(levelA);
+        orgUnitLevelStore.saveObject(levelB);
 
         List<OrganisationUnitLevel> actual = orgUnitLevelStore.getAll();
 
@@ -311,9 +313,9 @@ public class OrganisationUnitStoreTest extends AMTest {
         OrganisationUnitLevel levelA = new OrganisationUnitLevel(1, "National");
         OrganisationUnitLevel levelB = new OrganisationUnitLevel(2, "District");
 
-        orgUnitLevelStore.save(levelA);
+        orgUnitLevelStore.saveObject(levelA);
         long idA = levelA.getId();
-        orgUnitLevelStore.save(levelB);
+        orgUnitLevelStore.saveObject(levelB);
         long idB = levelB.getId();
 
         assertNotNull(orgUnitLevelStore.get(idA));
@@ -342,23 +344,23 @@ public class OrganisationUnitStoreTest extends AMTest {
 
         assertEquals(0, orgUnitStore.getMaxLevel());
 
-        orgUnitStore.save(ouA);
+        orgUnitStore.saveObject(ouA);
 
         orgUnitStore.forceUpdatePaths();
 
         assertEquals(1, orgUnitStore.getMaxLevel());
 
-        orgUnitStore.save(ouB);
-        orgUnitStore.save(ouC);
+        orgUnitStore.saveObject(ouB);
+        orgUnitStore.saveObject(ouC);
 
         orgUnitStore.forceUpdatePaths();
 
         assertEquals(2, orgUnitStore.getMaxLevel());
 
-        orgUnitStore.save(ouD);
-        orgUnitStore.save(ouE);
-        orgUnitStore.save(ouF);
-        orgUnitStore.save(ouG);
+        orgUnitStore.saveObject(ouD);
+        orgUnitStore.saveObject(ouE);
+        orgUnitStore.saveObject(ouF);
+        orgUnitStore.saveObject(ouG);
 
         orgUnitStore.forceUpdatePaths();
 
