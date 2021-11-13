@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This tests the {@link RelativePropertyContext}. We use a integration test so
- * we can use DHIS2 model to test the {@link RelativePropertyContext} with.
  */
 
 @IntegrationTest
