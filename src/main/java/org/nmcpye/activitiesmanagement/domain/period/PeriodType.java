@@ -1,5 +1,6 @@
 package org.nmcpye.activitiesmanagement.domain.period;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.google.common.collect.ImmutableMap;
 import org.hibernate.annotations.Cache;
@@ -362,6 +363,7 @@ public abstract class PeriodType implements Serializable {
      *
      * @return a unique name for the PeriodType. E.g. "Monthly".
      */
+    @JsonProperty
     public abstract String getName();
 
     /**
@@ -439,6 +441,7 @@ public abstract class PeriodType implements Serializable {
      *
      * @return the frequency order.
      */
+    @JsonProperty
     public abstract int getFrequencyOrder();
 
     /**
@@ -528,6 +531,7 @@ public abstract class PeriodType implements Serializable {
      *
      * @return the iso8601 format.
      */
+    @JsonProperty
     public abstract String getIsoFormat();
 
     // -------------------------------------------------------------------------
@@ -681,6 +685,7 @@ public abstract class PeriodType implements Serializable {
      *
      * @return true if the period spans more than one calendar year.
      */
+    @JsonProperty
     public boolean spansMultipleCalendarYears() {
         return false;
     }
