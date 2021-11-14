@@ -11,31 +11,26 @@ import org.springframework.util.Assert;
 import java.util.List;
 
 public class TypeReportWebMessageResponse
-    extends AbstractWebMessageResponse
-{
+    extends AbstractWebMessageResponse {
     private final TypeReport typeReport;
 
-    public TypeReportWebMessageResponse( TypeReport typeReport )
-    {
-        Assert.notNull( typeReport, "ImportReport is require to be non-null." );
+    public TypeReportWebMessageResponse(TypeReport typeReport) {
+        Assert.notNull(typeReport, "ImportReport is require to be non-null.");
         this.typeReport = typeReport;
     }
 
     @JsonProperty
-    public Status getStatus()
-    {
-        return typeReport.getErrorReports().isEmpty() ? Status.OK : Status.ERROR;
+    public Status getStatus() {
+        return !typeReport.hasErrorReports() ? Status.OK : Status.ERROR;
     }
 
     @JsonProperty
-    public Stats getStats()
-    {
+    public Stats getStats() {
         return typeReport.getStats();
     }
 
     @JsonProperty
-    public List<ObjectReport> getObjectReports()
-    {
+    public List<ObjectReport> getObjectReports() {
         return typeReport.getObjectReports();
     }
 }

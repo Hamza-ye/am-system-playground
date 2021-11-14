@@ -76,7 +76,7 @@ public class DefaultPersonService implements PersonServiceExtended {
         }
         AuditLogUtil.infoWrapper(log, userLogin, person, AuditLogUtil.ACTION_CREATE);
 
-        personStore.save(person);
+        personStore.saveObject(person);
 
         return person.getId();
     }
@@ -349,7 +349,7 @@ public class DefaultPersonService implements PersonServiceExtended {
     @Override
     @Transactional
     public long addUserAuthorityGroup(PersonAuthorityGroup userAuthorityGroup) {
-        userAuthorityGroupStore.save(userAuthorityGroup);
+        userAuthorityGroupStore.saveObject(userAuthorityGroup);
         return userAuthorityGroup.getId();
     }
 
@@ -425,7 +425,7 @@ public class DefaultPersonService implements PersonServiceExtended {
     @Override
     @Transactional
     public long addUserCredentials(Person userCredentials) {
-        personStore.save(userCredentials);
+        personStore.saveObject(userCredentials);
         return userCredentials.getId();
     }
 

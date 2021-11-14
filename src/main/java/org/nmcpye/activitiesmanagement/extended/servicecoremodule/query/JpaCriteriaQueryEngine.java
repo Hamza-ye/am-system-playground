@@ -10,7 +10,8 @@ import org.nmcpye.activitiesmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -28,9 +29,10 @@ public class JpaCriteriaQueryEngine<T extends IdentifiableObject>
 
     private final QueryPlanner queryPlanner;
 
-//    private final List<InternalHibernateGenericStore<T>> hibernateGenericStores;
+    @PersistenceContext
+    EntityManager entityManager;
 
-    private final EntityManagerFactory entityManagerFactory;
+//    private final List<InternalHibernateGenericStore<T>> hibernateGenericStores;
 
     private final QueryCacheManager queryCacheManager;
 
@@ -38,16 +40,17 @@ public class JpaCriteriaQueryEngine<T extends IdentifiableObject>
 
     @Autowired
     public JpaCriteriaQueryEngine(UserService userService, QueryPlanner queryPlanner,
-                                  EntityManagerFactory entityManagerFactory,
                                   QueryCacheManager queryCacheManager) {
         checkNotNull(userService);
         checkNotNull(queryPlanner);
-        checkNotNull(entityManagerFactory);
 
         this.userService = userService;
         this.queryPlanner = queryPlanner;
-        this.entityManagerFactory = entityManagerFactory;
         this.queryCacheManager = queryCacheManager;
+    }
+
+    private Session getSession() {
+        return entityManager.unwrap(Session.class);
     }
 
     @Override
@@ -71,7 +74,7 @@ public class JpaCriteriaQueryEngine<T extends IdentifiableObject>
             query = queryPlan.getPersistedQuery();
         }
 
-        CriteriaBuilder builder = entityManagerFactory.getCriteriaBuilder();
+        CriteriaBuilder builder = getSession().getCriteriaBuilder();
 
         CriteriaQuery<T> criteriaQuery = builder.createQuery(klass);
         Root<T> root = criteriaQuery.from(klass);
@@ -86,7 +89,7 @@ public class JpaCriteriaQueryEngine<T extends IdentifiableObject>
 
             criteriaQuery.where(predicate);
 
-            TypedQuery<T> typedQuery = entityManagerFactory.createEntityManager().unwrap(Session.class).createQuery(criteriaQuery);
+            TypedQuery<T> typedQuery = getSession().createQuery(criteriaQuery);
 
             typedQuery.setFirstResult(query.getFirstResult());
             typedQuery.setMaxResults(query.getMaxResults());
@@ -110,7 +113,7 @@ public class JpaCriteriaQueryEngine<T extends IdentifiableObject>
                 .collect(Collectors.toList()));
         }
 
-        TypedQuery<T> typedQuery = entityManagerFactory.createEntityManager().unwrap(Session.class).createQuery(criteriaQuery);
+        TypedQuery<T> typedQuery = getSession().createQuery(criteriaQuery);
 
         typedQuery.setFirstResult(query.getFirstResult());
         typedQuery.setMaxResults(query.getMaxResults());
@@ -144,7 +147,7 @@ public class JpaCriteriaQueryEngine<T extends IdentifiableObject>
             query = queryPlan.getPersistedQuery();
         }
 
-        CriteriaBuilder builder = entityManagerFactory.getCriteriaBuilder();
+        CriteriaBuilder builder = getSession().getCriteriaBuilder();
 
         CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
         Root<T> root = criteriaQuery.from(klass);
@@ -166,7 +169,7 @@ public class JpaCriteriaQueryEngine<T extends IdentifiableObject>
                 .collect(Collectors.toList()));
         }
 
-        TypedQuery<Long> typedQuery = entityManagerFactory.createEntityManager().unwrap(Session.class).createQuery(criteriaQuery);
+        TypedQuery<Long> typedQuery = getSession().createQuery(criteriaQuery);
 
         return typedQuery.getSingleResult();
     }

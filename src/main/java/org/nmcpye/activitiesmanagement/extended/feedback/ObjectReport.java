@@ -1,6 +1,7 @@
 package org.nmcpye.activitiesmanagement.extended.feedback;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObject;
@@ -8,15 +9,16 @@ import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObject;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
-public class ObjectReport
-{
+public class ObjectReport implements ErrorReportContainer {
     private final Class<?> klass;
 
-    private Integer index;
+    private final Integer index;
 
     /**
      * UID of object (if object is id object).
@@ -28,159 +30,146 @@ public class ObjectReport
      */
     private String displayName;
 
-    private Map<ErrorCode, List<ErrorReport>> errorReportsByCode = new HashMap<>();
+    private final Map<ErrorCode, List<ErrorReport>> errorReportsByCode = new EnumMap<>(ErrorCode.class);
 
-    public ObjectReport(@Nonnull IdentifiableObject object, @Nonnull ObjectIndexProvider objectIndexProvider )
-    {
-        this( object, objectIndexProvider, null );
+    public ObjectReport(@Nonnull IdentifiableObject object, @Nonnull ObjectIndexProvider objectIndexProvider) {
+        this(object, objectIndexProvider, null);
     }
 
-    public ObjectReport(@Nonnull IdentifiableObject object, @Nonnull ObjectIndexProvider objectIndexProvider, @Nullable String uid )
-    {
-        this( object.getClass(), objectIndexProvider.mergeObjectIndex( object ), uid == null ? object.getUid() : uid );
+    public ObjectReport(@Nonnull IdentifiableObject object, @Nonnull ObjectIndexProvider objectIndexProvider,
+                        @Nullable String uid) {
+        this(object.getClass(), objectIndexProvider.mergeObjectIndex(object), uid == null ? object.getUid() : uid);
     }
 
     @JsonCreator
-    public ObjectReport(@JsonProperty( "klass" ) Class<?> klass, @JsonProperty( "index" ) Integer index )
-    {
+    public ObjectReport(@JsonProperty("klass") Class<?> klass, @JsonProperty("index") Integer index) {
         this.klass = klass;
         this.index = index;
     }
 
-    public ObjectReport( Class<?> klass, Integer index, String uid )
-    {
+    public ObjectReport(Class<?> klass, Integer index, String uid) {
         this.klass = klass;
         this.index = index;
         this.uid = uid;
     }
 
-    public ObjectReport( Class<?> klass, Integer index, String uid, String displayName )
-    {
+    public ObjectReport(Class<?> klass, Integer index, String uid, String displayName) {
         this.klass = klass;
         this.index = index;
         this.uid = uid;
         this.displayName = displayName;
     }
 
-    public ObjectReport( ObjectReport objectReport )
-    {
+    public ObjectReport(ObjectReport objectReport) {
         this.klass = objectReport.getKlass();
         this.index = objectReport.getIndex();
         this.uid = objectReport.getUid();
         this.displayName = objectReport.getDisplayName();
     }
 
-    //-----------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------
     // Utility Methods
-    //-----------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------
 
-    public void merge( ObjectReport objectReport )
-    {
-        addErrorReports( objectReport.getErrorReports() );
+    public ObjectReport merge(ObjectReport objectReport) {
+        objectReport.forEachErrorReport(this::addErrorReport);
+        return this;
     }
 
-    public void addErrorReports( List<? extends ErrorReport> errorReports )
-    {
-        errorReports.forEach( this::addErrorReport );
+    public void addErrorReports(List<? extends ErrorReport> errorReports) {
+        errorReports.forEach(this::addErrorReport);
     }
 
-    public void addErrorReport( ErrorReport errorReport )
-    {
-        if ( !errorReportsByCode.containsKey( errorReport.getErrorCode() ) )
-        {
-            errorReportsByCode.put( errorReport.getErrorCode(), new ArrayList<>() );
-        }
-
-        errorReportsByCode.get( errorReport.getErrorCode() ).add( errorReport );
+    public void addErrorReport(ErrorReport errorReport) {
+        errorReportsByCode.computeIfAbsent(errorReport.getErrorCode(), key -> new ArrayList<>()).add(errorReport);
     }
 
-    //-----------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------
     // Getters and Setters
-    //-----------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------
 
     @JsonProperty
-    public Class<?> getKlass()
-    {
+    public Class<?> getKlass() {
         return klass;
     }
 
     @JsonProperty
-    public Integer getIndex()
-    {
+    public Integer getIndex() {
         return index;
     }
 
     @JsonProperty
-    public String getUid()
-    {
+    public String getUid() {
         return uid;
     }
 
     @JsonProperty
-    public String getDisplayName()
-    {
+    public String getDisplayName() {
         return displayName;
     }
 
-    public void setDisplayName( String displayName )
-    {
+    public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
 
     @JsonProperty
-    public List<ErrorReport> getErrorReports()
-    {
+    public List<ErrorReport> getErrorReports() {
         List<ErrorReport> errorReports = new ArrayList<>();
-        errorReportsByCode.values().forEach( errorReports::addAll );
-
+        forEachErrorReport(errorReports::add);
         return errorReports;
     }
-    
+
     @JsonProperty
-    public void setErrorReports( List<ErrorReport> errorReports )
-    {
-        if ( errorReports != null )
-        {
-            errorReports.forEach( er -> {
-                List<ErrorReport> errorReportForCode = errorReportsByCode.get( er.getErrorCode() );
-                if ( errorReportForCode == null )
-                {
-                    errorReportForCode = new ArrayList<>();
-                }
-                errorReportForCode.add( er );
-                errorReportsByCode.put( er.getErrorCode(), errorReportForCode );
-            } );
+    public void setErrorReports(List<ErrorReport> errorReports) {
+        errorReportsByCode.clear();
+        if (errorReports != null) {
+            errorReports.forEach(
+                er -> errorReportsByCode.computeIfAbsent(er.getErrorCode(), key -> new ArrayList<>()).add(er));
         }
     }
 
-    public List<ErrorCode> getErrorCodes()
-    {
-        return new ArrayList<>( errorReportsByCode.keySet() );
+    @JsonIgnore
+    @Override
+    public int getErrorReportsCount() {
+        return errorReportsByCode.values().stream().mapToInt(List::size).sum();
     }
 
-    public Map<ErrorCode, List<ErrorReport>> getErrorReportsByCode()
-    {
-        return errorReportsByCode;
+    @Override
+    public int getErrorReportsCount(ErrorCode errorCode) {
+        List<ErrorReport> reports = errorReportsByCode.get(errorCode);
+        return reports == null ? 0 : reports.size();
     }
 
-    public boolean isEmpty()
-    {
+    @Override
+    public boolean hasErrorReports() {
+        return !errorReportsByCode.isEmpty();
+    }
+
+    @Override
+    public boolean hasErrorReport(Predicate<ErrorReport> test) {
+        return errorReportsByCode.values().stream().anyMatch(reports -> reports.stream().anyMatch(test));
+    }
+
+    @Override
+    public void forEachErrorReport(Consumer<ErrorReport> reportConsumer) {
+        errorReportsByCode.values().forEach(reports -> reports.forEach(reportConsumer));
+    }
+
+    public boolean isEmpty() {
         return errorReportsByCode.isEmpty();
     }
 
-    public int size()
-    {
+    public int size() {
         return errorReportsByCode.size();
     }
 
     @Override
-    public String toString()
-    {
-        return MoreObjects.toStringHelper( this )
-            .add( "klass", klass )
-            .add( "index", index )
-            .add( "uid", uid )
-            .add( "errorReports", getErrorReports() )
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+            .add("klass", klass)
+            .add("index", index)
+            .add("uid", uid)
+            .add("errorReports", getErrorReports())
             .toString();
     }
 }

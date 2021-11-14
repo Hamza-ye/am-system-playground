@@ -6,6 +6,8 @@ import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitLevel;
+import org.nmcpye.activitiesmanagement.extended.common.DisplayProperty;
+import org.nmcpye.activitiesmanagement.extended.common.SortProperty;
 import org.nmcpye.activitiesmanagement.extended.common.collection.ListUtils;
 import org.nmcpye.activitiesmanagement.extended.common.filter.FilterUtils;
 import org.nmcpye.activitiesmanagement.extended.hierarchy.HierarchyViolationException;
@@ -243,14 +245,14 @@ public class DefaultOrganisationUnitService implements OrganisationUnitService {
         int rootLevel = organisationUnit.getLevel();
 
         Integer levels = maxLevels != null ? (rootLevel + maxLevels - 1) : null;
-        //        SortProperty orderBy = SortProperty
-        //            .fromValue( userSettingService.getUserSetting( UserSettingKey.ANALYSIS_DISPLAY_PROPERTY ).toString() );
+                SortProperty orderBy = SortProperty
+                   .fromValue(DisplayProperty.class.toString());
 
         OrganisationUnitQueryParams params = new OrganisationUnitQueryParams();
         params.setParents(Sets.newHashSet(organisationUnit));
         params.setMaxLevels(levels);
         params.setFetchChildren(true);
-        //        params.setOrderBy( orderBy );
+        params.setOrderBy( orderBy );
 
         return organisationUnitStore.getOrganisationUnits(params);
     }

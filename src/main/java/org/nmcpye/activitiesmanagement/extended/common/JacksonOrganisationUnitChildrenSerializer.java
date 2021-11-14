@@ -54,10 +54,9 @@ public class JacksonOrganisationUnitChildrenSerializer extends JsonSerializer<Or
         jgen.writeFieldName("lastUpdated");
         provider.defaultSerializeDateValue(value.getLastUpdated(), jgen);
 
-        //            if ( value.getHref() != null )
-        //            {
-        //                jgen.writeStringField( "href", value.getHref() );
-        //            }
+        if (value.getHref() != null) {
+            jgen.writeStringField("href", value.getHref());
+        }
 
         jgen.writeBooleanField("hasChildren", value.hasChild());
 

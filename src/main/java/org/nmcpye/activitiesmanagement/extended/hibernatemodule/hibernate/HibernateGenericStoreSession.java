@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@Deprecated
 public class HibernateGenericStoreSession<T> implements GenericStore<T> {
 
     private final Logger log = LoggerFactory.getLogger(HibernateGenericStoreSession.class);
@@ -299,7 +300,7 @@ public class HibernateGenericStoreSession<T> implements GenericStore<T> {
     // -------------------------------------------------------------------------
 
     @Override
-    public void save(T object) {
+    public void saveObject(T object) {
         AuditLogUtil.infoWrapper(log, object, AuditLogUtil.ACTION_CREATE);
 
         getSession().save(object);

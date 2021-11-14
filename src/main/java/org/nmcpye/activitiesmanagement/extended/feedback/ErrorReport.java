@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ErrorReport {
-
     protected final ErrorMessage message;
 
     protected final Class<?> mainKlass;
@@ -39,8 +38,7 @@ public class ErrorReport {
     public ErrorReport(
         @JsonProperty("message") String message,
         @JsonProperty("mainKlass") Class<?> mainKlass,
-        @JsonProperty("errorCode") ErrorCode errorCode
-    ) {
+        @JsonProperty("errorCode") ErrorCode errorCode) {
         this.mainKlass = mainKlass;
         this.message = new ErrorMessage(message, errorCode);
     }
@@ -111,8 +109,7 @@ public class ErrorReport {
 
     @Override
     public String toString() {
-        return MoreObjects
-            .toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
             .add("message", getMessage())
             .add("errorCode", message.getErrorCode())
             .add("mainKlass", mainKlass)

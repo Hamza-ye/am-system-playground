@@ -17,6 +17,7 @@ import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -29,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Implements the PeriodStore interface.
  */
-//@Repository("org.nmcpye.activitiesmanagement.extended.period.PeriodStore")
+@Repository("org.nmcpye.activitiesmanagement.extended.period.PeriodStore")
 public class HibernatePeriodStore extends HibernateIdentifiableObjectStore<Period> implements PeriodStore {
 
     private final Logger log = LoggerFactory.getLogger(HibernatePeriodStore.class);
@@ -55,7 +56,7 @@ public class HibernatePeriodStore extends HibernateIdentifiableObjectStore<Perio
     public void addPeriod(Period period) {
         period.setPeriodType(reloadPeriodType(period.getPeriodType()));
 
-        save(period);
+        saveObject(period);
     }
 
     @Override

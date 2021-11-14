@@ -29,15 +29,14 @@ public class DefaultPropertyIntrospectorService implements PropertyIntrospectorS
             .then(new JacksonPropertyIntrospector())
             .then(new PropertyPropertyIntrospector())
             .then(new GistPropertyIntrospector());
+    }
 
-//        this( new HibernatePropertyIntrospector(entityManager)
-//            .then( new JacksonPropertyIntrospector() )
-//            .then( new PropertyPropertyIntrospector() )
-//            .then( new GistPropertyIntrospector() ) );
+//    @Autowired
+//    public DefaultPropertyIntrospectorService() {
 //        this( new JacksonPropertyIntrospector()
 //            .then( new PropertyPropertyIntrospector() )
 //            .then( new GistPropertyIntrospector() ) );
-    }
+//    }
 
     public DefaultPropertyIntrospectorService(PropertyIntrospector introspector) {
         this.introspector = introspector;

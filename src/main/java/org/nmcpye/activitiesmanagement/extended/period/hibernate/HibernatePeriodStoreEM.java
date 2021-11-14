@@ -28,7 +28,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * Implements the PeriodStore interface.
  */
-@Repository("org.nmcpye.activitiesmanagement.extended.period.PeriodStore")
+@Deprecated
+//@Repository("org.nmcpye.activitiesmanagement.extended.period.PeriodStore")
 public class HibernatePeriodStoreEM extends HibernateIdentifiableObjectStoreEM<Period> implements PeriodStore {
 
     private final Logger log = LoggerFactory.getLogger(HibernatePeriodStoreEM.class);
@@ -57,7 +58,7 @@ public class HibernatePeriodStoreEM extends HibernateIdentifiableObjectStoreEM<P
     public void addPeriod(Period period) {
         period.setPeriodType(reloadPeriodType(period.getPeriodType()));
 
-        save(period);
+        saveObject(period);
     }
 
     @Override
@@ -193,7 +194,7 @@ public class HibernatePeriodStoreEM extends HibernateIdentifiableObjectStoreEM<P
     public PeriodType getPeriodType(int id) {
         //        Session session = getSession();
 
-        return entityManager.find(PeriodType.class, id);
+        return entityManager.getReference(PeriodType.class, id);
     }
 
     @Override

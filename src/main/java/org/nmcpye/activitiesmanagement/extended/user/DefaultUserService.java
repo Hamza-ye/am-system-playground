@@ -89,7 +89,7 @@ public class DefaultUserService implements org.nmcpye.activitiesmanagement.exten
         }
         AuditLogUtil.infoWrapper(log, userString, user, AuditLogUtil.ACTION_CREATE);
 
-        userStore.save(user);
+        userStore.saveObject(user);
 
         return user.getId();
     }
@@ -368,7 +368,7 @@ public class DefaultUserService implements org.nmcpye.activitiesmanagement.exten
     @Override
     @Transactional
     public Long addUserAuthorityGroup(PersonAuthorityGroup userAuthorityGroup) {
-        personAuthorityGroupStore.save(userAuthorityGroup);
+        personAuthorityGroupStore.saveObject(userAuthorityGroup);
         return userAuthorityGroup.getId();
     }
 

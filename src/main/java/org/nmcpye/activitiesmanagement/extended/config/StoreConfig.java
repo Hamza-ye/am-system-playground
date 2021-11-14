@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import javax.persistence.EntityManagerFactory;
+
 /**
  * Created by Hamza on 14/10/2021.
  */
@@ -38,7 +40,7 @@ public class StoreConfig {
 
     //    @Bean
     //    public SessionFactory sessionFactory(HibernateEntityManagerFactory hemf) {
-    //        return hemf.getSessionFactory();
+    //        return hemf.getSession();
     //    }
     //
     //    @PersistenceContext

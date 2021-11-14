@@ -6,7 +6,6 @@ import org.hibernate.annotations.QueryHints;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
-import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.extended.common.AuditLogUtil;
 import org.nmcpye.activitiesmanagement.extended.common.GenericStore;
 import org.slf4j.Logger;
@@ -126,7 +125,8 @@ public class HibernateGenericStore<T> implements GenericStore<T> {
      * Override to add additional restrictions to criteria before
      * it is invoked.
      */
-    protected void preProcessDetachedCriteria(DetachedCriteria detachedCriteria) {}
+    protected void preProcessDetachedCriteria(DetachedCriteria detachedCriteria) {
+    }
 
     public final Criteria getExecutableCriteria(DetachedCriteria detachedCriteria) {
         return detachedCriteria.getExecutableCriteria(getSession()).setCacheable(cacheable);
@@ -152,9 +152,9 @@ public class HibernateGenericStore<T> implements GenericStore<T> {
 
     /**
      * Method for adding additional Predicates into where clause
-     *
      */
-    protected void preProcessPredicates(CriteriaBuilder builder, List<Function<Root<T>, Predicate>> predicates) {}
+    protected void preProcessPredicates(CriteriaBuilder builder, List<Function<Root<T>, Predicate>> predicates) {
+    }
 
     /**
      * Get single result from executable typedQuery
@@ -300,7 +300,7 @@ public class HibernateGenericStore<T> implements GenericStore<T> {
     // -------------------------------------------------------------------------
 
     @Override
-    public void save(T object) {
+    public void saveObject(T object) {
         AuditLogUtil.infoWrapper(log, object, AuditLogUtil.ACTION_CREATE);
 
         getSession().save(object);

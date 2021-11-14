@@ -342,12 +342,13 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
         String code,
         Date openingDate,
         Date closedDate,
-        String comment
-    ) {
+        String comment,
+        OrganisationUnitType organisationUnitType) {
         this(name);
         this.parent = parent;
         this.shortName = shortName;
         this.code = code;
+        this.organisationUnitType = organisationUnitType;
         this.openingDate = openingDate;
         this.closedDate = closedDate;
         this.comment = comment;
@@ -1128,7 +1129,7 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
         this.people = people;
     }
 
-    @Gist( included = Include.FALSE )
+    @Gist(included = Include.FALSE)
     @JsonProperty
     public Geometry getGeometry() {
         return geometry;

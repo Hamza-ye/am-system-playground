@@ -67,7 +67,7 @@ public class HibernateIdentifiableObjectStoreEM<T extends BaseIdentifiableObject
     // -------------------------------------------------------------------------
 
     @Override
-    public void save(T object) {
+    public void saveObject(T object) {
         save(object, true);
     }
 

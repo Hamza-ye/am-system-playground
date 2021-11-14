@@ -52,7 +52,7 @@ public class DefaultJobConfigurationService implements JobConfigurationService {
     @Transactional
     public long addJobConfiguration(JobConfiguration jobConfiguration) {
         if (!jobConfiguration.isInMemoryJob()) {
-            jobConfigurationStore.save(jobConfiguration);
+            jobConfigurationStore.saveObject(jobConfiguration);
         }
 
         return jobConfiguration.getId();
@@ -61,7 +61,7 @@ public class DefaultJobConfigurationService implements JobConfigurationService {
     @Override
     @Transactional
     public void addJobConfigurations(List<JobConfiguration> jobConfigurations) {
-        jobConfigurations.forEach(jobConfiguration -> jobConfigurationStore.save(jobConfiguration));
+        jobConfigurations.forEach(jobConfiguration -> jobConfigurationStore.saveObject(jobConfiguration));
     }
 
     @Override

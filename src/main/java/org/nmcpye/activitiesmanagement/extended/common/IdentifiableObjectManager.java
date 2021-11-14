@@ -1,6 +1,8 @@
 package org.nmcpye.activitiesmanagement.extended.common;
 
 import org.nmcpye.activitiesmanagement.domain.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.*;
 
@@ -100,6 +102,8 @@ public interface IdentifiableObjectManager {
     <T extends DimensionalObject> List<T> getDataDimensions(Class<T> clazz);
 
     <T extends DimensionalObject> List<T> getDataDimensionsNoAcl(Class<T> clazz);
+
+    <T extends IdentifiableObject> Page<T> findAll(Class<T> clazz, Pageable pageable);
 
     void refresh(Object object);
 

@@ -16,7 +16,7 @@ public interface GenericStore<T> {
      *
      * @param object the object instance.
      */
-    void save(T object);
+    void saveObject(T object);
 
     /**
      * Updates the given object instance.

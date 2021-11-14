@@ -17,6 +17,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManagerFactory;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -38,7 +39,7 @@ public class HibernateSqlViewStore
 
     private final JdbcTemplate readOnlyJdbcTemplate;
 
-    public HibernateSqlViewStore( JdbcTemplate jdbcTemplate, UserService userService,
+    public HibernateSqlViewStore(JdbcTemplate jdbcTemplate, UserService userService,
                                  StatementBuilder statementBuilder, JdbcTemplate readOnlyJdbcTemplate )
     {
         super( jdbcTemplate, SqlView.class, userService, false );

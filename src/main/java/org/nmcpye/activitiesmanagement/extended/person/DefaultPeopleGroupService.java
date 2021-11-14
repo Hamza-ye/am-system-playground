@@ -45,7 +45,7 @@ public class DefaultPeopleGroupService implements PeopleGroupService {
     @Override
     @Transactional
     public long addUserGroup(PeopleGroup userGroup) {
-        userGroupStore.save(userGroup);
+        userGroupStore.saveObject(userGroup);
         return userGroup.getId();
     }
 

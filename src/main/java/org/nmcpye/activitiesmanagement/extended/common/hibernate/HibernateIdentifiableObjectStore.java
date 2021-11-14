@@ -39,7 +39,8 @@ public class HibernateIdentifiableObjectStore<T extends BaseIdentifiableObject>
 
     protected boolean transientIdentifiableProperties = false;
 
-    public HibernateIdentifiableObjectStore(JdbcTemplate jdbcTemplate, Class<T> clazz, UserService userService, boolean cacheable) {
+    public HibernateIdentifiableObjectStore(JdbcTemplate jdbcTemplate, Class<T> clazz,
+                                            UserService userService, boolean cacheable) {
         super(jdbcTemplate, clazz, cacheable);
         //        checkNotNull(userService);
         //        checkNotNull( aclService );
@@ -62,7 +63,7 @@ public class HibernateIdentifiableObjectStore<T extends BaseIdentifiableObject>
     // -------------------------------------------------------------------------
 
     @Override
-    public void save(T object) {
+    public void saveObject(T object) {
         save(object, true);
     }
 

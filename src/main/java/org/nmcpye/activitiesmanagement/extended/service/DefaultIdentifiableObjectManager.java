@@ -10,11 +10,15 @@ import org.nmcpye.activitiesmanagement.extended.common.exception.InvalidIdentifi
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.io.Serializable;
 import java.util.*;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -52,7 +56,6 @@ public class DefaultIdentifiableObjectManager implements IdentifiableObjectManag
         checkNotNull(identifiableObjectStores);
         checkNotNull(dimensionalObjectStores);
         checkNotNull(userService);
-
         this.dimensionalObjectStores = dimensionalObjectStores;
         this.identifiableObjectStores = identifiableObjectStores;
         this.userService = userService;
@@ -117,29 +120,6 @@ public class DefaultIdentifiableObjectManager implements IdentifiableObjectManag
             update(object, user);
         }
     }
-
-    //    @Override
-    //    @Transactional
-    //    public void updateTranslations( IdentifiableObject persistedObject, Set<Translation> translations )
-    //    {
-    //        Session session = sessionFactory.getCurrentSession();
-    //        persistedObject.getTranslations().clear();
-    //        session.flush();
-    //
-    //        translations.forEach( translation ->
-    //        {
-    //            if ( StringUtils.isNotEmpty( translation.getValue() ) )
-    //            {
-    //                persistedObject.getTranslations().add( translation );
-    //            }
-    //        } );
-    //
-    //        BaseIdentifiableObject translatedObject = (BaseIdentifiableObject) persistedObject;
-    //        translatedObject.setLastUpdated( new Date() );
-    //        translatedObject.setLastUpdatedBy( userService.getCurrentUser() );
-    //
-    //        session.update( translatedObject );
-    //    }
 
     @Override
     @Transactional
@@ -819,6 +799,18 @@ public class DefaultIdentifiableObjectManager implements IdentifiableObjectManag
         return defaultObject != null && defaultObject.getUid().equals(object.getUid());
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public <T extends IdentifiableObject> Page<T> findAll(Class<T> clazz, Pageable pageable) {
+        PagingAndSortingRepository<T, ? extends Serializable> store = (PagingAndSortingRepository<T, ? extends Serializable>) getIdentifiableObjectStore(clazz);
+
+        if (store == null) {
+            return null;
+        }
+        log.debug("Request to get all " + clazz.getName() + " Data");
+        return store.findAll(pageable);
+    }
+
     @SuppressWarnings("unchecked")
     private <T extends IdentifiableObject> IdentifiableObjectStore<IdentifiableObject> getIdentifiableObjectStore(Class<T> clazz) {
         initMaps();
@@ -871,5 +863,10 @@ public class DefaultIdentifiableObjectManager implements IdentifiableObjectManag
         for (GenericDimensionalObjectStore<? extends DimensionalObject> store : dimensionalObjectStores) {
             dimensionalObjectStoreMap.put(store.getClazz(), store);
         }
+//        pagingAndSortingRepositoryMap = new HashMap<>();
+//
+//        for (PagingAndSortingRepository<? extends IdentifiableObject, ? extends Serializable> store : pagingAndSortingRepositories) {
+//            dimensionalObjectStoreMap.put(store.getClazz(), store);
+//        }
     }
 }

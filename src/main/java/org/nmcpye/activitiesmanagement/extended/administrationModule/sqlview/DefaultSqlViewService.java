@@ -63,7 +63,7 @@ public class DefaultSqlViewService
     @Override
     public long saveSqlView( SqlView sqlView )
     {
-        sqlViewStore.save( sqlView );
+        sqlViewStore.saveObject( sqlView );
 
         return sqlView.getId();
     }

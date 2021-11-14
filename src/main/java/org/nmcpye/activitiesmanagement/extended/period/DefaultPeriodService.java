@@ -354,7 +354,7 @@ public class DefaultPeriodService implements PeriodService {
     @Override
     public Period save(Period period) {
         log.debug("Request to save Period : {}", period);
-        periodStore.save(period);
+        periodStore.saveObject(period);
         return period;
     }
 
@@ -381,7 +381,7 @@ public class DefaultPeriodService implements PeriodService {
             )
             .map(
                 period1 -> {
-                    periodStore.save(period);
+                    periodStore.saveObject(period);
                     return period;
                 }
             );
