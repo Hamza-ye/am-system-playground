@@ -1,6 +1,5 @@
 package org.nmcpye.activitiesmanagement.extended.web.rest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObject;
@@ -11,7 +10,6 @@ import org.nmcpye.activitiesmanagement.extended.dxf2module.common.OrderParams;
 import org.nmcpye.activitiesmanagement.extended.dxf2module.webmessage.WebMessageException;
 import org.nmcpye.activitiesmanagement.extended.hibernatemodule.hibernate.exception.ReadAccessDeniedException;
 import org.nmcpye.activitiesmanagement.extended.schemamodule.Schema;
-import org.nmcpye.activitiesmanagement.extended.schemamodule.SchemaService;
 import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;
 import org.nmcpye.activitiesmanagement.extended.servicecoremodule.query.*;
 import org.nmcpye.activitiesmanagement.extended.web.service.ContextService;
@@ -29,8 +27,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +41,8 @@ import static org.springframework.http.CacheControl.noCache;
  * <p>
  * Created by Hamza on 12/11/2021.
  */
-public abstract class AbstractFullReadOnlyController<T extends IdentifiableObject> {
+public abstract class AbstractFullReadOnlyController<T extends IdentifiableObject>
+    extends AbstractGistReadOnlyController<T> {
     protected static final WebOptions NO_WEB_OPTIONS = new WebOptions(new HashMap<>());
 
     @Autowired
@@ -62,12 +59,6 @@ public abstract class AbstractFullReadOnlyController<T extends IdentifiableObjec
 
     @Autowired
     protected AclService aclService;
-
-    @Autowired
-    protected ObjectMapper jsonMapper;
-
-    @Autowired
-    protected SchemaService schemaService;
 
     @Autowired
     protected UserService userService;
@@ -323,25 +314,4 @@ public abstract class AbstractFullReadOnlyController<T extends IdentifiableObjec
         return PaginationUtils.getPaginationData(options);
     }
 
-    private Class<T> entityClass;
-
-    @SuppressWarnings("unchecked")
-    protected final Class<T> getEntityClass() {
-        if (entityClass == null) {
-            Type[] actualTypeArguments = ((ParameterizedType) getClass().getGenericSuperclass())
-                .getActualTypeArguments();
-            entityClass = (Class<T>) actualTypeArguments[0];
-        }
-
-        return entityClass;
-    }
-
-    private Schema schema;
-
-    protected final Schema getSchema() {
-        if (schema == null) {
-            schema = schemaService.getDynamicSchema(getEntityClass());
-        }
-        return schema;
-    }
 }

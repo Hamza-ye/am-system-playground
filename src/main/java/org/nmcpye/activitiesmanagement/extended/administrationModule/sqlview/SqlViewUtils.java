@@ -28,7 +28,7 @@ package org.nmcpye.activitiesmanagement.extended.administrationModule.sqlview;
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.nmcpye.activitiesmanagement.extended.sqlview.SqlView;
+import org.nmcpye.activitiesmanagement.domain.sqlview.SqlView;
 
 import java.util.HashSet;
 import java.util.Map;

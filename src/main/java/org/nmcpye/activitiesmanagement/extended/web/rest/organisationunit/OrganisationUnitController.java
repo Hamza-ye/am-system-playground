@@ -289,6 +289,11 @@ public class OrganisationUnitController
     }
 
     @Override
+    protected Class<OrganisationUnit> getEntityClass() {
+        return OrganisationUnit.class;
+    }
+
+    @Override
     protected void postCreateEntity(OrganisationUnit entity) {
 //        versionService.updateVersion(VersionService.ORGANISATIONUNIT_VERSION);
     }

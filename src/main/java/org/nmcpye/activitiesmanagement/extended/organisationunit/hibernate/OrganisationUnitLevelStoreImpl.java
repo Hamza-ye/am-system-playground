@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 
-@Repository("org.hisp.dhis.organisationunit.OrganisationUnitLevelStore")
+@Repository("org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitLevelStore")
 public class OrganisationUnitLevelStoreImpl
     extends HibernateIdentifiableObjectStore<OrganisationUnitLevel>
     implements OrganisationUnitLevelStore {

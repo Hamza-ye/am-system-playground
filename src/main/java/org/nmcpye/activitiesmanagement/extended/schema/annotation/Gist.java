@@ -9,7 +9,7 @@ import java.lang.annotation.*;
  *
  * This can be used to fine tune gist appearance.
  *
- * The annotation data becomes the {@link org.hisp.dhis.schema.GistPreferences}
+ * The annotation data becomes the {@link org.nmcpye.activitiesmanagement.extended.schema.GistPreferences}
  * in {@link Property}.
  *
  */

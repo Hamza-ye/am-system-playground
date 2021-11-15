@@ -1,4 +1,4 @@
-package org.nmcpye.activitiesmanagement.extended.sqlview;
+package org.nmcpye.activitiesmanagement.domain.sqlview;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.ImmutableSet;
@@ -6,13 +6,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyRange;
+import org.nmcpye.activitiesmanagement.extended.sqlview.SqlViewType;
 
 import javax.persistence.*;
 import java.util.*;
 import java.util.regex.Pattern;
 
-//@Entity
-//@Table(name = "Sql_view")
+@Entity
+@Table(name = "sql_view")
 public class SqlView
     extends BaseIdentifiableObject
     implements MetadataObject
@@ -20,7 +21,7 @@ public class SqlView
     public static final String PREFIX_VIEWNAME = "_view";
 
     public static final Set<String> PROTECTED_TABLES = ImmutableSet.<String>builder().add(
-        "users", "userinfo", "trackedentityattribute", "trackedentityattributevalue", "oauth_access_token", "oauth2client" ).build();
+        "app_user", "person" ).build();
 
     public static final Set<String> ILLEGAL_KEYWORDS = ImmutableSet.<String>builder().add(
         "delete", "alter", "update", "create", "drop", "commit", "createdb",

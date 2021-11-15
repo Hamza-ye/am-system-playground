@@ -1,23 +1,7 @@
 package org.nmcpye.activitiesmanagement.extended.web.rest;
 
-import com.google.common.collect.Lists;
-import org.nmcpye.activitiesmanagement.extended.common.Grid;
-import org.nmcpye.activitiesmanagement.extended.dxf2module.webmessage.WebMessageException;
-import org.nmcpye.activitiesmanagement.extended.dxf2module.webmessage.WebMessageUtils;
-import org.nmcpye.activitiesmanagement.extended.sqlview.SqlView;
-import org.nmcpye.activitiesmanagement.extended.sqlview.SqlViewQuery;
-import org.nmcpye.activitiesmanagement.extended.sqlview.SqlViewService;
-import org.nmcpye.activitiesmanagement.extended.systemmodule.system.grid.GridUtils;
-import org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.CodecUtils;
-import org.nmcpye.activitiesmanagement.extended.web.utils.ContextUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.nmcpye.activitiesmanagement.domain.sqlview.SqlView;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.Set;
 
 @Controller
 //@RequestMapping( value = SqlViewSchemaDescriptor.API_ENDPOINT )

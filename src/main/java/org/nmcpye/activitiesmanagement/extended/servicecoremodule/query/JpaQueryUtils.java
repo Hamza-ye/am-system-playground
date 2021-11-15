@@ -308,7 +308,7 @@ public class JpaQueryUtils {
 //     * @param sharingColumn sharing column reference
 //     * @param user User for sharing checking
 //     * @param access The sharing access string for checking. Refer to
-//     *        {@link org.hisp.dhis.security.acl.AccessStringHelper}
+//     *        {@link org.nmcpye.activitiesmanagement.extended.security.acl.AccessStringHelper}
 //     * @return SQL query
 //     */
 //    public static String generateSQlQueryForSharingCheck( String sharingColumn, User user, String access )

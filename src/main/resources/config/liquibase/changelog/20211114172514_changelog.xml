@@ -1,0 +1,215 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="Hamza (generated)" id="1636911576718-7">
+        <createTable tableName="external_file_resource">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="external_file_resourcePK"/>
+            </column>
+            <column name="code" type="VARCHAR(255)"/>
+            <column name="created" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="last_updated" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="uid" type="VARCHAR(11)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="access_token" type="VARCHAR(255)"/>
+            <column name="expires" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="last_updated_by" type="BIGINT"/>
+            <column name="file_resource_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-8">
+        <createTable tableName="file_resource">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="file_resourcePK"/>
+            </column>
+            <column name="code" type="VARCHAR(255)"/>
+            <column name="created" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="last_updated" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="uid" type="VARCHAR(11)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="assigned" type="BOOLEAN"/>
+            <column name="content_length" type="BIGINT"/>
+            <column name="content_md5" type="VARCHAR(255)"/>
+            <column name="content_type" type="VARCHAR(255)"/>
+            <column name="domain" type="VARCHAR(255)"/>
+            <column name="has_multiple_storage_files" type="BOOLEAN"/>
+            <column name="storage_key" type="VARCHAR(255)"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="last_updated_by" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-9">
+        <createTable tableName="sql_view">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="sql_viewPK"/>
+            </column>
+            <column name="code" type="VARCHAR(255)"/>
+            <column name="created" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="last_updated" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="uid" type="VARCHAR(11)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sql_query" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="BIGINT"/>
+            <column name="last_updated_by" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-10">
+        <addColumn tableName="project">
+            <column name="created_by" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-11">
+        <addColumn tableName="project">
+            <column name="last_updated_by" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-12">
+        <addUniqueConstraint columnNames="code" constraintName="UC_APP_USERCODE_COL" tableName="app_user"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-13">
+        <addUniqueConstraint columnNames="uid" constraintName="UC_APP_USERUID_COL" tableName="app_user"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-14">
+        <addUniqueConstraint columnNames="code" constraintName="UC_EXTERNAL_FILE_RESOURCECODE_COL" tableName="external_file_resource"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-15">
+        <addUniqueConstraint columnNames="uid" constraintName="UC_EXTERNAL_FILE_RESOURCEUID_COL" tableName="external_file_resource"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-16">
+        <addUniqueConstraint columnNames="code" constraintName="UC_FILE_RESOURCECODE_COL" tableName="file_resource"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-17">
+        <addUniqueConstraint columnNames="uid" constraintName="UC_FILE_RESOURCEUID_COL" tableName="file_resource"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-18">
+        <addUniqueConstraint columnNames="code" constraintName="UC_PERIODCODE_COL" tableName="period"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-19">
+        <addUniqueConstraint columnNames="uid" constraintName="UC_PERIODUID_COL" tableName="period"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-20">
+        <addUniqueConstraint columnNames="code" constraintName="UC_SQL_VIEWCODE_COL" tableName="sql_view"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-21">
+        <addUniqueConstraint columnNames="uid" constraintName="UC_SQL_VIEWUID_COL" tableName="sql_view"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-22">
+        <addUniqueConstraint columnNames="authority" constraintName="UK_4br44r9cacyan5dqbvagpvy6b" tableName="person_authority_group_authorities"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-23">
+        <addUniqueConstraint columnNames="data_input_period_id" constraintName="UK_egldfsq6ceak53hi9f2vfcejl" tableName="data_set_data_input_periods"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-24">
+        <createIndex indexName="IX_null" tableName="orgunit_groupset_members" unique="true">
+            <column name="orgunit_groupset_id"/>
+            <column name="orgunit_group_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-25">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="external_file_resource" constraintName="FKb2ai47upv7t88js9xycrj6ivt" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-26">
+        <addForeignKeyConstraint baseColumnNames="file_resource_id" baseTableName="external_file_resource" constraintName="FKb4kihon02ukmlg0tsjnu503cp" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="file_resource" validate="true"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-27">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="orgunit_level" constraintName="FKgc4svx7jmi7irfha35xtn0r4n" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-28">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="project" constraintName="FKgpqiejvyg1nwgf27wlfbemdj7" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-29">
+        <addForeignKeyConstraint baseColumnNames="last_updated_by" baseTableName="project" constraintName="FKhe9xskpofphuwcwkdd68cm01s" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-30">
+        <addForeignKeyConstraint baseColumnNames="last_updated_by" baseTableName="orgunit_level" constraintName="FKl9tq4olab1t0vgmw32q7mbxx1" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-31">
+        <addForeignKeyConstraint baseColumnNames="last_updated_by" baseTableName="external_file_resource" constraintName="FKmgpcavyewtvcx7ga6cc640xq7" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-32">
+        <addForeignKeyConstraint baseColumnNames="last_updated_by" baseTableName="file_resource" constraintName="FKmy94tobim4lwtgfr50jpbgngf" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-33">
+        <addForeignKeyConstraint baseColumnNames="last_updated_by" baseTableName="sql_view" constraintName="FKoo07h6yyj5bmiogo0rpaev31n" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-34">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="sql_view" constraintName="FKrvwky8vpm7onxtpe267tl17p1" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-35">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="file_resource" constraintName="FKrwh3abvwahuavb5nav5gof62c" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-36">
+        <dropForeignKeyConstraint baseTableName="project" constraintName="fk_project__last_updated_by_id"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-37">
+        <dropForeignKeyConstraint baseTableName="project" constraintName="fk_project__user_id"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-38">
+        <dropView viewName="geography_columns"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-39">
+        <dropView viewName="geometry_columns"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-40">
+        <dropView viewName="raster_columns"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-41">
+        <dropView viewName="raster_overviews"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-42">
+        <dropTable tableName="_organisationunitgroupsetstructure"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-43">
+        <dropTable tableName="_orgunitstructure"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-44">
+        <dropTable tableName="_periodstructure"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-45">
+        <dropTable tableName="spatial_ref_sys"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-46">
+        <dropColumn columnName="description" tableName="data_set"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-47">
+        <dropColumn columnName="last_updated_by_id" tableName="project"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-48">
+        <dropColumn columnName="short_name" tableName="data_set"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-49">
+        <dropColumn columnName="user_id" tableName="project"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-1">
+        <alterSequence sequenceName="sequence_generator"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-2">
+        <addNotNullConstraint columnDataType="varchar(31)" columnName="name" tableName="period_type" validate="true"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-3">
+        <addNotNullConstraint columnDataType="varchar(11)" columnName="uid" tableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-4">
+        <addNotNullConstraint columnDataType="varchar(11)" columnName="uid" tableName="period" validate="true"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-5">
+        <dropPrimaryKey tableName="orgunit_groupset_members"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-6">
+        <addPrimaryKey columnNames="orgunit_groupset_id, orgunit_group_id" tableName="orgunit_groupset_members"/>
+    </changeSet>
+</databaseChangeLog>

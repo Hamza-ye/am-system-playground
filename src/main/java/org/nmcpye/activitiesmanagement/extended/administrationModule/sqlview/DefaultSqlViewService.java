@@ -11,7 +11,7 @@ import org.nmcpye.activitiesmanagement.extended.feedback.ErrorMessage;
 import org.nmcpye.activitiesmanagement.extended.jdbcmodule.StatementBuilder;
 import org.nmcpye.activitiesmanagement.extended.servicecoremodule.query.QueryParserException;
 import org.nmcpye.activitiesmanagement.extended.servicecoremodule.query.QueryUtils;
-import org.nmcpye.activitiesmanagement.extended.sqlview.SqlView;
+import org.nmcpye.activitiesmanagement.domain.sqlview.SqlView;
 import org.nmcpye.activitiesmanagement.extended.sqlview.SqlViewService;
 import org.nmcpye.activitiesmanagement.extended.sqlview.SqlViewStore;
 import org.nmcpye.activitiesmanagement.extended.systemmodule.system.grid.ListGrid;
@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static org.nmcpye.activitiesmanagement.extended.sqlview.SqlView.*;
+import static org.nmcpye.activitiesmanagement.domain.sqlview.SqlView.*;
 
 @Transactional
 @Service( "org.nmcpye.activitiesmanagement.extended.sqlview.SqlViewService" )

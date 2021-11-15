@@ -13,7 +13,7 @@ import org.nmcpye.activitiesmanagement.domain.person.PersonAuthorityGroup;
 import org.nmcpye.activitiesmanagement.extended.common.DimensionalObject;
 import org.nmcpye.activitiesmanagement.extended.common.NameableObject;
 import org.nmcpye.activitiesmanagement.extended.schemamodule.Schema;
-import org.nmcpye.activitiesmanagement.extended.sqlview.SqlView;
+import org.nmcpye.activitiesmanagement.domain.sqlview.SqlView;
 
 import java.util.Collections;
 import java.util.Date;

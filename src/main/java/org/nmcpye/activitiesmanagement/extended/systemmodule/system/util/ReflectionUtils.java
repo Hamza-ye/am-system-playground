@@ -132,7 +132,6 @@ public class ReflectionUtils {
 
     /**
      * Returns the name of the class that the object is an instance of
-     * org.hisp.dhis.indicator.Indicator returns Indicator.
      *
      * @param object object to determine className for.
      * @return String containing the class name.

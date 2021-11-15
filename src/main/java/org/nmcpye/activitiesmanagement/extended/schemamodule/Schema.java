@@ -626,7 +626,6 @@ public class Schema implements Ordered, Klass {
 
 //    /**
 //     * @return Get list of properties marked with
-//     *         {@link org.hisp.dhis.translation.Translatable}
 //     */
 //    public List<Property> getTranslatableProperties()
 //    {

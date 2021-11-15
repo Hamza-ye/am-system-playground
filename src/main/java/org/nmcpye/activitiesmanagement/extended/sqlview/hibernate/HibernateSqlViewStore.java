@@ -4,20 +4,18 @@ import com.google.common.collect.ImmutableMap;
 import org.nmcpye.activitiesmanagement.extended.common.Grid;
 import org.nmcpye.activitiesmanagement.extended.common.hibernate.HibernateIdentifiableObjectStore;
 import org.nmcpye.activitiesmanagement.extended.jdbcmodule.StatementBuilder;
-import org.nmcpye.activitiesmanagement.extended.sqlview.SqlView;
+import org.nmcpye.activitiesmanagement.domain.sqlview.SqlView;
 import org.nmcpye.activitiesmanagement.extended.sqlview.SqlViewStore;
 import org.nmcpye.activitiesmanagement.extended.sqlview.SqlViewType;
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManagerFactory;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;

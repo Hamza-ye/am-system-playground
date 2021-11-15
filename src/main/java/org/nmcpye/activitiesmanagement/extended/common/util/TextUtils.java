@@ -40,8 +40,6 @@ public class TextUtils {
 
     /**
      * Substitutes links in the given text with valid HTML mark-up. For instance,
-     * http://dhis2.org is replaced with <a href="http://dhis2.org">http://dhis2.org</a>,
-     * and www.dhis2.org is replaced with <a href="http://dhis2.org">www.dhis2.org</a>.
      *
      * @param text the text to substitute links for.
      * @return the substituted text.

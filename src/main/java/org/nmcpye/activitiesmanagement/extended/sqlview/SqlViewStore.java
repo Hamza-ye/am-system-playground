@@ -1,5 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.sqlview;
 
+import org.nmcpye.activitiesmanagement.domain.sqlview.SqlView;
 import org.nmcpye.activitiesmanagement.extended.common.Grid;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectStore;
 

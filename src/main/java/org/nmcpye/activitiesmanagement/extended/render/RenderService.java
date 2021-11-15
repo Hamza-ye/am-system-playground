@@ -24,7 +24,7 @@ public interface RenderService
     boolean isValidJson(String json) throws IOException;
 
     /**
-     * Gets the DHIS version from the metadata export
+     * Gets the version from the metadata export
      *
      * @param inputStream Stream to read from
      * @param format      Payload format (only JSON is supported)
