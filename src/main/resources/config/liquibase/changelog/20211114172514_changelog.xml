@@ -69,12 +69,12 @@
     </changeSet>
     <changeSet author="Hamza (generated)" id="1636911576718-10">
         <addColumn tableName="project">
-            <column name="created_by" type="int8"/>
+            <column name="created_by" type="bigint"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1636911576718-11">
         <addColumn tableName="project">
-            <column name="last_updated_by" type="int8"/>
+            <column name="last_updated_by" type="bigint"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1636911576718-12">
@@ -158,30 +158,7 @@
     <changeSet author="Hamza (generated)" id="1636911576718-37">
         <dropForeignKeyConstraint baseTableName="project" constraintName="fk_project__user_id"/>
     </changeSet>
-    <changeSet author="Hamza (generated)" id="1636911576718-38">
-        <dropView viewName="geography_columns"/>
-    </changeSet>
-    <changeSet author="Hamza (generated)" id="1636911576718-39">
-        <dropView viewName="geometry_columns"/>
-    </changeSet>
-    <changeSet author="Hamza (generated)" id="1636911576718-40">
-        <dropView viewName="raster_columns"/>
-    </changeSet>
-    <changeSet author="Hamza (generated)" id="1636911576718-41">
-        <dropView viewName="raster_overviews"/>
-    </changeSet>
-    <changeSet author="Hamza (generated)" id="1636911576718-42">
-        <dropTable tableName="_organisationunitgroupsetstructure"/>
-    </changeSet>
-    <changeSet author="Hamza (generated)" id="1636911576718-43">
-        <dropTable tableName="_orgunitstructure"/>
-    </changeSet>
-    <changeSet author="Hamza (generated)" id="1636911576718-44">
-        <dropTable tableName="_periodstructure"/>
-    </changeSet>
-    <changeSet author="Hamza (generated)" id="1636911576718-45">
-        <dropTable tableName="spatial_ref_sys"/>
-    </changeSet>
+
     <changeSet author="Hamza (generated)" id="1636911576718-46">
         <dropColumn columnName="description" tableName="data_set"/>
     </changeSet>

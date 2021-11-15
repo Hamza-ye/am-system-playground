@@ -3,6 +3,8 @@ package org.nmcpye.activitiesmanagement.extended.systemmodule.system.grid;
 import com.csvreader.CsvWriter;
 import com.lowagie.text.Document;
 import com.lowagie.text.pdf.PdfPTable;
+import net.sf.jasperreports.engine.*;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
@@ -15,6 +17,8 @@ import org.htmlparser.nodes.TagNode;
 import org.htmlparser.tags.CompositeTag;
 import org.htmlparser.tags.TableRow;
 import org.htmlparser.tags.TableTag;
+import org.nmcpye.activitiesmanagement.extended.common.DimensionalItemObject;
+import org.nmcpye.activitiesmanagement.extended.common.DimensionalObjectUtils;
 import org.nmcpye.activitiesmanagement.extended.common.Grid;
 import org.nmcpye.activitiesmanagement.extended.common.GridHeader;
 import org.nmcpye.activitiesmanagement.extended.common.collection.ListUtils;
@@ -29,9 +33,13 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.StringWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.stream.Collectors;
 
+import static org.nmcpye.activitiesmanagement.extended.common.DimensionalObject.DIMENSION_SEP;
 import static org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.PDFUtils.*;
 
 public class GridUtils {
@@ -39,37 +47,62 @@ public class GridUtils {
     protected static final Logger log = LoggerFactory.getLogger(GridUtils.class);
 
     private static final String EMPTY = "";
+
     private static final char CSV_DELIMITER = ',';
+
     private static final String XLS_SHEET_PREFIX = "Sheet ";
+
     private static final int JXL_MAX_COLS = 256;
+
     private static final String FONT_ARIAL = "Arial";
 
-    private static final NodeFilter HTML_ROW_FILTER = new OrFilter(new TagNameFilter("td"), new TagNameFilter("th"));
+    private static final NodeFilter HTML_ROW_FILTER = new OrFilter(new TagNameFilter("td"),
+        new TagNameFilter("th"));
 
     private static final Encoder ENCODER = new Encoder();
 
     private static final String KEY_GRID = "grid";
+
     private static final String KEY_ENCODER = "encoder";
+
     private static final String KEY_PARAMS = "params";
+
     private static final String JASPER_TEMPLATE = "grid.vm";
-    private static final String HTML_TEMPLATE = "grid-html.vm";
-    private static final String HTML_CSS_TEMPLATE = "grid-html-css.vm";
+
+    private static final String HTML_TEMPLATE = "grid-html.html";
+
+    private static final String HTML_CSS_TEMPLATE = "grid-html-css.html";
+
     private static final String HTML_INLINE_CSS_TEMPLATE = "grid-html-inline-css.vm";
 
     private static final String ATTR_GRID = "grid";
+
     private static final String ATTR_TITLE = "title";
+
     private static final String ATTR_SUBTITLE = "subtitle";
+
     private static final String ATTR_WIDTH = "width";
+
     private static final String ATTR_HEIGHT = "height";
+
     private static final String ATTR_HEADERS = "headers";
+
     private static final String ATTR_HEADER = "header";
+
     private static final String ATTR_NAME = "name";
+
     private static final String ATTR_COLUMN = "column";
+
     private static final String ATTR_TYPE = "type";
+
     private static final String ATTR_HIDDEN = "hidden";
+
     private static final String ATTR_META = "meta";
+
     private static final String ATTR_ROWS = "rows";
+
     private static final String ATTR_ROW = "row";
+
     private static final String ATTR_FIELD = "field";
 
     /**
@@ -88,7 +121,8 @@ public class GridUtils {
     }
 
     /**
-     * Writes a PDF representation of the given list of Grids to the given OutputStream.
+     * Writes a PDF representation of the given list of Grids to the given
+     * OutputStream.
      */
     public static void toPdf(List<Grid> grids, OutputStream out) {
         if (hasNonEmptyGrid(grids)) {
@@ -146,9 +180,11 @@ public class GridUtils {
     }
 
     /**
-     * Writes a XLS (Excel workbook) representation of the given list of Grids to the given OutputStream.
+     * Writes a XLS (Excel workbook) representation of the given list of Grids
+     * to the given OutputStream.
      */
-    public static void toXls(List<Grid> grids, OutputStream out) throws Exception {
+    public static void toXls(List<Grid> grids, OutputStream out)
+        throws Exception {
         Workbook workbook = new HSSFWorkbook();
 
         CellStyle headerCellStyle = createHeaderCellStyle(workbook);
@@ -157,7 +193,8 @@ public class GridUtils {
         for (int i = 0; i < grids.size(); i++) {
             Grid grid = grids.get(i);
 
-            String sheetName = CodecUtils.filenameEncode(StringUtils.defaultIfEmpty(grid.getTitle(), XLS_SHEET_PREFIX + (i + 1)));
+            String sheetName = CodecUtils
+                .filenameEncode(StringUtils.defaultIfEmpty(grid.getTitle(), XLS_SHEET_PREFIX + (i + 1)));
 
             toXlsInternal(grid, workbook.createSheet(sheetName), headerCellStyle, cellStyle);
         }
@@ -167,14 +204,18 @@ public class GridUtils {
     }
 
     /**
-     * Writes a XLS (Excel workbook) representation of the given Grid to the given OutputStream.
+     * Writes a XLS (Excel workbook) representation of the given Grid to the
+     * given OutputStream.
      */
-    public static void toXls(Grid grid, OutputStream out) throws Exception {
+    public static void toXls(Grid grid, OutputStream out)
+        throws Exception {
         Workbook workbook = new HSSFWorkbook();
 
-        String sheetName = CodecUtils.filenameEncode(StringUtils.defaultIfEmpty(grid.getTitle(), XLS_SHEET_PREFIX + 1));
+        String sheetName = CodecUtils
+            .filenameEncode(StringUtils.defaultIfEmpty(grid.getTitle(), XLS_SHEET_PREFIX + 1));
 
-        toXlsInternal(grid, workbook.createSheet(sheetName), createHeaderCellStyle(workbook), createCellStyle(workbook));
+        toXlsInternal(grid, workbook.createSheet(sheetName), createHeaderCellStyle(workbook),
+            createCellStyle(workbook));
 
         workbook.write(out);
         workbook.close();
@@ -188,7 +229,8 @@ public class GridUtils {
         int cols = grid.getVisibleHeaders().size();
 
         if (cols > JXL_MAX_COLS) {
-            log.warn("Grid will be truncated, no of columns is greater than JXL max limit: " + cols + "/" + JXL_MAX_COLS);
+            log.warn(
+                "Grid will be truncated, no of columns is greater than JXL max limit: " + cols + "/" + JXL_MAX_COLS);
         }
 
         int rowNumber = 0;
@@ -229,9 +271,11 @@ public class GridUtils {
 
             for (Object column : columns) {
                 if (column != null && MathUtils.isNumeric(String.valueOf(column))) {
-                    xlsRow.createCell(columnIndex++, CellType.NUMERIC).setCellValue(Double.parseDouble(String.valueOf(column)));
+                    xlsRow.createCell(columnIndex++, CellType.NUMERIC)
+                        .setCellValue(Double.parseDouble(String.valueOf(column)));
                 } else {
-                    xlsRow.createCell(columnIndex++, CellType.STRING).setCellValue(column != null ? String.valueOf(column) : EMPTY);
+                    xlsRow.createCell(columnIndex++, CellType.STRING)
+                        .setCellValue(column != null ? String.valueOf(column) : EMPTY);
                 }
             }
 
@@ -242,7 +286,8 @@ public class GridUtils {
     /**
      * Writes a CSV representation of the given Grid to the given OutputStream.
      */
-    public static void toCsv(Grid grid, Writer writer) throws IOException {
+    public static void toCsv(Grid grid, Writer writer)
+        throws IOException {
         if (grid == null) {
             return;
         }
@@ -268,53 +313,58 @@ public class GridUtils {
         }
     }
 
-    //    /**
-    //     * Writes a Jasper Reports representation of the given Grid to the given OutputStream.
-    //     */
-    //    public static void toJasperReport( Grid grid, Map<String, Object> params, OutputStream out )
-    //        throws Exception
-    //    {
-    //        if ( grid == null )
-    //        {
-    //            return;
-    //        }
-    //
-    //        final StringWriter writer = new StringWriter();
-    //
-    //        render( grid, params, writer, JASPER_TEMPLATE );
-    //
-    //        String report = writer.toString();
-    //
-    //        JasperReport jasperReport = JasperCompileManager.compileReport( IOUtils.toInputStream( report, StandardCharsets.UTF_8 ) );
-    //
-    //        JasperPrint print = JasperFillManager.fillReport( jasperReport, params, grid );
-    //
-    //        JasperExportManager.exportReportToPdfStream( print, out );
-    //    }
+    /**
+     * Writes a Jasper Reports representation of the given Grid to the given
+     * OutputStream.
+     */
+    public static void toJasperReport(Grid grid, Map<String, Object> params, OutputStream out)
+        throws Exception {
+        if (grid == null) {
+            return;
+        }
 
-    //    /**
-    //     * Writes a HTML representation of the given Grid to the given Writer.
-    //     */
-    //    public static void toHtml( Grid grid, Writer writer )
-    //    {
-    //        render( grid, null, writer, HTML_TEMPLATE );
-    //    }
-    //
-    //    /**
-    //     * Writes a HTML representation of the given Grid to the given Writer.
-    //     */
-    //    public static void toHtmlCss( Grid grid, Writer writer )
-    //    {
-    //        render( grid, null, writer, HTML_CSS_TEMPLATE );
-    //    }
-    //
-    //    /**
-    //     * Writes a HTML representation of the given Grid to the given Writer.
-    //     */
-    //    public static void toHtmlInlineCss( Grid grid, Writer writer )
-    //    {
-    //        render( grid, null, writer, HTML_INLINE_CSS_TEMPLATE );
-    //    }
+        final StringWriter writer = new StringWriter();
+
+        render(grid, params, writer, JASPER_TEMPLATE);
+
+        String report = writer.toString();
+
+        JasperReport jasperReport = JasperCompileManager
+            .compileReport(IOUtils.toInputStream(report, StandardCharsets.UTF_8));
+
+        JasperPrint print = JasperFillManager.fillReport(jasperReport, params, grid);
+
+        JasperExportManager.exportReportToPdfStream(print, out);
+    }
+
+    /**
+     * Writes a JRXML (Jasper Reports XML) representation of the given Grid to
+     * the given Writer.
+     */
+    public static void toJrxml(Grid grid, Map<?, ?> params, Writer writer) {
+        render(grid, params, writer, JASPER_TEMPLATE);
+    }
+
+    /**
+     * Writes a HTML representation of the given Grid to the given Writer.
+     */
+    public static void toHtml(Grid grid, Writer writer) {
+        render(grid, null, writer, HTML_TEMPLATE);
+    }
+
+    /**
+     * Writes a HTML representation of the given Grid to the given Writer.
+     */
+    public static void toHtmlCss(Grid grid, Writer writer) {
+        render(grid, null, writer, HTML_CSS_TEMPLATE);
+    }
+
+    /**
+     * Writes a HTML representation of the given Grid to the given Writer.
+     */
+    public static void toHtmlInlineCss(Grid grid, Writer writer) {
+        render(grid, null, writer, HTML_INLINE_CSS_TEMPLATE);
+    }
 
     /**
      * Writes all rows in the SqlRowSet to the given Grid.
@@ -331,41 +381,42 @@ public class GridUtils {
         }
     }
 
-    //    /**
-    //     * Derives the positional index of a Grid's row, based on the {@see DimensionalItemObject} identifiers
-    //     *
-    //     * @param row a Grid's row
-    //     * @param items a List of {@see DimensionalItemObject}
-    //     * @param defaultIndex the default positional index to return
-    //     * @return the positional index matching one of the DimensionalItemObject identifiers
-    //     */
-    //    public static int getGridIndexByDimensionItem( List<Object> row, List<DimensionalItemObject> items, int defaultIndex )
-    //    {
-    //        // accumulate the DimensionalItemObject identifiers into a List
-    //        List<String> valid = items.stream().map( DimensionalItemObject::getDimensionItem )
-    //            .collect( Collectors.toList() );
-    //
-    //        // skip the last index, since it is always the row value
-    //        for ( int i = 0; i < row.size() -1 ; i++ )
-    //        {
-    //            final String value = (String) row.get( i );
-    //            if ( valid.contains( value ) )
-    //            {
-    //                return i;
-    //            }
-    //        }
-    //        return defaultIndex;
-    //    }
+    /**
+     * Derives the positional index of a Grid's row, based on the
+     * {@see DimensionalItemObject} identifiers
+     *
+     * @param row          a Grid's row
+     * @param items        a List of {@see DimensionalItemObject}
+     * @param defaultIndex the default positional index to return
+     * @return the positional index matching one of the DimensionalItemObject
+     * identifiers
+     */
+    public static int getGridIndexByDimensionItem(List<Object> row, List<DimensionalItemObject> items,
+                                                  int defaultIndex) {
+        // accumulate the DimensionalItemObject identifiers into a List
+        List<String> valid = items.stream().map(DimensionalItemObject::getDimensionItem)
+            .collect(Collectors.toList());
+
+        // skip the last index, since it is always the row value
+        for (int i = 0; i < row.size() - 1; i++) {
+            final String value = (String) row.get(i);
+            if (valid.contains(value)) {
+                return i;
+            }
+        }
+        return defaultIndex;
+    }
 
     /**
      * Creates a list of Grids based on the given HTML string. This works only
      * for table-based HTML documents.
      *
-     * @param html the HTML string.
+     * @param html  the HTML string.
      * @param title the title to use for the grids.
      * @return a list of Grids.
      */
-    public static List<Grid> fromHtml(String html, String title) throws Exception {
+    public static List<Grid> fromHtml(String html, String title)
+        throws Exception {
         if (html == null || html.trim().isEmpty()) {
             return null;
         }
@@ -388,14 +439,16 @@ public class GridUtils {
             Integer firstColumnCount = null;
 
             for (TableRow row : rows) {
-                if (getColumnCount(row) == 0) { // Ignore if no cells
+                if (getColumnCount(row) == 0) // Ignore if no cells
+                {
                     log.warn("Ignoring row with no columns");
                     continue;
                 }
 
                 Node[] cells = row.getChildren().extractAllNodesThatMatch(HTML_ROW_FILTER).toNodeArray();
 
-                if (firstColumnCount == null) { // First row becomes header
+                if (firstColumnCount == null) // First row becomes header
+                {
                     firstColumnCount = getColumnCount(row);
 
                     for (Node c : cells) {
@@ -409,11 +462,12 @@ public class GridUtils {
                             grid.addEmptyHeaders((colSpan - 1));
                         }
                     }
-                } else { // Rest becomes rows
-                    if (firstColumnCount != getColumnCount(row)) { // Ignore
-                        log.warn(
-                            "Ignoring row which has " + row.getColumnCount() + " columns since table has " + firstColumnCount + " columns"
-                        );
+                } else // Rest becomes rows
+                {
+                    if (firstColumnCount != getColumnCount(row)) // Ignore
+                    {
+                        log.warn("Ignoring row which has " + row.getColumnCount() + " columns since table has "
+                            + firstColumnCount + " columns");
                         continue;
                     }
 
@@ -442,7 +496,8 @@ public class GridUtils {
     }
 
     /**
-     * Returns the number of columns/cells in the given row, including cell spacing.
+     * Returns the number of columns/cells in the given row, including cell
+     * spacing.
      */
     private static int getColumnCount(TableRow row) {
         Node[] cells = row.getChildren().extractAllNodesThatMatch(HTML_ROW_FILTER).toNodeArray();
@@ -464,6 +519,10 @@ public class GridUtils {
      * appended.
      */
     public static String getValue(TagNode cell) {
+        if (cell.getChildren() == null || cell.getChildren().size() == 0) {
+            return EMPTY;
+        }
+
         StringBuilder builder = new StringBuilder();
 
         for (Node child : cell.getChildren().toNodeArray()) {
@@ -478,14 +537,15 @@ public class GridUtils {
     }
 
     /**
-     * Returns a mapping based on the given grid where the key is a joined string
-     * of the string value of each value for meta columns. The value is the object
-     * at the given value index. The map contains at maximum one entry per row in
-     * the given grid, less if the joined key string are duplicates. The object
-     * at the value index must be numeric.
+     * Returns a mapping based on the given grid where the key is a joined
+     * string of the string value of each value for meta columns. The value is
+     * the object at the given value index. The map contains at maximum one
+     * entry per row in the given grid, less if the joined key string are
+     * duplicates. The object at the value index must be numeric.
      *
-     * @param grid the grid.
-     * @param valueIndex the index of the column holding the value, must be numeric.
+     * @param grid       the grid.
+     * @param valueIndex the index of the column holding the value, must be
+     *                   numeric.
      * @return a meta string to value object mapping.
      */
     public static Map<String, Object> getMetaValueMapping(Grid grid, int valueIndex) {
@@ -496,8 +556,7 @@ public class GridUtils {
         for (List<Object> row : grid.getRows()) {
             List<Object> metaDataRowItems = ListUtils.getAtIndexes(row, metaIndexes);
 
-            //            String key = TextUtils.join( metaDataRowItems, DIMENSION_SEP, DimensionalObjectUtils.NULL_REPLACEMENT );
-            String key = TextUtils.join(metaDataRowItems, "-", "[n/a]");
+            String key = TextUtils.join(metaDataRowItems, DIMENSION_SEP, DimensionalObjectUtils.NULL_REPLACEMENT);
 
             map.put(key, row.get(valueIndex));
         }
@@ -517,6 +576,20 @@ public class GridUtils {
     }
 
     /**
+     * Render using Velocity.
+     */
+    private static void render(Grid grid, Map<?, ?> params, Writer writer, String template) {
+        // TODO Edit Later to write an Html String into the response writer or return ModelAndView
+//        final VelocityContext context = new VelocityContext();
+//
+//        context.put( KEY_GRID, grid );
+//        context.put( KEY_ENCODER, ENCODER );
+//        context.put( KEY_PARAMS, params );
+//
+//        new VelocityManager().getEngine().getTemplate( template ).merge( context, writer );
+    }
+
+    /**
      * Indicates whether the given list of grids have at least one grid which is
      * not null and has more than zero visible columns.
      */
@@ -533,7 +606,8 @@ public class GridUtils {
     }
 
     /**
-     * Indicates whether grid is not null and has more than zero visible columns.
+     * Indicates whether grid is not null and has more than zero visible
+     * columns.
      */
     private static boolean isNonEmptyGrid(Grid grid) {
         return grid != null && grid.getVisibleWidth() > 0;

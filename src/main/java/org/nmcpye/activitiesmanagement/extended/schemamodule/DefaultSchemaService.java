@@ -4,12 +4,15 @@ import com.google.common.base.CaseFormat;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import org.apache.commons.lang3.StringUtils;
+import org.hibernate.MappingException;
+import org.hibernate.SessionFactory;
+import org.hibernate.metamodel.spi.MetamodelImplementor;
+import org.hibernate.persister.entity.EntityPersister;
+import org.hibernate.persister.entity.SingleTableEntityPersister;
 import org.nmcpye.activitiesmanagement.extended.common.*;
 import org.nmcpye.activitiesmanagement.extended.common.util.TextUtils;
 import org.nmcpye.activitiesmanagement.extended.schema.Property;
 import org.nmcpye.activitiesmanagement.extended.schemamodule.descriptors.*;
-import org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.AnnotationUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +21,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.core.OrderComparator;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Table;
+import javax.persistence.EntityManagerFactory;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +34,8 @@ public class DefaultSchemaService
     implements SchemaService {
     private static final Logger log = LoggerFactory.getLogger(DefaultSchemaService.class);
     private static final String PROPERTY_SELF = "__self__";
+
+    private final EntityManagerFactory entityManagerFactory;
 
     // Simple alias map for our concrete implementations of the core interfaces
     private static final ImmutableMap<Class<?>, Class<?>> BASE_ALIAS_MAP = ImmutableMap.<Class<?>, Class<?>>builder()
@@ -49,10 +54,11 @@ public class DefaultSchemaService
     private final PropertyIntrospectorService propertyIntrospectorService;
 
     @Autowired
-    public DefaultSchemaService(PropertyIntrospectorService propertyIntrospectorService) {
+    public DefaultSchemaService(EntityManagerFactory entityManagerFactory, PropertyIntrospectorService propertyIntrospectorService) {
         checkNotNull(propertyIntrospectorService);
 //        checkNotNull( sessionFactory );
 
+        this.entityManagerFactory = entityManagerFactory;
         this.propertyIntrospectorService = propertyIntrospectorService;
 //        this.sessionFactory = sessionFactory;
         init();
@@ -186,19 +192,37 @@ public class DefaultSchemaService
     @EventListener
     public void handleContextRefresh(ContextRefreshedEvent contextRefreshedEvent) {
         for (SchemaDescriptor descriptor : descriptors.values()) {
+
             Schema schema = descriptor.getSchema();
 
-            if (AnnotationUtils.isAnnotationPresent(schema.getKlass(), Table.class)) {
-                Table rootElement = AnnotationUtils.getAnnotation(schema.getKlass(), Table.class);
+            SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
+            MetamodelImplementor metamodelImplementor = (MetamodelImplementor) sessionFactory.getMetamodel();
+//            MetamodelImplementor metamodelImplementor = (MetamodelImplementor) sessionFactory.getMetamodel();
+            try {
+                EntityPersister entityPersister = metamodelImplementor.entityPersister(schema.getKlass());
 
-                if (!StringUtils.isEmpty(rootElement.name())) {
-                    schema.setTableName(rootElement.name());
-                    schema.setPersisted(true);
+                if (entityPersister instanceof SingleTableEntityPersister) {
+                    schema.setTableName(((SingleTableEntityPersister) entityPersister).getTableName());
                 }
-            } else {
+
+                schema.setPersisted(true);
+            } catch (MappingException e) {
                 // Class is not persisted with Hibernate
                 schema.setPersisted(false);
             }
+//            Schema schema = descriptor.getSchema();
+//
+//            if (AnnotationUtils.isAnnotationPresent(schema.getKlass(), Table.class)) {
+//                Table rootElement = AnnotationUtils.getAnnotation(schema.getKlass(), Table.class);
+//
+//                if (!StringUtils.isEmpty(rootElement.name())) {
+//                    schema.setTableName(rootElement.name());
+//                    schema.setPersisted(true);
+//                }
+//            } else {
+//                // Class is not persisted with Hibernate
+//                schema.setPersisted(false);
+//            }
 
             schema.setDisplayName(TextUtils.getPrettyClassName(schema.getKlass()));
 

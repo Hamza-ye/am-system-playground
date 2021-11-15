@@ -179,19 +179,8 @@ public abstract class AbstractGistReadOnlyController<T extends PrimaryKeyObject>
 
     private Class<T> entityClass;
 
-//    @SuppressWarnings("unchecked")
-//    protected final Class<T> getEntityClass() {
-//        if (entityClass == null) {
-//            Type[] actualTypeArguments = ((ParameterizedType) getClass().getGenericSuperclass())
-//                .getActualTypeArguments();
-//            entityClass = (Class<T>) actualTypeArguments[0];
-//        }
-//
-//        return entityClass;
-//    }
-
     @SuppressWarnings("unchecked")
-    protected Class<T> getEntityClass() {
+    protected final Class<T> getEntityClass() {
         if (entityClass == null) {
             Type[] actualTypeArguments = ((ParameterizedType) getClass().getGenericSuperclass())
                 .getActualTypeArguments();

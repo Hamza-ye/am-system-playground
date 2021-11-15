@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import org.hibernate.Hibernate;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
@@ -89,7 +88,7 @@ public class OrganisationUnitController
             params.setQuery(options.get("query"));
             params.setLevel(options.getInt("level"));
             params.setMaxLevels(options.getInt("maxLevel"));
-            if (currentUser != null && currentUser.getPerson() != null){
+            if (currentUser != null && currentUser.getPerson() != null) {
                 params.setParents(options.isTrue("withinUserHierarchy") ? currentUser.getPerson().getOrganisationUnits()
 //                : options.isTrue("withinUserSearchHierarchy")
 //                ? currentUser.getPerson().getTeiSearchOrganisationUnitsWithFallback()
@@ -286,11 +285,6 @@ public class OrganisationUnitController
         generator.writeEndObject();
 
         generator.writeEndObject();
-    }
-
-    @Override
-    protected Class<OrganisationUnit> getEntityClass() {
-        return OrganisationUnit.class;
     }
 
     @Override

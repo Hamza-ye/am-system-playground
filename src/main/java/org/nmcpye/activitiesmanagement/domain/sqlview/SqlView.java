@@ -16,22 +16,21 @@ import java.util.regex.Pattern;
 @Table(name = "sql_view")
 public class SqlView
     extends BaseIdentifiableObject
-    implements MetadataObject
-{
+    implements MetadataObject {
     public static final String PREFIX_VIEWNAME = "_view";
 
     public static final Set<String> PROTECTED_TABLES = ImmutableSet.<String>builder().add(
-        "app_user", "person" ).build();
+        "app_user", "person").build();
 
     public static final Set<String> ILLEGAL_KEYWORDS = ImmutableSet.<String>builder().add(
         "delete", "alter", "update", "create", "drop", "commit", "createdb",
-        "createuser", "insert", "rename", "restore", "write" ).build();
+        "createuser", "insert", "rename", "restore", "write").build();
 
     public static final String CURRENT_USER_ID_VARIABLE = "_current_user_id";
     public static final String CURRENT_USERNAME_VARIABLE = "_current_username";
 
     public static final Set<String> STANDARD_VARIABLES = ImmutableSet.of(
-        CURRENT_USER_ID_VARIABLE, CURRENT_USERNAME_VARIABLE );
+        CURRENT_USER_ID_VARIABLE, CURRENT_USERNAME_VARIABLE);
 
     private static final String CRITERIA_SEP = ":";
     private static final String REGEX_SEP = "|";
@@ -56,12 +55,10 @@ public class SqlView
     // Constructors
     // -------------------------------------------------------------------------
 
-    public SqlView()
-    {
+    public SqlView() {
     }
 
-    public SqlView( String name, String sqlQuery, SqlViewType type )
-    {
+    public SqlView(String name, String sqlQuery, SqlViewType type) {
         this.name = name;
         this.sqlQuery = sqlQuery;
         this.type = type;
@@ -71,39 +68,33 @@ public class SqlView
     // Logic
     // -------------------------------------------------------------------------
 
-    public String getViewName()
-    {
-        final Pattern p = Pattern.compile( "\\W" );
+    public String getViewName() {
+        final Pattern p = Pattern.compile("\\W");
 
         String input = name;
 
-        String[] items = p.split( input.trim().replaceAll( "_", "" ) );
+        String[] items = p.split(input.trim().replaceAll("_", ""));
 
         input = "";
 
-        for ( String s : items )
-        {
+        for (String s : items) {
             input += s.isEmpty() ? "" : ("_" + s);
         }
 
         return PREFIX_VIEWNAME + input.toLowerCase();
     }
 
-    public static Map<String, String> getCriteria( Set<String> params )
-    {
+    public static Map<String, String> getCriteria(Set<String> params) {
         Map<String, String> map = new HashMap<>();
 
-        if ( params != null )
-        {
-            for ( String param : params )
-            {
-                if ( param != null && param.split( CRITERIA_SEP ).length == 2 )
-                {
-                    String[] criteria = param.split( CRITERIA_SEP );
+        if (params != null) {
+            for (String param : params) {
+                if (param != null && param.split(CRITERIA_SEP).length == 2) {
+                    String[] criteria = param.split(CRITERIA_SEP);
                     String filter = criteria[0];
                     String value = criteria[1];
 
-                    map.put( filter, value );
+                    map.put(filter, value);
                 }
             }
         }
@@ -111,15 +102,12 @@ public class SqlView
         return map;
     }
 
-    public static Set<String> getInvalidQueryParams( Set<String> params )
-    {
+    public static Set<String> getInvalidQueryParams(Set<String> params) {
         Set<String> invalid = new HashSet<>();
 
-        for ( String param : params )
-        {
-            if ( !isValidQueryParam( param ) )
-            {
-                invalid.add( param );
+        for (String param : params) {
+            if (!isValidQueryParam(param)) {
+                invalid.add(param);
             }
         }
 
@@ -129,20 +117,16 @@ public class SqlView
     /**
      * Indicates whether the given query parameter is valid.
      */
-    public static boolean isValidQueryParam( String param )
-    {
-        return StringUtils.isAlphanumeric( param );
+    public static boolean isValidQueryParam(String param) {
+        return StringUtils.isAlphanumeric(param);
     }
 
-    public static Set<String> getInvalidQueryValues( Collection<String> values )
-    {
+    public static Set<String> getInvalidQueryValues(Collection<String> values) {
         Set<String> invalid = new HashSet<>();
 
-        for ( String value : values )
-        {
-            if ( !isValidQueryValue( value ) )
-            {
-                invalid.add( value );
+        for (String value : values) {
+            if (!isValidQueryValue(value)) {
+                invalid.add(value);
             }
         }
 
@@ -152,61 +136,53 @@ public class SqlView
     /**
      * Indicates whether the given query value is valid.
      */
-    public static boolean isValidQueryValue( String value )
-    {
-        return value != null && value.matches( QUERY_VALUE_REGEX );
+    public static boolean isValidQueryValue(String value) {
+        return value != null && value.matches(QUERY_VALUE_REGEX);
     }
 
-    public static String getProtectedTablesRegex()
-    {
-        StringBuffer regex = new StringBuffer( "^(.*\\W)?(" );
+    public static String getProtectedTablesRegex() {
+        StringBuffer regex = new StringBuffer("^(.*\\W)?(");
 
-        for ( String table : PROTECTED_TABLES )
-        {
-            regex.append( table ).append( REGEX_SEP );
+        for (String table : PROTECTED_TABLES) {
+            regex.append(table).append(REGEX_SEP);
         }
 
-        regex.delete( regex.length() - 1, regex.length() );
+        regex.delete(regex.length() - 1, regex.length());
 
-        return regex.append( ")(\\W.*)?$" ).toString();
+        return regex.append(")(\\W.*)?$").toString();
     }
 
-    public static String getIllegalKeywordsRegex()
-    {
-        StringBuffer regex = new StringBuffer( "^(.*\\W)?(" );
+    public static String getIllegalKeywordsRegex() {
+        StringBuffer regex = new StringBuffer("^(.*\\W)?(");
 
-        for ( String word : ILLEGAL_KEYWORDS )
-        {
-            regex.append( word ).append( REGEX_SEP );
+        for (String word : ILLEGAL_KEYWORDS) {
+            regex.append(word).append(REGEX_SEP);
         }
 
-        regex.delete( regex.length() - 1, regex.length() );
+        regex.delete(regex.length() - 1, regex.length());
 
-        return regex.append( ")(\\W.*)?$" ).toString();
+        return regex.append(")(\\W.*)?$").toString();
     }
 
     /**
      * Indicates whether this SQL view is a query.
      */
-    public boolean isQuery()
-    {
-        return SqlViewType.QUERY.equals( type );
+    public boolean isQuery() {
+        return SqlViewType.QUERY.equals(type);
     }
 
     /**
      * Indicates whether this SQl view is a view / materialized view.
      */
-    public boolean isView()
-    {
-        return SqlViewType.QUERY.equals( type ) || isMaterializedView();
+    public boolean isView() {
+        return SqlViewType.QUERY.equals(type) || isMaterializedView();
     }
 
     /**
      * Indicates whether this SQL view is a materalized view.
      */
-    public boolean isMaterializedView()
-    {
-        return SqlViewType.MATERIALIZED_VIEW.equals( type );
+    public boolean isMaterializedView() {
+        return SqlViewType.MATERIALIZED_VIEW.equals(type);
     }
 
     // -------------------------------------------------------------------------
@@ -214,37 +190,30 @@ public class SqlView
     // -------------------------------------------------------------------------
 
     @JsonProperty
-    @PropertyRange( min = 2 )
-    public String getDescription()
-    {
+    @PropertyRange(min = 2)
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription( String description )
-    {
+    public void setDescription(String description) {
         this.description = description;
     }
 
     @JsonProperty
-    public String getSqlQuery()
-    {
+    public String getSqlQuery() {
         return sqlQuery;
     }
 
-    public void setSqlQuery( String sqlQuery )
-    {
+    public void setSqlQuery(String sqlQuery) {
         this.sqlQuery = sqlQuery;
     }
 
     @JsonProperty
-    public SqlViewType getType()
-    {
+    public SqlViewType getType() {
         return type;
     }
 
-    public void setType( SqlViewType type )
-    {
+    public void setType(SqlViewType type) {
         this.type = type;
     }
-
 }

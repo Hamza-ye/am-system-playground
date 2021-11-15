@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.thymeleaf.org"
+    th:lang="${#locale.language}"
+    lang="en"
+>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="icon" href="${baseUrl}/favicon.ico"/>
+    <title>Your request cannot be processed</title>
+    <style>
+        ::-moz-selection {
+            background: #b3d4fc;
+            text-shadow: none;
+        }
+
+        ::selection {
+            background: #b3d4fc;
+            text-shadow: none;
+        }
+
+        html {
+            padding: 30px 10px;
+            font-size: 20px;
+            line-height: 1.4;
+            color: #737373;
+            background: #3e8acc;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        html,
+        input {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            max-width: 1000px;
+            _width: 500px;
+            padding: 30px 20px 50px;
+            border: 1px solid #b3b3b3;
+            border-radius: 4px;
+            margin: 0 auto;
+            box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
+            background: #fcfcfc;
+        }
+
+        h1 {
+            margin: 0 10px;
+            font-size: 50px;
+            text-align: center;
+        }
+
+        h1 span {
+            color: #bbb;
+        }
+
+        h3 {
+            margin: 1.5em 0 0.5em;
+        }
+
+        p {
+            margin: 1em 0;
+        }
+
+        ul {
+            padding: 0 0 0 40px;
+            margin: 1em 0;
+        }
+
+        .container {
+            max-width: 800px;
+            _width: 380px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+##    <h3>$!encoder.htmlEncode( $grid.title )</h3>
+##    <h4>$!encoder.htmlEncode( $grid.subtitle )</h4>
+    <h3 th:text="${encoder.htmlEncode($grid.title)}">)</h3>
+    <h4 th:text="${encoder.htmlEncode( $grid.subtitle )}">)</h4>
+
+    <table class="listTable gridTable">
+        <thead>
+        <tr>
+            #foreach( $header in $grid.getVisibleHeaders() )
+            <th th:if="${!#strings.isEmpty(message)}">$!encoder.htmlEncode( $header.column )</th>
+            <th#if( $header.meta ) style="text-align:left"#end>$!encoder.htmlEncode( $header.column )</th>
+            #end
+        </tr>
+        </thead>
+        <tbody>
+            #foreach( $row in $grid.getVisibleRows() )
+            <tr>
+                #foreach( $col in $row )
+                    #set( $index = ( $velocityCount - 1 ) )
+                    #if( $grid.getVisibleHeaders().get( $index ).meta )
+                        <td style="text-align:left">$!encoder.htmlEncode( $col )</td>
+                    #else
+                        <td>$!encoder.htmlEncode( $col )</td>
+                    #end
+                #end
+            </tr>
+            #end
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

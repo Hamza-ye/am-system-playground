@@ -1,23 +1,16 @@
 package org.nmcpye.activitiesmanagement.extended.web.servlet;
 
-import org.nmcpye.activitiesmanagement.extended.systemmodule.system.startup.StartupListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.orm.hibernate5.support.OpenSessionInViewFilter;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
-import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.filter.DelegatingFilterProxy;
-
-import javax.servlet.FilterRegistration;
-import javax.servlet.ServletContext;
 
 @Order(10)
 @Configuration
-public class AMWebApiWebAppInitializer{ // implements WebApplicationInitializer {
+public class AMWebApiWebAppInitializer { // implements WebApplicationInitializer {
     private final Logger log = LoggerFactory.getLogger(AMWebApiWebAppInitializer.class);
 
     @Bean
