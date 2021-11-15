@@ -4,6 +4,7 @@ import org.hibernate.query.Query;
 import org.nmcpye.activitiesmanagement.domain.Project;
 import org.nmcpye.activitiesmanagement.extended.common.hibernate.HibernateIdentifiableObjectStore;
 import org.nmcpye.activitiesmanagement.extended.project.ProjectStore;
+import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +16,8 @@ public class HibernateProjectStore extends HibernateIdentifiableObjectStore<Proj
 
     private final Logger log = LoggerFactory.getLogger(HibernateProjectStore.class);
 
-    public HibernateProjectStore(JdbcTemplate jdbcTemplate, UserService userService) {
-        super(jdbcTemplate, Project.class, userService, true);
+    public HibernateProjectStore(JdbcTemplate jdbcTemplate, UserService userService, AclService aclService) {
+        super(jdbcTemplate, Project.class, userService, aclService, true);
     }
 
     //////////////////////////////////////

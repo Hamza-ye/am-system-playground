@@ -9,8 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import javax.persistence.EntityManagerFactory;
-
 /**
  * Created by Hamza on 14/10/2021.
  */
@@ -30,12 +28,12 @@ public class StoreConfig {
 
     @Bean("org.nmcpye.activitiesmanagement.extended.person.PeopleGroupStore")
     public HibernateIdentifiableObjectStore<PeopleGroup> userGroupStore() {
-        return new HibernateIdentifiableObjectStore<>(jdbcTemplate, PeopleGroup.class, userService, true);
+        return new HibernateIdentifiableObjectStore<>(jdbcTemplate, PeopleGroup.class, userService, aclService, true);
     }
 
     @Bean("org.nmcpye.activitiesmanagement.extended.scheduling.JobConfigurationStore")
     public HibernateIdentifiableObjectStore<JobConfiguration> jobConfigurationStore() {
-        return new HibernateIdentifiableObjectStore<>(jdbcTemplate, JobConfiguration.class, userService, true);
+        return new HibernateIdentifiableObjectStore<>(jdbcTemplate, JobConfiguration.class, userService, aclService, true);
     }
 
     //    @Bean

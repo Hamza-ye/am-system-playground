@@ -12,6 +12,7 @@ import org.nmcpye.activitiesmanagement.extended.common.util.TextUtils;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitHierarchy;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitQueryParams;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitStore;
+import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;
 import org.nmcpye.activitiesmanagement.extended.systemmodule.system.objectmapper.OrganisationUnitRelationshipRowMapper;
 import org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.SqlUtils;
 import org.nmcpye.activitiesmanagement.service.UserService;
@@ -30,13 +31,8 @@ public class OrganisationUnitStoreImpl
 
     private final Logger log = LoggerFactory.getLogger(OrganisationUnitStoreImpl.class);
 
-    //    private final DbmsManager dbmsManager;
-
-    public OrganisationUnitStoreImpl(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher, UserService userService) {
-        super(jdbcTemplate, OrganisationUnit.class, userService, true);
-        //        checkNotNull( dbmsManager );
-
-        //        this.dbmsManager = dbmsManager;
+    public OrganisationUnitStoreImpl(JdbcTemplate jdbcTemplate, UserService userService, AclService aclService) {
+        super(jdbcTemplate, OrganisationUnit.class, userService, aclService, true);
     }
 
     // -------------------------------------------------------------------------

@@ -12,6 +12,7 @@ import org.nmcpye.activitiesmanagement.extended.hibernatemodule.hibernate.JpaQue
 import org.nmcpye.activitiesmanagement.extended.hibernatemodule.hibernate.exception.DeleteAccessDeniedException;
 import org.nmcpye.activitiesmanagement.extended.hibernatemodule.hibernate.exception.ReadAccessDeniedException;
 import org.nmcpye.activitiesmanagement.extended.hibernatemodule.hibernate.exception.UpdateAccessDeniedException;
+import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;
 import org.nmcpye.activitiesmanagement.extended.servicecoremodule.query.JpaQueryUtils;
 import org.nmcpye.activitiesmanagement.security.AuthoritiesConstants;
 import org.nmcpye.activitiesmanagement.security.SecurityUtils;
@@ -29,24 +30,28 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 public class HibernateIdentifiableObjectStore<T extends BaseIdentifiableObject>
     extends HibernateGenericStore<T>
     implements GenericDimensionalObjectStore<T> {
 
     private final Logger log = LoggerFactory.getLogger(HibernateIdentifiableObjectStore.class);
 
+    protected final AclService aclService;
+
     protected UserService userService;
 
     protected boolean transientIdentifiableProperties = false;
 
     public HibernateIdentifiableObjectStore(JdbcTemplate jdbcTemplate, Class<T> clazz,
-                                            UserService userService, boolean cacheable) {
+                                            UserService userService, AclService aclService, boolean cacheable) {
         super(jdbcTemplate, clazz, cacheable);
-        //        checkNotNull(userService);
-        //        checkNotNull( aclService );
+        checkNotNull(userService);
+        checkNotNull(aclService);
 
         this.userService = userService;
-        //        this.aclService = aclService;
+        this.aclService = aclService;
         this.cacheable = cacheable;
     }
 

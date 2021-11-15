@@ -13,6 +13,7 @@ import org.nmcpye.activitiesmanagement.extended.common.exception.InvalidIdentifi
 import org.nmcpye.activitiesmanagement.extended.common.hibernate.HibernateIdentifiableObjectStore;
 import org.nmcpye.activitiesmanagement.extended.hibernatemodule.dbms.DbmsUtils;
 import org.nmcpye.activitiesmanagement.extended.period.PeriodStore;
+import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,9 +38,9 @@ public class HibernatePeriodStore extends HibernateIdentifiableObjectStore<Perio
 
     private static Cache<String, Long> PERIOD_ID_CACHE;
 
-    public HibernatePeriodStore(JdbcTemplate jdbcTemplate, UserService userService) {
+    public HibernatePeriodStore(JdbcTemplate jdbcTemplate, UserService userService, AclService aclService) {
         //        super(sessionFactory, jdbcTemplate, Period.class, userService, true);
-        super(jdbcTemplate, Period.class, userService, true);
+        super(jdbcTemplate, Period.class, userService, aclService, true);
         transientIdentifiableProperties = true;
     }
 

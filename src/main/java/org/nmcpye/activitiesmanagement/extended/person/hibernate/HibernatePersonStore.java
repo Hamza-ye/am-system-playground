@@ -9,6 +9,7 @@ import org.nmcpye.activitiesmanagement.extended.common.util.SqlHelper;
 import org.nmcpye.activitiesmanagement.extended.common.util.TextUtils;
 import org.nmcpye.activitiesmanagement.extended.person.PersonQueryParams;
 import org.nmcpye.activitiesmanagement.extended.person.PersonStore;
+import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;
 import org.nmcpye.activitiesmanagement.extended.servicecoremodule.query.QueryUtils;
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
@@ -28,8 +29,8 @@ public class HibernatePersonStore extends HibernateIdentifiableObjectStore<Perso
 
     private final Logger log = LoggerFactory.getLogger(HibernatePersonStore.class);
 
-    public HibernatePersonStore(JdbcTemplate jdbcTemplate, UserService userService) {
-        super(jdbcTemplate, Person.class, userService, true);
+    public HibernatePersonStore(JdbcTemplate jdbcTemplate, UserService userService, AclService aclService) {
+        super(jdbcTemplate, Person.class, userService, aclService, true);
     }
 
     @Override

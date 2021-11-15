@@ -8,6 +8,7 @@ import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectUtils;
 import org.nmcpye.activitiesmanagement.extended.common.hibernate.HibernateIdentifiableObjectStore;
 import org.nmcpye.activitiesmanagement.extended.common.util.SqlHelper;
 import org.nmcpye.activitiesmanagement.extended.common.util.TextUtils;
+import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;
 import org.nmcpye.activitiesmanagement.extended.servicecoremodule.query.QueryUtils;
 import org.nmcpye.activitiesmanagement.extended.user.UserQueryParams;
 import org.nmcpye.activitiesmanagement.extended.user.UserStore;
@@ -30,8 +31,9 @@ public class HibernateUserStore extends HibernateIdentifiableObjectStore<User> i
 
     private final Logger log = LoggerFactory.getLogger(HibernateUserStore.class);
 
-    public HibernateUserStore(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher, UserService userService) {
-        super(jdbcTemplate, User.class, userService, true);
+    public HibernateUserStore(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher,
+                              UserService userService, AclService aclService) {
+        super(jdbcTemplate, User.class, userService, aclService, true);
     }
 
     @Override
