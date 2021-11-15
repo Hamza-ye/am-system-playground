@@ -26,9 +26,6 @@
             <column name="short_name" type="varchar(50)">
                 <constraints nullable="true" />
             </column>
-            <column name="description" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="created" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>

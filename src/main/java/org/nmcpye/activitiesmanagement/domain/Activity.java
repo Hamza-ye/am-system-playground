@@ -4,12 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 
 /**
  * A Activity.
@@ -17,31 +20,29 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "activity")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Activity implements Serializable {
+public class Activity extends BaseIdentifiableObject implements MetadataObject {
 
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
-    private Long id;
-
-    @NotNull
-    @Size(max = 11)
-    @Column(name = "uid", length = 11, nullable = false, unique = true)
-    private String uid;
-
-    @Column(name = "code", unique = true)
-    private String code;
-
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "created")
-    private Instant created;
-
-    @Column(name = "last_updated")
-    private Instant lastUpdated;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+//    @SequenceGenerator(name = "sequenceGenerator")
+//    private Long id;
+//
+//    @NotNull
+//    @Size(max = 11)
+//    @Column(name = "uid", length = 11, nullable = false, unique = true)
+//    private String uid;
+//
+//    @Column(name = "code", unique = true)
+//    private String code;
+//
+//    @Column(name = "name")
+//    private String name;
+//
+//    @Column(name = "created")
+//    private Instant created;
+//
+//    @Column(name = "last_updated")
+//    private Instant lastUpdated;
 
     @NotNull
     @Column(name = "start_date", nullable = false)
@@ -69,33 +70,20 @@ public class Activity implements Serializable {
     )
     private Set<Warehouse> warehouses = new HashSet<>();
 
-    @ManyToOne
-    private User user;
-
-    @ManyToOne
-    private User lastUpdatedBy;
+//    @ManyToOne
+//    private User user;
+//
+//    @ManyToOne
+//    private User lastUpdatedBy;
 
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties(value = { "activities", "user", "createdBy", "lastUpdatedBy" }, allowSetters = true)
     private Project project;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Activity id(Long id) {
         this.id = id;
         return this;
-    }
-
-    public String getUid() {
-        return this.uid;
     }
 
     public Activity uid(String uid) {
@@ -103,25 +91,9 @@ public class Activity implements Serializable {
         return this;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    public String getCode() {
-        return this.code;
-    }
-
     public Activity code(String code) {
         this.code = code;
         return this;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return this.name;
     }
 
     public Activity name(String name) {
@@ -129,34 +101,14 @@ public class Activity implements Serializable {
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Instant getCreated() {
-        return this.created;
-    }
-
-    public Activity created(Instant created) {
+    public Activity created(Date created) {
         this.created = created;
         return this;
     }
 
-    public void setCreated(Instant created) {
-        this.created = created;
-    }
-
-    public Instant getLastUpdated() {
-        return this.lastUpdated;
-    }
-
-    public Activity lastUpdated(Instant lastUpdated) {
+    public Activity lastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
         return this;
-    }
-
-    public void setLastUpdated(Instant lastUpdated) {
-        this.lastUpdated = lastUpdated;
     }
 
     public LocalDate getStartDate() {
@@ -255,30 +207,14 @@ public class Activity implements Serializable {
         this.warehouses = warehouses;
     }
 
-    public User getUser() {
-        return this.user;
-    }
-
     public Activity user(User user) {
         this.setUser(user);
         return this;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public User getLastUpdatedBy() {
-        return this.lastUpdatedBy;
-    }
-
     public Activity lastUpdatedBy(User user) {
         this.setLastUpdatedBy(user);
         return this;
-    }
-
-    public void setLastUpdatedBy(User user) {
-        this.lastUpdatedBy = user;
     }
 
     public Project getProject() {
@@ -292,42 +228,5 @@ public class Activity implements Serializable {
 
     public void setProject(Project project) {
         this.project = project;
-    }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Activity)) {
-            return false;
-        }
-        return id != null && id.equals(((Activity) o).id);
-    }
-
-    @Override
-    public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return getClass().hashCode();
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "Activity{" +
-            "id=" + getId() +
-            ", uid='" + getUid() + "'" +
-            ", code='" + getCode() + "'" +
-            ", name='" + getName() + "'" +
-            ", created='" + getCreated() + "'" +
-            ", lastUpdated='" + getLastUpdated() + "'" +
-            ", startDate='" + getStartDate() + "'" +
-            ", endDate='" + getEndDate() + "'" +
-            ", noOfDays=" + getNoOfDays() +
-            ", active='" + getActive() + "'" +
-            ", isDisplayed='" + getIsDisplayed() + "'" +
-            "}";
     }
 }

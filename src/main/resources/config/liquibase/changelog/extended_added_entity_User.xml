@@ -102,6 +102,16 @@
                                  referencedTableName="person"/>
     </changeSet>
 
+    <changeSet author="Hamza (generated)" id="1636911576718-12">
+        <addUniqueConstraint columnNames="code" constraintName="UC_APP_USERCODE_COL" tableName="app_user"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-13">
+        <addUniqueConstraint columnNames="uid" constraintName="UC_APP_USERUID_COL" tableName="app_user"/>
+    </changeSet>
+
+    <changeSet author="Hamza (generated)" id="1636911576718-3">
+        <addNotNullConstraint columnDataType="varchar(11)" columnName="uid" tableName="app_user" validate="true"/>
+    </changeSet>
     <!--<changeSet id="load_app_user_data" author="Hamza">-->
         <!--<loadData-->
             <!--file="config/liquibase/data/user.csv"-->

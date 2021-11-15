@@ -65,7 +65,7 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="orgunit_group_id, orgunit_groupset_id" tableName="orgunit_groupset_members"/>
+        <addPrimaryKey columnNames="orgunit_groupset_id, orgunit_group_id" tableName="orgunit_groupset_members"/>
 
     </changeSet>
 

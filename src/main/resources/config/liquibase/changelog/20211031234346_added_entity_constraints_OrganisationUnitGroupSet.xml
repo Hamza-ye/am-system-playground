@@ -32,4 +32,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="orgunit_group"/>
     </changeSet>
+
+    <changeSet author="Hamza (generated)" id="1636911576718-24">
+        <createIndex indexName="IX_null" tableName="orgunit_groupset_members" unique="true">
+            <column name="orgunit_groupset_id"/>
+            <column name="orgunit_group_id"/>
+        </createIndex>
+    </changeSet>
 </databaseChangeLog>

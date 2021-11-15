@@ -21,6 +21,9 @@
         </createTable>
     </changeSet>
 
+    <changeSet author="Hamza (generated)" id="1636911576718-2">
+        <addNotNullConstraint columnDataType="varchar(31)" columnName="name" tableName="period_type" validate="true"/>
+    </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
     <!--
