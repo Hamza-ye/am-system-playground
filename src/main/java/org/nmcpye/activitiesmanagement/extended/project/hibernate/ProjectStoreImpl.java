@@ -9,14 +9,13 @@ import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 
-@Repository("org.nmcpye.activitiesmanagement.extended.project.ProjectStore")
-public class HibernateProjectStore extends HibernateIdentifiableObjectStore<Project> implements ProjectStore {
+public class ProjectStoreImpl extends HibernateIdentifiableObjectStore<Project>
+    implements ProjectStore {
 
-    private final Logger log = LoggerFactory.getLogger(HibernateProjectStore.class);
+    private final Logger log = LoggerFactory.getLogger(ProjectStoreImpl.class);
 
-    public HibernateProjectStore(JdbcTemplate jdbcTemplate, UserService userService, AclService aclService) {
+    public ProjectStoreImpl(JdbcTemplate jdbcTemplate, UserService userService, AclService aclService) {
         super(jdbcTemplate, Project.class, userService, aclService, true);
     }
 

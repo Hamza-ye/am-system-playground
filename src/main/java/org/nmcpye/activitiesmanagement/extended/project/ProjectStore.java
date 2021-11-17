@@ -5,24 +5,25 @@ import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectStore;
 
 /**
  * Defines methods for persisting Project.
- * @author Hamza Assada
  *
+ * @author Hamza Assada
  */
 
 public interface ProjectStore extends IdentifiableObjectStore<Project> {
     String ID = ProjectStore.class.getName();
 
     /**
-     * Returns number of all people
-     * @return number of people
+     * Returns number of all Projects
+     *
+     * @return number of Projects
      */
     int getProjectCount();
 
     /**
      * Returns Project with given projectId.
      *
-     * @param projectId UserId
-     * @return User with given projectId
+     * @param projectId ProjectId
+     * @return Project with given projectId
      */
     Project getProject(Long projectId);
 }
