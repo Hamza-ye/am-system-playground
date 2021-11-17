@@ -3,12 +3,14 @@ package org.nmcpye.activitiesmanagement.extended.project;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.project.Project;
 import org.nmcpye.activitiesmanagement.extended.project.pagingrepository.ProjectPagingRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by Hamza on 17/11/2021.
  */
+@Service
 public class DefaultProjectService implements ProjectServiceExt {
     private final ProjectPagingRepository projectPagingRepository;
 
