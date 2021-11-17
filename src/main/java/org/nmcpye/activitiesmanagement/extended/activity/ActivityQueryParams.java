@@ -5,6 +5,9 @@ import org.nmcpye.activitiesmanagement.domain.project.Project;
 
 import java.time.LocalDate;
 
+/**
+ * Created by Hamza on 20/10/2021.
+ */
 public class ActivityQueryParams {
 
     private String query;

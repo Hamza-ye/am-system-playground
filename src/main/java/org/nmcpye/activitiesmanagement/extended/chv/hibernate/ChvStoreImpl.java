@@ -7,6 +7,9 @@ import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.Ac
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+/**
+ * Created by Hamza on 17-11-2021.
+ */
 public class ChvStoreImpl
     extends HibernateIdentifiableObjectStore<CHV>
     implements ChvStore {

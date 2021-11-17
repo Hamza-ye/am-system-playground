@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+/**
+ * Created by Hamza on 17/11/2021.
+ */
 public class ProjectStoreImpl extends HibernateIdentifiableObjectStore<Project>
     implements ProjectStore {
 

@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Created by Hamza on 20/10/2021.
+ */
 public class ActivityStoreImpl
     extends HibernateIdentifiableObjectStore<Activity> implements ActivityStore {
 

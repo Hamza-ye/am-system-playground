@@ -8,7 +8,7 @@ import org.nmcpye.activitiesmanagement.service.UserService;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
- * Created by Hamza on 17/11/2021.
+ * Created by Hamza on 17-11-2021.
  */
 public class MalariaCasesReportStoreImpl extends HibernateIdentifiableObjectStore<MalariaCasesReport> implements MalariaCasesReportStore {
     // -------------------------------------------------------------------------

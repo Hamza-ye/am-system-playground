@@ -5,6 +5,9 @@ import org.nmcpye.activitiesmanagement.domain.activity.Activity;
 
 import java.util.List;
 
+/**
+ * Created by Hamza on 20/10/2021.
+ */
 public interface ActivityServiceExtended {
     String ID = ActivityServiceExtended.class.getName();
 

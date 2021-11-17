@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * Spring Data SQL repository for the DengueCasesReport entity.
- * created by Hamza Assada 12-11-2021
+ * created by Hamza Assada 17-11-2021
  */
 @SuppressWarnings("unused")
 @Repository
