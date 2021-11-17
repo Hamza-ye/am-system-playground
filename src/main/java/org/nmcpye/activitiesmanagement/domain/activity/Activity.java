@@ -64,7 +64,7 @@ public class Activity extends BaseIdentifiableObject implements MetadataObject {
     @Column(name = "active")
     private Boolean active;
 
-    @Column(name = "is_displayed")
+    @Column(name = "displayed")
     private Boolean displayed;
 
     @OneToMany(mappedBy = "activity")
