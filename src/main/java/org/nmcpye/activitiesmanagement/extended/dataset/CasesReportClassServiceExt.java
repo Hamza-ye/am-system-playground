@@ -2,7 +2,6 @@ package org.nmcpye.activitiesmanagement.extended.dataset;
 
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.dataset.CasesReportClass;
-import org.nmcpye.activitiesmanagement.domain.dataset.DengueCasesReport;
 import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
 
 import java.util.List;

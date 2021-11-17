@@ -2,7 +2,6 @@ package org.nmcpye.activitiesmanagement.extended.chv;
 
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.chv.CHV;
-import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
 
 import java.util.List;
 

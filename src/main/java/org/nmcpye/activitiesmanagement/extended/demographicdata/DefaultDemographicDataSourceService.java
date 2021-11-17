@@ -2,7 +2,6 @@ package org.nmcpye.activitiesmanagement.extended.demographicdata;
 
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.demographicdata.DemographicDataSource;
-import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

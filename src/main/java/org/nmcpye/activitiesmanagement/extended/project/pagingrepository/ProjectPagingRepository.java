@@ -1,8 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.project.pagingrepository;
 
-import org.nmcpye.activitiesmanagement.domain.activity.Activity;
 import org.nmcpye.activitiesmanagement.domain.project.Project;
-import org.nmcpye.activitiesmanagement.extended.activity.ActivityStore;
 import org.nmcpye.activitiesmanagement.extended.project.ProjectStore;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
