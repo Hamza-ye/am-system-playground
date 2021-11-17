@@ -1,10 +1,8 @@
 package org.nmcpye.activitiesmanagement.extended.activity;
 
+import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.activity.Activity;
-import org.nmcpye.activitiesmanagement.extended.person.PersonQueryParams;
 
-import javax.annotation.Nullable;
-import java.util.Collection;
 import java.util.List;
 
 public interface ActivityServiceExtended {
@@ -17,111 +15,83 @@ public interface ActivityServiceExtended {
     /**
      * Adds a Activity.
      *
-     * @param activity the Activity to add.
-     * @return the generated identifier.
+     * @param activity The Activity to add.
+     * @return The generated unique identifier for this Activity.
      */
-    Long addActivity(Activity activity);
+    long addActivity(Activity activity);
 
     /**
      * Updates a Activity.
      *
-     * @param activity the Activity to update.
+     * @param activity The Activity to update.
      */
     void updateActivity(Activity activity);
 
     /**
-     * Retrieves the Activity with the given identifier.
+     * Deletes a Activity.
      *
-     * @param id the identifier of the Activity to retrieve.
-     * @return the Activity.
-     */
-    Activity getActivity(Long id);
-
-    /**
-     * Retrieves the Activity with the given unique identifier.
-     *
-     * @param uid the identifier of the Activity to retrieve.
-     * @return the Activity.
-     */
-    Activity getActivity(String uid);
-
-    /**
-     * Retrieves the Activity with the given username.
-     *
-     * @param name the name of the Activity to retrieve.
-     * @return the Activity.
-     */
-    Activity getActivityByActivityname(String name);
-
-    /**
-     * Retrieves the Activity by attempting to look up by various identifiers
-     * in the following order:
-     *
-     * <ul>
-     * <li>UID</li>
-     * <li>UUID</li>
-     * <li>Activityname</li>
-     * </ul>
-     *
-     * @param id the Activity identifier.
-     * @return the Activity, or null if not found.
-     */
-    Activity getActivityByIdentifier(String id);
-
-    /**
-     * Retrieves a collection of Activity with the given unique identifiers.
-     *
-     * @param uids the identifiers of the collection of Activitys to retrieve.
-     * @return the activities.
-     */
-    List<Activity> getActivities(Collection<String> uids);
-
-    /**
-     * Returns a List of all Activities.
-     *
-     * @return a Collection of Activities.
-     */
-    List<Activity> getAllActivities();
-
-    /**
-     * Deletes an Activity.
-     *
-     * @param activity the Activity to delete.
+     * @param activity The Activity to delete.
      */
     void deleteActivity(Activity activity);
 
     /**
-     * Returns a list of users based on the given query parameters.
-     * The default order of last name and first name will be applied.
+     * Get a Activity
      *
-     * @param params the activity query parameters.
-     * @return a List of activities.
+     * @param id The unique identifier for the Activity to get.
+     * @return The Activity with the given id or null if it does not exist.
      */
-    List<Activity> getActivities(ActivityQueryParams params);
+    Activity getActivity(long id);
 
     /**
-     * Returns a list of users based on the given query parameters.
-     * If the specified list of orders are empty, default order of
-     * last name and first name will be applied.
+     * Returns the Activity with the given UID.
      *
-     * @param params the activity query parameters.
-     * @param orders the already validated order strings (e.g. email:asc).
-     * @return a List of activities.
+     * @param uid the UID.
+     * @return the Activity with the given UID, or null if no match.
      */
-    List<Activity> getActivitys(PersonQueryParams params, @Nullable List<String> orders);
+    Activity getActivity(String uid);
 
     /**
-     * Returns the number of activities based on the given query parameters.
+     * Returns the Activity with the given UID. Bypasses the ACL system.
      *
-     * @param params the activity query parameters.
-     * @return number of activities.
+     * @param uid the UID.
+     * @return the Activity with the given UID, or null if no match.
      */
-    int getActivityCount(PersonQueryParams params);
+    Activity getActivityNoAcl(String uid);
 
     /**
-     * Returns number of all activities
+     * Get all Activitys.
      *
-     * @return number of activities
+     * @return A list containing all Activitys.
      */
-    int getActivityCount();
+    List<Activity> getAllActivitys();
+
+    /**
+     * Returns the Chvs which current user have READ access. If the current
+     * user has the ALL authority then all Chvs are returned.
+     */
+    List<Activity> getAllDataRead();
+
+    /**
+     * Returns the Chvs which given user have READ access. If the current
+     * user has the ALL authority then all Chvs are returned.
+     *
+     * @param user the user to query for data set list.
+     * @return a list of Chvs which the given user has data read access to.
+     */
+    List<Activity> getUserDataRead(User user);
+
+    /**
+     * Returns the Chvs which current user have WRITE access. If the
+     * current user has the ALL authority then all Chvs are returned.
+     */
+    List<Activity> getAllDataWrite();
+
+    /**
+     * Returns the Chvs which current user have WRITE access. If the
+     * current user has the ALL authority then all Chvs are returned.
+     *
+     * @param user the user to query for data set list.
+     * @return a list of Chvs which given user has data write access to.
+     */
+    List<Activity> getUserDataWrite(User user);
 }

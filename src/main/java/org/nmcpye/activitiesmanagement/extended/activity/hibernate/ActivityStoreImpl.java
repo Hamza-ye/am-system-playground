@@ -19,12 +19,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@Repository("org.nmcpye.activitiesmanagement.extended.activity.ActivityStore")
-public class HibernateActivityStore extends HibernateIdentifiableObjectStore<Activity> implements ActivityStore {
+public class ActivityStoreImpl
+    extends HibernateIdentifiableObjectStore<Activity> implements ActivityStore {
 
-    private final Logger log = LoggerFactory.getLogger(HibernateActivityStore.class);
+    private final Logger log = LoggerFactory.getLogger(ActivityStoreImpl.class);
 
-    public HibernateActivityStore(JdbcTemplate jdbcTemplate, UserService userService, AclService aclService) {
+    public ActivityStoreImpl(JdbcTemplate jdbcTemplate, UserService userService, AclService aclService) {
         super(jdbcTemplate, Activity.class, userService, aclService, true);
     }
 
