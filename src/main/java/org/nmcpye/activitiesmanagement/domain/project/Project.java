@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.User;
@@ -23,8 +25,8 @@ import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Project extends BaseIdentifiableObject implements MetadataObject {
 
-    @Column(name = "is_displayed")
-    private Boolean isDisplayed;
+    @Column(name = "displayed")
+    private Boolean displayed;
 
     @OneToMany(mappedBy = "project")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -61,19 +63,22 @@ public class Project extends BaseIdentifiableObject implements MetadataObject {
         return this;
     }
 
-    public Boolean getIsDisplayed() {
-        return isDisplayed;
+    @JsonProperty
+    public Boolean getDisplayed() {
+        return displayed;
     }
 
-    public Project isDisplayed(Boolean isDisplayed) {
-        this.isDisplayed = isDisplayed;
+    public Project displayed(Boolean isDisplayed) {
+        this.displayed = isDisplayed;
         return this;
     }
 
-    public void setIsDisplayed(Boolean isDisplayed) {
-        this.isDisplayed = isDisplayed;
+    public void setDisplayed(Boolean displayed) {
+        this.displayed = displayed;
     }
 
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<Activity> getActivities() {
         return this.activities;
     }

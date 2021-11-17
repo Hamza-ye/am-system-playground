@@ -17,7 +17,7 @@ public class ActivityQueryParams {
 
     private Boolean active;
 
-    private Boolean isDisplayed;
+    private Boolean displayed;
 
     private Project project;
     // -------------------------------------------------------------------------
@@ -43,7 +43,7 @@ public class ActivityQueryParams {
             ", startDate=" + startDate +
             ", endDate=" + endDate +
             ", active=" + active +
-            ", isDisplayed=" + isDisplayed +
+            ", displayed=" + displayed +
             ", project=" + project +
             '}';
     }
@@ -90,7 +90,7 @@ public class ActivityQueryParams {
     }
 
     public ActivityQueryParams setDisplayed(Boolean displayed) {
-        isDisplayed = displayed;
+        this.displayed = displayed;
         return this;
     }
 
@@ -112,7 +112,7 @@ public class ActivityQueryParams {
     }
 
     public boolean isDisplayed() {
-        return isDisplayed;
+        return displayed;
     }
 
     public boolean isActive() {

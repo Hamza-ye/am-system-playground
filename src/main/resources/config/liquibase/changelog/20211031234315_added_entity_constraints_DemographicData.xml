@@ -20,7 +20,7 @@
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
-        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+        <addForeignKeyConstraint baseColumnNames="last_updated_by"
                                  baseTableName="demographic_data"
                                  constraintName="fk_demographic_data__last_updated_by"
                                  referencedColumnNames="id"

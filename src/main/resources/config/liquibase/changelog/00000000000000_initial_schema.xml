@@ -49,21 +49,6 @@
                 <constraints nullable="true" unique="true" uniqueConstraintName="UC_APP_USERCODE_COL"/>
             </column>
 
-            <column name="created" type="timestamp">
-                <constraints nullable="true"/>
-            </column>
-
-            <column name="last_updated" type="timestamp">
-                <constraints nullable="true"/>
-            </column>
-
-            <column name="created_by" type="bigint">
-                <constraints nullable="true"/>
-            </column>
-
-            <column name="last_updated_by" type="bigint">
-                <constraints nullable="true"/>
-            </column>
             <column name="surname" type="varchar(255)">
                 <constraints nullable="true"/>
             </column>
@@ -77,7 +62,16 @@
             <column name="person_id" type="bigint">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_app_user_person_id"/>
             </column>
+            <column name="created" type="timestamp">
+                <constraints nullable="true"/>
+            </column>
 
+            <column name="created_by" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="last_updated_by" type="bigint">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
 
         <createTable tableName="app_authority">
@@ -119,10 +113,8 @@
             tableName="app_user">
             <column name="id" type="numeric"/>
             <column name="activated" type="boolean"/>
-            <column name="created_date" type="timestamp"/>
         </loadData>
 
-        <dropDefaultValue tableName="app_user" columnName="created_date" columnDataType="${datetimeType}"/>
         <loadData
             file="config/liquibase/data/authority.csv"
             separator=";"

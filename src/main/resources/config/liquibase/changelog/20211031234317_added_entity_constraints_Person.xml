@@ -10,13 +10,13 @@
 
         <addForeignKeyConstraint baseColumnNames="created_by"
                                  baseTableName="person"
-                                 constraintName="fk_person__user_id"
+                                 constraintName="fk_person__created_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
         <addForeignKeyConstraint baseColumnNames="last_updated_by"
                                  baseTableName="person"
-                                 constraintName="fk_person__last_updated_by_id"
+                                 constraintName="fk_person__last_updated_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 

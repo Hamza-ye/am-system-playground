@@ -15,6 +15,7 @@ import org.nmcpye.activitiesmanagement.extended.organisationunit.pagingrepositor
 import org.nmcpye.activitiesmanagement.extended.systemmodule.system.startup.TransactionContextStartupRoutine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 

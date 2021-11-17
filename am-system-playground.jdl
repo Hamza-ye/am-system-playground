@@ -4,7 +4,7 @@ entity Project(project) {
  name String
  created Instant
  lastUpdated Instant
- isDisplayed Boolean 
+ displayed Boolean
 } 
 
 entity Activity(activity) {
@@ -22,7 +22,7 @@ entity Activity(activity) {
 
  active Boolean
 
- isDisplayed Boolean
+ displayed Boolean
 }
 
 entity DemographicData(demographic_data) {

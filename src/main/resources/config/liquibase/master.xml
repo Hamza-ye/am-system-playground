@@ -98,13 +98,13 @@
     <include file="config/liquibase/changelog/extended_added_entity_PersonAuthorityGroup_relations.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/extended_added_entity_unique_constraints_DengueCasesReport.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/extended_added_entity_unique_constraints_MalariaCasesReport.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/extended_added_entity_User.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/extended_added_entity_jobConfiguration.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20211031234346_added_entity_OrganisationUnitGroupSet_add_dim_dimName.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/extended_added_entity_DataSet_DataInputPeriods_relationship.xml" relativeToChangelogFile="false"/>
-
-    <include file="config/liquibase/changelog/20211031234313_added_entity_constraints_Project_extend.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20211114172514_FileResource_and_External_FileResource.xml" relativeToChangelogFile="false"/>
+
+    <include file="config/liquibase/changelog/extended_added_entity_User_constraints.xml" relativeToChangelogFile="false"/>
+
 
     <!--<include file="config/liquibase/changelog/20211116184638_changelog.xml" relativeToChangelogFile="false"/>-->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->

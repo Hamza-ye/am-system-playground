@@ -29,7 +29,7 @@
             <column name="last_updated" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="is_displayed" type="boolean">
+            <column name="displayed" type="boolean">
                 <constraints nullable="true" />
             </column>
             <column name="created_by" type="bigint">
@@ -65,7 +65,7 @@
             <column name="name" type="string"/>
             <column name="created" type="${datetimeType}"/>
             <column name="last_updated" type="${datetimeType}"/>
-            <column name="is_displayed" type="boolean"/>
+            <column name="displayed" type="boolean"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

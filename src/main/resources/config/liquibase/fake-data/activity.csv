@@ -1,4 +1,4 @@
-id;uid;code;name;created;last_updated;start_date;end_date;no_of_days;active;is_displayed;project_id
+id;uid;code;name;created;last_updated;start_date;end_date;no_of_days;active;displayed;project_id
 1;drive reboo;navigate solid;reboot;2021-10-31T14:06:39;2021-10-31T01:03:40;2021-10-31;2021-10-31;47518;false;true;1
 2;blue maximi;withdrawal PCI full-range;Kiribati matrix;2021-10-31T21:10:19;2021-10-31T02:58:26;2021-10-31;2021-10-31;72662;false;false;2
 3;pink;Solutions;Crescent Avon revolutionary;2021-10-31T18:18:59;2021-10-31T17:13:28;2021-10-31;2021-10-31;9526;true;false;3

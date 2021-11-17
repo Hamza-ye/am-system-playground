@@ -99,7 +99,7 @@ class ActivityResourceIT {
             .endDate(DEFAULT_END_DATE)
             .noOfDays(DEFAULT_NO_OF_DAYS)
             .active(DEFAULT_ACTIVE)
-            .isDisplayed(DEFAULT_IS_DISPLAYED);
+            .displayed(DEFAULT_IS_DISPLAYED);
         // Add required entity
         Project project;
         if (TestUtil.findAll(em, Project.class).isEmpty()) {
@@ -130,7 +130,7 @@ class ActivityResourceIT {
             .endDate(UPDATED_END_DATE)
             .noOfDays(UPDATED_NO_OF_DAYS)
             .active(UPDATED_ACTIVE)
-            .isDisplayed(UPDATED_IS_DISPLAYED);
+            .displayed(UPDATED_IS_DISPLAYED);
         // Add required entity
         Project project;
         if (TestUtil.findAll(em, Project.class).isEmpty()) {
@@ -171,7 +171,7 @@ class ActivityResourceIT {
         assertThat(testActivity.getEndDate()).isEqualTo(DEFAULT_END_DATE);
         assertThat(testActivity.getNoOfDays()).isEqualTo(DEFAULT_NO_OF_DAYS);
         assertThat(testActivity.getActive()).isEqualTo(DEFAULT_ACTIVE);
-        assertThat(testActivity.getIsDisplayed()).isEqualTo(DEFAULT_IS_DISPLAYED);
+        assertThat(testActivity.getDisplayed()).isEqualTo(DEFAULT_IS_DISPLAYED);
     }
 
     @Test
@@ -264,7 +264,7 @@ class ActivityResourceIT {
             .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
             .andExpect(jsonPath("$.[*].noOfDays").value(hasItem(DEFAULT_NO_OF_DAYS)))
             .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())))
-            .andExpect(jsonPath("$.[*].isDisplayed").value(hasItem(DEFAULT_IS_DISPLAYED.booleanValue())));
+            .andExpect(jsonPath("$.[*].displayed").value(hasItem(DEFAULT_IS_DISPLAYED.booleanValue())));
     }
 
     @Test
@@ -288,7 +288,7 @@ class ActivityResourceIT {
             .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()))
             .andExpect(jsonPath("$.noOfDays").value(DEFAULT_NO_OF_DAYS))
             .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()))
-            .andExpect(jsonPath("$.isDisplayed").value(DEFAULT_IS_DISPLAYED.booleanValue()));
+            .andExpect(jsonPath("$.displayed").value(DEFAULT_IS_DISPLAYED.booleanValue()));
     }
 
     @Test
@@ -320,7 +320,7 @@ class ActivityResourceIT {
             .endDate(UPDATED_END_DATE)
             .noOfDays(UPDATED_NO_OF_DAYS)
             .active(UPDATED_ACTIVE)
-            .isDisplayed(UPDATED_IS_DISPLAYED);
+            .displayed(UPDATED_IS_DISPLAYED);
 
         restActivityMockMvc
             .perform(
@@ -343,7 +343,7 @@ class ActivityResourceIT {
         assertThat(testActivity.getEndDate()).isEqualTo(UPDATED_END_DATE);
         assertThat(testActivity.getNoOfDays()).isEqualTo(UPDATED_NO_OF_DAYS);
         assertThat(testActivity.getActive()).isEqualTo(UPDATED_ACTIVE);
-        assertThat(testActivity.getIsDisplayed()).isEqualTo(UPDATED_IS_DISPLAYED);
+        assertThat(testActivity.getDisplayed()).isEqualTo(UPDATED_IS_DISPLAYED);
     }
 
     @Test
@@ -442,7 +442,7 @@ class ActivityResourceIT {
         assertThat(testActivity.getEndDate()).isEqualTo(UPDATED_END_DATE);
         assertThat(testActivity.getNoOfDays()).isEqualTo(DEFAULT_NO_OF_DAYS);
         assertThat(testActivity.getActive()).isEqualTo(UPDATED_ACTIVE);
-        assertThat(testActivity.getIsDisplayed()).isEqualTo(DEFAULT_IS_DISPLAYED);
+        assertThat(testActivity.getDisplayed()).isEqualTo(DEFAULT_IS_DISPLAYED);
     }
 
     @Test
@@ -467,7 +467,7 @@ class ActivityResourceIT {
             .endDate(UPDATED_END_DATE)
             .noOfDays(UPDATED_NO_OF_DAYS)
             .active(UPDATED_ACTIVE)
-            .isDisplayed(UPDATED_IS_DISPLAYED);
+            .displayed(UPDATED_IS_DISPLAYED);
 
         restActivityMockMvc
             .perform(
@@ -490,7 +490,7 @@ class ActivityResourceIT {
         assertThat(testActivity.getEndDate()).isEqualTo(UPDATED_END_DATE);
         assertThat(testActivity.getNoOfDays()).isEqualTo(UPDATED_NO_OF_DAYS);
         assertThat(testActivity.getActive()).isEqualTo(UPDATED_ACTIVE);
-        assertThat(testActivity.getIsDisplayed()).isEqualTo(UPDATED_IS_DISPLAYED);
+        assertThat(testActivity.getDisplayed()).isEqualTo(UPDATED_IS_DISPLAYED);
     }
 
     @Test

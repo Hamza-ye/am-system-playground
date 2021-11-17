@@ -55,8 +55,8 @@ public class ProjectServiceImpl implements ProjectService {
                     if (project.getLastUpdated() != null) {
                         existingProject.setLastUpdated(project.getLastUpdated());
                     }
-                    if (project.getIsDisplayed() != null) {
-                        existingProject.setIsDisplayed(project.getIsDisplayed());
+                    if (project.getDisplayed() != null) {
+                        existingProject.setDisplayed(project.getDisplayed());
                     }
 
                     return existingProject;

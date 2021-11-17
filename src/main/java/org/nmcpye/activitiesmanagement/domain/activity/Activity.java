@@ -8,6 +8,9 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.project.Project;
@@ -62,7 +65,7 @@ public class Activity extends BaseIdentifiableObject implements MetadataObject {
     private Boolean active;
 
     @Column(name = "is_displayed")
-    private Boolean isDisplayed;
+    private Boolean displayed;
 
     @OneToMany(mappedBy = "activity")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -113,6 +116,7 @@ public class Activity extends BaseIdentifiableObject implements MetadataObject {
         return this;
     }
 
+    @JsonProperty
     public LocalDate getStartDate() {
         return this.startDate;
     }
@@ -126,6 +130,7 @@ public class Activity extends BaseIdentifiableObject implements MetadataObject {
         this.startDate = startDate;
     }
 
+    @JsonProperty
     public LocalDate getEndDate() {
         return this.endDate;
     }
@@ -139,6 +144,7 @@ public class Activity extends BaseIdentifiableObject implements MetadataObject {
         this.endDate = endDate;
     }
 
+    @JsonProperty
     public Integer getNoOfDays() {
         return this.noOfDays;
     }
@@ -152,6 +158,7 @@ public class Activity extends BaseIdentifiableObject implements MetadataObject {
         this.noOfDays = noOfDays;
     }
 
+    @JsonProperty
     public Boolean getActive() {
         return this.active;
     }
@@ -165,17 +172,18 @@ public class Activity extends BaseIdentifiableObject implements MetadataObject {
         this.active = active;
     }
 
-    public Boolean getIsDisplayed() {
-        return this.isDisplayed;
+    @JsonProperty
+    public Boolean getDisplayed() {
+        return this.displayed;
     }
 
-    public Activity isDisplayed(Boolean isDisplayed) {
-        this.isDisplayed = isDisplayed;
+    public Activity displayed(Boolean isDisplayed) {
+        this.displayed = isDisplayed;
         return this;
     }
 
-    public void setIsDisplayed(Boolean isDisplayed) {
-        this.isDisplayed = isDisplayed;
+    public void setDisplayed(Boolean displayed) {
+        this.displayed = displayed;
     }
 
     public Set<Warehouse> getWarehouses() {
@@ -219,6 +227,8 @@ public class Activity extends BaseIdentifiableObject implements MetadataObject {
         return this;
     }
 
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Project getProject() {
         return this.project;
     }

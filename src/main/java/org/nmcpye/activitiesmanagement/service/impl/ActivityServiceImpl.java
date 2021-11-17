@@ -67,8 +67,8 @@ public class ActivityServiceImpl implements ActivityService {
                     if (activity.getActive() != null) {
                         existingActivity.setActive(activity.getActive());
                     }
-                    if (activity.getIsDisplayed() != null) {
-                        existingActivity.setIsDisplayed(activity.getIsDisplayed());
+                    if (activity.getDisplayed() != null) {
+                        existingActivity.setDisplayed(activity.getDisplayed());
                     }
 
                     return existingActivity;

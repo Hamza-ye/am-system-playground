@@ -80,7 +80,7 @@ class ProjectResourceIT {
             .name(DEFAULT_NAME)
             .created(DEFAULT_CREATED)
             .lastUpdated(DEFAULT_LAST_UPDATED)
-            .isDisplayed(DEFAULT_IS_DISPLAYED);
+            .displayed(DEFAULT_IS_DISPLAYED);
         return project;
     }
 
@@ -97,7 +97,7 @@ class ProjectResourceIT {
             .name(UPDATED_NAME)
             .created(UPDATED_CREATED)
             .lastUpdated(UPDATED_LAST_UPDATED)
-            .isDisplayed(UPDATED_IS_DISPLAYED);
+            .displayed(UPDATED_IS_DISPLAYED);
         return project;
     }
 
@@ -124,7 +124,7 @@ class ProjectResourceIT {
         assertThat(testProject.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testProject.getCreated()).isEqualTo(DEFAULT_CREATED);
         assertThat(testProject.getLastUpdated()).isEqualTo(DEFAULT_LAST_UPDATED);
-        assertThat(testProject.getIsDisplayed()).isEqualTo(DEFAULT_IS_DISPLAYED);
+        assertThat(testProject.getDisplayed()).isEqualTo(DEFAULT_IS_DISPLAYED);
     }
 
     @Test
@@ -179,7 +179,7 @@ class ProjectResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
             .andExpect(jsonPath("$.[*].lastUpdated").value(hasItem(DEFAULT_LAST_UPDATED.toString())))
-            .andExpect(jsonPath("$.[*].isDisplayed").value(hasItem(DEFAULT_IS_DISPLAYED.booleanValue())));
+            .andExpect(jsonPath("$.[*].displayed").value(hasItem(DEFAULT_IS_DISPLAYED.booleanValue())));
     }
 
     @Test
@@ -199,7 +199,7 @@ class ProjectResourceIT {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.created").value(DEFAULT_CREATED.toString()))
             .andExpect(jsonPath("$.lastUpdated").value(DEFAULT_LAST_UPDATED.toString()))
-            .andExpect(jsonPath("$.isDisplayed").value(DEFAULT_IS_DISPLAYED.booleanValue()));
+            .andExpect(jsonPath("$.displayed").value(DEFAULT_IS_DISPLAYED.booleanValue()));
     }
 
     @Test
@@ -227,7 +227,7 @@ class ProjectResourceIT {
             .name(UPDATED_NAME)
             .created(UPDATED_CREATED)
             .lastUpdated(UPDATED_LAST_UPDATED)
-            .isDisplayed(UPDATED_IS_DISPLAYED);
+            .displayed(UPDATED_IS_DISPLAYED);
 
         restProjectMockMvc
             .perform(
@@ -246,7 +246,7 @@ class ProjectResourceIT {
         assertThat(testProject.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testProject.getCreated()).isEqualTo(UPDATED_CREATED);
         assertThat(testProject.getLastUpdated()).isEqualTo(UPDATED_LAST_UPDATED);
-        assertThat(testProject.getIsDisplayed()).isEqualTo(UPDATED_IS_DISPLAYED);
+        assertThat(testProject.getDisplayed()).isEqualTo(UPDATED_IS_DISPLAYED);
     }
 
     @Test
@@ -336,7 +336,7 @@ class ProjectResourceIT {
         assertThat(testProject.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testProject.getCreated()).isEqualTo(UPDATED_CREATED);
         assertThat(testProject.getLastUpdated()).isEqualTo(UPDATED_LAST_UPDATED);
-        assertThat(testProject.getIsDisplayed()).isEqualTo(DEFAULT_IS_DISPLAYED);
+        assertThat(testProject.getDisplayed()).isEqualTo(DEFAULT_IS_DISPLAYED);
     }
 
     @Test
@@ -357,7 +357,7 @@ class ProjectResourceIT {
             .name(UPDATED_NAME)
             .created(UPDATED_CREATED)
             .lastUpdated(UPDATED_LAST_UPDATED)
-            .isDisplayed(UPDATED_IS_DISPLAYED);
+            .displayed(UPDATED_IS_DISPLAYED);
 
         restProjectMockMvc
             .perform(
@@ -376,7 +376,7 @@ class ProjectResourceIT {
         assertThat(testProject.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testProject.getCreated()).isEqualTo(UPDATED_CREATED);
         assertThat(testProject.getLastUpdated()).isEqualTo(UPDATED_LAST_UPDATED);
-        assertThat(testProject.getIsDisplayed()).isEqualTo(UPDATED_IS_DISPLAYED);
+        assertThat(testProject.getDisplayed()).isEqualTo(UPDATED_IS_DISPLAYED);
     }
 
     @Test
