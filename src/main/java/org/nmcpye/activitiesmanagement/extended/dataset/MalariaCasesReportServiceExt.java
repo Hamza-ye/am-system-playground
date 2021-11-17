@@ -23,7 +23,7 @@ public interface MalariaCasesReportServiceExt {
      * @param malariaCasesReport The MalariaCasesReport to add.
      * @return The generated unique identifier for this MalariaCasesReport.
      */
-    long addMalariaCasesReport(MalariaCasesReport malariaCasesReport);
+    Long addMalariaCasesReport(MalariaCasesReport malariaCasesReport);
 
     /**
      * Updates a MalariaCasesReport.
@@ -45,7 +45,7 @@ public interface MalariaCasesReportServiceExt {
      * @param id The unique identifier for the MalariaCasesReport to get.
      * @return The MalariaCasesReport with the given id or null if it does not exist.
      */
-    MalariaCasesReport getMalariaCasesReport(long id);
+    MalariaCasesReport getMalariaCasesReport(Long id);
 
     /**
      * Returns the MalariaCasesReport with the given UID.

@@ -47,7 +47,7 @@ public class DefaultDataSetService
 
     @Override
     @Transactional
-    public long addDataSet(DataSet dataSet) {
+    public Long addDataSet(DataSet dataSet) {
         dataSetPagingRepository.saveObject(dataSet);
         return dataSet.getId();
     }
@@ -66,7 +66,7 @@ public class DefaultDataSetService
 
     @Override
     @Transactional(readOnly = true)
-    public DataSet getDataSet(long id) {
+    public DataSet getDataSet(Long id) {
         return dataSetPagingRepository.get(id);
     }
 

@@ -19,7 +19,7 @@ public class DefaultChvService implements ChvServiceExt {
     }
 
     @Override
-    public long addCHV(CHV chv) {
+    public Long addCHV(CHV chv) {
         chvPagingRepository.saveObject(chv);
         return chv.getId();
     }
@@ -35,7 +35,7 @@ public class DefaultChvService implements ChvServiceExt {
     }
 
     @Override
-    public CHV getCHV(long id) {
+    public CHV getCHV(Long id) {
         return chvPagingRepository.get(id);
     }
 

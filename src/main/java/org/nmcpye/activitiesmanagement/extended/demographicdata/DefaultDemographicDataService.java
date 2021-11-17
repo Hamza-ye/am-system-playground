@@ -19,7 +19,7 @@ public class DefaultDemographicDataService implements DemographicDataServiceExt 
     }
 
     @Override
-    public long addDemographicData(DemographicData demographicData) {
+    public Long addDemographicData(DemographicData demographicData) {
         demographicDataPagingRepository.saveObject(demographicData);
         return demographicData.getId();
     }
@@ -35,7 +35,7 @@ public class DefaultDemographicDataService implements DemographicDataServiceExt 
     }
 
     @Override
-    public DemographicData getDemographicData(long id) {
+    public DemographicData getDemographicData(Long id) {
         return demographicDataPagingRepository.get(id);
     }
 

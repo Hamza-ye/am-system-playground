@@ -22,7 +22,7 @@ public interface CasesReportClassServiceExt {
      * @param casesReportClass The CasesReportClass to add.
      * @return The generated unique identifier for this CasesReportClass.
      */
-    long addCasesReportClass(CasesReportClass casesReportClass);
+    Long addCasesReportClass(CasesReportClass casesReportClass);
 
     /**
      * Updates a CasesReportClass.
@@ -44,7 +44,7 @@ public interface CasesReportClassServiceExt {
      * @param id The unique identifier for the CasesReportClass to get.
      * @return The CasesReportClass with the given id or null if it does not exist.
      */
-    CasesReportClass getCasesReportClass(long id);
+    CasesReportClass getCasesReportClass(Long id);
 
     /**
      * Returns the CasesReportClass with the given UID.

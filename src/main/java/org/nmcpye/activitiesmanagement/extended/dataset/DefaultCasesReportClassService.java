@@ -20,7 +20,7 @@ public class DefaultCasesReportClassService implements CasesReportClassServiceEx
     }
 
     @Override
-    public long addCasesReportClass(CasesReportClass casesReportClass) {
+    public Long addCasesReportClass(CasesReportClass casesReportClass) {
         casesReportClassPagingRepository.saveObject(casesReportClass);
         return casesReportClass.getId();
     }
@@ -36,7 +36,7 @@ public class DefaultCasesReportClassService implements CasesReportClassServiceEx
     }
 
     @Override
-    public CasesReportClass getCasesReportClass(long id) {
+    public CasesReportClass getCasesReportClass(Long id) {
         return casesReportClassPagingRepository.get(id);
     }
 

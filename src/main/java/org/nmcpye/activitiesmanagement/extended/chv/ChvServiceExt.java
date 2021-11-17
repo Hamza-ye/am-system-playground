@@ -22,7 +22,7 @@ public interface ChvServiceExt {
      * @param chv The CHV to add.
      * @return The generated unique identifier for this CHV.
      */
-    long addCHV(CHV chv);
+    Long addCHV(CHV chv);
 
     /**
      * Updates a CHV.
@@ -44,7 +44,7 @@ public interface ChvServiceExt {
      * @param id The unique identifier for the CHV to get.
      * @return The CHV with the given id or null if it does not exist.
      */
-    CHV getCHV(long id);
+    CHV getCHV(Long id);
 
     /**
      * Returns the CHV with the given UID.

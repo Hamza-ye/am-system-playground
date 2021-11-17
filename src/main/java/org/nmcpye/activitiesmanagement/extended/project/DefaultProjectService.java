@@ -19,7 +19,7 @@ public class DefaultProjectService implements ProjectServiceExt {
     }
 
     @Override
-    public long addProject(Project dengueCasesReport) {
+    public Long addProject(Project dengueCasesReport) {
         projectPagingRepository.saveObject(dengueCasesReport);
         return dengueCasesReport.getId();
     }
@@ -35,7 +35,7 @@ public class DefaultProjectService implements ProjectServiceExt {
     }
 
     @Override
-    public Project getProject(long id) {
+    public Project getProject(Long id) {
         return projectPagingRepository.get(id);
     }
 

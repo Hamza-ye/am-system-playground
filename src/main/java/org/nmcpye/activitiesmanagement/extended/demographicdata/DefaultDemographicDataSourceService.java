@@ -19,7 +19,7 @@ public class DefaultDemographicDataSourceService implements DemographicDataSourc
     }
 
     @Override
-    public long addDemographicDataSource(DemographicDataSource demographicDataSource) {
+    public Long addDemographicDataSource(DemographicDataSource demographicDataSource) {
         demographicDataSourcePagingRepository.saveObject(demographicDataSource);
         return demographicDataSource.getId();
     }
@@ -35,7 +35,7 @@ public class DefaultDemographicDataSourceService implements DemographicDataSourc
     }
 
     @Override
-    public DemographicDataSource getDemographicDataSource(long id) {
+    public DemographicDataSource getDemographicDataSource(Long id) {
         return demographicDataSourcePagingRepository.get(id);
     }
 

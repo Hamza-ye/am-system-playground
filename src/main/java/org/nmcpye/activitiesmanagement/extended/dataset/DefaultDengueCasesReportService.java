@@ -20,7 +20,7 @@ public class DefaultDengueCasesReportService implements DengueCasesReportService
     }
 
     @Override
-    public long addDengueCasesReport(DengueCasesReport dengueCasesReport) {
+    public Long addDengueCasesReport(DengueCasesReport dengueCasesReport) {
         dengueCasesReportPagingRepository.saveObject(dengueCasesReport);
         return dengueCasesReport.getId();
     }
@@ -36,7 +36,7 @@ public class DefaultDengueCasesReportService implements DengueCasesReportService
     }
 
     @Override
-    public DengueCasesReport getDengueCasesReport(long id) {
+    public DengueCasesReport getDengueCasesReport(Long id) {
         return dengueCasesReportPagingRepository.get(id);
     }
 

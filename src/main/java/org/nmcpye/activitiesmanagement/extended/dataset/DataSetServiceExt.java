@@ -25,7 +25,7 @@ public interface DataSetServiceExt {
      * @param dataSet The DataSet to add.
      * @return The generated unique identifier for this DataSet.
      */
-    long addDataSet(DataSet dataSet);
+    Long addDataSet(DataSet dataSet);
 
     /**
      * Updates a DataSet.
@@ -47,7 +47,7 @@ public interface DataSetServiceExt {
      * @param id The unique identifier for the DataSet to get.
      * @return The DataSet with the given id or null if it does not exist.
      */
-    DataSet getDataSet(long id);
+    DataSet getDataSet(Long id);
 
     /**
      * Returns the DataSet with the given UID.

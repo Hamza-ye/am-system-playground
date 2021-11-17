@@ -20,7 +20,7 @@ public class DefaultMalariaCasesReportService implements MalariaCasesReportServi
     }
 
     @Override
-    public long addMalariaCasesReport(MalariaCasesReport malariaCasesReport) {
+    public Long addMalariaCasesReport(MalariaCasesReport malariaCasesReport) {
         malariaCasesReportPagingRepository.saveObject(malariaCasesReport);
         return malariaCasesReport.getId();
     }
@@ -36,7 +36,7 @@ public class DefaultMalariaCasesReportService implements MalariaCasesReportServi
     }
 
     @Override
-    public MalariaCasesReport getMalariaCasesReport(long id) {
+    public MalariaCasesReport getMalariaCasesReport(Long id) {
         return malariaCasesReportPagingRepository.get(id);
     }
 

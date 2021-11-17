@@ -23,7 +23,7 @@ public interface DengueCasesReportServiceExt {
      * @param dengueCasesReport The DengueCasesReport to add.
      * @return The generated unique identifier for this DengueCasesReport.
      */
-    long addDengueCasesReport(DengueCasesReport dengueCasesReport);
+    Long addDengueCasesReport(DengueCasesReport dengueCasesReport);
 
     /**
      * Updates a DengueCasesReport.
@@ -45,7 +45,7 @@ public interface DengueCasesReportServiceExt {
      * @param id The unique identifier for the DengueCasesReport to get.
      * @return The DengueCasesReport with the given id or null if it does not exist.
      */
-    DengueCasesReport getDengueCasesReport(long id);
+    DengueCasesReport getDengueCasesReport(Long id);
 
     /**
      * Returns the DengueCasesReport with the given UID.

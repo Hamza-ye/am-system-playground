@@ -21,7 +21,7 @@ public interface ProjectServiceExt {
      * @param project The Project to add.
      * @return The generated unique identifier for this Project.
      */
-    long addProject(Project project);
+    Long addProject(Project project);
 
     /**
      * Updates a Project.
@@ -43,7 +43,7 @@ public interface ProjectServiceExt {
      * @param id The unique identifier for the Project to get.
      * @return The Project with the given id or null if it does not exist.
      */
-    Project getProject(long id);
+    Project getProject(Long id);
 
     /**
      * Returns the Project with the given UID.

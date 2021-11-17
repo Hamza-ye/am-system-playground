@@ -21,7 +21,7 @@ public interface DemographicDataServiceExt {
      * @param demographicData The DemographicData to add.
      * @return The generated unique identifier for this DemographicData.
      */
-    long addDemographicData(DemographicData demographicData);
+    Long addDemographicData(DemographicData demographicData);
 
     /**
      * Updates a DemographicData.
@@ -43,7 +43,7 @@ public interface DemographicDataServiceExt {
      * @param id The unique identifier for the DemographicData to get.
      * @return The DemographicData with the given id or null if it does not exist.
      */
-    DemographicData getDemographicData(long id);
+    DemographicData getDemographicData(Long id);
 
     /**
      * Returns the DemographicData with the given UID.

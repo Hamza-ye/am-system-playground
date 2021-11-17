@@ -21,7 +21,7 @@ public class DefaultActivityService implements ActivityServiceExtended {
 
 
     @Override
-    public long addActivity(Activity casesReportClass) {
+    public Long addActivity(Activity casesReportClass) {
         activityPagingRepository.saveObject(casesReportClass);
         return casesReportClass.getId();
     }
@@ -37,7 +37,7 @@ public class DefaultActivityService implements ActivityServiceExtended {
     }
 
     @Override
-    public Activity getActivity(long id) {
+    public Activity getActivity(Long id) {
         return activityPagingRepository.get(id);
     }
 

@@ -21,7 +21,7 @@ public interface ActivityServiceExtended {
      * @param activity The Activity to add.
      * @return The generated unique identifier for this Activity.
      */
-    long addActivity(Activity activity);
+    Long addActivity(Activity activity);
 
     /**
      * Updates a Activity.
@@ -43,7 +43,7 @@ public interface ActivityServiceExtended {
      * @param id The unique identifier for the Activity to get.
      * @return The Activity with the given id or null if it does not exist.
      */
-    Activity getActivity(long id);
+    Activity getActivity(Long id);
 
     /**
      * Returns the Activity with the given UID.
