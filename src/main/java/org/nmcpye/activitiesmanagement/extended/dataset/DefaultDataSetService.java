@@ -6,6 +6,7 @@ import org.nmcpye.activitiesmanagement.domain.dataset.DataSet;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.period.Period;
 import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
+import org.nmcpye.activitiesmanagement.extended.dataset.pagingrepository.DataSetPagingRepository;
 import org.nmcpye.activitiesmanagement.extended.servicecoremodule.query.QueryParserException;
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.springframework.stereotype.Service;
@@ -18,22 +19,22 @@ import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-@Service("org.nmcpye.activitiesmanagement.extended.dataset.DataSetService")
+@Service
 public class DefaultDataSetService
-    implements DataSetService {
+    implements DataSetServiceExt {
     // -------------------------------------------------------------------------
     // Dependencies
     // -------------------------------------------------------------------------
 
-    private final DataSetStore dataSetStore;
+    private final DataSetPagingRepository dataSetPagingRepository;
 
     private UserService currentUserService;
 
-    public DefaultDataSetService(DataSetStore dataSetStore, UserService currentUserService) {
-        checkNotNull(dataSetStore);
+    public DefaultDataSetService(DataSetPagingRepository dataSetPagingRepository, UserService currentUserService) {
+        checkNotNull(dataSetPagingRepository);
         checkNotNull(currentUserService);
 
-        this.dataSetStore = dataSetStore;
+        this.dataSetPagingRepository = dataSetPagingRepository;
         this.currentUserService = currentUserService;
     }
 
@@ -44,50 +45,50 @@ public class DefaultDataSetService
     @Override
     @Transactional
     public long addDataSet(DataSet dataSet) {
-        dataSetStore.saveObject(dataSet);
+        dataSetPagingRepository.saveObject(dataSet);
         return dataSet.getId();
     }
 
     @Override
     @Transactional
     public void updateDataSet(DataSet dataSet) {
-        dataSetStore.update(dataSet);
+        dataSetPagingRepository.update(dataSet);
     }
 
     @Override
     @Transactional
     public void deleteDataSet(DataSet dataSet) {
-        dataSetStore.delete(dataSet);
+        dataSetPagingRepository.delete(dataSet);
     }
 
     @Override
     @Transactional(readOnly = true)
     public DataSet getDataSet(long id) {
-        return dataSetStore.get(id);
+        return dataSetPagingRepository.get(id);
     }
 
     @Override
     @Transactional(readOnly = true)
     public DataSet getDataSet(String uid) {
-        return dataSetStore.getByUid(uid);
+        return dataSetPagingRepository.getByUid(uid);
     }
 
     @Override
     @Transactional(readOnly = true)
     public DataSet getDataSetNoAcl(String uid) {
-        return dataSetStore.getByUidNoAcl(uid);
+        return dataSetPagingRepository.getByUidNoAcl(uid);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<DataSet> getAllDataSets() {
-        return dataSetStore.getAll();
+        return dataSetPagingRepository.getAll();
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<DataSet> getDataSetsByPeriodType(PeriodType periodType) {
-        return dataSetStore.getDataSetsByPeriodType(periodType);
+        return dataSetPagingRepository.getDataSetsByPeriodType(periodType);
     }
 
     @Override
@@ -97,7 +98,7 @@ public class DefaultDataSetService
             return Lists.newArrayList();
         }
 
-        return user.isSuper() ? getAllDataSets() : dataSetStore.getDataReadAll(user);
+        return user.isSuper() ? getAllDataSets() : dataSetPagingRepository.getDataReadAll(user);
     }
 
     @Override
@@ -123,13 +124,13 @@ public class DefaultDataSetService
             return Lists.newArrayList();
         }
 
-        return user.isSuper() ? getAllDataSets() : dataSetStore.getDataWriteAll(user);
+        return user.isSuper() ? getAllDataSets() : dataSetPagingRepository.getDataWriteAll(user);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<DataSet> getDataSetsNotAssignedToOrganisationUnits() {
-        return dataSetStore.getDataSetsNotAssignedToOrganisationUnits();
+        return dataSetPagingRepository.getDataSetsNotAssignedToOrganisationUnits();
     }
 
     @Override

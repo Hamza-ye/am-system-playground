@@ -9,15 +9,13 @@ import org.nmcpye.activitiesmanagement.extended.period.PeriodService;
 import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-@Repository("org.nmcpye.activitiesmanagement.extended.dataset.DataSetStore")
-public class HibernateDataSetStore
+public class DataSetStoreImpl
     extends HibernateIdentifiableObjectStore<DataSet>
     implements DataSetStore {
     // -------------------------------------------------------------------------
@@ -26,8 +24,8 @@ public class HibernateDataSetStore
 
     private final PeriodService periodService;
 
-    public HibernateDataSetStore(JdbcTemplate jdbcTemplate, UserService currentUserService, AclService aclService,
-                                 PeriodService periodService) {
+    public DataSetStoreImpl(JdbcTemplate jdbcTemplate, UserService currentUserService, AclService aclService,
+                            PeriodService periodService) {
         super(jdbcTemplate, DataSet.class, currentUserService, aclService, true);
 
         checkNotNull(periodService);

@@ -9,8 +9,8 @@ import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
 import java.util.Date;
 import java.util.List;
 
-public interface DataSetService {
-    String ID = DataSetService.class.getName();
+public interface DataSetServiceExt {
+    String ID = DataSetServiceExt.class.getName();
 
     // -------------------------------------------------------------------------
     // DataSet
