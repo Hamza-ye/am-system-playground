@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.service;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.CasesReportClass;
+import org.nmcpye.activitiesmanagement.domain.dataset.CasesReportClass;
 
 /**
  * Service Interface for managing {@link CasesReportClass}.

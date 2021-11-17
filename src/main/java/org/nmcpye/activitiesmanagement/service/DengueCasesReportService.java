@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.service;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.DengueCasesReport;
+import org.nmcpye.activitiesmanagement.domain.dataset.DengueCasesReport;
 
 /**
  * Service Interface for managing {@link DengueCasesReport}.

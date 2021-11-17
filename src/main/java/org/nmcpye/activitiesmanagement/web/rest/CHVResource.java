@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import org.nmcpye.activitiesmanagement.domain.CHV;
+import org.nmcpye.activitiesmanagement.domain.chv.CHV;
 import org.nmcpye.activitiesmanagement.repository.CHVRepository;
 import org.nmcpye.activitiesmanagement.service.CHVService;
 import org.nmcpye.activitiesmanagement.web.rest.errors.BadRequestAlertException;
@@ -20,7 +20,7 @@ import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
- * REST controller for managing {@link org.nmcpye.activitiesmanagement.domain.CHV}.
+ * REST controller for managing {@link CHV}.
  */
 @RestController
 @RequestMapping("/api")

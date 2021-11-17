@@ -7,6 +7,7 @@ import com.google.common.collect.Sets;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
+import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitQueryParams;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitService;
@@ -63,12 +64,12 @@ public class OrganisationUnitController
         // ---------------------------------------------------------------------
 
 //        if (options.isTrue("userOnly")) {
-        if (options.isTrue("userOnly") && currentUser != null && currentUser.getPerson() != null) {
-            objects = new ArrayList<>(currentUser.getPerson().getOrganisationUnits());
+        if (options.isTrue("userOnly") ) {
+            objects = new ArrayList<>(getPersonOrganisationUnits(currentUser.getPerson()));
         } else if (options.isTrue("userDataViewOnly")) {
-            objects = new ArrayList<>(currentUser.getPerson().getDataViewOrganisationUnits());
+            objects = new ArrayList<>(getPersonDataViewOrganisationUnits(currentUser.getPerson()));
         } else if (options.isTrue("userDataViewFallback")) {
-            if (currentUser.getPerson().hasDataViewOrganisationUnit()) {
+            if (currentUser.hasDataViewOrganisationUnit()) {
                 objects = new ArrayList<>(currentUser.getPerson().getDataViewOrganisationUnits());
             } else {
                 objects = organisationUnitService.getOrganisationUnitsAtLevel(1);
@@ -129,6 +130,21 @@ public class OrganisationUnitController
 
         return list;
     }
+
+    private Set<OrganisationUnit> getPersonOrganisationUnits(Person person) {
+        if (person != null) {
+            return person.getOrganisationUnits();
+        }
+        return Sets.newHashSet();
+    }
+
+    private Set<OrganisationUnit> getPersonDataViewOrganisationUnits(Person person) {
+        if (person != null) {
+            return person.getDataViewOrganisationUnits();
+        }
+        return Sets.newHashSet();
+    }
+
 
     @Override
     protected List<OrganisationUnit> getEntity(String uid, WebOptions options) {

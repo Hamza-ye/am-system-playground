@@ -23,6 +23,9 @@
             <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="created" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
@@ -44,10 +47,10 @@
             <column name="managed_by_hf_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="user_id" type="bigint">
+            <column name="created_by" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="last_updated_by_id" type="bigint">
+            <column name="last_updated_by" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

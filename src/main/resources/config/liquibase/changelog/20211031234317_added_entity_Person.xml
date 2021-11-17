@@ -50,9 +50,6 @@
             <column name="disabled" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="user_info_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_person__user_info_id" />
-            </column>
             <column name="created_by" type="bigint">
                 <constraints nullable="true" />
             </column>

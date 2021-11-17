@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.DataSet;
+import org.nmcpye.activitiesmanagement.domain.dataset.DataSet;
 import org.nmcpye.activitiesmanagement.repository.DataSetRepository;
 import org.nmcpye.activitiesmanagement.service.DataSetService;
 import org.slf4j.Logger;

@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.MalariaCasesReport;
+import org.nmcpye.activitiesmanagement.domain.dataset.MalariaCasesReport;
 import org.nmcpye.activitiesmanagement.repository.MalariaCasesReportRepository;
 import org.nmcpye.activitiesmanagement.service.MalariaCasesReportService;
 import org.slf4j.Logger;

@@ -1,18 +1,18 @@
-package org.nmcpye.activitiesmanagement.domain;
+package org.nmcpye.activitiesmanagement.domain.project;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.io.Serializable;
-import java.time.Instant;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import javax.validation.constraints.*;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.nmcpye.activitiesmanagement.domain.User;
+import org.nmcpye.activitiesmanagement.domain.activity.Activity;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
-import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * A Project.

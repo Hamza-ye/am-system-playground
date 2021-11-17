@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.DengueCasesReport;
+import org.nmcpye.activitiesmanagement.domain.dataset.DengueCasesReport;
 import org.nmcpye.activitiesmanagement.repository.DengueCasesReportRepository;
 import org.nmcpye.activitiesmanagement.service.DengueCasesReportService;
 import org.slf4j.Logger;

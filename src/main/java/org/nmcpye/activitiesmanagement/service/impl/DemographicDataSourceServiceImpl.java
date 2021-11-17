@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.DemographicDataSource;
+import org.nmcpye.activitiesmanagement.domain.demographicdata.DemographicDataSource;
 import org.nmcpye.activitiesmanagement.repository.DemographicDataSourceRepository;
 import org.nmcpye.activitiesmanagement.service.DemographicDataSourceService;
 import org.slf4j.Logger;

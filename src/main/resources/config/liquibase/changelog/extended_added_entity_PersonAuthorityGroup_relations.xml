@@ -17,7 +17,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="authority" type="varchar(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true" uniqueConstraintName="ux_person_authority_group_authorities_code"/>
             </column>
         </createTable>
 

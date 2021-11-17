@@ -30,15 +30,4 @@
     <changeSet author="Hamza (generated)" id="1635554862551-141">
         <addUniqueConstraint columnNames="period_type_id, start_date, end_date" constraintName="UX_period_type_start_end_date" tableName="period"/>
     </changeSet>
-
-    <changeSet author="Hamza (generated)" id="1636911576718-18">
-        <addUniqueConstraint columnNames="code" constraintName="UC_PERIODCODE_COL" tableName="period"/>
-    </changeSet>
-    <changeSet author="Hamza (generated)" id="1636911576718-19">
-        <addUniqueConstraint columnNames="uid" constraintName="UC_PERIODUID_COL" tableName="period"/>
-    </changeSet>
-
-    <changeSet author="Hamza (generated)" id="1636911576718-4">
-        <addNotNullConstraint columnDataType="varchar(11)" columnName="uid" tableName="period" validate="true"/>
-    </changeSet>
 </databaseChangeLog>

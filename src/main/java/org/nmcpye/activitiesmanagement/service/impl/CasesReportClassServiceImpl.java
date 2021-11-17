@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.CasesReportClass;
+import org.nmcpye.activitiesmanagement.domain.dataset.CasesReportClass;
 import org.nmcpye.activitiesmanagement.repository.CasesReportClassRepository;
 import org.nmcpye.activitiesmanagement.service.CasesReportClassService;
 import org.slf4j.Logger;

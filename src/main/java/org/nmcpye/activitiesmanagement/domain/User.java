@@ -2,18 +2,25 @@ package org.nmcpye.activitiesmanagement.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.config.Constants;
 import org.nmcpye.activitiesmanagement.domain.enumeration.Gender;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
+import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectUtils;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 import org.nmcpye.activitiesmanagement.extended.schema.PropertyType;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.Property;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyRange;
+import org.nmcpye.activitiesmanagement.extended.security.Authorities;
+import org.nmcpye.activitiesmanagement.security.AuthoritiesConstants;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -94,8 +101,8 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
     @ManyToMany
     @JoinTable(
         name = "app_user_authority",
-        joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") },
-        inverseJoinColumns = { @JoinColumn(name = "authority_name", referencedColumnName = "name") }
+        joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+        inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")}
     )
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @BatchSize(size = 20)
@@ -126,6 +133,7 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
     /**
      * Returns the concatenated first name and surname.
      */
+    @JsonProperty
     @Override
     public String getName() {
         return firstName + " " + surname;
@@ -170,8 +178,8 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
     }
 
     @JsonProperty
-//    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
-    @Property( required = Property.Value.TRUE, value = PropertyType.REFERENCE )
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
+    @Property(required = Property.Value.TRUE, value = PropertyType.REFERENCE)
     public Person getPerson() {
         return person;
     }
@@ -180,14 +188,15 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
         this.person = person;
     }
 
-    public Long getId() {
-        return id;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    @JsonProperty
     public String getLogin() {
         return login;
     }
@@ -205,6 +214,7 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
         this.password = password;
     }
 
+    @JsonProperty
     public String getFirstName() {
         return firstName;
     }
@@ -213,6 +223,7 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
         this.firstName = firstName;
     }
 
+    @JsonProperty
     public String getLastName() {
         return lastName;
     }
@@ -221,6 +232,7 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
         this.lastName = lastName;
     }
 
+    @JsonProperty
     public String getEmail() {
         return email;
     }
@@ -229,6 +241,7 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
         this.email = email;
     }
 
+    @JsonProperty
     public String getImageUrl() {
         return imageUrl;
     }
@@ -237,6 +250,7 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
         this.imageUrl = imageUrl;
     }
 
+    @JsonProperty
     public boolean isActivated() {
         return activated;
     }
@@ -269,6 +283,7 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
         this.resetDate = resetDate;
     }
 
+    @JsonProperty
     public String getLangKey() {
         return langKey;
     }
@@ -277,6 +292,7 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
         this.langKey = langKey;
     }
 
+    @JsonProperty
     public Set<Authority> getAuthorities() {
         return authorities;
     }
@@ -285,35 +301,180 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
         this.authorities = authorities;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
+    //////////////////////////////
+    //
+    // Person Data
+    //
+    //////////////////////////////
+
+    public Set<OrganisationUnit> getOrganisationUnits() {
+        return hasOrganisationUnit() ? null : person.getOrganisationUnits();
+    }
+
+    public Set<OrganisationUnit> getDataViewOrganisationUnits() {
+        return hasDataViewOrganisationUnit() ? null : person.getDataViewOrganisationUnits();
+    }
+    /**
+     * Returns the first of the organisation units associated with the user.
+     * Null is returned if the user has no organisation units. Which
+     * organisation unit to return is undefined if the user has multiple
+     * organisation units.
+     */
+    public OrganisationUnit getOrganisationUnit() {
+        return !hasOrganisationUnit() ? null : person.getOrganisationUnits().iterator().next();
+    }
+
+    public boolean hasOrganisationUnit() {
+        return !CollectionUtils.isEmpty(person != null ? person.getOrganisationUnits() : null);
+    }
+
+    // -------------------------------------------------------------------------
+    // Logic - data view organisation unit
+    // -------------------------------------------------------------------------
+
+    public boolean hasDataViewOrganisationUnit() {
+        return !CollectionUtils.isEmpty(person != null ? person.getDataViewOrganisationUnits() : null);
+    }
+
+    public OrganisationUnit getDataViewOrganisationUnit() {
+        return !hasDataViewOrganisationUnit() ? null
+            : person.getDataViewOrganisationUnits().iterator().next();
+    }
+
+    public boolean hasDataViewOrganisationUnitWithFallback() {
+        return hasDataViewOrganisationUnit() || hasOrganisationUnit();
+    }
+
+    /**
+     * Returns the first of the data view organisation units associated with the
+     * user. If none, returns the first of the data capture organisation units.
+     * If none, return nulls.
+     */
+    public OrganisationUnit getDataViewOrganisationUnitWithFallback() {
+        return hasDataViewOrganisationUnit() ? getDataViewOrganisationUnit() : getOrganisationUnit();
+    }
+
+    /**
+     * Returns the data view organisation units or organisation units if not
+     * exist.
+     */
+    public Set<OrganisationUnit> getDataViewOrganisationUnitsWithFallback() {
+        return hasDataViewOrganisationUnit() ? person.getDataViewOrganisationUnits() : person.getOrganisationUnits();
+    }
+
+    public String getOrganisationUnitsName() {
+        return IdentifiableObjectUtils.join(person != null ? person.getOrganisationUnits() : null);
+    }
+
+    public Set<PeopleGroup> getManagedGroups() {
+        Set<PeopleGroup> managedGroups = new HashSet<>();
+
+        if (person != null) {
+            for (PeopleGroup group : person.getGroups()) {
+                managedGroups.addAll(group.getManagedGroups());
+            }
         }
-        if (!(o instanceof User)) {
+        return managedGroups;
+    }
+
+    public boolean hasManagedGroups() {
+        if (person != null) {
+            for (PeopleGroup group : person.getGroups()) {
+                if (group != null && group.getManagedGroups() != null && !group.getManagedGroups().isEmpty()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Indicates whether this user can manage the given user group.
+     *
+     * @param userGroup the user group to test.
+     * @return true if the given user group can be managed by this user, false
+     * if not.
+     */
+    public boolean canManage(PeopleGroup userGroup) {
+        return userGroup != null && person != null
+            && CollectionUtils.containsAny(person.getGroups(), userGroup.getManagedByGroups());
+    }
+
+    /**
+     * Indicates whether this user can manage the given user.
+     *
+     * @param user the user to test.
+     * @return true if the given user can be managed by this user, false if not.
+     */
+    public boolean canManage(User user) {
+        if (user == null || user.getPerson() == null || user.getPerson().getGroups() == null) {
             return false;
         }
-        return id != null && id.equals(((User) o).id);
+
+        for (PeopleGroup group : user.getPerson().getGroups()) {
+            if (canManage(group)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    @Override
-    public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return getClass().hashCode();
+    /**
+     * Indicates whether this user is managed by the given user group.
+     *
+     * @param userGroup the user group to test.
+     * @return true if the given user group is managed by this user, false if
+     * not.
+     */
+    public boolean isManagedBy(PeopleGroup userGroup) {
+        return userGroup != null && person != null && CollectionUtils.containsAny(person.getGroups(), userGroup.getManagedGroups());
     }
 
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "User{" +
-            "login='" + login + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", email='" + email + '\'' +
-            ", imageUrl='" + imageUrl + '\'' +
-            ", activated='" + activated + '\'' +
-            ", langKey='" + langKey + '\'' +
-            ", activationKey='" + activationKey + '\'' +
-            "}";
+    /**
+     * Indicates whether this user is managed by the given user.
+     *
+     * @param user the user to test.
+     * @return true if the given user is managed by this user, false if not.
+     */
+    public boolean isManagedBy(User user) {
+        if (user == null || user.getPerson() == null || user.getPerson().getGroups() == null) {
+            return false;
+        }
+
+        for (PeopleGroup group : user.getPerson().getGroups()) {
+            if (isManagedBy(group)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public Boolean isSuper() {
+        return authorities.stream()
+            .anyMatch(authority -> authority.getName().equals(AuthoritiesConstants.ADMIN))
+            || (person != null && person.isSuper());
+    }
+
+    /**
+     * Tests whether the user has the given authority. Returns true in any case
+     * if the user has the ALL authority.
+     *
+     * @param auth the authority.
+     */
+    public boolean isAuthorized(String auth) {
+        return person != null && person.isAuthorized(auth);
+    }
+
+    /**
+     * Tests whether the user has the given authority. Returns true in any case
+     * if the user has the ALL authority.
+     *
+     * @param auth the {@link Authorities}.
+     */
+    public boolean isAuthorized(Authorities auth) {
+        return isAuthorized(auth.getAuthority());
     }
 }

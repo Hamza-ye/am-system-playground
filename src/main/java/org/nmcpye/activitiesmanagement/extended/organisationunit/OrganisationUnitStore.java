@@ -1,6 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.organisationunit;
 
-import org.nmcpye.activitiesmanagement.domain.DataSet;
+import org.nmcpye.activitiesmanagement.domain.dataset.DataSet;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectStore;
 

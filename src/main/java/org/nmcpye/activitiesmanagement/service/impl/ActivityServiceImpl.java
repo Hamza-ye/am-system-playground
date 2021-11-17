@@ -1,7 +1,7 @@
 package org.nmcpye.activitiesmanagement.service.impl;
 
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.Activity;
+import org.nmcpye.activitiesmanagement.domain.activity.Activity;
 import org.nmcpye.activitiesmanagement.repository.ActivityRepository;
 import org.nmcpye.activitiesmanagement.service.ActivityService;
 import org.slf4j.Logger;

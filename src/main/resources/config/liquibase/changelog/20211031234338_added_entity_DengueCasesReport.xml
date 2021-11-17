@@ -17,6 +17,12 @@
             <column name="uid" type="varchar(11)">
                 <constraints nullable="false" unique="true" uniqueConstraintName="ux_dengue_cases_report__uid" />
             </column>
+            <column name="code" type="varchar(255)">
+                <constraints nullable="true" unique="true" uniqueConstraintName="UC_DENGUE_CASES_REPORTCODE_COL"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="created" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
@@ -47,10 +53,10 @@
             <column name="comment" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="user_id" type="bigint">
+            <column name="created_by" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="last_updated_by_id" type="bigint">
+            <column name="last_updated_by" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="report_class_id" type="bigint">

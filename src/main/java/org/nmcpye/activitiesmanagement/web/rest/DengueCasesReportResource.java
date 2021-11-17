@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import org.nmcpye.activitiesmanagement.domain.DengueCasesReport;
+import org.nmcpye.activitiesmanagement.domain.dataset.DengueCasesReport;
 import org.nmcpye.activitiesmanagement.repository.DengueCasesReportRepository;
 import org.nmcpye.activitiesmanagement.service.DengueCasesReportService;
 import org.nmcpye.activitiesmanagement.web.rest.errors.BadRequestAlertException;
@@ -20,7 +20,7 @@ import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
- * REST controller for managing {@link org.nmcpye.activitiesmanagement.domain.DengueCasesReport}.
+ * REST controller for managing {@link DengueCasesReport}.
  */
 @RestController
 @RequestMapping("/api")

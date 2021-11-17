@@ -4,82 +4,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 
-    <changeSet id="extend_app_user" author="Hamza">
-        <dropColumn tableName="app_user" columnName="created_by"/>
-        <dropColumn tableName="app_user" columnName="created_date"/>
-        <dropColumn tableName="app_user" columnName="last_modified_by"/>
-        <dropColumn tableName="app_user" columnName="last_modified_date"/>
-
-        <addColumn tableName="app_user">
-            <column name="surname" type="varchar(255)">
-                <constraints nullable="true"/>
-            </column>
-        </addColumn>
-
-        <addColumn tableName="app_user">
-            <column name="mobile" type="varchar(255)">
-                <constraints nullable="true"/>
-            </column>
-        </addColumn>
-
-        <addColumn tableName="app_user">
-            <column name="gender" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-        </addColumn>
-
-        <addColumn tableName="app_user">
-            <column name="person_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_app_user_person_id"/>
-            </column>
-        </addColumn>
-
-    </changeSet>
-
-    <!--
-       Added common columns and constraints.
-   -->
-    <changeSet id="app_user_common_fields" author="Hamza">
-
-        <addColumn tableName="app_user">
-            <column name="name" type="varchar(255)">
-                <constraints nullable="true"/>
-            </column>
-        </addColumn>
-
-        <addColumn tableName="app_user">
-            <column name="uid" type="varchar(11)"/>
-        </addColumn>
-
-        <addColumn tableName="app_user">
-            <column name="code" type="varchar(255)">
-                <constraints nullable="true"/>
-            </column>
-        </addColumn>
-
-        <addColumn tableName="app_user">
-            <column name="created" type="timestamp">
-                <constraints nullable="true"/>
-            </column>
-        </addColumn>
-
-        <addColumn tableName="app_user">
-            <column name="last_updated" type="timestamp">
-                <constraints nullable="true"/>
-            </column>
-        </addColumn>
-
-        <addColumn tableName="app_user">
-            <column name="created_by" type="bigint">
-                <constraints nullable="true"/>
-            </column>
-        </addColumn>
-
-        <addColumn tableName="app_user">
-            <column name="last_updated_by" type="bigint">
-                <constraints nullable="true"/>
-            </column>
-        </addColumn>
+    <changeSet id="extend-app_user-constraints" author="Hamza">
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="app_user"
+                                 constraintName="fk_app_user_person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
 
         <addForeignKeyConstraint baseColumnNames="last_updated_by"
                                  baseTableName="app_user"
@@ -93,34 +23,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
     </changeSet>
-
-    <changeSet id="extend-app_user-constraints" author="Hamza">
-        <addForeignKeyConstraint baseColumnNames="person_id"
-                                 baseTableName="app_user"
-                                 constraintName="fk_app_user_person_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="person"/>
-    </changeSet>
-
-    <changeSet author="Hamza (generated)" id="1636911576718-12">
-        <addUniqueConstraint columnNames="code" constraintName="UC_APP_USERCODE_COL" tableName="app_user"/>
-    </changeSet>
-    <changeSet author="Hamza (generated)" id="1636911576718-13">
-        <addUniqueConstraint columnNames="uid" constraintName="UC_APP_USERUID_COL" tableName="app_user"/>
-    </changeSet>
-
-    <changeSet author="Hamza (generated)" id="1636911576718-3">
-        <addNotNullConstraint columnDataType="varchar(11)" columnName="uid" tableName="app_user" validate="true"/>
-    </changeSet>
-    <!--<changeSet id="load_app_user_data" author="Hamza">-->
-        <!--<loadData-->
-            <!--file="config/liquibase/data/user.csv"-->
-            <!--separator=";"-->
-            <!--tableName="app_user">-->
-            <!--<column name="id" type="numeric"/>-->
-            <!--<column name="activated" type="boolean"/>-->
-            <!--<column name="created_date" type="timestamp"/>-->
-        <!--</loadData>-->
-    <!--</changeSet>-->
 
 </databaseChangeLog>

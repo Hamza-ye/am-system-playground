@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.service;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.CHV;
+import org.nmcpye.activitiesmanagement.domain.chv.CHV;
 
 /**
  * Service Interface for managing {@link CHV}.

@@ -1,13 +1,7 @@
 package org.nmcpye.activitiesmanagement.extended.project;
 
-import org.nmcpye.activitiesmanagement.domain.Project;
-import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
+import org.nmcpye.activitiesmanagement.domain.project.Project;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectStore;
-import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitHierarchy;
-import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitQueryParams;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * Defines methods for persisting Project.

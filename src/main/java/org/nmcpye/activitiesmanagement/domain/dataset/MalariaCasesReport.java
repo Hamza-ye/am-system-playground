@@ -1,8 +1,8 @@
-package org.nmcpye.activitiesmanagement.domain;
+package org.nmcpye.activitiesmanagement.domain.dataset;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.io.Serializable;
-import java.time.Instant;
+
+import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -10,9 +10,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.period.Period;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 
 /**
  * A MalariaCasesReport.
@@ -25,25 +27,23 @@ import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
             {"data_set_id", "organisation_unit_id", "period_id", "report_class_id"})}
 )
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class MalariaCasesReport implements Serializable {
+public class MalariaCasesReport extends BaseIdentifiableObject implements MetadataObject {
 
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
-    private Long id;
-
-    @NotNull
-    @Size(max = 11)
-    @Column(name = "uid", length = 11, nullable = false, unique = true)
-    private String uid;
-
-    @Column(name = "created")
-    private Instant created;
-
-    @Column(name = "last_updated")
-    private Instant lastUpdated;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+//    @SequenceGenerator(name = "sequenceGenerator")
+//    private Long id;
+//
+//    @NotNull
+//    @Size(max = 11)
+//    @Column(name = "uid", length = 11, nullable = false, unique = true)
+//    private String uid;
+//
+//    @Column(name = "created")
+//    private Instant created;
+//
+//    @Column(name = "last_updated")
+//    private Instant lastUpdated;
 
     @Column(name = "rdt_tested")
     private Integer rdtTested;
@@ -99,11 +99,11 @@ public class MalariaCasesReport implements Serializable {
     @Column(name = "comment")
     private String comment;
 
-    @ManyToOne
-    private User user;
-
-    @ManyToOne
-    private User lastUpdatedBy;
+//    @ManyToOne
+//    private User user;
+//
+//    @ManyToOne
+//    private User lastUpdatedBy;
 
     @ManyToOne(optional = false)
     @NotNull
@@ -146,24 +146,9 @@ public class MalariaCasesReport implements Serializable {
     )
     private OrganisationUnit organisationUnit;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
-    @JsonProperty
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public MalariaCasesReport id(Long id) {
         this.id = id;
         return this;
-    }
-
-    @JsonProperty
-    public String getUid() {
-        return this.uid;
     }
 
     public MalariaCasesReport uid(String uid) {
@@ -171,36 +156,14 @@ public class MalariaCasesReport implements Serializable {
         return this;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    @JsonProperty
-    public Instant getCreated() {
-        return this.created;
-    }
-
-    public MalariaCasesReport created(Instant created) {
+    public MalariaCasesReport created(Date created) {
         this.created = created;
         return this;
     }
 
-    public void setCreated(Instant created) {
-        this.created = created;
-    }
-
-    @JsonProperty
-    public Instant getLastUpdated() {
-        return this.lastUpdated;
-    }
-
-    public MalariaCasesReport lastUpdated(Instant lastUpdated) {
+    public MalariaCasesReport lastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
         return this;
-    }
-
-    public void setLastUpdated(Instant lastUpdated) {
-        this.lastUpdated = lastUpdated;
     }
 
     @JsonProperty
@@ -455,32 +418,14 @@ public class MalariaCasesReport implements Serializable {
         this.comment = comment;
     }
 
-    @JsonProperty
-    public User getUser() {
-        return this.user;
-    }
-
     public MalariaCasesReport user(User user) {
         this.setUser(user);
         return this;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    @JsonProperty
-    public User getLastUpdatedBy() {
-        return this.lastUpdatedBy;
-    }
-
     public MalariaCasesReport lastUpdatedBy(User user) {
         this.setLastUpdatedBy(user);
         return this;
-    }
-
-    public void setLastUpdatedBy(User user) {
-        this.lastUpdatedBy = user;
     }
 
     @JsonProperty
@@ -539,53 +484,5 @@ public class MalariaCasesReport implements Serializable {
 
     public void setOrganisationUnit(OrganisationUnit organisationUnit) {
         this.organisationUnit = organisationUnit;
-    }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof MalariaCasesReport)) {
-            return false;
-        }
-        return id != null && id.equals(((MalariaCasesReport) o).id);
-    }
-
-    @Override
-    public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return getClass().hashCode();
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "MalariaCasesReport{" +
-            "id=" + getId() +
-            ", uid='" + getUid() + "'" +
-            ", created='" + getCreated() + "'" +
-            ", lastUpdated='" + getLastUpdated() + "'" +
-            ", rdtTested=" + getRdtTested() +
-            ", rdtPositive=" + getRdtPositive() +
-            ", rdtPf=" + getRdtPf() +
-            ", rdtPv=" + getRdtPv() +
-            ", rdtPother=" + getRdtPother() +
-            ", microTested=" + getMicroTested() +
-            ", microPositive=" + getMicroPositive() +
-            ", microPf=" + getMicroPf() +
-            ", microPv=" + getMicroPv() +
-            ", microMix=" + getMicroMix() +
-            ", microPother=" + getMicroPother() +
-            ", probableCases=" + getProbableCases() +
-            ", inpatientCases=" + getInpatientCases() +
-            ", deathCases=" + getDeathCases() +
-            ", treated=" + getTreated() +
-            ", suspectedCases=" + getSuspectedCases() +
-            ", totalFrequents=" + getTotalFrequents() +
-            ", comment='" + getComment() + "'" +
-            "}";
     }
 }

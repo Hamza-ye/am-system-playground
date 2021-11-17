@@ -1,4 +1,4 @@
-package org.nmcpye.activitiesmanagement.domain;
+package org.nmcpye.activitiesmanagement.domain.dataset;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,9 +7,14 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.Sets;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.joda.time.DateTime;
+import org.nmcpye.activitiesmanagement.domain.DataInputPeriod;
+import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
+import org.nmcpye.activitiesmanagement.domain.period.Period;
 import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
 import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
+import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.extended.common.BaseDimensionalItemObject;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
@@ -17,6 +22,7 @@ import org.nmcpye.activitiesmanagement.extended.common.adapter.JacksonPeriodType
 import org.nmcpye.activitiesmanagement.extended.common.adapter.JacksonPeriodTypeSerializer;
 import org.nmcpye.activitiesmanagement.extended.schema.PropertyType;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.Property;
+import org.nmcpye.activitiesmanagement.extended.security.Authorities;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -31,6 +37,8 @@ import java.util.Set;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class DataSet extends BaseDimensionalItemObject
     implements MetadataObject {
+
+    public static final int NO_EXPIRY = 0;
 //
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
@@ -467,5 +475,23 @@ public class DataSet extends BaseDimensionalItemObject
         this.dataInputPeriods = dataInputPeriods;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    /**
+     * Indicates whether the data set is locked for data entry based on the
+     * expiry days.
+     *
+     * @param period the period to compare with.
+     * @param now the date indicating now, uses current date if null.
+     */
+    public boolean isLocked(User person, Period period, Date now )
+    {
+        if ( person != null && person.isAuthorized( Authorities.F_EDIT_EXPIRED.getAuthority() ) )
+        {
+            return false;
+        }
+
+        DateTime date = now != null ? new DateTime( now ) : new DateTime();
+
+        return expiryDays != DataSet.NO_EXPIRY &&
+            new DateTime( period.getEndDate() ).plusDays( expiryDays ).isBefore( date );
+    }
 }

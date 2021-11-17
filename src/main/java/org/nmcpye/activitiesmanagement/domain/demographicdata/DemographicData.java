@@ -1,16 +1,19 @@
-package org.nmcpye.activitiesmanagement.domain;
+package org.nmcpye.activitiesmanagement.domain.demographicdata;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.io.Serializable;
+
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.enumeration.DemographicDataLevel;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
+import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 
 /**
  * A DemographicData.
@@ -18,20 +21,18 @@ import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 @Entity
 @Table(name = "demographic_data")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class DemographicData implements Serializable {
+public class DemographicData extends BaseIdentifiableObject implements MetadataObject {
 
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
-    private Long id;
-
-    @Column(name = "created")
-    private Instant created;
-
-    @Column(name = "last_updated")
-    private Instant lastUpdated;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+//    @SequenceGenerator(name = "sequenceGenerator")
+//    private Long id;
+//
+//    @Column(name = "created")
+//    private Instant created;
+//
+//    @Column(name = "last_updated")
+//    private Instant lastUpdated;
 
     @NotNull
     @Column(name = "date", nullable = false)
@@ -113,55 +114,30 @@ public class DemographicData implements Serializable {
     )
     private OrganisationUnit organisationUnit;
 
-    @ManyToOne
-    private User user;
-
-    @ManyToOne
-    private User lastUpdatedBy;
+//    @ManyToOne
+//    private User user;
+//
+//    @ManyToOne
+//    private User lastUpdatedBy;
 
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties(value = { "demographicData", "user", "createdBy", "lastUpdatedBy" }, allowSetters = true)
     private DemographicDataSource source;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public DemographicData id(Long id) {
         this.id = id;
         return this;
     }
 
-    public Instant getCreated() {
-        return this.created;
-    }
-
-    public DemographicData created(Instant created) {
+    public DemographicData created(Date created) {
         this.created = created;
         return this;
     }
 
-    public void setCreated(Instant created) {
-        this.created = created;
-    }
-
-    public Instant getLastUpdated() {
-        return this.lastUpdated;
-    }
-
-    public DemographicData lastUpdated(Instant lastUpdated) {
+    public DemographicData lastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
         return this;
-    }
-
-    public void setLastUpdated(Instant lastUpdated) {
-        this.lastUpdated = lastUpdated;
     }
 
     public LocalDate getDate() {
@@ -411,21 +387,9 @@ public class DemographicData implements Serializable {
         this.organisationUnit = organisationUnit;
     }
 
-    public User getUser() {
-        return this.user;
-    }
-
     public DemographicData user(User user) {
         this.setUser(user);
         return this;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public User getLastUpdatedBy() {
-        return this.lastUpdatedBy;
     }
 
     public DemographicData lastUpdatedBy(User user) {
@@ -448,52 +412,5 @@ public class DemographicData implements Serializable {
 
     public void setSource(DemographicDataSource demographicDataSource) {
         this.source = demographicDataSource;
-    }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof DemographicData)) {
-            return false;
-        }
-        return id != null && id.equals(((DemographicData) o).id);
-    }
-
-    @Override
-    public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return getClass().hashCode();
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "DemographicData{" +
-            "id=" + getId() +
-            ", created='" + getCreated() + "'" +
-            ", lastUpdated='" + getLastUpdated() + "'" +
-            ", date='" + getDate() + "'" +
-            ", level='" + getLevel() + "'" +
-            ", totalPopulation=" + getTotalPopulation() +
-            ", malePopulation=" + getMalePopulation() +
-            ", femalePopulation=" + getFemalePopulation() +
-            ", lessThan5Population=" + getLessThan5Population() +
-            ", greaterThan5Population=" + getGreaterThan5Population() +
-            ", bw5And15Population=" + getBw5And15Population() +
-            ", greaterThan15Population=" + getGreaterThan15Population() +
-            ", household=" + getHousehold() +
-            ", houses=" + getHouses() +
-            ", healthFacilities=" + getHealthFacilities() +
-            ", avgNoOfRooms=" + getAvgNoOfRooms() +
-            ", avgRoomArea=" + getAvgRoomArea() +
-            ", avgHouseArea=" + getAvgHouseArea() +
-            ", individualsPerHousehold=" + getIndividualsPerHousehold() +
-            ", populationGrowthRate=" + getPopulationGrowthRate() +
-            ", comment='" + getComment() + "'" +
-            "}";
     }
 }

@@ -3,6 +3,7 @@ package org.nmcpye.activitiesmanagement.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
+import org.nmcpye.activitiesmanagement.domain.dataset.MalariaCasesReport;
 import org.nmcpye.activitiesmanagement.web.rest.TestUtil;
 
 class MalariaCasesReportTest {

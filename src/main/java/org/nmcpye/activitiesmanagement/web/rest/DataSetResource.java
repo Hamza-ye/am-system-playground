@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import org.nmcpye.activitiesmanagement.domain.DataSet;
+import org.nmcpye.activitiesmanagement.domain.dataset.DataSet;
 import org.nmcpye.activitiesmanagement.repository.DataSetRepository;
 import org.nmcpye.activitiesmanagement.service.DataSetService;
 import org.nmcpye.activitiesmanagement.web.rest.errors.BadRequestAlertException;
@@ -20,7 +20,7 @@ import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
- * REST controller for managing {@link org.nmcpye.activitiesmanagement.domain.DataSet}.
+ * REST controller for managing {@link DataSet}.
  */
 @RestController
 @RequestMapping("/api")

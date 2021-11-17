@@ -1,8 +1,12 @@
 package org.nmcpye.activitiesmanagement.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.nmcpye.activitiesmanagement.config.Constants;
 import org.nmcpye.activitiesmanagement.domain.Authority;
 import org.nmcpye.activitiesmanagement.domain.User;
+import org.nmcpye.activitiesmanagement.domain.person.Person;
+import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -52,6 +56,8 @@ public class AdminUserDTO {
 
     private Set<String> authorities;
 
+    private Person person;
+
     public AdminUserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -70,8 +76,10 @@ public class AdminUserDTO {
         this.lastUpdatedBy = user.getLastUpdatedBy();
         this.lastUpdated = user.getLastUpdated();
         this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
+        this.person = user.getPerson();
     }
 
+    @JsonProperty
     public Long getId() {
         return id;
     }
@@ -80,6 +88,7 @@ public class AdminUserDTO {
         this.id = id;
     }
 
+    @JsonProperty
     public String getLogin() {
         return login;
     }
@@ -88,6 +97,7 @@ public class AdminUserDTO {
         this.login = login;
     }
 
+    @JsonProperty
     public String getFirstName() {
         return firstName;
     }
@@ -96,6 +106,7 @@ public class AdminUserDTO {
         this.firstName = firstName;
     }
 
+    @JsonProperty
     public String getLastName() {
         return lastName;
     }
@@ -104,6 +115,7 @@ public class AdminUserDTO {
         this.lastName = lastName;
     }
 
+    @JsonProperty
     public String getEmail() {
         return email;
     }
@@ -112,6 +124,7 @@ public class AdminUserDTO {
         this.email = email;
     }
 
+    @JsonProperty
     public String getImageUrl() {
         return imageUrl;
     }
@@ -120,6 +133,7 @@ public class AdminUserDTO {
         this.imageUrl = imageUrl;
     }
 
+    @JsonProperty
     public boolean isActivated() {
         return activated;
     }
@@ -128,6 +142,7 @@ public class AdminUserDTO {
         this.activated = activated;
     }
 
+    @JsonProperty
     public String getLangKey() {
         return langKey;
     }
@@ -136,6 +151,8 @@ public class AdminUserDTO {
         this.langKey = langKey;
     }
 
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public User getUser() {
         return user;
     }
@@ -144,6 +161,7 @@ public class AdminUserDTO {
         this.user = user;
     }
 
+    @JsonProperty
     public Date getCreated() {
         return created;
     }
@@ -152,6 +170,7 @@ public class AdminUserDTO {
         this.created = created;
     }
 
+    @JsonProperty
     public User getLastUpdatedBy() {
         return lastUpdatedBy;
     }
@@ -160,14 +179,23 @@ public class AdminUserDTO {
         this.lastUpdatedBy = lastUpdatedBy;
     }
 
+    @JsonProperty
     public Date getLastUpdated() {
         return lastUpdated;
     }
 
+    @JsonProperty
     public void setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
 
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
+    public Person getPerson() {
+        return person;
+    }
+
+    @JsonProperty
     public Set<String> getAuthorities() {
         return authorities;
     }

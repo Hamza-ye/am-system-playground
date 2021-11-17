@@ -1,7 +1,7 @@
 package org.nmcpye.activitiesmanagement.repository;
 
 import java.util.List;
-import org.nmcpye.activitiesmanagement.domain.DemographicData;
+import org.nmcpye.activitiesmanagement.domain.demographicdata.DemographicData;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface DemographicDataRepository extends JpaRepository<DemographicData, Long> {
-    @Query("select demographicData from DemographicData demographicData where demographicData.user.login = ?#{principal.username}")
+    @Query("select demographicData from DemographicData demographicData where demographicData.createdBy.login = ?#{principal.username}")
     List<DemographicData> findByUserIsCurrentUser();
 
     @Query("select demographicData from DemographicData demographicData where demographicData.lastUpdatedBy.login = ?#{principal.username}")

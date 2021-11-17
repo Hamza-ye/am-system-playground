@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import org.nmcpye.activitiesmanagement.domain.DemographicDataSource;
+import org.nmcpye.activitiesmanagement.domain.demographicdata.DemographicDataSource;
 import org.nmcpye.activitiesmanagement.repository.DemographicDataSourceRepository;
 import org.nmcpye.activitiesmanagement.service.DemographicDataSourceService;
 import org.nmcpye.activitiesmanagement.web.rest.errors.BadRequestAlertException;
@@ -20,7 +20,7 @@ import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
- * REST controller for managing {@link org.nmcpye.activitiesmanagement.domain.DemographicDataSource}.
+ * REST controller for managing {@link DemographicDataSource}.
  */
 @RestController
 @RequestMapping("/api")

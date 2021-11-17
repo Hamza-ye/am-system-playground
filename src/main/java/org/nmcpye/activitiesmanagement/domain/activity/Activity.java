@@ -1,8 +1,7 @@
-package org.nmcpye.activitiesmanagement.domain;
+package org.nmcpye.activitiesmanagement.domain.activity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.io.Serializable;
-import java.time.Instant;
+
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
@@ -11,6 +10,9 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.nmcpye.activitiesmanagement.domain.project.Project;
+import org.nmcpye.activitiesmanagement.domain.User;
+import org.nmcpye.activitiesmanagement.domain.Warehouse;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 

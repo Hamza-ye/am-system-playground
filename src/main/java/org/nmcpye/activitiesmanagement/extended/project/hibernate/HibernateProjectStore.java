@@ -1,7 +1,7 @@
 package org.nmcpye.activitiesmanagement.extended.project.hibernate;
 
 import org.hibernate.query.Query;
-import org.nmcpye.activitiesmanagement.domain.Project;
+import org.nmcpye.activitiesmanagement.domain.project.Project;
 import org.nmcpye.activitiesmanagement.extended.common.hibernate.HibernateIdentifiableObjectStore;
 import org.nmcpye.activitiesmanagement.extended.project.ProjectStore;
 import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;

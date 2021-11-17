@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.service;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.MalariaCasesReport;
+import org.nmcpye.activitiesmanagement.domain.dataset.MalariaCasesReport;
 
 /**
  * Service Interface for managing {@link MalariaCasesReport}.

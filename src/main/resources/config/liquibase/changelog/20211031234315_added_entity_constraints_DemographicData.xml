@@ -14,15 +14,15 @@
                                  referencedColumnNames="id"
                                  referencedTableName="organisation_unit"/>
 
-        <addForeignKeyConstraint baseColumnNames="user_id"
+        <addForeignKeyConstraint baseColumnNames="created_by"
                                  baseTableName="demographic_data"
-                                 constraintName="fk_demographic_data__user_id"
+                                 constraintName="fk_demographic_data__created_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
         <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
                                  baseTableName="demographic_data"
-                                 constraintName="fk_demographic_data__last_updated_by_id"
+                                 constraintName="fk_demographic_data__last_updated_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
@@ -32,4 +32,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="demographic_data_source"/>
     </changeSet>
+
 </databaseChangeLog>

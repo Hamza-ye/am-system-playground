@@ -3,7 +3,7 @@ package org.nmcpye.activitiesmanagement.extended.organisationunit.hibernate;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import org.nmcpye.activitiesmanagement.domain.DataSet;
+import org.nmcpye.activitiesmanagement.domain.dataset.DataSet;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectUtils;
 import org.nmcpye.activitiesmanagement.extended.common.hibernate.HibernateIdentifiableObjectStore;
@@ -18,7 +18,6 @@ import org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.SqlUtil
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.Assert;
 

@@ -1,7 +1,7 @@
 package org.nmcpye.activitiesmanagement.repository;
 
 import java.util.List;
-import org.nmcpye.activitiesmanagement.domain.CasesReportClass;
+import org.nmcpye.activitiesmanagement.domain.dataset.CasesReportClass;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface CasesReportClassRepository extends JpaRepository<CasesReportClass, Long> {
-    @Query("select casesReportClass from CasesReportClass casesReportClass where casesReportClass.user.login = ?#{principal.username}")
+    @Query("select casesReportClass from CasesReportClass casesReportClass where casesReportClass.createdBy.login = ?#{principal.username}")
     List<CasesReportClass> findByUserIsCurrentUser();
 
     @Query(

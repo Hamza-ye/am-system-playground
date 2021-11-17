@@ -16,7 +16,7 @@ import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.nmcpye.activitiesmanagement.IntegrationTest;
-import org.nmcpye.activitiesmanagement.domain.Activity;
+import org.nmcpye.activitiesmanagement.domain.activity.Activity;
 import org.nmcpye.activitiesmanagement.domain.Warehouse;
 import org.nmcpye.activitiesmanagement.repository.WarehouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;

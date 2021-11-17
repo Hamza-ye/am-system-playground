@@ -1,7 +1,7 @@
 package org.nmcpye.activitiesmanagement.extended.dxf2module.metadata;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.nmcpye.activitiesmanagement.domain.DataSet;
+import org.nmcpye.activitiesmanagement.domain.dataset.DataSet;
 import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;

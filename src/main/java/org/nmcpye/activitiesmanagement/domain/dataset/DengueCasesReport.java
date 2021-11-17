@@ -1,14 +1,17 @@
-package org.nmcpye.activitiesmanagement.domain;
+package org.nmcpye.activitiesmanagement.domain.dataset;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.io.Serializable;
-import java.time.Instant;
+
+import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.period.Period;
+import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 
 /**
  * A DengueCasesReport.
@@ -22,25 +25,23 @@ import org.nmcpye.activitiesmanagement.domain.period.Period;
     }
 )
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class DengueCasesReport implements Serializable {
+public class DengueCasesReport extends BaseIdentifiableObject implements MetadataObject {
 
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
-    private Long id;
-
-    @NotNull
-    @Size(max = 11)
-    @Column(name = "uid", length = 11, nullable = false, unique = true)
-    private String uid;
-
-    @Column(name = "created")
-    private Instant created;
-
-    @Column(name = "last_updated")
-    private Instant lastUpdated;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+//    @SequenceGenerator(name = "sequenceGenerator")
+//    private Long id;
+//
+//    @NotNull
+//    @Size(max = 11)
+//    @Column(name = "uid", length = 11, nullable = false, unique = true)
+//    private String uid;
+//
+//    @Column(name = "created")
+//    private Instant created;
+//
+//    @Column(name = "last_updated")
+//    private Instant lastUpdated;
 
     @Column(name = "rdt_tested")
     private Integer rdtTested;
@@ -66,11 +67,11 @@ public class DengueCasesReport implements Serializable {
     @Column(name = "comment")
     private String comment;
 
-    @ManyToOne
-    private User user;
-
-    @ManyToOne
-    private User lastUpdatedBy;
+//    @ManyToOne
+//    private User user;
+//
+//    @ManyToOne
+//    private User lastUpdatedBy;
 
     @ManyToOne(optional = false)
     @NotNull
@@ -113,22 +114,9 @@ public class DengueCasesReport implements Serializable {
     )
     private OrganisationUnit organisationUnit;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public DengueCasesReport id(Long id) {
         this.id = id;
         return this;
-    }
-
-    public String getUid() {
-        return this.uid;
     }
 
     public DengueCasesReport uid(String uid) {
@@ -136,34 +124,14 @@ public class DengueCasesReport implements Serializable {
         return this;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    public Instant getCreated() {
-        return this.created;
-    }
-
-    public DengueCasesReport created(Instant created) {
+    public DengueCasesReport created(Date created) {
         this.created = created;
         return this;
     }
 
-    public void setCreated(Instant created) {
-        this.created = created;
-    }
-
-    public Instant getLastUpdated() {
-        return this.lastUpdated;
-    }
-
-    public DengueCasesReport lastUpdated(Instant lastUpdated) {
+    public DengueCasesReport lastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
         return this;
-    }
-
-    public void setLastUpdated(Instant lastUpdated) {
-        this.lastUpdated = lastUpdated;
     }
 
     public Integer getRdtTested() {
@@ -270,30 +238,14 @@ public class DengueCasesReport implements Serializable {
         this.comment = comment;
     }
 
-    public User getUser() {
-        return this.user;
-    }
-
     public DengueCasesReport user(User user) {
         this.setUser(user);
         return this;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public User getLastUpdatedBy() {
-        return this.lastUpdatedBy;
-    }
-
     public DengueCasesReport lastUpdatedBy(User user) {
         this.setLastUpdatedBy(user);
         return this;
-    }
-
-    public void setLastUpdatedBy(User user) {
-        this.lastUpdatedBy = user;
     }
 
     public CasesReportClass getReportClass() {
@@ -346,43 +298,5 @@ public class DengueCasesReport implements Serializable {
 
     public void setOrganisationUnit(OrganisationUnit organisationUnit) {
         this.organisationUnit = organisationUnit;
-    }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof DengueCasesReport)) {
-            return false;
-        }
-        return id != null && id.equals(((DengueCasesReport) o).id);
-    }
-
-    @Override
-    public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return getClass().hashCode();
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "DengueCasesReport{" +
-            "id=" + getId() +
-            ", uid='" + getUid() + "'" +
-            ", created='" + getCreated() + "'" +
-            ", lastUpdated='" + getLastUpdated() + "'" +
-            ", rdtTested=" + getRdtTested() +
-            ", rdtPositive=" + getRdtPositive() +
-            ", probableCases=" + getProbableCases() +
-            ", inpatientCases=" + getInpatientCases() +
-            ", deathCases=" + getDeathCases() +
-            ", treated=" + getTreated() +
-            ", suspectedCases=" + getSuspectedCases() +
-            ", comment='" + getComment() + "'" +
-            "}";
     }
 }

@@ -1,7 +1,7 @@
 package org.nmcpye.activitiesmanagement.repository;
 
 import java.util.List;
-import org.nmcpye.activitiesmanagement.domain.Project;
+import org.nmcpye.activitiesmanagement.domain.project.Project;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 

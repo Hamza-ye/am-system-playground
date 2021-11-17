@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.service;
 
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.DemographicDataSource;
+import org.nmcpye.activitiesmanagement.domain.demographicdata.DemographicDataSource;
 
 /**
  * Service Interface for managing {@link DemographicDataSource}.

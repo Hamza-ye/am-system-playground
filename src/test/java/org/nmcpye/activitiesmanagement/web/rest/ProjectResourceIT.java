@@ -15,7 +15,7 @@ import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.nmcpye.activitiesmanagement.IntegrationTest;
-import org.nmcpye.activitiesmanagement.domain.Project;
+import org.nmcpye.activitiesmanagement.domain.project.Project;
 import org.nmcpye.activitiesmanagement.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

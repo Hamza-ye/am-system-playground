@@ -1,7 +1,7 @@
 package org.nmcpye.activitiesmanagement.repository;
 
 import java.util.List;
-import org.nmcpye.activitiesmanagement.domain.DengueCasesReport;
+import org.nmcpye.activitiesmanagement.domain.dataset.DengueCasesReport;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface DengueCasesReportRepository extends JpaRepository<DengueCasesReport, Long> {
-    @Query("select dengueCasesReport from DengueCasesReport dengueCasesReport where dengueCasesReport.user.login = ?#{principal.username}")
+    @Query("select dengueCasesReport from DengueCasesReport dengueCasesReport where dengueCasesReport.createdBy.login = ?#{principal.username}")
     List<DengueCasesReport> findByUserIsCurrentUser();
 
     @Query(
