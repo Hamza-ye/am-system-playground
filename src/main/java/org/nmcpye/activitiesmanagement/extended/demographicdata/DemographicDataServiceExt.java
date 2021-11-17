@@ -62,39 +62,39 @@ public interface DemographicDataServiceExt {
     DemographicData getDemographicDataNoAcl(String uid);
 
     /**
-     * Get all DemographicDatas.
+     * Get all DemographicData.
      *
-     * @return A list containing all DemographicDatas.
+     * @return A list containing all DemographicData.
      */
-    List<DemographicData> getAllDemographicDatas();
+    List<DemographicData> getAllDemographicData();
 
     /**
-     * Returns the DemographicDatas which current user have READ access. If the current
-     * user has the ALL authority then all DemographicDatas are returned.
+     * Returns the DemographicData which current user have READ access. If the current
+     * user has the ALL authority then all DemographicData are returned.
      */
     List<DemographicData> getAllDataRead();
 
     /**
-     * Returns the DemographicDatas which given user have READ access. If the current
-     * user has the ALL authority then all DemographicDatas are returned.
+     * Returns the DemographicData which given user have READ access. If the current
+     * user has the ALL authority then all DemographicData are returned.
      *
      * @param user the user to query for data set list.
-     * @return a list of DemographicDatas which the given user has data read access to.
+     * @return a list of DemographicData which the given user has data read access to.
      */
     List<DemographicData> getUserDataRead(User user);
 
     /**
-     * Returns the DemographicDatas which current user have WRITE access. If the
-     * current user has the ALL authority then all DemographicDatas are returned.
+     * Returns the DemographicData which current user have WRITE access. If the
+     * current user has the ALL authority then all DemographicData are returned.
      */
     List<DemographicData> getAllDataWrite();
 
     /**
-     * Returns the DemographicDatas which current user have WRITE access. If the
-     * current user has the ALL authority then all DemographicDatas are returned.
+     * Returns the DemographicData which current user have WRITE access. If the
+     * current user has the ALL authority then all DemographicData are returned.
      *
      * @param user the user to query for data set list.
-     * @return a list of DemographicDatas which given user has data write access to.
+     * @return a list of DemographicData which given user has data write access to.
      */
     List<DemographicData> getUserDataWrite(User user);
 

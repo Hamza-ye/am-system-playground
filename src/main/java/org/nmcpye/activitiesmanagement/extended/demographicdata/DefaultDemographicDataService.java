@@ -50,7 +50,7 @@ public class DefaultDemographicDataService implements DemographicDataServiceExt 
     }
 
     @Override
-    public List<DemographicData> getAllDemographicDatas() {
+    public List<DemographicData> getAllDemographicData() {
         return demographicDataPagingRepository.getAll();
     }
 
