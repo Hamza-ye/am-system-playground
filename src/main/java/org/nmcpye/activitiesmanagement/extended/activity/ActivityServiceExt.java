@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * Created by Hamza on 20/10/2021.
  */
-public interface ActivityServiceExtended {
-    String ID = ActivityServiceExtended.class.getName();
+public interface ActivityServiceExt {
+    String ID = ActivityServiceExt.class.getName();
 
     // -------------------------------------------------------------------------
     // Activity

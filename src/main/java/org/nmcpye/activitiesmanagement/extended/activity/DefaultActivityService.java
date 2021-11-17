@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Hamza on 20/10/2021.
  */
 @Service
-public class DefaultActivityService implements ActivityServiceExtended {
+public class DefaultActivityService implements ActivityServiceExt {
 
     private final ActivityPagingRepository activityPagingRepository;
 
