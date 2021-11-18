@@ -47,13 +47,13 @@
         <dropDefaultValue tableName="orgunit_level" columnName="last_updated" columnDataType="${datetimeType}"/>
 
         <addForeignKeyConstraint baseColumnNames="created_by"
-                                 baseTableName="organisation_unit"
+                                 baseTableName="orgunit_level"
                                  constraintName="fk_organisation_unit_level_created_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
         <addForeignKeyConstraint baseColumnNames="last_updated_by"
-                                 baseTableName="organisation_unit"
+                                 baseTableName="orgunit_level"
                                  constraintName="fk_organisation_unit_level_last_updated_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
