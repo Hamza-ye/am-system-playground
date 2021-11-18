@@ -35,7 +35,7 @@ describe('Service Tests', () => {
         endDate: currentDate,
         noOfDays: 0,
         active: false,
-        isDisplayed: false,
+        displayed: false,
       };
     });
 

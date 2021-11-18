@@ -100,7 +100,7 @@ export class ProjectUpdateComponent implements OnInit {
       name: project.name,
       created: project.created ? project.created.format(DATE_TIME_FORMAT) : null,
       lastUpdated: project.lastUpdated ? project.lastUpdated.format(DATE_TIME_FORMAT) : null,
-      isDisplayed: project.isDisplayed,
+      isDisplayed: project.displayed,
       user: project.user,
       lastUpdatedBy: project.lastUpdatedBy,
     });
@@ -135,7 +135,7 @@ export class ProjectUpdateComponent implements OnInit {
       lastUpdated: this.editForm.get(['lastUpdated'])!.value
         ? dayjs(this.editForm.get(['lastUpdated'])!.value, DATE_TIME_FORMAT)
         : undefined,
-      isDisplayed: this.editForm.get(['isDisplayed'])!.value,
+      displayed: this.editForm.get(['displayed'])!.value,
       user: this.editForm.get(['user'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
     };

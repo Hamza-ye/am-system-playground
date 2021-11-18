@@ -9,7 +9,7 @@ export interface IProject {
   name?: string | null;
   created?: dayjs.Dayjs | null;
   lastUpdated?: dayjs.Dayjs | null;
-  isDisplayed?: boolean | null;
+  displayed?: boolean | null;
   activities?: IActivity[] | null;
   user?: IUser | null;
   lastUpdatedBy?: IUser | null;
@@ -23,12 +23,12 @@ export class Project implements IProject {
     public name?: string | null,
     public created?: dayjs.Dayjs | null,
     public lastUpdated?: dayjs.Dayjs | null,
-    public isDisplayed?: boolean | null,
+    public displayed?: boolean | null,
     public activities?: IActivity[] | null,
     public user?: IUser | null,
     public lastUpdatedBy?: IUser | null
   ) {
-    this.isDisplayed = this.isDisplayed ?? false;
+    this.displayed = this.displayed ?? false;
   }
 }
 

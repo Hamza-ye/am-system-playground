@@ -14,7 +14,7 @@ export interface IActivity {
   endDate?: dayjs.Dayjs;
   noOfDays?: number | null;
   active?: boolean | null;
-  isDisplayed?: boolean | null;
+  displayed?: boolean | null;
   warehouses?: IWarehouse[] | null;
   user?: IUser | null;
   lastUpdatedBy?: IUser | null;
@@ -33,14 +33,14 @@ export class Activity implements IActivity {
     public endDate?: dayjs.Dayjs,
     public noOfDays?: number | null,
     public active?: boolean | null,
-    public isDisplayed?: boolean | null,
+    public displayed?: boolean | null,
     public warehouses?: IWarehouse[] | null,
     public user?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public project?: IProject
   ) {
     this.active = this.active ?? false;
-    this.isDisplayed = this.isDisplayed ?? false;
+    this.displayed = this.displayed ?? false;
   }
 }
 

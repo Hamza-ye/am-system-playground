@@ -31,7 +31,7 @@ describe('Service Tests', () => {
         name: 'AAAAAAA',
         created: currentDate,
         lastUpdated: currentDate,
-        isDisplayed: false,
+        displayed: false,
       };
     });
 
