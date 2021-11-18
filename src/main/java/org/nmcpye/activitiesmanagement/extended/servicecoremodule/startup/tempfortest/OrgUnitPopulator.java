@@ -14,6 +14,7 @@ import org.nmcpye.activitiesmanagement.extended.organisationunit.pagingrepositor
 import org.nmcpye.activitiesmanagement.extended.systemmodule.system.startup.TransactionContextStartupRoutine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -121,8 +122,8 @@ public class OrgUnitPopulator extends TransactionContextStartupRoutine {
             case 5:
                 unit.setOrganisationUnitType(OrganisationUnitType.SUBVILLAGE);
                 break;
-                default:
-                    unit.setOrganisationUnitType(OrganisationUnitType.SUBVILLAGE);
+            default:
+                unit.setOrganisationUnitType(OrganisationUnitType.SUBVILLAGE);
         }
 
         return unit;
