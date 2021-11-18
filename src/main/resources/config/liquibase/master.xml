@@ -104,6 +104,7 @@
     <include file="config/liquibase/changelog/20211114172514_FileResource_and_External_FileResource.xml" relativeToChangelogFile="false"/>
 
     <include file="config/liquibase/changelog/extended_added_entity_User_constraints.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211114172514_Document.xml" relativeToChangelogFile="false"/>
 
 
     <!--<include file="config/liquibase/changelog/20211116184638_changelog.xml" relativeToChangelogFile="false"/>-->

@@ -1,0 +1,56 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <!---->
+    <changeSet author="Hamza (generated)" id="1637249241269-2">
+        <createTable tableName="document">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="documentPK"/>
+            </column>
+            <column name="uid" type="varchar(11)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="UC_DOCUMENTUID_COL" />
+            </column>
+            <column name="code" type="varchar(255)">
+                <constraints nullable="true" unique="true" uniqueConstraintName="UC_DOCUMENTCODE_COL" />
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="attachment" type="BOOLEAN"/>
+            <column name="content_type" type="VARCHAR(255)"/>
+            <column name="external" type="BOOLEAN"/>
+            <column name="url" type="VARCHAR(255)"/>
+            <column name="created" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="last_updated" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="last_updated_by" type="BIGINT"/>
+            <column name="file_resource_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="Hamza (generated)" id="1637249241269-10">
+        <addForeignKeyConstraint
+            baseColumnNames="file_resource_id"
+            baseTableName="document"
+            constraintName="FK_document_file_resource_id"
+            deferrable="false" initiallyDeferred="false"
+            referencedColumnNames="id"
+            referencedTableName="file_resource" validate="true"/>
+
+        <addForeignKeyConstraint
+            baseColumnNames="created_by"
+            baseTableName="document"
+            constraintName="FK_document_created_by"
+            deferrable="false" initiallyDeferred="false"
+            referencedColumnNames="id"
+            referencedTableName="app_user" validate="true"/>
+
+        <addForeignKeyConstraint
+            baseColumnNames="last_updated_by"
+            baseTableName="document"
+            constraintName="FK_document_last_updated_by"
+            deferrable="false" initiallyDeferred="false"
+            referencedColumnNames="id"
+            referencedTableName="app_user" validate="true"/>
+
+    </changeSet>
+</databaseChangeLog>
