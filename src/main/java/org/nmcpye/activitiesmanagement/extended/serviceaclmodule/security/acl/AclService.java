@@ -6,8 +6,7 @@ import org.nmcpye.activitiesmanagement.extended.feedback.ErrorReport;
 
 import java.util.List;
 
-public interface AclService
-{
+public interface AclService {
     String LIKE_READ_METADATA = "r%"; // TODO use r_______ ?
 
     String LIKE_WRITE_METADATA = "_w%"; // TODO use r_______ ?
@@ -68,7 +67,7 @@ public interface AclService
      * Is the object public read? 5. Does any of the userGroupAccesses contain
      * public read and the current user is in that group
      *
-     * @param user User to check against
+     * @param user   User to check against
      * @param object Object to check
      * @return Result of test
      */
@@ -79,11 +78,11 @@ public interface AclService
      * to pass superclasses as object that can be validated as if they are of a
      * certain object type.
      *
-     * @param user User to check against
-     * @param object Object to check, could be
-     *        {@link org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject}
+     * @param user    User to check against
+     * @param object  Object to check, could be
+     *                {@link org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject}
      * @param objType the type as which to regard the provided object
-     * @param <T> type of the passed object
+     * @param <T>     type of the passed object
      * @return Result of test
      */
     <T extends IdentifiableObject> boolean canRead(User user, T object, Class<? extends T> objType);
@@ -91,7 +90,7 @@ public interface AclService
     /**
      * Can user read data this object.
      *
-     * @param user User to check against
+     * @param user   User to check against
      * @param object Object to check
      * @return Result of test
      */
@@ -100,12 +99,12 @@ public interface AclService
     /**
      * Check if the given user has data or metadata permission over the given
      * object
-     *
+     * <p>
      * Data-read permission is only considered if the given object's schema is
      * 'DataShareable'. If not 'DataShareable', only metadata-read ACL is
      * considered
      *
-     * @param user User to check against
+     * @param user   User to check against
      * @param object Object to check permission
      * @return true, if use can access object
      */
@@ -119,7 +118,7 @@ public interface AclService
      * Is the object public write? 5. Does any of the userGroupAccesses contain
      * public write and the current user is in that group
      *
-     * @param user User to check against
+     * @param user   User to check against
      * @param object Object to check
      * @return Result of test
      */
@@ -128,7 +127,7 @@ public interface AclService
     /**
      * Can user write data to this object (create)
      *
-     * @param user User to check against
+     * @param user   User to check against
      * @param object Object to check
      * @return Result of test
      */
@@ -140,7 +139,7 @@ public interface AclService
      * 1. Does user have ACL_OVERRIDE_AUTHORITIES authority? 2. Can user write
      * to this object?
      *
-     * @param user User to check against
+     * @param user   User to check against
      * @param object Object to check
      * @return Result of test
      */
@@ -152,7 +151,7 @@ public interface AclService
      * 1. Does user have ACL_OVERRIDE_AUTHORITIES authority? 2. Can user write
      * to this object?
      *
-     * @param user User to check against
+     * @param user   User to check against
      * @param object Object to check
      * @return Result of test
      */
@@ -164,7 +163,7 @@ public interface AclService
      * 1. Does user have ACL_OVERRIDE_AUTHORITIES authority? 2. Can user write
      * to this object?
      *
-     * @param user User to check against
+     * @param user   User to check against
      * @param object Object to check
      * @return Result of test
      */
@@ -173,7 +172,7 @@ public interface AclService
     /**
      * Can read an objects of this type.
      *
-     * @param user User to User to check against
+     * @param user  User to User to check against
      * @param klass Type to check against
      * @return Result of test
      */
@@ -182,7 +181,7 @@ public interface AclService
     /**
      * Can create an object of this type.
      *
-     * @param user User to User to check against
+     * @param user  User to User to check against
      * @param klass Type to check against
      * @return Result of test
      */
@@ -194,7 +193,7 @@ public interface AclService
      * 1. Does user have ACL_OVERRIDE_AUTHORITIES authority? 2. Does user have
      * the authority to create public instances of that object
      *
-     * @param user User to check against
+     * @param user   User to check against
      * @param object Object to check
      * @return Result of test
      */
@@ -208,7 +207,7 @@ public interface AclService
      * 1. Does user have ACL_OVERRIDE_AUTHORITIES authority? 2. Does user have
      * the authority to create private instances of that object
      *
-     * @param user User to check against
+     * @param user   User to check against
      * @param object Object to check
      * @return Result of test
      */
@@ -219,7 +218,7 @@ public interface AclService
     /**
      * Can user make this object external? (read with no login)
      *
-     * @param user User to check against
+     * @param user   User to check against
      * @param object Object to check
      * @return Result of test
      */
@@ -255,7 +254,7 @@ public interface AclService
      * Sets default sharing props on object, disregarding what is already there.
      *
      * @param object Object to update
-     * @param user User to base ACL on
+     * @param user   User to base ACL on
      */
     <T extends IdentifiableObject> void resetSharing(T object, User user);
 
@@ -264,7 +263,7 @@ public interface AclService
      * the given user.
      *
      * @param object the object.
-     * @param user the user.
+     * @param user   the user.
      */
     <T extends IdentifiableObject> void clearSharing(T object, User user);
 
@@ -272,7 +271,7 @@ public interface AclService
      * Verify that sharing props are correctly set according to user.
      *
      * @param object Object to update
-     * @param user User to base ACL on
+     * @param user   User to base ACL on
      * @return List of error reports (if any)
      */
     <T extends IdentifiableObject> List<ErrorReport> verifySharing(T object, User user);
