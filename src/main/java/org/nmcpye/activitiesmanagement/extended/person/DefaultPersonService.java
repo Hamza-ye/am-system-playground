@@ -24,7 +24,7 @@ import static org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.
 
 @Lazy
 @Service("org.nmcpye.activitiesmanagement.extended.person.PersonServiceExtended")
-public class DefaultPersonService implements PersonServiceExtended {
+public class DefaultPersonService implements PersonServiceExt {
 
     private final Logger log = LoggerFactory.getLogger(DefaultPersonService.class);
 
@@ -36,7 +36,7 @@ public class DefaultPersonService implements PersonServiceExtended {
 
     private final PersonStore personStore;
 
-    private final PeopleGroupService peopleGroupService;
+    private final PeopleGroupServiceExt peopleGroupServiceExt;
 
     private final PersonAuthorityGroupStore userAuthorityGroupStore;
 
@@ -44,16 +44,16 @@ public class DefaultPersonService implements PersonServiceExtended {
 
     public DefaultPersonService(
         PersonStore personStore,
-        PeopleGroupService peopleGroupService,
+        PeopleGroupServiceExt peopleGroupServiceExt,
         PersonAuthorityGroupStore userAuthorityGroupStore,
         UserService userService
     ) {
         checkNotNull(personStore);
-        checkNotNull(peopleGroupService);
+        checkNotNull(peopleGroupServiceExt);
         checkNotNull(userAuthorityGroupStore);
 
         this.personStore = personStore;
-        this.peopleGroupService = peopleGroupService;
+        this.peopleGroupServiceExt = peopleGroupServiceExt;
         this.userAuthorityGroupStore = userAuthorityGroupStore;
         this.userService = userService;
     }
@@ -331,7 +331,7 @@ public class DefaultPersonService implements PersonServiceExtended {
         boolean canManageAnyGroup = false;
 
         for (String uid : userGroups) {
-            PeopleGroup userGroup = peopleGroupService.getUserGroup(uid);
+            PeopleGroup userGroup = peopleGroupServiceExt.getUserGroup(uid);
 
             if (currentUser.getPerson().canManage(userGroup)) {
                 canManageAnyGroup = true;

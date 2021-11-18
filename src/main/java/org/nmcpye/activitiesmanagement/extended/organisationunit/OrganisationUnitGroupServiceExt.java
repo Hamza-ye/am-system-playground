@@ -12,8 +12,8 @@ import java.util.List;
  * OrganisationUnitGroupSets.
  *
  */
-public interface OrganisationUnitGroupService {
-    String ID = OrganisationUnitGroupService.class.getName();
+public interface OrganisationUnitGroupServiceExt {
+    String ID = OrganisationUnitGroupServiceExt.class.getName();
 
     // -------------------------------------------------------------------------
     // OrganisationUnitGroup

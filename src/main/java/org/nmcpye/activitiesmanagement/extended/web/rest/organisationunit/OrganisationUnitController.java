@@ -10,7 +10,7 @@ import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitG
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitQueryParams;
-import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitService;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitServiceExt;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.comparator.OrganisationUnitByLevelComparator;
 import org.nmcpye.activitiesmanagement.extended.schemamodule.descriptors.OrganisationUnitSchemaDescriptor;
 import org.nmcpye.activitiesmanagement.extended.servicecoremodule.query.Order;
@@ -39,7 +39,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class OrganisationUnitController
     extends AbstractCrudController<OrganisationUnit> {
     @Autowired
-    private OrganisationUnitService organisationUnitService;
+    private OrganisationUnitServiceExt organisationUnitServiceExt;
 
     @Override
     @SuppressWarnings("unchecked")
@@ -72,7 +72,7 @@ public class OrganisationUnitController
             if (currentUser.hasDataViewOrganisationUnit()) {
                 objects = new ArrayList<>(currentUser.getPerson().getDataViewOrganisationUnits());
             } else {
-                objects = organisationUnitService.getOrganisationUnitsAtLevel(1);
+                objects = organisationUnitServiceExt.getOrganisationUnitsAtLevel(1);
             }
         } else if (options.isTrue("levelSorted")) {
             objects = new ArrayList<>(manager.getAll(getEntityClass()));
@@ -95,7 +95,7 @@ public class OrganisationUnitController
 //                ? currentUser.getPerson().getTeiSearchOrganisationUnitsWithFallback()
                     : Sets.newHashSet());
             }
-            objects = organisationUnitService.getOrganisationUnitsByQuery(params);
+            objects = organisationUnitServiceExt.getOrganisationUnitsByQuery(params);
         }
 
         // ---------------------------------------------------------------------
@@ -121,7 +121,7 @@ public class OrganisationUnitController
 
         if (memberObject != null && memberCollection != null && (member = manager.get(memberObject)) != null) {
             for (OrganisationUnit unit : list) {
-                Long count = organisationUnitService.getOrganisationUnitHierarchyMemberCount(unit, member,
+                Long count = organisationUnitServiceExt.getOrganisationUnitHierarchyMemberCount(unit, member,
                     memberCollection);
 
                 unit.setMemberCount((count != null ? count.intValue() : 0));
@@ -163,7 +163,7 @@ public class OrganisationUnitController
             organisationUnits.addAll(organisationUnit.getChildren());
         } else if (options.contains("includeDescendants")) {
             options.getOptions().put("useWrapper", "true");
-            organisationUnits.addAll(organisationUnitService.getOrganisationUnitWithChildren(uid));
+            organisationUnits.addAll(organisationUnitServiceExt.getOrganisationUnitWithChildren(uid));
         } else if (options.contains("includeAncestors")) {
             options.getOptions().put("useWrapper", "true");
             organisationUnits.add(organisationUnit);
@@ -176,7 +176,7 @@ public class OrganisationUnitController
             int ouLevel = organisationUnit.getLevel();
             int targetLevel = ouLevel + level;
             organisationUnits
-                .addAll(organisationUnitService.getOrganisationUnitsAtLevel(targetLevel, organisationUnit));
+                .addAll(organisationUnitServiceExt.getOrganisationUnitsAtLevel(targetLevel, organisationUnit));
         } else {
             organisationUnits.add(organisationUnit);
         }
@@ -227,10 +227,10 @@ public class OrganisationUnitController
         }
 
         if (parents.isEmpty()) {
-            parents.addAll(organisationUnitService.getRootOrganisationUnits());
+            parents.addAll(organisationUnitServiceExt.getRootOrganisationUnits());
         }
 
-        List<OrganisationUnit> organisationUnits = organisationUnitService.getOrganisationUnitsAtLevels(rpLevels,
+        List<OrganisationUnit> organisationUnits = organisationUnitServiceExt.getOrganisationUnitsAtLevels(rpLevels,
             parents);
 
         response.setContentType(APPLICATION_JSON_VALUE);

@@ -9,8 +9,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-public interface PersonServiceExtended {
-    String ID = PersonServiceExtended.class.getName();
+public interface PersonServiceExt {
+    String ID = PersonServiceExt.class.getName();
     String PW_NO_INTERNAL_LOGIN = "--[##no_internal_login##]--";
 
     // -------------------------------------------------------------------------

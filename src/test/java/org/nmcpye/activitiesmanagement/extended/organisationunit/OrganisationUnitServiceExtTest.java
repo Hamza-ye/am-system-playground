@@ -11,7 +11,6 @@ import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitG
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroupSet;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitLevel;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
-import org.nmcpye.activitiesmanagement.extended.common.DeleteNotAllowedException;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,11 +19,11 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @IntegrationTest
-public class OrganisationUnitServiceTest
+public class OrganisationUnitServiceExtTest
     extends AMTest {
 
     @Autowired
-    private OrganisationUnitService organisationUnitService;
+    private OrganisationUnitServiceExt organisationUnitServiceExt;
 
 //    @Autowired
 //    private ProgramService programService;
@@ -39,7 +38,7 @@ public class OrganisationUnitServiceTest
 //    private FileResourceService fileResourceService;
 
     @Autowired
-    private OrganisationUnitGroupService organisationUnitGroupService;
+    private OrganisationUnitGroupServiceExt organisationUnitGroupServiceExt;
 
     // -------------------------------------------------------------------------
     // OrganisationUnit
@@ -49,22 +48,22 @@ public class OrganisationUnitServiceTest
     public void testBasicOrganisationUnitCoarseGrained() {
         OrganisationUnit organisationUnit1 = createOrganisationUnit('A');
 
-        long id1 = organisationUnitService.addOrganisationUnit(organisationUnit1);
+        long id1 = organisationUnitServiceExt.addOrganisationUnit(organisationUnit1);
 
-        assertNotNull(organisationUnitService.getOrganisationUnit(id1));
+        assertNotNull(organisationUnitServiceExt.getOrganisationUnit(id1));
 
-        assertNull(organisationUnitService.getOrganisationUnit(-1L));
+        assertNull(organisationUnitServiceExt.getOrganisationUnit(-1L));
 
         OrganisationUnit organisationUnit2 = createOrganisationUnit('B', organisationUnit1);
 
-        long id2 = organisationUnitService.addOrganisationUnit(organisationUnit2);
+        long id2 = organisationUnitServiceExt.addOrganisationUnit(organisationUnit2);
 
-        assertTrue(organisationUnitService.getOrganisationUnit(id2).getParent().getId() == id1);
+        assertTrue(organisationUnitServiceExt.getOrganisationUnit(id2).getParent().getId() == id1);
 
-        organisationUnitService.deleteOrganisationUnit(organisationUnitService.getOrganisationUnit(id2));
+        organisationUnitServiceExt.deleteOrganisationUnit(organisationUnitServiceExt.getOrganisationUnit(id2));
 
-        assertNotNull(organisationUnitService.getOrganisationUnit(id1));
-        assertNull(organisationUnitService.getOrganisationUnit(id2));
+        assertNotNull(organisationUnitServiceExt.getOrganisationUnit(id1));
+        assertNull(organisationUnitServiceExt.getOrganisationUnit(id2));
     }
 
     @Test
@@ -74,35 +73,35 @@ public class OrganisationUnitServiceTest
 
         OrganisationUnitGroup organisationUnitGroup = createOrganisationUnitGroup('A');
 
-        long id1 = organisationUnitService.addOrganisationUnit(organisationUnit1);
-        long id2 = organisationUnitService.addOrganisationUnit(organisationUnit2);
+        long id1 = organisationUnitServiceExt.addOrganisationUnit(organisationUnit1);
+        long id2 = organisationUnitServiceExt.addOrganisationUnit(organisationUnit2);
 
-        long groupId1 = organisationUnitGroupService.addOrganisationUnitGroup(organisationUnitGroup);
+        long groupId1 = organisationUnitGroupServiceExt.addOrganisationUnitGroup(organisationUnitGroup);
 
         organisationUnit1.addOrganisationUnitGroup(organisationUnitGroup);
         organisationUnit2.addOrganisationUnitGroup(organisationUnitGroup);
 
-        organisationUnitService.updateOrganisationUnit(organisationUnit1);
-        organisationUnitService.updateOrganisationUnit(organisationUnit2);
+        organisationUnitServiceExt.updateOrganisationUnit(organisationUnit1);
+        organisationUnitServiceExt.updateOrganisationUnit(organisationUnit2);
 
         organisationUnitGroup.addOrganisationUnit(organisationUnit1);
         organisationUnitGroup.addOrganisationUnit(organisationUnit2);
 
-        organisationUnitGroupService.updateOrganisationUnitGroup(organisationUnitGroup);
+        organisationUnitGroupServiceExt.updateOrganisationUnitGroup(organisationUnitGroup);
 
-        assertNotNull(organisationUnitService.getOrganisationUnit(id1));
-        assertNotNull(organisationUnitService.getOrganisationUnit(id2));
+        assertNotNull(organisationUnitServiceExt.getOrganisationUnit(id1));
+        assertNotNull(organisationUnitServiceExt.getOrganisationUnit(id2));
 
         assertEquals("OrganisationUnitGroupA",
-            organisationUnitGroupService.getOrganisationUnitGroup(groupId1).getName());
+            organisationUnitGroupServiceExt.getOrganisationUnitGroup(groupId1).getName());
 
-        organisationUnitService.deleteOrganisationUnit(organisationUnitService.getOrganisationUnit(id1));
+        organisationUnitServiceExt.deleteOrganisationUnit(organisationUnitServiceExt.getOrganisationUnit(id1));
 
-        assertNull(organisationUnitService.getOrganisationUnit(id1));
-        assertNotNull(organisationUnitService.getOrganisationUnit(id2));
-        assertFalse(organisationUnitGroupService.getOrganisationUnitGroup(groupId1).getMembers()
+        assertNull(organisationUnitServiceExt.getOrganisationUnit(id1));
+        assertNotNull(organisationUnitServiceExt.getOrganisationUnit(id2));
+        assertFalse(organisationUnitGroupServiceExt.getOrganisationUnitGroup(groupId1).getMembers()
             .contains(organisationUnit1));
-        assertTrue(organisationUnitGroupService.getOrganisationUnitGroup(groupId1).getMembers()
+        assertTrue(organisationUnitGroupServiceExt.getOrganisationUnitGroup(groupId1).getMembers()
             .contains(organisationUnit2));
     }
 
@@ -111,22 +110,22 @@ public class OrganisationUnitServiceTest
         OrganisationUnit organisationUnit1 = createOrganisationUnit('A');
         OrganisationUnit organisationUnit2 = createOrganisationUnit('B');
 
-        long id1 = organisationUnitService.addOrganisationUnit(organisationUnit1);
-        long id2 = organisationUnitService.addOrganisationUnit(organisationUnit2);
+        long id1 = organisationUnitServiceExt.addOrganisationUnit(organisationUnit1);
+        long id2 = organisationUnitServiceExt.addOrganisationUnit(organisationUnit2);
 
         organisationUnit1.setChildren(Sets.newHashSet(organisationUnit2));
         organisationUnit2.setParent(organisationUnit1);
 
-        organisationUnitService.updateOrganisationUnit(organisationUnit1);
+        organisationUnitServiceExt.updateOrganisationUnit(organisationUnit1);
 
-        assertNotNull(organisationUnitService.getOrganisationUnit(id1));
-        assertNotNull(organisationUnitService.getOrganisationUnit(id2));
+        assertNotNull(organisationUnitServiceExt.getOrganisationUnit(id1));
+        assertNotNull(organisationUnitServiceExt.getOrganisationUnit(id2));
 
-        organisationUnitService.deleteOrganisationUnit(organisationUnitService.getOrganisationUnit(id2));
+        organisationUnitServiceExt.deleteOrganisationUnit(organisationUnitServiceExt.getOrganisationUnit(id2));
 
-        assertNull(organisationUnitService.getOrganisationUnit(id2));
-        assertNotNull(organisationUnitService.getOrganisationUnit(id1));
-        assertTrue(organisationUnitService.getOrganisationUnit(id1).getChildren().isEmpty());
+        assertNull(organisationUnitServiceExt.getOrganisationUnit(id2));
+        assertNotNull(organisationUnitServiceExt.getOrganisationUnit(id1));
+        assertTrue(organisationUnitServiceExt.getOrganisationUnit(id1).getChildren().isEmpty());
     }
 
 //    @Test(expected = DeleteNotAllowedException.class)
@@ -195,14 +194,14 @@ public class OrganisationUnitServiceTest
 
         OrganisationUnit organisationUnit = createOrganisationUnit('A');
 
-        long id = organisationUnitService.addOrganisationUnit(organisationUnit);
+        long id = organisationUnitServiceExt.addOrganisationUnit(organisationUnit);
 
         organisationUnit.setName(updatedName);
         organisationUnit.setShortName(updatedShortName);
 
-        organisationUnitService.updateOrganisationUnit(organisationUnit);
+        organisationUnitServiceExt.updateOrganisationUnit(organisationUnit);
 
-        OrganisationUnit updatedOrganisationUnit = organisationUnitService.getOrganisationUnit(id);
+        OrganisationUnit updatedOrganisationUnit = organisationUnitServiceExt.getOrganisationUnit(id);
 
         assertEquals(updatedOrganisationUnit.getName(), updatedName);
         assertEquals(updatedOrganisationUnit.getShortName(), updatedShortName);
@@ -216,16 +215,16 @@ public class OrganisationUnitServiceTest
         OrganisationUnit unit3 = createOrganisationUnit('C', unit2);
         OrganisationUnit unit4 = createOrganisationUnit('D');
 
-        long id1 = organisationUnitService.addOrganisationUnit(unit1);
+        long id1 = organisationUnitServiceExt.addOrganisationUnit(unit1);
         unit1.getChildren().add(unit2);
-        organisationUnitService.addOrganisationUnit(unit2);
-        organisationUnitService.addOrganisationUnit(unit3);
-        organisationUnitService.addOrganisationUnit(unit4);
+        organisationUnitServiceExt.addOrganisationUnit(unit2);
+        organisationUnitServiceExt.addOrganisationUnit(unit3);
+        organisationUnitServiceExt.addOrganisationUnit(unit4);
 
-        organisationUnitService.updatePaths();
+        organisationUnitServiceExt.updatePaths();
 
         List<OrganisationUnit> actual = new ArrayList<>(
-            organisationUnitService.getOrganisationUnitWithChildren(id1));
+            organisationUnitServiceExt.getOrganisationUnitWithChildren(id1));
 
         assertEquals(3, actual.size());
         assertTrue(actual.contains(unit1));
@@ -240,22 +239,22 @@ public class OrganisationUnitServiceTest
         OrganisationUnit unitD = createOrganisationUnit('D', unitB);
         OrganisationUnit unitE = createOrganisationUnit('E', unitC);
 
-        long idA = organisationUnitService.addOrganisationUnit(unitA);
-        long idB = organisationUnitService.addOrganisationUnit(unitB);
-        long idC = organisationUnitService.addOrganisationUnit(unitC);
-        long idD = organisationUnitService.addOrganisationUnit(unitD);
-        organisationUnitService.addOrganisationUnit(unitE);
+        long idA = organisationUnitServiceExt.addOrganisationUnit(unitA);
+        long idB = organisationUnitServiceExt.addOrganisationUnit(unitB);
+        long idC = organisationUnitServiceExt.addOrganisationUnit(unitC);
+        long idD = organisationUnitServiceExt.addOrganisationUnit(unitD);
+        organisationUnitServiceExt.addOrganisationUnit(unitE);
 
-        organisationUnitService.updatePaths();
+        organisationUnitServiceExt.updatePaths();
 
         List<OrganisationUnit> actualA = new ArrayList<>(
-            organisationUnitService.getOrganisationUnitWithChildren(idA));
+            organisationUnitServiceExt.getOrganisationUnitWithChildren(idA));
         List<OrganisationUnit> actualB = new ArrayList<>(
-            organisationUnitService.getOrganisationUnitWithChildren(idB));
+            organisationUnitServiceExt.getOrganisationUnitWithChildren(idB));
         List<OrganisationUnit> actualC = new ArrayList<>(
-            organisationUnitService.getOrganisationUnitWithChildren(idC));
+            organisationUnitServiceExt.getOrganisationUnitWithChildren(idC));
         List<OrganisationUnit> actualD = new ArrayList<>(
-            organisationUnitService.getOrganisationUnitWithChildren(idD));
+            organisationUnitServiceExt.getOrganisationUnitWithChildren(idD));
 
         assertEquals(5, actualA.size());
         assertEquals(4, actualB.size());
@@ -274,13 +273,13 @@ public class OrganisationUnitServiceTest
         OrganisationUnit unitD = createOrganisationUnit('D', unitB);
         OrganisationUnit unitE = createOrganisationUnit('E', unitC);
 
-        organisationUnitService.addOrganisationUnit(unitA);
-        organisationUnitService.addOrganisationUnit(unitB);
-        organisationUnitService.addOrganisationUnit(unitC);
-        organisationUnitService.addOrganisationUnit(unitD);
-        organisationUnitService.addOrganisationUnit(unitE);
+        organisationUnitServiceExt.addOrganisationUnit(unitA);
+        organisationUnitServiceExt.addOrganisationUnit(unitB);
+        organisationUnitServiceExt.addOrganisationUnit(unitC);
+        organisationUnitServiceExt.addOrganisationUnit(unitD);
+        organisationUnitServiceExt.addOrganisationUnit(unitE);
 
-        organisationUnitService.updatePaths();
+        organisationUnitServiceExt.updatePaths();
 
         assertEquals(1, unitA.getLevel());
         assertEquals(2, unitB.getLevel());
@@ -306,46 +305,46 @@ public class OrganisationUnitServiceTest
         unit3.getChildren().add(unit6);
         unit3.getChildren().add(unit7);
 
-        long id1 = organisationUnitService.addOrganisationUnit(unit1);
-        long id2 = organisationUnitService.addOrganisationUnit(unit2);
-        organisationUnitService.addOrganisationUnit(unit3);
-        long id4 = organisationUnitService.addOrganisationUnit(unit4);
-        organisationUnitService.addOrganisationUnit(unit5);
-        organisationUnitService.addOrganisationUnit(unit6);
-        organisationUnitService.addOrganisationUnit(unit7);
+        long id1 = organisationUnitServiceExt.addOrganisationUnit(unit1);
+        long id2 = organisationUnitServiceExt.addOrganisationUnit(unit2);
+        organisationUnitServiceExt.addOrganisationUnit(unit3);
+        long id4 = organisationUnitServiceExt.addOrganisationUnit(unit4);
+        organisationUnitServiceExt.addOrganisationUnit(unit5);
+        organisationUnitServiceExt.addOrganisationUnit(unit6);
+        organisationUnitServiceExt.addOrganisationUnit(unit7);
 
-        organisationUnitService.updatePaths();
+        organisationUnitServiceExt.updatePaths();
 
         List<OrganisationUnit> actual = new ArrayList<>(
-            organisationUnitService.getOrganisationUnitWithChildren(id1, 0));
+            organisationUnitServiceExt.getOrganisationUnitWithChildren(id1, 0));
         assertEquals(0, actual.size());
 
-        actual = new ArrayList<>(organisationUnitService.getOrganisationUnitWithChildren(id1, 1));
+        actual = new ArrayList<>(organisationUnitServiceExt.getOrganisationUnitWithChildren(id1, 1));
         assertEquals(1, actual.size());
         assertTrue(actual.contains(unit1));
 
-        actual = new ArrayList<>(organisationUnitService.getOrganisationUnitWithChildren(id1, 2));
+        actual = new ArrayList<>(organisationUnitServiceExt.getOrganisationUnitWithChildren(id1, 2));
         assertEquals(3, actual.size());
         assertTrue(actual.contains(unit1));
         assertTrue(actual.contains(unit2));
         assertTrue(actual.contains(unit3));
 
-        actual = new ArrayList<>(organisationUnitService.getOrganisationUnitWithChildren(id1, 3));
+        actual = new ArrayList<>(organisationUnitServiceExt.getOrganisationUnitWithChildren(id1, 3));
         assertEquals(7, actual.size());
 
-        actual = new ArrayList<>(organisationUnitService.getOrganisationUnitWithChildren(id1, 8));
+        actual = new ArrayList<>(organisationUnitServiceExt.getOrganisationUnitWithChildren(id1, 8));
         assertEquals(7, actual.size());
 
-        actual = new ArrayList<>(organisationUnitService.getOrganisationUnitWithChildren(id2, 1));
+        actual = new ArrayList<>(organisationUnitServiceExt.getOrganisationUnitWithChildren(id2, 1));
         assertEquals(1, actual.size());
 
-        actual = new ArrayList<>(organisationUnitService.getOrganisationUnitWithChildren(id2, 2));
+        actual = new ArrayList<>(organisationUnitServiceExt.getOrganisationUnitWithChildren(id2, 2));
         assertEquals(3, actual.size());
 
-        actual = new ArrayList<>(organisationUnitService.getOrganisationUnitWithChildren(id4, 1));
+        actual = new ArrayList<>(organisationUnitServiceExt.getOrganisationUnitWithChildren(id4, 1));
         assertEquals(1, actual.size());
 
-        actual = new ArrayList<>(organisationUnitService.getOrganisationUnitWithChildren(id4, 8));
+        actual = new ArrayList<>(organisationUnitServiceExt.getOrganisationUnitWithChildren(id4, 8));
         assertEquals(1, actual.size());
     }
 
@@ -368,20 +367,20 @@ public class OrganisationUnitServiceTest
         OrganisationUnit organisationUnit3 = new OrganisationUnit(oU3Name, null, oU3ShortName, oU3Code, new Date(),
             null, null, OrganisationUnitType.DISTRICT);
 
-        organisationUnitService.addOrganisationUnit(organisationUnit1);
-        organisationUnitService.addOrganisationUnit(organisationUnit2);
-        organisationUnitService.addOrganisationUnit(organisationUnit3);
+        organisationUnitServiceExt.addOrganisationUnit(organisationUnit1);
+        organisationUnitServiceExt.addOrganisationUnit(organisationUnit2);
+        organisationUnitServiceExt.addOrganisationUnit(organisationUnit3);
 
-        OrganisationUnit unit1 = organisationUnitService.getOrganisationUnitByName(oU1Name).get(0);
+        OrganisationUnit unit1 = organisationUnitServiceExt.getOrganisationUnitByName(oU1Name).get(0);
         assertEquals(unit1.getName(), oU1Name);
 
-        List<OrganisationUnit> units = organisationUnitService.getOrganisationUnitByName("foo");
+        List<OrganisationUnit> units = organisationUnitServiceExt.getOrganisationUnitByName("foo");
         assertTrue(units.isEmpty());
 
-        unit1 = organisationUnitService.getOrganisationUnitByCode(oU1Code);
+        unit1 = organisationUnitServiceExt.getOrganisationUnitByCode(oU1Code);
         assertEquals(unit1.getName(), oU1Name);
 
-        OrganisationUnit unit4 = organisationUnitService.getOrganisationUnitByCode("foo");
+        OrganisationUnit unit4 = organisationUnitServiceExt.getOrganisationUnitByCode("foo");
         assertNull(unit4);
     }
 
@@ -395,13 +394,13 @@ public class OrganisationUnitServiceTest
         OrganisationUnit unit4 = createOrganisationUnit('D');
         OrganisationUnit unit5 = createOrganisationUnit('E', unit4);
 
-        organisationUnitService.addOrganisationUnit(unit1);
-        organisationUnitService.addOrganisationUnit(unit2);
-        organisationUnitService.addOrganisationUnit(unit3);
-        organisationUnitService.addOrganisationUnit(unit4);
-        organisationUnitService.addOrganisationUnit(unit5);
+        organisationUnitServiceExt.addOrganisationUnit(unit1);
+        organisationUnitServiceExt.addOrganisationUnit(unit2);
+        organisationUnitServiceExt.addOrganisationUnit(unit3);
+        organisationUnitServiceExt.addOrganisationUnit(unit4);
+        organisationUnitServiceExt.addOrganisationUnit(unit5);
 
-        List<OrganisationUnit> units = organisationUnitService.getAllOrganisationUnits();
+        List<OrganisationUnit> units = organisationUnitServiceExt.getAllOrganisationUnits();
 
         assertNotNull(units);
         assertEquals(5, units.size());
@@ -411,7 +410,7 @@ public class OrganisationUnitServiceTest
         assertTrue(units.contains(unit4));
         assertTrue(units.contains(unit5));
 
-        units = organisationUnitService.getRootOrganisationUnits();
+        units = organisationUnitServiceExt.getRootOrganisationUnits();
 
         assertNotNull(units);
         assertEquals(2, units.size());
@@ -426,38 +425,38 @@ public class OrganisationUnitServiceTest
         OrganisationUnitLevel levelC = new OrganisationUnitLevel(3, "County");
         OrganisationUnitLevel levelD = new OrganisationUnitLevel(4, "District");
 
-        organisationUnitService.addOrganisationUnitLevel(levelA);
-        organisationUnitService.addOrganisationUnitLevel(levelB);
-        organisationUnitService.addOrganisationUnitLevel(levelC);
-        organisationUnitService.addOrganisationUnitLevel(levelD);
+        organisationUnitServiceExt.addOrganisationUnitLevel(levelA);
+        organisationUnitServiceExt.addOrganisationUnitLevel(levelB);
+        organisationUnitServiceExt.addOrganisationUnitLevel(levelC);
+        organisationUnitServiceExt.addOrganisationUnitLevel(levelD);
 
         OrganisationUnit unit1 = createOrganisationUnit('1');
-        organisationUnitService.addOrganisationUnit(unit1);
+        organisationUnitServiceExt.addOrganisationUnit(unit1);
 
         OrganisationUnit unit2 = createOrganisationUnit('2', unit1);
         unit1.getChildren().add(unit2);
-        organisationUnitService.addOrganisationUnit(unit2);
+        organisationUnitServiceExt.addOrganisationUnit(unit2);
 
         OrganisationUnit unit3 = createOrganisationUnit('3', unit2);
         unit2.getChildren().add(unit3);
-        organisationUnitService.addOrganisationUnit(unit3);
+        organisationUnitServiceExt.addOrganisationUnit(unit3);
 
         OrganisationUnit unit4 = createOrganisationUnit('4', unit2);
         unit2.getChildren().add(unit4);
-        organisationUnitService.addOrganisationUnit(unit4);
+        organisationUnitServiceExt.addOrganisationUnit(unit4);
 
         OrganisationUnit unit5 = createOrganisationUnit('5', unit2);
         unit2.getChildren().add(unit5);
-        organisationUnitService.addOrganisationUnit(unit5);
+        organisationUnitServiceExt.addOrganisationUnit(unit5);
 
         OrganisationUnit unit6 = createOrganisationUnit('6', unit3);
         unit3.getChildren().add(unit6);
-        organisationUnitService.addOrganisationUnit(unit6);
+        organisationUnitServiceExt.addOrganisationUnit(unit6);
 
         OrganisationUnit unit7 = createOrganisationUnit('7');
-        organisationUnitService.addOrganisationUnit(unit7);
+        organisationUnitServiceExt.addOrganisationUnit(unit7);
 
-        organisationUnitService.updatePaths();
+        organisationUnitServiceExt.updatePaths();
 
         // unit1
         // unit1 . unit2
@@ -467,83 +466,83 @@ public class OrganisationUnitServiceTest
         // unit1 . unit2 . unit3 . unit6
         // unit7
 
-        assertEquals(2, organisationUnitService.getOrganisationUnitsAtLevel(1).size());
-        assertEquals(3, organisationUnitService.getOrganisationUnitsAtLevel(3).size());
-        assertEquals(4, organisationUnitService.getNumberOfOrganisationalLevels());
+        assertEquals(2, organisationUnitServiceExt.getOrganisationUnitsAtLevel(1).size());
+        assertEquals(3, organisationUnitServiceExt.getOrganisationUnitsAtLevel(3).size());
+        assertEquals(4, organisationUnitServiceExt.getNumberOfOrganisationalLevels());
         assertTrue(unit4.getLevel() == 3);
         assertTrue(unit1.getLevel() == 1);
         assertTrue(unit6.getLevel() == 4);
 
-        assertEquals(3, organisationUnitService
+        assertEquals(3, organisationUnitServiceExt
             .getOrganisationUnitsAtLevels(Lists.newArrayList(3), Lists.newArrayList(unit1)).size());
-        assertEquals(3, organisationUnitService
+        assertEquals(3, organisationUnitServiceExt
             .getOrganisationUnitsAtLevels(Lists.newArrayList(3), Lists.newArrayList(unit2)).size());
-        assertEquals(0, organisationUnitService
+        assertEquals(0, organisationUnitServiceExt
             .getOrganisationUnitsAtLevels(Lists.newArrayList(3), Lists.newArrayList(unit7)).size());
-        assertEquals(4, organisationUnitService
+        assertEquals(4, organisationUnitServiceExt
             .getOrganisationUnitsAtLevels(Lists.newArrayList(3, 4), Lists.newArrayList(unit1)).size());
-        assertEquals(4, organisationUnitService
+        assertEquals(4, organisationUnitServiceExt
             .getOrganisationUnitsAtLevels(Lists.newArrayList(3, 4), Lists.newArrayList(unit1, unit7)).size());
 
-        assertEquals(3, organisationUnitService
+        assertEquals(3, organisationUnitServiceExt
             .getOrganisationUnitsAtOrgUnitLevels(Lists.newArrayList(levelC), Lists.newArrayList(unit1)).size());
-        assertEquals(3, organisationUnitService
+        assertEquals(3, organisationUnitServiceExt
             .getOrganisationUnitsAtOrgUnitLevels(Lists.newArrayList(levelC), Lists.newArrayList(unit2)).size());
-        assertEquals(0, organisationUnitService
+        assertEquals(0, organisationUnitServiceExt
             .getOrganisationUnitsAtOrgUnitLevels(Lists.newArrayList(levelC), Lists.newArrayList(unit7)).size());
-        assertEquals(4, organisationUnitService
+        assertEquals(4, organisationUnitServiceExt
             .getOrganisationUnitsAtOrgUnitLevels(Lists.newArrayList(levelC, levelD), Lists.newArrayList(unit1))
             .size());
         assertEquals(4,
-            organisationUnitService.getOrganisationUnitsAtOrgUnitLevels(Lists.newArrayList(levelC, levelD),
+            organisationUnitServiceExt.getOrganisationUnitsAtOrgUnitLevels(Lists.newArrayList(levelC, levelD),
                 Lists.newArrayList(unit1, unit7)).size());
     }
 
     @Test
     public void testGetNumberOfOrganisationalLevels() {
-        assertEquals(0, organisationUnitService.getNumberOfOrganisationalLevels());
+        assertEquals(0, organisationUnitServiceExt.getNumberOfOrganisationalLevels());
 
         OrganisationUnit unit1 = createOrganisationUnit('1');
-        organisationUnitService.addOrganisationUnit(unit1);
+        organisationUnitServiceExt.addOrganisationUnit(unit1);
 
         OrganisationUnit unit2 = createOrganisationUnit('2', unit1);
         unit1.getChildren().add(unit2);
-        organisationUnitService.addOrganisationUnit(unit2);
+        organisationUnitServiceExt.addOrganisationUnit(unit2);
 
-        organisationUnitService.updatePaths();
+        organisationUnitServiceExt.updatePaths();
 
-        assertEquals(2, organisationUnitService.getNumberOfOrganisationalLevels());
+        assertEquals(2, organisationUnitServiceExt.getNumberOfOrganisationalLevels());
 
         OrganisationUnit unit3 = createOrganisationUnit('3', unit2);
         unit2.getChildren().add(unit3);
-        organisationUnitService.addOrganisationUnit(unit3);
+        organisationUnitServiceExt.addOrganisationUnit(unit3);
 
-        organisationUnitService.updatePaths();
+        organisationUnitServiceExt.updatePaths();
 
         OrganisationUnit unit4 = createOrganisationUnit('4', unit2);
         unit2.getChildren().add(unit4);
-        organisationUnitService.addOrganisationUnit(unit4);
+        organisationUnitServiceExt.addOrganisationUnit(unit4);
 
-        organisationUnitService.updatePaths();
+        organisationUnitServiceExt.updatePaths();
 
-        assertEquals(3, organisationUnitService.getNumberOfOrganisationalLevels());
+        assertEquals(3, organisationUnitServiceExt.getNumberOfOrganisationalLevels());
     }
 
     @Test
     public void testIsDescendantSet() {
         OrganisationUnit unit1 = createOrganisationUnit('1');
-        organisationUnitService.addOrganisationUnit(unit1);
+        organisationUnitServiceExt.addOrganisationUnit(unit1);
 
         OrganisationUnit unit2 = createOrganisationUnit('2', unit1);
         unit1.getChildren().add(unit2);
-        organisationUnitService.addOrganisationUnit(unit2);
+        organisationUnitServiceExt.addOrganisationUnit(unit2);
 
         OrganisationUnit unit3 = createOrganisationUnit('3', unit2);
         unit2.getChildren().add(unit3);
-        organisationUnitService.addOrganisationUnit(unit3);
+        organisationUnitServiceExt.addOrganisationUnit(unit3);
 
         OrganisationUnit unit4 = createOrganisationUnit('4');
-        organisationUnitService.addOrganisationUnit(unit4);
+        organisationUnitServiceExt.addOrganisationUnit(unit4);
 
         assertTrue(unit1.isDescendant(Sets.newHashSet(unit1)));
         assertTrue(unit2.isDescendant(Sets.newHashSet(unit1)));
@@ -557,18 +556,18 @@ public class OrganisationUnitServiceTest
     @Test
     public void testIsDescendantObject() {
         OrganisationUnit unit1 = createOrganisationUnit('1');
-        organisationUnitService.addOrganisationUnit(unit1);
+        organisationUnitServiceExt.addOrganisationUnit(unit1);
 
         OrganisationUnit unit2 = createOrganisationUnit('2', unit1);
         unit1.getChildren().add(unit2);
-        organisationUnitService.addOrganisationUnit(unit2);
+        organisationUnitServiceExt.addOrganisationUnit(unit2);
 
         OrganisationUnit unit3 = createOrganisationUnit('3', unit2);
         unit2.getChildren().add(unit3);
-        organisationUnitService.addOrganisationUnit(unit3);
+        organisationUnitServiceExt.addOrganisationUnit(unit3);
 
         OrganisationUnit unit4 = createOrganisationUnit('4');
-        organisationUnitService.addOrganisationUnit(unit4);
+        organisationUnitServiceExt.addOrganisationUnit(unit4);
 
         assertTrue(unit1.isDescendant(unit1));
         assertTrue(unit2.isDescendant(unit1));
@@ -597,30 +596,30 @@ public class OrganisationUnitServiceTest
         OrganisationUnit unitN = createOrganisationUnit('N', unitG);
         OrganisationUnit unitO = createOrganisationUnit('O', unitG);
 
-        organisationUnitService.addOrganisationUnit(unitA);
-        organisationUnitService.addOrganisationUnit(unitB);
-        organisationUnitService.addOrganisationUnit(unitC);
-        organisationUnitService.addOrganisationUnit(unitD);
-        organisationUnitService.addOrganisationUnit(unitE);
-        organisationUnitService.addOrganisationUnit(unitF);
-        organisationUnitService.addOrganisationUnit(unitG);
-        organisationUnitService.addOrganisationUnit(unitH);
-        organisationUnitService.addOrganisationUnit(unitI);
-        organisationUnitService.addOrganisationUnit(unitJ);
-        organisationUnitService.addOrganisationUnit(unitK);
-        organisationUnitService.addOrganisationUnit(unitL);
-        organisationUnitService.addOrganisationUnit(unitM);
-        organisationUnitService.addOrganisationUnit(unitN);
-        organisationUnitService.addOrganisationUnit(unitO);
+        organisationUnitServiceExt.addOrganisationUnit(unitA);
+        organisationUnitServiceExt.addOrganisationUnit(unitB);
+        organisationUnitServiceExt.addOrganisationUnit(unitC);
+        organisationUnitServiceExt.addOrganisationUnit(unitD);
+        organisationUnitServiceExt.addOrganisationUnit(unitE);
+        organisationUnitServiceExt.addOrganisationUnit(unitF);
+        organisationUnitServiceExt.addOrganisationUnit(unitG);
+        organisationUnitServiceExt.addOrganisationUnit(unitH);
+        organisationUnitServiceExt.addOrganisationUnit(unitI);
+        organisationUnitServiceExt.addOrganisationUnit(unitJ);
+        organisationUnitServiceExt.addOrganisationUnit(unitK);
+        organisationUnitServiceExt.addOrganisationUnit(unitL);
+        organisationUnitServiceExt.addOrganisationUnit(unitM);
+        organisationUnitServiceExt.addOrganisationUnit(unitN);
+        organisationUnitServiceExt.addOrganisationUnit(unitO);
 
-        organisationUnitService.updatePaths();
+        organisationUnitServiceExt.updatePaths();
 
         assertEquals(Sets.newHashSet(unitB),
-            Sets.newHashSet(organisationUnitService.getOrganisationUnitsAtLevel(2, unitB)));
+            Sets.newHashSet(organisationUnitServiceExt.getOrganisationUnitsAtLevel(2, unitB)));
         assertEquals(Sets.newHashSet(unitD, unitE),
-            Sets.newHashSet(organisationUnitService.getOrganisationUnitsAtLevel(3, unitB)));
+            Sets.newHashSet(organisationUnitServiceExt.getOrganisationUnitsAtLevel(3, unitB)));
         assertEquals(Sets.newHashSet(unitH, unitI, unitJ, unitK),
-            Sets.newHashSet(organisationUnitService.getOrganisationUnitsAtLevel(4, unitB)));
+            Sets.newHashSet(organisationUnitServiceExt.getOrganisationUnitsAtLevel(4, unitB)));
 
         assertEquals(2, unitB.getLevel());
         assertEquals(3, unitD.getLevel());
@@ -664,33 +663,33 @@ public class OrganisationUnitServiceTest
         unitG.getChildren().add(unitN);
         unitG.getChildren().add(unitO);
 
-        organisationUnitService.addOrganisationUnit(unitA);
-        organisationUnitService.addOrganisationUnit(unitB);
-        organisationUnitService.addOrganisationUnit(unitC);
-        organisationUnitService.addOrganisationUnit(unitD);
-        organisationUnitService.addOrganisationUnit(unitE);
-        organisationUnitService.addOrganisationUnit(unitF);
-        organisationUnitService.addOrganisationUnit(unitG);
-        organisationUnitService.addOrganisationUnit(unitH);
-        organisationUnitService.addOrganisationUnit(unitI);
-        organisationUnitService.addOrganisationUnit(unitJ);
-        organisationUnitService.addOrganisationUnit(unitK);
-        organisationUnitService.addOrganisationUnit(unitL);
-        organisationUnitService.addOrganisationUnit(unitM);
-        organisationUnitService.addOrganisationUnit(unitN);
-        organisationUnitService.addOrganisationUnit(unitO);
+        organisationUnitServiceExt.addOrganisationUnit(unitA);
+        organisationUnitServiceExt.addOrganisationUnit(unitB);
+        organisationUnitServiceExt.addOrganisationUnit(unitC);
+        organisationUnitServiceExt.addOrganisationUnit(unitD);
+        organisationUnitServiceExt.addOrganisationUnit(unitE);
+        organisationUnitServiceExt.addOrganisationUnit(unitF);
+        organisationUnitServiceExt.addOrganisationUnit(unitG);
+        organisationUnitServiceExt.addOrganisationUnit(unitH);
+        organisationUnitServiceExt.addOrganisationUnit(unitI);
+        organisationUnitServiceExt.addOrganisationUnit(unitJ);
+        organisationUnitServiceExt.addOrganisationUnit(unitK);
+        organisationUnitServiceExt.addOrganisationUnit(unitL);
+        organisationUnitServiceExt.addOrganisationUnit(unitM);
+        organisationUnitServiceExt.addOrganisationUnit(unitN);
+        organisationUnitServiceExt.addOrganisationUnit(unitO);
 
-        organisationUnitService.updatePaths();
+        organisationUnitServiceExt.updatePaths();
 
         List<OrganisationUnit> unitsA = new ArrayList<>(Arrays.asList(unitB, unitC));
         List<OrganisationUnit> unitsB = new ArrayList<>(Arrays.asList(unitD, unitE));
 
         assertEquals(Sets.newHashSet(unitD, unitE, unitF, unitG),
-            Sets.newHashSet(organisationUnitService.getOrganisationUnitsAtLevels(Sets.newHashSet(3), unitsA)));
+            Sets.newHashSet(organisationUnitServiceExt.getOrganisationUnitsAtLevels(Sets.newHashSet(3), unitsA)));
         assertEquals(Sets.newHashSet(unitH, unitI, unitJ, unitK, unitL, unitM, unitN, unitO),
-            Sets.newHashSet(organisationUnitService.getOrganisationUnitsAtLevels(Sets.newHashSet(4), unitsA)));
+            Sets.newHashSet(organisationUnitServiceExt.getOrganisationUnitsAtLevels(Sets.newHashSet(4), unitsA)));
         assertEquals(Sets.newHashSet(unitH, unitI, unitJ, unitK),
-            Sets.newHashSet(organisationUnitService.getOrganisationUnitsAtLevels(Sets.newHashSet(4), unitsB)));
+            Sets.newHashSet(organisationUnitServiceExt.getOrganisationUnitsAtLevels(Sets.newHashSet(4), unitsB)));
 
         assertEquals(2, unitB.getLevel());
         assertEquals(3, unitD.getLevel());
@@ -709,18 +708,18 @@ public class OrganisationUnitServiceTest
     public void testAddAndDelOrganisationUnitGroup() {
         OrganisationUnitGroup organisationUnitGroup1 = new OrganisationUnitGroup("OUGname");
 
-        long id1 = organisationUnitGroupService.addOrganisationUnitGroup(organisationUnitGroup1);
+        long id1 = organisationUnitGroupServiceExt.addOrganisationUnitGroup(organisationUnitGroup1);
 
         // assert getOrganisationUnitGroup
-        assertNotNull(organisationUnitGroupService.getOrganisationUnitGroup(id1));
+        assertNotNull(organisationUnitGroupServiceExt.getOrganisationUnitGroup(id1));
 
-        assertEquals(organisationUnitGroupService.getOrganisationUnitGroup(id1).getName(), "OUGname");
+        assertEquals(organisationUnitGroupServiceExt.getOrganisationUnitGroup(id1).getName(), "OUGname");
 
-        organisationUnitGroupService
-            .deleteOrganisationUnitGroup(organisationUnitGroupService.getOrganisationUnitGroup(id1));
+        organisationUnitGroupServiceExt
+            .deleteOrganisationUnitGroup(organisationUnitGroupServiceExt.getOrganisationUnitGroup(id1));
 
         // assert delOrganisationUnitGroup
-        assertNull(organisationUnitGroupService.getOrganisationUnitGroup(id1));
+        assertNull(organisationUnitGroupServiceExt.getOrganisationUnitGroup(id1));
     }
 
     @Test
@@ -733,42 +732,42 @@ public class OrganisationUnitServiceTest
         organisationUnitGroupSet1.setShortName("ougs1");
         organisationUnitGroupSet1.setCompulsory(true);
 
-        long id1 = organisationUnitGroupService.addOrganisationUnitGroup(organisationUnitGroup1);
-        long id2 = organisationUnitGroupService.addOrganisationUnitGroup(organisationUnitGroup2);
+        long id1 = organisationUnitGroupServiceExt.addOrganisationUnitGroup(organisationUnitGroup1);
+        long id2 = organisationUnitGroupServiceExt.addOrganisationUnitGroup(organisationUnitGroup2);
 
-        long setId1 = organisationUnitGroupService.addOrganisationUnitGroupSet(organisationUnitGroupSet1);
+        long setId1 = organisationUnitGroupServiceExt.addOrganisationUnitGroupSet(organisationUnitGroupSet1);
 
         organisationUnitGroup1.setGroupSets(Sets.newHashSet(organisationUnitGroupSet1));
         organisationUnitGroup2.setGroupSets(Sets.newHashSet(organisationUnitGroupSet1));
 
-        organisationUnitGroupService.updateOrganisationUnitGroup(organisationUnitGroup1);
-        organisationUnitGroupService.updateOrganisationUnitGroup(organisationUnitGroup2);
+        organisationUnitGroupServiceExt.updateOrganisationUnitGroup(organisationUnitGroup1);
+        organisationUnitGroupServiceExt.updateOrganisationUnitGroup(organisationUnitGroup2);
 
         organisationUnitGroupSet1.getOrganisationUnitGroups().add(organisationUnitGroup1);
         organisationUnitGroupSet1.getOrganisationUnitGroups().add(organisationUnitGroup2);
 
-        organisationUnitGroupService.updateOrganisationUnitGroupSet(organisationUnitGroupSet1);
+        organisationUnitGroupServiceExt.updateOrganisationUnitGroupSet(organisationUnitGroupSet1);
 
-        organisationUnitService.updatePaths();
+        organisationUnitServiceExt.updatePaths();
 
         // assert getOrganisationUnitGroup
-        assertNotNull(organisationUnitGroupService.getOrganisationUnitGroup(id1));
-        assertNotNull(organisationUnitGroupService.getOrganisationUnitGroup(id2));
+        assertNotNull(organisationUnitGroupServiceExt.getOrganisationUnitGroup(id1));
+        assertNotNull(organisationUnitGroupServiceExt.getOrganisationUnitGroup(id2));
 
-        assertEquals("OUGname", organisationUnitGroupService.getOrganisationUnitGroup(id1).getName());
-        assertEquals("OUGname2", organisationUnitGroupService.getOrganisationUnitGroup(id2).getName());
+        assertEquals("OUGname", organisationUnitGroupServiceExt.getOrganisationUnitGroup(id1).getName());
+        assertEquals("OUGname2", organisationUnitGroupServiceExt.getOrganisationUnitGroup(id2).getName());
 
-        organisationUnitGroupService
-            .deleteOrganisationUnitGroup(organisationUnitGroupService.getOrganisationUnitGroup(id1));
+        organisationUnitGroupServiceExt
+            .deleteOrganisationUnitGroup(organisationUnitGroupServiceExt.getOrganisationUnitGroup(id1));
 
-        organisationUnitService.updatePaths();
+        organisationUnitServiceExt.updatePaths();
 
         // assert delOrganisationUnitGroup
-        assertNull(organisationUnitGroupService.getOrganisationUnitGroup(id1));
-        assertNotNull(organisationUnitGroupService.getOrganisationUnitGroup(id2));
-        assertFalse(organisationUnitGroupService.getOrganisationUnitGroupSet(setId1).getOrganisationUnitGroups()
+        assertNull(organisationUnitGroupServiceExt.getOrganisationUnitGroup(id1));
+        assertNotNull(organisationUnitGroupServiceExt.getOrganisationUnitGroup(id2));
+        assertFalse(organisationUnitGroupServiceExt.getOrganisationUnitGroupSet(setId1).getOrganisationUnitGroups()
             .contains(organisationUnitGroup1));
-        assertTrue(organisationUnitGroupService.getOrganisationUnitGroupSet(setId1).getOrganisationUnitGroups()
+        assertTrue(organisationUnitGroupServiceExt.getOrganisationUnitGroupSet(setId1).getOrganisationUnitGroups()
             .contains(organisationUnitGroup2));
     }
 
@@ -782,18 +781,18 @@ public class OrganisationUnitServiceTest
         organisationUnitGroup.getMembers().add(organisationUnit1);
         organisationUnitGroup.getMembers().add(organisationUnit2);
 
-        organisationUnitService.addOrganisationUnit(organisationUnit1);
-        organisationUnitService.addOrganisationUnit(organisationUnit2);
+        organisationUnitServiceExt.addOrganisationUnit(organisationUnit1);
+        organisationUnitServiceExt.addOrganisationUnit(organisationUnit2);
 
-        long ougid = organisationUnitGroupService.addOrganisationUnitGroup(organisationUnitGroup);
+        long ougid = organisationUnitGroupServiceExt.addOrganisationUnitGroup(organisationUnitGroup);
 
-        assertTrue(organisationUnitGroupService.getOrganisationUnitGroup(ougid).getMembers().size() == 2);
+        assertTrue(organisationUnitGroupServiceExt.getOrganisationUnitGroup(ougid).getMembers().size() == 2);
 
         organisationUnitGroup.getMembers().remove(organisationUnit1);
 
-        organisationUnitGroupService.updateOrganisationUnitGroup(organisationUnitGroup);
+        organisationUnitGroupServiceExt.updateOrganisationUnitGroup(organisationUnitGroup);
 
-        assertTrue(organisationUnitGroupService.getOrganisationUnitGroup(ougid).getMembers().size() == 1);
+        assertTrue(organisationUnitGroupServiceExt.getOrganisationUnitGroup(ougid).getMembers().size() == 1);
     }
 
     @Test
@@ -812,10 +811,10 @@ public class OrganisationUnitServiceTest
         ArrayList<Long> groupIds = new ArrayList<>();
 
         for (OrganisationUnitGroup group : groups) {
-            groupIds.add(organisationUnitGroupService.addOrganisationUnitGroup(group));
+            groupIds.add(organisationUnitGroupServiceExt.addOrganisationUnitGroup(group));
         }
 
-        List<OrganisationUnitGroup> fetchedGroups = organisationUnitGroupService.getAllOrganisationUnitGroups();
+        List<OrganisationUnitGroup> fetchedGroups = organisationUnitGroupServiceExt.getAllOrganisationUnitGroups();
 
         ArrayList<Long> fetchedGroupIds = new ArrayList<>();
 
@@ -845,10 +844,10 @@ public class OrganisationUnitServiceTest
         OrganisationUnitGroup organisationUnitGroup4 = new OrganisationUnitGroup();
         organisationUnitGroup4.setName("oug4");
 
-        organisationUnitGroupService.addOrganisationUnitGroup(organisationUnitGroup1);
-        organisationUnitGroupService.addOrganisationUnitGroup(organisationUnitGroup2);
-        organisationUnitGroupService.addOrganisationUnitGroup(organisationUnitGroup3);
-        organisationUnitGroupService.addOrganisationUnitGroup(organisationUnitGroup4);
+        organisationUnitGroupServiceExt.addOrganisationUnitGroup(organisationUnitGroup1);
+        organisationUnitGroupServiceExt.addOrganisationUnitGroup(organisationUnitGroup2);
+        organisationUnitGroupServiceExt.addOrganisationUnitGroup(organisationUnitGroup3);
+        organisationUnitGroupServiceExt.addOrganisationUnitGroup(organisationUnitGroup4);
 
         OrganisationUnitGroupSet organisationUnitGroupSet1 = new OrganisationUnitGroupSet();
         organisationUnitGroupSet1.setName("ougs1");
@@ -858,23 +857,23 @@ public class OrganisationUnitServiceTest
         organisationUnitGroupSet1.getOrganisationUnitGroups().add(organisationUnitGroup2);
         organisationUnitGroupSet1.getOrganisationUnitGroups().add(organisationUnitGroup3);
 
-        long id1 = organisationUnitGroupService.addOrganisationUnitGroupSet(organisationUnitGroupSet1);
+        long id1 = organisationUnitGroupServiceExt.addOrganisationUnitGroupSet(organisationUnitGroupSet1);
 
         // assert add
-        assertNotNull(organisationUnitGroupService.getOrganisationUnitGroupSet(id1));
+        assertNotNull(organisationUnitGroupServiceExt.getOrganisationUnitGroupSet(id1));
 
-        assertEquals(organisationUnitGroupService.getOrganisationUnitGroupSet(id1).getName(), "ougs1");
+        assertEquals(organisationUnitGroupServiceExt.getOrganisationUnitGroupSet(id1).getName(), "ougs1");
 
         assertTrue(
-            organisationUnitGroupService.getOrganisationUnitGroupSet(id1).getOrganisationUnitGroups().size() == 3);
+            organisationUnitGroupServiceExt.getOrganisationUnitGroupSet(id1).getOrganisationUnitGroups().size() == 3);
 
         organisationUnitGroupSet1.getOrganisationUnitGroups().remove(organisationUnitGroup3);
 
-        organisationUnitGroupService.updateOrganisationUnitGroupSet(organisationUnitGroupSet1);
+        organisationUnitGroupServiceExt.updateOrganisationUnitGroupSet(organisationUnitGroupSet1);
 
         // assert update
         assertTrue(
-            organisationUnitGroupService.getOrganisationUnitGroupSet(id1).getOrganisationUnitGroups().size() == 2);
+            organisationUnitGroupServiceExt.getOrganisationUnitGroupSet(id1).getOrganisationUnitGroups().size() == 2);
 
         OrganisationUnitGroupSet organisationUnitGroupSet2 = new OrganisationUnitGroupSet();
         organisationUnitGroupSet2.setName("ougs2");
@@ -882,16 +881,16 @@ public class OrganisationUnitServiceTest
         organisationUnitGroupSet2.setCompulsory(true);
         organisationUnitGroupSet2.getOrganisationUnitGroups().add(organisationUnitGroup4);
 
-        long id2 = organisationUnitGroupService.addOrganisationUnitGroupSet(organisationUnitGroupSet2);
+        long id2 = organisationUnitGroupServiceExt.addOrganisationUnitGroupSet(organisationUnitGroupSet2);
 
         // assert getAllOrderedName
-        assertTrue(organisationUnitGroupService.getAllOrganisationUnitGroupSets().size() == 2);
+        assertTrue(organisationUnitGroupServiceExt.getAllOrganisationUnitGroupSets().size() == 2);
 
-        organisationUnitGroupService.deleteOrganisationUnitGroupSet(organisationUnitGroupSet1);
-        organisationUnitGroupService.deleteOrganisationUnitGroupSet(organisationUnitGroupSet2);
+        organisationUnitGroupServiceExt.deleteOrganisationUnitGroupSet(organisationUnitGroupSet1);
+        organisationUnitGroupServiceExt.deleteOrganisationUnitGroupSet(organisationUnitGroupSet2);
 
-        assertNull(organisationUnitGroupService.getOrganisationUnitGroupSet(id1));
-        assertNull(organisationUnitGroupService.getOrganisationUnitGroupSet(id2));
+        assertNull(organisationUnitGroupServiceExt.getOrganisationUnitGroupSet(id1));
+        assertNull(organisationUnitGroupServiceExt.getOrganisationUnitGroupSet(id2));
     }
 
     // -------------------------------------------------------------------------
@@ -903,11 +902,11 @@ public class OrganisationUnitServiceTest
         OrganisationUnitLevel levelA = new OrganisationUnitLevel(1, "National");
         OrganisationUnitLevel levelB = new OrganisationUnitLevel(2, "District");
 
-        long idA = organisationUnitService.addOrganisationUnitLevel(levelA);
-        long idB = organisationUnitService.addOrganisationUnitLevel(levelB);
+        long idA = organisationUnitServiceExt.addOrganisationUnitLevel(levelA);
+        long idB = organisationUnitServiceExt.addOrganisationUnitLevel(levelB);
 
-        assertEquals(levelA, organisationUnitService.getOrganisationUnitLevel(idA));
-        assertEquals(levelB, organisationUnitService.getOrganisationUnitLevel(idB));
+        assertEquals(levelA, organisationUnitServiceExt.getOrganisationUnitLevel(idA));
+        assertEquals(levelB, organisationUnitServiceExt.getOrganisationUnitLevel(idB));
     }
 
     @Test
@@ -916,9 +915,9 @@ public class OrganisationUnitServiceTest
         OrganisationUnitLevel level2 = new OrganisationUnitLevel(2, "District");
         OrganisationUnitLevel level4 = new OrganisationUnitLevel(4, "PHU");
 
-        organisationUnitService.addOrganisationUnitLevel(level1);
-        organisationUnitService.addOrganisationUnitLevel(level2);
-        organisationUnitService.addOrganisationUnitLevel(level4);
+        organisationUnitServiceExt.addOrganisationUnitLevel(level1);
+        organisationUnitServiceExt.addOrganisationUnitLevel(level2);
+        organisationUnitServiceExt.addOrganisationUnitLevel(level4);
 
         OrganisationUnit unitA = createOrganisationUnit('A');
         OrganisationUnit unitB = createOrganisationUnit('B', unitA);
@@ -929,12 +928,12 @@ public class OrganisationUnitServiceTest
         unitB.getChildren().add(unitC);
         unitC.getChildren().add(unitD);
 
-        organisationUnitService.addOrganisationUnit(unitA);
-        organisationUnitService.addOrganisationUnit(unitB);
-        organisationUnitService.addOrganisationUnit(unitC);
-        organisationUnitService.addOrganisationUnit(unitD);
+        organisationUnitServiceExt.addOrganisationUnit(unitA);
+        organisationUnitServiceExt.addOrganisationUnit(unitB);
+        organisationUnitServiceExt.addOrganisationUnit(unitC);
+        organisationUnitServiceExt.addOrganisationUnit(unitD);
 
-        Iterator<OrganisationUnitLevel> actual = organisationUnitService.getOrganisationUnitLevels().iterator();
+        Iterator<OrganisationUnitLevel> actual = organisationUnitServiceExt.getOrganisationUnitLevels().iterator();
 
         assertNotNull(actual);
         assertEquals(level1, actual.next());
@@ -951,21 +950,21 @@ public class OrganisationUnitServiceTest
         OrganisationUnitLevel levelA = new OrganisationUnitLevel(1, "National");
         OrganisationUnitLevel levelB = new OrganisationUnitLevel(2, "District");
 
-        long idA = organisationUnitService.addOrganisationUnitLevel(levelA);
-        long idB = organisationUnitService.addOrganisationUnitLevel(levelB);
+        long idA = organisationUnitServiceExt.addOrganisationUnitLevel(levelA);
+        long idB = organisationUnitServiceExt.addOrganisationUnitLevel(levelB);
 
-        assertNotNull(organisationUnitService.getOrganisationUnitLevel(idA));
-        assertNotNull(organisationUnitService.getOrganisationUnitLevel(idB));
+        assertNotNull(organisationUnitServiceExt.getOrganisationUnitLevel(idA));
+        assertNotNull(organisationUnitServiceExt.getOrganisationUnitLevel(idB));
 
-        organisationUnitService.deleteOrganisationUnitLevel(levelA);
+        organisationUnitServiceExt.deleteOrganisationUnitLevel(levelA);
 
-        assertNull(organisationUnitService.getOrganisationUnitLevel(idA));
-        assertNotNull(organisationUnitService.getOrganisationUnitLevel(idB));
+        assertNull(organisationUnitServiceExt.getOrganisationUnitLevel(idA));
+        assertNotNull(organisationUnitServiceExt.getOrganisationUnitLevel(idB));
 
-        organisationUnitService.deleteOrganisationUnitLevel(levelB);
+        organisationUnitServiceExt.deleteOrganisationUnitLevel(levelB);
 
-        assertNull(organisationUnitService.getOrganisationUnitLevel(idA));
-        assertNull(organisationUnitService.getOrganisationUnitLevel(idB));
+        assertNull(organisationUnitServiceExt.getOrganisationUnitLevel(idA));
+        assertNull(organisationUnitServiceExt.getOrganisationUnitLevel(idB));
     }
 
     @Test
@@ -973,15 +972,15 @@ public class OrganisationUnitServiceTest
         OrganisationUnitLevel levelA = new OrganisationUnitLevel(1, "National");
         OrganisationUnitLevel levelB = new OrganisationUnitLevel(2, "District");
 
-        organisationUnitService.addOrganisationUnitLevel(levelA);
-        organisationUnitService.addOrganisationUnitLevel(levelB);
+        organisationUnitServiceExt.addOrganisationUnitLevel(levelA);
+        organisationUnitServiceExt.addOrganisationUnitLevel(levelB);
 
-        assertEquals(new Integer(1), organisationUnitService.getOrganisationUnitLevelByLevelOrUid("1"));
+        assertEquals(new Integer(1), organisationUnitServiceExt.getOrganisationUnitLevelByLevelOrUid("1"));
         assertEquals(new Integer(1),
-            organisationUnitService.getOrganisationUnitLevelByLevelOrUid(levelA.getUid()));
-        assertEquals(new Integer(2), organisationUnitService.getOrganisationUnitLevelByLevelOrUid("2"));
+            organisationUnitServiceExt.getOrganisationUnitLevelByLevelOrUid(levelA.getUid()));
+        assertEquals(new Integer(2), organisationUnitServiceExt.getOrganisationUnitLevelByLevelOrUid("2"));
         assertEquals(new Integer(2),
-            organisationUnitService.getOrganisationUnitLevelByLevelOrUid(levelB.getUid()));
+            organisationUnitServiceExt.getOrganisationUnitLevelByLevelOrUid(levelB.getUid()));
     }
 
     @Test
@@ -1001,26 +1000,26 @@ public class OrganisationUnitServiceTest
         ouC.getChildren().add(ouF);
         ouC.getChildren().add(ouG);
 
-        organisationUnitService.addOrganisationUnit(ouA);
-        organisationUnitService.addOrganisationUnit(ouB);
-        organisationUnitService.addOrganisationUnit(ouC);
-        organisationUnitService.addOrganisationUnit(ouD);
-        organisationUnitService.addOrganisationUnit(ouE);
-        organisationUnitService.addOrganisationUnit(ouF);
-        organisationUnitService.addOrganisationUnit(ouG);
+        organisationUnitServiceExt.addOrganisationUnit(ouA);
+        organisationUnitServiceExt.addOrganisationUnit(ouB);
+        organisationUnitServiceExt.addOrganisationUnit(ouC);
+        organisationUnitServiceExt.addOrganisationUnit(ouD);
+        organisationUnitServiceExt.addOrganisationUnit(ouE);
+        organisationUnitServiceExt.addOrganisationUnit(ouF);
+        organisationUnitServiceExt.addOrganisationUnit(ouG);
 
         Person user = createUserCredentials('A', null);
         Set<OrganisationUnit> organisationUnits = Sets.newHashSet(ouB);
         user.setOrganisationUnits(organisationUnits);
 
-        assertTrue(organisationUnitService.isInUserHierarchy(ouB.getUid(), organisationUnits));
-        assertTrue(organisationUnitService.isInUserHierarchy(ouD.getUid(), organisationUnits));
-        assertTrue(organisationUnitService.isInUserHierarchy(ouE.getUid(), organisationUnits));
+        assertTrue(organisationUnitServiceExt.isInUserHierarchy(ouB.getUid(), organisationUnits));
+        assertTrue(organisationUnitServiceExt.isInUserHierarchy(ouD.getUid(), organisationUnits));
+        assertTrue(organisationUnitServiceExt.isInUserHierarchy(ouE.getUid(), organisationUnits));
 
-        assertFalse(organisationUnitService.isInUserHierarchy(ouA.getUid(), organisationUnits));
-        assertFalse(organisationUnitService.isInUserHierarchy(ouC.getUid(), organisationUnits));
-        assertFalse(organisationUnitService.isInUserHierarchy(ouF.getUid(), organisationUnits));
-        assertFalse(organisationUnitService.isInUserHierarchy(ouG.getUid(), organisationUnits));
+        assertFalse(organisationUnitServiceExt.isInUserHierarchy(ouA.getUid(), organisationUnits));
+        assertFalse(organisationUnitServiceExt.isInUserHierarchy(ouC.getUid(), organisationUnits));
+        assertFalse(organisationUnitServiceExt.isInUserHierarchy(ouF.getUid(), organisationUnits));
+        assertFalse(organisationUnitServiceExt.isInUserHierarchy(ouG.getUid(), organisationUnits));
     }
 
     @Test
@@ -1034,12 +1033,12 @@ public class OrganisationUnitServiceTest
         ouA.getChildren().add(ouC);
         ouB.getChildren().add(ouD);
 
-        organisationUnitService.addOrganisationUnit(ouA);
-        organisationUnitService.addOrganisationUnit(ouB);
-        organisationUnitService.addOrganisationUnit(ouC);
-        organisationUnitService.addOrganisationUnit(ouD);
+        organisationUnitServiceExt.addOrganisationUnit(ouA);
+        organisationUnitServiceExt.addOrganisationUnit(ouB);
+        organisationUnitServiceExt.addOrganisationUnit(ouC);
+        organisationUnitServiceExt.addOrganisationUnit(ouD);
 
-        organisationUnitService.updatePaths();
+        organisationUnitServiceExt.updatePaths();
 
         List<String> expected = IdentifiableObjectUtils.getUids(Arrays.asList(ouA, ouB, ouC));
 
@@ -1062,12 +1061,12 @@ public class OrganisationUnitServiceTest
         ouA.getChildren().add(ouC);
         ouB.getChildren().add(ouD);
 
-        organisationUnitService.addOrganisationUnit(ouA);
-        organisationUnitService.addOrganisationUnit(ouB);
-        organisationUnitService.addOrganisationUnit(ouC);
-        organisationUnitService.addOrganisationUnit(ouD);
+        organisationUnitServiceExt.addOrganisationUnit(ouA);
+        organisationUnitServiceExt.addOrganisationUnit(ouB);
+        organisationUnitServiceExt.addOrganisationUnit(ouC);
+        organisationUnitServiceExt.addOrganisationUnit(ouD);
 
-        organisationUnitService.updatePaths();
+        organisationUnitServiceExt.updatePaths();
 
         String expected = ouA.getUid() + "/" + ouB.getUid() + "/" + ouC.getUid();
 

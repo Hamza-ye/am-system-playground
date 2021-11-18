@@ -7,8 +7,8 @@ import org.nmcpye.activitiesmanagement.domain.person.Person;
 import java.util.Collection;
 import java.util.List;
 
-public interface PeopleGroupService {
-    String ID = PeopleGroupService.class.getName();
+public interface PeopleGroupServiceExt {
+    String ID = PeopleGroupServiceExt.class.getName();
 
     long addUserGroup(PeopleGroup peopleGroup);
 

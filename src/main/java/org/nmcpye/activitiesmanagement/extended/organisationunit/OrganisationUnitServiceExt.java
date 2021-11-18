@@ -12,8 +12,8 @@ import java.util.*;
  * Defines methods for working with OrganisationUnits.
  *
  */
-public interface OrganisationUnitService {
-    String ID = OrganisationUnitService.class.getName();
+public interface OrganisationUnitServiceExt {
+    String ID = OrganisationUnitServiceExt.class.getName();
 
     int MAX_LIMIT = 500;
 

@@ -1,7 +1,7 @@
 package org.nmcpye.activitiesmanagement.web.rest;
 
 import org.nmcpye.activitiesmanagement.domain.period.Period;
-import org.nmcpye.activitiesmanagement.extended.period.PeriodService;
+import org.nmcpye.activitiesmanagement.extended.period.PeriodServiceExt;
 import org.nmcpye.activitiesmanagement.extended.period.PeriodStore;
 import org.nmcpye.activitiesmanagement.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
@@ -34,12 +34,12 @@ public class PeriodResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final PeriodService periodService;
+    private final PeriodServiceExt periodServiceExt;
 
     private final PeriodStore periodStore;
 
-    public PeriodResource(PeriodService periodService, PeriodStore periodStore) {
-        this.periodService = periodService;
+    public PeriodResource(PeriodServiceExt periodServiceExt, PeriodStore periodStore) {
+        this.periodServiceExt = periodServiceExt;
         this.periodStore = periodStore;
     }
 
@@ -56,7 +56,7 @@ public class PeriodResource {
         if (period.getId() != null) {
             throw new BadRequestAlertException("A new period cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Period result = periodService.save(period);
+        Period result = periodServiceExt.save(period);
         return ResponseEntity
             .created(new URI("/api/periods/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
@@ -86,13 +86,13 @@ public class PeriodResource {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        Period period1 = periodService.getPeriod(id);
+        Period period1 = periodServiceExt.getPeriod(id);
 
         if (period1 == null) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Period result = periodService.save(period);
+        Period result = periodServiceExt.save(period);
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, period.getId().toString()))
@@ -123,13 +123,13 @@ public class PeriodResource {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        Period period1 = periodService.getPeriod(id);
+        Period period1 = periodServiceExt.getPeriod(id);
 
         if (period1 == null) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<Period> result = periodService.partialUpdate(period);
+        Optional<Period> result = periodServiceExt.partialUpdate(period);
 
         return ResponseUtil.wrapOrNotFound(
             result,
@@ -145,7 +145,7 @@ public class PeriodResource {
     @GetMapping("/periods")
     public List<Period> getAllPeriods() {
         log.debug("REST request to get all Periods");
-        return periodService.findAll();
+        return periodServiceExt.findAll();
     }
 
     /**
@@ -157,7 +157,7 @@ public class PeriodResource {
     @GetMapping("/periods/{id}")
     public ResponseEntity<Period> getPeriod(@PathVariable Long id) {
         log.debug("REST request to get Period : {}", id);
-        Optional<Period> period = periodService.findOne(id);
+        Optional<Period> period = periodServiceExt.findOne(id);
         return ResponseUtil.wrapOrNotFound(period);
     }
 
@@ -170,7 +170,7 @@ public class PeriodResource {
     @DeleteMapping("/periods/{id}")
     public ResponseEntity<Void> deletePeriod(@PathVariable Long id) {
         log.debug("REST request to delete Period : {}", id);
-        periodService.delete(id);
+        periodServiceExt.delete(id);
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))

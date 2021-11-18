@@ -10,8 +10,8 @@ import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
-import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitGroupService;
-import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitService;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitGroupServiceExt;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitServiceExt;
 import org.nmcpye.activitiesmanagement.extended.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,10 +29,10 @@ public class IdentifiableObjectManagerTest
     EntityManager entityManager;
 
     @Autowired
-    private OrganisationUnitService organisationUnitService;
+    private OrganisationUnitServiceExt organisationUnitServiceExt;
 
     @Autowired
-    private OrganisationUnitGroupService organisationUnitGroupService;
+    private OrganisationUnitGroupServiceExt organisationUnitGroupServiceExt;
 
     @Autowired
     private IdentifiableObjectManager identifiableObjectManager;
@@ -49,7 +49,7 @@ public class IdentifiableObjectManagerTest
     public void testGetObjectWithIdScheme() {
         OrganisationUnit unitA = createOrganisationUnit('A');
 
-        organisationUnitService.addOrganisationUnit(unitA);
+        organisationUnitServiceExt.addOrganisationUnit(unitA);
 
         assertEquals(unitA, identifiableObjectManager.getObject(OrganisationUnit.class, IdScheme.CODE, unitA.getCode()));
         assertEquals(unitA, identifiableObjectManager.getObject(OrganisationUnit.class, IdScheme.UID, unitA.getUid()));
@@ -60,17 +60,17 @@ public class IdentifiableObjectManagerTest
         OrganisationUnit unitA = createOrganisationUnit('A');
         OrganisationUnit unitB = createOrganisationUnit('B');
 
-        organisationUnitService.addOrganisationUnit(unitA);
+        organisationUnitServiceExt.addOrganisationUnit(unitA);
         long unitIdA = unitA.getId();
-        organisationUnitService.addOrganisationUnit(unitB);
+        organisationUnitServiceExt.addOrganisationUnit(unitB);
         long unitIdB = unitB.getId();
 
         OrganisationUnitGroup unitGroupA = createOrganisationUnitGroup('A');
         OrganisationUnitGroup unitGroupB = createOrganisationUnitGroup('B');
 
-        organisationUnitGroupService.addOrganisationUnitGroup(unitGroupA);
+        organisationUnitGroupServiceExt.addOrganisationUnitGroup(unitGroupA);
         long unitGroupIdA = unitGroupA.getId();
-        organisationUnitGroupService.addOrganisationUnitGroup(unitGroupB);
+        organisationUnitGroupServiceExt.addOrganisationUnitGroup(unitGroupB);
         long unitGroupIdB = unitGroupB.getId();
 
         assertEquals(unitA, identifiableObjectManager.getObject(unitIdA, OrganisationUnit.class.getSimpleName()));
@@ -86,8 +86,8 @@ public class IdentifiableObjectManagerTest
         OrganisationUnit unitB = createOrganisationUnit('B');
         ;
 
-        organisationUnitService.addOrganisationUnit(unitA);
-        organisationUnitService.addOrganisationUnit(unitB);
+        organisationUnitServiceExt.addOrganisationUnit(unitA);
+        organisationUnitServiceExt.addOrganisationUnit(unitB);
 
         Set<Class<? extends IdentifiableObject>> classes = ImmutableSet.<Class<? extends IdentifiableObject>>builder().
             add(Person.class).add(OrganisationUnit.class).add(OrganisationUnitGroup.class).build();
@@ -477,8 +477,8 @@ public class IdentifiableObjectManagerTest
         OrganisationUnit unitB = createOrganisationUnit('B');
         ;
 
-        organisationUnitService.addOrganisationUnit(unitA);
-        organisationUnitService.addOrganisationUnit(unitB);
+        organisationUnitServiceExt.addOrganisationUnit(unitA);
+        organisationUnitServiceExt.addOrganisationUnit(unitB);
 
         Map<String, OrganisationUnit> map = identifiableObjectManager.getIdMap(OrganisationUnit.class, IdScheme.CODE);
 

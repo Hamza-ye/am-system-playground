@@ -1,6 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.servicecoremodule.startup;
 
-import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitService;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitServiceExt;
 import org.nmcpye.activitiesmanagement.extended.systemmodule.system.startup.TransactionContextStartupRoutine;
 import org.springframework.stereotype.Component;
 
@@ -9,11 +9,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @Component
 public class ModelUpgrader extends TransactionContextStartupRoutine {
 
-    private final OrganisationUnitService organisationUnitService;
+    private final OrganisationUnitServiceExt organisationUnitServiceExt;
 
-    public ModelUpgrader(OrganisationUnitService organisationUnitService) {
-        checkNotNull(organisationUnitService);
-        this.organisationUnitService = organisationUnitService;
+    public ModelUpgrader(OrganisationUnitServiceExt organisationUnitServiceExt) {
+        checkNotNull(organisationUnitServiceExt);
+        this.organisationUnitServiceExt = organisationUnitServiceExt;
         this.setRunlevel(7);
         this.setSkipInTests(true);
     }
@@ -25,6 +25,6 @@ public class ModelUpgrader extends TransactionContextStartupRoutine {
     @Override
     public void executeInTransaction() {
 //        organisationUnitService.updatePaths();
-        organisationUnitService.forceUpdatePaths();
+        organisationUnitServiceExt.forceUpdatePaths();
     }
 }

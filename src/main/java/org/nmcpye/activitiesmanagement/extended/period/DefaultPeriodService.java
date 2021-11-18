@@ -17,7 +17,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectUtils.getIdentifiers;
 
 @Service("org.nmcpye.activitiesmanagement.extended.period.PeriodService")
-public class DefaultPeriodService implements PeriodService {
+public class DefaultPeriodService implements PeriodServiceExt {
 
     private final Logger log = LoggerFactory.getLogger(DefaultPeriodService.class);
 

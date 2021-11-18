@@ -11,7 +11,7 @@ import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.domain.person.PersonAuthorityGroup;
-import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitService;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitServiceExt;
 import org.nmcpye.activitiesmanagement.extended.user.UserService;
 import org.nmcpye.activitiesmanagement.repository.AuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +30,13 @@ public class PersonServiceTest extends AMTest {
     private UserService userService;
 
     @Autowired
-    private PersonServiceExtended personServiceExtended;
+    private PersonServiceExt personServiceExt;
 
     @Autowired
-    private PeopleGroupService peopleGroupService;
+    private PeopleGroupServiceExt peopleGroupServiceExt;
 
     @Autowired
-    private OrganisationUnitService organisationUnitService;
+    private OrganisationUnitServiceExt organisationUnitServiceExt;
 
     @Autowired
     AuthorityRepository authorityRepository;
@@ -59,13 +59,13 @@ public class PersonServiceTest extends AMTest {
         unitD = createOrganisationUnit('D', unitB);
         unitE = createOrganisationUnit('E');
 
-        organisationUnitService.addOrganisationUnit(unitA);
-        organisationUnitService.addOrganisationUnit(unitB);
-        organisationUnitService.addOrganisationUnit(unitC);
-        organisationUnitService.addOrganisationUnit(unitD);
-        organisationUnitService.addOrganisationUnit(unitE);
+        organisationUnitServiceExt.addOrganisationUnit(unitA);
+        organisationUnitServiceExt.addOrganisationUnit(unitB);
+        organisationUnitServiceExt.addOrganisationUnit(unitC);
+        organisationUnitServiceExt.addOrganisationUnit(unitD);
+        organisationUnitServiceExt.addOrganisationUnit(unitE);
 
-        organisationUnitService.forceUpdatePaths();
+        organisationUnitServiceExt.forceUpdatePaths();
 
         roleA = createUserAuthorityGroup('A');
         roleB = createUserAuthorityGroup('B');
@@ -95,9 +95,9 @@ public class PersonServiceTest extends AMTest {
         //        authorityRepository.save(authC);
         //        authorityRepository.save(authD);
 
-        personServiceExtended.addUserAuthorityGroup(roleA);
-        personServiceExtended.addUserAuthorityGroup(roleB);
-        personServiceExtended.addUserAuthorityGroup(roleC);
+        personServiceExt.addUserAuthorityGroup(roleA);
+        personServiceExt.addUserAuthorityGroup(roleB);
+        personServiceExt.addUserAuthorityGroup(roleC);
     }
 
     @Test
@@ -116,14 +116,14 @@ public class PersonServiceTest extends AMTest {
         personA.setOrganisationUnits(units);
         personB.setOrganisationUnits(units);
 
-        Long idA = personServiceExtended.addUser(personA);
-        Long idB = personServiceExtended.addUser(personB);
+        Long idA = personServiceExt.addUser(personA);
+        Long idB = personServiceExt.addUser(personB);
 
-        assertEquals(personA, personServiceExtended.getUser(idA));
-        assertEquals(personB, personServiceExtended.getUser(idB));
+        assertEquals(personA, personServiceExt.getUser(idA));
+        assertEquals(personB, personServiceExt.getUser(idB));
 
-        assertEquals(units, personServiceExtended.getUser(idA).getOrganisationUnits());
-        assertEquals(units, personServiceExtended.getUser(idB).getOrganisationUnits());
+        assertEquals(units, personServiceExt.getUser(idA).getOrganisationUnits());
+        assertEquals(units, personServiceExt.getUser(idB).getOrganisationUnits());
     }
 
     @Test
@@ -134,17 +134,17 @@ public class PersonServiceTest extends AMTest {
         Person personA = createUserCredentials('A', userA);
         Person personB = createUserCredentials('B', userB);
 
-        Long idA = personServiceExtended.addUser(personA);
-        Long idB = personServiceExtended.addUser(personB);
+        Long idA = personServiceExt.addUser(personA);
+        Long idB = personServiceExt.addUser(personB);
 
-        assertEquals(personA, personServiceExtended.getUser(idA));
-        assertEquals(personB, personServiceExtended.getUser(idB));
+        assertEquals(personA, personServiceExt.getUser(idA));
+        assertEquals(personB, personServiceExt.getUser(idB));
 
         personA.setLogin("UpdatedLoginA");
 
-        personServiceExtended.updateUser(personA);
+        personServiceExt.updateUser(personA);
 
-        assertEquals(personServiceExtended.getUser(idA).getLogin(), "UpdatedLoginA");
+        assertEquals(personServiceExt.getUser(idA).getLogin(), "UpdatedLoginA");
     }
 
     @Test
@@ -155,16 +155,16 @@ public class PersonServiceTest extends AMTest {
         Person personA = createUserCredentials('A', userA);
         Person personB = createUserCredentials('B', userB);
 
-        Long idA = personServiceExtended.addUser(personA);
-        Long idB = personServiceExtended.addUser(personB);
+        Long idA = personServiceExt.addUser(personA);
+        Long idB = personServiceExt.addUser(personB);
 
-        assertEquals(personA, personServiceExtended.getUser(idA));
-        assertEquals(personB, personServiceExtended.getUser(idB));
+        assertEquals(personA, personServiceExt.getUser(idA));
+        assertEquals(personB, personServiceExt.getUser(idB));
 
-        personServiceExtended.deleteUser(personA);
+        personServiceExt.deleteUser(personA);
 
-        assertNull(personServiceExtended.getUser(idA));
-        assertNotNull(personServiceExtended.getUser(idB));
+        assertNull(personServiceExt.getUser(idA));
+        assertNotNull(personServiceExt.getUser(idB));
     }
 
     @Test
@@ -189,21 +189,21 @@ public class PersonServiceTest extends AMTest {
         userService.addUser(userC);
         userService.addUser(userD);
 
-        personServiceExtended.addUser(personA);
-        personServiceExtended.addUser(personB);
-        personServiceExtended.addUser(personC);
-        personServiceExtended.addUser(personD);
+        personServiceExt.addUser(personA);
+        personServiceExt.addUser(personB);
+        personServiceExt.addUser(personC);
+        personServiceExt.addUser(personD);
 
         PersonQueryParams params = new PersonQueryParams().addOrganisationUnit(unitA).setPerson(personA);
 
-        List<Person> users = personServiceExtended.getUsers(params);
+        List<Person> users = personServiceExt.getUsers(params);
 
         assertEquals(1, users.size());
         assertTrue(users.contains(personA));
 
         params = new PersonQueryParams().addOrganisationUnit(unitA).setIncludeOrgUnitChildren(true).setPerson(personA);
 
-        users = personServiceExtended.getUsers(params);
+        users = personServiceExt.getUsers(params);
 
         assertEquals(2, users.size());
         assertTrue(users.contains(personA));
@@ -227,33 +227,33 @@ public class PersonServiceTest extends AMTest {
         userService.addUser(userC);
         userService.addUser(userD);
 
-        personServiceExtended.addUser(personA);
-        personServiceExtended.addUser(personB);
-        personServiceExtended.addUser(personC);
-        personServiceExtended.addUser(personD);
+        personServiceExt.addUser(personA);
+        personServiceExt.addUser(personB);
+        personServiceExt.addUser(personC);
+        personServiceExt.addUser(personD);
 
         PeopleGroup ugA = createUserGroup('A', Sets.newHashSet(personA, personB));
         PeopleGroup ugB = createUserGroup('B', Sets.newHashSet(personB, personC));
         PeopleGroup ugC = createUserGroup('C', Sets.newHashSet(personD));
 
-        peopleGroupService.addUserGroup(ugA);
-        peopleGroupService.addUserGroup(ugB);
-        peopleGroupService.addUserGroup(ugC);
+        peopleGroupServiceExt.addUserGroup(ugA);
+        peopleGroupServiceExt.addUserGroup(ugB);
+        peopleGroupServiceExt.addUserGroup(ugC);
 
-        List<Person> users = personServiceExtended.getUsers(new PersonQueryParams().setPeopleGroups(Sets.newHashSet(ugA)));
+        List<Person> users = personServiceExt.getUsers(new PersonQueryParams().setPeopleGroups(Sets.newHashSet(ugA)));
 
         assertEquals(2, users.size());
         assertTrue(users.contains(personA));
         assertTrue(users.contains(personB));
 
-        users = personServiceExtended.getUsers(new PersonQueryParams().setPeopleGroups(Sets.newHashSet(ugA, ugB)));
+        users = personServiceExt.getUsers(new PersonQueryParams().setPeopleGroups(Sets.newHashSet(ugA, ugB)));
 
         assertEquals(3, users.size());
         assertTrue(users.contains(personA));
         assertTrue(users.contains(personB));
         assertTrue(users.contains(personC));
 
-        users = personServiceExtended.getUsers(new PersonQueryParams().setPeopleGroups(Sets.newHashSet(ugA, ugC)));
+        users = personServiceExt.getUsers(new PersonQueryParams().setPeopleGroups(Sets.newHashSet(ugA, ugC)));
 
         assertEquals(3, users.size());
         assertTrue(users.contains(personA));
@@ -294,16 +294,16 @@ public class PersonServiceTest extends AMTest {
         userService.addUser(userD);
         userService.addUser(userE);
 
-        personServiceExtended.addUser(currentPerson);
-        personServiceExtended.addUser(credentialsA);
-        personServiceExtended.addUser(credentialsB);
-        personServiceExtended.addUser(credentialsC);
-        personServiceExtended.addUser(credentialsD);
-        personServiceExtended.addUser(credentialsE);
+        personServiceExt.addUser(currentPerson);
+        personServiceExt.addUser(credentialsA);
+        personServiceExt.addUser(credentialsB);
+        personServiceExt.addUser(credentialsC);
+        personServiceExt.addUser(credentialsD);
+        personServiceExt.addUser(credentialsE);
 
         PersonQueryParams params = new PersonQueryParams().setPerson(currentPerson).setUserOrgUnits(true);
 
-        List<Person> users = personServiceExtended.getUsers(params);
+        List<Person> users = personServiceExt.getUsers(params);
 
         assertEquals(3, users.size());
         assertTrue(users.contains(currentPerson));
@@ -312,7 +312,7 @@ public class PersonServiceTest extends AMTest {
 
         params = new PersonQueryParams().setPerson(currentPerson).setUserOrgUnits(true).setIncludeOrgUnitChildren(true);
 
-        users = personServiceExtended.getUsers(params);
+        users = personServiceExt.getUsers(params);
 
         assertEquals(5, users.size());
         assertTrue(users.contains(currentPerson));
@@ -341,10 +341,10 @@ public class PersonServiceTest extends AMTest {
         userService.addUser(userC);
         userService.addUser(userD);
 
-        personServiceExtended.addUser(personA);
-        personServiceExtended.addUser(personB);
-        personServiceExtended.addUser(personC);
-        personServiceExtended.addUser(personD);
+        personServiceExt.addUser(personA);
+        personServiceExt.addUser(personB);
+        personServiceExt.addUser(personC);
+        personServiceExt.addUser(personD);
 
         PeopleGroup userGroup1 = createUserGroup('A', Sets.newHashSet(personA, personB));
         PeopleGroup userGroup2 = createUserGroup('B', Sets.newHashSet(personC, personD));
@@ -357,13 +357,13 @@ public class PersonServiceTest extends AMTest {
         userGroup1.setManagedGroups(Sets.newHashSet(userGroup2));
         userGroup2.setManagedByGroups(Sets.newHashSet(userGroup1));
 
-        long group1 = peopleGroupService.addUserGroup(userGroup1);
-        long group2 = peopleGroupService.addUserGroup(userGroup2);
+        long group1 = peopleGroupServiceExt.addUserGroup(userGroup1);
+        long group2 = peopleGroupServiceExt.addUserGroup(userGroup2);
 
-        assertEquals(1, peopleGroupService.getUserGroup(group1).getManagedGroups().size());
-        assertTrue(peopleGroupService.getUserGroup(group1).getManagedGroups().contains(userGroup2));
-        assertEquals(1, peopleGroupService.getUserGroup(group2).getManagedByGroups().size());
-        assertTrue(peopleGroupService.getUserGroup(group2).getManagedByGroups().contains(userGroup1));
+        assertEquals(1, peopleGroupServiceExt.getUserGroup(group1).getManagedGroups().size());
+        assertTrue(peopleGroupServiceExt.getUserGroup(group1).getManagedGroups().contains(userGroup2));
+        assertEquals(1, peopleGroupServiceExt.getUserGroup(group2).getManagedByGroups().size());
+        assertTrue(peopleGroupServiceExt.getUserGroup(group2).getManagedByGroups().contains(userGroup1));
 
         assertTrue(personA.canManage(userGroup2));
         assertTrue(personB.canManage(userGroup2));
@@ -413,11 +413,11 @@ public class PersonServiceTest extends AMTest {
         userService.addUser(userB);
         userService.addUser(userC);
 
-        personServiceExtended.addUser(credentialsA);
-        personServiceExtended.addUser(credentialsB);
-        personServiceExtended.addUser(credentialsC);
+        personServiceExt.addUser(credentialsA);
+        personServiceExt.addUser(credentialsB);
+        personServiceExt.addUser(credentialsC);
 
-        List<Person> users = personServiceExtended.getUsersByPhoneNumber("23452134");
+        List<Person> users = personServiceExt.getUsersByPhoneNumber("23452134");
 
         assertEquals(1, users.size());
         assertEquals(credentialsB, users.get(0));
@@ -435,8 +435,8 @@ public class PersonServiceTest extends AMTest {
         userService.addUser(userA);
         userService.addUser(userB);
 
-        personServiceExtended.addUser(credentialsA);
-        personServiceExtended.addUser(credentialsB);
+        personServiceExt.addUser(credentialsA);
+        personServiceExt.addUser(credentialsB);
 
         assertEquals(userA, userService.getUserByUuid(credentialsA.getUuid()));
         assertEquals(userB, userService.getUserByUuid(credentialsB.getUuid()));
@@ -456,25 +456,25 @@ public class PersonServiceTest extends AMTest {
         userService.addUser(userB);
         userService.addUser(userC);
 
-        personServiceExtended.addUser(credentialsA);
-        personServiceExtended.addUser(credentialsB);
-        personServiceExtended.addUser(credentialsC);
+        personServiceExt.addUser(credentialsA);
+        personServiceExt.addUser(credentialsB);
+        personServiceExt.addUser(credentialsC);
 
         // Match
 
-        assertEquals(credentialsA, personServiceExtended.getUserByIdentifier(credentialsA.getUid()));
-        assertEquals(credentialsA, personServiceExtended.getUserByIdentifier(credentialsA.getUuid().toString()));
-        assertEquals(credentialsA, personServiceExtended.getUserByIdentifier(credentialsA.getUsername()));
+        assertEquals(credentialsA, personServiceExt.getUserByIdentifier(credentialsA.getUid()));
+        assertEquals(credentialsA, personServiceExt.getUserByIdentifier(credentialsA.getUuid().toString()));
+        assertEquals(credentialsA, personServiceExt.getUserByIdentifier(credentialsA.getUsername()));
 
-        assertEquals(credentialsB, personServiceExtended.getUserByIdentifier(credentialsB.getUid()));
-        assertEquals(credentialsB, personServiceExtended.getUserByIdentifier(credentialsB.getUuid().toString()));
-        assertEquals(credentialsB, personServiceExtended.getUserByIdentifier(credentialsB.getUsername()));
+        assertEquals(credentialsB, personServiceExt.getUserByIdentifier(credentialsB.getUid()));
+        assertEquals(credentialsB, personServiceExt.getUserByIdentifier(credentialsB.getUuid().toString()));
+        assertEquals(credentialsB, personServiceExt.getUserByIdentifier(credentialsB.getUsername()));
 
         // No match
 
-        assertNull(personServiceExtended.getUserByIdentifier("hYg6TgAfN71"));
-        assertNull(personServiceExtended.getUserByIdentifier("cac39761-3ef9-4774-8b1e-b96cedbc57a9"));
-        assertNull(personServiceExtended.getUserByIdentifier("johndoe"));
+        assertNull(personServiceExt.getUserByIdentifier("hYg6TgAfN71"));
+        assertNull(personServiceExt.getUserByIdentifier("cac39761-3ef9-4774-8b1e-b96cedbc57a9"));
+        assertNull(personServiceExt.getUserByIdentifier("johndoe"));
     }
 
     @Disabled("Ignore until implementing Queries with orders")
@@ -506,11 +506,11 @@ public class PersonServiceTest extends AMTest {
         userService.addUser(userB);
         userService.addUser(userC);
 
-        personServiceExtended.addUser(credentialsA);
-        personServiceExtended.addUser(credentialsB);
-        personServiceExtended.addUser(credentialsC);
+        personServiceExt.addUser(credentialsA);
+        personServiceExt.addUser(credentialsB);
+        personServiceExt.addUser(credentialsC);
 
-        List<Person> users = personServiceExtended.getUsers(
+        List<Person> users = personServiceExt.getUsers(
             new PersonQueryParams().addOrganisationUnit(unitA),
             Collections.singletonList("email:idesc")
         );
@@ -519,14 +519,14 @@ public class PersonServiceTest extends AMTest {
         assertEquals(credentialsB, users.get(1));
         assertEquals(credentialsC, users.get(2));
 
-        users = personServiceExtended.getUsers(new PersonQueryParams().addOrganisationUnit(unitA), null);
+        users = personServiceExt.getUsers(new PersonQueryParams().addOrganisationUnit(unitA), null);
         assertEquals(3, users.size());
         assertEquals(credentialsA, users.get(2));
         assertEquals(credentialsB, users.get(0));
         assertEquals(credentialsC, users.get(1));
 
         users =
-            personServiceExtended.getUsers(new PersonQueryParams().addOrganisationUnit(unitA), Collections.singletonList("firstName:asc"));
+            personServiceExt.getUsers(new PersonQueryParams().addOrganisationUnit(unitA), Collections.singletonList("firstName:asc"));
         assertEquals(3, users.size());
         assertEquals(credentialsA, users.get(0));
         assertEquals(credentialsB, users.get(2));
@@ -566,12 +566,12 @@ public class PersonServiceTest extends AMTest {
         userService.addUser(userE);
         userService.addUser(userF);
 
-        personServiceExtended.addUser(credentialsA);
-        personServiceExtended.addUser(credentialsB);
-        personServiceExtended.addUser(credentialsC);
-        personServiceExtended.addUser(credentialsD);
-        personServiceExtended.addUser(credentialsE);
-        personServiceExtended.addUser(credentialsF);
+        personServiceExt.addUser(credentialsA);
+        personServiceExt.addUser(credentialsB);
+        personServiceExt.addUser(credentialsC);
+        personServiceExt.addUser(credentialsD);
+        personServiceExt.addUser(credentialsE);
+        personServiceExt.addUser(credentialsF);
 
         PeopleGroup userGroup1 = createUserGroup('A', Sets.newHashSet(credentialsA, credentialsB));
         PeopleGroup userGroup2 = createUserGroup('B', Sets.newHashSet(credentialsC, credentialsD, credentialsE, credentialsF));
@@ -586,40 +586,40 @@ public class PersonServiceTest extends AMTest {
         userGroup1.setManagedGroups(Sets.newHashSet(userGroup2));
         userGroup2.setManagedByGroups(Sets.newHashSet(userGroup1));
 
-        peopleGroupService.addUserGroup(userGroup1);
-        peopleGroupService.addUserGroup(userGroup2);
+        peopleGroupServiceExt.addUserGroup(userGroup1);
+        peopleGroupServiceExt.addUserGroup(userGroup2);
 
         PersonQueryParams params = new PersonQueryParams();
         params.setCanManage(true);
         params.setAuthSubset(true);
         params.setPerson(credentialsA);
 
-        List<Person> users = personServiceExtended.getUsers(params);
+        List<Person> users = personServiceExt.getUsers(params);
 
         //        assertEquals(2, users.size());
         assertEquals(4, users.size());
         assertTrue(users.contains(credentialsD));
         assertTrue(users.contains(credentialsF));
 
-        //        assertEquals(2, personServiceExtended.getUserCount(params));
-        assertEquals(4, personServiceExtended.getUserCount(params));
+        //        assertEquals(2, personServiceExt.getUserCount(params));
+        assertEquals(4, personServiceExt.getUserCount(params));
 
         //        params.setPerson(credentialsB);
         params.setPerson(credentialsD);
 
-        users = personServiceExtended.getUsers(params);
+        users = personServiceExt.getUsers(params);
 
         assertEquals(0, users.size());
 
-        assertEquals(0, personServiceExtended.getUserCount(params));
+        assertEquals(0, personServiceExt.getUserCount(params));
 
         params.setPerson(credentialsC);
 
-        users = personServiceExtended.getUsers(params);
+        users = personServiceExt.getUsers(params);
 
         assertEquals(0, users.size());
 
-        assertEquals(0, personServiceExtended.getUserCount(params));
+        assertEquals(0, personServiceExt.getUserCount(params));
     }
 
     @Test
@@ -645,22 +645,22 @@ public class PersonServiceTest extends AMTest {
         userService.addUser(userE);
         userService.addUser(userF);
 
-        personServiceExtended.addUser(credentialsA);
-        personServiceExtended.addUser(credentialsB);
-        personServiceExtended.addUser(credentialsC);
-        personServiceExtended.addUser(credentialsD);
-        personServiceExtended.addUser(credentialsE);
-        personServiceExtended.addUser(credentialsF);
+        personServiceExt.addUser(credentialsA);
+        personServiceExt.addUser(credentialsB);
+        personServiceExt.addUser(credentialsC);
+        personServiceExt.addUser(credentialsD);
+        personServiceExt.addUser(credentialsE);
+        personServiceExt.addUser(credentialsF);
 
         PersonQueryParams params = new PersonQueryParams();
         params.setQuery("oginA");
 
-        List<Person> users = personServiceExtended.getUsers(params);
+        List<Person> users = personServiceExt.getUsers(params);
 
         assertEquals(1, users.size());
         assertTrue(users.contains(credentialsA));
 
-        assertEquals(1, personServiceExtended.getUserCount(params));
+        assertEquals(1, personServiceExt.getUserCount(params));
     }
 
     @Test
@@ -683,21 +683,21 @@ public class PersonServiceTest extends AMTest {
         userService.addUser(userC);
         userService.addUser(userD);
 
-        personServiceExtended.addUser(credentialsA);
-        personServiceExtended.addUser(credentialsB);
-        personServiceExtended.addUser(credentialsC);
-        personServiceExtended.addUser(credentialsD);
+        personServiceExt.addUser(credentialsA);
+        personServiceExt.addUser(credentialsB);
+        personServiceExt.addUser(credentialsC);
+        personServiceExt.addUser(credentialsD);
 
         PersonQueryParams params = new PersonQueryParams();
         params.setSelfRegistered(true);
 
-        List<Person> users = personServiceExtended.getUsers(params);
+        List<Person> users = personServiceExt.getUsers(params);
 
         assertEquals(2, users.size());
         assertTrue(users.contains(credentialsA));
         assertTrue(users.contains(credentialsC));
 
-        assertEquals(2, personServiceExtended.getUserCount(params));
+        assertEquals(2, personServiceExt.getUserCount(params));
     }
 
     @Test
@@ -723,20 +723,20 @@ public class PersonServiceTest extends AMTest {
         userService.addUser(userC);
         userService.addUser(userD);
 
-        personServiceExtended.addUser(credentialsA);
-        personServiceExtended.addUser(credentialsB);
-        personServiceExtended.addUser(credentialsC);
-        personServiceExtended.addUser(credentialsD);
+        personServiceExt.addUser(credentialsA);
+        personServiceExt.addUser(credentialsB);
+        personServiceExt.addUser(credentialsC);
+        personServiceExt.addUser(credentialsD);
 
         PersonQueryParams params = new PersonQueryParams();
         params.getOrganisationUnits().add(unitA);
 
-        List<Person> users = personServiceExtended.getUsers(params);
+        List<Person> users = personServiceExt.getUsers(params);
 
         assertEquals(2, users.size());
         assertTrue(users.contains(credentialsA));
         assertTrue(users.contains(credentialsC));
 
-        assertEquals(2, personServiceExtended.getUserCount(params));
+        assertEquals(2, personServiceExt.getUserCount(params));
     }
 }

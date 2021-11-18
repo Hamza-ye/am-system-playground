@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PeriodServiceTest extends AMTest {
 
     @Autowired
-    private PeriodService periodService;
+    private PeriodServiceExt periodServiceExt;
 
     // -------------------------------------------------------------------------
     // Period
@@ -29,7 +29,7 @@ class PeriodServiceTest extends AMTest {
     @Test
     public void testAddPeriod()
     {
-        List<PeriodType> periodTypes = periodService.getAllPeriodTypes();
+        List<PeriodType> periodTypes = periodServiceExt.getAllPeriodTypes();
         Iterator<PeriodType> it = periodTypes.iterator();
         PeriodType periodTypeA = it.next();
         PeriodType periodTypeB = it.next();
@@ -37,25 +37,25 @@ class PeriodServiceTest extends AMTest {
         Period periodA = new Period( periodTypeA, getDay( 1 ), getDay( 2 ) );
         Period periodB = new Period( periodTypeA, getDay( 2 ), getDay( 3 ) );
         Period periodC = new Period( periodTypeB, getDay( 2 ), getDay( 3 ) );
-        long idA = periodService.addPeriod( periodA );
-        long idB = periodService.addPeriod( periodB );
-        long idC = periodService.addPeriod( periodC );
+        long idA = periodServiceExt.addPeriod( periodA );
+        long idB = periodServiceExt.addPeriod( periodB );
+        long idC = periodServiceExt.addPeriod( periodC );
 
-        periodA = periodService.getPeriod( idA );
+        periodA = periodServiceExt.getPeriod( idA );
         assertNotNull( periodA );
         assertEquals( idA, periodA.getId() );
         assertEquals( periodTypeA, periodA.getPeriodType() );
         assertEquals( getDay( 1 ), periodA.getStartDate() );
         assertEquals( getDay( 2 ), periodA.getEndDate() );
 
-        periodB = periodService.getPeriod( idB );
+        periodB = periodServiceExt.getPeriod( idB );
         assertNotNull( periodB );
         assertEquals( idB, periodB.getId() );
         assertEquals( periodTypeA, periodB.getPeriodType() );
         assertEquals( getDay( 2 ), periodB.getStartDate() );
         assertEquals( getDay( 3 ), periodB.getEndDate() );
 
-        periodC = periodService.getPeriod( idC );
+        periodC = periodServiceExt.getPeriod( idC );
         assertNotNull( periodC );
         assertEquals( idC, periodC.getId() );
         assertEquals( periodTypeB, periodC.getPeriodType() );
@@ -66,7 +66,7 @@ class PeriodServiceTest extends AMTest {
     @Test
     public void testDeleteAndGetPeriod()
     {
-        List<PeriodType> periodTypes = periodService.getAllPeriodTypes();
+        List<PeriodType> periodTypes = periodServiceExt.getAllPeriodTypes();
         Iterator<PeriodType> it = periodTypes.iterator();
         PeriodType periodTypeA = it.next();
         PeriodType periodTypeB = it.next();
@@ -75,45 +75,45 @@ class PeriodServiceTest extends AMTest {
         Period periodB = new Period( periodTypeA, getDay( 2 ), getDay( 3 ) );
         Period periodC = new Period( periodTypeB, getDay( 2 ), getDay( 3 ) );
         Period periodD = new Period( periodTypeB, getDay( 3 ), getDay( 4 ) );
-        long idA = periodService.addPeriod( periodA );
-        long idB = periodService.addPeriod( periodB );
-        long idC = periodService.addPeriod( periodC );
-        long idD = periodService.addPeriod( periodD );
+        long idA = periodServiceExt.addPeriod( periodA );
+        long idB = periodServiceExt.addPeriod( periodB );
+        long idC = periodServiceExt.addPeriod( periodC );
+        long idD = periodServiceExt.addPeriod( periodD );
 
-        assertNotNull( periodService.getPeriod( idA ) );
-        assertNotNull( periodService.getPeriod( idB ) );
-        assertNotNull( periodService.getPeriod( idC ) );
-        assertNotNull( periodService.getPeriod( idD ) );
+        assertNotNull( periodServiceExt.getPeriod( idA ) );
+        assertNotNull( periodServiceExt.getPeriod( idB ) );
+        assertNotNull( periodServiceExt.getPeriod( idC ) );
+        assertNotNull( periodServiceExt.getPeriod( idD ) );
 
-        periodService.deletePeriod( periodA );
-        assertNull( periodService.getPeriod( idA ) );
-        assertNotNull( periodService.getPeriod( idB ) );
-        assertNotNull( periodService.getPeriod( idC ) );
-        assertNotNull( periodService.getPeriod( idD ) );
+        periodServiceExt.deletePeriod( periodA );
+        assertNull( periodServiceExt.getPeriod( idA ) );
+        assertNotNull( periodServiceExt.getPeriod( idB ) );
+        assertNotNull( periodServiceExt.getPeriod( idC ) );
+        assertNotNull( periodServiceExt.getPeriod( idD ) );
 
-        periodService.deletePeriod( periodB );
-        assertNull( periodService.getPeriod( idA ) );
-        assertNull( periodService.getPeriod( idB ) );
-        assertNotNull( periodService.getPeriod( idC ) );
-        assertNotNull( periodService.getPeriod( idD ) );
+        periodServiceExt.deletePeriod( periodB );
+        assertNull( periodServiceExt.getPeriod( idA ) );
+        assertNull( periodServiceExt.getPeriod( idB ) );
+        assertNotNull( periodServiceExt.getPeriod( idC ) );
+        assertNotNull( periodServiceExt.getPeriod( idD ) );
 
-        periodService.deletePeriod( periodC );
-        assertNull( periodService.getPeriod( idA ) );
-        assertNull( periodService.getPeriod( idB ) );
-        assertNull( periodService.getPeriod( idC ) );
-        assertNotNull( periodService.getPeriod( idD ) );
+        periodServiceExt.deletePeriod( periodC );
+        assertNull( periodServiceExt.getPeriod( idA ) );
+        assertNull( periodServiceExt.getPeriod( idB ) );
+        assertNull( periodServiceExt.getPeriod( idC ) );
+        assertNotNull( periodServiceExt.getPeriod( idD ) );
 
-        periodService.deletePeriod( periodD );
-        assertNull( periodService.getPeriod( idA ) );
-        assertNull( periodService.getPeriod( idB ) );
-        assertNull( periodService.getPeriod( idC ) );
-        assertNull( periodService.getPeriod( idD ) );
+        periodServiceExt.deletePeriod( periodD );
+        assertNull( periodServiceExt.getPeriod( idA ) );
+        assertNull( periodServiceExt.getPeriod( idB ) );
+        assertNull( periodServiceExt.getPeriod( idC ) );
+        assertNull( periodServiceExt.getPeriod( idD ) );
     }
 
     @Test
     public void testGetPeriod()
     {
-        List<PeriodType> periodTypes = periodService.getAllPeriodTypes();
+        List<PeriodType> periodTypes = periodServiceExt.getAllPeriodTypes();
         Iterator<PeriodType> it = periodTypes.iterator();
         PeriodType periodTypeA = it.next();
         PeriodType periodTypeB = it.next();
@@ -123,68 +123,68 @@ class PeriodServiceTest extends AMTest {
         Period periodC = new Period( periodTypeB, getDay( 2 ), getDay( 3 ) );
         Period periodD = new Period( periodTypeB, getDay( 3 ), getDay( 4 ) );
         Period periodE = new Period( periodTypeA, getDay( 3 ), getDay( 4 ) );
-        long idA = periodService.addPeriod( periodA );
-        long idB = periodService.addPeriod( periodB );
-        long idC = periodService.addPeriod( periodC );
-        long idD = periodService.addPeriod( periodD );
-        long idE = periodService.addPeriod( periodE );
+        long idA = periodServiceExt.addPeriod( periodA );
+        long idB = periodServiceExt.addPeriod( periodB );
+        long idC = periodServiceExt.addPeriod( periodC );
+        long idD = periodServiceExt.addPeriod( periodD );
+        long idE = periodServiceExt.addPeriod( periodE );
 
-        periodA = periodService.getPeriod( getDay( 1 ), getDay( 2 ), periodTypeA );
+        periodA = periodServiceExt.getPeriod( getDay( 1 ), getDay( 2 ), periodTypeA );
         assertNotNull( periodA );
         assertEquals( idA, periodA.getId() );
         assertEquals( periodTypeA, periodA.getPeriodType() );
         assertEquals( getDay( 1 ), periodA.getStartDate() );
         assertEquals( getDay( 2 ), periodA.getEndDate() );
 
-        periodB = periodService.getPeriod( getDay( 2 ), getDay( 3 ), periodTypeA );
+        periodB = periodServiceExt.getPeriod( getDay( 2 ), getDay( 3 ), periodTypeA );
         assertNotNull( periodB );
         assertEquals( idB, periodB.getId() );
         assertEquals( periodTypeA, periodB.getPeriodType() );
         assertEquals( getDay( 2 ), periodB.getStartDate() );
         assertEquals( getDay( 3 ), periodB.getEndDate() );
 
-        periodC = periodService.getPeriod( getDay( 2 ), getDay( 3 ), periodTypeB );
+        periodC = periodServiceExt.getPeriod( getDay( 2 ), getDay( 3 ), periodTypeB );
         assertNotNull( periodC );
         assertEquals( idC, periodC.getId() );
         assertEquals( periodTypeB, periodC.getPeriodType() );
         assertEquals( getDay( 2 ), periodC.getStartDate() );
         assertEquals( getDay( 3 ), periodC.getEndDate() );
 
-        periodD = periodService.getPeriod( getDay( 3 ), getDay( 4 ), periodTypeB );
+        periodD = periodServiceExt.getPeriod( getDay( 3 ), getDay( 4 ), periodTypeB );
         assertNotNull( periodD );
         assertEquals( idD, periodD.getId() );
         assertEquals( periodTypeB, periodD.getPeriodType() );
         assertEquals( getDay( 3 ), periodD.getStartDate() );
         assertEquals( getDay( 4 ), periodD.getEndDate() );
 
-        periodE = periodService.getPeriod( getDay( 3 ), getDay( 4 ), periodTypeA );
+        periodE = periodServiceExt.getPeriod( getDay( 3 ), getDay( 4 ), periodTypeA );
         assertNotNull( periodE );
         assertEquals( idE, periodE.getId() );
         assertEquals( periodTypeA, periodE.getPeriodType() );
         assertEquals( getDay( 3 ), periodE.getStartDate() );
         assertEquals( getDay( 4 ), periodE.getEndDate() );
 
-        assertNull( periodService.getPeriod( getDay( 1 ), getDay( 2 ), periodTypeB ) );
-        assertNull( periodService.getPeriod( getDay( 4 ), getDay( 5 ), periodTypeA ) );
-        assertNull( periodService.getPeriod( getDay( 1 ), getDay( 5 ), periodTypeB ) );
-        assertNull( periodService.getPeriod( getDay( 4 ), getDay( 3 ), periodTypeB ) );
-        assertNull( periodService.getPeriod( getDay( 5 ), getDay( 6 ), periodTypeA ) );
+        assertNull( periodServiceExt.getPeriod( getDay( 1 ), getDay( 2 ), periodTypeB ) );
+        assertNull( periodServiceExt.getPeriod( getDay( 4 ), getDay( 5 ), periodTypeA ) );
+        assertNull( periodServiceExt.getPeriod( getDay( 1 ), getDay( 5 ), periodTypeB ) );
+        assertNull( periodServiceExt.getPeriod( getDay( 4 ), getDay( 3 ), periodTypeB ) );
+        assertNull( periodServiceExt.getPeriod( getDay( 5 ), getDay( 6 ), periodTypeA ) );
     }
 
     @Test
     public void testGetAllPeriods()
     {
-        PeriodType periodType = periodService.getAllPeriodTypes().iterator().next();
+        PeriodType periodType = periodServiceExt.getAllPeriodTypes().iterator().next();
 
         Period periodA = new Period( periodType, getDay( 1 ), getDay( 2 ) );
         Period periodB = new Period( periodType, getDay( 2 ), getDay( 3 ) );
         Period periodC = new Period( periodType, getDay( 3 ), getDay( 4 ) );
 
-        periodService.addPeriod( periodA );
-        periodService.addPeriod( periodB );
-        periodService.addPeriod( periodC );
+        periodServiceExt.addPeriod( periodA );
+        periodServiceExt.addPeriod( periodB );
+        periodServiceExt.addPeriod( periodC );
 
-        List<Period> periods = periodService.getAllPeriods();
+        List<Period> periods = periodServiceExt.getAllPeriods();
 
         assertNotNull( periods );
         assertEquals( 3, periods.size() );
@@ -196,7 +196,7 @@ class PeriodServiceTest extends AMTest {
     @Test
     public void testGetPeriodsBetweenDates()
     {
-        List<PeriodType> periodTypes = periodService.getAllPeriodTypes();
+        List<PeriodType> periodTypes = periodServiceExt.getAllPeriodTypes();
         Iterator<PeriodType> it = periodTypes.iterator();
         PeriodType periodTypeA = it.next();
         PeriodType periodTypeB = it.next();
@@ -205,28 +205,28 @@ class PeriodServiceTest extends AMTest {
         Period periodB = new Period( periodTypeA, getDay( 2 ), getDay( 3 ) );
         Period periodC = new Period( periodTypeB, getDay( 2 ), getDay( 3 ) );
         Period periodD = new Period( periodTypeB, getDay( 3 ), getDay( 4 ) );
-        periodService.addPeriod( periodA );
-        periodService.addPeriod( periodB );
-        periodService.addPeriod( periodC );
-        periodService.addPeriod( periodD );
+        periodServiceExt.addPeriod( periodA );
+        periodServiceExt.addPeriod( periodB );
+        periodServiceExt.addPeriod( periodC );
+        periodServiceExt.addPeriod( periodD );
 
-        List<Period> periods = periodService.getPeriodsBetweenDates( getDay( 1 ), getDay( 1 ) );
+        List<Period> periods = periodServiceExt.getPeriodsBetweenDates( getDay( 1 ), getDay( 1 ) );
         assertNotNull( periods );
         assertEquals( 0, periods.size() );
 
-        periods = periodService.getPeriodsBetweenDates( getDay( 1 ), getDay( 2 ) );
+        periods = periodServiceExt.getPeriodsBetweenDates( getDay( 1 ), getDay( 2 ) );
         assertNotNull( periods );
         assertEquals( 1, periods.size() );
         assertEquals( periodA, periods.iterator().next() );
 
-        periods = periodService.getPeriodsBetweenDates( getDay( 2 ), getDay( 4 ) );
+        periods = periodServiceExt.getPeriodsBetweenDates( getDay( 2 ), getDay( 4 ) );
         assertNotNull( periods );
         assertEquals( 3, periods.size() );
         assertTrue( periods.contains( periodB ) );
         assertTrue( periods.contains( periodC ) );
         assertTrue( periods.contains( periodD ) );
 
-        periods = periodService.getPeriodsBetweenDates( getDay( 1 ), getDay( 5 ) );
+        periods = periodServiceExt.getPeriodsBetweenDates( getDay( 1 ), getDay( 5 ) );
         assertNotNull( periods );
         assertEquals( 4, periods.size() );
         assertTrue( periods.contains( periodA ) );
@@ -247,8 +247,8 @@ class PeriodServiceTest extends AMTest {
 
         Period periodA = new Period( ypt, jan2006, dec2006 );
         Period periodB = new Period( ypt, jan2007, dec2007 );
-        periodService.addPeriod( periodA );
-        periodService.addPeriod( periodB );
+        periodServiceExt.addPeriod( periodA );
+        periodServiceExt.addPeriod( periodB );
 
         PeriodType mpt = PeriodType.getPeriodTypeByName( MonthlyPeriodType.NAME );
 
@@ -290,25 +290,25 @@ class PeriodServiceTest extends AMTest {
         Period periodM = new Period( mpt, novstart, novend );
         Period periodN = new Period( mpt, decstart, decend );
 
-        periodService.addPeriod( periodC );
-        periodService.addPeriod( periodD );
-        periodService.addPeriod( periodE );
-        periodService.addPeriod( periodF );
-        periodService.addPeriod( periodG );
-        periodService.addPeriod( periodH );
-        periodService.addPeriod( periodI );
-        periodService.addPeriod( periodJ );
-        periodService.addPeriod( periodK );
-        periodService.addPeriod( periodL );
-        periodService.addPeriod( periodM );
-        periodService.addPeriod( periodN );
+        periodServiceExt.addPeriod( periodC );
+        periodServiceExt.addPeriod( periodD );
+        periodServiceExt.addPeriod( periodE );
+        periodServiceExt.addPeriod( periodF );
+        periodServiceExt.addPeriod( periodG );
+        periodServiceExt.addPeriod( periodH );
+        periodServiceExt.addPeriod( periodI );
+        periodServiceExt.addPeriod( periodJ );
+        periodServiceExt.addPeriod( periodK );
+        periodServiceExt.addPeriod( periodL );
+        periodServiceExt.addPeriod( periodM );
+        periodServiceExt.addPeriod( periodN );
 
-        List<Period> periodsA = periodService.getIntersectingPeriodsByPeriodType( ypt, getDate( 2006, 6, 1 ),
+        List<Period> periodsA = periodServiceExt.getIntersectingPeriodsByPeriodType( ypt, getDate( 2006, 6, 1 ),
             getDate( 2006, 11, 30 ) );
         assertNotNull( periodsA );
         assertEquals( 1, periodsA.size() );
 
-        List<Period> periodsB = periodService.getIntersectingPeriodsByPeriodType( mpt, getDate( 2006, 6, 1 ),
+        List<Period> periodsB = periodServiceExt.getIntersectingPeriodsByPeriodType( mpt, getDate( 2006, 6, 1 ),
             getDate( 2006, 11, 30 ) );
         assertNotNull( periodsB );
         assertEquals( 6, periodsB.size() );
@@ -317,7 +317,7 @@ class PeriodServiceTest extends AMTest {
     @Test
     public void testGetIntersectingPeriods()
     {
-        PeriodType type = periodService.getAllPeriodTypes().iterator().next();
+        PeriodType type = periodServiceExt.getAllPeriodTypes().iterator().next();
 
         Period periodA = new Period( type, getDay( 1 ), getDay( 2 ) );
         Period periodB = new Period( type, getDay( 2 ), getDay( 4 ) );
@@ -330,18 +330,18 @@ class PeriodServiceTest extends AMTest {
         Period periodI = new Period( type, getDay( 8 ), getDay( 12 ) );
         Period periodJ = new Period( type, getDay( 2 ), getDay( 12 ) );
 
-        periodService.addPeriod( periodA );
-        periodService.addPeriod( periodB );
-        periodService.addPeriod( periodC );
-        periodService.addPeriod( periodD );
-        periodService.addPeriod( periodE );
-        periodService.addPeriod( periodF );
-        periodService.addPeriod( periodG );
-        periodService.addPeriod( periodH );
-        periodService.addPeriod( periodI );
-        periodService.addPeriod( periodJ );
+        periodServiceExt.addPeriod( periodA );
+        periodServiceExt.addPeriod( periodB );
+        periodServiceExt.addPeriod( periodC );
+        periodServiceExt.addPeriod( periodD );
+        periodServiceExt.addPeriod( periodE );
+        periodServiceExt.addPeriod( periodF );
+        periodServiceExt.addPeriod( periodG );
+        periodServiceExt.addPeriod( periodH );
+        periodServiceExt.addPeriod( periodI );
+        periodServiceExt.addPeriod( periodJ );
 
-        List<Period> periods = periodService.getIntersectingPeriods( getDay( 4 ), getDay( 10 ) );
+        List<Period> periods = periodServiceExt.getIntersectingPeriods( getDay( 4 ), getDay( 10 ) );
 
         assertEquals( periods.size(), 8 );
 
@@ -358,7 +358,7 @@ class PeriodServiceTest extends AMTest {
     @Test
     public void testGetPeriodsByPeriodType()
     {
-        List<PeriodType> periodTypes = periodService.getAllPeriodTypes();
+        List<PeriodType> periodTypes = periodServiceExt.getAllPeriodTypes();
         Iterator<PeriodType> it = periodTypes.iterator();
         PeriodType periodTypeA = it.next();
         PeriodType periodTypeB = it.next();
@@ -368,27 +368,27 @@ class PeriodServiceTest extends AMTest {
         Period periodB = new Period( periodTypeA, getDay( 2 ), getDay( 3 ) );
         Period periodC = new Period( periodTypeA, getDay( 3 ), getDay( 4 ) );
         Period periodD = new Period( periodTypeB, getDay( 3 ), getDay( 4 ) );
-        periodService.addPeriod( periodA );
-        periodService.addPeriod( periodB );
-        periodService.addPeriod( periodC );
-        periodService.addPeriod( periodD );
+        periodServiceExt.addPeriod( periodA );
+        periodServiceExt.addPeriod( periodB );
+        periodServiceExt.addPeriod( periodC );
+        periodServiceExt.addPeriod( periodD );
 
         List<Period> periodsARef = new ArrayList<>();
         periodsARef.add( periodA );
         periodsARef.add( periodB );
         periodsARef.add( periodC );
 
-        List<Period> periodsA = periodService.getPeriodsByPeriodType( periodTypeA );
+        List<Period> periodsA = periodServiceExt.getPeriodsByPeriodType( periodTypeA );
         assertNotNull( periodsA );
         assertEquals( periodsARef.size(), periodsA.size() );
         assertTrue( periodsA.containsAll( periodsARef ) );
 
-        List<Period> periodsB = periodService.getPeriodsByPeriodType( periodTypeB );
+        List<Period> periodsB = periodServiceExt.getPeriodsByPeriodType( periodTypeB );
         assertNotNull( periodsB );
         assertEquals( 1, periodsB.size() );
         assertEquals( periodD, periodsB.iterator().next() );
 
-        List<Period> periodsC = periodService.getPeriodsByPeriodType( periodTypeC );
+        List<Period> periodsC = periodServiceExt.getPeriodsByPeriodType( periodTypeC );
         assertNotNull( periodsC );
         assertEquals( 0, periodsC.size() );
     }
@@ -396,7 +396,7 @@ class PeriodServiceTest extends AMTest {
     @Test
     public void testGetBoundaryPeriods()
     {
-        PeriodType periodType = periodService.getAllPeriodTypes().iterator().next();
+        PeriodType periodType = periodServiceExt.getAllPeriodTypes().iterator().next();
 
         Period periodA = new Period( periodType, getDay( 5 ), getDay( 8 ) );
         Period periodB = new Period( periodType, getDay( 8 ), getDay( 11 ) );
@@ -416,7 +416,7 @@ class PeriodServiceTest extends AMTest {
 
         Period basePeriod = new Period( periodType, getDay( 9 ), getDay( 15 ) );
 
-        List<Period> boundaryPeriods = periodService.getBoundaryPeriods( basePeriod, periods );
+        List<Period> boundaryPeriods = periodServiceExt.getBoundaryPeriods( basePeriod, periods );
 
         assertTrue( boundaryPeriods.size() == 3 );
         assertTrue( boundaryPeriods.contains( periodB ) );
@@ -425,14 +425,14 @@ class PeriodServiceTest extends AMTest {
 
         basePeriod = new Period( periodType, getDay( 11 ), getDay( 14 ) );
 
-        boundaryPeriods = periodService.getBoundaryPeriods( basePeriod, periods );
+        boundaryPeriods = periodServiceExt.getBoundaryPeriods( basePeriod, periods );
 
         assertTrue( boundaryPeriods.size() == 1 );
         assertTrue( boundaryPeriods.contains( periodF ) );
 
         basePeriod = new Period( periodType, getDay( 2 ), getDay( 5 ) );
 
-        boundaryPeriods = periodService.getBoundaryPeriods( basePeriod, periods );
+        boundaryPeriods = periodServiceExt.getBoundaryPeriods( basePeriod, periods );
 
         assertTrue( boundaryPeriods.size() == 0 );
     }
@@ -440,7 +440,7 @@ class PeriodServiceTest extends AMTest {
     @Test
     public void testGetInclusivePeriods()
     {
-        PeriodType periodType = periodService.getAllPeriodTypes().iterator().next();
+        PeriodType periodType = periodServiceExt.getAllPeriodTypes().iterator().next();
 
         Period periodA = new Period( periodType, getDay( 5 ), getDay( 8 ) );
         Period periodB = new Period( periodType, getDay( 8 ), getDay( 11 ) );
@@ -460,7 +460,7 @@ class PeriodServiceTest extends AMTest {
 
         Period basePeriod = new Period( periodType, getDay( 8 ), getDay( 20 ) );
 
-        List<Period> inclusivePeriods = periodService.getInclusivePeriods( basePeriod, periods );
+        List<Period> inclusivePeriods = periodServiceExt.getInclusivePeriods( basePeriod, periods );
 
         assertTrue( inclusivePeriods.size() == 4 );
         assertTrue( inclusivePeriods.contains( periodB ) );
@@ -470,7 +470,7 @@ class PeriodServiceTest extends AMTest {
 
         basePeriod = new Period( periodType, getDay( 9 ), getDay( 18 ) );
 
-        inclusivePeriods = periodService.getInclusivePeriods( basePeriod, periods );
+        inclusivePeriods = periodServiceExt.getInclusivePeriods( basePeriod, periods );
 
         assertTrue( inclusivePeriods.size() == 2 );
         assertTrue( inclusivePeriods.contains( periodC ) );
@@ -478,7 +478,7 @@ class PeriodServiceTest extends AMTest {
 
         basePeriod = new Period( periodType, getDay( 2 ), getDay( 5 ) );
 
-        inclusivePeriods = periodService.getInclusivePeriods( basePeriod, periods );
+        inclusivePeriods = periodServiceExt.getInclusivePeriods( basePeriod, periods );
 
         assertTrue( inclusivePeriods.size() == 0 );
     }
@@ -490,32 +490,32 @@ class PeriodServiceTest extends AMTest {
     @Test
     public void testGetAndGetAllPeriodTypes()
     {
-        List<PeriodType> periodTypes = periodService.getAllPeriodTypes();
+        List<PeriodType> periodTypes = periodServiceExt.getAllPeriodTypes();
         Iterator<PeriodType> it = periodTypes.iterator();
         PeriodType periodTypeA = it.next();
         PeriodType periodTypeB = it.next();
         PeriodType periodTypeC = it.next();
         PeriodType periodTypeD = it.next();
 
-        assertNotNull( periodService.getPeriodTypeByName( periodTypeA.getName() ) );
-        assertNotNull( periodService.getPeriodTypeByName( periodTypeB.getName() ) );
-        assertNotNull( periodService.getPeriodTypeByName( periodTypeC.getName() ) );
-        assertNotNull( periodService.getPeriodTypeByName( periodTypeD.getName() ) );
+        assertNotNull( periodServiceExt.getPeriodTypeByName( periodTypeA.getName() ) );
+        assertNotNull( periodServiceExt.getPeriodTypeByName( periodTypeB.getName() ) );
+        assertNotNull( periodServiceExt.getPeriodTypeByName( periodTypeC.getName() ) );
+        assertNotNull( periodServiceExt.getPeriodTypeByName( periodTypeD.getName() ) );
     }
 
     @Test
     public void testGetPeriodTypeByName()
     {
-        List<PeriodType> periodTypes = periodService.getAllPeriodTypes();
+        List<PeriodType> periodTypes = periodServiceExt.getAllPeriodTypes();
         Iterator<PeriodType> it = periodTypes.iterator();
         PeriodType refA = it.next();
         PeriodType refB = it.next();
 
-        PeriodType periodTypeA = periodService.getPeriodTypeByName( refA.getName() );
+        PeriodType periodTypeA = periodServiceExt.getPeriodTypeByName( refA.getName() );
         assertNotNull( periodTypeA );
         assertEquals( refA.getName(), periodTypeA.getName() );
 
-        PeriodType periodTypeB = periodService.getPeriodTypeByName( refB.getName() );
+        PeriodType periodTypeB = periodServiceExt.getPeriodTypeByName( refB.getName() );
         assertNotNull( periodTypeB );
         assertEquals( refB.getName(), periodTypeB.getName() );
     }
@@ -523,7 +523,7 @@ class PeriodServiceTest extends AMTest {
     @Test
     public void testDeleteAndGetPeriodType()
     {
-        List<PeriodType> periodTypes = periodService.getAllPeriodTypes();
+        List<PeriodType> periodTypes = periodServiceExt.getAllPeriodTypes();
         Iterator<PeriodType> it = periodTypes.iterator();
         PeriodType periodTypeA = it.next();
         PeriodType periodTypeB = it.next();
@@ -537,19 +537,19 @@ class PeriodServiceTest extends AMTest {
 
         Integer intD = periodTypeD.getId();
 
-        PeriodType idA1 = periodService.getPeriodType( idA );
-        PeriodType idB1 = periodService.getPeriodType( idB );
-        PeriodType idC1 = periodService.getPeriodType( intD );
-        PeriodType idD1 = periodService.getPeriodType( periodTypeD.getId() );
+        PeriodType idA1 = periodServiceExt.getPeriodType( idA );
+        PeriodType idB1 = periodServiceExt.getPeriodType( idB );
+        PeriodType idC1 = periodServiceExt.getPeriodType( intD );
+        PeriodType idD1 = periodServiceExt.getPeriodType( periodTypeD.getId() );
 
-        assertNotNull( periodService.getPeriodType( idA ) );
-        assertNotNull( periodService.getPeriodType( idB ) );
-        assertNotNull( periodService.getPeriodType( idC ) );
-        assertNotNull( periodService.getPeriodType( idD ) );
+        assertNotNull( periodServiceExt.getPeriodType( idA ) );
+        assertNotNull( periodServiceExt.getPeriodType( idB ) );
+        assertNotNull( periodServiceExt.getPeriodType( idC ) );
+        assertNotNull( periodServiceExt.getPeriodType( idD ) );
 
-        assertNotNull( periodService.getPeriodType( periodTypeA.getId() ) );
-        assertNotNull( periodService.getPeriodType( periodTypeB.getId() ) );
-        assertNotNull( periodService.getPeriodType( periodTypeC.getId() ) );
-        assertNotNull( periodService.getPeriodType( periodTypeD.getId() ) );
+        assertNotNull( periodServiceExt.getPeriodType( periodTypeA.getId() ) );
+        assertNotNull( periodServiceExt.getPeriodType( periodTypeB.getId() ) );
+        assertNotNull( periodServiceExt.getPeriodType( periodTypeC.getId() ) );
+        assertNotNull( periodServiceExt.getPeriodType( periodTypeD.getId() ) );
     }
 }

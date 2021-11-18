@@ -14,7 +14,7 @@ import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.domain.person.PersonAuthorityGroup;
 import org.nmcpye.activitiesmanagement.extended.common.CodeGenerator;
-import org.nmcpye.activitiesmanagement.extended.person.PersonServiceExtended;
+import org.nmcpye.activitiesmanagement.extended.person.PersonServiceExt;
 import org.nmcpye.activitiesmanagement.extended.user.UserService;
 import org.nmcpye.activitiesmanagement.security.AuthoritiesConstants;
 import org.slf4j.Logger;
@@ -50,7 +50,7 @@ public abstract class AMConvenienceTest {
 
     protected UserService userService;
 
-    protected PersonServiceExtended personServiceExtended;
+    protected PersonServiceExt personServiceExt;
 
     private static Date date;
 
@@ -322,7 +322,7 @@ public abstract class AMConvenienceTest {
         userAuthorityGroup.setDescription(username);
         userAuthorityGroup.setAuthoritiesString(Sets.newHashSet(authorities));
 
-        personServiceExtended.addUserAuthorityGroup(userAuthorityGroup);
+        personServiceExt.addUserAuthorityGroup(userAuthorityGroup);
 
         User user = new User();
         user.setCode(username);

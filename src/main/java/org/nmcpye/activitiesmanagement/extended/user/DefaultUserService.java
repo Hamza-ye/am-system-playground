@@ -12,9 +12,9 @@ import org.nmcpye.activitiesmanagement.extended.common.filter.FilterUtils;
 import org.nmcpye.activitiesmanagement.extended.common.filter.UserAuthorityGroupCanIssueFilter;
 import org.nmcpye.activitiesmanagement.extended.feedback.ErrorCode;
 import org.nmcpye.activitiesmanagement.extended.feedback.ErrorReport;
-import org.nmcpye.activitiesmanagement.extended.person.PeopleGroupService;
+import org.nmcpye.activitiesmanagement.extended.person.PeopleGroupServiceExt;
 import org.nmcpye.activitiesmanagement.extended.person.PersonAuthorityGroupStore;
-import org.nmcpye.activitiesmanagement.extended.person.PersonServiceExtended;
+import org.nmcpye.activitiesmanagement.extended.person.PersonServiceExt;
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,9 +44,9 @@ public class DefaultUserService implements org.nmcpye.activitiesmanagement.exten
 
     private final UserStore userStore;
 
-    private final PeopleGroupService peopleGroupService;
+    private final PeopleGroupServiceExt peopleGroupServiceExt;
 
-    private final PersonServiceExtended personServiceExtended;
+    private final PersonServiceExt personServiceExt;
 
     private final PersonAuthorityGroupStore personAuthorityGroupStore;
 
@@ -54,19 +54,19 @@ public class DefaultUserService implements org.nmcpye.activitiesmanagement.exten
 
     public DefaultUserService(
         UserStore userStore,
-        PeopleGroupService peopleGroupService,
-        PersonServiceExtended personServiceExtended,
+        PeopleGroupServiceExt peopleGroupServiceExt,
+        PersonServiceExt personServiceExt,
         PersonAuthorityGroupStore personAuthorityGroupStore,
         UserService userService
     ) {
         checkNotNull(userStore);
-        checkNotNull(peopleGroupService);
-        checkNotNull(personServiceExtended);
+        checkNotNull(peopleGroupServiceExt);
+        checkNotNull(personServiceExt);
         checkNotNull(personAuthorityGroupStore);
 
         this.userStore = userStore;
-        this.peopleGroupService = peopleGroupService;
-        this.personServiceExtended = personServiceExtended;
+        this.peopleGroupServiceExt = peopleGroupServiceExt;
+        this.personServiceExt = personServiceExt;
         this.personAuthorityGroupStore = personAuthorityGroupStore;
         this.userService = userService;
     }
@@ -143,7 +143,7 @@ public class DefaultUserService implements org.nmcpye.activitiesmanagement.exten
     @Override
     @Transactional(readOnly = true)
     public User getUserByUuid(UUID uuid) {
-        Person userCredentials = personServiceExtended.getUserByUuid(uuid);
+        Person userCredentials = personServiceExt.getUserByUuid(uuid);
 
         return userCredentials != null ? userCredentials.getUserInfo() : null;
     }
@@ -151,7 +151,7 @@ public class DefaultUserService implements org.nmcpye.activitiesmanagement.exten
     @Override
     @Transactional(readOnly = true)
     public User getUserByUsername(String username) {
-        Person userCredentials = personServiceExtended.getUserCredentialsByUsername(username);
+        Person userCredentials = personServiceExt.getUserCredentialsByUsername(username);
 
         return userCredentials != null ? userCredentials.getUserInfo() : null;
     }
@@ -293,7 +293,7 @@ public class DefaultUserService implements org.nmcpye.activitiesmanagement.exten
             return false; // Cannot be last if not super user
         }
 
-        Collection<Person> users = personServiceExtended.getAllUsers();
+        Collection<Person> users = personServiceExt.getAllUsers();
 
         for (Person user : users) {
             if (user.isSuper() && !user.equals(userCredentials)) {
@@ -350,7 +350,7 @@ public class DefaultUserService implements org.nmcpye.activitiesmanagement.exten
         boolean canManageAnyGroup = false;
 
         for (String uid : userGroups) {
-            PeopleGroup userGroup = peopleGroupService.getUserGroup(uid);
+            PeopleGroup userGroup = peopleGroupServiceExt.getUserGroup(uid);
 
             if (currentUser.getPerson().canManage(userGroup)) {
                 canManageAnyGroup = true;
@@ -443,32 +443,32 @@ public class DefaultUserService implements org.nmcpye.activitiesmanagement.exten
     @Override
     @Transactional
     public Long addUserCredentials(Person userCredentials) {
-        personServiceExtended.addUser(userCredentials);
+        personServiceExt.addUser(userCredentials);
         return userCredentials.getId();
     }
 
     @Override
     @Transactional
     public void updateUserCredentials(Person userCredentials) {
-        personServiceExtended.updateUser(userCredentials);
+        personServiceExt.updateUser(userCredentials);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Person> getAllUserCredentials() {
-        return personServiceExtended.getAllUsers();
+        return personServiceExt.getAllUsers();
     }
 
     @Override
     @Transactional(readOnly = true)
     public Person getUserCredentialsByUsername(String username) {
-        return personServiceExtended.getUserCredentialsByUsername(username);
+        return personServiceExt.getUserCredentialsByUsername(username);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Person getUserCredentialsWithEagerFetchAuthorities(String username) {
-        Person userCredentials = personServiceExtended.getUserCredentialsByUsername(username);
+        Person userCredentials = personServiceExt.getUserCredentialsByUsername(username);
 
         if (userCredentials != null) {
             userCredentials.getAllAuthorities();
@@ -551,7 +551,7 @@ public class DefaultUserService implements org.nmcpye.activitiesmanagement.exten
             .getGroups()
             .forEach(
                 ug -> {
-                    if (!(currentUser.getPerson().canManage(ug) || peopleGroupService.canAddOrRemoveMember(ug.getUid()))) {
+                    if (!(currentUser.getPerson().canManage(ug) || peopleGroupServiceExt.canAddOrRemoveMember(ug.getUid()))) {
                         errors.add(new ErrorReport(PeopleGroup.class, ErrorCode.E3005, currentUser, ug));
                     }
                 }

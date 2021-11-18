@@ -3,8 +3,8 @@ package org.nmcpye.activitiesmanagement.extended.administrationModule.resourceta
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroupSet;
 import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.table.OrganisationUnitStructureResourceTable;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectManager;
-import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitService;
-import org.nmcpye.activitiesmanagement.extended.period.PeriodService;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitServiceExt;
+import org.nmcpye.activitiesmanagement.extended.period.PeriodServiceExt;
 import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.table.DatePeriodResourceTable;
 import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.table.OrganisationUnitGroupSetResourceTable;
 import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.table.PeriodResourceTable;
@@ -27,25 +27,25 @@ public class DefaultResourceTableService implements ResourceTableService {
 
     private IdentifiableObjectManager idObjectManager;
 
-    private OrganisationUnitService organisationUnitService;
+    private OrganisationUnitServiceExt organisationUnitServiceExt;
 
-    private PeriodService periodService;
+    private PeriodServiceExt periodServiceExt;
 
     public DefaultResourceTableService(
         ResourceTableStore resourceTableStore,
         IdentifiableObjectManager idObjectManager,
-        OrganisationUnitService organisationUnitService,
-        PeriodService periodService
+        OrganisationUnitServiceExt organisationUnitServiceExt,
+        PeriodServiceExt periodServiceExt
     ) {
         checkNotNull(resourceTableStore);
         checkNotNull(idObjectManager);
-        checkNotNull(organisationUnitService);
-        checkNotNull(periodService);
+        checkNotNull(organisationUnitServiceExt);
+        checkNotNull(periodServiceExt);
 
         this.resourceTableStore = resourceTableStore;
         this.idObjectManager = idObjectManager;
-        this.organisationUnitService = organisationUnitService;
-        this.periodService = periodService;
+        this.organisationUnitServiceExt = organisationUnitServiceExt;
+        this.periodServiceExt = periodServiceExt;
     }
 
     // -------------------------------------------------------------------------
@@ -58,8 +58,8 @@ public class DefaultResourceTableService implements ResourceTableService {
         resourceTableStore.generateResourceTable(
             new OrganisationUnitStructureResourceTable(
                 null,
-                organisationUnitService,
-                organisationUnitService.getNumberOfOrganisationalLevels()
+                organisationUnitServiceExt,
+                organisationUnitServiceExt.getNumberOfOrganisationalLevels()
             )
         );
     }
@@ -71,7 +71,7 @@ public class DefaultResourceTableService implements ResourceTableService {
             new OrganisationUnitGroupSetResourceTable(
                 idObjectManager.getDataDimensionsNoAcl(OrganisationUnitGroupSet.class),
                 true,
-                organisationUnitService.getNumberOfOrganisationalLevels()
+                organisationUnitServiceExt.getNumberOfOrganisationalLevels()
             )
         );
     }
@@ -84,6 +84,6 @@ public class DefaultResourceTableService implements ResourceTableService {
     @Override
     @Transactional
     public void generatePeriodTable() {
-        resourceTableStore.generateResourceTable(new PeriodResourceTable(periodService.getAllPeriods()));
+        resourceTableStore.generateResourceTable(new PeriodResourceTable(periodServiceExt.getAllPeriods()));
     }
 }

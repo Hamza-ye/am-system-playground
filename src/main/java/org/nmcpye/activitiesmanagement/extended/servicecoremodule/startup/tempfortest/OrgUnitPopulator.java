@@ -7,15 +7,13 @@ import org.nmcpye.activitiesmanagement.domain.enumeration.OrganisationUnitType;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
 import org.nmcpye.activitiesmanagement.extended.common.CodeGenerator;
-import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitGroupService;
-import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitGroupStore;
-import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitService;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitGroupServiceExt;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitServiceExt;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.pagingrepository.OrganisationUnitGroupPagingRepository;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.pagingrepository.OrganisationUnitPagingRepository;
 import org.nmcpye.activitiesmanagement.extended.systemmodule.system.startup.TransactionContextStartupRoutine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -35,9 +33,9 @@ public class OrgUnitPopulator extends TransactionContextStartupRoutine {
 
     private final OrganisationUnitPagingRepository orgUnitStore;
 
-    private final OrganisationUnitService organisationUnitService;
+    private final OrganisationUnitServiceExt organisationUnitServiceExt;
 
-    private final OrganisationUnitGroupService organisationUnitGroupService;
+    private final OrganisationUnitGroupServiceExt organisationUnitGroupServiceExt;
 
     private final OrganisationUnitGroupPagingRepository orgUnitGroupStore;
 
@@ -50,12 +48,12 @@ public class OrgUnitPopulator extends TransactionContextStartupRoutine {
 
     public OrgUnitPopulator(
         OrganisationUnitPagingRepository orgUnitStore,
-        OrganisationUnitService organisationUnitService,
-        OrganisationUnitGroupService organisationUnitGroupService,
+        OrganisationUnitServiceExt organisationUnitServiceExt,
+        OrganisationUnitGroupServiceExt organisationUnitGroupServiceExt,
         OrganisationUnitGroupPagingRepository orgUnitGroupStore
     ) {
-        this.organisationUnitService = organisationUnitService;
-        this.organisationUnitGroupService = organisationUnitGroupService;
+        this.organisationUnitServiceExt = organisationUnitServiceExt;
+        this.organisationUnitGroupServiceExt = organisationUnitGroupServiceExt;
         //        this.em = em;
         checkNotNull(orgUnitStore);
         checkNotNull(orgUnitGroupStore);
@@ -201,19 +199,19 @@ public class OrgUnitPopulator extends TransactionContextStartupRoutine {
         ougC.getMembers().addAll(Sets.newHashSet(ouH, ouI));
 
         try {
-            organisationUnitService.addOrganisationUnit(ouA);
-            organisationUnitService.addOrganisationUnit(ouB);
-            organisationUnitService.addOrganisationUnit(ouC);
-            organisationUnitService.addOrganisationUnit(ouD);
-            organisationUnitService.addOrganisationUnit(ouE);
-            organisationUnitService.addOrganisationUnit(ouF);
-            organisationUnitService.addOrganisationUnit(ouG);
-            organisationUnitService.addOrganisationUnit(ouH);
-            organisationUnitService.addOrganisationUnit(ouI);
+            organisationUnitServiceExt.addOrganisationUnit(ouA);
+            organisationUnitServiceExt.addOrganisationUnit(ouB);
+            organisationUnitServiceExt.addOrganisationUnit(ouC);
+            organisationUnitServiceExt.addOrganisationUnit(ouD);
+            organisationUnitServiceExt.addOrganisationUnit(ouE);
+            organisationUnitServiceExt.addOrganisationUnit(ouF);
+            organisationUnitServiceExt.addOrganisationUnit(ouG);
+            organisationUnitServiceExt.addOrganisationUnit(ouH);
+            organisationUnitServiceExt.addOrganisationUnit(ouI);
 
-            organisationUnitGroupService.addOrganisationUnitGroup(ougA);
-            organisationUnitGroupService.addOrganisationUnitGroup(ougB);
-            organisationUnitGroupService.addOrganisationUnitGroup(ougC);
+            organisationUnitGroupServiceExt.addOrganisationUnitGroup(ougA);
+            organisationUnitGroupServiceExt.addOrganisationUnitGroup(ougB);
+            organisationUnitGroupServiceExt.addOrganisationUnitGroup(ougC);
 
         } catch (Exception exception) {
             exception.printStackTrace();

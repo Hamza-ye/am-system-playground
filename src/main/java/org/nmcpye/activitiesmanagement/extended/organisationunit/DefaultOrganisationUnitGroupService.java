@@ -16,7 +16,7 @@ import java.util.*;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service("org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitGroupService")
-public class DefaultOrganisationUnitGroupService implements OrganisationUnitGroupService {
+public class DefaultOrganisationUnitGroupService implements OrganisationUnitGroupServiceExt {
 
     // -------------------------------------------------------------------------
     // Dependencies
@@ -41,7 +41,7 @@ public class DefaultOrganisationUnitGroupService implements OrganisationUnitGrou
     private UserService currentUserService;
 
     @Autowired
-    private OrganisationUnitService organisationUnitService;
+    private OrganisationUnitServiceExt organisationUnitService;
 
     // -------------------------------------------------------------------------
     // OrganisationUnitGroup

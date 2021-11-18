@@ -5,7 +5,7 @@ import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
 import org.nmcpye.activitiesmanagement.extended.common.hibernate.HibernateIdentifiableObjectStore;
 import org.nmcpye.activitiesmanagement.extended.dataset.DataSetStore;
 import org.nmcpye.activitiesmanagement.extended.hibernatemodule.hibernate.JpaQueryParameters;
-import org.nmcpye.activitiesmanagement.extended.period.PeriodService;
+import org.nmcpye.activitiesmanagement.extended.period.PeriodServiceExt;
 import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,15 +25,15 @@ public class DataSetStoreImpl
     // Dependencies
     // -------------------------------------------------------------------------
 
-    private final PeriodService periodService;
+    private final PeriodServiceExt periodServiceExt;
 
     public DataSetStoreImpl(JdbcTemplate jdbcTemplate, UserService currentUserService, AclService aclService,
-                            PeriodService periodService) {
+                            PeriodServiceExt periodServiceExt) {
         super(jdbcTemplate, DataSet.class, currentUserService, aclService, true);
 
-        checkNotNull(periodService);
+        checkNotNull(periodServiceExt);
 
-        this.periodService = periodService;
+        this.periodServiceExt = periodServiceExt;
     }
 
     // -------------------------------------------------------------------------
@@ -42,7 +42,7 @@ public class DataSetStoreImpl
 
     @Override
     public void saveObject(DataSet dataSet) {
-        PeriodType periodType = periodService.reloadPeriodType(dataSet.getPeriodType());
+        PeriodType periodType = periodServiceExt.reloadPeriodType(dataSet.getPeriodType());
 
         dataSet.setPeriodType(periodType);
 
@@ -51,7 +51,7 @@ public class DataSetStoreImpl
 
     @Override
     public void update(DataSet dataSet) {
-        PeriodType periodType = periodService.reloadPeriodType(dataSet.getPeriodType());
+        PeriodType periodType = periodServiceExt.reloadPeriodType(dataSet.getPeriodType());
 
         dataSet.setPeriodType(periodType);
 
@@ -60,7 +60,7 @@ public class DataSetStoreImpl
 
     @Override
     public List<DataSet> getDataSetsByPeriodType(PeriodType periodType) {
-        PeriodType refreshedPeriodType = periodService.reloadPeriodType(periodType);
+        PeriodType refreshedPeriodType = periodServiceExt.reloadPeriodType(periodType);
 
         CriteriaBuilder builder = getCriteriaBuilder();
 

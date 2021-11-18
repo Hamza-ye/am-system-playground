@@ -1,6 +1,5 @@
 package org.nmcpye.activitiesmanagement.extended.scheduling;
 
-import org.nmcpye.activitiesmanagement.extended.scheduling.parameters.MetadataSyncJobParameters;
 import org.nmcpye.activitiesmanagement.extended.scheduling.parameters.MockJobParameters;
 
 import java.util.Map;
@@ -11,10 +10,9 @@ import java.util.Map;
  * <p>
  * The key must match the jobs bean name so that the {@link SchedulingManager} can fetch
  * the correct job
- *
  */
 public enum JobType {
-//    DATA_STATISTICS("dataStatisticsJob", false),
+    //    DATA_STATISTICS("dataStatisticsJob", false),
 //    DATA_INTEGRITY("dataIntegrityJob", true),
     RESOURCE_TABLE("resourceTableJob", true),
     //    ANALYTICS_TABLE( "analyticsTableJob", true, SchedulingType.CRON, AnalyticsJobParameters.class, ImmutableMap.of(
@@ -24,8 +22,8 @@ public enum JobType {
     //    DATA_SYNC( "dataSyncJob", true, SchedulingType.CRON, DataSynchronizationJobParameters.class, null ),
     //    TRACKER_PROGRAMS_DATA_SYNC( "trackerProgramsDataSyncJob", true, SchedulingType.CRON, TrackerProgramsDataSynchronizationJobParameters.class, null ),
     //    EVENT_PROGRAMS_DATA_SYNC( "eventProgramsDataSyncJob", true, SchedulingType.CRON, EventProgramsDataSynchronizationJobParameters.class, null ),
-//    FILE_RESOURCE_CLEANUP("fileResourceCleanUpJob", false),
-    //    IMAGE_PROCESSING( "imageProcessingJob", false ),
+    FILE_RESOURCE_CLEANUP("fileResourceCleanUpJob", false),
+    IMAGE_PROCESSING("imageProcessingJob", false),
 //    META_DATA_SYNC("metadataSyncJob", true, SchedulingType.CRON, MetadataSyncJobParameters.class, null),
     //    SMS_SEND( "sendSmsJob", false, SchedulingType.CRON, SmsJobParameters.class, null ),
 //    SEND_SCHEDULED_MESSAGE("sendScheduledMessageJob", true),

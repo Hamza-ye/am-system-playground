@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.extended.administrationModule.resourceta
 
 import com.google.common.collect.Lists;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
-import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitService;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitServiceExt;
 import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.ResourceTable;
 import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.ResourceTableType;
 
@@ -12,17 +12,17 @@ import static org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.
 
 public class OrganisationUnitStructureResourceTable extends ResourceTable<OrganisationUnit> {
 
-    private OrganisationUnitService organisationUnitService; // Nasty
+    private OrganisationUnitServiceExt organisationUnitServiceExt; // Nasty
 
     private int organisationUnitLevels;
 
     public OrganisationUnitStructureResourceTable(
         List<OrganisationUnit> objects,
-        OrganisationUnitService organisationUnitService,
+        OrganisationUnitServiceExt organisationUnitServiceExt,
         int organisationUnitLevels
     ) {
         super(objects);
-        this.organisationUnitService = organisationUnitService;
+        this.organisationUnitServiceExt = organisationUnitServiceExt;
         this.organisationUnitLevels = organisationUnitLevels;
     }
 
@@ -66,7 +66,7 @@ public class OrganisationUnitStructureResourceTable extends ResourceTable<Organi
         for (int i = 0; i < organisationUnitLevels; i++) {
             int level = i + 1;
 
-            Collection<OrganisationUnit> units = organisationUnitService.getOrganisationUnitsAtLevel(level);
+            Collection<OrganisationUnit> units = organisationUnitServiceExt.getOrganisationUnitsAtLevel(level);
 
             for (OrganisationUnit unit : units) {
                 List<Object> values = new ArrayList<>();

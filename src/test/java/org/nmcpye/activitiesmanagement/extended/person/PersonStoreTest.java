@@ -5,7 +5,7 @@ import org.nmcpye.activitiesmanagement.AMTest;
 import org.nmcpye.activitiesmanagement.IntegrationTest;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
-import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitService;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitServiceExt;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
@@ -20,7 +20,7 @@ public class PersonStoreTest extends AMTest {
     private PersonStore personStore;
 
     @Autowired
-    private OrganisationUnitService organisationUnitService;
+    private OrganisationUnitServiceExt organisationUnitServiceExt;
 
     private OrganisationUnit unit1;
     private OrganisationUnit unit2;
@@ -30,8 +30,8 @@ public class PersonStoreTest extends AMTest {
         unit1 = createOrganisationUnit('A');
         unit2 = createOrganisationUnit('B');
 
-        organisationUnitService.addOrganisationUnit(unit1);
-        organisationUnitService.addOrganisationUnit(unit2);
+        organisationUnitServiceExt.addOrganisationUnit(unit1);
+        organisationUnitServiceExt.addOrganisationUnit(unit2);
     }
 
     @Test

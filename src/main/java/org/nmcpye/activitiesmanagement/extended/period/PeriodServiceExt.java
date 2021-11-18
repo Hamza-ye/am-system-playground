@@ -10,8 +10,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-public interface PeriodService {
-    String ID = PeriodService.class.getName();
+public interface PeriodServiceExt {
+    String ID = PeriodServiceExt.class.getName();
 
     // -------------------------------------------------------------------------
     // Period
