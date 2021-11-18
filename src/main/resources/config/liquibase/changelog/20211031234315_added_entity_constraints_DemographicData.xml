@@ -32,5 +32,8 @@
                                  referencedColumnNames="id"
                                  referencedTableName="demographic_data_source"/>
     </changeSet>
+    <changeSet author="Hamza (generated)" id="1637249241269-3">
+        <addUniqueConstraint columnNames="uid" constraintName="UC_DEMOGRAPHIC_DATAUID_COL" tableName="demographic_data"/>
+    </changeSet>
 
 </databaseChangeLog>
