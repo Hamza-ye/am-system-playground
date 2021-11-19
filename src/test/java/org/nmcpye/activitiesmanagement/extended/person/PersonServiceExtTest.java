@@ -24,7 +24,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 @IntegrationTest
-public class PersonServiceTest extends AMTest {
+public class PersonServiceExtTest extends AMTest {
 
     @Autowired
     private UserServiceExt userServiceExt;

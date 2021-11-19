@@ -17,7 +17,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @IntegrationTest
-class PeriodServiceTest extends AMTest {
+class PeriodServiceExtTest extends AMTest {
 
     @Autowired
     private PeriodServiceExt periodServiceExt;

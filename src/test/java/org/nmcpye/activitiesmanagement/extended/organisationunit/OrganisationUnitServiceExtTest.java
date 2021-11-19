@@ -19,7 +19,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @IntegrationTest
-public class OrganisationUnitServiceTest
+public class OrganisationUnitServiceExtTest
     extends AMTest {
 
     @Autowired
