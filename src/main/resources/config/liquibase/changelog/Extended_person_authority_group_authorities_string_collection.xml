@@ -15,19 +15,6 @@
         </createTable>
     </changeSet>
 
-    <changeSet author="Hamza (generated)" id="1637333476148-2">
-        <addColumn tableName="person_authority_group_authorities">
-            <column name="authorities" type="varchar(255)"/>
-        </addColumn>
-    </changeSet>
-    <changeSet author="Hamza (generated)" id="1637333476148-3">
-        <addColumn tableName="person_authority_group_authorities">
-            <column name="person_authority_group_id" type="int8">
-                <constraints nullable="false"/>
-            </column>
-        </addColumn>
-    </changeSet>
-
     <changeSet author="Hamza (generated)" id="1637333476148-5">
         <addForeignKeyConstraint
             baseColumnNames="person_authority_group_id"
