@@ -7,6 +7,8 @@ import org.nmcpye.activitiesmanagement.IntegrationTest;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitLevel;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.pagingrepository.OrganisationUnitGroupPagingRepository;
+import org.nmcpye.activitiesmanagement.extended.organisationunit.pagingrepository.OrganisationUnitPagingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -20,10 +22,10 @@ public class OrganisationUnitStoreTest extends AMTest {
     private OrganisationUnitLevelStore orgUnitLevelStore;
 
     @Autowired
-    private OrganisationUnitStore orgUnitStore;
+    private OrganisationUnitPagingRepository orgUnitStore;
 
     @Autowired
-    private OrganisationUnitGroupStore orgUnitGroupStore;
+    private OrganisationUnitGroupPagingRepository orgUnitGroupStore;
 
     //    @Autowired
     //    private IdentifiableObjectManager idObjectManager;

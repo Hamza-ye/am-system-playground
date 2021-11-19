@@ -137,26 +137,30 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
     @ManyToOne
     @JsonIgnoreProperties(
         value = {
-            "malariaReports",
-            "dengueReports",
-            "parent",
-            "hfHomeSubVillage",
-            "coveredByHf",
-            "createdBy",
-            "user",
-            "lastUpdatedBy",
-            "malariaUnit",
-            "assignedChv",
-            "children",
-            "demographicData",
-            "groups",
-            "people",
-            "dataViewPeople",
-            "dataSets",
+            "malariaReports", "dengueReports", "parent", "hfHomeSubVillage", "coveredByHf",
+            "createdBy", "user", "lastUpdatedBy", "malariaUnit", "assignedChv", "children",
+            "demographicData", "groups", "people", "dataViewPeople", "dataSets",
         },
         allowSetters = true
     )
     private OrganisationUnit parent;
+
+    @OneToMany(mappedBy = "parent")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(
+        value = {
+            "malariaReports", "dengueReports", "parent", "hfHomeSubVillage", "coveredByHf", "createdBy",
+            "user", "lastUpdatedBy", "malariaUnit", "assignedChv", "children", "demographicData",
+            "groups", "people", "dataViewPeople", "dataSets",
+        },
+        allowSetters = true
+    )
+    private Set<OrganisationUnit> children = new HashSet<>();
+
+    @ManyToMany(mappedBy = "members")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = {"user", "createdBy", "lastUpdatedBy", "members", "groupSets"}, allowSetters = true)
+    private Set<OrganisationUnitGroup> groups = new HashSet<>();
 
     /**
      * When OrgUnit is HealthFacility, what its home subvillage
@@ -165,22 +169,9 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
     @ManyToOne
     @JsonIgnoreProperties(
         value = {
-            "malariaReports",
-            "dengueReports",
-            "parent",
-            "hfHomeSubVillage",
-            "coveredByHf",
-            "createdBy",
-            "user",
-            "lastUpdatedBy",
-            "malariaUnit",
-            "assignedChv",
-            "children",
-            "demographicData",
-            "groups",
-            "people",
-            "dataViewPeople",
-            "dataSets",
+            "malariaReports", "dengueReports", "parent", "hfHomeSubVillage", "coveredByHf", "createdBy",
+            "user", "lastUpdatedBy", "malariaUnit", "assignedChv", "children", "demographicData", "groups",
+            "people", "dataViewPeople", "dataSets",
         },
         allowSetters = true
     )
@@ -193,22 +184,9 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
     @ManyToOne
     @JsonIgnoreProperties(
         value = {
-            "malariaReports",
-            "dengueReports",
-            "parent",
-            "hfHomeSubVillage",
-            "coveredByHf",
-            "createdBy",
-            "user",
-            "lastUpdatedBy",
-            "malariaUnit",
-            "assignedChv",
-            "children",
-            "demographicData",
-            "groups",
-            "people",
-            "dataViewPeople",
-            "dataSets",
+            "malariaReports", "dengueReports", "parent", "hfHomeSubVillage", "coveredByHf", "createdBy",
+            "user", "lastUpdatedBy", "malariaUnit", "assignedChv", "children", "demographicData", "groups",
+            "people", "dataViewPeople", "dataSets",
         },
         allowSetters = true
     )
@@ -227,40 +205,10 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
     )
     private CHV assignedChv;
 
-    @OneToMany(mappedBy = "parent")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(
-        value = {
-            "malariaReports",
-            "dengueReports",
-            "parent",
-            "hfHomeSubVillage",
-            "coveredByHf",
-            "createdBy",
-            "user",
-            "lastUpdatedBy",
-            "malariaUnit",
-            "assignedChv",
-            "children",
-            "demographicData",
-            "groups",
-            "people",
-            "dataViewPeople",
-            "dataSets",
-        },
-        allowSetters = true
-    )
-    private Set<OrganisationUnit> children = new HashSet<>();
-
     @OneToMany(mappedBy = "organisationUnit")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = {"organisationUnit", "user", "createdBy", "lastUpdatedBy", "source"}, allowSetters = true)
     private Set<DemographicData> demographicData = new HashSet<>();
-
-    @ManyToMany(mappedBy = "members")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = {"user", "createdBy", "lastUpdatedBy", "members", "groupSets"}, allowSetters = true)
-    private Set<OrganisationUnitGroup> groups = new HashSet<>();
 
     @ManyToMany(mappedBy = "organisationUnits")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

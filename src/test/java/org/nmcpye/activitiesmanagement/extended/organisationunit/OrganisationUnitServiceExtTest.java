@@ -125,6 +125,8 @@ public class OrganisationUnitServiceExtTest
 
         assertNull(organisationUnitServiceExt.getOrganisationUnit(id2));
         assertNotNull(organisationUnitServiceExt.getOrganisationUnit(id1));
+
+        OrganisationUnit ou = organisationUnitServiceExt.getOrganisationUnit(id1);
         assertTrue(organisationUnitServiceExt.getOrganisationUnit(id1).getChildren().isEmpty());
     }
 

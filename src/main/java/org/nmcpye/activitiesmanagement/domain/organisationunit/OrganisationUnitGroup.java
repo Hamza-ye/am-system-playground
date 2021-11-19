@@ -47,22 +47,9 @@ public class OrganisationUnitGroup extends BaseDimensionalItemObject implements 
     )
     @JsonIgnoreProperties(
         value = {
-            "malariaReports",
-            "dengueReports",
-            "parent",
-            "hfHomeSubVillage",
-            "coveredByHf",
-            "user",
-            "createdBy",
-            "lastUpdatedBy",
-            "malariaUnit",
-            "assignedChv",
-            "children",
-            "demographicData",
-            "groups",
-            "people",
-            "dataViewPeople",
-            "dataSets",
+            "malariaReports", "dengueReports", "parent", "hfHomeSubVillage", "coveredByHf", "user",
+            "createdBy", "lastUpdatedBy", "malariaUnit", "assignedChv", "children", "demographicData",
+            "groups", "people", "dataViewPeople", "dataSets",
         },
         allowSetters = true
     )

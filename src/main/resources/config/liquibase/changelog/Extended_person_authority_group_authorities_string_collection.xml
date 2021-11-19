@@ -25,26 +25,4 @@
             referencedTableName="person_authority_group" validate="true"/>
     </changeSet>
 
-
-    <changeSet author="Hamza (generated)" id="1637333476148-6">
-        <dropForeignKeyConstraint baseTableName="person_authority_group_authorities" constraintName="fk_person_authority_group_authorities__person_role_id"/>
-    </changeSet>
-
-    <!--Comment Later-->
-    <!--<changeSet author="Hamza (generated)" id="1637333476148-7">-->
-        <!--<dropForeignKeyConstraint baseTableName="person_authority_group_authorities" constraintName="fk_person_role_members__authority_id"/>-->
-    <!--</changeSet>-->
-    <!--<changeSet author="Hamza (generated)" id="1637333476148-8">-->
-        <!--<dropUniqueConstraint constraintName="ux_person_authority_group_authorities_code" tableName="person_authority_group_authorities"/>-->
-    <!--</changeSet>-->
-    <!--<changeSet author="Hamza (generated)" id="1637333476148-14">-->
-        <!--<dropPrimaryKey constraintName="person_authority_group_authorities_pkey" tableName="person_authority_group_authorities"/>-->
-    <!--</changeSet>-->
-    <!--<changeSet author="Hamza (generated)" id="1637333476148-15">-->
-        <!--<dropColumn columnName="authority" tableName="person_authority_group_authorities"/>-->
-    <!--</changeSet>-->
-    <!--<changeSet author="Hamza (generated)" id="1637333476148-16">-->
-        <!--<dropColumn columnName="authority_group_id" tableName="person_authority_group_authorities"/>-->
-    <!--</changeSet>-->
-
 </databaseChangeLog>
