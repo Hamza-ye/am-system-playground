@@ -24,7 +24,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Repository("org.nmcpye.activitiesmanagement.extended.person.PersonStore")
+@Repository
 public class HibernatePersonStore extends HibernateIdentifiableObjectStore<Person> implements PersonStore {
 
     private final Logger log = LoggerFactory.getLogger(HibernatePersonStore.class);
@@ -166,9 +166,8 @@ public class HibernatePersonStore extends HibernateIdentifiableObjectStore<Perso
                 "select uc2 from Person uc2 " +
                 "inner join uc2.personAuthorityGroups ag2 " +
                 "inner join ag2.authorities a " +
-                //                "where uc2.id = uc.id " +
                 "where uc2.id = u.id " +
-                "and a.name not in (:auths) ) ";
+                "and a not in (:auths) ) ";
         }
 
         // TODO handle users with no user roles
