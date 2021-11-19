@@ -1,11 +1,13 @@
 package org.nmcpye.activitiesmanagement.domain.period;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.google.common.collect.ImmutableMap;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.joda.time.DateTime;
+import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 import org.nmcpye.activitiesmanagement.extended.common.calendar.*;
 import org.nmcpye.activitiesmanagement.extended.common.calendar.impl.Iso8601Calendar;
 import org.nmcpye.activitiesmanagement.extended.service.CalendarService;
@@ -28,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 @Table(name = "period_type")
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonRootName( value = "periodType", namespace = DxfNamespaces.DXF_2_0 )
 public abstract class PeriodType implements Serializable {
 
     @Id

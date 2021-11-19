@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -14,6 +15,7 @@ import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.period.Period;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 
 /**
@@ -27,6 +29,7 @@ import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
             {"data_set_id", "organisation_unit_id", "period_id", "report_class_id"})}
 )
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonRootName( value = "malariaCasesReport", namespace = DxfNamespaces.DXF_2_0 )
 public class MalariaCasesReport extends BaseIdentifiableObject implements MetadataObject {
 
 //    @Id

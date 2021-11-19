@@ -2,6 +2,7 @@ package org.nmcpye.activitiesmanagement.domain.dataset;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.Sets;
@@ -17,6 +18,7 @@ import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.extended.common.BaseDimensionalItemObject;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 import org.nmcpye.activitiesmanagement.extended.common.adapter.JacksonPeriodTypeDeserializer;
 import org.nmcpye.activitiesmanagement.extended.common.adapter.JacksonPeriodTypeSerializer;
@@ -35,6 +37,7 @@ import java.util.Set;
 @Entity
 @Table(name = "data_set")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonRootName( value = "dataSet", namespace = DxfNamespaces.DXF_2_0 )
 public class DataSet extends BaseDimensionalItemObject
     implements MetadataObject {
 

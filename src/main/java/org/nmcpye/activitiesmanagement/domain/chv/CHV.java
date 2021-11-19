@@ -1,6 +1,7 @@
 package org.nmcpye.activitiesmanagement.domain.chv;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
@@ -15,6 +16,7 @@ import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 
 /**
@@ -23,6 +25,7 @@ import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 @Entity
 @Table(name = "chv")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonRootName( value = "chv", namespace = DxfNamespaces.DXF_2_0 )
 public class CHV extends BaseIdentifiableObject implements MetadataObject {
 
 //    @Id

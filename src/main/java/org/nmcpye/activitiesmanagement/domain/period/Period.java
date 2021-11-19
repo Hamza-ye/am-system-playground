@@ -1,6 +1,7 @@
 package org.nmcpye.activitiesmanagement.domain.period;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Cache;
@@ -9,6 +10,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.nmcpye.activitiesmanagement.extended.common.BaseDimensionalItemObject;
 import org.nmcpye.activitiesmanagement.extended.common.DimensionItemType;
+import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 import org.nmcpye.activitiesmanagement.extended.common.adapter.JacksonPeriodTypeDeserializer;
 import org.nmcpye.activitiesmanagement.extended.common.adapter.JacksonPeriodTypeSerializer;
 
@@ -22,6 +24,7 @@ import java.util.Date;
     uniqueConstraints = { @UniqueConstraint(columnNames =
         { "period_type_id", "start_date", "end_date" }) })
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonRootName( value = "period", namespace = DxfNamespaces.DXF_2_0 )
 public class Period extends BaseDimensionalItemObject {
 
     public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
@@ -73,7 +76,7 @@ public class Period extends BaseDimensionalItemObject {
     // -------------------------------------------------------------------------
 
     public Period() {
-//        setAutoFields();
+        setAutoFields();
     }
 
     public Period(Period period) {
@@ -102,8 +105,8 @@ public class Period extends BaseDimensionalItemObject {
     // Logic
     // -------------------------------------------------------------------------
 
-    @Override
-    public void setAutoFields() {}
+//    @Override
+//    public void setAutoFields() {}
 
 //    @Override
 //    public Long getId() {

@@ -1,11 +1,13 @@
 package org.nmcpye.activitiesmanagement.domain.period;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import org.apache.commons.lang3.ArrayUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.joda.time.DateTime;
 import org.nmcpye.activitiesmanagement.extended.analytics.AnalyticsFinancialYearStartKey;
+import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 import org.nmcpye.activitiesmanagement.extended.i18n.I18nFormat;
 
 import javax.persistence.*;
@@ -20,6 +22,7 @@ import static org.nmcpye.activitiesmanagement.extended.analytics.AnalyticsFinanc
 @Entity
 @Table(name = "relative_periods")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonRootName( value = "relativePeriods", namespace = DxfNamespaces.DXF_2_0 )
 public class RelativePeriods implements Serializable {
 
     public static final String[] MONTH_NAMES = {

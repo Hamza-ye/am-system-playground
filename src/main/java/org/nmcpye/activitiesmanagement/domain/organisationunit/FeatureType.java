@@ -1,5 +1,9 @@
 package org.nmcpye.activitiesmanagement.domain.organisationunit;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
+
+@JsonRootName( value = "featureType", namespace = DxfNamespaces.DXF_2_0 )
 public enum FeatureType {
     NONE("None"),
     MULTI_POLYGON("MultiPolygon"),

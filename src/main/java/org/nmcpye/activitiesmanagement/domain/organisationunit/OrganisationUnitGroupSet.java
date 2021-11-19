@@ -2,6 +2,7 @@ package org.nmcpye.activitiesmanagement.domain.organisationunit;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -19,6 +20,7 @@ import java.util.*;
 @Entity
 @Table(name = "orgunit_groupset")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonRootName( value = "organisationUnitGroupSet", namespace = DxfNamespaces.DXF_2_0 )
 public class OrganisationUnitGroupSet extends BaseDimensionalObject implements MetadataObject {
 
     @Size(max = 50)

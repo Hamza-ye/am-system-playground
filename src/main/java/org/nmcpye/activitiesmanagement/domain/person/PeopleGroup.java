@@ -3,12 +3,14 @@ package org.nmcpye.activitiesmanagement.domain.person;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyTransformer;
 import org.nmcpye.activitiesmanagement.extended.schema.transformer.PersonPropertyTransformer;
@@ -25,6 +27,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "people_group")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonRootName( value = "peopleGroup", namespace = DxfNamespaces.DXF_2_0 )
 public class PeopleGroup extends BaseIdentifiableObject implements MetadataObject {
 
     public static final String AUTH_USER_ADD = "F_USER_ADD";

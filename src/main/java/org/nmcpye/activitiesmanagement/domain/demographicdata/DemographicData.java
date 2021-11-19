@@ -7,12 +7,15 @@ import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonRootName;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.enumeration.DemographicDataLevel;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 
 /**
@@ -21,6 +24,7 @@ import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 @Entity
 @Table(name = "demographic_data")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonRootName( value = "demographicData", namespace = DxfNamespaces.DXF_2_0 )
 public class DemographicData extends BaseIdentifiableObject implements MetadataObject {
 
 //    @Id

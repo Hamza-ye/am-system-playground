@@ -7,10 +7,12 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 
 /**
@@ -19,6 +21,7 @@ import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 @Entity
 @Table(name = "demographic_data_source")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonRootName( value = "demographicDataSource", namespace = DxfNamespaces.DXF_2_0 )
 public class DemographicDataSource extends BaseIdentifiableObject implements MetadataObject {
 //
 //    private static final long serialVersionUID = 1L;

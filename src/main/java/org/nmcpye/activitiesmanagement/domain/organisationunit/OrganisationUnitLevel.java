@@ -1,9 +1,11 @@
 package org.nmcpye.activitiesmanagement.domain.organisationunit;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 
 import javax.persistence.Column;
@@ -17,6 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "orgunit_level")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonRootName( value = "organisationUnitLevel", namespace = DxfNamespaces.DXF_2_0 )
 public class OrganisationUnitLevel extends BaseIdentifiableObject implements MetadataObject {
 
     @Column(name = "level")

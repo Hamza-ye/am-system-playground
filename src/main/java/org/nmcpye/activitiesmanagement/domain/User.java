@@ -126,7 +126,7 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
     @Column(name = "mobile")
     private String mobile;
 
-    @OneToOne
+    @OneToOne//(mappedBy = "userInfo")
     @JoinColumn(unique = true)
     Person person;
 

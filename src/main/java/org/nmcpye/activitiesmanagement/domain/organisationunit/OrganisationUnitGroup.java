@@ -2,14 +2,12 @@ package org.nmcpye.activitiesmanagement.domain.organisationunit;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.vividsolutions.jts.geom.Geometry;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.nmcpye.activitiesmanagement.extended.common.BaseDimensionalItemObject;
-import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
-import org.nmcpye.activitiesmanagement.extended.common.DimensionItemType;
-import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
+import org.nmcpye.activitiesmanagement.extended.common.*;
 import org.nmcpye.activitiesmanagement.extended.common.coordinate.CoordinateObject;
 import org.nmcpye.activitiesmanagement.extended.common.coordinate.CoordinateUtils;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.Gist;
@@ -27,6 +25,7 @@ import java.util.Set;
 @Entity
 @Table(name = "orgunit_group")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonRootName( value = "organisationUnitGroup", namespace = DxfNamespaces.DXF_2_0 )
 public class OrganisationUnitGroup extends BaseDimensionalItemObject implements MetadataObject, CoordinateObject {
 
     @Size(max = 50)

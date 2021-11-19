@@ -2,6 +2,7 @@ package org.nmcpye.activitiesmanagement.domain.organisationunit;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
@@ -43,6 +44,7 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "organisation_unit")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonRootName( value = "organisationUnit", namespace = DxfNamespaces.DXF_2_0 )
 public class OrganisationUnit extends BaseDimensionalItemObject implements MetadataObject, CoordinateObject {
 
     private static final String PATH_SEP = "/";

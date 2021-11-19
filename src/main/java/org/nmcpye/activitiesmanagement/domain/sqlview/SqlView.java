@@ -1,9 +1,11 @@
 package org.nmcpye.activitiesmanagement.domain.sqlview;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.StringUtils;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyRange;
 import org.nmcpye.activitiesmanagement.extended.sqlview.SqlViewType;
@@ -14,6 +16,7 @@ import java.util.regex.Pattern;
 
 @Entity
 @Table(name = "sql_view")
+@JsonRootName( value = "sqlView", namespace = DxfNamespaces.DXF_2_0 )
 public class SqlView
     extends BaseIdentifiableObject
     implements MetadataObject {

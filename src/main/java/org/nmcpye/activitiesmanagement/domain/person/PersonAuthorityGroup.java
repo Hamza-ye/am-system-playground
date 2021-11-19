@@ -2,6 +2,7 @@ package org.nmcpye.activitiesmanagement.domain.person;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.Sets;
 import org.apache.commons.collections4.CollectionUtils;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.Authority;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyRange;
 import org.nmcpye.activitiesmanagement.security.AuthoritiesConstants;
@@ -28,6 +30,7 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "person_authority_group")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonRootName( value = "personAuthorityGroup", namespace = DxfNamespaces.DXF_2_0 )
 public class PersonAuthorityGroup extends BaseIdentifiableObject implements MetadataObject {
 
     public static final String AUTHORITY_ALL = AuthoritiesConstants.ADMIN;
@@ -60,18 +63,18 @@ public class PersonAuthorityGroup extends BaseIdentifiableObject implements Meta
     private Set<Person> members = new HashSet<>();
 
     //    fk_userroleauthorities_userroleid
-    @OneToMany(targetEntity = Authority.class, cascade = CascadeType.ALL)//(mappedBy = "personAuthorityGroup")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JoinTable(
-        name = "person_authority_group_authorities",
-        joinColumns = @JoinColumn(name = "authority_group_id"),
-        inverseJoinColumns = @JoinColumn(name = "authority")
-//        joinColumns = {@JoinColumn(name = "person_role_id", referencedColumnName = "id")},
-//        inverseJoinColumns = {@JoinColumn(name = "authority", referencedColumnName = "name")}
-    )
-    @JsonIgnoreProperties(value = { "personAuthorityGroup" }, allowSetters = true)
-    private Set<Authority> authorities = new HashSet<>();
+//    @OneToMany(targetEntity = Authority.class, cascade = CascadeType.ALL)//(mappedBy = "personAuthorityGroup")
+//    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//    @JoinTable(
+//        name = "person_authority_group_authorities",
+//        joinColumns = @JoinColumn(name = "authority_group_id"),
+//        inverseJoinColumns = @JoinColumn(name = "authority")
+//    )
+//    @JsonIgnoreProperties(value = { "personAuthorityGroup" }, allowSetters = true)
+//    private Set<Authority> authorities = new HashSet<>();
 
+    @ElementCollection
+    private Set<String> authorities;
     // -------------------------------------------------------------------------
     // Constructors
     // -------------------------------------------------------------------------
@@ -115,26 +118,35 @@ public class PersonAuthorityGroup extends BaseIdentifiableObject implements Meta
     }
 
     @JsonProperty
-    public Set<Authority> getAuthorities() {
+    public Set<String> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(Set<Authority> authorities) {
+    public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
     }
 
-    public Set<String> getAuthoritiesString() {
-        if (authorities != null && !authorities.isEmpty()) {
-            return authorities.stream().map(Authority::getName).collect(Collectors.toSet());
-        }
-        return null;
-    }
-
-    public void setAuthoritiesString(Set<String> authorities) {
-        if (authorities != null) {
-            this.authorities.addAll(authorities.stream().map(Authority::new).collect(Collectors.toSet()));
-        }
-    }
+//    @JsonProperty
+//    public Set<Authority> getAuthorities() {
+//        return authorities;
+//    }
+//
+//    public void setAuthorities(Set<Authority> authorities) {
+//        this.authorities = authorities;
+//    }
+//
+//    public Set<String> getAuthoritiesString() {
+//        if (authorities != null && !authorities.isEmpty()) {
+//            return authorities.stream().map(Authority::getName).collect(Collectors.toSet());
+//        }
+//        return null;
+//    }
+//
+//    public void setAuthoritiesString(Set<String> authorities) {
+//        if (authorities != null) {
+//            this.authorities.addAll(authorities.stream().map(Authority::new).collect(Collectors.toSet()));
+//        }
+//    }
 
     public Set<Person> getMembers() {
         return members;

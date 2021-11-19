@@ -3,6 +3,7 @@ package org.nmcpye.activitiesmanagement.domain.person;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.collections4.CollectionUtils;
@@ -13,6 +14,7 @@ import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.enumeration.Gender;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectUtils;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,6 +33,7 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "person")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonRootName( value = "person", namespace = DxfNamespaces.DXF_2_0 )
 public class Person extends BaseIdentifiableObject implements UserDetails, MetadataObject {
 
     @Column(name = "uuid", unique = true)
@@ -56,7 +59,7 @@ public class Person extends BaseIdentifiableObject implements UserDetails, Metad
     private Boolean disabled;
 
     @OneToOne(mappedBy = "person")
-//    @JoinColumn(unique = true)
+//    @JoinColumn(name = "user_info_id", unique = true)
     private User userInfo;
 
     @ManyToMany
@@ -200,8 +203,12 @@ public class Person extends BaseIdentifiableObject implements UserDetails, Metad
 
         Set<String> authorities = new HashSet<>();
 
+        // PersonAuthorityGroup
+//        for (PersonAuthorityGroup group : personAuthorityGroups) {
+//            authorities.addAll(group.getAuthorities().stream().map(Authority::getName).collect(Collectors.toList()));
+//        }
         for (PersonAuthorityGroup group : personAuthorityGroups) {
-            authorities.addAll(group.getAuthorities().stream().map(Authority::getName).collect(Collectors.toList()));
+            authorities.addAll(group.getAuthorities());
         }
 
         if (userInfo != null) {

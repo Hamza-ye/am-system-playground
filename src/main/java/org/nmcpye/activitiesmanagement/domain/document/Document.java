@@ -1,8 +1,10 @@
 package org.nmcpye.activitiesmanagement.domain.document;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import org.nmcpye.activitiesmanagement.domain.fileresource.FileResource;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 
 import javax.persistence.Column;
@@ -12,6 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "document")
+@JsonRootName( value = "document", namespace = DxfNamespaces.DXF_2_0 )
 public class Document
     extends BaseIdentifiableObject implements MetadataObject {
     /**
