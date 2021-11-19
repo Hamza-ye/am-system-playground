@@ -59,11 +59,15 @@
             <column name="gender" type="varchar(255)">
                 <constraints nullable="true"/>
             </column>
-            <column name="person_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_app_user_person_id"/>
-            </column>
             <column name="created" type="timestamp">
                 <constraints nullable="true"/>
+            </column>
+            <column name="last_updated" type="timestamp">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="person_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="UC_USER_PERSON_ID_UNIQUE"/>
             </column>
 
             <column name="created_by" type="bigint">

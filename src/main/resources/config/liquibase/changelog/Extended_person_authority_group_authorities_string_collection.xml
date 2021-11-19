@@ -1,0 +1,63 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <!--Un-comment Later-->
+    <changeSet id="create_person_authority_group_authorities" author="">
+        <createTable tableName="person_authority_group_authorities">
+            <column name="authorities" type="varchar(255)"/>
+            <column name="person_authority_group_id" type="int8">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Hamza (generated)" id="1637333476148-2">
+        <addColumn tableName="person_authority_group_authorities">
+            <column name="authorities" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1637333476148-3">
+        <addColumn tableName="person_authority_group_authorities">
+            <column name="person_authority_group_id" type="int8">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="Hamza (generated)" id="1637333476148-5">
+        <addForeignKeyConstraint
+            baseColumnNames="person_authority_group_id"
+            baseTableName="person_authority_group_authorities"
+            constraintName="FK_person_authority_group_authorities"
+            deferrable="false" initiallyDeferred="false"
+            referencedColumnNames="id"
+            referencedTableName="person_authority_group" validate="true"/>
+    </changeSet>
+
+
+    <changeSet author="Hamza (generated)" id="1637333476148-6">
+        <dropForeignKeyConstraint baseTableName="person_authority_group_authorities" constraintName="fk_person_authority_group_authorities__person_role_id"/>
+    </changeSet>
+
+    <!--Comment Later-->
+    <!--<changeSet author="Hamza (generated)" id="1637333476148-7">-->
+        <!--<dropForeignKeyConstraint baseTableName="person_authority_group_authorities" constraintName="fk_person_role_members__authority_id"/>-->
+    <!--</changeSet>-->
+    <!--<changeSet author="Hamza (generated)" id="1637333476148-8">-->
+        <!--<dropUniqueConstraint constraintName="ux_person_authority_group_authorities_code" tableName="person_authority_group_authorities"/>-->
+    <!--</changeSet>-->
+    <!--<changeSet author="Hamza (generated)" id="1637333476148-14">-->
+        <!--<dropPrimaryKey constraintName="person_authority_group_authorities_pkey" tableName="person_authority_group_authorities"/>-->
+    <!--</changeSet>-->
+    <!--<changeSet author="Hamza (generated)" id="1637333476148-15">-->
+        <!--<dropColumn columnName="authority" tableName="person_authority_group_authorities"/>-->
+    <!--</changeSet>-->
+    <!--<changeSet author="Hamza (generated)" id="1637333476148-16">-->
+        <!--<dropColumn columnName="authority_group_id" tableName="person_authority_group_authorities"/>-->
+    <!--</changeSet>-->
+
+</databaseChangeLog>

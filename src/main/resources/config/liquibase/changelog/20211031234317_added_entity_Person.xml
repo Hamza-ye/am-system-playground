@@ -56,6 +56,9 @@
             <column name="last_updated_by" type="bigint">
                 <constraints nullable="true" />
             </column>
+            <!--<column name="user_info_id" type="bigint">-->
+                <!--<constraints nullable="true" unique="true" uniqueConstraintName="UC_PERSON_USERINFO_UNIQUE"/>-->
+            <!--</column>-->
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
         <dropDefaultValue tableName="person" columnName="created" columnDataType="${datetimeType}"/>
