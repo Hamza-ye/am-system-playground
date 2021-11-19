@@ -11,7 +11,7 @@ import org.nmcpye.activitiesmanagement.extended.schemamodule.RelativePropertyCon
 import org.nmcpye.activitiesmanagement.extended.schemamodule.Schema;
 import org.nmcpye.activitiesmanagement.extended.schemamodule.SchemaService;
 import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;
-import org.nmcpye.activitiesmanagement.extended.user.UserService;
+import org.nmcpye.activitiesmanagement.extended.user.UserServiceExt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -36,7 +36,7 @@ public class DefaultGistService implements GistService {
 
     private final SchemaService schemaService;
 
-    private final UserService userService;
+    private final UserServiceExt userServiceExt;
 
     private final org.nmcpye.activitiesmanagement.service.UserService currentUserService;
 
@@ -48,11 +48,11 @@ public class DefaultGistService implements GistService {
     EntityManager entityManager;
 
     public DefaultGistService(SchemaService schemaService,
-                              UserService userService,
+                              UserServiceExt userServiceExt,
                               org.nmcpye.activitiesmanagement.service.UserService currentUserService,
                               AclService aclService, ObjectMapper jsonMapper) {
         this.schemaService = schemaService;
-        this.userService = userService;
+        this.userServiceExt = userServiceExt;
         this.currentUserService = currentUserService;
         this.aclService = aclService;
         this.jsonMapper = jsonMapper;
@@ -164,7 +164,7 @@ public class DefaultGistService implements GistService {
     }
 
     private GistAccessControl createGistAccessControl() {
-        return new DefaultGistAccessControl(currentUserService.getUserWithAuthorities().orElse(null), aclService, userService, this);
+        return new DefaultGistAccessControl(currentUserService.getUserWithAuthorities().orElse(null), aclService, userServiceExt, this);
     }
 
     private RelativePropertyContext createPropertyContext(GistQuery query) {
@@ -203,9 +203,9 @@ public class DefaultGistService implements GistService {
     }
 
     private List<String> getUserGroupIdsByUserId(String userId) {
-        User user = userService.getUser(userId);
+        User user = userServiceExt.getUser(userId);
         if (user.getPerson() != null) {
-            return userService.getUser(userId).getPerson().getGroups().stream().map(IdentifiableObject::getUid).collect(toList());
+            return userServiceExt.getUser(userId).getPerson().getGroups().stream().map(IdentifiableObject::getUid).collect(toList());
         }
         return Lists.newArrayList();
     }

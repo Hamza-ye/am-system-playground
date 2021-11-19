@@ -30,7 +30,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static org.nmcpye.activitiesmanagement.domain.sqlview.SqlView.*;
 
 @Transactional
-@Service( "org.nmcpye.activitiesmanagement.extended.sqlview.SqlViewService" )
+@Service
 public class DefaultSqlViewService
     implements SqlViewService
 {

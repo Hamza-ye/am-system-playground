@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Implements the PeriodStore interface.
  */
-@Repository("org.nmcpye.activitiesmanagement.extended.period.PeriodStore")
+@Repository
 public class HibernatePeriodStore extends HibernateIdentifiableObjectStore<Period> implements PeriodStore {
 
     private final Logger log = LoggerFactory.getLogger(HibernatePeriodStore.class);

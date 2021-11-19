@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-@Service("org.nmcpye.activitiesmanagement.extended.fileresource.FileResourceService")
+@Service
 public class DefaultFileResourceService
     implements FileResourceService {
     private static final Duration IS_ORPHAN_TIME_DELTA = Hours.TWO.toStandardDuration();

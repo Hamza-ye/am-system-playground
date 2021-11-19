@@ -2,6 +2,7 @@ package org.nmcpye.activitiesmanagement.extended.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.nmcpye.activitiesmanagement.domain.User;
@@ -19,6 +20,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @MappedSuperclass
+@JsonRootName( value = "identifiableObject", namespace = DxfNamespaces.DXF_2_0 )
 public class BaseIdentifiableObject
     extends BaseLinkableObject implements IdentifiableObject {
 

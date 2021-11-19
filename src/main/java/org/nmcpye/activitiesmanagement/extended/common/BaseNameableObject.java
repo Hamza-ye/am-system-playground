@@ -2,12 +2,14 @@ package org.nmcpye.activitiesmanagement.extended.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyRange;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Size;
 
 //@MappedSuperclass
+@JsonRootName( value = "nameableObject", namespace = DxfNamespaces.DXF_2_0 )
 public class BaseNameableObject extends BaseIdentifiableObject implements NameableObject {
 
     /**

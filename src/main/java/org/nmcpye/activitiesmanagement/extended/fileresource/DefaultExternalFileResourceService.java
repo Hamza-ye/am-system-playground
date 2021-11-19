@@ -8,7 +8,7 @@ import org.springframework.util.Assert;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-@Service("org.nmcpye.activitiesmanagement.extended.fileresource.ExternalFileResourceService")
+@Service
 public class DefaultExternalFileResourceService
     implements ExternalFileResourceService {
     private final ExternalFileResourceStore externalFileResourceStore;

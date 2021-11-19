@@ -11,8 +11,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public interface UserService {
-    String ID = UserService.class.getName();
+public interface UserServiceExt {
+    String ID = UserServiceExt.class.getName();
     String PW_NO_INTERNAL_LOGIN = "--[##no_internal_login##]--";
 
     // -------------------------------------------------------------------------
@@ -25,7 +25,7 @@ public interface UserService {
      * @param user the User to add.
      * @return the generated identifier.
      */
-    long addUser(User user);
+    Long addUser(User user);
 
     /**
      * Updates a User.

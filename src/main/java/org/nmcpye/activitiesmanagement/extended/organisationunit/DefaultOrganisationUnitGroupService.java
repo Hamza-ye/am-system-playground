@@ -15,7 +15,7 @@ import java.util.*;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-@Service("org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitGroupService")
+@Service("org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitGroupServiceExt")
 public class DefaultOrganisationUnitGroupService implements OrganisationUnitGroupServiceExt {
 
     // -------------------------------------------------------------------------

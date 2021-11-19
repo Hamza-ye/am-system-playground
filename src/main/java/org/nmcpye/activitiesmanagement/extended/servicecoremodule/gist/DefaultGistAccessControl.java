@@ -10,7 +10,7 @@ import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.Ac
 import org.nmcpye.activitiesmanagement.extended.servicecoremodule.gist.GistQuery.Comparison;
 import org.nmcpye.activitiesmanagement.extended.servicecoremodule.gist.GistQuery.Field;
 import org.nmcpye.activitiesmanagement.extended.servicecoremodule.gist.GistQuery.Filter;
-import org.nmcpye.activitiesmanagement.extended.user.UserService;
+import org.nmcpye.activitiesmanagement.extended.user.UserServiceExt;
 import org.nmcpye.activitiesmanagement.security.AuthoritiesConstants;
 
 import java.util.HashSet;
@@ -41,15 +41,15 @@ public class DefaultGistAccessControl implements GistAccessControl {
 
     private final AclService aclService;
 
-    private final UserService userService;
+    private final UserServiceExt userServiceExt;
 
     private final GistService gistService;
 
     public DefaultGistAccessControl(User currentUser, AclService aclService,
-                                    UserService userService, GistService gistService) {
+                                    UserServiceExt userServiceExt, GistService gistService) {
         this.currentUser = currentUser;
         this.aclService = aclService;
-        this.userService = userService;
+        this.userServiceExt = userServiceExt;
         this.gistService = gistService;
     }
 
@@ -126,7 +126,7 @@ public class DefaultGistAccessControl implements GistAccessControl {
 
     @Override
     public boolean canFilterByAccessOfUser(String userUid) {
-        User user = getCurrentUserUid().equals(userUid) ? currentUser : userService.getUser(userUid);
+        User user = getCurrentUserUid().equals(userUid) ? currentUser : userServiceExt.getUser(userUid);
         return user != null && aclService.canRead(currentUser, user);
     }
 

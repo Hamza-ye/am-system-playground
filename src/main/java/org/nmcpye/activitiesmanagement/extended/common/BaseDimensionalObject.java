@@ -2,6 +2,7 @@ package org.nmcpye.activitiesmanagement.extended.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.MoreObjects;
 import org.nmcpye.activitiesmanagement.extended.analytics.AggregationType;
@@ -12,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@JsonRootName( value = "dimension", namespace = DxfNamespaces.DXF_2_0 )
 public class BaseDimensionalObject extends BaseNameableObject implements DimensionalObject {
 
     /**

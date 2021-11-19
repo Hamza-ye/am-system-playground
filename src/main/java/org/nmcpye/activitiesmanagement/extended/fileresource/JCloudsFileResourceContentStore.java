@@ -38,7 +38,7 @@ import java.util.regex.Pattern;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-@Service("org.nmcpye.activitiesmanagement.extended.fileresource.FileResourceContentStore")
+@Service
 public class JCloudsFileResourceContentStore
     implements FileResourceContentStore {
     private final Logger log = LoggerFactory.getLogger(JCloudsFileResourceContentStore.class);

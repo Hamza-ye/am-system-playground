@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-@Service("org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitService")
+@Service("org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitServiceExt")
 public class DefaultOrganisationUnitService implements OrganisationUnitServiceExt {
 
     private static final String LEVEL_PREFIX = "Level ";

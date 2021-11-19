@@ -31,8 +31,8 @@ import static org.nmcpye.activitiesmanagement.extended.common.CodeGenerator.isVa
 import static org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.ValidationUtils.uuidIsValid;
 
 @Lazy
-@Service("org.nmcpye.activitiesmanagement.extended.user.UserService")
-public class DefaultUserService implements org.nmcpye.activitiesmanagement.extended.user.UserService {
+@Service
+public class DefaultUserService implements UserServiceExt {
 
     private final Logger log = LoggerFactory.getLogger(DefaultUserService.class);
 
@@ -81,7 +81,7 @@ public class DefaultUserService implements org.nmcpye.activitiesmanagement.exten
 
     @Override
     @Transactional
-    public long addUser(User user) {
+    public Long addUser(User user) {
         User user1 = userService.getUserWithAuthorities().orElse(null);
         String userString = null;
         if (user1 != null) {

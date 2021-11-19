@@ -8,7 +8,7 @@ import org.nmcpye.activitiesmanagement.service.UserService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-@Repository("org.nmcpye.activitiesmanagement.extended.person.PersonAuthorityGroupStore")
+@Repository
 public class HibernatePersonAuthorityGroupStore
     extends HibernateIdentifiableObjectStore<PersonAuthorityGroup>
     implements PersonAuthorityGroupStore {

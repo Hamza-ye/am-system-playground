@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectUtils.getIdentifiers;
 
-@Service("org.nmcpye.activitiesmanagement.extended.period.PeriodService")
+@Service
 public class DefaultPeriodService implements PeriodServiceExt {
 
     private final Logger log = LoggerFactory.getLogger(DefaultPeriodService.class);

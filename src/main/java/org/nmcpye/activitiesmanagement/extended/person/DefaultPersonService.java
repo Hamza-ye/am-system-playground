@@ -23,7 +23,7 @@ import static org.nmcpye.activitiesmanagement.extended.common.CodeGenerator.isVa
 import static org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.ValidationUtils.uuidIsValid;
 
 @Lazy
-@Service("org.nmcpye.activitiesmanagement.extended.person.PersonServiceExtended")
+@Service
 public class DefaultPersonService implements PersonServiceExt {
 
     private final Logger log = LoggerFactory.getLogger(DefaultPersonService.class);

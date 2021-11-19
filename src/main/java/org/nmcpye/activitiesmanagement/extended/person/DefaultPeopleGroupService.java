@@ -16,7 +16,7 @@ import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-@Service("org.nmcpye.activitiesmanagement.extended.person.PeopleGroupService")
+@Service
 public class DefaultPeopleGroupService implements PeopleGroupServiceExt {
 
     // -------------------------------------------------------------------------

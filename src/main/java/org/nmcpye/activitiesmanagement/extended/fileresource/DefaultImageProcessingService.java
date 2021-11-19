@@ -15,7 +15,7 @@ import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 
-@Service("org.nmcpye.activitiesmanagement.extended.fileresource.ImageProcessingService")
+@Service
 public class DefaultImageProcessingService implements ImageProcessingService {
     private final Logger log = LoggerFactory.getLogger(DefaultImageProcessingService.class);
 

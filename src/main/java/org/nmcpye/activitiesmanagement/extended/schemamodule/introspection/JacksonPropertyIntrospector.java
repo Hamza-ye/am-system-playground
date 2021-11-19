@@ -1,6 +1,7 @@
 package org.nmcpye.activitiesmanagement.extended.schemamodule.introspection;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.collect.Multimap;
 import com.google.common.primitives.Primitives;
 import org.apache.commons.lang3.StringUtils;
@@ -107,31 +108,24 @@ public class JacksonPropertyIntrospector implements PropertyIntrospector {
 //        }
 //    }
 
-//    private static void initFromJacksonXmlProperty( Property property )
-//    {
-//        if ( !isAnnotationPresent( property.getGetterMethod(), JacksonXmlProperty.class ) )
-//        {
-//            return;
-//        }
-//        JacksonXmlProperty jacksonXmlProperty = getAnnotation( property.getGetterMethod(),
-//            JacksonXmlProperty.class );
-//
-//        if ( isEmpty( jacksonXmlProperty.localName() ) )
-//        {
-//            property.setName( property.getName() );
-//        }
-//        else
-//        {
-//            property.setName( jacksonXmlProperty.localName() );
-//        }
-//
-//        if ( !isEmpty( jacksonXmlProperty.namespace() ) )
-//        {
-//            property.setNamespace( jacksonXmlProperty.namespace() );
-//        }
-//
-//        property.setAttribute( jacksonXmlProperty.isAttribute() );
-//    }
+    private static void initFromJacksonXmlProperty( Property property )
+    {
+        if ( !isAnnotationPresent( property.getGetterMethod(), JsonProperty.class ) )
+        {
+            return;
+        }
+        JsonProperty jacksonXmlProperty = getAnnotation( property.getGetterMethod(),
+            JsonProperty.class );
+
+        if ( isEmpty( jacksonXmlProperty.value() ) )
+        {
+            property.setName( property.getName() );
+        }
+        else
+        {
+            property.setName( jacksonXmlProperty.value() );
+        }
+    }
 
     private static void initFromPersistedProperty(Property property, Property persisted) {
         property.setPersisted(true);
@@ -197,24 +191,24 @@ public class JacksonPropertyIntrospector implements PropertyIntrospector {
         return StringUtils.uncapitalize(name);
     }
 
-//    private static Property createSelfProperty( Class<?> clazz )
-//    {
-//        Property self = new Property();
-//
-//        JacksonXmlRootElement jacksonXmlRootElement = getAnnotation( clazz,
-//            JacksonXmlRootElement.class );
-//
-//        if ( !isEmpty( jacksonXmlRootElement.localName() ) )
-//        {
-//            self.setName( jacksonXmlRootElement.localName() );
-//        }
-//
-//        if ( !isEmpty( jacksonXmlRootElement.namespace() ) )
-//        {
-//            self.setNamespace( jacksonXmlRootElement.namespace() );
-//        }
-//        return self;
-//    }
+    private static Property createSelfProperty( Class<?> clazz )
+    {
+        Property self = new Property();
+
+        JsonRootName jsonRootName = getAnnotation( clazz,
+            JsonRootName.class );
+
+        if ( !isEmpty( jsonRootName.value() ) )
+        {
+            self.setName( jsonRootName.value() );
+        }
+
+        if ( !isEmpty( jsonRootName.namespace() ) )
+        {
+            self.setNamespace( jsonRootName.namespace() );
+        }
+        return self;
+    }
 
     private static List<Property> collectProperties(Class<?> klass) {
         boolean isPrimitiveOrWrapped = ClassUtils.isPrimitiveOrWrapper(klass);
@@ -291,10 +285,10 @@ public class JacksonPropertyIntrospector implements PropertyIntrospector {
 
         // TODO this is quite nasty, should find a better way of exposing
         // properties at class-level
-//        if ( isAnnotationPresent( clazz, JacksonXmlRootElement.class ) )
-//        {
-//            properties.put( "__self__", createSelfProperty( clazz ) );
-//        }
+        if ( isAnnotationPresent( clazz, JsonRootName.class ) )
+        {
+            properties.put( "__self__", createSelfProperty( clazz ) );
+        }
 
         for (Property property : collectProperties(clazz)) {
             String fieldName = initFromJsonProperty(property);
@@ -308,7 +302,7 @@ public class JacksonPropertyIntrospector implements PropertyIntrospector {
             }
 
             initFromDescription(property);
-//            initFromJacksonXmlProperty( property );
+            initFromJacksonXmlProperty( property );
 
             initCollectionProperty(property);
             if (!property.isCollection() && !hasProperties(property.getGetterMethod().getReturnType())) {
