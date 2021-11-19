@@ -27,15 +27,18 @@ public class PersonTest {
     public void setUp() {
         userAuthorityGroup1 = new PersonAuthorityGroup();
         userAuthorityGroup1.setUid("uid1");
-        userAuthorityGroup1.setAuthoritiesString(new HashSet<>(Arrays.asList("x1", "x2")));
+//        userAuthorityGroup1.setAuthoritiesString(new HashSet<>(Arrays.asList("x1", "x2")));
+        userAuthorityGroup1.setAuthorities(new HashSet<>(Arrays.asList("x1", "x2")));
 
         userAuthorityGroup2 = new PersonAuthorityGroup();
         userAuthorityGroup2.setUid("uid2");
-        userAuthorityGroup2.setAuthoritiesString(new HashSet<>(Arrays.asList("y1", "y2")));
+//        userAuthorityGroup2.setAuthoritiesString(new HashSet<>(Arrays.asList("y1", "y2")));
+        userAuthorityGroup2.setAuthorities(new HashSet<>(Arrays.asList("y1", "y2")));
 
         userAuthorityGroup1Super = new PersonAuthorityGroup();
         userAuthorityGroup1Super.setUid("uid4");
-        userAuthorityGroup1Super.setAuthoritiesString(new HashSet<>(Arrays.asList("z1", PersonAuthorityGroup.AUTHORITY_ALL)));
+//        userAuthorityGroup1Super.setAuthoritiesString(new HashSet<>(Arrays.asList("z1", PersonAuthorityGroup.AUTHORITY_ALL)));
+        userAuthorityGroup1Super.setAuthorities(new HashSet<>(Arrays.asList("z1", PersonAuthorityGroup.AUTHORITY_ALL)));
     }
 
     @Test

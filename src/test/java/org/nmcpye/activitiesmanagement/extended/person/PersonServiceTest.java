@@ -12,7 +12,7 @@ import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.domain.person.PersonAuthorityGroup;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitServiceExt;
-import org.nmcpye.activitiesmanagement.extended.user.UserService;
+import org.nmcpye.activitiesmanagement.extended.user.UserServiceExt;
 import org.nmcpye.activitiesmanagement.repository.AuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PersonServiceTest extends AMTest {
 
     @Autowired
-    private UserService userService;
+    private UserServiceExt userServiceExt;
 
     @Autowired
     private PersonServiceExt personServiceExt;
@@ -53,6 +53,8 @@ public class PersonServiceTest extends AMTest {
 
     @Override
     public void setUpTest() throws Exception {
+        super.userServiceExt = userServiceExt;
+
         unitA = createOrganisationUnit('A');
         unitB = createOrganisationUnit('B');
         unitC = createOrganisationUnit('C', unitA);
@@ -71,29 +73,35 @@ public class PersonServiceTest extends AMTest {
         roleB = createUserAuthorityGroup('B');
         roleC = createUserAuthorityGroup('C');
 
-        Authority authA = new Authority();
-        authA.setName("AuthA");
-        Authority authB = new Authority();
-        authB.setName("AuthB");
-        Authority authC = new Authority();
-        authC.setName("AuthC");
-        Authority authD = new Authority();
-        authD.setName("AuthD");
+//        Authority authA = new Authority();
+//        authA.setName("AuthA");
+//        Authority authB = new Authority();
+//        authB.setName("AuthB");
+//        Authority authC = new Authority();
+//        authC.setName("AuthC");
+//        Authority authD = new Authority();
+//        authD.setName("AuthD");
+//
+//        roleA.getAuthorities().add(authA);
+//        roleA.getAuthorities().add(authB);
+//        roleA.getAuthorities().add(authC);
+//        roleA.getAuthorities().add(authD);
+//
+//        roleB.getAuthorities().add(authA);
+//        roleB.getAuthorities().add(authB);
+//
+//        roleC.getAuthorities().add(authC);
 
-        roleA.getAuthorities().add(authA);
-        roleA.getAuthorities().add(authB);
-        roleA.getAuthorities().add(authC);
-        roleA.getAuthorities().add(authD);
+        roleA.getAuthorities().add("AuthA");
+        roleA.getAuthorities().add("AuthB");
+        roleA.getAuthorities().add("AuthC");
+        roleA.getAuthorities().add("AuthD");
 
-        roleB.getAuthorities().add(authA);
-        roleB.getAuthorities().add(authB);
+        roleB.getAuthorities().add("AuthA");
+        roleB.getAuthorities().add("AuthB");
 
-        roleC.getAuthorities().add(authC);
+        roleC.getAuthorities().add("AuthC");
 
-        //        authorityRepository.save(authA);
-        //        authorityRepository.save(authB);
-        //        authorityRepository.save(authC);
-        //        authorityRepository.save(authD);
 
         personServiceExt.addUserAuthorityGroup(roleA);
         personServiceExt.addUserAuthorityGroup(roleB);
@@ -184,10 +192,10 @@ public class PersonServiceTest extends AMTest {
         personC.getOrganisationUnits().add(unitC);
         personD.getOrganisationUnits().add(unitD);
 
-        userService.addUser(userA);
-        userService.addUser(userB);
-        userService.addUser(userC);
-        userService.addUser(userD);
+        userServiceExt.addUser(userA);
+        userServiceExt.addUser(userB);
+        userServiceExt.addUser(userC);
+        userServiceExt.addUser(userD);
 
         personServiceExt.addUser(personA);
         personServiceExt.addUser(personB);
@@ -222,10 +230,10 @@ public class PersonServiceTest extends AMTest {
         Person personC = createUserCredentials('C', userC);
         Person personD = createUserCredentials('D', userD);
 
-        userService.addUser(userA);
-        userService.addUser(userB);
-        userService.addUser(userC);
-        userService.addUser(userD);
+        userServiceExt.addUser(userA);
+        userServiceExt.addUser(userB);
+        userServiceExt.addUser(userC);
+        userServiceExt.addUser(userD);
 
         personServiceExt.addUser(personA);
         personServiceExt.addUser(personB);
@@ -287,12 +295,12 @@ public class PersonServiceTest extends AMTest {
         credentialsD.addOrganisationUnit(unitD);
         credentialsE.addOrganisationUnit(unitE);
 
-        userService.addUser(currentUser);
-        userService.addUser(userA);
-        userService.addUser(userB);
-        userService.addUser(userC);
-        userService.addUser(userD);
-        userService.addUser(userE);
+        userServiceExt.addUser(currentUser);
+        userServiceExt.addUser(userA);
+        userServiceExt.addUser(userB);
+        userServiceExt.addUser(userC);
+        userServiceExt.addUser(userD);
+        userServiceExt.addUser(userE);
 
         personServiceExt.addUser(currentPerson);
         personServiceExt.addUser(credentialsA);
@@ -336,10 +344,10 @@ public class PersonServiceTest extends AMTest {
         Person personC = createUserCredentials('C', userC);
         Person personD = createUserCredentials('D', userD);
 
-        userService.addUser(userA);
-        userService.addUser(userB);
-        userService.addUser(userC);
-        userService.addUser(userD);
+        userServiceExt.addUser(userA);
+        userServiceExt.addUser(userB);
+        userServiceExt.addUser(userC);
+        userServiceExt.addUser(userD);
 
         personServiceExt.addUser(personA);
         personServiceExt.addUser(personB);
@@ -409,9 +417,9 @@ public class PersonServiceTest extends AMTest {
         credentialsB.setMobile("23452134");
         credentialsC.setMobile("14543232");
 
-        userService.addUser(userA);
-        userService.addUser(userB);
-        userService.addUser(userC);
+        userServiceExt.addUser(userA);
+        userServiceExt.addUser(userB);
+        userServiceExt.addUser(userC);
 
         personServiceExt.addUser(credentialsA);
         personServiceExt.addUser(credentialsB);
@@ -432,14 +440,14 @@ public class PersonServiceTest extends AMTest {
         Person credentialsA = createUserCredentials('A', userA);
         Person credentialsB = createUserCredentials('B', userB);
 
-        userService.addUser(userA);
-        userService.addUser(userB);
+        userServiceExt.addUser(userA);
+        userServiceExt.addUser(userB);
 
         personServiceExt.addUser(credentialsA);
         personServiceExt.addUser(credentialsB);
 
-        assertEquals(userA, userService.getUserByUuid(credentialsA.getUuid()));
-        assertEquals(userB, userService.getUserByUuid(credentialsB.getUuid()));
+        assertEquals(userA, userServiceExt.getUserByUuid(credentialsA.getUuid()));
+        assertEquals(userB, userServiceExt.getUserByUuid(credentialsB.getUuid()));
     }
 
     @Test
@@ -452,9 +460,9 @@ public class PersonServiceTest extends AMTest {
         Person credentialsB = createUserCredentials('B', userB);
         Person credentialsC = createUserCredentials('C', userC);
 
-        userService.addUser(userA);
-        userService.addUser(userB);
-        userService.addUser(userC);
+        userServiceExt.addUser(userA);
+        userServiceExt.addUser(userB);
+        userServiceExt.addUser(userC);
 
         personServiceExt.addUser(credentialsA);
         personServiceExt.addUser(credentialsB);
@@ -502,9 +510,9 @@ public class PersonServiceTest extends AMTest {
         credentialsB.getOrganisationUnits().add(unitA);
         credentialsC.getOrganisationUnits().add(unitA);
 
-        userService.addUser(userA);
-        userService.addUser(userB);
-        userService.addUser(userC);
+        userServiceExt.addUser(userA);
+        userServiceExt.addUser(userB);
+        userServiceExt.addUser(userC);
 
         personServiceExt.addUser(credentialsA);
         personServiceExt.addUser(credentialsB);
@@ -559,12 +567,12 @@ public class PersonServiceTest extends AMTest {
         credentialsE.getPersonAuthorityGroups().add(roleB);
         credentialsF.getPersonAuthorityGroups().add(roleC);
 
-        userService.addUser(userA);
-        userService.addUser(userB);
-        userService.addUser(userC);
-        userService.addUser(userD);
-        userService.addUser(userE);
-        userService.addUser(userF);
+        userServiceExt.addUser(userA);
+        userServiceExt.addUser(userB);
+        userServiceExt.addUser(userC);
+        userServiceExt.addUser(userD);
+        userServiceExt.addUser(userE);
+        userServiceExt.addUser(userF);
 
         personServiceExt.addUser(credentialsA);
         personServiceExt.addUser(credentialsB);
@@ -638,12 +646,12 @@ public class PersonServiceTest extends AMTest {
         Person credentialsE = createUserCredentials('E', userE);
         Person credentialsF = createUserCredentials('F', userF);
 
-        userService.addUser(userA);
-        userService.addUser(userB);
-        userService.addUser(userC);
-        userService.addUser(userD);
-        userService.addUser(userE);
-        userService.addUser(userF);
+        userServiceExt.addUser(userA);
+        userServiceExt.addUser(userB);
+        userServiceExt.addUser(userC);
+        userServiceExt.addUser(userD);
+        userServiceExt.addUser(userE);
+        userServiceExt.addUser(userF);
 
         personServiceExt.addUser(credentialsA);
         personServiceExt.addUser(credentialsB);
@@ -678,10 +686,10 @@ public class PersonServiceTest extends AMTest {
         credentialsA.setSelfRegistered(true);
         credentialsC.setSelfRegistered(true);
 
-        userService.addUser(userA);
-        userService.addUser(userB);
-        userService.addUser(userC);
-        userService.addUser(userD);
+        userServiceExt.addUser(userA);
+        userServiceExt.addUser(userB);
+        userServiceExt.addUser(userC);
+        userServiceExt.addUser(userD);
 
         personServiceExt.addUser(credentialsA);
         personServiceExt.addUser(credentialsB);
@@ -718,10 +726,10 @@ public class PersonServiceTest extends AMTest {
         credentialsC.getOrganisationUnits().add(unitA);
         credentialsD.getOrganisationUnits().add(unitB);
 
-        userService.addUser(userA);
-        userService.addUser(userB);
-        userService.addUser(userC);
-        userService.addUser(userD);
+        userServiceExt.addUser(userA);
+        userServiceExt.addUser(userB);
+        userServiceExt.addUser(userC);
+        userServiceExt.addUser(userD);
 
         personServiceExt.addUser(credentialsA);
         personServiceExt.addUser(credentialsB);

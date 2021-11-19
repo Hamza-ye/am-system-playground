@@ -15,7 +15,7 @@ import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.domain.person.PersonAuthorityGroup;
 import org.nmcpye.activitiesmanagement.extended.common.CodeGenerator;
 import org.nmcpye.activitiesmanagement.extended.person.PersonServiceExt;
-import org.nmcpye.activitiesmanagement.extended.user.UserService;
+import org.nmcpye.activitiesmanagement.extended.user.UserServiceExt;
 import org.nmcpye.activitiesmanagement.security.AuthoritiesConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +29,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
@@ -48,7 +49,7 @@ public abstract class AMConvenienceTest {
 
     protected static final String BASE_USER_GROUP_UID = "ugabcdefgh";
 
-    protected UserService userService;
+    protected UserServiceExt userServiceExt;
 
     protected PersonServiceExt personServiceExt;
 
@@ -198,7 +199,7 @@ public abstract class AMConvenienceTest {
         boolean allAuth,
         String... auths
     ) {
-        Assert.notNull(userService, "UserService must be injected in test");
+        Assert.notNull(userServiceExt, "UserService must be injected in test");
 
         Set<String> authorities = new HashSet<>();
 
@@ -213,9 +214,10 @@ public abstract class AMConvenienceTest {
         PersonAuthorityGroup userAuthorityGroup = new PersonAuthorityGroup();
         userAuthorityGroup.setName("Superuser");
 
-        userAuthorityGroup.setAuthoritiesString(Sets.newHashSet(auths));
+//        userAuthorityGroup.setAuthoritiesString(Sets.newHashSet(auths));
+        userAuthorityGroup.setAuthorities(Sets.newHashSet(auths));
 
-        userService.addUserAuthorityGroup(userAuthorityGroup);
+        userServiceExt.addUserAuthorityGroup(userAuthorityGroup);
 
         User user = createUser('A');
 
@@ -228,9 +230,9 @@ public abstract class AMConvenienceTest {
         }
 
         user.getPerson().getPersonAuthorityGroups().add(userAuthorityGroup);
-        userService.addUser(user);
+        userServiceExt.addUser(user);
         user.getPerson().setUserInfo(user);
-        userService.addUserCredentials(user.getPerson());
+        userServiceExt.addUserCredentials(user.getPerson());
 
         Set<GrantedAuthority> grantedAuths = authorities.stream().map(a -> new SimpleGrantedAuthority(a)).collect(Collectors.toSet());
 
@@ -247,8 +249,8 @@ public abstract class AMConvenienceTest {
     }
 
     protected void saveAndInjectUserSecurityContext(User user) {
-        userService.addUser(user);
-        userService.addUserCredentials(user.getPerson());
+        userServiceExt.addUser(user);
+        userServiceExt.addUserCredentials(user.getPerson());
 
         List<GrantedAuthority> grantedAuthorities = user
             .getPerson()
@@ -288,16 +290,20 @@ public abstract class AMConvenienceTest {
 
         credentials.setUserInfo(user);
         credentials.setUser(user);
+        credentials.setLogin("username" + uniqueCharacter);
         user.setPerson(credentials);
         user.setEmail(uniqueCharacter + "nmcpye@nmcpye.org");
         user.setLogin("username" + uniqueCharacter);
 
-        credentials.setLogin("username" + uniqueCharacter);
+
         user.setPassword("password" + uniqueCharacter);
 
-        if (auths != null && !auths.isEmpty()) {
+        Set<Authority> authoritySet = auths.stream().map(Authority::new).collect(Collectors.toSet());
+        user.setAuthorities(authoritySet);
+        if (!auths.isEmpty()) {
             PersonAuthorityGroup role = new PersonAuthorityGroup();
-            role.setAuthoritiesString(Sets.newHashSet(auths));
+//            role.setAuthoritiesString(Sets.newHashSet(auths));
+            role.setAuthorities(Sets.newHashSet(auths));
             credentials.getPersonAuthorityGroups().add(role);
         }
 
@@ -312,7 +318,7 @@ public abstract class AMConvenienceTest {
     }
 
     protected User createUser(String username, String... authorities) {
-        Assert.notNull(userService, "UserService must be injected in test");
+        Assert.notNull(userServiceExt, "UserService must be injected in test");
 
         String password = "district";
 
@@ -320,7 +326,8 @@ public abstract class AMConvenienceTest {
         userAuthorityGroup.setCode(username);
         userAuthorityGroup.setName(username);
         userAuthorityGroup.setDescription(username);
-        userAuthorityGroup.setAuthoritiesString(Sets.newHashSet(authorities));
+//        userAuthorityGroup.setAuthoritiesString(Sets.newHashSet(authorities));
+        userAuthorityGroup.setAuthorities(Sets.newHashSet(authorities));
 
         personServiceExt.addUserAuthorityGroup(userAuthorityGroup);
 
@@ -333,7 +340,7 @@ public abstract class AMConvenienceTest {
         Set<Authority> authoritySet = auths.stream().map(Authority::new).collect(Collectors.toSet());
 
         user.setAuthorities(authoritySet);
-        userService.addUser(user);
+        userServiceExt.addUser(user);
 
         Person userCredentials = new Person();
         userCredentials.setCode(username);
@@ -342,16 +349,16 @@ public abstract class AMConvenienceTest {
         userCredentials.setLogin(username);
         userCredentials.getPersonAuthorityGroups().add(userAuthorityGroup);
 
-        userService.addUserCredentials(userCredentials);
+        userServiceExt.addUserCredentials(userCredentials);
 
         user.setPerson(userCredentials);
-        userService.updateUser(user);
+        userServiceExt.updateUser(user);
 
         return user;
     }
 
     protected User createAdminUser(String... authorities) {
-        Assert.notNull(userService, "UserService must be injected in test");
+        Assert.notNull(userServiceExt, "UserService must be injected in test");
 
         String username = "admin";
         String password = "district";
@@ -362,9 +369,10 @@ public abstract class AMConvenienceTest {
         userAuthorityGroup.setName("Superuser");
         userAuthorityGroup.setDescription("Superuser");
 
-        userAuthorityGroup.setAuthoritiesString(Sets.newHashSet(authorities));
+//        userAuthorityGroup.setAuthoritiesString(Sets.newHashSet(authorities));
+        userAuthorityGroup.setAuthorities(Sets.newHashSet(authorities));
 
-        userService.addUserAuthorityGroup(userAuthorityGroup);
+        userServiceExt.addUserAuthorityGroup(userAuthorityGroup);
 
         User user = new User();
         user.setUid("M5zQapPyTZI");
@@ -378,7 +386,7 @@ public abstract class AMConvenienceTest {
         user.setAuthorities(authoritySet);
         user.setPassword(password);
 
-        userService.addUser(user);
+        userServiceExt.addUser(user);
 
         Person userCredentials = new Person();
         userCredentials.setUid("KvMx6c1eoYo");
@@ -390,10 +398,10 @@ public abstract class AMConvenienceTest {
         userCredentials.getPersonAuthorityGroups().add(userAuthorityGroup);
 
         //        userService.encodeAndSetPassword( userCredentials, password );
-        userService.addUserCredentials(userCredentials);
+        userServiceExt.addUserCredentials(userCredentials);
 
         user.setPerson(userCredentials);
-        userService.updateUser(user);
+        userServiceExt.updateUser(user);
 
         return user;
     }
@@ -497,7 +505,8 @@ public abstract class AMConvenienceTest {
         role.setUid(BASE_UID + uniqueCharacter);
         role.setName("UserAuthorityGroup" + uniqueCharacter);
 
-        role.setAuthoritiesString(Sets.newHashSet(auths));
+//        role.setAuthoritiesString(Sets.newHashSet(auths));
+        role.setAuthorities(Sets.newHashSet(auths));
 
         return role;
     }
@@ -602,5 +611,18 @@ public abstract class AMConvenienceTest {
         groupSet.setCompulsory(true);
 
         return groupSet;
+    }
+
+    protected final User addUser( char uniqueCharacter, Consumer<Person> consumer )
+    {
+        User user = createUser( uniqueCharacter );
+        Person credentials = createUserCredentials( uniqueCharacter, user );
+        if ( consumer != null )
+        {
+            consumer.accept( credentials );
+        }
+        userServiceExt.addUser( user );
+        userServiceExt.addUserCredentials( credentials );
+        return user;
     }
 }

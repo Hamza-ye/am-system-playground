@@ -12,7 +12,7 @@ import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitG
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitGroupServiceExt;
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitServiceExt;
-import org.nmcpye.activitiesmanagement.extended.user.UserService;
+import org.nmcpye.activitiesmanagement.extended.user.UserServiceExt;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
@@ -38,11 +38,11 @@ public class IdentifiableObjectManagerTest
     private IdentifiableObjectManager identifiableObjectManager;
 
     @Autowired
-    private UserService _userService;
+    private UserServiceExt _userServiceExt;
 
     @Override
     protected void setUpTest() throws Exception {
-        this.userService = _userService;
+        this.userServiceExt = _userServiceExt;
     }
 
     @Test
