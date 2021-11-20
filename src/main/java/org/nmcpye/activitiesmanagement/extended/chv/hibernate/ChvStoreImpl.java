@@ -5,6 +5,7 @@ import org.nmcpye.activitiesmanagement.extended.chv.ChvStore;
 import org.nmcpye.activitiesmanagement.extended.common.hibernate.HibernateIdentifiableObjectStore;
 import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;
 import org.nmcpye.activitiesmanagement.service.UserService;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
@@ -17,7 +18,8 @@ public class ChvStoreImpl
     // Dependencies
     // -------------------------------------------------------------------------
 
-    public ChvStoreImpl(JdbcTemplate jdbcTemplate, UserService currentUserService, AclService aclService) {
-        super(jdbcTemplate, CHV.class, currentUserService, aclService, true);
+    public ChvStoreImpl(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher,
+                        UserService userService, AclService aclService) {
+        super(jdbcTemplate, publisher, CHV.class, userService, aclService, true);
     }
 }

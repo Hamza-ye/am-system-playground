@@ -3,10 +3,12 @@ package org.nmcpye.activitiesmanagement.extended.organisationunit;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.nmcpye.activitiesmanagement.AMTest;
 import org.nmcpye.activitiesmanagement.IntegrationTest;
 import org.nmcpye.activitiesmanagement.domain.enumeration.OrganisationUnitType;
+import org.nmcpye.activitiesmanagement.domain.fileresource.FileResource;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroupSet;
@@ -14,7 +16,10 @@ import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitL
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.extended.common.DeleteNotAllowedException;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectUtils;
+import org.nmcpye.activitiesmanagement.extended.fileresource.FileResourceDomain;
+import org.nmcpye.activitiesmanagement.extended.fileresource.FileResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.MimeTypeUtils;
 
 import java.util.*;
 
@@ -36,8 +41,8 @@ public class OrganisationUnitServiceExtTest
 //    @Autowired
 //    private DataSetService dataSetService;
 
-//    @Autowired
-//    private FileResourceService fileResourceService;
+    @Autowired
+    private FileResourceService fileResourceService;
 
     @Autowired
     private OrganisationUnitGroupServiceExt organisationUnitGroupServiceExt;
@@ -132,6 +137,7 @@ public class OrganisationUnitServiceExtTest
         assertTrue(organisationUnitServiceExt.getOrganisationUnit(id1).getChildren().isEmpty());
     }
 
+    @Disabled("Enable after implementing DeletionHandlers")
     @Test
     public void testAddAndDelOrganisationUnitWithChildren() {
         OrganisationUnit organisationUnit1 = createOrganisationUnit('A');
@@ -1085,25 +1091,25 @@ public class OrganisationUnitServiceExtTest
     }
 
     // TODO Enable when Adding FileResource
-//    @Test
-//    public void testSaveImage()
-//    {
-//        byte[] content = "<<png data>>".getBytes();
-//        FileResource fileResource = new FileResource( "testOrgUnitImage.png", MimeTypeUtils.IMAGE_PNG.getType(),
-//            content.length,
-//            "md5", FileResourceDomain.ORG_UNIT );
-//        fileResource.setAssigned( false );
-//        fileResource.setCreated( new Date() );
-//        fileResource.setAutoFields();
-//        fileResourceService.saveFileResource( fileResource, content );
-//
-//        OrganisationUnit orgUnit = createOrganisationUnit( 'A' );
-//        orgUnit.setImage( fileResource );
-//        organisationUnitService.addOrganisationUnit( orgUnit );
-//
-//        OrganisationUnit savedOU = organisationUnitService.getOrganisationUnit( orgUnit.getUid() );
-//
-//        assertEquals( fileResource.getUid(), savedOU.getImage().getUid() );
-//
-//    }
+    @Test
+    public void testSaveImage()
+    {
+        byte[] content = "<<png data>>".getBytes();
+        FileResource fileResource = new FileResource( "testOrgUnitImage.png", MimeTypeUtils.IMAGE_PNG.getType(),
+            content.length,
+            "md5", FileResourceDomain.ORG_UNIT );
+        fileResource.setAssigned( false );
+        fileResource.setCreated( new Date() );
+        fileResource.setAutoFields();
+        fileResourceService.saveFileResource( fileResource, content );
+
+        OrganisationUnit orgUnit = createOrganisationUnit( 'A' );
+        orgUnit.setImage( fileResource );
+        organisationUnitServiceExt.addOrganisationUnit( orgUnit );
+
+        OrganisationUnit savedOU = organisationUnitServiceExt.getOrganisationUnit( orgUnit.getUid() );
+
+        assertEquals( fileResource.getUid(), savedOU.getImage().getUid() );
+
+    }
 }

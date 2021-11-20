@@ -5,17 +5,21 @@ import org.nmcpye.activitiesmanagement.extended.common.hibernate.HibernateIdenti
 import org.nmcpye.activitiesmanagement.extended.dataset.MalariaCasesReportStore;
 import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;
 import org.nmcpye.activitiesmanagement.service.UserService;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  * Created by Hamza on 17-11-2021.
  */
-public class MalariaCasesReportStoreImpl extends HibernateIdentifiableObjectStore<MalariaCasesReport> implements MalariaCasesReportStore {
+public class MalariaCasesReportStoreImpl
+    extends HibernateIdentifiableObjectStore<MalariaCasesReport>
+    implements MalariaCasesReportStore {
     // -------------------------------------------------------------------------
     // Dependencies
     // -------------------------------------------------------------------------
 
-    public MalariaCasesReportStoreImpl(JdbcTemplate jdbcTemplate, UserService userService, AclService aclService) {
-        super(jdbcTemplate, MalariaCasesReport.class, userService, aclService, true);
+    public MalariaCasesReportStoreImpl(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher,
+                                       UserService userService, AclService aclService) {
+        super(jdbcTemplate, publisher, MalariaCasesReport.class, userService, aclService, true);
     }
 }

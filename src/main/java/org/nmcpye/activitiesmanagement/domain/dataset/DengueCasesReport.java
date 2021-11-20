@@ -99,12 +99,6 @@ public class DengueCasesReport extends BaseIdentifiableObject implements Metadat
     @Column(name = "comment")
     private String comment;
 
-//    @ManyToOne
-//    private User user;
-//
-//    @ManyToOne
-//    private User lastUpdatedBy;
-
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy" }, allowSetters = true)

@@ -205,12 +205,6 @@ public class CHV extends BaseIdentifiableObject implements MetadataObject {
     )
     private OrganisationUnit managedByHf;
 
-//    @ManyToOne
-//    private User user;
-//
-//    @ManyToOne
-//    private User lastUpdatedBy;
-
     @ManyToMany(mappedBy = "responsibleForChvs")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "person", "responsibleForChvs" }, allowSetters = true)

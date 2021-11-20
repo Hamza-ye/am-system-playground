@@ -5,6 +5,7 @@ import org.nmcpye.activitiesmanagement.extended.common.hibernate.HibernateIdenti
 import org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitGroupStore;
 import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;
 import org.nmcpye.activitiesmanagement.service.UserService;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
@@ -14,8 +15,9 @@ public class OrganisationUnitGroupStoreImpl
     extends HibernateIdentifiableObjectStore<OrganisationUnitGroup>
     implements OrganisationUnitGroupStore {
 
-    public OrganisationUnitGroupStoreImpl(JdbcTemplate jdbcTemplate, UserService userService, AclService aclService) {
-        super(jdbcTemplate, OrganisationUnitGroup.class, userService, aclService, true);
+    public OrganisationUnitGroupStoreImpl(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher,
+                                          UserService userService, AclService aclService) {
+        super(jdbcTemplate, publisher, OrganisationUnitGroup.class, userService, aclService, true);
     }
 
     @Override

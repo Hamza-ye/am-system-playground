@@ -8,8 +8,11 @@ import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.nmcpye.activitiesmanagement.extended.common.AuditLogUtil;
 import org.nmcpye.activitiesmanagement.extended.common.GenericStore;
+import org.nmcpye.activitiesmanagement.extended.common.ObjectDeletionRequestedEvent;
+import org.nmcpye.activitiesmanagement.extended.hibernate.HibernateProxyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.persistence.EntityManager;
@@ -20,6 +23,8 @@ import javax.persistence.criteria.*;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class HibernateGenericStore<T> implements GenericStore<T> {
 
@@ -37,11 +42,16 @@ public class HibernateGenericStore<T> implements GenericStore<T> {
 
     protected boolean cacheable;
 
-    public HibernateGenericStore(JdbcTemplate jdbcTemplate, Class<T> clazz, boolean cacheable) {
-        //        checkNotNull( jdbcTemplate );
-        //        checkNotNull( clazz );
+    protected ApplicationEventPublisher publisher;
+
+    public HibernateGenericStore(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher, Class<T> clazz,
+                                 boolean cacheable) {
+        checkNotNull( jdbcTemplate );
+        checkNotNull( publisher );
+        checkNotNull( clazz );
 
         this.jdbcTemplate = jdbcTemplate;
+        this.publisher = publisher;
         this.clazz = clazz;
         this.cacheable = cacheable;
     }
@@ -313,7 +323,12 @@ public class HibernateGenericStore<T> implements GenericStore<T> {
 
     @Override
     public void delete(T object) {
-        getSession().delete(object);
+        if ( !ObjectDeletionRequestedEvent.shouldSkip( HibernateProxyUtils.getRealClass( object ) ) )
+        {
+            publisher.publishEvent( new ObjectDeletionRequestedEvent( object ) );
+        }
+
+        getSession().delete( object );
     }
 
     @Override

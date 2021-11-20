@@ -26,31 +26,4 @@
             <column name="file_resource_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    
-    <changeSet author="Hamza (generated)" id="1637249241269-10">
-        <addForeignKeyConstraint
-            baseColumnNames="file_resource_id"
-            baseTableName="document"
-            constraintName="FK_document_file_resource_id"
-            deferrable="false" initiallyDeferred="false"
-            referencedColumnNames="id"
-            referencedTableName="file_resource" validate="true"/>
-
-        <addForeignKeyConstraint
-            baseColumnNames="created_by"
-            baseTableName="document"
-            constraintName="FK_document_created_by"
-            deferrable="false" initiallyDeferred="false"
-            referencedColumnNames="id"
-            referencedTableName="app_user" validate="true"/>
-
-        <addForeignKeyConstraint
-            baseColumnNames="last_updated_by"
-            baseTableName="document"
-            constraintName="FK_document_last_updated_by"
-            deferrable="false" initiallyDeferred="false"
-            referencedColumnNames="id"
-            referencedTableName="app_user" validate="true"/>
-
-    </changeSet>
 </databaseChangeLog>

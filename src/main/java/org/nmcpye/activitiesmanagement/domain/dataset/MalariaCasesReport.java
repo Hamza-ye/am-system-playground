@@ -130,12 +130,6 @@ public class MalariaCasesReport extends BaseIdentifiableObject implements Metada
     @Column(name = "comment")
     private String comment;
 
-//    @ManyToOne
-//    private User user;
-//
-//    @ManyToOne
-//    private User lastUpdatedBy;
-
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy" }, allowSetters = true)

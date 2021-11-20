@@ -1,0 +1,48 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <!---->
+    <changeSet author="Hamza (generated)" id="1636911576718-16">
+        <addUniqueConstraint columnNames="code" constraintName="UC_FILE_RESOURCECODE_COL" tableName="file_resource"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-17">
+        <addUniqueConstraint columnNames="uid" constraintName="UC_FILE_RESOURCEUID_COL" tableName="file_resource"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-32">
+        <addForeignKeyConstraint baseColumnNames="last_updated_by" baseTableName="file_resource" constraintName="FKmy94tobim4lwtgfr50jpbgngf" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-35">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="file_resource" constraintName="FKrwh3abvwahuavb5nav5gof62c" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+
+    <!---->
+    <changeSet author="Hamza (generated)" id="1636911576718-14">
+        <addUniqueConstraint columnNames="code" constraintName="UC_EXTERNAL_FILE_RESOURCECODE_COL" tableName="external_file_resource"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-15">
+        <addUniqueConstraint columnNames="uid" constraintName="UC_EXTERNAL_FILE_RESOURCEUID_COL" tableName="external_file_resource"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-31">
+        <addForeignKeyConstraint baseColumnNames="last_updated_by" baseTableName="external_file_resource" constraintName="FKmgpcavyewtvcx7ga6cc640xq7" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <!--<changeSet author="Hamza (generated)" id="1636911576718-25">-->
+        <!--<addForeignKeyConstraint baseColumnNames="created_by" baseTableName="external_file_resource" constraintName="FKb2ai47upv7t88js9xycrj6ivt" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>-->
+    <!--</changeSet>-->
+    <changeSet author="Hamza (generated)" id="1636911576718-26">
+        <addForeignKeyConstraint baseColumnNames="file_resource_id" baseTableName="external_file_resource" constraintName="FKb4kihon02ukmlg0tsjnu503cp" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="file_resource" validate="true"/>
+    </changeSet>
+
+    <!---->
+    <changeSet author="Hamza (generated)" id="1636911576718-20">
+        <addUniqueConstraint columnNames="code" constraintName="UC_SQL_VIEWCODE_COL" tableName="sql_view"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-21">
+        <addUniqueConstraint columnNames="uid" constraintName="UC_SQL_VIEWUID_COL" tableName="sql_view"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-33">
+        <addForeignKeyConstraint baseColumnNames="last_updated_by" baseTableName="sql_view" constraintName="FKoo07h6yyj5bmiogo0rpaev31n" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1636911576718-34">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="sql_view" constraintName="FKrvwky8vpm7onxtpe267tl17p1" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+
+</databaseChangeLog>

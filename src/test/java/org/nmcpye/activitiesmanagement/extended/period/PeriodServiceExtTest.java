@@ -535,13 +535,6 @@ class PeriodServiceExtTest extends AMTest {
         int idC = periodTypeC.getId();
         int idD = periodTypeD.getId();
 
-        Integer intD = periodTypeD.getId();
-
-        PeriodType idA1 = periodServiceExt.getPeriodType( idA );
-        PeriodType idB1 = periodServiceExt.getPeriodType( idB );
-        PeriodType idC1 = periodServiceExt.getPeriodType( intD );
-        PeriodType idD1 = periodServiceExt.getPeriodType( periodTypeD.getId() );
-
         assertNotNull( periodServiceExt.getPeriodType( idA ) );
         assertNotNull( periodServiceExt.getPeriodType( idB ) );
         assertNotNull( periodServiceExt.getPeriodType( idC ) );

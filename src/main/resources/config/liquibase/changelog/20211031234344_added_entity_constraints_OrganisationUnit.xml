@@ -8,6 +8,12 @@
     -->
     <changeSet id="20211031234344-2" author="jhipster">
 
+        <addForeignKeyConstraint baseColumnNames="image"
+                                 baseTableName="organisation_unit"
+                                 constraintName="fk_organisation_unit__file_resource_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="file_resource"/>
+
         <addForeignKeyConstraint baseColumnNames="parent_id"
                                  baseTableName="organisation_unit"
                                  constraintName="fk_organisation_unit__parent_id"

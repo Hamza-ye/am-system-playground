@@ -10,6 +10,7 @@ import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.Ac
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.annotation.Nonnull;
@@ -26,8 +27,9 @@ public class ActivityStoreImpl
 
     private final Logger log = LoggerFactory.getLogger(ActivityStoreImpl.class);
 
-    public ActivityStoreImpl(JdbcTemplate jdbcTemplate, UserService userService, AclService aclService) {
-        super(jdbcTemplate, Activity.class, userService, aclService, true);
+    public ActivityStoreImpl(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher,
+                             UserService userService, AclService aclService) {
+        super(jdbcTemplate, publisher, Activity.class, userService, aclService, true);
     }
 
     //////////////////////////////////////

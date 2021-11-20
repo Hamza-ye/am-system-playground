@@ -68,7 +68,12 @@
 
         <addPrimaryKey columnNames="orgunit_group_id, organisation_unit_id" tableName="orgunit_group_members"/>
     </changeSet>
-
+    <changeSet author="Hamza (generated)" id="1637439606771-7">
+        <createIndex indexName="IX_null_1" tableName="orgunit_group_members" unique="true">
+            <column name="orgunit_group_id"/>
+            <column name="organisation_unit_id"/>
+        </createIndex>
+    </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
     <!--

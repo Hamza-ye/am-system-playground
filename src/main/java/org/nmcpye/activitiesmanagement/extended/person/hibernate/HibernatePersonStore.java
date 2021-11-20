@@ -14,6 +14,7 @@ import org.nmcpye.activitiesmanagement.extended.servicecoremodule.query.QueryUti
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -29,8 +30,9 @@ public class HibernatePersonStore extends HibernateIdentifiableObjectStore<Perso
 
     private final Logger log = LoggerFactory.getLogger(HibernatePersonStore.class);
 
-    public HibernatePersonStore(JdbcTemplate jdbcTemplate, UserService userService, AclService aclService) {
-        super(jdbcTemplate, Person.class, userService, aclService, true);
+    public HibernatePersonStore(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher,
+                                UserService userService, AclService aclService) {
+        super(jdbcTemplate, publisher, Person.class, userService, aclService, true);
     }
 
     @Override
@@ -162,12 +164,12 @@ public class HibernatePersonStore extends HibernateIdentifiableObjectStore<Perso
             //                "and a.name not in (:auths) ) ";
             hql +=
                 hlp.whereAnd() +
-                " not exists (" +
-                "select uc2 from Person uc2 " +
-                "inner join uc2.personAuthorityGroups ag2 " +
-                "inner join ag2.authorities a " +
-                "where uc2.id = u.id " +
-                "and a not in (:auths) ) ";
+                    " not exists (" +
+                    "select uc2 from Person uc2 " +
+                    "inner join uc2.personAuthorityGroups ag2 " +
+                    "inner join ag2.authorities a " +
+                    "where uc2.id = u.id " +
+                    "and a not in (:auths) ) ";
         }
 
         // TODO handle users with no user roles
@@ -175,12 +177,12 @@ public class HibernatePersonStore extends HibernateIdentifiableObjectStore<Perso
         if (params.isDisjointRoles() && params.getPerson() != null) {
             hql +=
                 hlp.whereAnd() +
-                " not exists (" +
-                "select uc3 from Person uc3 " +
-                "inner join uc3.personAuthorityGroups ag3 " +
-                //                "where uc3.id = uc.id " +
-                "where uc3.id = u.id " +
-                "and ag3.id in (:roles) ) ";
+                    " not exists (" +
+                    "select uc3 from Person uc3 " +
+                    "inner join uc3.personAuthorityGroups ag3 " +
+                    //                "where uc3.id = uc.id " +
+                    "where uc3.id = u.id " +
+                    "and ag3.id in (:roles) ) ";
         }
 
         if (params.getLastLogin() != null) {

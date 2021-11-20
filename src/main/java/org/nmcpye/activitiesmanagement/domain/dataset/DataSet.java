@@ -188,110 +188,45 @@ public class DataSet extends BaseDimensionalItemObject
         this.code = code;
     }
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
-//    public Long getId() {
-//        return id;
-//    }
-
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-
     public DataSet id(Long id) {
         this.id = id;
         return this;
     }
-
-//    public String getUid() {
-//        return this.uid;
-//    }
 
     public DataSet uid(String uid) {
         this.uid = uid;
         return this;
     }
 
-//    public void setUid(String uid) {
-//        this.uid = uid;
-//    }
-//
-//    public String getCode() {
-//        return this.code;
-//    }
-
     public DataSet code(String code) {
         this.code = code;
         return this;
     }
-
-//    public void setCode(String code) {
-//        this.code = code;
-//    }
-
-//    public String getName() {
-//        return this.name;
-//    }
 
     public DataSet name(String name) {
         this.name = name;
         return this;
     }
 
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-
-//    public String getShortName() {
-//        return this.shortName;
-//    }
-
     public DataSet shortName(String shortName) {
         this.shortName = shortName;
         return this;
     }
-
-//    public void setShortName(String shortName) {
-//        this.shortName = shortName;
-//    }
-
-//    public String getDescription() {
-//        return this.description;
-//    }
 
     public DataSet description(String description) {
         this.description = description;
         return this;
     }
 
-//    public void setDescription(String description) {
-//        this.description = description;
-//    }
-
-//    public Date getCreated() {
-//        return this.created;
-//    }
-
     public DataSet created(Date created) {
         this.created = created;
         return this;
     }
 
-//    public void setCreated(Date created) {
-//        this.created = created;
-//    }
-
-//    public Date getLastUpdated() {
-//        return this.lastUpdated;
-//    }
-
     public DataSet lastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
         return this;
     }
-
-//    public void setLastUpdated(Date lastUpdated) {
-//        this.lastUpdated = lastUpdated;
-//    }
 
     @JsonProperty
     public Integer getExpiryDays() {
@@ -322,7 +257,7 @@ public class DataSet extends BaseDimensionalItemObject
     }
 
     @JsonProperty
-//    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<MalariaCasesReport> getMalariaCasesReports() {
         return this.malariaCasesReports;
     }
@@ -355,7 +290,7 @@ public class DataSet extends BaseDimensionalItemObject
     }
 
     @JsonProperty
-//    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<DengueCasesReport> getDengueCasesReports() {
         return this.dengueCasesReports;
     }
@@ -419,31 +354,15 @@ public class DataSet extends BaseDimensionalItemObject
         this.notificationRecipients = peopleGroup;
     }
 
-//    public User getUser() {
-//        return this.user;
-//    }
-
     public DataSet user(User user) {
         this.setUser(user);
         return this;
     }
 
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
-
-//    public User getLastUpdatedBy() {
-//        return this.lastUpdatedBy;
-//    }
-
     public DataSet lastUpdatedBy(User user) {
         this.setLastUpdatedBy(user);
         return this;
     }
-
-//    public void setLastUpdatedBy(User user) {
-//        this.lastUpdatedBy = user;
-//    }
 
     @JsonProperty(value = "organisationUnits")
     @JsonSerialize(contentAs = BaseIdentifiableObject.class)

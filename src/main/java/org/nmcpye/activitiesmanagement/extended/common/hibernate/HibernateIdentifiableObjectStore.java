@@ -19,6 +19,7 @@ import org.nmcpye.activitiesmanagement.security.SecurityUtils;
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.persistence.TypedQuery;
@@ -44,9 +45,11 @@ public class HibernateIdentifiableObjectStore<T extends BaseIdentifiableObject>
 
     protected boolean transientIdentifiableProperties = false;
 
-    public HibernateIdentifiableObjectStore(JdbcTemplate jdbcTemplate, Class<T> clazz,
-                                            UserService userService, AclService aclService, boolean cacheable) {
-        super(jdbcTemplate, clazz, cacheable);
+    public HibernateIdentifiableObjectStore(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher,
+                                            Class<T> clazz, UserService userService,
+                                            AclService aclService, boolean cacheable) {
+        super(jdbcTemplate, publisher, clazz, cacheable);
+
         checkNotNull(userService);
         checkNotNull(aclService);
 

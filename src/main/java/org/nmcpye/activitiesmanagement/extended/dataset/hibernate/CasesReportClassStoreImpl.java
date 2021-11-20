@@ -5,6 +5,7 @@ import org.nmcpye.activitiesmanagement.extended.common.hibernate.HibernateIdenti
 import org.nmcpye.activitiesmanagement.extended.dataset.CasesReportClassStore;
 import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;
 import org.nmcpye.activitiesmanagement.service.UserService;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
@@ -17,9 +18,9 @@ public class CasesReportClassStoreImpl
     // Dependencies
     // -------------------------------------------------------------------------
 
-    public CasesReportClassStoreImpl(JdbcTemplate jdbcTemplate, UserService currentUserService,
-                                     AclService aclService) {
-        super(jdbcTemplate, CasesReportClass.class, currentUserService, aclService, true);
+    public CasesReportClassStoreImpl(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher,
+                                     UserService userService, AclService aclService) {
+        super(jdbcTemplate, publisher, CasesReportClass.class, userService, aclService, true);
     }
 
     // -------------------------------------------------------------------------

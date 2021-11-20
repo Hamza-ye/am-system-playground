@@ -122,6 +122,13 @@ public class OrganisationUnitGroup extends BaseDimensionalItemObject implements 
     // Logic
     // -------------------------------------------------------------------------
 
+    @PreRemove
+    private void removeGroupSetsFromOuGroups() {
+        for (OrganisationUnitGroupSet gs : groupSets) {
+            gs.getOrganisationUnitGroups().remove(this);
+        }
+    }
+
     public boolean addOrganisationUnit(OrganisationUnit organisationUnit) {
         members.add(organisationUnit);
         return organisationUnit.getGroups().add(this);

@@ -13,13 +13,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.geotools.geojson.geom.GeometryJSON;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.nmcpye.activitiesmanagement.domain.*;
+import org.nmcpye.activitiesmanagement.domain.MalariaUnit;
+import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.chv.CHV;
 import org.nmcpye.activitiesmanagement.domain.dataset.DataSet;
 import org.nmcpye.activitiesmanagement.domain.dataset.DengueCasesReport;
 import org.nmcpye.activitiesmanagement.domain.dataset.MalariaCasesReport;
 import org.nmcpye.activitiesmanagement.domain.demographicdata.DemographicData;
 import org.nmcpye.activitiesmanagement.domain.enumeration.OrganisationUnitType;
+import org.nmcpye.activitiesmanagement.domain.fileresource.FileResource;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.extended.common.*;
 import org.nmcpye.activitiesmanagement.extended.common.coordinate.CoordinateObject;
@@ -44,7 +46,7 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "organisation_unit")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@JsonRootName( value = "organisationUnit", namespace = DxfNamespaces.DXF_2_0 )
+@JsonRootName(value = "organisationUnit", namespace = DxfNamespaces.DXF_2_0)
 public class OrganisationUnit extends BaseDimensionalItemObject implements MetadataObject, CoordinateObject {
 
     private static final String PATH_SEP = "/";
@@ -265,6 +267,13 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
     @Column(columnDefinition = "geometry(Geometry,4326)", nullable = true)
     private Geometry geometry;
 
+    /**
+     * A reference to the Image file associated with this OrganisationUnit.
+     */
+    @ManyToOne
+    @JoinColumn(name = "image")
+    private FileResource image;
+
     private transient boolean currentParent;
 
     private transient String type;
@@ -338,67 +347,26 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
         super.setAutoFields();
     }
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
-//    @Override
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    @Override
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
-//    public OrganisationUnit id(Long id) {
-//        this.id = id;
-//        return this;
-//    }
-//
-//    @Override
-//    public String getUid() {
-//        return this.uid;
-//    }
-//
-//    public OrganisationUnit uid(String uid) {
-//        this.uid = uid;
-//        return this;
-//    }
-
-//    @Override
-//    public void setUid(String uid) {
-//        this.uid = uid;
-//    }
-//
-//    @Override
-//    public String getCode() {
-//        return this.code;
-//    }
+    @PreRemove
+    private void removeOuGroupsFromOu() {
+        for (OrganisationUnitGroup g : groups) {
+            g.getMembers().remove(this);
+        }
+        if (parent != null) {
+            parent.getChildren().remove(this);
+        }
+    }
 
     public OrganisationUnit code(String code) {
         this.code = code;
         return this;
     }
 
-//    @Override
-//    public void setCode(String code) {
-//        this.code = code;
-//    }
-//
-//    @Override
-//    public String getName() {
-//        return this.name;
-//    }
-
     public OrganisationUnit name(String name) {
         this.name = name;
         return this;
     }
 
-    //    @Override
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
     @Override
     public String getShortName() {
         return this.shortName;
@@ -409,40 +377,15 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
         return this;
     }
 
-//    @Override
-//    public void setShortName(String shortName) {
-//        this.shortName = shortName;
-//    }
-//
-//    @Override
-//    public Date getCreated() {
-//        return this.created;
-//    }
-
     public OrganisationUnit created(Date created) {
         this.created = created;
         return this;
     }
 
-//    @Override
-//    public void setCreated(Date created) {
-//        this.created = created;
-//    }
-//
-//    @Override
-//    public Date getLastUpdated() {
-//        return this.lastUpdated;
-//    }
-
     public OrganisationUnit lastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
         return this;
     }
-
-//    @Override
-//    public void setLastUpdated(Date lastUpdated) {
-//        this.lastUpdated = lastUpdated;
-//    }
 
     public void setComment(String comment) {
         this.comment = comment;
@@ -452,31 +395,15 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
         this.coveredByHf = organisationUnit;
     }
 
-//    public User getUser() {
-//        return this.user;
-//    }
-
     public OrganisationUnit user(User user) {
         this.setUser(user);
         return this;
     }
 
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
-//
-//    public User getLastUpdatedBy() {
-//        return this.lastUpdatedBy;
-//    }
-
     public OrganisationUnit lastUpdatedBy(User user) {
         this.setLastUpdatedBy(user);
         return this;
     }
-
-//    public void setLastUpdatedBy(User user) {
-//        this.lastUpdatedBy = user;
-//    }
 
     public OrganisationUnit addChildren(OrganisationUnit organisationUnit) {
         this.children.add(organisationUnit);
@@ -1285,7 +1212,7 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
     }
 
     @JsonProperty
-    //    @JsonSerialize( contentAs = BaseIdentifiableObject.class )
+    @JsonSerialize( contentAs = BaseIdentifiableObject.class )
     public Set<MalariaCasesReport> getMalariaReports() {
         return this.malariaReports;
     }
@@ -1318,7 +1245,7 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
     }
 
     @JsonProperty
-    //    @JsonSerialize( contentAs = BaseIdentifiableObject.class )
+    @JsonSerialize( contentAs = BaseIdentifiableObject.class )
     public Set<DengueCasesReport> getDengueReports() {
         return this.dengueReports;
     }
@@ -1397,7 +1324,7 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
     }
 
     @JsonProperty
-    //    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public CHV getAssignedChv() {
         return this.assignedChv;
     }
@@ -1412,7 +1339,7 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
     }
 
     @JsonProperty
-    //    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<DemographicData> getDemographicData() {
         return this.demographicData;
     }
@@ -1591,6 +1518,15 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
 
     @Override
     public void setUser(User user) {
-        setCreatedBy( createdBy == null ? user : createdBy );
+        setCreatedBy(createdBy == null ? user : createdBy);
+    }
+
+    @JsonProperty
+    public FileResource getImage() {
+        return image;
+    }
+
+    public void setImage(FileResource image) {
+        this.image = image;
     }
 }

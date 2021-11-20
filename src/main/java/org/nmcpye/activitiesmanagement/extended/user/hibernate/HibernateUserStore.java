@@ -33,7 +33,7 @@ public class HibernateUserStore extends HibernateIdentifiableObjectStore<User> i
 
     public HibernateUserStore(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher,
                               UserService userService, AclService aclService) {
-        super(jdbcTemplate, User.class, userService, aclService, true);
+        super(jdbcTemplate, publisher, User.class, userService, aclService, true);
     }
 
     @Override
@@ -125,11 +125,11 @@ public class HibernateUserStore extends HibernateIdentifiableObjectStore<User> i
         if (params.getQuery() != null) {
             hql +=
                 hlp.whereAnd() +
-                " (" +
-                "lower(u.firstName) like :key " +
-                "or lower(u.surname) like :key " +
-                "or lower(u.email) like :key " +
-                "or lower(uc.username) like :key) ";
+                    " (" +
+                    "lower(u.firstName) like :key " +
+                    "or lower(u.surname) like :key " +
+                    "or lower(u.email) like :key " +
+                    "or lower(uc.username) like :key) ";
         }
 
         if (params.getMobile() != null) {
@@ -143,12 +143,12 @@ public class HibernateUserStore extends HibernateIdentifiableObjectStore<User> i
         if (params.isAuthSubset() && params.getUser() != null) {
             hql +=
                 hlp.whereAnd() +
-                " not exists (" +
-                "select uc2 from UserCredentials uc2 " +
-                "inner join uc2.userAuthorityGroups ag2 " +
-                "inner join ag2.authorities a " +
-                "where uc2.id = uc.id " +
-                "and a not in (:auths) ) ";
+                    " not exists (" +
+                    "select uc2 from UserCredentials uc2 " +
+                    "inner join uc2.userAuthorityGroups ag2 " +
+                    "inner join ag2.authorities a " +
+                    "where uc2.id = uc.id " +
+                    "and a not in (:auths) ) ";
         }
 
         // TODO handle users with no user roles
@@ -156,11 +156,11 @@ public class HibernateUserStore extends HibernateIdentifiableObjectStore<User> i
         if (params.isDisjointRoles() && params.getUser() != null) {
             hql +=
                 hlp.whereAnd() +
-                " not exists (" +
-                "select uc3 from UserCredentials uc3 " +
-                "inner join uc3.userAuthorityGroups ag3 " +
-                "where uc3.id = uc.id " +
-                "and ag3.id in (:roles) ) ";
+                    " not exists (" +
+                    "select uc3 from UserCredentials uc3 " +
+                    "inner join uc3.userAuthorityGroups ag3 " +
+                    "where uc3.id = uc.id " +
+                    "and ag3.id in (:roles) ) ";
         }
 
         if (params.getLastLogin() != null) {

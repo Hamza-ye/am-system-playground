@@ -68,6 +68,9 @@
             <column name="parent_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+            <column name="image" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <column name="hf_home_sub_village_id" type="bigint">
                 <constraints nullable="true" />
             </column>

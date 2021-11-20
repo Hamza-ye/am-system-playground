@@ -18,6 +18,7 @@ import org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.SqlUtil
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.Assert;
 
@@ -26,12 +27,14 @@ import java.util.*;
 
 //@Repository("org.nmcpye.activitiesmanagement.extended.organisationunit.OrganisationUnitStore")
 public class OrganisationUnitStoreImpl
-    extends HibernateIdentifiableObjectStore<OrganisationUnit> implements OrganisationUnitStore {
+    extends HibernateIdentifiableObjectStore<OrganisationUnit>
+    implements OrganisationUnitStore {
 
     private final Logger log = LoggerFactory.getLogger(OrganisationUnitStoreImpl.class);
 
-    public OrganisationUnitStoreImpl(JdbcTemplate jdbcTemplate, UserService userService, AclService aclService) {
-        super(jdbcTemplate, OrganisationUnit.class, userService, aclService, true);
+    public OrganisationUnitStoreImpl(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher,
+                                     UserService userService, AclService aclService) {
+        super(jdbcTemplate, publisher, OrganisationUnit.class, userService, aclService, true);
     }
 
     // -------------------------------------------------------------------------
@@ -224,13 +227,13 @@ public class OrganisationUnitStoreImpl
 
         final String sql =
             "update organisationunit " +
-            "set parentid=" +
-            parentId +
-            ", lastupdated='" +
-            now +
-            "' " +
-            "where organisationunitid=" +
-            organisationUnitId;
+                "set parentid=" +
+                parentId +
+                ", lastupdated='" +
+                now +
+                "' " +
+                "where organisationunitid=" +
+                organisationUnitId;
 
         jdbcTemplate.execute(sql);
     }

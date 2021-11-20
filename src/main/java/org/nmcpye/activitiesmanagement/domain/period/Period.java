@@ -75,9 +75,7 @@ public class Period extends BaseDimensionalItemObject {
     // Constructors
     // -------------------------------------------------------------------------
 
-    public Period() {
-//        setAutoFields();
-    }
+    public Period() {}
 
     public Period(Period period) {
         this.id = period.getId();

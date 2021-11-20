@@ -11,6 +11,7 @@ import org.nmcpye.activitiesmanagement.extended.sqlview.SqlViewType;
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -37,9 +38,10 @@ public class HibernateSqlViewStore
 
     private final JdbcTemplate readOnlyJdbcTemplate;
 
-    public HibernateSqlViewStore(JdbcTemplate jdbcTemplate, UserService userService,
-                                 StatementBuilder statementBuilder, JdbcTemplate readOnlyJdbcTemplate, AclService aclService) {
-        super(jdbcTemplate, SqlView.class, userService, aclService, false);
+    public HibernateSqlViewStore(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher,
+                                 UserService currentUserService, AclService aclService,
+                                 StatementBuilder statementBuilder, JdbcTemplate readOnlyJdbcTemplate) {
+        super(jdbcTemplate, publisher, SqlView.class, currentUserService, aclService, false);
 
         checkNotNull(statementBuilder);
         checkNotNull(readOnlyJdbcTemplate);

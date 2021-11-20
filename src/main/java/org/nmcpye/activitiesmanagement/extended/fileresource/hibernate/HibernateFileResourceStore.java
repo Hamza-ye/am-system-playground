@@ -8,6 +8,7 @@ import org.nmcpye.activitiesmanagement.extended.fileresource.FileResourceDomain;
 import org.nmcpye.activitiesmanagement.extended.fileresource.FileResourceStore;
 import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;
 import org.nmcpye.activitiesmanagement.service.UserService;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -24,9 +25,9 @@ public class HibernateFileResourceStore
         .add("image/jpeg")
         .build();
 
-    public HibernateFileResourceStore(JdbcTemplate jdbcTemplate, UserService currentUserService,
-                                      AclService aclService) {
-        super(jdbcTemplate, FileResource.class, currentUserService, aclService, false);
+    public HibernateFileResourceStore(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher,
+                                      UserService userService, AclService aclService) {
+        super(jdbcTemplate, publisher, FileResource.class, userService, aclService, true);
     }
 
     @Override

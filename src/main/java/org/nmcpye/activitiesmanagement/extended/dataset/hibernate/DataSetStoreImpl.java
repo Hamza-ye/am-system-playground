@@ -8,6 +8,7 @@ import org.nmcpye.activitiesmanagement.extended.hibernatemodule.hibernate.JpaQue
 import org.nmcpye.activitiesmanagement.extended.period.PeriodServiceExt;
 import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;
 import org.nmcpye.activitiesmanagement.service.UserService;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -27,9 +28,9 @@ public class DataSetStoreImpl
 
     private final PeriodServiceExt periodServiceExt;
 
-    public DataSetStoreImpl(JdbcTemplate jdbcTemplate, UserService currentUserService, AclService aclService,
-                            PeriodServiceExt periodServiceExt) {
-        super(jdbcTemplate, DataSet.class, currentUserService, aclService, true);
+    public DataSetStoreImpl(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher,
+                            UserService userService, AclService aclService, PeriodServiceExt periodServiceExt) {
+        super(jdbcTemplate, publisher, DataSet.class, userService, aclService, true);
 
         checkNotNull(periodServiceExt);
 

@@ -17,6 +17,7 @@ import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.Ac
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -38,9 +39,9 @@ public class HibernatePeriodStore extends HibernateIdentifiableObjectStore<Perio
 
     private static Cache<String, Long> PERIOD_ID_CACHE;
 
-    public HibernatePeriodStore(JdbcTemplate jdbcTemplate, UserService userService, AclService aclService) {
-        //        super(sessionFactory, jdbcTemplate, Period.class, userService, true);
-        super(jdbcTemplate, Period.class, userService, aclService, true);
+    public HibernatePeriodStore(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher,
+                                UserService userService, AclService aclService) {
+        super(jdbcTemplate, publisher, Period.class, userService, aclService, true);
         transientIdentifiableProperties = true;
     }
 

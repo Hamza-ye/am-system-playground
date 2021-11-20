@@ -5,6 +5,7 @@ import org.nmcpye.activitiesmanagement.extended.common.hibernate.HibernateIdenti
 import org.nmcpye.activitiesmanagement.extended.fileresource.ExternalFileResourceStore;
 import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;
 import org.nmcpye.activitiesmanagement.service.UserService;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -12,10 +13,10 @@ import org.springframework.stereotype.Repository;
 public class HibernateExternalFileResourceStore
     extends HibernateIdentifiableObjectStore<ExternalFileResource>
     implements ExternalFileResourceStore {
-    public HibernateExternalFileResourceStore(JdbcTemplate jdbcTemplate, UserService currentUserService,
-                                              AclService aclService) {
-        super(jdbcTemplate, ExternalFileResource.class, currentUserService, aclService,
-            false);
+
+    public HibernateExternalFileResourceStore(JdbcTemplate jdbcTemplate, ApplicationEventPublisher publisher,
+                                              UserService userService, AclService aclService) {
+        super(jdbcTemplate, publisher, ExternalFileResource.class, userService, aclService, true);
     }
 
     @Override

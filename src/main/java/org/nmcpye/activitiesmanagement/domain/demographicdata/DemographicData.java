@@ -154,12 +154,6 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
     )
     private OrganisationUnit organisationUnit;
 
-//    @ManyToOne
-//    private User user;
-//
-//    @ManyToOne
-//    private User lastUpdatedBy;
-
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties(value = { "demographicData", "user", "createdBy", "lastUpdatedBy" }, allowSetters = true)
