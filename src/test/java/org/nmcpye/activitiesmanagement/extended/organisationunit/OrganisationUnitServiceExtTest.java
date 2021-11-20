@@ -2,6 +2,7 @@ package org.nmcpye.activitiesmanagement.extended.organisationunit;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.nmcpye.activitiesmanagement.AMTest;
 import org.nmcpye.activitiesmanagement.IntegrationTest;
@@ -11,6 +12,7 @@ import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitG
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroupSet;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitLevel;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
+import org.nmcpye.activitiesmanagement.extended.common.DeleteNotAllowedException;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -130,26 +132,28 @@ public class OrganisationUnitServiceExtTest
         assertTrue(organisationUnitServiceExt.getOrganisationUnit(id1).getChildren().isEmpty());
     }
 
-//    @Test(expected = DeleteNotAllowedException.class)
-//    public void testAddAndDelOrganisationUnitWithChildren() {
-//        OrganisationUnit organisationUnit1 = createOrganisationUnit('A');
-//        OrganisationUnit organisationUnit2 = createOrganisationUnit('B');
-//
-//        long id1 = organisationUnitService.addOrganisationUnit(organisationUnit1);
-//        long id2 = organisationUnitService.addOrganisationUnit(organisationUnit2);
-//
-//        organisationUnit1.setChildren(Sets.newHashSet(organisationUnit2));
-//        organisationUnit2.setParent(organisationUnit1);
-//
-//        organisationUnitService.updateOrganisationUnit(organisationUnit1);
-//
-//        organisationUnitService.updatePaths();
-//
-//        assertNotNull(organisationUnitService.getOrganisationUnit(id1));
-//        assertNotNull(organisationUnitService.getOrganisationUnit(id2));
-//
-//        organisationUnitService.deleteOrganisationUnit(organisationUnitService.getOrganisationUnit(id1));
-//    }
+    @Test
+    public void testAddAndDelOrganisationUnitWithChildren() {
+        OrganisationUnit organisationUnit1 = createOrganisationUnit('A');
+        OrganisationUnit organisationUnit2 = createOrganisationUnit('B');
+
+        long id1 = organisationUnitServiceExt.addOrganisationUnit(organisationUnit1);
+        long id2 = organisationUnitServiceExt.addOrganisationUnit(organisationUnit2);
+
+        organisationUnit1.setChildren(Sets.newHashSet(organisationUnit2));
+        organisationUnit2.setParent(organisationUnit1);
+
+        organisationUnitServiceExt.updateOrganisationUnit(organisationUnit1);
+
+        organisationUnitServiceExt.updatePaths();
+
+        assertNotNull(organisationUnitServiceExt.getOrganisationUnit(id1));
+        assertNotNull(organisationUnitServiceExt.getOrganisationUnit(id2));
+
+        Assertions.assertThrows(DeleteNotAllowedException.class, () -> {
+            organisationUnitServiceExt.deleteOrganisationUnit(organisationUnitServiceExt.getOrganisationUnit(id1));
+        });
+    }
 
     // TODO Enable when converting DataSet into identifiable Object
 //    @Test
