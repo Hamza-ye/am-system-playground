@@ -19,7 +19,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
-@MappedSuperclass
+//@MappedSuperclass
 @JsonRootName( value = "identifiableObject", namespace = DxfNamespaces.DXF_2_0 )
 public class BaseIdentifiableObject
     extends BaseLinkableObject implements IdentifiableObject {
@@ -340,14 +340,14 @@ public class BaseIdentifiableObject
      * Set auto-generated fields on save or update
      */
     public void setAutoFields() {
-        if (uid == null || uid.length() == 0) {
+        if (getUid() == null || getUid().length() == 0) {
             setUid(CodeGenerator.generateUid());
         }
 
         Date date = new Date();
 
-        if (created == null) {
-            created = date;
+        if (getCreated() == null) {
+            setCreated(date);
         }
 
         setLastUpdated(date);
@@ -362,13 +362,13 @@ public class BaseIdentifiableObject
     @Override
     public String getPropertyValue(IdScheme idScheme) {
         if (idScheme.isNull() || idScheme.is(IdentifiableProperty.UID)) {
-            return uid;
+            return getUid();
         } else if (idScheme.is(IdentifiableProperty.CODE)) {
-            return code;
+            return getCode();
         } else if (idScheme.is(IdentifiableProperty.NAME)) {
-            return name;
+            return getName();
         } else if (idScheme.is(IdentifiableProperty.ID)) {
-            return id > 0 ? String.valueOf(id) : null;
+            return getId() > 0 ? String.valueOf(getId()) : null;
         }
 
         return null;
