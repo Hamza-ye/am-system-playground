@@ -475,7 +475,6 @@ public class IdentifiableObjectManagerTest
     public void testGetIdMapIdScheme() {
         OrganisationUnit unitA = createOrganisationUnit('A');
         OrganisationUnit unitB = createOrganisationUnit('B');
-        ;
 
         organisationUnitServiceExt.addOrganisationUnit(unitA);
         organisationUnitServiceExt.addOrganisationUnit(unitB);
