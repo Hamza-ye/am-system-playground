@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CHVTeamRepository extends JpaRepository<CHVTeam, Long> {
-    @Query("select cHVTeam from CHVTeam cHVTeam where cHVTeam.user.login = ?#{principal.username}")
+    @Query("select cHVTeam from CHVTeam cHVTeam where cHVTeam.createdBy.login = ?#{principal.username}")
     List<CHVTeam> findByUserIsCurrentUser();
 
     @Query("select cHVTeam from CHVTeam cHVTeam where cHVTeam.lastUpdatedBy.login = ?#{principal.username}")

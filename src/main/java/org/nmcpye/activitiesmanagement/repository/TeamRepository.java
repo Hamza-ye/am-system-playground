@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface TeamRepository extends JpaRepository<Team, Long> {
-    @Query("select team from Team team where team.user.login = ?#{principal.username}")
+    @Query("select team from Team team where team.createdBy.login = ?#{principal.username}")
     List<Team> findByUserIsCurrentUser();
 
     @Query("select team from Team team where team.lastUpdatedBy.login = ?#{principal.username}")

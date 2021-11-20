@@ -1,6 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.scheduling;
 
-import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.nmcpye.activitiesmanagement.domain.scheduling.JobConfiguration;
 import org.nmcpye.activitiesmanagement.extended.schema.Property;
 
 import java.util.List;

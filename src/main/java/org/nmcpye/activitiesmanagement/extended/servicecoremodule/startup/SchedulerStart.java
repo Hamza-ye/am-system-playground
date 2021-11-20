@@ -1,6 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.servicecoremodule.startup;
 
-import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.nmcpye.activitiesmanagement.domain.scheduling.JobConfiguration;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobConfigurationService;
 import org.nmcpye.activitiesmanagement.extended.scheduling.SchedulingManager;
 import org.nmcpye.activitiesmanagement.extended.systemmodule.system.startup.AbstractStartupRoutine;

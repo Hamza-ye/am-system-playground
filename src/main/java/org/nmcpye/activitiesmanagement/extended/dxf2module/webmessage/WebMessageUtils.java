@@ -1,6 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.dxf2module.webmessage;
 
-import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.nmcpye.activitiesmanagement.domain.scheduling.JobConfiguration;
 import org.nmcpye.activitiesmanagement.extended.dxf2module.scheduling.JobConfigurationWebMessageResponse;
 import org.nmcpye.activitiesmanagement.extended.dxf2module.webmessage.responses.ErrorReportsWebMessageResponse;
 import org.nmcpye.activitiesmanagement.extended.dxf2module.webmessage.responses.ObjectReportWebMessageResponse;

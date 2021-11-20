@@ -1,6 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.analyticsmodule;
 
-import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.nmcpye.activitiesmanagement.domain.scheduling.JobConfiguration;
 
 import javax.annotation.Nullable;
 

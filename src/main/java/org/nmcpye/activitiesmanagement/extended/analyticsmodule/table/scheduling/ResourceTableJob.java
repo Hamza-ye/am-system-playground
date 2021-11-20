@@ -1,6 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.analyticsmodule.table.scheduling;
 
-import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.nmcpye.activitiesmanagement.domain.scheduling.JobConfiguration;
 import org.nmcpye.activitiesmanagement.extended.analyticsmodule.AnalyticsTableGenerator;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobType;
 import org.nmcpye.activitiesmanagement.extended.scheduling.schedulingcoremodule.AbstractJob;

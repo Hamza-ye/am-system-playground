@@ -1,6 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.config;
 
-import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.nmcpye.activitiesmanagement.domain.scheduling.JobConfiguration;
 import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
 import org.nmcpye.activitiesmanagement.extended.common.hibernate.HibernateIdentifiableObjectStore;
 import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;

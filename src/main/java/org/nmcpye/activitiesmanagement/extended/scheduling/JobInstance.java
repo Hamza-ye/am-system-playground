@@ -1,6 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.scheduling;
 
-import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.nmcpye.activitiesmanagement.domain.scheduling.JobConfiguration;
 
 /**
  * This interface is an abstraction for the actual execution of jobs based on a job configuration.

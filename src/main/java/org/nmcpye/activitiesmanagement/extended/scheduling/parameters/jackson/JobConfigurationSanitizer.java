@@ -1,7 +1,7 @@
 package org.nmcpye.activitiesmanagement.extended.scheduling.parameters.jackson;
 
 import com.fasterxml.jackson.databind.util.StdConverter;
-import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.nmcpye.activitiesmanagement.domain.scheduling.JobConfiguration;
 
 /**
  * Cleans the resulting job configuration after de-serializing.

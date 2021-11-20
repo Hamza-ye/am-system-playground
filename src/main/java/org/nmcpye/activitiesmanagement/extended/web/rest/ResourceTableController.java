@@ -1,6 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.web.rest;
 
-import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.nmcpye.activitiesmanagement.domain.scheduling.JobConfiguration;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobType;
 import org.nmcpye.activitiesmanagement.extended.scheduling.SchedulingManager;
 import org.nmcpye.activitiesmanagement.extended.web.service.WebMessageService;

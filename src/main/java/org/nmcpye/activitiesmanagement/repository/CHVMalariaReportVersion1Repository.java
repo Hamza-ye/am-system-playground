@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CHVMalariaReportVersion1Repository extends JpaRepository<CHVMalariaReportVersion1, Long> {
     @Query(
-        "select cHVMalariaReportVersion1 from CHVMalariaReportVersion1 cHVMalariaReportVersion1 where cHVMalariaReportVersion1.user.login = ?#{principal.username}"
+        "select cHVMalariaReportVersion1 from CHVMalariaReportVersion1 cHVMalariaReportVersion1 where cHVMalariaReportVersion1.createdBy.login = ?#{principal.username}"
     )
     List<CHVMalariaReportVersion1> findByUserIsCurrentUser();
 

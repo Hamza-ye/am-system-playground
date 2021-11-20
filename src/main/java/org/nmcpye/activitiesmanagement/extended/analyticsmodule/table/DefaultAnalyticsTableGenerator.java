@@ -1,6 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.analyticsmodule.table;
 
-import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.nmcpye.activitiesmanagement.domain.scheduling.JobConfiguration;
 import org.nmcpye.activitiesmanagement.extended.analyticsmodule.AnalyticsTableGenerator;
 import org.nmcpye.activitiesmanagement.extended.administrationModule.resourcetable.ResourceTableService;
 import org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.Clock;

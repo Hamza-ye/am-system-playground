@@ -1,7 +1,7 @@
 package org.nmcpye.activitiesmanagement.extended.dxf2module.scheduling;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.nmcpye.activitiesmanagement.domain.scheduling.JobConfiguration;
 import org.nmcpye.activitiesmanagement.extended.dxf2module.webmessage.WebMessageResponse;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobParameters;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobStatus;

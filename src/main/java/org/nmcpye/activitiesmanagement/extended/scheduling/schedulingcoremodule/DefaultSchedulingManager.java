@@ -1,6 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.scheduling.schedulingcoremodule;
 
-import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.nmcpye.activitiesmanagement.domain.scheduling.JobConfiguration;
 import org.nmcpye.activitiesmanagement.extended.scheduling.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

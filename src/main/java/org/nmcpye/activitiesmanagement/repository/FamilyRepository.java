@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface FamilyRepository extends JpaRepository<Family, Long> {
-    @Query("select family from Family family where family.user.login = ?#{principal.username}")
+    @Query("select family from Family family where family.createdBy.login = ?#{principal.username}")
     List<Family> findByUserIsCurrentUser();
 
     @Query("select family from Family family where family.lastUpdatedBy.login = ?#{principal.username}")

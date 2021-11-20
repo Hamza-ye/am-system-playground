@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface DataProviderRepository extends JpaRepository<DataProvider, Long> {
-    @Query("select dataProvider from DataProvider dataProvider where dataProvider.user.login = ?#{principal.username}")
+    @Query("select dataProvider from DataProvider dataProvider where dataProvider.createdBy.login = ?#{principal.username}")
     List<DataProvider> findByUserIsCurrentUser();
 
     @Query("select dataProvider from DataProvider dataProvider where dataProvider.lastUpdatedBy.login = ?#{principal.username}")

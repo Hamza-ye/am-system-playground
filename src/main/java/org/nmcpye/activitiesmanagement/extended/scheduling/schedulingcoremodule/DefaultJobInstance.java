@@ -1,7 +1,7 @@
 package org.nmcpye.activitiesmanagement.extended.scheduling.schedulingcoremodule;
 
 import com.google.common.base.Preconditions;
-import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.nmcpye.activitiesmanagement.domain.scheduling.JobConfiguration;
 import org.nmcpye.activitiesmanagement.extended.common.DebugUtils;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobInstance;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobStatus;

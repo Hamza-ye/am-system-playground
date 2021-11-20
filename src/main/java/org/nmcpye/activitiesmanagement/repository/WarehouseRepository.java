@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
-    @Query("select warehouse from Warehouse warehouse where warehouse.user.login = ?#{principal.username}")
+    @Query("select warehouse from Warehouse warehouse where warehouse.createdBy.login = ?#{principal.username}")
     List<Warehouse> findByUserIsCurrentUser();
 
     @Query("select warehouse from Warehouse warehouse where warehouse.lastUpdatedBy.login = ?#{principal.username}")

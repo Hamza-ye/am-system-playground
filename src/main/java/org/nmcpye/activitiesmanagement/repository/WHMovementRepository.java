@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface WHMovementRepository extends JpaRepository<WHMovement, Long> {
-    @Query("select wHMovement from WHMovement wHMovement where wHMovement.user.login = ?#{principal.username}")
+    @Query("select wHMovement from WHMovement wHMovement where wHMovement.createdBy.login = ?#{principal.username}")
     List<WHMovement> findByUserIsCurrentUser();
 
     @Query("select wHMovement from WHMovement wHMovement where wHMovement.lastUpdatedBy.login = ?#{principal.username}")

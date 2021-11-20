@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.extended.fileresource;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.nmcpye.activitiesmanagement.domain.scheduling.JobConfiguration;
 import org.nmcpye.activitiesmanagement.domain.fileresource.FileResource;
 import org.nmcpye.activitiesmanagement.extended.common.DeleteNotAllowedException;
 import org.nmcpye.activitiesmanagement.extended.scheduling.Job;

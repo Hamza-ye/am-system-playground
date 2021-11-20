@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface MalariaUnitRepository extends JpaRepository<MalariaUnit, Long> {
-    @Query("select malariaUnit from MalariaUnit malariaUnit where malariaUnit.user.login = ?#{principal.username}")
+    @Query("select malariaUnit from MalariaUnit malariaUnit where malariaUnit.createdBy.login = ?#{principal.username}")
     List<MalariaUnit> findByUserIsCurrentUser();
 
     @Query("select malariaUnit from MalariaUnit malariaUnit where malariaUnit.lastUpdatedBy.login = ?#{principal.username}")

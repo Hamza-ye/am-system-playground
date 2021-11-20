@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface FingerprintRepository extends JpaRepository<Fingerprint, Long> {
-    @Query("select fingerprint from Fingerprint fingerprint where fingerprint.user.login = ?#{principal.username}")
+    @Query("select fingerprint from Fingerprint fingerprint where fingerprint.createdBy.login = ?#{principal.username}")
     List<Fingerprint> findByUserIsCurrentUser();
 
     @Query("select fingerprint from Fingerprint fingerprint where fingerprint.lastUpdatedBy.login = ?#{principal.username}")

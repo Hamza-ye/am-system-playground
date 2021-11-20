@@ -1,6 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.fileresource;
 
-import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.nmcpye.activitiesmanagement.domain.scheduling.JobConfiguration;
 import org.nmcpye.activitiesmanagement.domain.fileresource.FileResource;
 import org.nmcpye.activitiesmanagement.extended.common.DebugUtils;
 import org.nmcpye.activitiesmanagement.extended.scheduling.Job;

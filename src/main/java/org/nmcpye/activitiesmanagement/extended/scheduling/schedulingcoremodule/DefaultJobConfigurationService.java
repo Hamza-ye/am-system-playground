@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Primitives;
 import org.apache.commons.beanutils.PropertyUtils;
-import org.nmcpye.activitiesmanagement.domain.JobConfiguration;
+import org.nmcpye.activitiesmanagement.domain.scheduling.JobConfiguration;
 import org.nmcpye.activitiesmanagement.extended.common.EmbeddedObject;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectStore;

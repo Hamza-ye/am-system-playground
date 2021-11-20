@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface LLINSFamilyTargetRepository extends JpaRepository<LLINSFamilyTarget, Long> {
-    @Query("select lLINSFamilyTarget from LLINSFamilyTarget lLINSFamilyTarget where lLINSFamilyTarget.user.login = ?#{principal.username}")
+    @Query("select lLINSFamilyTarget from LLINSFamilyTarget lLINSFamilyTarget where lLINSFamilyTarget.createdBy.login = ?#{principal.username}")
     List<LLINSFamilyTarget> findByUserIsCurrentUser();
 
     @Query(

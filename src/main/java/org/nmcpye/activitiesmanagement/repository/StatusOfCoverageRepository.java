@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface StatusOfCoverageRepository extends JpaRepository<StatusOfCoverage, Long> {
-    @Query("select statusOfCoverage from StatusOfCoverage statusOfCoverage where statusOfCoverage.user.login = ?#{principal.username}")
+    @Query("select statusOfCoverage from StatusOfCoverage statusOfCoverage where statusOfCoverage.createdBy.login = ?#{principal.username}")
     List<StatusOfCoverage> findByUserIsCurrentUser();
 
     @Query(

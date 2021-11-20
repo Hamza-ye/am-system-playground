@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MalariaUnitStaffMemberRepository extends JpaRepository<MalariaUnitStaffMember, Long> {
     @Query(
-        "select malariaUnitStaffMember from MalariaUnitStaffMember malariaUnitStaffMember where malariaUnitStaffMember.user.login = ?#{principal.username}"
+        "select malariaUnitStaffMember from MalariaUnitStaffMember malariaUnitStaffMember where malariaUnitStaffMember.createdBy.login = ?#{principal.username}"
     )
     List<MalariaUnitStaffMember> findByUserIsCurrentUser();
 

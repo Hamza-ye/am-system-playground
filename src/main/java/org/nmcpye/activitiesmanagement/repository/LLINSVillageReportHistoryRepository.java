@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LLINSVillageReportHistoryRepository extends JpaRepository<LLINSVillageReportHistory, Long> {
     @Query(
-        "select lLINSVillageReportHistory from LLINSVillageReportHistory lLINSVillageReportHistory where lLINSVillageReportHistory.user.login = ?#{principal.username}"
+        "select lLINSVillageReportHistory from LLINSVillageReportHistory lLINSVillageReportHistory where lLINSVillageReportHistory.createdBy.login = ?#{principal.username}"
     )
     List<LLINSVillageReportHistory> findByUserIsCurrentUser();
 
