@@ -32,10 +32,10 @@
             <column name="comment" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="user_id" type="bigint">
+            <column name="created_by" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="last_updated_by_id" type="bigint">
+            <column name="last_updated_by" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="day_id" type="bigint">

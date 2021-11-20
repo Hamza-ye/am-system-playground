@@ -29,13 +29,13 @@ public class Period extends BaseDimensionalItemObject {
 
     public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
 
-//    /**
-//     * The database internal identifier for this Object.
-//     */
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-//    @SequenceGenerator(name = "sequenceGenerator")
-//    protected Long id;
+    /**
+     * The database internal identifier for this Object.
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    protected Long id;
 
     /**
      * Required.
@@ -76,7 +76,7 @@ public class Period extends BaseDimensionalItemObject {
     // -------------------------------------------------------------------------
 
     public Period() {
-        setAutoFields();
+//        setAutoFields();
     }
 
     public Period(Period period) {
@@ -105,37 +105,37 @@ public class Period extends BaseDimensionalItemObject {
     // Logic
     // -------------------------------------------------------------------------
 
-//    @Override
-//    public void setAutoFields() {}
+    @Override
+    public void setAutoFields() {}
 
-//    @Override
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    @Override
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Override
     public String getDimensionItem() {
         return getIsoDate();
     }
-//
-//    @Override
-//    public String getUid() {
-//        return uid != null ? uid : getIsoDate();
-//    }
-//
-//    public String getRealUid() {
-//        return uid;
-//    }
-//
-//    @Override
-//    public String getCode() {
-//        return getIsoDate();
-//    }
+
+    @Override
+    public String getUid() {
+        return uid != null ? uid : getIsoDate();
+    }
+
+    public String getRealUid() {
+        return uid;
+    }
+
+    @Override
+    public String getCode() {
+        return getIsoDate();
+    }
 
     @Override
     public String getName() {

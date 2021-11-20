@@ -8,15 +8,15 @@
     -->
     <changeSet id="20211031234341-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="user_id"
+        <addForeignKeyConstraint baseColumnNames="created_by"
                                  baseTableName="chv_team"
-                                 constraintName="fk_chv_team__user_id"
+                                 constraintName="fk_chv_team__created_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
-        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+        <addForeignKeyConstraint baseColumnNames="last_updated_by"
                                  baseTableName="chv_team"
-                                 constraintName="fk_chv_team__last_updated_by_id"
+                                 constraintName="fk_chv_team__last_updated_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
@@ -27,14 +27,14 @@
                                  referencedTableName="person"/>
 
         <addForeignKeyConstraint baseColumnNames="chv_team_id"
-                                 baseTableName="rel_chv_team__responsible_for_chv"
-                                 constraintName="fk_rel_chv_team__responsible_for_chv__chv_team_id"
+                                 baseTableName="chv_team_responsible_for_chv"
+                                 constraintName="fk_chv_team__responsible_for_chv__chv_team_id"
                                  referencedColumnNames="id"
                                  referencedTableName="chv_team"/>
 
-        <addForeignKeyConstraint baseColumnNames="responsible_for_chv_id"
-                                 baseTableName="rel_chv_team__responsible_for_chv"
-                                 constraintName="fk_rel_chv_team__responsible_for_chv__responsible_for_chv_id"
+        <addForeignKeyConstraint baseColumnNames="chv_id"
+                                 baseTableName="chv_team_responsible_for_chv"
+                                 constraintName="fk_chv_team__responsible_for_chv_chv_id"
                                  referencedColumnNames="id"
                                  referencedTableName="chv"/>
     </changeSet>

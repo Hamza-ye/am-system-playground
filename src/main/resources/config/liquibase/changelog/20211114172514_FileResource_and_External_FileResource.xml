@@ -46,13 +46,13 @@
             <column name="code" type="VARCHAR(255)"/>
             <column name="created" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="last_updated" type="TIMESTAMP WITHOUT TIME ZONE"/>
-            <column name="name" type="VARCHAR(255)"/>
+            <!--<column name="name" type="VARCHAR(255)"/>-->
             <column name="uid" type="VARCHAR(11)">
                 <constraints nullable="false"/>
             </column>
             <column name="access_token" type="VARCHAR(255)"/>
             <column name="expires" type="TIMESTAMP WITHOUT TIME ZONE"/>
-            <column name="created_by" type="BIGINT"/>
+            <!--<column name="created_by" type="BIGINT"/>-->
             <column name="last_updated_by" type="BIGINT"/>
             <column name="file_resource_id" type="BIGINT"/>
         </createTable>
@@ -66,9 +66,9 @@
     <changeSet author="Hamza (generated)" id="1636911576718-31">
         <addForeignKeyConstraint baseColumnNames="last_updated_by" baseTableName="external_file_resource" constraintName="FKmgpcavyewtvcx7ga6cc640xq7" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
     </changeSet>
-    <changeSet author="Hamza (generated)" id="1636911576718-25">
-        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="external_file_resource" constraintName="FKb2ai47upv7t88js9xycrj6ivt" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
-    </changeSet>
+    <!--<changeSet author="Hamza (generated)" id="1636911576718-25">-->
+        <!--<addForeignKeyConstraint baseColumnNames="created_by" baseTableName="external_file_resource" constraintName="FKb2ai47upv7t88js9xycrj6ivt" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>-->
+    <!--</changeSet>-->
     <changeSet author="Hamza (generated)" id="1636911576718-26">
         <addForeignKeyConstraint baseColumnNames="file_resource_id" baseTableName="external_file_resource" constraintName="FKb4kihon02ukmlg0tsjnu503cp" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="file_resource" validate="true"/>
     </changeSet>

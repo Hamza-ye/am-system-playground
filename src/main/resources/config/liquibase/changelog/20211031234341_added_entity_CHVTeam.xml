@@ -38,10 +38,10 @@
             <column name="team_type" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="user_id" type="bigint">
+            <column name="created_by" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="last_updated_by_id" type="bigint">
+            <column name="last_updated_by" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="person_id" type="bigint">
@@ -55,8 +55,8 @@
 
     <changeSet id="20211031234341-1-relations" author="jhipster">
 
-        <createTable tableName="rel_chv_team__responsible_for_chv">
-            <column name="responsible_for_chv_id" type="bigint">
+        <createTable tableName="chv_team_responsible_for_chv">
+            <column name="chv_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="chv_team_id" type="bigint">
@@ -64,7 +64,7 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="chv_team_id, responsible_for_chv_id" tableName="rel_chv_team__responsible_for_chv"/>
+        <addPrimaryKey columnNames="chv_team_id, chv_id" tableName="chv_team_responsible_for_chv"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

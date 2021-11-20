@@ -17,10 +17,9 @@ import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyRange;
 import org.nmcpye.activitiesmanagement.security.AuthoritiesConstants;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -47,9 +46,53 @@ public class PersonAuthorityGroup extends BaseIdentifiableObject implements Meta
         "F_USERROLE_DELETE",
     };
 
+    ////////////////////////
+    ///
+    /// Common Columns
+    ///
+    ////////////////////////
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    private Long id;
+
+    @NotNull
+    @Size(max = 11)
+    @Column(name = "uid", length = 11, nullable = false, unique = true)
+    private String uid;
+
+    @Column(name = "code", unique = true)
+    private String code;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "created")
+    private Date created;
+
+    @Column(name = "last_updated")
+    private Date lastUpdated;
+
     /**
-     * Required and unique.
+     * Last user updated this object.
      */
+    @ManyToOne
+    @JoinColumn(name = "last_updated_by")
+    protected User lastUpdatedBy;
+
+    /**
+     * Owner of this object.
+     */
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    protected User createdBy;
+
+    ////////////////////////
+    ///
+    ///
+    ////////////////////////
+
     private String description;
 
     @ManyToMany(mappedBy = "personAuthorityGroups")
@@ -157,7 +200,7 @@ public class PersonAuthorityGroup extends BaseIdentifiableObject implements Meta
     }
 
     @JsonProperty
-    @JsonSerialize(contentAs = BaseIdentifiableObject.class) // TODO Later
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public List<User> getUsers() {
         List<User> users = new ArrayList<>();
 
@@ -168,5 +211,85 @@ public class PersonAuthorityGroup extends BaseIdentifiableObject implements Meta
         }
 
         return users;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getUid() {
+        return uid;
+    }
+
+    @Override
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    @Override
+    public String getCode() {
+        return code;
+    }
+
+    @Override
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public Date getCreated() {
+        return created;
+    }
+
+    @Override
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    @Override
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    @Override
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    @Override
+    public User getLastUpdatedBy() {
+        return lastUpdatedBy;
+    }
+
+    @Override
+    public void setLastUpdatedBy(User lastUpdatedBy) {
+        this.lastUpdatedBy = lastUpdatedBy;
+    }
+
+    @Override
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    @Override
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
     }
 }

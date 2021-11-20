@@ -99,10 +99,12 @@ public class Family implements Serializable {
     private OrganisationUnit organisationUnit;
 
     @ManyToOne
-    private User user;
+    @JoinColumn(name = "created_by")
+    private User createdBy;
 
     @ManyToOne
-    private User lastUpdatedBy;
+    @JoinColumn(name = "last_updated_by")
+    private User lastUpdatedBy;;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -346,17 +348,10 @@ public class Family implements Serializable {
         this.organisationUnit = organisationUnit;
     }
 
-    public User getUser() {
-        return this.user;
-    }
-
+    @Deprecated
     public Family user(User user) {
         this.setUser(user);
         return this;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public User getLastUpdatedBy() {
@@ -404,5 +399,27 @@ public class Family implements Serializable {
             ", familyNo=" + getFamilyNo() +
             ", address='" + getAddress() + "'" +
             "}";
+    }
+
+    //    @Override
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    //    @Override
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    //    @Override
+    @Deprecated
+    public User getUser() {
+        return createdBy;
+    }
+
+    //    @Override
+    @Deprecated
+    public void setUser(User user) {
+        setCreatedBy(createdBy == null ? user : createdBy);
     }
 }

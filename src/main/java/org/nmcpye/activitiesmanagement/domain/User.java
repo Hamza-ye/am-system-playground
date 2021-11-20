@@ -28,6 +28,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.Instant;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -42,10 +43,37 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
 
     private static final long serialVersionUID = 1L;
 
+    ////////////////////////
+    ///
+    /// Common Columns
+    ///
+    ////////////////////////
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
+
+    @NotNull
+    @Size(max = 11)
+    @Column(name = "uid", length = 11, nullable = false, unique = true)
+    private String uid;
+
+    @Column(name = "code", unique = true)
+    private String code;
+
+
+    @Column(name = "created")
+    private Date created;
+
+    @Column(name = "last_updated")
+    private Date lastUpdated;
+
+    ////////////////////////
+    ///
+    /// Common Columns
+    ///
+    ////////////////////////
 
     @NotNull
     @Pattern(regexp = Constants.LOGIN_REGEX)
@@ -188,13 +216,15 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
         this.person = person;
     }
 
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @JsonProperty
     public String getLogin() {
@@ -476,5 +506,45 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
      */
     public boolean isAuthorized(Authorities auth) {
         return isAuthorized(auth.getAuthority());
+    }
+
+    @Override
+    public String getUid() {
+        return uid;
+    }
+
+    @Override
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    @Override
+    public String getCode() {
+        return code;
+    }
+
+    @Override
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    @Override
+    public Date getCreated() {
+        return created;
+    }
+
+    @Override
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    @Override
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    @Override
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 }

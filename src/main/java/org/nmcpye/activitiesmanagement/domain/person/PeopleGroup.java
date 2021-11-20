@@ -16,6 +16,9 @@ import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyTransf
 import org.nmcpye.activitiesmanagement.extended.schema.transformer.PersonPropertyTransformer;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -35,6 +38,53 @@ public class PeopleGroup extends BaseIdentifiableObject implements MetadataObjec
     public static final String AUTH_USER_VIEW = "F_USER_VIEW";
     public static final String AUTH_USER_ADD_IN_GROUP = "F_USER_ADD_WITHIN_MANAGED_GROUP";
     public static final String AUTH_ADD_MEMBERS_TO_READ_ONLY_USER_GROUPS = "F_USER_GROUPS_READ_ONLY_ADD_MEMBERS";
+
+    ////////////////////////
+    ///
+    /// Common Columns
+    ///
+    ////////////////////////
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    private Long id;
+
+    @NotNull
+    @Size(max = 11)
+    @Column(name = "uid", length = 11, nullable = false, unique = true)
+    private String uid;
+
+    @Column(name = "code", unique = true)
+    private String code;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "created")
+    private Date created;
+
+    @Column(name = "last_updated")
+    private Date lastUpdated;
+
+    /**
+     * Owner of this object.
+     */
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    protected User createdBy;
+
+    /**
+     * Last user updated this object.
+     */
+    @ManyToOne
+    @JoinColumn(name = "last_updated_by")
+    protected User lastUpdatedBy;
+
+    ////////////////////////
+    ///
+    ///
+    ////////////////////////
 
     /**
      * Global unique identifier for PeopleGroup (to be used for sharing etc)
@@ -201,5 +251,85 @@ public class PeopleGroup extends BaseIdentifiableObject implements MetadataObjec
 
     public void setManagedByGroups(Set<PeopleGroup> managedByGroups) {
         this.managedByGroups = managedByGroups;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getUid() {
+        return uid;
+    }
+
+    @Override
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    @Override
+    public String getCode() {
+        return code;
+    }
+
+    @Override
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public Date getCreated() {
+        return created;
+    }
+
+    @Override
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    @Override
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    @Override
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    @Override
+    public User getLastUpdatedBy() {
+        return lastUpdatedBy;
+    }
+
+    @Override
+    public void setLastUpdatedBy(User lastUpdatedBy) {
+        this.lastUpdatedBy = lastUpdatedBy;
+    }
+
+    @Override
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    @Override
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
     }
 }

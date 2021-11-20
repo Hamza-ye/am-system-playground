@@ -14,15 +14,15 @@
                                  referencedColumnNames="id"
                                  referencedTableName="organisation_unit"/>
 
-        <addForeignKeyConstraint baseColumnNames="user_id"
+        <addForeignKeyConstraint baseColumnNames="created_by"
                                  baseTableName="chv_malaria_case_report"
-                                 constraintName="fk_chv_malaria_case_report__user_id"
+                                 constraintName="fk_chv_malaria_case_report__created_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
-        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+        <addForeignKeyConstraint baseColumnNames="last_updated_by"
                                  baseTableName="chv_malaria_case_report"
-                                 constraintName="fk_chv_malaria_case_report__last_updated_by_id"
+                                 constraintName="fk_chv_malaria_case_report__last_updated_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 

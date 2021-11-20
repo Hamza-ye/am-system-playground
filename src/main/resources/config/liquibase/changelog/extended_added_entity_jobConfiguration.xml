@@ -35,7 +35,7 @@
             <column name="next_execution_time" type="TIMESTAMP"/>
             <column name="user_uid" type="VARCHAR(255)"/>
             <column name="last_updated_by" type="BIGINT"/>
-            <column name="created_by" type="BIGINT"/>
+            <!--<column name="created_by" type="BIGINT"/>-->
         </createTable>
     </changeSet>
 
@@ -48,9 +48,9 @@
     <changeSet author="Hamza (generated)" id="1635284049386-125">
         <addForeignKeyConstraint baseColumnNames="last_updated_by" baseTableName="job_configuration" constraintName="FK3kmu28pf706w7yw3iv071v7aa" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
     </changeSet>
-    <changeSet author="Hamza (generated)" id="1635284049386-195">
-        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="job_configuration" constraintName="FKne6hcnpe014kape3ua0j4qvjl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
-    </changeSet>
+    <!--<changeSet author="Hamza (generated)" id="1635284049386-195">-->
+        <!--<addForeignKeyConstraint baseColumnNames="created_by" baseTableName="job_configuration" constraintName="FKne6hcnpe014kape3ua0j4qvjl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>-->
+    <!--</changeSet>-->
 
     <!--<changeSet id="load_app_user_data" author="Hamza">-->
         <!--<loadData-->

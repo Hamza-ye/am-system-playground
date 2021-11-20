@@ -1,4 +1,4 @@
-package org.nmcpye.activitiesmanagement.domain;
+package org.nmcpye.activitiesmanagement.domain.scheduling;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
+import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.SecondaryMetadataObject;
 import org.nmcpye.activitiesmanagement.extended.hibernatemodule.hibernate.jsonb.type.JsonJobParametersType;
@@ -20,6 +21,8 @@ import org.springframework.scheduling.support.SimpleTriggerContext;
 
 import javax.annotation.Nonnull;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 import static org.nmcpye.activitiesmanagement.extended.scheduling.JobStatus.DISABLED;
@@ -50,6 +53,46 @@ public class JobConfiguration extends BaseIdentifiableObject implements Secondar
     // -------------------------------------------------------------------------
     // Externally configurable properties
     // -------------------------------------------------------------------------
+
+    ////////////////////////
+    ///
+    /// Common Columns
+    ///
+    ////////////////////////
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    private Long id;
+
+    @NotNull
+    @Size(max = 11)
+    @Column(name = "uid", length = 11, nullable = false, unique = true)
+    private String uid;
+
+    @Column(name = "code", unique = true)
+    private String code;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "created")
+    private Date created;
+
+    @Column(name = "last_updated")
+    private Date lastUpdated;
+
+    /**
+     * Last user updated this object.
+     */
+    @ManyToOne
+    @JoinColumn(name = "last_updated_by")
+    protected User lastUpdatedBy;
+
+    ////////////////////////
+    ///
+    ///
+    ////////////////////////
 
     /**
      * The type of job.
@@ -412,5 +455,75 @@ public class JobConfiguration extends BaseIdentifiableObject implements Secondar
 
     public void setUserUid(String userUid) {
         this.userUid = userUid;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getUid() {
+        return uid;
+    }
+
+    @Override
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    @Override
+    public String getCode() {
+        return code;
+    }
+
+    @Override
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public Date getCreated() {
+        return created;
+    }
+
+    @Override
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    @Override
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    @Override
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    @Override
+    public User getLastUpdatedBy() {
+        return lastUpdatedBy;
+    }
+
+    @Override
+    public void setLastUpdatedBy(User lastUpdatedBy) {
+        this.lastUpdatedBy = lastUpdatedBy;
     }
 }

@@ -37,9 +37,9 @@
                 <constraints nullable="true"/>
             </column>
 
-            <column name="name" type="varchar(255)">
-                <constraints nullable="true"/>
-            </column>
+            <!--<column name="name" type="varchar(255)">-->
+                <!--<constraints nullable="true"/>-->
+            <!--</column>-->
 
             <column name="uid" type="varchar(11)">
                 <constraints nullable="false" unique="true" uniqueConstraintName="UC_APP_USERUID_COL"/>
@@ -70,12 +70,12 @@
                 <constraints nullable="true" unique="true" uniqueConstraintName="UC_USER_PERSON_ID_UNIQUE"/>
             </column>
 
-            <column name="created_by" type="bigint">
-                <constraints nullable="true"/>
-            </column>
-            <column name="last_updated_by" type="bigint">
-                <constraints nullable="true"/>
-            </column>
+            <!--<column name="created_by" type="bigint">-->
+                <!--<constraints nullable="true"/>-->
+            <!--</column>-->
+            <!--<column name="last_updated_by" type="bigint">-->
+                <!--<constraints nullable="true"/>-->
+            <!--</column>-->
         </createTable>
 
         <createTable tableName="app_authority">

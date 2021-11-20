@@ -20,10 +20,10 @@
             <column name="status" type="varchar(255)">
                 <constraints nullable="false" unique="true" uniqueConstraintName="ux_status_of_coverage__status" />
             </column>
-            <column name="user_id" type="bigint">
+            <column name="created_by" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="last_updated_by_id" type="bigint">
+            <column name="last_updated_by" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

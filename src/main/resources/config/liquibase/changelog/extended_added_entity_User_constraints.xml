@@ -18,17 +18,17 @@
                                  referencedColumnNames="id"
                                  referencedTableName="person"/>
 
-        <addForeignKeyConstraint baseColumnNames="last_updated_by"
-                                 baseTableName="app_user"
-                                 constraintName="fk_app_user__last_updated_by"
-                                 referencedColumnNames="id"
-                                 referencedTableName="app_user"/>
+        <!--<addForeignKeyConstraint baseColumnNames="last_updated_by"-->
+                                 <!--baseTableName="app_user"-->
+                                 <!--constraintName="fk_app_user__last_updated_by"-->
+                                 <!--referencedColumnNames="id"-->
+                                 <!--referencedTableName="app_user"/>-->
 
-        <addForeignKeyConstraint baseColumnNames="created_by"
-                                 baseTableName="app_user"
-                                 constraintName="fk_app_user__created_by"
-                                 referencedColumnNames="id"
-                                 referencedTableName="app_user"/>
+        <!--<addForeignKeyConstraint baseColumnNames="created_by"-->
+                                 <!--baseTableName="app_user"-->
+                                 <!--constraintName="fk_app_user__created_by"-->
+                                 <!--referencedColumnNames="id"-->
+                                 <!--referencedTableName="app_user"/>-->
     </changeSet>
 
 </databaseChangeLog>

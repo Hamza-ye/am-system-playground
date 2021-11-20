@@ -8,13 +8,13 @@
     -->
     <changeSet id="20211031234327-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="user_id"
+        <addForeignKeyConstraint baseColumnNames="created_by"
                                  baseTableName="llins_family_target"
-                                 constraintName="fk_llins_family_target__user_id"
+                                 constraintName="fk_llins_family_target__created_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
-        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+        <addForeignKeyConstraint baseColumnNames="last_updated_by"
                                  baseTableName="llins_family_target"
                                  constraintName="fk_llins_family_target__last_updated_by_id"
                                  referencedColumnNames="id"

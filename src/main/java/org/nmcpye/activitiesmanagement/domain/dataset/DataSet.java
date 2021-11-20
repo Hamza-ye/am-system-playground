@@ -27,6 +27,8 @@ import org.nmcpye.activitiesmanagement.extended.schema.annotation.Property;
 import org.nmcpye.activitiesmanagement.extended.security.Authorities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -42,35 +44,59 @@ public class DataSet extends BaseDimensionalItemObject
     implements MetadataObject {
 
     public static final int NO_EXPIRY = 0;
-//
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-//    @SequenceGenerator(name = "sequenceGenerator")
-//    private Long id;
-//
-//    @NotNull
-//    @Size(max = 11)
-//    @Column(name = "uid", length = 11, nullable = false, unique = true)
-//    private String uid;
-//
-//    @Column(name = "code", unique = true)
-//    private String code;
-//
-//    @Column(name = "name")
-//    private String name;
-//
-//    @Size(max = 50)
-//    @Column(name = "short_name", length = 50)
-//    private String shortName;
-//
-//    @Column(name = "description")
-//    private String description;
-//
-//    @Column(name = "created")
-//    private Instant created;
-//
-//    @Column(name = "last_updated")
-//    private Instant lastUpdated;
+
+    ////////////////////////
+    ///
+    /// Common Columns
+    ///
+    ////////////////////////
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    private Long id;
+
+    @NotNull
+    @Size(max = 11)
+    @Column(name = "uid", length = 11, nullable = false, unique = true)
+    private String uid;
+
+    @Column(name = "code", unique = true)
+    private String code;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "created")
+    private Date created;
+
+    @Column(name = "last_updated")
+    private Date lastUpdated;
+
+    @Size(max = 50)
+    @Column(name = "short_name", length = 50)
+    private String shortName;
+
+    private String description;
+
+    /**
+     * Owner of this object.
+     */
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    protected User createdBy;
+
+    /**
+     * Last user updated this object.
+     */
+    @ManyToOne
+    @JoinColumn(name = "last_updated_by")
+    protected User lastUpdatedBy;
+
+    ////////////////////////
+    ///
+    ///
+    ////////////////////////
 
     @Column(name = "expiry_days")
     private Integer expiryDays;
@@ -496,5 +522,105 @@ public class DataSet extends BaseDimensionalItemObject
 
         return expiryDays != DataSet.NO_EXPIRY &&
             new DateTime( period.getEndDate() ).plusDays( expiryDays ).isBefore( date );
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getUid() {
+        return uid;
+    }
+
+    @Override
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    @Override
+    public String getCode() {
+        return code;
+    }
+
+    @Override
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public Date getCreated() {
+        return created;
+    }
+
+    @Override
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    @Override
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    @Override
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    @Override
+    public String getShortName() {
+        return shortName;
+    }
+
+    @Override
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    @Override
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    @Override
+    public User getLastUpdatedBy() {
+        return lastUpdatedBy;
+    }
+
+    @Override
+    public void setLastUpdatedBy(User lastUpdatedBy) {
+        this.lastUpdatedBy = lastUpdatedBy;
     }
 }

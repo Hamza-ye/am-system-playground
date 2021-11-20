@@ -1,0 +1,16 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="Hamza (generated)" id="1637426771544-2">
+        <addUniqueConstraint columnNames="data_input_period_id" constraintName="UK_egldfsq6ceak53hi9f2vfcejl" tableName="data_set_data_input_periods"/>
+    </changeSet>
+
+    <changeSet author="Hamza (generated)" id="1637426771544-8">
+        <dropColumn columnName="name" tableName="person"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1637426771544-9">
+        <dropColumn columnName="name" tableName="person_authority_group"/>
+    </changeSet>
+    <changeSet author="Hamza (generated)" id="1637426771544-1">
+        <alterSequence sequenceName="sequence_generator"/>
+    </changeSet>
+</databaseChangeLog>

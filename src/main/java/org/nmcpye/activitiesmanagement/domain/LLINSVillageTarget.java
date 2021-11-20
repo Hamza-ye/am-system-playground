@@ -100,9 +100,11 @@ public class LLINSVillageTarget implements Serializable {
     private OrganisationUnit organisationUnit;
 
     @ManyToOne
-    private User user;
+    @JoinColumn(name = "created_by")
+    private User createdBy;
 
     @ManyToOne
+    @JoinColumn(name = "last_updated_by")
     private User lastUpdatedBy;
 
     @ManyToOne(optional = false)
@@ -307,17 +309,27 @@ public class LLINSVillageTarget implements Serializable {
         this.organisationUnit = organisationUnit;
     }
 
-    public User getUser() {
-        return this.user;
+    //    @Override
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
     }
 
+    //    @Override
+    @Deprecated
+    public User getUser() {
+        return createdBy;
+    }
+
+    //    @Override
+    @Deprecated
+    public void setUser(User user) {
+        setCreatedBy(createdBy == null ? user : createdBy);
+    }
+
+    @Deprecated
     public LLINSVillageTarget user(User user) {
         this.setUser(user);
         return this;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public User getLastUpdatedBy() {

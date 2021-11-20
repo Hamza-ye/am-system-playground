@@ -70,9 +70,11 @@ public class Warehouse implements Serializable {
     private Set<WHMovement> notInitiatedMovements = new HashSet<>();
 
     @ManyToOne
-    private User user;
+    @JoinColumn(name = "created_by")
+    private User createdBy;
 
     @ManyToOne
+    @JoinColumn(name = "last_updated_by")
     private User lastUpdatedBy;
 
     @ManyToOne(optional = false)
@@ -279,17 +281,27 @@ public class Warehouse implements Serializable {
         this.notInitiatedMovements = wHMovements;
     }
 
-    public User getUser() {
-        return this.user;
+    //    @Override
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
     }
 
+    //    @Override
+    @Deprecated
+    public User getUser() {
+        return createdBy;
+    }
+
+    //    @Override
+    @Deprecated
+    public void setUser(User user) {
+        setCreatedBy(createdBy == null ? user : createdBy);
+    }
+
+    @Deprecated
     public Warehouse user(User user) {
         this.setUser(user);
         return this;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public User getLastUpdatedBy() {

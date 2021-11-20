@@ -8,15 +8,15 @@
     -->
     <changeSet id="20211031234318-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="user_id"
+        <addForeignKeyConstraint baseColumnNames="created_by"
                                  baseTableName="team"
-                                 constraintName="fk_team__user_id"
+                                 constraintName="fk_team__created_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
-        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+        <addForeignKeyConstraint baseColumnNames="last_updated_by"
                                  baseTableName="team"
-                                 constraintName="fk_team__last_updated_by_id"
+                                 constraintName="fk_team__last_updated_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
@@ -27,14 +27,14 @@
                                  referencedTableName="person"/>
 
         <addForeignKeyConstraint baseColumnNames="team_id"
-                                 baseTableName="rel_team__assigned_to_warehouse"
-                                 constraintName="fk_rel_team__assigned_to_warehouse__team_id"
+                                 baseTableName="team_assigned_to_warehouse"
+                                 constraintName="fk_team__assigned_to_warehouse__team_id"
                                  referencedColumnNames="id"
                                  referencedTableName="team"/>
 
-        <addForeignKeyConstraint baseColumnNames="assigned_to_warehouse_id"
-                                 baseTableName="rel_team__assigned_to_warehouse"
-                                 constraintName="fk_rel_team__assigned_to_warehouse__assigned_to_warehouse_id"
+        <addForeignKeyConstraint baseColumnNames="warehouse_id"
+                                 baseTableName="team_assigned_to_warehouse"
+                                 constraintName="fk_team__assigned_to_warehouse_to_warehouse_id"
                                  referencedColumnNames="id"
                                  referencedTableName="warehouse"/>
     </changeSet>

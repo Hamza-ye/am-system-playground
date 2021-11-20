@@ -68,9 +68,11 @@ public class LLINSFamilyReportHistory implements Serializable {
     private FamilyType familyType;
 
     @ManyToOne
-    private User user;
+    @JoinColumn(name = "created_by")
+    private User createdBy;
 
     @ManyToOne
+    @JoinColumn(name = "last_updated_by")
     private User lastUpdatedBy;
 
     @ManyToOne(optional = false)
@@ -242,17 +244,32 @@ public class LLINSFamilyReportHistory implements Serializable {
         this.familyType = familyType;
     }
 
-    public User getUser() {
-        return this.user;
+    //    @Override
+    public User getCreatedBy() {
+        return createdBy;
     }
 
+    //    @Override
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    //    @Override
+    @Deprecated
+    public User getUser() {
+        return createdBy;
+    }
+
+    //    @Override
+    @Deprecated
+    public void setUser(User user) {
+        setCreatedBy(createdBy == null ? user : createdBy);
+    }
+
+    @Deprecated
     public LLINSFamilyReportHistory user(User user) {
         this.setUser(user);
         return this;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public User getLastUpdatedBy() {

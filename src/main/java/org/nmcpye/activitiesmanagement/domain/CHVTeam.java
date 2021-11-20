@@ -59,9 +59,11 @@ public class CHVTeam implements Serializable {
     private CHVTeamType teamType;
 
     @ManyToOne
-    private User user;
+    @JoinColumn(name = "created_by")
+    private User createdBy;
 
     @ManyToOne
+    @JoinColumn(name = "last_updated_by")
     private User lastUpdatedBy;
 
     @ManyToOne
@@ -76,9 +78,9 @@ public class CHVTeam implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(
-        name = "rel_chv_team__responsible_for_chv",
+        name = "chv_team_responsible_for_chv",
         joinColumns = @JoinColumn(name = "chv_team_id"),
-        inverseJoinColumns = @JoinColumn(name = "responsible_for_chv_id")
+        inverseJoinColumns = @JoinColumn(name = "chv_id")
     )
     @JsonIgnoreProperties(
         value = {
@@ -206,17 +208,10 @@ public class CHVTeam implements Serializable {
         this.teamType = teamType;
     }
 
-    public User getUser() {
-        return this.user;
-    }
-
+    @Deprecated
     public CHVTeam user(User user) {
         this.setUser(user);
         return this;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public User getLastUpdatedBy() {
@@ -303,5 +298,27 @@ public class CHVTeam implements Serializable {
             ", teamNo='" + getTeamNo() + "'" +
             ", teamType='" + getTeamType() + "'" +
             "}";
+    }
+
+    //    @Override
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    //    @Override
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    //    @Override
+    @Deprecated
+    public User getUser() {
+        return createdBy;
+    }
+
+    //    @Override
+    @Deprecated
+    public void setUser(User user) {
+        setCreatedBy(createdBy == null ? user : createdBy);
     }
 }

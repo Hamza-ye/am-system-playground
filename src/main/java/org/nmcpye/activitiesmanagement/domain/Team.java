@@ -1,16 +1,19 @@
 package org.nmcpye.activitiesmanagement.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.io.Serializable;
-import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.*;
-import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.enumeration.TeamType;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
+
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Team.
@@ -56,13 +59,13 @@ public class Team implements Serializable {
 
     @OneToMany(mappedBy = "team")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "day", "initiatedWH", "theOtherSideWH", "team" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {"user", "createdBy", "lastUpdatedBy", "day", "initiatedWH", "theOtherSideWH", "team"}, allowSetters = true)
     private Set<WHMovement> whMovements = new HashSet<>();
 
     @OneToMany(mappedBy = "teamAssigned")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "llinsVillageReports", "organisationUnit", "user", "createdBy", "lastUpdatedBy", "dayPlanned", "statusOfCoverage", "teamAssigned" },
+        value = {"llinsVillageReports", "organisationUnit", "user", "createdBy", "lastUpdatedBy", "dayPlanned", "statusOfCoverage", "teamAssigned"},
         allowSetters = true
     )
     private Set<LLINSVillageTarget> llinsVillageTargets = new HashSet<>();
@@ -70,7 +73,7 @@ public class Team implements Serializable {
     @OneToMany(mappedBy = "executingTeam")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "llinsVillageReportHistories", "user", "createdBy", "lastUpdatedBy", "dayReached", "targetDetails", "executingTeam" },
+        value = {"llinsVillageReportHistories", "user", "createdBy", "lastUpdatedBy", "dayReached", "targetDetails", "executingTeam"},
         allowSetters = true
     )
     private Set<LLINSVillageReport> llinsVillageReports = new HashSet<>();
@@ -78,7 +81,7 @@ public class Team implements Serializable {
     @OneToMany(mappedBy = "teamAssigned")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "llinsFamilyReports", "user", "createdBy", "lastUpdatedBy", "dayPlanned", "family", "teamAssigned" },
+        value = {"llinsFamilyReports", "user", "createdBy", "lastUpdatedBy", "dayPlanned", "family", "teamAssigned"},
         allowSetters = true
     )
     private Set<LLINSFamilyTarget> llinsFamilyTargets = new HashSet<>();
@@ -86,15 +89,17 @@ public class Team implements Serializable {
     @OneToMany(mappedBy = "executingTeam")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "llinsFamilyReportHistories", "user", "createdBy", "lastUpdatedBy", "dayReached", "targetDetails", "executingTeam" },
+        value = {"llinsFamilyReportHistories", "user", "createdBy", "lastUpdatedBy", "dayReached", "targetDetails", "executingTeam"},
         allowSetters = true
     )
     private Set<LLINSFamilyReport> llinsFamilyReports = new HashSet<>();
 
     @ManyToOne
-    private User user;
+    @JoinColumn(name = "created_by")
+    private User createdBy;
 
     @ManyToOne
+    @JoinColumn(name = "last_updated_by")
     private User lastUpdatedBy;
 
     @ManyToOne
@@ -109,12 +114,12 @@ public class Team implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(
-        name = "rel_team__assigned_to_warehouse",
+        name = "team_assigned_to_warehouse",
         joinColumns = @JoinColumn(name = "team_id"),
-        inverseJoinColumns = @JoinColumn(name = "assigned_to_warehouse_id")
+        inverseJoinColumns = @JoinColumn(name = "warehouse_id")
     )
     @JsonIgnoreProperties(
-        value = { "initiatedMovements", "notInitiatedMovements", "user", "createdBy", "lastUpdatedBy", "activity", "teams" },
+        value = {"initiatedMovements", "notInitiatedMovements", "user", "createdBy", "lastUpdatedBy", "activity", "teams"},
         allowSetters = true
     )
     private Set<Warehouse> assignedToWarehouses = new HashSet<>();
@@ -379,19 +384,6 @@ public class Team implements Serializable {
         this.llinsFamilyReports = lLINSFamilyReports;
     }
 
-    public User getUser() {
-        return this.user;
-    }
-
-    public Team user(User user) {
-        this.setUser(user);
-        return this;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public User getLastUpdatedBy() {
         return this.lastUpdatedBy;
     }
@@ -475,5 +467,33 @@ public class Team implements Serializable {
             ", teamNo=" + getTeamNo() +
             ", teamType='" + getTeamType() + "'" +
             "}";
+    }
+
+    //    @Override
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    //    @Override
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    //    @Override
+    @Deprecated
+    public User getUser() {
+        return createdBy;
+    }
+
+    //    @Override
+    @Deprecated
+    public void setUser(User user) {
+        setCreatedBy(createdBy == null ? user : createdBy);
+    }
+
+    @Deprecated
+    public Team user(User user) {
+        this.setCreatedBy(user);
+        return this;
     }
 }

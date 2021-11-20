@@ -12,16 +12,16 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="uid" type="varchar(11)">
-                <constraints nullable="false" unique="true" uniqueConstraintName="UC_PERIODUID__COL" />
-            </column>
+            <!--<column name="uid" type="varchar(11)">-->
+                <!--<constraints nullable="false" unique="true" uniqueConstraintName="UC_PERIODUID__COL" />-->
+            <!--</column>-->
 
-            <column name="code" type="varchar(255)">
-                <constraints nullable="true" unique="true" uniqueConstraintName="UC_PERIODCODE_COL"/>
-            </column>
-            <column name="name" type="varchar(255)">
-                <constraints nullable="true"/>
-            </column>
+            <!--<column name="code" type="varchar(255)">-->
+                <!--<constraints nullable="true" unique="true" uniqueConstraintName="UC_PERIODCODE_COL"/>-->
+            <!--</column>-->
+            <!--<column name="name" type="varchar(255)">-->
+                <!--<constraints nullable="true"/>-->
+            <!--</column>-->
             <column name="start_date" type="date">
                 <constraints nullable="false"/>
             </column>
@@ -34,18 +34,18 @@
 
             <!--Extended-->
 
-            <column name="created" type="${datetimeType}">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_updated" type="${datetimeType}">
-                <constraints nullable="true" />
-            </column>
-            <column name="created_by" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="last_updated_by" type="bigint">
-                <constraints nullable="true" />
-            </column>
+            <!--<column name="created" type="${datetimeType}">-->
+                <!--<constraints nullable="true" />-->
+            <!--</column>-->
+            <!--<column name="last_updated" type="${datetimeType}">-->
+                <!--<constraints nullable="true" />-->
+            <!--</column>-->
+            <!--<column name="created_by" type="bigint">-->
+                <!--<constraints nullable="true" />-->
+            <!--</column>-->
+            <!--<column name="last_updated_by" type="bigint">-->
+                <!--<constraints nullable="true" />-->
+            <!--</column>-->
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>

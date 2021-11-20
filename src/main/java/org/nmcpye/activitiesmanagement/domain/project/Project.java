@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -27,6 +29,53 @@ import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @JsonRootName( value = "project", namespace = DxfNamespaces.DXF_2_0 )
 public class Project extends BaseIdentifiableObject implements MetadataObject {
+
+    ////////////////////////
+    ///
+    /// Common Columns
+    ///
+    ////////////////////////
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    private Long id;
+
+    @NotNull
+    @Size(max = 11)
+    @Column(name = "uid", length = 11, nullable = false, unique = true)
+    private String uid;
+
+    @Column(name = "code", unique = true)
+    private String code;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "created")
+    private Date created;
+
+    @Column(name = "last_updated")
+    private Date lastUpdated;
+
+    /**
+     * Owner of this object.
+     */
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    protected User createdBy;
+
+    /**
+     * Last user updated this object.
+     */
+    @ManyToOne
+    @JoinColumn(name = "last_updated_by")
+    protected User lastUpdatedBy;
+
+    ////////////////////////
+    ///
+    ///
+    ////////////////////////
 
     @Column(name = "displayed")
     private Boolean displayed;
@@ -121,5 +170,85 @@ public class Project extends BaseIdentifiableObject implements MetadataObject {
     public Project lastUpdatedBy(User user) {
         this.setLastUpdatedBy(user);
         return this;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getUid() {
+        return uid;
+    }
+
+    @Override
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    @Override
+    public String getCode() {
+        return code;
+    }
+
+    @Override
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public Date getCreated() {
+        return created;
+    }
+
+    @Override
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    @Override
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    @Override
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    @Override
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    @Override
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    @Override
+    public User getLastUpdatedBy() {
+        return lastUpdatedBy;
+    }
+
+    @Override
+    public void setLastUpdatedBy(User lastUpdatedBy) {
+        this.lastUpdatedBy = lastUpdatedBy;
     }
 }

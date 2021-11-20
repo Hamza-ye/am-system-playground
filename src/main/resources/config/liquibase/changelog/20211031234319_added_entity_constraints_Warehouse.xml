@@ -8,15 +8,15 @@
     -->
     <changeSet id="20211031234319-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="user_id"
+        <addForeignKeyConstraint baseColumnNames="created_by"
                                  baseTableName="warehouse"
-                                 constraintName="fk_warehouse__user_id"
+                                 constraintName="fk_warehouse__created_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 
-        <addForeignKeyConstraint baseColumnNames="last_updated_by_id"
+        <addForeignKeyConstraint baseColumnNames="last_updated_by"
                                  baseTableName="warehouse"
-                                 constraintName="fk_warehouse__last_updated_by_id"
+                                 constraintName="fk_warehouse__last_updated_by"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
 

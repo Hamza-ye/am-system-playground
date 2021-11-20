@@ -20,7 +20,7 @@
             <column name="code" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="UC_MALARIA_CASES_REPORTCODE_COL"/>
             </column>
-            <column name="name" type="varchar(255)"/>
+            <!--<column name="name" type="varchar(255)"/>-->
             <column name="created" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>

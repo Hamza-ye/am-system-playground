@@ -44,4 +44,13 @@
                                  referencedColumnNames="id"
                                  referencedTableName="organisation_unit"/>
     </changeSet>
+    <changeSet id="extended" author="Hamza">
+
+        <addUniqueConstraint
+            columnNames="data_set_id, organisation_unit_id, period_id, report_class_id"
+            constraintName="extended_unique_constraint_malaria_cases_report"
+            tableName="malaria_cases_report"
+        />
+
+    </changeSet>
 </databaseChangeLog>

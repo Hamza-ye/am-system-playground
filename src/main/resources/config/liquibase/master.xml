@@ -96,8 +96,6 @@
     <include file="config/liquibase/changelog/20211031234351_added_entity_constraints_DataInputPeriod.xml" relativeToChangelogFile="false"/>
 
     <!--<include file="config/liquibase/changelog/extended_added_entity_PersonAuthorityGroup_relations.xml" relativeToChangelogFile="false"/>-->
-    <include file="config/liquibase/changelog/extended_added_entity_unique_constraints_DengueCasesReport.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/extended_added_entity_unique_constraints_MalariaCasesReport.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/extended_added_entity_jobConfiguration.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20211031234346_added_entity_OrganisationUnitGroupSet_add_dim_dimName.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/extended_added_entity_DataSet_DataInputPeriods_relationship.xml" relativeToChangelogFile="false"/>

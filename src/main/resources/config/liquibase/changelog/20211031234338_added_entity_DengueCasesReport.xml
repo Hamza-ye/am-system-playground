@@ -20,9 +20,9 @@
             <column name="code" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="UC_DENGUE_CASES_REPORTCODE_COL"/>
             </column>
-            <column name="name" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
+            <!--<column name="name" type="varchar(255)">-->
+                <!--<constraints nullable="true" />-->
+            <!--</column>-->
             <column name="created" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>

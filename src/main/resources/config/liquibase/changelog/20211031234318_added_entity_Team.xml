@@ -35,10 +35,10 @@
             <column name="team_type" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="user_id" type="bigint">
+            <column name="created_by" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="last_updated_by_id" type="bigint">
+            <column name="last_updated_by" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="person_id" type="bigint">
@@ -52,8 +52,8 @@
 
     <changeSet id="20211031234318-1-relations" author="jhipster">
 
-        <createTable tableName="rel_team__assigned_to_warehouse">
-            <column name="assigned_to_warehouse_id" type="bigint">
+        <createTable tableName="team_assigned_to_warehouse">
+            <column name="warehouse_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="team_id" type="bigint">
@@ -61,7 +61,7 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="team_id, assigned_to_warehouse_id" tableName="rel_team__assigned_to_warehouse"/>
+        <addPrimaryKey columnNames="team_id, warehouse_id" tableName="team_assigned_to_warehouse"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

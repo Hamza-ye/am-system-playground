@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 import org.hibernate.annotations.Cache;
@@ -23,41 +25,58 @@ import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @JsonRootName( value = "demographicDataSource", namespace = DxfNamespaces.DXF_2_0 )
 public class DemographicDataSource extends BaseIdentifiableObject implements MetadataObject {
-//
-//    private static final long serialVersionUID = 1L;
-//
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-//    @SequenceGenerator(name = "sequenceGenerator")
-//    private Long id;
-//
-//    @NotNull
-//    @Size(max = 11)
-//    @Column(name = "uid", length = 11, nullable = false, unique = true)
-//    private String uid;
-//
-//    @Column(name = "code", unique = true)
-//    private String code;
-//
-//    @Column(name = "name")
-//    private String name;
-//
-//    @Column(name = "created")
-//    private Instant created;
-//
-//    @Column(name = "last_updated")
-//    private Instant lastUpdated;
+
+    ////////////////////////
+    ///
+    /// Common Columns
+    ///
+    ////////////////////////
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    private Long id;
+
+    @NotNull
+    @Size(max = 11)
+    @Column(name = "uid", length = 11, nullable = false, unique = true)
+    private String uid;
+
+    @Column(name = "code", unique = true)
+    private String code;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "created")
+    private Date created;
+
+    @Column(name = "last_updated")
+    private Date lastUpdated;
+
+    /**
+     * Owner of this object.
+     */
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    protected User createdBy;
+
+    /**
+     * Last user updated this object.
+     */
+    @ManyToOne
+    @JoinColumn(name = "last_updated_by")
+    protected User lastUpdatedBy;
+
+    ////////////////////////
+    ///
+    ///
+    ////////////////////////
 
     @OneToMany(mappedBy = "source")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "organisationUnit", "user", "createdBy", "lastUpdatedBy", "source" }, allowSetters = true)
     private Set<DemographicData> demographicData = new HashSet<>();
-
-//    @ManyToOne
-//    private User user;
-//
-//    @ManyToOne
-//    private User lastUpdatedBy;
 
     public DemographicDataSource id(Long id) {
         this.id = id;
@@ -128,5 +147,85 @@ public class DemographicDataSource extends BaseIdentifiableObject implements Met
     public DemographicDataSource lastUpdatedBy(User user) {
         this.setLastUpdatedBy(user);
         return this;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getUid() {
+        return uid;
+    }
+
+    @Override
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    @Override
+    public String getCode() {
+        return code;
+    }
+
+    @Override
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public Date getCreated() {
+        return created;
+    }
+
+    @Override
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    @Override
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    @Override
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    @Override
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    @Override
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    @Override
+    public User getLastUpdatedBy() {
+        return lastUpdatedBy;
+    }
+
+    @Override
+    public void setLastUpdatedBy(User lastUpdatedBy) {
+        this.lastUpdatedBy = lastUpdatedBy;
     }
 }
