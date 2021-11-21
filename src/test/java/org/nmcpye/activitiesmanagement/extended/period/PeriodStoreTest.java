@@ -1,6 +1,5 @@
 package org.nmcpye.activitiesmanagement.extended.period;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.nmcpye.activitiesmanagement.AMTest;
 import org.nmcpye.activitiesmanagement.IntegrationTest;
@@ -290,7 +289,6 @@ class PeriodStoreTest extends AMTest {
         assertTrue(periods.contains(periodE));
     }
 
-    @Disabled("Until DataIntegrityViolationException is fixed")
     @Test
     void testGetIntersectingPeriodsByPeriodType() {
         PeriodType ypt = PeriodType.getPeriodTypeByName(YearlyPeriodType.NAME);
@@ -302,8 +300,8 @@ class PeriodStoreTest extends AMTest {
 
         Period periodA = new Period(ypt, jan2006, dec2006);
         Period periodB = new Period(ypt, jan2007, dec2007);
-        periodStore.saveObject(periodA);
-        periodStore.saveObject(periodB);
+        periodStore.addPeriod(periodA);
+        periodStore.addPeriod(periodB);
 
         PeriodType mpt = PeriodType.getPeriodTypeByName(MonthlyPeriodType.NAME);
 
@@ -345,24 +343,26 @@ class PeriodStoreTest extends AMTest {
         Period periodM = new Period(mpt, novstart, novend);
         Period periodN = new Period(mpt, decstart, decend);
 
-        periodStore.saveObject(periodC);
-        periodStore.saveObject(periodD);
-        periodStore.saveObject(periodE);
-        periodStore.saveObject(periodF);
-        periodStore.saveObject(periodG);
-        periodStore.saveObject(periodH);
-        periodStore.saveObject(periodI);
-        periodStore.saveObject(periodJ);
-        periodStore.saveObject(periodK);
-        periodStore.saveObject(periodL);
-        periodStore.saveObject(periodM);
-        periodStore.saveObject(periodN);
+        periodStore.addPeriod(periodC);
+        periodStore.addPeriod(periodD);
+        periodStore.addPeriod(periodE);
+        periodStore.addPeriod(periodF);
+        periodStore.addPeriod(periodG);
+        periodStore.addPeriod(periodH);
+        periodStore.addPeriod(periodI);
+        periodStore.addPeriod(periodJ);
+        periodStore.addPeriod(periodK);
+        periodStore.addPeriod(periodL);
+        periodStore.addPeriod(periodM);
+        periodStore.addPeriod(periodN);
 
-        List<Period> periodsA = periodStore.getIntersectingPeriodsByPeriodType(ypt, getDate(2006, 6, 1), getDate(2006, 11, 30));
+        List<Period> periodsA = periodStore.getIntersectingPeriodsByPeriodType(ypt, getDate(2006, 6, 1),
+            getDate(2006, 11, 30));
         assertNotNull(periodsA);
         assertEquals(1, periodsA.size());
 
-        List<Period> periodsB = periodStore.getIntersectingPeriodsByPeriodType(mpt, getDate(2006, 6, 1), getDate(2006, 11, 30));
+        List<Period> periodsB = periodStore.getIntersectingPeriodsByPeriodType(mpt, getDate(2006, 6, 1),
+            getDate(2006, 11, 30));
         assertNotNull(periodsB);
         assertEquals(6, periodsB.size());
     }
