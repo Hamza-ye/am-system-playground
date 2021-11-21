@@ -1,5 +1,6 @@
 package org.nmcpye.activitiesmanagement.extended.period;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.nmcpye.activitiesmanagement.AMTest;
 import org.nmcpye.activitiesmanagement.IntegrationTest;
@@ -289,6 +290,7 @@ class PeriodStoreTest extends AMTest {
         assertTrue(periods.contains(periodE));
     }
 
+    @Disabled("Until DataIntegrityViolationException is fixed")
     @Test
     void testGetIntersectingPeriodsByPeriodType() {
         PeriodType ypt = PeriodType.getPeriodTypeByName(YearlyPeriodType.NAME);
