@@ -9,6 +9,7 @@ import org.nmcpye.activitiesmanagement.extended.schemamodule.Schema;
 import org.nmcpye.activitiesmanagement.extended.schemamodule.SchemaService;
 import org.nmcpye.activitiesmanagement.extended.schemamodule.Schemas;
 import org.nmcpye.activitiesmanagement.extended.schemamodule.validation.SchemaValidator;
+import org.nmcpye.activitiesmanagement.extended.web.constants.ApiEndPoint;
 import org.nmcpye.activitiesmanagement.extended.web.service.ContextService;
 import org.nmcpye.activitiesmanagement.extended.web.service.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ import java.util.List;
 import static org.nmcpye.activitiesmanagement.extended.dxf2module.webmessage.WebMessageUtils.errorReports;
 
 @Controller
-@RequestMapping("/api/schemas")
+@RequestMapping(ApiEndPoint.API_END_POINT + "/schemas")
 public class SchemaController {
 
     private final SchemaService schemaService;

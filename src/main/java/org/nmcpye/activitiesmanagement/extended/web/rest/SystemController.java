@@ -4,6 +4,7 @@ import org.nmcpye.activitiesmanagement.extended.render.RenderService;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobType;
 import org.nmcpye.activitiesmanagement.extended.systemmodule.system.notification.Notification;
 import org.nmcpye.activitiesmanagement.extended.systemmodule.system.notification.Notifier;
+import org.nmcpye.activitiesmanagement.extended.web.constants.ApiEndPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +23,7 @@ import static org.nmcpye.activitiesmanagement.extended.web.utils.ContextUtils.se
  * Created by Hamza on 05/11/2021.
  */
 @Controller
-@RequestMapping( value = SystemController.RESOURCE_PATH )
+@RequestMapping( value = ApiEndPoint.API_END_POINT + SystemController.RESOURCE_PATH )
 public class SystemController {
     public static final String RESOURCE_PATH = "/api/system";
 

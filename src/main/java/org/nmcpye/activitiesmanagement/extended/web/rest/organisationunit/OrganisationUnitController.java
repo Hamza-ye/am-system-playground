@@ -63,14 +63,13 @@ public class OrganisationUnitController
         // Special parameter handling
         // ---------------------------------------------------------------------
 
-//        if (options.isTrue("userOnly")) {
         if (options.isTrue("userOnly") ) {
             objects = new ArrayList<>(getPersonOrganisationUnits(currentUser.getPerson()));
         } else if (options.isTrue("userDataViewOnly")) {
             objects = new ArrayList<>(getPersonDataViewOrganisationUnits(currentUser.getPerson()));
         } else if (options.isTrue("userDataViewFallback")) {
             if (currentUser.hasDataViewOrganisationUnit()) {
-                objects = new ArrayList<>(currentUser.getPerson().getDataViewOrganisationUnits());
+                objects = new ArrayList<>(getPersonDataViewOrganisationUnits(currentUser.getPerson()));
             } else {
                 objects = organisationUnitServiceExt.getOrganisationUnitsAtLevel(1);
             }

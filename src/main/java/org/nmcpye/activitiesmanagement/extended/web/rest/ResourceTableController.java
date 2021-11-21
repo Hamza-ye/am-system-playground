@@ -3,6 +3,7 @@ package org.nmcpye.activitiesmanagement.extended.web.rest;
 import org.nmcpye.activitiesmanagement.domain.scheduling.JobConfiguration;
 import org.nmcpye.activitiesmanagement.extended.scheduling.JobType;
 import org.nmcpye.activitiesmanagement.extended.scheduling.SchedulingManager;
+import org.nmcpye.activitiesmanagement.extended.web.constants.ApiEndPoint;
 import org.nmcpye.activitiesmanagement.extended.web.service.WebMessageService;
 import org.nmcpye.activitiesmanagement.security.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import static org.nmcpye.activitiesmanagement.extended.dxf2module.webmessage.Web
  * Created by Hamza on 03/11/2021.
  */
 @Controller
-@RequestMapping( value = ResourceTableController.RESOURCE_PATH )
+@RequestMapping( value = ApiEndPoint.API_END_POINT + ResourceTableController.RESOURCE_PATH )
 public class ResourceTableController {
 
     public static final String RESOURCE_PATH = "/api/resourceTables";
