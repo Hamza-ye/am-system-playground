@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.collections4.CollectionUtils;
@@ -17,6 +18,8 @@ import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectUtils;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
+import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyTransformer;
+import org.nmcpye.activitiesmanagement.extended.schema.transformer.UserPropertyTransformer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -472,7 +475,7 @@ public class Person extends BaseIdentifiableObject implements UserDetails, Metad
         this.uuid = uuid;
     }
 
-    @JsonProperty("userRoles")
+    @JsonProperty//("userRoles")
     @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<PersonAuthorityGroup> getPersonAuthorityGroups() {
         return personAuthorityGroups;
@@ -779,6 +782,9 @@ public class Person extends BaseIdentifiableObject implements UserDetails, Metad
 
     @JsonProperty
     @JsonSerialize( as = BaseIdentifiableObject.class )
+//    @JsonSerialize(contentUsing = UserPropertyTransformer.JacksonSerialize.class)
+//    @JsonDeserialize(contentUsing = UserPropertyTransformer.JacksonDeserialize.class)
+//    @PropertyTransformer(UserPropertyTransformer.class)
     public User getUserInfo() {
         return this.userInfo;
     }
