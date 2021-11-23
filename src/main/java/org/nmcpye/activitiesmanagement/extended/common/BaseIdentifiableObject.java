@@ -132,7 +132,8 @@ public class BaseIdentifiableObject
     // -------------------------------------------------------------------------
 
     @Override
-    @JsonIgnore
+//    @JsonIgnore
+    @JsonProperty
     public Long getId() {
         return id;
     }
@@ -142,7 +143,8 @@ public class BaseIdentifiableObject
     }
 
     @Override
-    @JsonProperty(value = "id")
+//    @JsonProperty(value = "id")
+    @JsonProperty(value = "uid")
     @Description( "The Unique Identifier for this Object." )
     @Property(value = PropertyType.IDENTIFIER, required = Property.Value.FALSE)
     @PropertyRange(min = 11, max = 11)
