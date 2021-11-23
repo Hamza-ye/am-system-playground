@@ -23,7 +23,7 @@
       "name": "Name",
       "created": "Created",
       "lastUpdated": "Last Updated",
-      "isDisplayed": "Is Displayed",
+      "displayed": "Is Displayed",
       "activity": "Activity",
       "user": "User",
       "lastUpdatedBy": "Last Updated By"

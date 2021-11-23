@@ -27,7 +27,7 @@
       "endDate": "End Date",
       "noOfDays": "No Of Days",
       "active": "Active",
-      "isDisplayed": "Is Displayed",
+      "displayed": "Is Displayed",
       "warehouse": "Warehouse",
       "user": "User",
       "lastUpdatedBy": "Last Updated By",
