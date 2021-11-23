@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.time.Instant;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.enumeration.MalariaUnitMemberType;
@@ -74,6 +76,7 @@ public class MalariaUnitStaffMember implements Serializable {
     private MalariaUnit malariaUnit;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+    @JsonProperty
     public Long getId() {
         return id;
     }
@@ -87,6 +90,7 @@ public class MalariaUnitStaffMember implements Serializable {
         return this;
     }
 
+    @JsonProperty
     public String getUid() {
         return this.uid;
     }
@@ -100,6 +104,7 @@ public class MalariaUnitStaffMember implements Serializable {
         this.uid = uid;
     }
 
+    @JsonProperty
     public String getCode() {
         return this.code;
     }
@@ -113,6 +118,7 @@ public class MalariaUnitStaffMember implements Serializable {
         this.code = code;
     }
 
+    @JsonProperty
     public String getDescription() {
         return this.description;
     }
@@ -126,6 +132,7 @@ public class MalariaUnitStaffMember implements Serializable {
         this.description = description;
     }
 
+    @JsonProperty
     public Instant getCreated() {
         return this.created;
     }
@@ -139,6 +146,7 @@ public class MalariaUnitStaffMember implements Serializable {
         this.created = created;
     }
 
+    @JsonProperty
     public Instant getLastUpdated() {
         return this.lastUpdated;
     }
@@ -152,6 +160,7 @@ public class MalariaUnitStaffMember implements Serializable {
         this.lastUpdated = lastUpdated;
     }
 
+    @JsonProperty
     public Integer getMemberNo() {
         return this.memberNo;
     }
@@ -165,6 +174,7 @@ public class MalariaUnitStaffMember implements Serializable {
         this.memberNo = memberNo;
     }
 
+    @JsonProperty
     public MalariaUnitMemberType getMemberType() {
         return this.memberType;
     }
@@ -184,6 +194,7 @@ public class MalariaUnitStaffMember implements Serializable {
     }
 
     //    @Override
+    @JsonProperty
     @Deprecated
     public User getUser() {
         return createdBy;
@@ -201,6 +212,7 @@ public class MalariaUnitStaffMember implements Serializable {
         return this;
     }
 
+    @JsonProperty
     public User getLastUpdatedBy() {
         return this.lastUpdatedBy;
     }
@@ -214,6 +226,7 @@ public class MalariaUnitStaffMember implements Serializable {
         this.lastUpdatedBy = user;
     }
 
+    @JsonProperty
     public Person getPerson() {
         return this.person;
     }
@@ -227,6 +240,7 @@ public class MalariaUnitStaffMember implements Serializable {
         this.person = person;
     }
 
+    @JsonProperty
     public MalariaUnit getMalariaUnit() {
         return this.malariaUnit;
     }

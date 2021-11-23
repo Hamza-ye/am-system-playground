@@ -7,9 +7,13 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
+import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
 
 /**
  * A MalariaUnit.
@@ -89,6 +93,7 @@ public class MalariaUnit implements Serializable {
     private User lastUpdatedBy;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+    @JsonProperty
     public Long getId() {
         return id;
     }
@@ -102,6 +107,7 @@ public class MalariaUnit implements Serializable {
         return this;
     }
 
+    @JsonProperty
     public String getUid() {
         return this.uid;
     }
@@ -115,6 +121,7 @@ public class MalariaUnit implements Serializable {
         this.uid = uid;
     }
 
+    @JsonProperty
     public String getCode() {
         return this.code;
     }
@@ -128,6 +135,7 @@ public class MalariaUnit implements Serializable {
         this.code = code;
     }
 
+    @JsonProperty
     public String getName() {
         return this.name;
     }
@@ -141,6 +149,7 @@ public class MalariaUnit implements Serializable {
         this.name = name;
     }
 
+    @JsonProperty
     public String getShortName() {
         return this.shortName;
     }
@@ -154,6 +163,7 @@ public class MalariaUnit implements Serializable {
         this.shortName = shortName;
     }
 
+    @JsonProperty
     public String getDescription() {
         return this.description;
     }
@@ -167,6 +177,7 @@ public class MalariaUnit implements Serializable {
         this.description = description;
     }
 
+    @JsonProperty
     public Instant getCreated() {
         return this.created;
     }
@@ -180,6 +191,7 @@ public class MalariaUnit implements Serializable {
         this.created = created;
     }
 
+    @JsonProperty
     public Instant getLastUpdated() {
         return this.lastUpdated;
     }
@@ -193,6 +205,8 @@ public class MalariaUnit implements Serializable {
         this.lastUpdated = lastUpdated;
     }
 
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<OrganisationUnit> getOrganisationUnits() {
         return this.organisationUnits;
     }
@@ -261,6 +275,7 @@ public class MalariaUnit implements Serializable {
     }
 
     //    @Override
+    @JsonProperty
     @Deprecated
     public User getUser() {
         return createdBy;
@@ -278,6 +293,7 @@ public class MalariaUnit implements Serializable {
         return this;
     }
 
+    @JsonProperty
     public User getLastUpdatedBy() {
         return this.lastUpdatedBy;
     }
