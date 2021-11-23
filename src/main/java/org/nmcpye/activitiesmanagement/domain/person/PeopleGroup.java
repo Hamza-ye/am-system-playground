@@ -221,7 +221,7 @@ public class PeopleGroup extends BaseIdentifiableObject implements MetadataObjec
         this.uuid = uuid;
     }
 
-    @JsonProperty("people")
+    @JsonProperty//("people")
     @JsonSerialize(contentUsing = PersonPropertyTransformer.JacksonSerialize.class)
     @JsonDeserialize(contentUsing = PersonPropertyTransformer.JacksonDeserialize.class)
     @PropertyTransformer(PersonPropertyTransformer.class)
@@ -233,7 +233,7 @@ public class PeopleGroup extends BaseIdentifiableObject implements MetadataObjec
         this.members = members;
     }
 
-    @JsonProperty("managedGroups")
+    @JsonProperty//("managedGroups")
     @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<PeopleGroup> getManagedGroups() {
         return managedGroups;
@@ -243,7 +243,7 @@ public class PeopleGroup extends BaseIdentifiableObject implements MetadataObjec
         this.managedGroups = managedGroups;
     }
 
-    @JsonProperty("managedByGroups")
+    @JsonProperty//("managedByGroups")
     @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<PeopleGroup> getManagedByGroups() {
         return managedByGroups;
