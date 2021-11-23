@@ -46,6 +46,8 @@ public class AdminUserDTO {
     @Size(min = 2, max = 10)
     private String langKey;
 
+    private User createdBy;
+
     private User user;
 
     private Date created;
@@ -152,13 +154,22 @@ public class AdminUserDTO {
     }
 
     @JsonProperty
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    @JsonProperty
     @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public User getUser() {
-        return user;
+        return createdBy;
     }
 
     public void setUser(User user) {
-        this.user = user;
+        setCreatedBy(createdBy == null ? user : createdBy);
     }
 
     @JsonProperty

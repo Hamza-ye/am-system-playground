@@ -30,6 +30,8 @@ public class JacksonObjectMapperConfig {
      */
     public static final ObjectMapper jsonMapper = configureMapper( new ObjectMapper() );
 
+//    public static final ObjectMapper jsonMapper = new ObjectMapper();
+
     @Primary
     @Bean( "jsonMapper" )
     public ObjectMapper jsonMapper()
@@ -40,8 +42,6 @@ public class JacksonObjectMapperConfig {
     @Bean
     public MappingJackson2HttpMessageConverter jacksonMessageConverter(){
         MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
-
-//        ObjectMapper mapper = configureMapper(new ObjectMapper(), false );
 
         messageConverter.setObjectMapper(jsonMapper);
         return messageConverter;

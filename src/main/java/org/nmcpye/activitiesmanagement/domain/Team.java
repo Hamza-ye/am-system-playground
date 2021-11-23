@@ -1,6 +1,7 @@
 package org.nmcpye.activitiesmanagement.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.enumeration.TeamType;
@@ -125,6 +126,7 @@ public class Team implements Serializable {
     private Set<Warehouse> assignedToWarehouses = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+    @JsonProperty
     public Long getId() {
         return id;
     }
@@ -138,6 +140,7 @@ public class Team implements Serializable {
         return this;
     }
 
+    @JsonProperty
     public String getUid() {
         return this.uid;
     }
@@ -151,6 +154,7 @@ public class Team implements Serializable {
         this.uid = uid;
     }
 
+    @JsonProperty
     public String getCode() {
         return this.code;
     }
@@ -164,6 +168,7 @@ public class Team implements Serializable {
         this.code = code;
     }
 
+    @JsonProperty
     public String getName() {
         return this.name;
     }
@@ -177,6 +182,7 @@ public class Team implements Serializable {
         this.name = name;
     }
 
+    @JsonProperty
     public Instant getCreated() {
         return this.created;
     }
@@ -190,6 +196,7 @@ public class Team implements Serializable {
         this.created = created;
     }
 
+    @JsonProperty
     public Instant getLastUpdated() {
         return this.lastUpdated;
     }
@@ -203,6 +210,7 @@ public class Team implements Serializable {
         this.lastUpdated = lastUpdated;
     }
 
+    @JsonProperty
     public Integer getTeamNo() {
         return this.teamNo;
     }
@@ -216,6 +224,7 @@ public class Team implements Serializable {
         this.teamNo = teamNo;
     }
 
+    @JsonProperty
     public TeamType getTeamType() {
         return this.teamType;
     }
@@ -229,6 +238,7 @@ public class Team implements Serializable {
         this.teamType = teamType;
     }
 
+    @JsonProperty
     public Set<WHMovement> getWhMovements() {
         return this.whMovements;
     }
@@ -384,6 +394,7 @@ public class Team implements Serializable {
         this.llinsFamilyReports = lLINSFamilyReports;
     }
 
+    @JsonProperty
     public User getLastUpdatedBy() {
         return this.lastUpdatedBy;
     }
@@ -397,6 +408,7 @@ public class Team implements Serializable {
         this.lastUpdatedBy = user;
     }
 
+    @JsonProperty
     public Person getPerson() {
         return this.person;
     }
@@ -410,6 +422,7 @@ public class Team implements Serializable {
         this.person = person;
     }
 
+    @JsonProperty
     public Set<Warehouse> getAssignedToWarehouses() {
         return this.assignedToWarehouses;
     }
@@ -470,6 +483,7 @@ public class Team implements Serializable {
     }
 
     //    @Override
+    @JsonProperty
     public User getCreatedBy() {
         return createdBy;
     }
@@ -481,6 +495,7 @@ public class Team implements Serializable {
 
     //    @Override
     @Deprecated
+    @JsonProperty
     public User getUser() {
         return createdBy;
     }

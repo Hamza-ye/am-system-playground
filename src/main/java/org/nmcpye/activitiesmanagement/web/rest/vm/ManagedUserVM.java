@@ -1,6 +1,8 @@
 package org.nmcpye.activitiesmanagement.web.rest.vm;
 
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.nmcpye.activitiesmanagement.service.dto.AdminUserDTO;
 
 /**
@@ -19,10 +21,12 @@ public class ManagedUserVM extends AdminUserDTO {
         // Empty constructor needed for Jackson.
     }
 
+    @JsonProperty
     public String getPassword() {
         return password;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }

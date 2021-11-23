@@ -1,5 +1,7 @@
 package org.nmcpye.activitiesmanagement.web.rest.vm;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * View Model object for storing the user's key and password.
  */
@@ -9,6 +11,7 @@ public class KeyAndPasswordVM {
 
     private String newPassword;
 
+    @JsonProperty
     public String getKey() {
         return key;
     }
@@ -17,6 +20,7 @@ public class KeyAndPasswordVM {
         this.key = key;
     }
 
+    @JsonProperty
     public String getNewPassword() {
         return newPassword;
     }

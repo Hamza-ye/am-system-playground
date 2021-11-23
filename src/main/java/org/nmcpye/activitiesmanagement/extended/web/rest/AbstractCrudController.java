@@ -6,20 +6,19 @@ import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjects;
 import org.nmcpye.activitiesmanagement.extended.dxf2module.webmessage.WebMessageException;
+import org.nmcpye.activitiesmanagement.extended.dxf2module.webmessage.WebMessageUtils;
 import org.nmcpye.activitiesmanagement.extended.hibernatemodule.hibernate.exception.UpdateAccessDeniedException;
 import org.nmcpye.activitiesmanagement.extended.patch.Patch;
 import org.nmcpye.activitiesmanagement.extended.patch.PatchParams;
 import org.nmcpye.activitiesmanagement.extended.patch.PatchService;
 import org.nmcpye.activitiesmanagement.extended.render.RenderService;
+import org.nmcpye.activitiesmanagement.extended.schema.Property;
 import org.nmcpye.activitiesmanagement.extended.schemamodule.validation.SchemaValidator;
 import org.nmcpye.activitiesmanagement.extended.web.webdomain.WebOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -85,6 +84,47 @@ public abstract class AbstractCrudController<T extends IdentifiableObject>
         return patchService.diff(new PatchParams(mapper.readTree(request.getInputStream())));
     }
 
+    @RequestMapping(value = "/{uid}/{property}", method = {RequestMethod.PUT, RequestMethod.PATCH})
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void updateObjectProperty(
+        @PathVariable("uid") String pvUid, @PathVariable("property") String pvProperty, @RequestParam Map<String, String> rpParameters,
+        HttpServletRequest request) throws Exception {
+        WebOptions options = new WebOptions(rpParameters);
+
+        List<T> entities = getEntity(pvUid, options);
+
+        if (entities.isEmpty()) {
+            throw new WebMessageException(WebMessageUtils.notFound(getEntityClass(), pvUid));
+        }
+
+        if (!getSchema().haveProperty(pvProperty)) {
+            throw new WebMessageException(WebMessageUtils.notFound("Property " + pvProperty + " does not exist on " + getEntityName()));
+        }
+
+        Property property = getSchema().getProperty(pvProperty);
+        T persistedObject = entities.get(0);
+
+        if (!aclService.canUpdate(userService.getUserWithAuthorities().orElse(null), persistedObject)) {
+            throw new UpdateAccessDeniedException("You don't have the proper permissions to update this object.");
+        }
+
+        if (!property.isWritable()) {
+            throw new UpdateAccessDeniedException("This property is read-only.");
+        }
+
+        T object = deserialize(request);
+
+        if (object == null) {
+            throw new WebMessageException(WebMessageUtils.badRequest("Unknown payload format."));
+        }
+
+        Object value = property.getGetterMethod().invoke(object);
+
+        property.getSetterMethod().invoke(persistedObject, value);
+
+        manager.update(persistedObject);
+        postPatchEntity(persistedObject);
+    }
     // --------------------------------------------------------------------------
     // Hooks
     // --------------------------------------------------------------------------

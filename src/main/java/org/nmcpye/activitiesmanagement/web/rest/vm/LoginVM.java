@@ -1,5 +1,7 @@
 package org.nmcpye.activitiesmanagement.web.rest.vm;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -18,6 +20,7 @@ public class LoginVM {
 
     private boolean rememberMe;
 
+    @JsonProperty
     public String getUsername() {
         return username;
     }
@@ -26,6 +29,7 @@ public class LoginVM {
         this.username = username;
     }
 
+    @JsonProperty
     public String getPassword() {
         return password;
     }
@@ -34,6 +38,7 @@ public class LoginVM {
         this.password = password;
     }
 
+    @JsonProperty
     public boolean isRememberMe() {
         return rememberMe;
     }
