@@ -107,8 +107,8 @@ public class Person extends BaseIdentifiableObject implements UserDetails, Metad
     @Column(name = "disabled")
     private Boolean disabled;
 
-    @OneToOne(mappedBy = "person")
-//    @JoinColumn(name = "user_info_id", unique = true)
+    @OneToOne//(mappedBy = "person")
+    @JoinColumn(name = "user_info_id", unique = true)
     private User userInfo;
 
     @ManyToMany

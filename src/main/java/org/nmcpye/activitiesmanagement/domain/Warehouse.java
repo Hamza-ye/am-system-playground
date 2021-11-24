@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.activity.Activity;
@@ -102,6 +104,7 @@ public class Warehouse implements Serializable {
     private Set<Team> teams = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+    @JsonProperty
     public Long getId() {
         return id;
     }
@@ -115,6 +118,7 @@ public class Warehouse implements Serializable {
         return this;
     }
 
+    @JsonProperty
     public String getUid() {
         return this.uid;
     }
@@ -128,6 +132,7 @@ public class Warehouse implements Serializable {
         this.uid = uid;
     }
 
+    @JsonProperty
     public String getCode() {
         return this.code;
     }
@@ -141,6 +146,7 @@ public class Warehouse implements Serializable {
         this.code = code;
     }
 
+    @JsonProperty
     public String getName() {
         return this.name;
     }
@@ -154,6 +160,7 @@ public class Warehouse implements Serializable {
         this.name = name;
     }
 
+    @JsonProperty
     public Instant getCreated() {
         return this.created;
     }
@@ -167,6 +174,7 @@ public class Warehouse implements Serializable {
         this.created = created;
     }
 
+    @JsonProperty
     public Instant getLastUpdated() {
         return this.lastUpdated;
     }
@@ -180,6 +188,7 @@ public class Warehouse implements Serializable {
         this.lastUpdated = lastUpdated;
     }
 
+    @JsonProperty
     public Integer getWhNo() {
         return this.whNo;
     }
@@ -193,6 +202,7 @@ public class Warehouse implements Serializable {
         this.whNo = whNo;
     }
 
+    @JsonProperty
     public BigDecimal getInitialBalancePlan() {
         return this.initialBalancePlan;
     }
@@ -206,6 +216,7 @@ public class Warehouse implements Serializable {
         this.initialBalancePlan = initialBalancePlan;
     }
 
+    @JsonProperty
     public BigDecimal getInitialBalanceActual() {
         return this.initialBalanceActual;
     }
@@ -219,6 +230,7 @@ public class Warehouse implements Serializable {
         this.initialBalanceActual = initialBalanceActual;
     }
 
+    @JsonProperty
     public Set<WHMovement> getInitiatedMovements() {
         return this.initiatedMovements;
     }
@@ -250,6 +262,7 @@ public class Warehouse implements Serializable {
         this.initiatedMovements = wHMovements;
     }
 
+    @JsonProperty
     public Set<WHMovement> getNotInitiatedMovements() {
         return this.notInitiatedMovements;
     }
@@ -287,6 +300,7 @@ public class Warehouse implements Serializable {
     }
 
     //    @Override
+    @JsonProperty
     @Deprecated
     public User getUser() {
         return createdBy;
@@ -304,6 +318,8 @@ public class Warehouse implements Serializable {
         return this;
     }
 
+    //    @Override
+    @JsonProperty
     public User getLastUpdatedBy() {
         return this.lastUpdatedBy;
     }
@@ -313,10 +329,12 @@ public class Warehouse implements Serializable {
         return this;
     }
 
+    //    @Override
     public void setLastUpdatedBy(User user) {
         this.lastUpdatedBy = user;
     }
 
+    @JsonProperty
     public Activity getActivity() {
         return this.activity;
     }
@@ -330,6 +348,7 @@ public class Warehouse implements Serializable {
         this.activity = activity;
     }
 
+    @JsonProperty
     public Set<Team> getTeams() {
         return this.teams;
     }

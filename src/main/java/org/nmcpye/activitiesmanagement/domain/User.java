@@ -2,6 +2,7 @@ package org.nmcpye.activitiesmanagement.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -16,9 +17,13 @@ import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectUtils;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
+import org.nmcpye.activitiesmanagement.extended.common.adapter.AuthorityDeserializer;
+import org.nmcpye.activitiesmanagement.extended.common.adapter.AuthoritySerializer;
 import org.nmcpye.activitiesmanagement.extended.schema.PropertyType;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.Property;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyRange;
+import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyTransformer;
+import org.nmcpye.activitiesmanagement.extended.schema.transformer.PersonPropertyTransformer;
 import org.nmcpye.activitiesmanagement.extended.security.Authorities;
 import org.nmcpye.activitiesmanagement.security.AuthoritiesConstants;
 
@@ -154,8 +159,8 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
     @Column(name = "mobile")
     private String mobile;
 
-    @OneToOne//(mappedBy = "userInfo")
-    @JoinColumn(unique = true)
+    @OneToOne(mappedBy = "userInfo", fetch = FetchType.EAGER)
+//    @JoinColumn(unique = true)
     Person person;
 
     /**
@@ -208,6 +213,9 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
     @JsonProperty
     @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     @Property(required = Property.Value.TRUE, value = PropertyType.REFERENCE)
+//    @JsonSerialize(contentUsing = PersonPropertyTransformer.JacksonSerialize.class)
+//    @JsonDeserialize(contentUsing = PersonPropertyTransformer.JacksonDeserialize.class)
+//    @PropertyTransformer(PersonPropertyTransformer.class)
     public Person getPerson() {
         return person;
     }
@@ -323,6 +331,8 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
     }
 
     @JsonProperty
+    @JsonSerialize(using = AuthoritySerializer.class)
+    @JsonDeserialize(using = AuthorityDeserializer.class)
     public Set<Authority> getAuthorities() {
         return authorities;
     }

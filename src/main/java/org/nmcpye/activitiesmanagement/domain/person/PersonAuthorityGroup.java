@@ -191,6 +191,8 @@ public class PersonAuthorityGroup extends BaseIdentifiableObject implements Meta
 //        }
 //    }
 
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<Person> getMembers() {
         return members;
     }
@@ -199,8 +201,8 @@ public class PersonAuthorityGroup extends BaseIdentifiableObject implements Meta
         this.members = members;
     }
 
-    @JsonProperty
-    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
+//    @JsonProperty
+//    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public List<User> getUsers() {
         List<User> users = new ArrayList<>();
 
