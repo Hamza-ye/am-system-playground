@@ -66,9 +66,9 @@
                 <constraints nullable="true"/>
             </column>
 
-            <column name="person_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="UC_USER_PERSON_ID_UNIQUE"/>
-            </column>
+            <!--<column name="person_id" type="bigint">-->
+                <!--<constraints nullable="true" unique="true" uniqueConstraintName="UC_USER_PERSON_ID_UNIQUE"/>-->
+            <!--</column>-->
 
             <!--<column name="created_by" type="bigint">-->
                 <!--<constraints nullable="true"/>-->

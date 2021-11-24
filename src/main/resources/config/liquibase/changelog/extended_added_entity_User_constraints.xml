@@ -12,11 +12,11 @@
         <!--</addColumn>-->
     <!--</changeSet>-->
     <changeSet id="extend-app_user-constraints" author="Hamza">
-        <addForeignKeyConstraint baseColumnNames="person_id"
-                                 baseTableName="app_user"
-                                 constraintName="fk_app_user_person_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="person"/>
+        <!--<addForeignKeyConstraint baseColumnNames="person_id"-->
+                                 <!--baseTableName="app_user"-->
+                                 <!--constraintName="fk_app_user_person_id"-->
+                                 <!--referencedColumnNames="id"-->
+                                 <!--referencedTableName="person"/>-->
 
         <!--<addForeignKeyConstraint baseColumnNames="last_updated_by"-->
                                  <!--baseTableName="app_user"-->

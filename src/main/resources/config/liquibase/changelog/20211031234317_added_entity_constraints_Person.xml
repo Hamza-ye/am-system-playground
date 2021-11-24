@@ -8,11 +8,11 @@
     -->
     <changeSet id="20211031234317-2" author="jhipster">
 
-        <!--<addForeignKeyConstraint baseColumnNames="user_info_id"-->
-                                 <!--baseTableName="person"-->
-                                 <!--constraintName="fk_person_user_info__id"-->
-                                 <!--referencedColumnNames="id"-->
-                                 <!--referencedTableName="app_user"/>-->
+        <addForeignKeyConstraint baseColumnNames="user_info_id"
+                                 baseTableName="person"
+                                 constraintName="fk_person_user_info__id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
 
         <addForeignKeyConstraint baseColumnNames="created_by"
                                  baseTableName="person"
