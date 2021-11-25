@@ -24,7 +24,7 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
     }
 
     @Override
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public Object transform(Object o) {
         if (!(o instanceof User)) {
             if (o instanceof Collection) {
@@ -55,7 +55,7 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
     private UserDto buildUserDto(User user) {
         Person userCredentials = user.getPerson();
 
-        UserDto.UserDtoBuilder builder = UserDto.builder().id(user.getUid()).code(user.getCode()).displayName(user.getDisplayName());
+        UserDto.UserDtoBuilder builder = UserDto.builder().id(user.getId()).uid(user.getUid()).code(user.getCode()).displayName(user.getDisplayName());
 
         if (userCredentials != null) {
             builder.username(userCredentials.getUsername());
@@ -66,7 +66,9 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
 
     public static class UserDto {
 
-        private String id;
+        private Long id;
+
+        private String uid;
 
         private String code;
 
@@ -78,6 +80,7 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
 
         public UserDto(UserDtoBuilder userDtoBuilder) {
             this.id = userDtoBuilder.id;
+            this.uid = userDtoBuilder.uid;
             this.code = userDtoBuilder.code;
             this.name = userDtoBuilder.name;
             this.displayName = userDtoBuilder.displayName;
@@ -89,8 +92,13 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
         }
 
         @JsonProperty
-        public String getId() {
+        public Long getId() {
             return id;
+        }
+
+        @JsonProperty
+        public String getUid() {
+            return uid;
         }
 
         @JsonProperty
@@ -121,15 +129,18 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
             UserDto userDto = (UserDto) o;
 
             if (id != null ? !id.equals(userDto.id) : userDto.id != null) return false;
+            if (uid != null ? !uid.equals(userDto.uid) : userDto.uid != null) return false;
             if (code != null ? !code.equals(userDto.code) : userDto.code != null) return false;
             if (name != null ? !name.equals(userDto.name) : userDto.name != null) return false;
-            if (displayName != null ? !displayName.equals(userDto.displayName) : userDto.displayName != null) return false;
+            if (displayName != null ? !displayName.equals(userDto.displayName) : userDto.displayName != null)
+                return false;
             return username != null ? username.equals(userDto.username) : userDto.username == null;
         }
 
         @Override
         public int hashCode() {
             int result = id != null ? id.hashCode() : 0;
+            result = 31 * result + (uid != null ? uid.hashCode() : 0);
             result = 31 * result + (code != null ? code.hashCode() : 0);
             result = 31 * result + (name != null ? name.hashCode() : 0);
             result = 31 * result + (displayName != null ? displayName.hashCode() : 0);
@@ -141,28 +152,32 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
         public String toString() {
             return (
                 "UserDto{" +
-                "id='" +
-                id +
-                '\'' +
-                ", code='" +
-                code +
-                '\'' +
-                ", name='" +
-                name +
-                '\'' +
-                ", displayName='" +
-                displayName +
-                '\'' +
-                ", username='" +
-                username +
-                '\'' +
-                '}'
+                    "id='" +
+                    id +
+                    '\'' +
+                    "uid='" +
+                    uid +
+                    '\'' +
+                    ", code='" +
+                    code +
+                    '\'' +
+                    ", name='" +
+                    name +
+                    '\'' +
+                    ", displayName='" +
+                    displayName +
+                    '\'' +
+                    ", username='" +
+                    username +
+                    '\'' +
+                    '}'
             );
         }
 
         public static class UserDtoBuilder {
 
-            private String id;
+            private Long id;
+            private String uid;
 
             private String code;
 
@@ -172,8 +187,13 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
 
             private String username;
 
-            public UserDtoBuilder id(String id) {
+            public UserDtoBuilder id(Long id) {
                 this.id = id;
+                return this;
+            }
+
+            public UserDtoBuilder uid(String uid) {
+                this.uid = uid;
                 return this;
             }
 
@@ -222,7 +242,8 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
             Person userCredentials = user.getPerson();
 
             gen.writeStartObject();
-            gen.writeStringField("id", user.getUid());
+            gen.writeNumberField("id", user.getId());
+            gen.writeStringField("uid", user.getUid());
             gen.writeStringField("code", user.getCode());
             gen.writeStringField("name", user.getName());
             gen.writeStringField("displayName", user.getDisplayName());
@@ -244,31 +265,41 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
         @Override
         public User deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
             User user = new User();
-            Person userCredentials = new Person();
-            user.setPerson(userCredentials);
+            Person person = new Person();
+            user.setPerson(person);
 
             JsonNode node = jp.getCodec().readTree(jp);
 
-            if (node.has("id")) {
-                String identifier = node.get("id").asText();
+//            if (node.has("id")) {
+//                String identifier = node.get("id").asText();
+            if (node.has("uid")) {
+                String identifier = node.get("uid").asText();
 
                 if (CodeGenerator.isValidUid(identifier)) {
                     user.setUid(identifier);
-                    userCredentials.setUid(identifier);
+                    person.setUid(identifier);
                 } else {
-                    userCredentials.setUuid(UUID.fromString(identifier));
+                    person.setUuid(UUID.fromString(identifier));
                 }
+            }
+
+            // Extend
+            if (node.has("id")) {
+                Long id = node.get("id").asLong();
+
+                user.setId(id);
+                person.setId(id);
             }
 
             if (node.has("code")) {
                 String code = node.get("code").asText();
 
                 user.setCode(code);
-                userCredentials.setCode(code);
+                person.setCode(code);
             }
 
-            if (node.has("username")) {
-                userCredentials.setLogin(node.get("login").asText());
+            if (node.has("login")) {
+                person.setLogin(node.get("login").asText());
             }
 
             return user;

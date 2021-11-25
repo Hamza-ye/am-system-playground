@@ -130,6 +130,7 @@ public class CacheConfiguration {
             createCache(cm, org.nmcpye.activitiesmanagement.domain.person.PersonAuthorityGroup.class.getName());
             createCache(cm, org.nmcpye.activitiesmanagement.domain.person.PersonAuthorityGroup.class.getName() + ".members");
             createCache(cm, org.nmcpye.activitiesmanagement.domain.dataset.DataSet.class.getName());
+            createCache(cm, org.nmcpye.activitiesmanagement.domain.dataset.DataSet.class.getName() + ".dataInputPeriods");
             createCache(cm, org.nmcpye.activitiesmanagement.domain.dataset.DataSet.class.getName() + ".malariaCasesReports");
             createCache(cm, org.nmcpye.activitiesmanagement.domain.dataset.DataSet.class.getName() + ".dengueCasesReports");
             createCache(cm, org.nmcpye.activitiesmanagement.domain.dataset.DataSet.class.getName() + ".sources");

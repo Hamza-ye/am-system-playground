@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
+import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectManager;
 import org.nmcpye.activitiesmanagement.repository.PersonRepository;
 import org.nmcpye.activitiesmanagement.service.PersonService;
 import org.nmcpye.activitiesmanagement.web.rest.errors.BadRequestAlertException;
@@ -40,10 +41,13 @@ public class PersonResource {
 
     private final PersonService personService;
 
+    protected final IdentifiableObjectManager manager;
+
     private final PersonRepository personRepository;
 
-    public PersonResource(PersonService personService, PersonRepository personRepository) {
+    public PersonResource(PersonService personService, IdentifiableObjectManager manager, PersonRepository personRepository) {
         this.personService = personService;
+        this.manager = manager;
         this.personRepository = personRepository;
     }
 
@@ -94,11 +98,18 @@ public class PersonResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Person result = personService.save(person);
+//        Person result = personService.save(person);
+//        return ResponseEntity
+//            .ok()
+//            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, person.getId().toString()))
+//            .body(result);
+
+        manager.update(person);
+
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, person.getId().toString()))
-            .body(result);
+            .body(person);
     }
 
     /**

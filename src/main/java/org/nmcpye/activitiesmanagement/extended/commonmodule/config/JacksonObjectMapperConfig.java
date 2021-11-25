@@ -79,6 +79,8 @@ public class JacksonObjectMapperConfig {
         objectMapper.enable( DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES );
         objectMapper.enable( DeserializationFeature.WRAP_EXCEPTIONS );
 
+//        objectMapper.disable( SerializationFeature.FAIL_ON_SELF_REFERENCES );
+
         objectMapper.disable( MapperFeature.AUTO_DETECT_FIELDS );
         objectMapper.disable( MapperFeature.AUTO_DETECT_CREATORS );
         if ( !autoDetectGetters )

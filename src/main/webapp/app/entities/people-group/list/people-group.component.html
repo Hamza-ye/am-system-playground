@@ -39,10 +39,10 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.created">Created</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.lastUpdated">Last Updated</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.uuid">Uuid</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.member">Member</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.managedByGroup">Managed By Group</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.managedGroup">Managed Group</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -58,7 +58,7 @@
           <td>{{ peopleGroup.lastUpdated | formatMediumDatetime }}</td>
           <td>{{ peopleGroup.uuid }}</td>
           <td>
-            {{ peopleGroup.user?.login }}
+            {{ peopleGroup.createdBy?.login }}
           </td>
           <td>
             {{ peopleGroup.lastUpdatedBy?.login }}
@@ -70,8 +70,8 @@
             </span>
           </td>
           <td>
-            <span *ngFor="let managedByGroup of peopleGroup.managedByGroups; let last = last">
-              <a class="form-control-static" [routerLink]="['/people-group', managedByGroup.id, 'view']">{{ managedByGroup.name }}</a
+            <span *ngFor="let managedGroup of peopleGroup.managedGroups; let last = last">
+              <a class="form-control-static" [routerLink]="['/people-group', managedGroup.id, 'view']">{{ managedGroup.name }}</a
               >{{ last ? '' : ', ' }}
             </span>
           </td>

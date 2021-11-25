@@ -6,9 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.config.Constants;
 import org.nmcpye.activitiesmanagement.domain.enumeration.Gender;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
@@ -28,6 +27,8 @@ import org.nmcpye.activitiesmanagement.extended.security.Authorities;
 import org.nmcpye.activitiesmanagement.security.AuthoritiesConstants;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -159,7 +160,8 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
     @Column(name = "mobile")
     private String mobile;
 
-    @OneToOne(mappedBy = "userInfo", fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "userInfo", fetch = FetchType.EAGER)//(mappedBy = "userInfo")
+    @Fetch(FetchMode.JOIN)
 //    @JoinColumn(unique = true)
     Person person;
 
@@ -169,7 +171,7 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
     @JsonProperty
     @Override
     public String getName() {
-        return firstName + " " + surname;
+        return firstName + " " + lastName + " " + surname;
     }
 
     @JsonProperty

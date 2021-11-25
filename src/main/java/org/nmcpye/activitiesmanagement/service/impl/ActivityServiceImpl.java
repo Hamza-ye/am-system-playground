@@ -58,12 +58,6 @@ public class ActivityServiceImpl implements ActivityService {
                     if (activity.getStartDate() != null) {
                         existingActivity.setStartDate(activity.getStartDate());
                     }
-                    if (activity.getEndDate() != null) {
-                        existingActivity.setEndDate(activity.getEndDate());
-                    }
-                    if (activity.getNoOfDays() != null) {
-                        existingActivity.setNoOfDays(activity.getNoOfDays());
-                    }
                     if (activity.getActive() != null) {
                         existingActivity.setActive(activity.getActive());
                     }

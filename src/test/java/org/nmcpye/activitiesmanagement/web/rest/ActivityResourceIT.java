@@ -97,7 +97,6 @@ class ActivityResourceIT {
             .lastUpdated(DEFAULT_LAST_UPDATED)
             .startDate(DEFAULT_START_DATE)
             .endDate(DEFAULT_END_DATE)
-            .noOfDays(DEFAULT_NO_OF_DAYS)
             .active(DEFAULT_ACTIVE)
             .displayed(DEFAULT_IS_DISPLAYED);
         // Add required entity
@@ -128,7 +127,6 @@ class ActivityResourceIT {
             .lastUpdated(UPDATED_LAST_UPDATED)
             .startDate(UPDATED_START_DATE)
             .endDate(UPDATED_END_DATE)
-            .noOfDays(UPDATED_NO_OF_DAYS)
             .active(UPDATED_ACTIVE)
             .displayed(UPDATED_IS_DISPLAYED);
         // Add required entity
@@ -169,7 +167,6 @@ class ActivityResourceIT {
         assertThat(testActivity.getLastUpdated()).isEqualTo(DEFAULT_LAST_UPDATED);
         assertThat(testActivity.getStartDate()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testActivity.getEndDate()).isEqualTo(DEFAULT_END_DATE);
-        assertThat(testActivity.getNoOfDays()).isEqualTo(DEFAULT_NO_OF_DAYS);
         assertThat(testActivity.getActive()).isEqualTo(DEFAULT_ACTIVE);
         assertThat(testActivity.getDisplayed()).isEqualTo(DEFAULT_IS_DISPLAYED);
     }
@@ -262,7 +259,6 @@ class ActivityResourceIT {
             .andExpect(jsonPath("$.[*].lastUpdated").value(hasItem(DEFAULT_LAST_UPDATED.toString())))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
-            .andExpect(jsonPath("$.[*].noOfDays").value(hasItem(DEFAULT_NO_OF_DAYS)))
             .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())))
             .andExpect(jsonPath("$.[*].displayed").value(hasItem(DEFAULT_IS_DISPLAYED.booleanValue())));
     }
@@ -286,7 +282,6 @@ class ActivityResourceIT {
             .andExpect(jsonPath("$.lastUpdated").value(DEFAULT_LAST_UPDATED.toString()))
             .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
             .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()))
-            .andExpect(jsonPath("$.noOfDays").value(DEFAULT_NO_OF_DAYS))
             .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()))
             .andExpect(jsonPath("$.displayed").value(DEFAULT_IS_DISPLAYED.booleanValue()));
     }
@@ -318,7 +313,6 @@ class ActivityResourceIT {
             .lastUpdated(UPDATED_LAST_UPDATED)
             .startDate(UPDATED_START_DATE)
             .endDate(UPDATED_END_DATE)
-            .noOfDays(UPDATED_NO_OF_DAYS)
             .active(UPDATED_ACTIVE)
             .displayed(UPDATED_IS_DISPLAYED);
 
@@ -341,7 +335,6 @@ class ActivityResourceIT {
         assertThat(testActivity.getLastUpdated()).isEqualTo(UPDATED_LAST_UPDATED);
         assertThat(testActivity.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testActivity.getEndDate()).isEqualTo(UPDATED_END_DATE);
-        assertThat(testActivity.getNoOfDays()).isEqualTo(UPDATED_NO_OF_DAYS);
         assertThat(testActivity.getActive()).isEqualTo(UPDATED_ACTIVE);
         assertThat(testActivity.getDisplayed()).isEqualTo(UPDATED_IS_DISPLAYED);
     }
@@ -440,7 +433,6 @@ class ActivityResourceIT {
         assertThat(testActivity.getLastUpdated()).isEqualTo(UPDATED_LAST_UPDATED);
         assertThat(testActivity.getStartDate()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testActivity.getEndDate()).isEqualTo(UPDATED_END_DATE);
-        assertThat(testActivity.getNoOfDays()).isEqualTo(DEFAULT_NO_OF_DAYS);
         assertThat(testActivity.getActive()).isEqualTo(UPDATED_ACTIVE);
         assertThat(testActivity.getDisplayed()).isEqualTo(DEFAULT_IS_DISPLAYED);
     }
@@ -465,7 +457,6 @@ class ActivityResourceIT {
             .lastUpdated(UPDATED_LAST_UPDATED)
             .startDate(UPDATED_START_DATE)
             .endDate(UPDATED_END_DATE)
-            .noOfDays(UPDATED_NO_OF_DAYS)
             .active(UPDATED_ACTIVE)
             .displayed(UPDATED_IS_DISPLAYED);
 
@@ -488,7 +479,6 @@ class ActivityResourceIT {
         assertThat(testActivity.getLastUpdated()).isEqualTo(UPDATED_LAST_UPDATED);
         assertThat(testActivity.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testActivity.getEndDate()).isEqualTo(UPDATED_END_DATE);
-        assertThat(testActivity.getNoOfDays()).isEqualTo(UPDATED_NO_OF_DAYS);
         assertThat(testActivity.getActive()).isEqualTo(UPDATED_ACTIVE);
         assertThat(testActivity.getDisplayed()).isEqualTo(UPDATED_IS_DISPLAYED);
     }

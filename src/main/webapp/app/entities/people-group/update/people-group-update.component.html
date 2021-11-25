@@ -84,11 +84,13 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.peopleGroup.user" for="field_user">User</label>
-          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.peopleGroup.createdBy" for="field_createdBy"
+            >Created By</label
+          >
+          <select class="form-control" id="field_createdBy" data-cy="createdBy" name="createdBy" formControlName="createdBy">
             <option [ngValue]="null"></option>
             <option
-              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              [ngValue]="userOption.id === editForm.get('createdBy')!.value?.id ? editForm.get('createdBy')!.value : userOption"
               *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
             >
               {{ userOption.login }}
@@ -130,17 +132,17 @@
         </div>
 
         <div class="form-group">
-          <label appTranslate="amSystemPlaygroundApp.peopleGroup.managedByGroup" for="field_managedByGroups">Managed By Group</label>
+          <label appTranslate="amSystemPlaygroundApp.peopleGroup.managedGroup" for="field_managedGroups">Managed Group</label>
           <select
             class="form-control"
-            id="field_managedByGroups"
-            data-cy="managedByGroup"
+            id="field_managedGroups"
+            data-cy="managedGroup"
             multiple
-            name="managedByGroups"
-            formControlName="managedByGroups"
+            name="managedGroups"
+            formControlName="managedGroups"
           >
             <option
-              [ngValue]="getSelectedPeopleGroup(peopleGroupOption, editForm.get('managedByGroups')!.value)"
+              [ngValue]="getSelectedPeopleGroup(peopleGroupOption, editForm.get('managedGroups')!.value)"
               *ngFor="let peopleGroupOption of peopleGroupsSharedCollection; trackBy: trackPeopleGroupById"
             >
               {{ peopleGroupOption.name }}

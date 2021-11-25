@@ -34,10 +34,10 @@ export class PeopleGroupUpdateComponent implements OnInit {
     created: [],
     lastUpdated: [],
     uuid: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     members: [],
-    managedByGroups: [],
+    managedGroups: [],
   });
 
   constructor(
@@ -138,15 +138,15 @@ export class PeopleGroupUpdateComponent implements OnInit {
       created: peopleGroup.created ? peopleGroup.created.format(DATE_TIME_FORMAT) : null,
       lastUpdated: peopleGroup.lastUpdated ? peopleGroup.lastUpdated.format(DATE_TIME_FORMAT) : null,
       uuid: peopleGroup.uuid,
-      user: peopleGroup.user,
+      createdBy: peopleGroup.createdBy,
       lastUpdatedBy: peopleGroup.lastUpdatedBy,
       members: peopleGroup.members,
-      managedByGroups: peopleGroup.managedByGroups,
+      managedGroups: peopleGroup.managedGroups,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      peopleGroup.user,
+      peopleGroup.createdBy,
       peopleGroup.lastUpdatedBy
     );
     this.peopleSharedCollection = this.personService.addPersonToCollectionIfMissing(
@@ -155,7 +155,7 @@ export class PeopleGroupUpdateComponent implements OnInit {
     );
     this.peopleGroupsSharedCollection = this.peopleGroupService.addPeopleGroupToCollectionIfMissing(
       this.peopleGroupsSharedCollection,
-      ...(peopleGroup.managedByGroups ?? [])
+      ...(peopleGroup.managedGroups ?? [])
     );
   }
 
@@ -165,7 +165,11 @@ export class PeopleGroupUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -185,7 +189,7 @@ export class PeopleGroupUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IPeopleGroup[]>) => res.body ?? []))
       .pipe(
         map((peopleGroups: IPeopleGroup[]) =>
-          this.peopleGroupService.addPeopleGroupToCollectionIfMissing(peopleGroups, ...(this.editForm.get('managedByGroups')!.value ?? []))
+          this.peopleGroupService.addPeopleGroupToCollectionIfMissing(peopleGroups, ...(this.editForm.get('managedGroups')!.value ?? []))
         )
       )
       .subscribe((peopleGroups: IPeopleGroup[]) => (this.peopleGroupsSharedCollection = peopleGroups));
@@ -203,10 +207,10 @@ export class PeopleGroupUpdateComponent implements OnInit {
         ? dayjs(this.editForm.get(['lastUpdated'])!.value, DATE_TIME_FORMAT)
         : undefined,
       uuid: this.editForm.get(['uuid'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       members: this.editForm.get(['members'])!.value,
-      managedByGroups: this.editForm.get(['managedByGroups'])!.value,
+      managedGroups: this.editForm.get(['managedGroups'])!.value,
     };
   }
 }

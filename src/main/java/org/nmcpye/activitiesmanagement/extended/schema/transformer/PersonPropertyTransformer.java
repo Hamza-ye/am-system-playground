@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.extended.common.CodeGenerator;
 import org.nmcpye.activitiesmanagement.extended.schema.AbstractPropertyTransformer;
@@ -19,11 +20,11 @@ import java.util.*;
 public class PersonPropertyTransformer extends AbstractPropertyTransformer<Person> {
 
     public PersonPropertyTransformer() {
-        super(UserDto.class);
+        super(PersonDto.class);
     }
 
     @Override
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public Object transform(Object o) {
         if (!(o instanceof Person)) {
             if (o instanceof Collection) {
@@ -39,10 +40,10 @@ public class PersonPropertyTransformer extends AbstractPropertyTransformer<Perso
                     return o;
                 }
 
-                Collection<UserDto> userDtoCollection = newCollectionInstance(collection.getClass());
-                collection.forEach(user -> userDtoCollection.add(buildUserDto((Person) user)));
+                Collection<PersonDto> personDtoCollection = newCollectionInstance(collection.getClass());
+                collection.forEach(user -> personDtoCollection.add(buildUserDto((Person) user)));
 
-                return userDtoCollection;
+                return personDtoCollection;
             }
 
             return o;
@@ -51,21 +52,23 @@ public class PersonPropertyTransformer extends AbstractPropertyTransformer<Perso
         return buildUserDto((Person) o);
     }
 
-    private UserDto buildUserDto(Person user) {
-//        Person userCredentials = user.getPerson();
+    private PersonDto buildUserDto(Person person) {
+        User userInfo = person.getUserInfo();
 
-        UserDto.UserDtoBuilder builder = UserDto.builder().id(user.getUid()).code(user.getCode()).displayName(user.getDisplayName());
+        PersonDto.PersonDtoBuilder builder = PersonDto.builder().uid(person.getUid()).code(person.getCode()).displayName(person.getDisplayName());
 
-//        if (userCredentials != null) {
-//            builder.username(userCredentials.getUsername());
-//        }
+        if (userInfo != null) {
+            builder.login(userInfo.getLogin());
+        }
 
         return builder.build();
     }
 
-    public static class UserDto {
+    public static class PersonDto {
 
-        private String id;
+        private Long id;
+
+        private String uid;
 
         private String code;
 
@@ -73,23 +76,30 @@ public class PersonPropertyTransformer extends AbstractPropertyTransformer<Perso
 
         private String displayName;
 
-        private String username;
+        private String login;
 
-        public UserDto(UserDtoBuilder userDtoBuilder) {
-            this.id = userDtoBuilder.id;
-            this.code = userDtoBuilder.code;
-            this.name = userDtoBuilder.name;
-            this.displayName = userDtoBuilder.displayName;
-            this.username = userDtoBuilder.username;
+        public PersonDto(PersonDtoBuilder personDtoBuilder) {
+
+            this.id = personDtoBuilder.id;
+            this.uid = personDtoBuilder.uid;
+            this.code = personDtoBuilder.code;
+            this.name = personDtoBuilder.name;
+            this.displayName = personDtoBuilder.displayName;
+            this.login = personDtoBuilder.login;
         }
 
-        public static UserDtoBuilder builder() {
-            return new UserDtoBuilder();
+        public static PersonDtoBuilder builder() {
+            return new PersonDtoBuilder();
         }
 
         @JsonProperty
-        public String getId() {
+        public Long getId() {
             return id;
+        }
+
+        @JsonProperty
+        public String getUid() {
+            return uid;
         }
 
         @JsonProperty
@@ -108,8 +118,8 @@ public class PersonPropertyTransformer extends AbstractPropertyTransformer<Perso
         }
 
         @JsonProperty
-        public String getUsername() {
-            return username;
+        public String getLogin() {
+            return login;
         }
 
         @Override
@@ -117,22 +127,25 @@ public class PersonPropertyTransformer extends AbstractPropertyTransformer<Perso
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
 
-            UserDto userDto = (UserDto) o;
+            PersonDto personDto = (PersonDto) o;
 
-            if (id != null ? !id.equals(userDto.id) : userDto.id != null) return false;
-            if (code != null ? !code.equals(userDto.code) : userDto.code != null) return false;
-            if (name != null ? !name.equals(userDto.name) : userDto.name != null) return false;
-            if (displayName != null ? !displayName.equals(userDto.displayName) : userDto.displayName != null) return false;
-            return username != null ? username.equals(userDto.username) : userDto.username == null;
+            if (id != null ? !id.equals(personDto.id) : personDto.id != null) return false;
+            if (uid != null ? !uid.equals(personDto.uid) : personDto.uid != null) return false;
+            if (code != null ? !code.equals(personDto.code) : personDto.code != null) return false;
+            if (name != null ? !name.equals(personDto.name) : personDto.name != null) return false;
+            if (displayName != null ? !displayName.equals(personDto.displayName) : personDto.displayName != null)
+                return false;
+            return login != null ? login.equals(personDto.login) : personDto.login == null;
         }
 
         @Override
         public int hashCode() {
             int result = id != null ? id.hashCode() : 0;
+            result = 31 * result + (uid != null ? uid.hashCode() : 0);
             result = 31 * result + (code != null ? code.hashCode() : 0);
             result = 31 * result + (name != null ? name.hashCode() : 0);
             result = 31 * result + (displayName != null ? displayName.hashCode() : 0);
-            result = 31 * result + (username != null ? username.hashCode() : 0);
+            result = 31 * result + (login != null ? login.hashCode() : 0);
             return result;
         }
 
@@ -140,28 +153,33 @@ public class PersonPropertyTransformer extends AbstractPropertyTransformer<Perso
         public String toString() {
             return (
                 "UserDto{" +
-                "id='" +
-                id +
-                '\'' +
-                ", code='" +
-                code +
-                '\'' +
-                ", name='" +
-                name +
-                '\'' +
-                ", displayName='" +
-                displayName +
-                '\'' +
-                ", username='" +
-                username +
-                '\'' +
-                '}'
+                    "id='" +
+                    id +
+                    '\'' +
+                    "uid='" +
+                    uid +
+                    '\'' +
+                    ", code='" +
+                    code +
+                    '\'' +
+                    ", name='" +
+                    name +
+                    '\'' +
+                    ", displayName='" +
+                    displayName +
+                    '\'' +
+                    ", username='" +
+                    login +
+                    '\'' +
+                    '}'
             );
         }
 
-        public static class UserDtoBuilder {
+        public static class PersonDtoBuilder {
 
-            private String id;
+            private Long id;
+
+            private String uid;
 
             private String code;
 
@@ -169,41 +187,46 @@ public class PersonPropertyTransformer extends AbstractPropertyTransformer<Perso
 
             private String displayName;
 
-            private String username;
+            private String login;
 
-            public UserDtoBuilder id(String id) {
+            public PersonDtoBuilder id(Long id) {
                 this.id = id;
                 return this;
             }
 
-            public UserDtoBuilder code(String code) {
+            public PersonDtoBuilder uid(String uid) {
+                this.uid = uid;
+                return this;
+            }
+
+            public PersonDtoBuilder code(String code) {
                 this.code = code;
                 return this;
             }
 
-            public UserDtoBuilder name(String name) {
+            public PersonDtoBuilder name(String name) {
                 this.name = name;
                 return this;
             }
 
-            public UserDtoBuilder displayName(String displayName) {
+            public PersonDtoBuilder displayName(String displayName) {
                 this.displayName = displayName;
                 return this;
             }
 
-            public UserDtoBuilder username(String username) {
-                this.username = username;
+            public PersonDtoBuilder login(String username) {
+                this.login = username;
                 return this;
             }
 
             //Return the finally consrcuted User object
-            public UserDto build() {
-                UserDto user = new UserDto(this);
+            public PersonDto build() {
+                PersonDto user = new PersonDto(this);
                 validateUserObject(user);
                 return user;
             }
 
-            private void validateUserObject(UserDto user) {
+            private void validateUserObject(PersonDto user) {
                 //Do some basic validations to check
                 //if user object does not break any assumption of system
             }
@@ -218,17 +241,18 @@ public class PersonPropertyTransformer extends AbstractPropertyTransformer<Perso
 
         @Override
         public void serialize(Person user, JsonGenerator gen, SerializerProvider provider) throws IOException {
-//            Person userCredentials = user.getPerson();
+            User userInfo = user.getUserInfo();
 
             gen.writeStartObject();
-            gen.writeStringField("id", user.getUid());
+            gen.writeNumberField("id", user.getId());
+            gen.writeStringField("uid", user.getUid());
             gen.writeStringField("code", user.getCode());
             gen.writeStringField("name", user.getName());
             gen.writeStringField("displayName", user.getDisplayName());
 
-//            if (userCredentials != null) {
-//                gen.writeStringField("username", userCredentials.getUsername());
-//            }
+            if (userInfo != null) {
+                gen.writeStringField("login", userInfo.getLogin());
+            }
 
             gen.writeEndObject();
         }
@@ -242,35 +266,42 @@ public class PersonPropertyTransformer extends AbstractPropertyTransformer<Perso
 
         @Override
         public Person deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-            Person user = new Person();
-//            Person userCredentials = new Person();
-//            user.setPerson(userCredentials);
+            Person person = new Person();
+            User user1 = new User();
+            person.setUserInfo(user1);
 
             JsonNode node = jp.getCodec().readTree(jp);
 
-            if (node.has("id")) {
-                String identifier = node.get("id").asText();
+            if (node.has("uid")) {
+                String identifier = node.get("uid").asText();
 
                 if (CodeGenerator.isValidUid(identifier)) {
-                    user.setUid(identifier);
-//                    userCredentials.setUid(identifier);
+                    person.setUid(identifier);
+                    user1.setUid(identifier);
                 } else {
-//                    userCredentials.setUuid(UUID.fromString(identifier));
+//                    user1.setU(UUID.fromString(identifier));
                 }
+            }
+
+            if (node.has("id")) {
+                Long id = node.get("id").asLong();
+
+                person.setId(id);
+                user1.setId(id);
             }
 
             if (node.has("code")) {
                 String code = node.get("code").asText();
 
-                user.setCode(code);
-//                userCredentials.setCode(code);
+                person.setCode(code);
+                user1.setCode(code);
             }
 
-            if (node.has("username")) {
-//                userCredentials.setLogin(node.get("login").asText());
+            if (node.has("login")) {
+                user1.setLogin(node.get("login").asText());
             }
 
-            return user;
+            return person;
         }
     }
 

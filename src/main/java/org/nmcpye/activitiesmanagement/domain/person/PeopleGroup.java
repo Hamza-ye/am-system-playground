@@ -115,13 +115,13 @@ public class PeopleGroup extends BaseIdentifiableObject implements MetadataObjec
      * People group.
      */
     //    fk_usergroupmanaging_managedbygroupid
-    @ManyToMany
+    @ManyToMany(mappedBy = "managedGroups")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JoinTable(
-        name = "people_group_managed",
-        joinColumns = @JoinColumn(name = "managed_group_id"),
-        inverseJoinColumns = @JoinColumn(name = "managed_by_group_id")
-    )
+//    @JoinTable(
+//        name = "people_group_managed",
+//        joinColumns = @JoinColumn(name = "managed_group_id"),
+//        inverseJoinColumns = @JoinColumn(name = "managed_by_group_id")
+//    )
     @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "members", "managedByGroups", "managedGroups" }, allowSetters = true)
     private Set<PeopleGroup> managedByGroups = new HashSet<>();
 
@@ -129,8 +129,13 @@ public class PeopleGroup extends BaseIdentifiableObject implements MetadataObjec
      * People groups (if any) that members of this people group can manage
      * the members within.
      */
-    @ManyToMany(mappedBy = "managedByGroups")
+    @ManyToMany//(mappedBy = "managedByGroups")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JoinTable(
+        name = "people_group_managed",
+        joinColumns = @JoinColumn(name = "managed_by_group_id"),
+        inverseJoinColumns = @JoinColumn(name = "managed_group_id")
+    )
     @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "members", "managedByGroups", "managedGroups" }, allowSetters = true)
     private Set<PeopleGroup> managedGroups = new HashSet<>();
 

@@ -38,9 +38,9 @@
         <dd>
           <span>{{ peopleGroup.uuid }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.peopleGroup.user">User</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.peopleGroup.createdBy">Created By</span></dt>
         <dd>
-          <span>{{ peopleGroup.user?.login }}</span>
+          <span>{{ peopleGroup.createdBy?.login }}</span>
         </dd>
         <dt><span appTranslate="amSystemPlaygroundApp.peopleGroup.lastUpdatedBy">Last Updated By</span></dt>
         <dd>
@@ -53,10 +53,10 @@
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.peopleGroup.managedByGroup">Managed By Group</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.peopleGroup.managedGroup">Managed Group</span></dt>
         <dd>
-          <span *ngFor="let managedByGroup of peopleGroup.managedByGroups; let last = last">
-            <a [routerLink]="['/people-group', managedByGroup?.id, 'view']">{{ managedByGroup.name }}</a
+          <span *ngFor="let managedGroup of peopleGroup.managedGroups; let last = last">
+            <a [routerLink]="['/people-group', managedGroup?.id, 'view']">{{ managedGroup.name }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>

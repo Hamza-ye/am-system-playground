@@ -46,8 +46,8 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
     @Column(name = "code", unique = true)
     private String code;
 
-    @Column(name = "name")
-    private String name;
+//    @Column(name = "name")
+//    private String name;
 
     @Column(name = "created")
     private Date created;
@@ -478,15 +478,15 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.code = code;
     }
 
-    @Override
-    public String getName() {
-        return name;
-    }
+//    @Override
+//    public String getName() {
+//        return name;
+//    }
 
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
+//    @Override
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     @Override
     public Date getCreated() {

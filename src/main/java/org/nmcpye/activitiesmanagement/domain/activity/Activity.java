@@ -1,25 +1,25 @@
 package org.nmcpye.activitiesmanagement.domain.activity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.*;
-import javax.validation.constraints.*;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.nmcpye.activitiesmanagement.domain.project.Project;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.Warehouse;
+import org.nmcpye.activitiesmanagement.domain.project.Project;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Activity.
@@ -27,7 +27,7 @@ import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
 @Entity
 @Table(name = "activity")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@JsonRootName( value = "activity", namespace = DxfNamespaces.DXF_2_0 )
+@JsonRootName(value = "activity", namespace = DxfNamespaces.DXF_2_0)
 public class Activity extends BaseIdentifiableObject implements MetadataObject {
 
     ////////////////////////
@@ -85,9 +85,9 @@ public class Activity extends BaseIdentifiableObject implements MetadataObject {
     @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
 
-    @Min(value = 0)
-    @Column(name = "no_of_days")
-    private Integer noOfDays;
+//    @Min(value = 0)
+//    @Column(name = "no_of_days")
+//    private Integer noOfDays;
 
     @Column(name = "active")
     private Boolean active;
@@ -98,14 +98,14 @@ public class Activity extends BaseIdentifiableObject implements MetadataObject {
     @OneToMany(mappedBy = "activity")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "initiatedMovements", "notInitiatedMovements", "user", "createdBy", "lastUpdatedBy", "activity", "teams" },
+        value = {"initiatedMovements", "notInitiatedMovements", "user", "createdBy", "lastUpdatedBy", "activity", "teams"},
         allowSetters = true
     )
     private Set<Warehouse> warehouses = new HashSet<>();
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties(value = { "activities", "user", "createdBy", "lastUpdatedBy" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {"activities", "user", "createdBy", "lastUpdatedBy"}, allowSetters = true)
     private Project project;
 
     public Activity id(Long id) {
@@ -165,20 +165,20 @@ public class Activity extends BaseIdentifiableObject implements MetadataObject {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
-
-    @JsonProperty
-    public Integer getNoOfDays() {
-        return this.noOfDays;
-    }
-
-    public Activity noOfDays(Integer noOfDays) {
-        this.noOfDays = noOfDays;
-        return this;
-    }
-
-    public void setNoOfDays(Integer noOfDays) {
-        this.noOfDays = noOfDays;
-    }
+//
+//    @JsonProperty
+//    public Integer getNoOfDays() {
+//        return this.noOfDays;
+//    }
+//
+//    public Activity noOfDays(Integer noOfDays) {
+//        this.noOfDays = noOfDays;
+//        return this;
+//    }
+//
+//    public void setNoOfDays(Integer noOfDays) {
+//        this.noOfDays = noOfDays;
+//    }
 
     @JsonProperty
     public Boolean getActive() {

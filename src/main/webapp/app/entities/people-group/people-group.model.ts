@@ -10,11 +10,11 @@ export interface IPeopleGroup {
   created?: dayjs.Dayjs | null;
   lastUpdated?: dayjs.Dayjs | null;
   uuid?: string | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   members?: IPerson[] | null;
-  managedByGroups?: IPeopleGroup[] | null;
   managedGroups?: IPeopleGroup[] | null;
+  managedByGroups?: IPeopleGroup[] | null;
 }
 
 export class PeopleGroup implements IPeopleGroup {
@@ -26,11 +26,11 @@ export class PeopleGroup implements IPeopleGroup {
     public created?: dayjs.Dayjs | null,
     public lastUpdated?: dayjs.Dayjs | null,
     public uuid?: string | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public members?: IPerson[] | null,
-    public managedByGroups?: IPeopleGroup[] | null,
-    public managedGroups?: IPeopleGroup[] | null
+    public managedGroups?: IPeopleGroup[] | null,
+    public managedByGroups?: IPeopleGroup[] | null
   ) {}
 }
 

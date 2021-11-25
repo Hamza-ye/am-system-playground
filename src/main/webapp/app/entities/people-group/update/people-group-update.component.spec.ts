@@ -47,14 +47,14 @@ describe('Component Tests', () => {
     describe('ngOnInit', () => {
       it('Should call User query and add missing value', () => {
         const peopleGroup: IPeopleGroup = { id: 456 };
-        const user: IUser = { id: 77122 };
-        peopleGroup.user = user;
+        const createdBy: IUser = { id: 77122 };
+        peopleGroup.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 56598 };
         peopleGroup.lastUpdatedBy = lastUpdatedBy;
 
         const userCollection: IUser[] = [{ id: 287 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [user, lastUpdatedBy];
+        const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -87,12 +87,12 @@ describe('Component Tests', () => {
 
       it('Should call PeopleGroup query and add missing value', () => {
         const peopleGroup: IPeopleGroup = { id: 456 };
-        const managedByGroups: IPeopleGroup[] = [{ id: 58256 }];
-        peopleGroup.managedByGroups = managedByGroups;
+        const managedGroups: IPeopleGroup[] = [{ id: 58256 }];
+        peopleGroup.managedGroups = managedGroups;
 
         const peopleGroupCollection: IPeopleGroup[] = [{ id: 85661 }];
         jest.spyOn(peopleGroupService, 'query').mockReturnValue(of(new HttpResponse({ body: peopleGroupCollection })));
-        const additionalPeopleGroups = [...managedByGroups];
+        const additionalPeopleGroups = [...managedGroups];
         const expectedCollection: IPeopleGroup[] = [...additionalPeopleGroups, ...peopleGroupCollection];
         jest.spyOn(peopleGroupService, 'addPeopleGroupToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -109,23 +109,23 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const peopleGroup: IPeopleGroup = { id: 456 };
-        const user: IUser = { id: 59384 };
-        peopleGroup.user = user;
+        const createdBy: IUser = { id: 59384 };
+        peopleGroup.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 99392 };
         peopleGroup.lastUpdatedBy = lastUpdatedBy;
         const members: IPerson = { id: 89282 };
         peopleGroup.members = [members];
-        const managedByGroups: IPeopleGroup = { id: 11651 };
-        peopleGroup.managedByGroups = [managedByGroups];
+        const managedGroups: IPeopleGroup = { id: 11651 };
+        peopleGroup.managedGroups = [managedGroups];
 
         activatedRoute.data = of({ peopleGroup });
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(peopleGroup));
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.peopleSharedCollection).toContain(members);
-        expect(comp.peopleGroupsSharedCollection).toContain(managedByGroups);
+        expect(comp.peopleGroupsSharedCollection).toContain(managedGroups);
       });
     });
 

@@ -10,6 +10,8 @@ import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.collections4.CollectionUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.nmcpye.activitiesmanagement.domain.Authority;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.enumeration.Gender;
@@ -107,7 +109,8 @@ public class Person extends BaseIdentifiableObject implements UserDetails, Metad
     @Column(name = "disabled")
     private Boolean disabled;
 
-    @OneToOne//(mappedBy = "person")
+    @OneToOne
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "user_info_id", unique = true)
     private User userInfo;
 
@@ -413,7 +416,7 @@ public class Person extends BaseIdentifiableObject implements UserDetails, Metad
      */
     @Override
     public String getName() {
-        return userInfo != null ? userInfo.getFirstName() : login;
+        return userInfo != null ? userInfo.getName() : login;
     }
 
     /**
@@ -436,7 +439,13 @@ public class Person extends BaseIdentifiableObject implements UserDetails, Metad
 
     @Override
     public int hashCode() {
-        return login.hashCode();
+//        return login.hashCode();
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (getUid() != null ? getUid().hashCode() : 0);
+        result = 31 * result + (getCode() != null ? getCode().hashCode() : 0);
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getLogin() != null ? getLogin().hashCode() : 0);
+        return result;
     }
 
     @Override
