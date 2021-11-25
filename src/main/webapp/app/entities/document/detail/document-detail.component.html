@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="document">
+      <h2 data-cy="documentDetailsHeading"><span appTranslate="amSystemPlaygroundApp.document.detail.title">Document</span></h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ document.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.document.uid">Uid</span></dt>
+        <dd>
+          <span>{{ document.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.document.code">Code</span></dt>
+        <dd>
+          <span>{{ document.code }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.document.name">Name</span></dt>
+        <dd>
+          <span>{{ document.name }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.document.created">Created</span></dt>
+        <dd>
+          <span>{{ document.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.document.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ document.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.document.url">Url</span></dt>
+        <dd>
+          <span>{{ document.url }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.document.external">External</span></dt>
+        <dd>
+          <span>{{ document.external }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.document.contentType">Content Type</span></dt>
+        <dd>
+          <span>{{ document.contentType }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.document.attachment">Attachment</span></dt>
+        <dd>
+          <span>{{ document.attachment }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.document.fileResource">File Resource</span></dt>
+        <dd>
+          <div *ngIf="document.fileResource">
+            <a [routerLink]="['/file-resource', document.fileResource?.id, 'view']">{{ document.fileResource?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.document.createdBy">Created By</span></dt>
+        <dd>
+          <span>{{ document.createdBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.document.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ document.lastUpdatedBy?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/document', document.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,108 @@
+<div>
+  <h2 id="page-heading" data-cy="DocumentHeading">
+    <span appTranslate="amSystemPlaygroundApp.document.home.title">Documents</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.document.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-document"
+        [routerLink]="['/document/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.document.home.createLabel"> Create a new Document </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="documents?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.document.home.notFound">No documents found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="documents && documents.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.document.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.document.code">Code</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.document.name">Name</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.document.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.document.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.document.url">Url</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.document.external">External</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.document.contentType">Content Type</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.document.attachment">Attachment</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.document.fileResource">File Resource</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.document.createdBy">Created By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.document.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let document of documents; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/document', document.id, 'view']">{{ document.id }}</a>
+          </td>
+          <td>{{ document.uid }}</td>
+          <td>{{ document.code }}</td>
+          <td>{{ document.name }}</td>
+          <td>{{ document.created | formatMediumDatetime }}</td>
+          <td>{{ document.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ document.url }}</td>
+          <td>{{ document.external }}</td>
+          <td>{{ document.contentType }}</td>
+          <td>{{ document.attachment }}</td>
+          <td>
+            <div *ngIf="document.fileResource">
+              <a [routerLink]="['/file-resource', document.fileResource?.id, 'view']">{{ document.fileResource?.name }}</a>
+            </div>
+          </td>
+          <td>
+            {{ document.createdBy?.login }}
+          </td>
+          <td>
+            {{ document.lastUpdatedBy?.login }}
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/document', document.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/document', document.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(document)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

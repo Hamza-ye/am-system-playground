@@ -1,0 +1,226 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="app-file-resource-heading"
+        data-cy="FileResourceCreateUpdateHeading"
+        appTranslate="amSystemPlaygroundApp.fileResource.home.createOrEditLabel"
+      >
+        Create or edit a File Resource
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" appTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.fileResource.uid" for="field_uid">Uid</label>
+          <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
+          <div *ngIf="editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('uid')?.errors?.required" appTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('uid')?.errors?.maxlength"
+              appTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 11 }"
+            >
+              This field cannot be longer than 11 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.fileResource.code" for="field_code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.fileResource.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.fileResource.created" for="field_created">Created</label>
+          <div class="d-flex">
+            <input
+              id="field_created"
+              data-cy="created"
+              type="datetime-local"
+              class="form-control"
+              name="created"
+              formControlName="created"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.fileResource.lastUpdated" for="field_lastUpdated"
+            >Last Updated</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastUpdated"
+              data-cy="lastUpdated"
+              type="datetime-local"
+              class="form-control"
+              name="lastUpdated"
+              formControlName="lastUpdated"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.fileResource.contentType" for="field_contentType"
+            >Content Type</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="contentType"
+            id="field_contentType"
+            data-cy="contentType"
+            formControlName="contentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.fileResource.contentLength" for="field_contentLength"
+            >Content Length</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="contentLength"
+            id="field_contentLength"
+            data-cy="contentLength"
+            formControlName="contentLength"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.fileResource.contentMd5" for="field_contentMd5"
+            >Content Md 5</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="contentMd5"
+            id="field_contentMd5"
+            data-cy="contentMd5"
+            formControlName="contentMd5"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.fileResource.storageKey" for="field_storageKey"
+            >Storage Key</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="storageKey"
+            id="field_storageKey"
+            data-cy="storageKey"
+            formControlName="storageKey"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.fileResource.assigned" for="field_assigned">Assigned</label>
+          <input type="checkbox" class="form-check" name="assigned" id="field_assigned" data-cy="assigned" formControlName="assigned" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.fileResource.domain" for="field_domain">Domain</label>
+          <select class="form-control" name="domain" formControlName="domain" id="field_domain" data-cy="domain">
+            <option [ngValue]="null">{{ 'amSystemPlaygroundApp.FileResourceDomain.null' | translate }}</option>
+            <option value="DATA_VALUE">{{ 'amSystemPlaygroundApp.FileResourceDomain.DATA_VALUE' | translate }}</option>
+            <option value="PUSH_ANALYSIS">{{ 'amSystemPlaygroundApp.FileResourceDomain.PUSH_ANALYSIS' | translate }}</option>
+            <option value="DOCUMENT">{{ 'amSystemPlaygroundApp.FileResourceDomain.DOCUMENT' | translate }}</option>
+            <option value="MESSAGE_ATTACHMENT">{{ 'amSystemPlaygroundApp.FileResourceDomain.MESSAGE_ATTACHMENT' | translate }}</option>
+            <option value="USER_AVATAR">{{ 'amSystemPlaygroundApp.FileResourceDomain.USER_AVATAR' | translate }}</option>
+            <option value="ORG_UNIT">{{ 'amSystemPlaygroundApp.FileResourceDomain.ORG_UNIT' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            appTranslate="amSystemPlaygroundApp.fileResource.hasMultipleStorageFiles"
+            for="field_hasMultipleStorageFiles"
+            >Has Multiple Storage Files</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="hasMultipleStorageFiles"
+            id="field_hasMultipleStorageFiles"
+            data-cy="hasMultipleStorageFiles"
+            formControlName="hasMultipleStorageFiles"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.fileResource.createdBy" for="field_createdBy"
+            >Created By</label
+          >
+          <select class="form-control" id="field_createdBy" data-cy="createdBy" name="createdBy" formControlName="createdBy">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('createdBy')!.value?.id ? editForm.get('createdBy')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.fileResource.lastUpdatedBy" for="field_lastUpdatedBy"
+            >Last Updated By</label
+          >
+          <select
+            class="form-control"
+            id="field_lastUpdatedBy"
+            data-cy="lastUpdatedBy"
+            name="lastUpdatedBy"
+            formControlName="lastUpdatedBy"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('lastUpdatedBy')!.value?.id ? editForm.get('lastUpdatedBy')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

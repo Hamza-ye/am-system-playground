@@ -209,6 +209,21 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'amSystemPlaygroundApp.relativePeriods.home.title' },
         loadChildren: () => import('./relative-periods/relative-periods.module').then(m => m.RelativePeriodsModule),
       },
+      {
+        path: 'file-resource',
+        data: { pageTitle: 'amSystemPlaygroundApp.fileResource.home.title' },
+        loadChildren: () => import('./file-resource/file-resource.module').then(m => m.FileResourceModule),
+      },
+      {
+        path: 'external-file-resource',
+        data: { pageTitle: 'amSystemPlaygroundApp.externalFileResource.home.title' },
+        loadChildren: () => import('./external-file-resource/external-file-resource.module').then(m => m.ExternalFileResourceModule),
+      },
+      {
+        path: 'document',
+        data: { pageTitle: 'amSystemPlaygroundApp.document.home.title' },
+        loadChildren: () => import('./document/document.module').then(m => m.DocumentModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],
