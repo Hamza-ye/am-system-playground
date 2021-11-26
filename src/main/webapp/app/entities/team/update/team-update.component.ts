@@ -37,7 +37,7 @@ export class TeamUpdateComponent implements OnInit {
     lastUpdated: [],
     teamNo: [null, [Validators.required, Validators.min(1)]],
     teamType: [null, [Validators.required]],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     person: [],
     assignedToWarehouses: [],
@@ -132,13 +132,17 @@ export class TeamUpdateComponent implements OnInit {
       lastUpdated: team.lastUpdated ? team.lastUpdated.format(DATE_TIME_FORMAT) : null,
       teamNo: team.teamNo,
       teamType: team.teamType,
-      user: team.user,
+      createdBy: team.createdBy,
       lastUpdatedBy: team.lastUpdatedBy,
       person: team.person,
       assignedToWarehouses: team.assignedToWarehouses,
     });
 
-    this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(this.usersSharedCollection, team.user, team.lastUpdatedBy);
+    this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
+      this.usersSharedCollection,
+      team.createdBy,
+      team.lastUpdatedBy
+    );
     this.peopleSharedCollection = this.personService.addPersonToCollectionIfMissing(this.peopleSharedCollection, team.person);
     this.warehousesSharedCollection = this.warehouseService.addWarehouseToCollectionIfMissing(
       this.warehousesSharedCollection,
@@ -152,7 +156,11 @@ export class TeamUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -187,7 +195,7 @@ export class TeamUpdateComponent implements OnInit {
         : undefined,
       teamNo: this.editForm.get(['teamNo'])!.value,
       teamType: this.editForm.get(['teamType'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       person: this.editForm.get(['person'])!.value,
       assignedToWarehouses: this.editForm.get(['assignedToWarehouses'])!.value,

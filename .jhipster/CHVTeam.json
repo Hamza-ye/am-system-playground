@@ -46,7 +46,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "cHVTeam",
-      "relationshipName": "user",
+      "relationshipName": "createdBy",
       "otherEntityField": "login"
     },
     {

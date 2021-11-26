@@ -67,7 +67,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "lLINSFamilyReportHistory",
-      "relationshipName": "user",
+      "relationshipName": "createdBy",
       "otherEntityField": "login"
     },
     {

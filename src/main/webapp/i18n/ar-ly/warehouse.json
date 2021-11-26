@@ -28,7 +28,7 @@
       "initialBalanceActual": "Initial Balance Actual",
       "initiatedMovement": "Initiated Movement",
       "notInitiatedMovement": "Not Initiated Movement",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
       "activity": "Activity",
       "team": "Team"

@@ -40,7 +40,7 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.lastUpdated">Last Updated</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.memberNo">Member No</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.memberType">Member Type</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.person">Person</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnitStaffMember.malariaUnit">Malaria Unit</span></th>
@@ -62,7 +62,7 @@
             {{ malariaUnitStaffMember.memberType }}
           </td>
           <td>
-            {{ malariaUnitStaffMember.user?.login }}
+            {{ malariaUnitStaffMember.createdBy?.login }}
           </td>
           <td>
             {{ malariaUnitStaffMember.lastUpdatedBy?.login }}

@@ -24,11 +24,11 @@
       "created": "Created",
       "lastUpdated": "Last Updated",
       "uuid": "Uuid",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
       "member": "Member",
-      "managedByGroup": "Managed By Group",
-      "managedGroup": "Managed Group"
+      "managedGroup": "Managed Group",
+      "managedByGroup": "Managed By Group"
     }
   }
 }

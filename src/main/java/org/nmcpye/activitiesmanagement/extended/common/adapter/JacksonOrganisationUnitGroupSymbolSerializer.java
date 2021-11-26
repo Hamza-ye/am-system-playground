@@ -54,10 +54,9 @@ public class JacksonOrganisationUnitGroupSymbolSerializer extends JsonSerializer
         jgen.writeFieldName("lastUpdated");
         provider.defaultSerializeDateValue(value.getLastUpdated(), jgen);
 
-        //            if ( value.getHref() != null )
-        //            {
-        //                jgen.writeStringField( "href", value.getHref() );
-        //            }
+        if (value.getHref() != null) {
+            jgen.writeStringField("href", value.getHref());
+        }
 
         jgen.writeStringField("symbol", value.getSymbol());
 

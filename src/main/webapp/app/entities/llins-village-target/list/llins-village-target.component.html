@@ -68,8 +68,8 @@
             <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.organisationUnit">Organisation Unit</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" appSortBy="user.login">
-            <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.user">User</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" appSortBy="createdBy.login">
+            <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="lastUpdatedBy.login">
             <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.lastUpdatedBy">Last Updated By</span>
@@ -110,7 +110,7 @@
             </div>
           </td>
           <td>
-            {{ lLINSVillageTarget.user?.login }}
+            {{ lLINSVillageTarget.createdBy?.login }}
           </td>
           <td>
             {{ lLINSVillageTarget.lastUpdatedBy?.login }}

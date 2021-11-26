@@ -21,7 +21,7 @@ export interface ILLINSVillageReport {
   quantityReceived?: number;
   comment?: string | null;
   llinsVillageReportHistories?: ILLINSVillageReportHistory[] | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   dayReached?: IWorkingDay;
   targetDetails?: ILLINSVillageTarget | null;
@@ -45,7 +45,7 @@ export class LLINSVillageReport implements ILLINSVillageReport {
     public quantityReceived?: number,
     public comment?: string | null,
     public llinsVillageReportHistories?: ILLINSVillageReportHistory[] | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public dayReached?: IWorkingDay,
     public targetDetails?: ILLINSVillageTarget | null,

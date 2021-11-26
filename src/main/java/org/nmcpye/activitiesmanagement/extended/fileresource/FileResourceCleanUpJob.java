@@ -22,13 +22,13 @@ import java.util.List;
 public class FileResourceCleanUpJob implements Job {
     private final Logger log = LoggerFactory.getLogger(FileResourceCleanUpJob.class);
 
-    private final FileResourceService fileResourceService;
+    private final FileResourceServiceExt fileResourceServiceExt;
 
     private final FileResourceContentStore fileResourceContentStore;
 
-    public FileResourceCleanUpJob(FileResourceService fileResourceService,
+    public FileResourceCleanUpJob(FileResourceServiceExt fileResourceServiceExt,
                                   FileResourceContentStore fileResourceContentStore) {
-        this.fileResourceService = fileResourceService;
+        this.fileResourceServiceExt = fileResourceServiceExt;
         this.fileResourceContentStore = fileResourceContentStore;
     }
 
@@ -53,13 +53,13 @@ public class FileResourceCleanUpJob implements Job {
 
         // Delete expired FRs
         if (!FileResourceRetentionStrategy.FOREVER.equals(retentionStrategy)) {
-            List<FileResource> expired = fileResourceService.getExpiredFileResources(retentionStrategy);
+            List<FileResource> expired = fileResourceServiceExt.getExpiredFileResources(retentionStrategy);
             expired.forEach(this::safeDelete);
             expired.forEach(fr -> deletedAuditFiles.add(ImmutablePair.of(fr.getName(), fr.getUid())));
         }
 
         // Delete failed uploads
-        fileResourceService.getOrphanedFileResources().stream()
+        fileResourceServiceExt.getOrphanedFileResources().stream()
             .filter(fr -> !isFileStored(fr))
             .filter(this::safeDelete)
             .forEach(fr -> deletedOrphans.add(ImmutablePair.of(fr.getName(), fr.getUid())));
@@ -103,11 +103,11 @@ public class FileResourceCleanUpJob implements Job {
      */
     private boolean safeDelete(FileResource fileResource) {
         try {
-            fileResourceService.deleteFileResource(fileResource);
+            fileResourceServiceExt.deleteFileResource(fileResource);
             return true;
         } catch (DeleteNotAllowedException e) {
             fileResource.setAssigned(true);
-            fileResourceService.updateFileResource(fileResource);
+            fileResourceServiceExt.updateFileResource(fileResource);
         }
 
         return false;

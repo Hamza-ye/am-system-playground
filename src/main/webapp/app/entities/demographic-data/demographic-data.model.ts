@@ -6,6 +6,8 @@ import { DemographicDataLevel } from 'app/entities/enumerations/demographic-data
 
 export interface IDemographicData {
   id?: number;
+  uid?: string;
+  code?: string | null;
   created?: dayjs.Dayjs | null;
   lastUpdated?: dayjs.Dayjs | null;
   date?: dayjs.Dayjs;
@@ -27,7 +29,7 @@ export interface IDemographicData {
   populationGrowthRate?: number | null;
   comment?: string | null;
   organisationUnit?: IOrganisationUnit | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   source?: IDemographicDataSource;
 }
@@ -35,6 +37,8 @@ export interface IDemographicData {
 export class DemographicData implements IDemographicData {
   constructor(
     public id?: number,
+    public uid?: string,
+    public code?: string | null,
     public created?: dayjs.Dayjs | null,
     public lastUpdated?: dayjs.Dayjs | null,
     public date?: dayjs.Dayjs,
@@ -56,7 +60,7 @@ export class DemographicData implements IDemographicData {
     public populationGrowthRate?: number | null,
     public comment?: string | null,
     public organisationUnit?: IOrganisationUnit | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public source?: IDemographicDataSource
   ) {}

@@ -27,7 +27,7 @@
       "familyType": "Family Type",
       "statusOfFamilyTarget": "Status Of Family Target",
       "llinsFamilyReport": "Llins Family Report",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
       "dayPlanned": "Day Planned",
       "family": "Family",

@@ -86,7 +86,7 @@ describe('Service Tests', () => {
             name: 'BBBBBB',
             created: currentDate.format(DATE_TIME_FORMAT),
             lastUpdated: currentDate.format(DATE_TIME_FORMAT),
-            isDisplayed: true,
+            displayed: true,
           },
           elemDefault
         );
@@ -111,7 +111,7 @@ describe('Service Tests', () => {
           {
             uid: 'BBBBBB',
             lastUpdated: currentDate.format(DATE_TIME_FORMAT),
-            isDisplayed: true,
+            displayed: true,
           },
           new Project()
         );
@@ -142,7 +142,7 @@ describe('Service Tests', () => {
             name: 'BBBBBB',
             created: currentDate.format(DATE_TIME_FORMAT),
             lastUpdated: currentDate.format(DATE_TIME_FORMAT),
-            isDisplayed: true,
+            displayed: true,
           },
           elemDefault
         );

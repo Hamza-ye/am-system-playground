@@ -8,7 +8,9 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.User;
@@ -174,6 +176,7 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         return this;
     }
 
+    @JsonProperty
     public LocalDate getDate() {
         return this.date;
     }
@@ -187,6 +190,7 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.date = date;
     }
 
+    @JsonProperty
     public DemographicDataLevel getLevel() {
         return this.level;
     }
@@ -200,6 +204,7 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.level = level;
     }
 
+    @JsonProperty
     public Integer getTotalPopulation() {
         return this.totalPopulation;
     }
@@ -213,6 +218,7 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.totalPopulation = totalPopulation;
     }
 
+    @JsonProperty
     public Integer getMalePopulation() {
         return this.malePopulation;
     }
@@ -226,6 +232,7 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.malePopulation = malePopulation;
     }
 
+    @JsonProperty
     public Integer getFemalePopulation() {
         return this.femalePopulation;
     }
@@ -239,6 +246,7 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.femalePopulation = femalePopulation;
     }
 
+    @JsonProperty
     public Integer getLessThan5Population() {
         return this.lessThan5Population;
     }
@@ -252,10 +260,12 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.lessThan5Population = lessThan5Population;
     }
 
+    @JsonProperty
     public Integer getGreaterThan5Population() {
         return this.greaterThan5Population;
     }
 
+    @JsonProperty
     public DemographicData greaterThan5Population(Integer greaterThan5Population) {
         this.greaterThan5Population = greaterThan5Population;
         return this;
@@ -265,6 +275,7 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.greaterThan5Population = greaterThan5Population;
     }
 
+    @JsonProperty
     public Integer getBw5And15Population() {
         return this.bw5And15Population;
     }
@@ -278,10 +289,12 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.bw5And15Population = bw5And15Population;
     }
 
+    @JsonProperty
     public Integer getGreaterThan15Population() {
         return this.greaterThan15Population;
     }
 
+    @JsonProperty
     public DemographicData greaterThan15Population(Integer greaterThan15Population) {
         this.greaterThan15Population = greaterThan15Population;
         return this;
@@ -291,6 +304,7 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.greaterThan15Population = greaterThan15Population;
     }
 
+    @JsonProperty
     public Integer getHousehold() {
         return this.household;
     }
@@ -304,6 +318,7 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.household = household;
     }
 
+    @JsonProperty
     public Integer getHouses() {
         return this.houses;
     }
@@ -317,6 +332,7 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.houses = houses;
     }
 
+    @JsonProperty
     public Integer getHealthFacilities() {
         return this.healthFacilities;
     }
@@ -330,6 +346,7 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.healthFacilities = healthFacilities;
     }
 
+    @JsonProperty
     public BigDecimal getAvgNoOfRooms() {
         return this.avgNoOfRooms;
     }
@@ -343,6 +360,7 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.avgNoOfRooms = avgNoOfRooms;
     }
 
+    @JsonProperty
     public BigDecimal getAvgRoomArea() {
         return this.avgRoomArea;
     }
@@ -356,6 +374,7 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.avgRoomArea = avgRoomArea;
     }
 
+    @JsonProperty
     public BigDecimal getAvgHouseArea() {
         return this.avgHouseArea;
     }
@@ -369,6 +388,7 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.avgHouseArea = avgHouseArea;
     }
 
+    @JsonProperty
     public BigDecimal getIndividualsPerHousehold() {
         return this.individualsPerHousehold;
     }
@@ -382,6 +402,7 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.individualsPerHousehold = individualsPerHousehold;
     }
 
+    @JsonProperty
     public BigDecimal getPopulationGrowthRate() {
         return this.populationGrowthRate;
     }
@@ -395,6 +416,7 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.populationGrowthRate = populationGrowthRate;
     }
 
+    @JsonProperty
     public String getComment() {
         return this.comment;
     }
@@ -408,6 +430,8 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.comment = comment;
     }
 
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public OrganisationUnit getOrganisationUnit() {
         return this.organisationUnit;
     }
@@ -435,6 +459,8 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
         this.lastUpdatedBy = user;
     }
 
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public DemographicDataSource getSource() {
         return this.source;
     }
@@ -477,16 +503,6 @@ public class DemographicData extends BaseIdentifiableObject implements MetadataO
     public void setCode(String code) {
         this.code = code;
     }
-
-//    @Override
-//    public String getName() {
-//        return name;
-//    }
-
-//    @Override
-//    public void setName(String name) {
-//        this.name = name;
-//    }
 
     @Override
     public Date getCreated() {

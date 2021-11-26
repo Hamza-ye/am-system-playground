@@ -59,14 +59,14 @@ describe('Component Tests', () => {
     describe('ngOnInit', () => {
       it('Should call User query and add missing value', () => {
         const dengueCasesReport: IDengueCasesReport = { id: 456 };
-        const user: IUser = { id: 57938 };
-        dengueCasesReport.user = user;
+        const createdBy: IUser = { id: 57938 };
+        dengueCasesReport.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 47424 };
         dengueCasesReport.lastUpdatedBy = lastUpdatedBy;
 
         const userCollection: IUser[] = [{ id: 38950 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [user, lastUpdatedBy];
+        const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -162,8 +162,8 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const dengueCasesReport: IDengueCasesReport = { id: 456 };
-        const user: IUser = { id: 64437 };
-        dengueCasesReport.user = user;
+        const createdBy: IUser = { id: 64437 };
+        dengueCasesReport.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 49940 };
         dengueCasesReport.lastUpdatedBy = lastUpdatedBy;
         const reportClass: ICasesReportClass = { id: 42788 };
@@ -179,7 +179,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(dengueCasesReport));
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.casesReportClassesSharedCollection).toContain(reportClass);
         expect(comp.periodsSharedCollection).toContain(period);

@@ -57,7 +57,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "lLINSFamilyTarget",
-      "relationshipName": "user",
+      "relationshipName": "createdBy",
       "otherEntityField": "login"
     },
     {

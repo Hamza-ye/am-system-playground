@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-@Repository("org.nmcpye.activitiesmanagement.extended.fileresource.ExternalFileResourceStore")
+@Repository
 public class HibernateExternalFileResourceStore
     extends HibernateIdentifiableObjectStore<ExternalFileResource>
     implements ExternalFileResourceStore {

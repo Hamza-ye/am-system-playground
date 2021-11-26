@@ -60,7 +60,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "warehouse",
-      "relationshipName": "user",
+      "relationshipName": "createdBy",
       "otherEntityField": "login"
     },
     {

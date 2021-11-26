@@ -72,7 +72,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "team",
-      "relationshipName": "user",
+      "relationshipName": "createdBy",
       "otherEntityField": "login"
     },
     {

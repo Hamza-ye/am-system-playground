@@ -35,7 +35,7 @@
           <th scope="col"><span appTranslate="global.field.id">ID</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.statusOfCoverage.code">Code</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.statusOfCoverage.status">Status</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.statusOfCoverage.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.statusOfCoverage.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.statusOfCoverage.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"></th>
         </tr>
@@ -48,7 +48,7 @@
           <td>{{ statusOfCoverage.code }}</td>
           <td>{{ statusOfCoverage.status }}</td>
           <td>
-            {{ statusOfCoverage.user?.login }}
+            {{ statusOfCoverage.createdBy?.login }}
           </td>
           <td>
             {{ statusOfCoverage.lastUpdatedBy?.login }}

@@ -1,4 +1,5 @@
 import * as dayjs from 'dayjs';
+import { IDataInputPeriod } from 'app/entities/data-input-period/data-input-period.model';
 import { IMalariaCasesReport } from 'app/entities/malaria-cases-report/malaria-cases-report.model';
 import { IDengueCasesReport } from 'app/entities/dengue-cases-report/dengue-cases-report.model';
 import { IPeriodType } from 'app/entities/period-type/period-type.model';
@@ -17,11 +18,12 @@ export interface IDataSet {
   lastUpdated?: dayjs.Dayjs | null;
   expiryDays?: number | null;
   timelyDays?: number | null;
+  dataInputPeriods?: IDataInputPeriod[] | null;
   malariaCasesReports?: IMalariaCasesReport[] | null;
   dengueCasesReports?: IDengueCasesReport[] | null;
   periodType?: IPeriodType | null;
   notificationRecipients?: IPeopleGroup | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   sources?: IOrganisationUnit[] | null;
 }
@@ -38,11 +40,12 @@ export class DataSet implements IDataSet {
     public lastUpdated?: dayjs.Dayjs | null,
     public expiryDays?: number | null,
     public timelyDays?: number | null,
+    public dataInputPeriods?: IDataInputPeriod[] | null,
     public malariaCasesReports?: IMalariaCasesReport[] | null,
     public dengueCasesReports?: IDengueCasesReport[] | null,
     public periodType?: IPeriodType | null,
     public notificationRecipients?: IPeopleGroup | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public sources?: IOrganisationUnit[] | null
   ) {}

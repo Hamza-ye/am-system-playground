@@ -43,7 +43,7 @@ export class PersonUpdateComponent implements OnInit {
     selfRegistered: [],
     disabled: [],
     userInfo: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     organisationUnits: [],
     dataViewOrganisationUnits: [],
@@ -157,7 +157,7 @@ export class PersonUpdateComponent implements OnInit {
       selfRegistered: person.selfRegistered,
       disabled: person.disabled,
       userInfo: person.userInfo,
-      user: person.user,
+      createdBy: person.createdBy,
       lastUpdatedBy: person.lastUpdatedBy,
       organisationUnits: person.organisationUnits,
       dataViewOrganisationUnits: person.dataViewOrganisationUnits,
@@ -167,7 +167,7 @@ export class PersonUpdateComponent implements OnInit {
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
       person.userInfo,
-      person.user,
+      person.createdBy,
       person.lastUpdatedBy
     );
     this.organisationUnitsSharedCollection = this.organisationUnitService.addOrganisationUnitToCollectionIfMissing(
@@ -190,7 +190,7 @@ export class PersonUpdateComponent implements OnInit {
           this.userService.addUserToCollectionIfMissing(
             users,
             this.editForm.get('userInfo')!.value,
-            this.editForm.get('user')!.value,
+            this.editForm.get('createdBy')!.value,
             this.editForm.get('lastUpdatedBy')!.value
           )
         )
@@ -244,7 +244,7 @@ export class PersonUpdateComponent implements OnInit {
       selfRegistered: this.editForm.get(['selfRegistered'])!.value,
       disabled: this.editForm.get(['disabled'])!.value,
       userInfo: this.editForm.get(['userInfo'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       organisationUnits: this.editForm.get(['organisationUnits'])!.value,
       dataViewOrganisationUnits: this.editForm.get(['dataViewOrganisationUnits'])!.value,

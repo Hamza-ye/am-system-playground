@@ -34,7 +34,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "peopleGroup",
-      "relationshipName": "user",
+      "relationshipName": "createdBy",
       "otherEntityField": "login"
     },
     {
@@ -55,16 +55,16 @@
     {
       "relationshipType": "many-to-many",
       "otherEntityName": "peopleGroup",
-      "otherEntityRelationshipName": "managedGroup",
-      "relationshipName": "managedByGroup",
+      "otherEntityRelationshipName": "managedByGroup",
+      "relationshipName": "managedGroup",
       "otherEntityField": "name",
       "ownerSide": true
     },
     {
       "relationshipType": "many-to-many",
       "otherEntityName": "peopleGroup",
-      "otherEntityRelationshipName": "managedByGroup",
-      "relationshipName": "managedGroup",
+      "otherEntityRelationshipName": "managedGroup",
+      "relationshipName": "managedByGroup",
       "ownerSide": false
     }
   ],

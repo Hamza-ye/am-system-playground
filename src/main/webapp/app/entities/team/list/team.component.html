@@ -54,8 +54,8 @@
           <th scope="col" appSortBy="teamType">
             <span appTranslate="amSystemPlaygroundApp.team.teamType">Team Type</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" appSortBy="user.login">
-            <span appTranslate="amSystemPlaygroundApp.team.user">User</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" appSortBy="createdBy.login">
+            <span appTranslate="amSystemPlaygroundApp.team.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="lastUpdatedBy.login">
             <span appTranslate="amSystemPlaygroundApp.team.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon>
@@ -79,7 +79,7 @@
           <td>{{ team.teamNo }}</td>
           <td appTranslate="{{ 'amSystemPlaygroundApp.TeamType.' + team.teamType }}">{{ team.teamType }}</td>
           <td>
-            {{ team.user?.login }}
+            {{ team.createdBy?.login }}
           </td>
           <td>
             {{ team.lastUpdatedBy?.login }}

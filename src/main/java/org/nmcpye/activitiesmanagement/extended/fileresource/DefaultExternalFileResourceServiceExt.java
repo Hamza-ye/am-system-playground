@@ -9,11 +9,11 @@ import org.springframework.util.Assert;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service
-public class DefaultExternalFileResourceService
-    implements ExternalFileResourceService {
+public class DefaultExternalFileResourceServiceExt
+    implements ExternalFileResourceServiceExt {
     private final ExternalFileResourceStore externalFileResourceStore;
 
-    public DefaultExternalFileResourceService(ExternalFileResourceStore externalFileResourceStore) {
+    public DefaultExternalFileResourceServiceExt(ExternalFileResourceStore externalFileResourceStore) {
         checkNotNull(externalFileResourceStore);
 
         this.externalFileResourceStore = externalFileResourceStore;

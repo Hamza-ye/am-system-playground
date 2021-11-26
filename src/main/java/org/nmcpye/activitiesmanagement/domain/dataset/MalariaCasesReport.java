@@ -454,6 +454,7 @@ public class MalariaCasesReport extends BaseIdentifiableObject implements Metada
     }
 
     @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public CasesReportClass getReportClass() {
         return this.reportClass;
     }

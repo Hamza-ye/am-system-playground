@@ -59,8 +59,8 @@
             <span appTranslate="amSystemPlaygroundApp.warehouse.initialBalanceActual">Initial Balance Actual</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" appSortBy="user.login">
-            <span appTranslate="amSystemPlaygroundApp.warehouse.user">User</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" appSortBy="createdBy.login">
+            <span appTranslate="amSystemPlaygroundApp.warehouse.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="lastUpdatedBy.login">
             <span appTranslate="amSystemPlaygroundApp.warehouse.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon>
@@ -85,7 +85,7 @@
           <td>{{ warehouse.initialBalancePlan }}</td>
           <td>{{ warehouse.initialBalanceActual }}</td>
           <td>
-            {{ warehouse.user?.login }}
+            {{ warehouse.createdBy?.login }}
           </td>
           <td>
             {{ warehouse.lastUpdatedBy?.login }}

@@ -61,8 +61,8 @@
             <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.statusOfFamilyTarget">Status Of Family Target</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" appSortBy="user.login">
-            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.user">User</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" appSortBy="createdBy.login">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="lastUpdatedBy.login">
             <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.lastUpdatedBy">Last Updated By</span>
@@ -98,7 +98,7 @@
             {{ lLINSFamilyTarget.statusOfFamilyTarget }}
           </td>
           <td>
-            {{ lLINSFamilyTarget.user?.login }}
+            {{ lLINSFamilyTarget.createdBy?.login }}
           </td>
           <td>
             {{ lLINSFamilyTarget.lastUpdatedBy?.login }}

@@ -23,7 +23,7 @@ export interface ITeam {
   llinsVillageReports?: ILLINSVillageReport[] | null;
   llinsFamilyTargets?: ILLINSFamilyTarget[] | null;
   llinsFamilyReports?: ILLINSFamilyReport[] | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   person?: IPerson | null;
   assignedToWarehouses?: IWarehouse[] | null;
@@ -44,7 +44,7 @@ export class Team implements ITeam {
     public llinsVillageReports?: ILLINSVillageReport[] | null,
     public llinsFamilyTargets?: ILLINSFamilyTarget[] | null,
     public llinsFamilyReports?: ILLINSFamilyReport[] | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public person?: IPerson | null,
     public assignedToWarehouses?: IWarehouse[] | null

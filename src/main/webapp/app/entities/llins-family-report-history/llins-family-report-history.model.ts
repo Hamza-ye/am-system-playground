@@ -17,7 +17,7 @@ export interface ILLINSFamilyReportHistory {
   pregnantWomen?: number | null;
   quantityReceived?: number | null;
   familyType?: FamilyType;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   dayReached?: IWorkingDay;
   llinsFamilyReport?: ILLINSFamilyReport;
@@ -37,7 +37,7 @@ export class LLINSFamilyReportHistory implements ILLINSFamilyReportHistory {
     public pregnantWomen?: number | null,
     public quantityReceived?: number | null,
     public familyType?: FamilyType,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public dayReached?: IWorkingDay,
     public llinsFamilyReport?: ILLINSFamilyReport

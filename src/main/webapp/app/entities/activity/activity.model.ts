@@ -12,11 +12,10 @@ export interface IActivity {
   lastUpdated?: dayjs.Dayjs | null;
   startDate?: dayjs.Dayjs;
   endDate?: dayjs.Dayjs;
-  noOfDays?: number | null;
   active?: boolean | null;
   displayed?: boolean | null;
   warehouses?: IWarehouse[] | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   project?: IProject;
 }
@@ -31,11 +30,10 @@ export class Activity implements IActivity {
     public lastUpdated?: dayjs.Dayjs | null,
     public startDate?: dayjs.Dayjs,
     public endDate?: dayjs.Dayjs,
-    public noOfDays?: number | null,
     public active?: boolean | null,
     public displayed?: boolean | null,
     public warehouses?: IWarehouse[] | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public project?: IProject
   ) {

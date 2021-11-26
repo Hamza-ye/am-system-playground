@@ -46,7 +46,7 @@ export class LLINSVillageReportUpdateComponent implements OnInit {
     pregnantWomen: [null, [Validators.min(0)]],
     quantityReceived: [null, [Validators.required, Validators.min(0)]],
     comment: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     dayReached: [null, Validators.required],
     targetDetails: [],
@@ -142,7 +142,7 @@ export class LLINSVillageReportUpdateComponent implements OnInit {
       pregnantWomen: lLINSVillageReport.pregnantWomen,
       quantityReceived: lLINSVillageReport.quantityReceived,
       comment: lLINSVillageReport.comment,
-      user: lLINSVillageReport.user,
+      createdBy: lLINSVillageReport.createdBy,
       lastUpdatedBy: lLINSVillageReport.lastUpdatedBy,
       dayReached: lLINSVillageReport.dayReached,
       targetDetails: lLINSVillageReport.targetDetails,
@@ -151,7 +151,7 @@ export class LLINSVillageReportUpdateComponent implements OnInit {
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      lLINSVillageReport.user,
+      lLINSVillageReport.createdBy,
       lLINSVillageReport.lastUpdatedBy
     );
     this.workingDaysSharedCollection = this.workingDayService.addWorkingDayToCollectionIfMissing(
@@ -174,7 +174,11 @@ export class LLINSVillageReportUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -228,7 +232,7 @@ export class LLINSVillageReportUpdateComponent implements OnInit {
       pregnantWomen: this.editForm.get(['pregnantWomen'])!.value,
       quantityReceived: this.editForm.get(['quantityReceived'])!.value,
       comment: this.editForm.get(['comment'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       dayReached: this.editForm.get(['dayReached'])!.value,
       targetDetails: this.editForm.get(['targetDetails'])!.value,

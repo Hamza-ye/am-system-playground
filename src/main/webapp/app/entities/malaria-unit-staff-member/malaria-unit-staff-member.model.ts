@@ -13,7 +13,7 @@ export interface IMalariaUnitStaffMember {
   lastUpdated?: dayjs.Dayjs | null;
   memberNo?: number;
   memberType?: MalariaUnitMemberType;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   person?: IPerson | null;
   malariaUnit?: IMalariaUnit;
@@ -29,7 +29,7 @@ export class MalariaUnitStaffMember implements IMalariaUnitStaffMember {
     public lastUpdated?: dayjs.Dayjs | null,
     public memberNo?: number,
     public memberType?: MalariaUnitMemberType,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public person?: IPerson | null,
     public malariaUnit?: IMalariaUnit

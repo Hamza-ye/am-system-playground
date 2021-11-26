@@ -4,7 +4,7 @@ export interface IStatusOfCoverage {
   id?: number;
   code?: string;
   status?: string;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
 }
 
@@ -13,7 +13,7 @@ export class StatusOfCoverage implements IStatusOfCoverage {
     public id?: number,
     public code?: string,
     public status?: string,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null
   ) {}
 }

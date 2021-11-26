@@ -73,14 +73,14 @@ describe('Component Tests', () => {
 
       it('Should call User query and add missing value', () => {
         const demographicData: IDemographicData = { id: 456 };
-        const user: IUser = { id: 56296 };
-        demographicData.user = user;
+        const createdBy: IUser = { id: 56296 };
+        demographicData.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 78577 };
         demographicData.lastUpdatedBy = lastUpdatedBy;
 
         const userCollection: IUser[] = [{ id: 28649 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [user, lastUpdatedBy];
+        const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -118,8 +118,8 @@ describe('Component Tests', () => {
         const demographicData: IDemographicData = { id: 456 };
         const organisationUnit: IOrganisationUnit = { id: 36331 };
         demographicData.organisationUnit = organisationUnit;
-        const user: IUser = { id: 900 };
-        demographicData.user = user;
+        const createdBy: IUser = { id: 900 };
+        demographicData.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 45158 };
         demographicData.lastUpdatedBy = lastUpdatedBy;
         const source: IDemographicDataSource = { id: 15129 };
@@ -130,7 +130,7 @@ describe('Component Tests', () => {
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(demographicData));
         expect(comp.organisationUnitsSharedCollection).toContain(organisationUnit);
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.demographicDataSourcesSharedCollection).toContain(source);
       });

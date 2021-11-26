@@ -32,7 +32,7 @@
       "barImageUrl": "Bar Image Url",
       "comment": "Comment",
       "subVillage": "Sub Village",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
       "chv": "Chv",
       "reportClass": "Report Class"

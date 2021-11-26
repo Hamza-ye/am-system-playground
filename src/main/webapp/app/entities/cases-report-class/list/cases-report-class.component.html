@@ -40,7 +40,7 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.casesReportClass.description">Description</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.casesReportClass.created">Created</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.casesReportClass.lastUpdated">Last Updated</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.casesReportClass.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.casesReportClass.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.casesReportClass.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"></th>
         </tr>
@@ -58,7 +58,7 @@
           <td>{{ casesReportClass.created | formatMediumDatetime }}</td>
           <td>{{ casesReportClass.lastUpdated | formatMediumDatetime }}</td>
           <td>
-            {{ casesReportClass.user?.login }}
+            {{ casesReportClass.createdBy?.login }}
           </td>
           <td>
             {{ casesReportClass.lastUpdatedBy?.login }}

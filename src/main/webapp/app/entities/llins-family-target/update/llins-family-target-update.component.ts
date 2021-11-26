@@ -41,7 +41,7 @@ export class LLINSFamilyTargetUpdateComponent implements OnInit {
     quantityPlanned: [null, [Validators.required, Validators.min(0)]],
     familyType: [null, [Validators.required]],
     statusOfFamilyTarget: [null, [Validators.required]],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     dayPlanned: [null, Validators.required],
     family: [null, Validators.required],
@@ -132,7 +132,7 @@ export class LLINSFamilyTargetUpdateComponent implements OnInit {
       quantityPlanned: lLINSFamilyTarget.quantityPlanned,
       familyType: lLINSFamilyTarget.familyType,
       statusOfFamilyTarget: lLINSFamilyTarget.statusOfFamilyTarget,
-      user: lLINSFamilyTarget.user,
+      createdBy: lLINSFamilyTarget.createdBy,
       lastUpdatedBy: lLINSFamilyTarget.lastUpdatedBy,
       dayPlanned: lLINSFamilyTarget.dayPlanned,
       family: lLINSFamilyTarget.family,
@@ -141,7 +141,7 @@ export class LLINSFamilyTargetUpdateComponent implements OnInit {
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      lLINSFamilyTarget.user,
+      lLINSFamilyTarget.createdBy,
       lLINSFamilyTarget.lastUpdatedBy
     );
     this.workingDaysSharedCollection = this.workingDayService.addWorkingDayToCollectionIfMissing(
@@ -161,7 +161,11 @@ export class LLINSFamilyTargetUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -203,7 +207,7 @@ export class LLINSFamilyTargetUpdateComponent implements OnInit {
       quantityPlanned: this.editForm.get(['quantityPlanned'])!.value,
       familyType: this.editForm.get(['familyType'])!.value,
       statusOfFamilyTarget: this.editForm.get(['statusOfFamilyTarget'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       dayPlanned: this.editForm.get(['dayPlanned'])!.value,
       family: this.editForm.get(['family'])!.value,

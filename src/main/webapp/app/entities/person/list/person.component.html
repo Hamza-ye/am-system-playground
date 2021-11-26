@@ -72,8 +72,8 @@
           <th scope="col" appSortBy="userInfo.login">
             <span appTranslate="amSystemPlaygroundApp.person.userInfo">User Info</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" appSortBy="user.login">
-            <span appTranslate="amSystemPlaygroundApp.person.user">User</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" appSortBy="createdBy.login">
+            <span appTranslate="amSystemPlaygroundApp.person.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="lastUpdatedBy.login">
             <span appTranslate="amSystemPlaygroundApp.person.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon>
@@ -102,7 +102,7 @@
             {{ person.userInfo?.login }}
           </td>
           <td>
-            {{ person.user?.login }}
+            {{ person.createdBy?.login }}
           </td>
           <td>
             {{ person.lastUpdatedBy?.login }}

@@ -44,7 +44,7 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.treated">Treated</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.suspectedCases">Suspected Cases</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.comment">Comment</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.reportClass">Report Class</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.period">Period</span></th>
@@ -70,7 +70,7 @@
           <td>{{ dengueCasesReport.suspectedCases }}</td>
           <td>{{ dengueCasesReport.comment }}</td>
           <td>
-            {{ dengueCasesReport.user?.login }}
+            {{ dengueCasesReport.createdBy?.login }}
           </td>
           <td>
             {{ dengueCasesReport.lastUpdatedBy?.login }}

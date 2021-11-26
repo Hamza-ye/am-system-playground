@@ -27,11 +27,12 @@
       "lastUpdated": "Last Updated",
       "expiryDays": "Expiry Days",
       "timelyDays": "Timely Days",
+      "dataInputPeriods": "Data Input Periods",
       "malariaCasesReport": "Malaria Cases Report",
       "dengueCasesReport": "Dengue Cases Report",
       "periodType": "Period Type",
       "notificationRecipients": "Notification Recipients",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
       "source": "Source"
     }

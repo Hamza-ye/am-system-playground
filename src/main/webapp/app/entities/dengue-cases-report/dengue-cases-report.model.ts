@@ -18,7 +18,7 @@ export interface IDengueCasesReport {
   treated?: number | null;
   suspectedCases?: number | null;
   comment?: string | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   reportClass?: ICasesReportClass;
   period?: IPeriod;
@@ -40,7 +40,7 @@ export class DengueCasesReport implements IDengueCasesReport {
     public treated?: number | null,
     public suspectedCases?: number | null,
     public comment?: string | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public reportClass?: ICasesReportClass,
     public period?: IPeriod,

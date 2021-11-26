@@ -19,7 +19,7 @@ export interface ILLINSVillageTarget {
   quantity?: number;
   llinsVillageReports?: ILLINSVillageReport[] | null;
   organisationUnit?: IOrganisationUnit;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   dayPlanned?: IWorkingDay;
   statusOfCoverage?: IStatusOfCoverage | null;
@@ -40,7 +40,7 @@ export class LLINSVillageTarget implements ILLINSVillageTarget {
     public quantity?: number,
     public llinsVillageReports?: ILLINSVillageReport[] | null,
     public organisationUnit?: IOrganisationUnit,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public dayPlanned?: IWorkingDay,
     public statusOfCoverage?: IStatusOfCoverage | null,

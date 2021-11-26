@@ -59,7 +59,7 @@
             <span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.suppsDamagedLost">Supps Damaged Lost</span>
           </th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.comment">Comment</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.chv">Chv</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.period">Period</span></th>
@@ -92,7 +92,7 @@
           <td>{{ cHVMalariaReportVersion1.suppsDamagedLost }}</td>
           <td>{{ cHVMalariaReportVersion1.comment }}</td>
           <td>
-            {{ cHVMalariaReportVersion1.user?.login }}
+            {{ cHVMalariaReportVersion1.createdBy?.login }}
           </td>
           <td>
             {{ cHVMalariaReportVersion1.lastUpdatedBy?.login }}

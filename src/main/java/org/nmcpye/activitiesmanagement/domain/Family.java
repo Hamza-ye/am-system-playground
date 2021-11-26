@@ -7,9 +7,13 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
+import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
 
 /**
  * A Family.
@@ -107,6 +111,8 @@ public class Family implements Serializable {
     private User lastUpdatedBy;;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+    //    @Override
+    @JsonProperty
     public Long getId() {
         return id;
     }
@@ -120,6 +126,8 @@ public class Family implements Serializable {
         return this;
     }
 
+    //    @Override
+    @JsonProperty
     public String getUid() {
         return this.uid;
     }
@@ -133,6 +141,8 @@ public class Family implements Serializable {
         this.uid = uid;
     }
 
+    //    @Override
+    @JsonProperty
     public String getCode() {
         return this.code;
     }
@@ -146,6 +156,8 @@ public class Family implements Serializable {
         this.code = code;
     }
 
+    //    @Override
+    @JsonProperty
     public String getName() {
         return this.name;
     }
@@ -159,6 +171,8 @@ public class Family implements Serializable {
         this.name = name;
     }
 
+    //    @Override
+    @JsonProperty
     public Instant getCreated() {
         return this.created;
     }
@@ -172,6 +186,8 @@ public class Family implements Serializable {
         this.created = created;
     }
 
+    //    @Override
+    @JsonProperty
     public Instant getLastUpdated() {
         return this.lastUpdated;
     }
@@ -185,6 +201,7 @@ public class Family implements Serializable {
         this.lastUpdated = lastUpdated;
     }
 
+    @JsonProperty
     public Integer getFamilyNo() {
         return this.familyNo;
     }
@@ -198,6 +215,7 @@ public class Family implements Serializable {
         this.familyNo = familyNo;
     }
 
+    @JsonProperty
     public String getAddress() {
         return this.address;
     }
@@ -211,6 +229,8 @@ public class Family implements Serializable {
         this.address = address;
     }
 
+    @JsonProperty
+//    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<FamilyHead> getFamilyHeads() {
         return this.familyHeads;
     }
@@ -242,6 +262,8 @@ public class Family implements Serializable {
         this.familyHeads = familyHeads;
     }
 
+    @JsonProperty
+//    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<DataProvider> getDataProviders() {
         return this.dataProviders;
     }
@@ -273,6 +295,8 @@ public class Family implements Serializable {
         this.dataProviders = dataProviders;
     }
 
+    @JsonProperty
+//    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<Fingerprint> getFingerprints() {
         return this.fingerprints;
     }
@@ -304,6 +328,8 @@ public class Family implements Serializable {
         this.fingerprints = fingerprints;
     }
 
+    @JsonProperty
+//    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<LLINSFamilyTarget> getLlinsFamilyTargets() {
         return this.llinsFamilyTargets;
     }
@@ -335,6 +361,8 @@ public class Family implements Serializable {
         this.llinsFamilyTargets = lLINSFamilyTargets;
     }
 
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public OrganisationUnit getOrganisationUnit() {
         return this.organisationUnit;
     }
@@ -354,6 +382,8 @@ public class Family implements Serializable {
         return this;
     }
 
+//    @Override
+    @JsonProperty
     public User getLastUpdatedBy() {
         return this.lastUpdatedBy;
     }
@@ -402,6 +432,7 @@ public class Family implements Serializable {
     }
 
     //    @Override
+    @JsonProperty
     public User getCreatedBy() {
         return createdBy;
     }
@@ -413,6 +444,7 @@ public class Family implements Serializable {
 
     //    @Override
     @Deprecated
+    @JsonProperty
     public User getUser() {
         return createdBy;
     }

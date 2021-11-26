@@ -205,7 +205,7 @@ public class OrganisationUnitGroup extends BaseDimensionalItemObject implements 
         this.color = color;
     }
 
-    @JsonProperty("organisationUnits")
+    @JsonProperty//("organisationUnits")
     @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<OrganisationUnit> getMembers() {
         return members;

@@ -25,11 +25,10 @@
       "lastUpdated": "Last Updated",
       "startDate": "Start Date",
       "endDate": "End Date",
-      "noOfDays": "No Of Days",
       "active": "Active",
-      "displayed": "Is Displayed",
+      "displayed": "Displayed",
       "warehouse": "Warehouse",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
       "project": "Project"
     }

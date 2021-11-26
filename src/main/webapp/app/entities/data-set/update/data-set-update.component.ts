@@ -44,7 +44,7 @@ export class DataSetUpdateComponent implements OnInit {
     timelyDays: [],
     periodType: [],
     notificationRecipients: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     sources: [],
   });
@@ -147,7 +147,7 @@ export class DataSetUpdateComponent implements OnInit {
       timelyDays: dataSet.timelyDays,
       periodType: dataSet.periodType,
       notificationRecipients: dataSet.notificationRecipients,
-      user: dataSet.user,
+      createdBy: dataSet.createdBy,
       lastUpdatedBy: dataSet.lastUpdatedBy,
       sources: dataSet.sources,
     });
@@ -162,7 +162,7 @@ export class DataSetUpdateComponent implements OnInit {
     );
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      dataSet.user,
+      dataSet.createdBy,
       dataSet.lastUpdatedBy
     );
     this.organisationUnitsSharedCollection = this.organisationUnitService.addOrganisationUnitToCollectionIfMissing(
@@ -197,7 +197,11 @@ export class DataSetUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -233,7 +237,7 @@ export class DataSetUpdateComponent implements OnInit {
       timelyDays: this.editForm.get(['timelyDays'])!.value,
       periodType: this.editForm.get(['periodType'])!.value,
       notificationRecipients: this.editForm.get(['notificationRecipients'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       sources: this.editForm.get(['sources'])!.value,
     };

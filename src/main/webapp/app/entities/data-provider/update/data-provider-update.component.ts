@@ -34,7 +34,7 @@ export class DataProviderUpdateComponent implements OnInit {
     created: [],
     lastUpdated: [],
     mobile: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     family: [],
   });
@@ -112,14 +112,14 @@ export class DataProviderUpdateComponent implements OnInit {
       created: dataProvider.created ? dataProvider.created.format(DATE_TIME_FORMAT) : null,
       lastUpdated: dataProvider.lastUpdated ? dataProvider.lastUpdated.format(DATE_TIME_FORMAT) : null,
       mobile: dataProvider.mobile,
-      user: dataProvider.user,
+      createdBy: dataProvider.createdBy,
       lastUpdatedBy: dataProvider.lastUpdatedBy,
       family: dataProvider.family,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      dataProvider.user,
+      dataProvider.createdBy,
       dataProvider.lastUpdatedBy
     );
     this.familiesSharedCollection = this.familyService.addFamilyToCollectionIfMissing(this.familiesSharedCollection, dataProvider.family);
@@ -131,7 +131,11 @@ export class DataProviderUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -156,7 +160,7 @@ export class DataProviderUpdateComponent implements OnInit {
         ? dayjs(this.editForm.get(['lastUpdated'])!.value, DATE_TIME_FORMAT)
         : undefined,
       mobile: this.editForm.get(['mobile'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       family: this.editForm.get(['family'])!.value,
     };

@@ -23,12 +23,12 @@ import java.util.stream.Stream;
 public class FileResourceEventListener {
     private final Logger log = LoggerFactory.getLogger(FileResourceEventListener.class);
 
-    private final FileResourceService fileResourceService;
+    private final FileResourceServiceExt fileResourceServiceExt;
 
     private final FileResourceContentStore fileResourceContentStore;
 
-    public FileResourceEventListener(FileResourceService fileResourceService, FileResourceContentStore contentStore) {
-        this.fileResourceService = fileResourceService;
+    public FileResourceEventListener(FileResourceServiceExt fileResourceServiceExt, FileResourceContentStore contentStore) {
+        this.fileResourceServiceExt = fileResourceServiceExt;
         this.fileResourceContentStore = contentStore;
     }
 
@@ -39,7 +39,7 @@ public class FileResourceEventListener {
 
         File file = fileSavedEvent.getFile();
 
-        FileResource fileResource = fileResourceService.getFileResource(fileSavedEvent.getFileResource());
+        FileResource fileResource = fileResourceServiceExt.getFileResource(fileSavedEvent.getFileResource());
 
         String storageId = fileResourceContentStore.saveFileResourceContent(fileResource, file);
 
@@ -55,14 +55,14 @@ public class FileResourceEventListener {
 
         Map<ImageFileDimension, File> imageFiles = imageFileSavedEvent.getImageFiles();
 
-        FileResource fileResource = fileResourceService.getFileResource(imageFileSavedEvent.getFileResource());
+        FileResource fileResource = fileResourceServiceExt.getFileResource(imageFileSavedEvent.getFileResource());
 
         String storageId = fileResourceContentStore.saveFileResourceContent(fileResource, imageFiles);
 
         if (storageId != null) {
             fileResource.setHasMultipleStorageFiles(true);
 
-            fileResourceService.updateFileResource(fileResource);
+            fileResourceServiceExt.updateFileResource(fileResource);
         }
 
         Period timeDiff = new Period(startTime, DateTime.now());
@@ -77,7 +77,7 @@ public class FileResourceEventListener {
 
         byte[] bytes = binaryFileSavedEvent.getBytes();
 
-        FileResource fileResource = fileResourceService.getFileResource(binaryFileSavedEvent.getFileResource());
+        FileResource fileResource = fileResourceServiceExt.getFileResource(binaryFileSavedEvent.getFileResource());
 
         String storageId = fileResourceContentStore.saveFileResourceContent(fileResource, bytes);
 

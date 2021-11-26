@@ -3,9 +3,9 @@ package org.nmcpye.activitiesmanagement.extended.document.impl;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.fileresource.FileResource;
 import org.nmcpye.activitiesmanagement.domain.document.Document;
-import org.nmcpye.activitiesmanagement.extended.document.DocumentService;
+import org.nmcpye.activitiesmanagement.extended.document.DocumentServiceExt;
 import org.nmcpye.activitiesmanagement.extended.document.DocumentStore;
-import org.nmcpye.activitiesmanagement.extended.fileresource.FileResourceService;
+import org.nmcpye.activitiesmanagement.extended.fileresource.FileResourceServiceExt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,17 +13,17 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Transactional
-@Service("org.nmcpye.activitiesmanagement.extended.document.DocumentService")
-public class DefaultDocumentService
-    implements DocumentService {
+@Service
+public class DefaultDocumentServiceExt
+    implements DocumentServiceExt {
     @Autowired
-    private FileResourceService fileResourceService;
+    private FileResourceServiceExt fileResourceServiceExt;
 
     @Autowired
     private DocumentStore documentStore;
 
     // -------------------------------------------------------------------------
-    // DocumentService implementation
+    // DocumentServiceExt implementation
     // -------------------------------------------------------------------------
 
     @Override
@@ -53,7 +53,7 @@ public class DefaultDocumentService
         documentStore.saveObject(document);
 
         // Delete file
-        fileResourceService.deleteFileResource(fileResource.getUid());
+        fileResourceServiceExt.deleteFileResource(fileResource.getUid());
     }
 
     @Override

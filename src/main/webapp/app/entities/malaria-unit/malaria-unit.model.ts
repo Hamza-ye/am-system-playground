@@ -14,7 +14,7 @@ export interface IMalariaUnit {
   lastUpdated?: dayjs.Dayjs | null;
   organisationUnits?: IOrganisationUnit[] | null;
   malariaUnitStaffMembers?: IMalariaUnitStaffMember[] | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
 }
 
@@ -30,7 +30,7 @@ export class MalariaUnit implements IMalariaUnit {
     public lastUpdated?: dayjs.Dayjs | null,
     public organisationUnits?: IOrganisationUnit[] | null,
     public malariaUnitStaffMembers?: IMalariaUnitStaffMember[] | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null
   ) {}
 }

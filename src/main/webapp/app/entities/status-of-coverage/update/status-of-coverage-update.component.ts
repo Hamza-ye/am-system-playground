@@ -23,7 +23,7 @@ export class StatusOfCoverageUpdateComponent implements OnInit {
     id: [],
     code: [null, [Validators.required]],
     status: [null, [Validators.required]],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
   });
 
@@ -84,13 +84,13 @@ export class StatusOfCoverageUpdateComponent implements OnInit {
       id: statusOfCoverage.id,
       code: statusOfCoverage.code,
       status: statusOfCoverage.status,
-      user: statusOfCoverage.user,
+      createdBy: statusOfCoverage.createdBy,
       lastUpdatedBy: statusOfCoverage.lastUpdatedBy,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      statusOfCoverage.user,
+      statusOfCoverage.createdBy,
       statusOfCoverage.lastUpdatedBy
     );
   }
@@ -101,7 +101,11 @@ export class StatusOfCoverageUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -113,7 +117,7 @@ export class StatusOfCoverageUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       code: this.editForm.get(['code'])!.value,
       status: this.editForm.get(['status'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
     };
   }

@@ -54,8 +54,8 @@
           <th scope="col" appSortBy="mobile">
             <span appTranslate="amSystemPlaygroundApp.familyHead.mobile">Mobile</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" appSortBy="user.login">
-            <span appTranslate="amSystemPlaygroundApp.familyHead.user">User</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" appSortBy="createdBy.login">
+            <span appTranslate="amSystemPlaygroundApp.familyHead.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="lastUpdatedBy.login">
             <span appTranslate="amSystemPlaygroundApp.familyHead.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon>
@@ -79,7 +79,7 @@
           <td>{{ familyHead.lastUpdated | formatMediumDatetime }}</td>
           <td>{{ familyHead.mobile }}</td>
           <td>
-            {{ familyHead.user?.login }}
+            {{ familyHead.createdBy?.login }}
           </td>
           <td>
             {{ familyHead.lastUpdatedBy?.login }}

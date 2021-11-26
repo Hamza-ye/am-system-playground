@@ -33,7 +33,6 @@ describe('Service Tests', () => {
         lastUpdated: currentDate,
         startDate: currentDate,
         endDate: currentDate,
-        noOfDays: 0,
         active: false,
         displayed: false,
       };
@@ -98,9 +97,8 @@ describe('Service Tests', () => {
             lastUpdated: currentDate.format(DATE_TIME_FORMAT),
             startDate: currentDate.format(DATE_FORMAT),
             endDate: currentDate.format(DATE_FORMAT),
-            noOfDays: 1,
             active: true,
-            isDisplayed: true,
+            displayed: true,
           },
           elemDefault
         );
@@ -155,9 +153,8 @@ describe('Service Tests', () => {
             lastUpdated: currentDate.format(DATE_TIME_FORMAT),
             startDate: currentDate.format(DATE_FORMAT),
             endDate: currentDate.format(DATE_FORMAT),
-            noOfDays: 1,
             active: true,
-            isDisplayed: true,
+            displayed: true,
           },
           elemDefault
         );
@@ -217,7 +214,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Activity to an array', () => {
-          const activityArray: IActivity[] = [{ id: 123 }, { id: 456 }, { id: 58091 }];
+          const activityArray: IActivity[] = [{ id: 123 }, { id: 456 }, { id: 17617 }];
           const activityCollection: IActivity[] = [{ id: 123 }];
           expectedResult = service.addActivityToCollectionIfMissing(activityCollection, ...activityArray);
           expect(expectedResult).toHaveLength(3);

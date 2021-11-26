@@ -15,7 +15,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-@Repository("org.nmcpye.activitiesmanagement.extended.document.DocumentStore")
+@Repository
 public class HibernateDocumentStore
     extends HibernateIdentifiableObjectStore<Document> implements DocumentStore {
 

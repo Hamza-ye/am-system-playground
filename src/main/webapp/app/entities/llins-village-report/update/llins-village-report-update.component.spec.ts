@@ -55,14 +55,14 @@ describe('Component Tests', () => {
     describe('ngOnInit', () => {
       it('Should call User query and add missing value', () => {
         const lLINSVillageReport: ILLINSVillageReport = { id: 456 };
-        const user: IUser = { id: 67754 };
-        lLINSVillageReport.user = user;
+        const createdBy: IUser = { id: 67754 };
+        lLINSVillageReport.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 11140 };
         lLINSVillageReport.lastUpdatedBy = lastUpdatedBy;
 
         const userCollection: IUser[] = [{ id: 32182 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [user, lastUpdatedBy];
+        const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -136,8 +136,8 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const lLINSVillageReport: ILLINSVillageReport = { id: 456 };
-        const user: IUser = { id: 77620 };
-        lLINSVillageReport.user = user;
+        const createdBy: IUser = { id: 77620 };
+        lLINSVillageReport.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 40616 };
         lLINSVillageReport.lastUpdatedBy = lastUpdatedBy;
         const dayReached: IWorkingDay = { id: 62688 };
@@ -151,7 +151,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(lLINSVillageReport));
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.workingDaysSharedCollection).toContain(dayReached);
         expect(comp.lLINSVillageTargetsSharedCollection).toContain(targetDetails);

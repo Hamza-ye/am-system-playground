@@ -17,6 +17,12 @@
       "otherEntityRelationshipName": "dataInputPeriod",
       "relationshipName": "period",
       "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "dataSet",
+      "otherEntityRelationshipName": "dataInputPeriods",
+      "relationshipName": "dataSet"
     }
   ],
   "entityTableName": "data_input_period",

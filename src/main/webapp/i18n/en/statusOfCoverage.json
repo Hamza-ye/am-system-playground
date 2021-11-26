@@ -20,7 +20,7 @@
       "id": "ID",
       "code": "Code",
       "status": "Status",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By"
     }
   }

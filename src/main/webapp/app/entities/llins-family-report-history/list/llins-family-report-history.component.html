@@ -50,7 +50,7 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.pregnantWomen">Pregnant Women</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.quantityReceived">Quantity Received</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.familyType">Family Type</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.dayReached">Day Reached</span></th>
           <th scope="col">
@@ -78,7 +78,7 @@
             {{ lLINSFamilyReportHistory.familyType }}
           </td>
           <td>
-            {{ lLINSFamilyReportHistory.user?.login }}
+            {{ lLINSFamilyReportHistory.createdBy?.login }}
           </td>
           <td>
             {{ lLINSFamilyReportHistory.lastUpdatedBy?.login }}

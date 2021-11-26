@@ -75,6 +75,21 @@
             </option>
           </select>
         </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.dataInputPeriod.dataSet" for="field_dataSet"
+            >Data Set</label
+          >
+          <select class="form-control" id="field_dataSet" data-cy="dataSet" name="dataSet" formControlName="dataSet">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="dataSetOption.id === editForm.get('dataSet')!.value?.id ? editForm.get('dataSet')!.value : dataSetOption"
+              *ngFor="let dataSetOption of dataSetsSharedCollection; trackBy: trackDataSetById"
+            >
+              {{ dataSetOption.id }}
+            </option>
+          </select>
+        </div>
       </div>
 
       <div>

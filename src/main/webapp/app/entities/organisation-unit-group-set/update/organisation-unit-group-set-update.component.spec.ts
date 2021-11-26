@@ -47,14 +47,14 @@ describe('Component Tests', () => {
     describe('ngOnInit', () => {
       it('Should call User query and add missing value', () => {
         const organisationUnitGroupSet: IOrganisationUnitGroupSet = { id: 456 };
-        const user: IUser = { id: 54724 };
-        organisationUnitGroupSet.user = user;
+        const createdBy: IUser = { id: 54724 };
+        organisationUnitGroupSet.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 91254 };
         organisationUnitGroupSet.lastUpdatedBy = lastUpdatedBy;
 
         const userCollection: IUser[] = [{ id: 15120 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [user, lastUpdatedBy];
+        const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -90,8 +90,8 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const organisationUnitGroupSet: IOrganisationUnitGroupSet = { id: 456 };
-        const user: IUser = { id: 69309 };
-        organisationUnitGroupSet.user = user;
+        const createdBy: IUser = { id: 69309 };
+        organisationUnitGroupSet.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 43555 };
         organisationUnitGroupSet.lastUpdatedBy = lastUpdatedBy;
         const organisationUnitGroups: IOrganisationUnitGroup = { id: 51579 };
@@ -101,7 +101,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(organisationUnitGroupSet));
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.organisationUnitGroupsSharedCollection).toContain(organisationUnitGroups);
       });

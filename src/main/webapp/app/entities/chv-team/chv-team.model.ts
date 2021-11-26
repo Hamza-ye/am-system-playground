@@ -14,7 +14,7 @@ export interface ICHVTeam {
   lastUpdated?: dayjs.Dayjs | null;
   teamNo?: string;
   teamType?: CHVTeamType;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   person?: IPerson | null;
   responsibleForChvs?: ICHV[] | null;
@@ -31,7 +31,7 @@ export class CHVTeam implements ICHVTeam {
     public lastUpdated?: dayjs.Dayjs | null,
     public teamNo?: string,
     public teamType?: CHVTeamType,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public person?: IPerson | null,
     public responsibleForChvs?: ICHV[] | null

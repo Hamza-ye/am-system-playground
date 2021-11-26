@@ -17,17 +17,17 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "familyNo",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
       "fieldName": "created",
       "fieldType": "Instant"
     },
     {
       "fieldName": "lastUpdated",
       "fieldType": "Instant"
-    },
-    {
-      "fieldName": "familyNo",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "address",
@@ -71,7 +71,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "family",
-      "relationshipName": "user",
+      "relationshipName": "createdBy",
       "otherEntityField": "login"
     },
     {

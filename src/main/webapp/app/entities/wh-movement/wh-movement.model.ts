@@ -12,7 +12,7 @@ export interface IWHMovement {
   reconciliationDestination?: string | null;
   confirmedByOtherSide?: boolean | null;
   comment?: string | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   day?: IWorkingDay;
   initiatedWH?: IWarehouse;
@@ -29,7 +29,7 @@ export class WHMovement implements IWHMovement {
     public reconciliationDestination?: string | null,
     public confirmedByOtherSide?: boolean | null,
     public comment?: string | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public day?: IWorkingDay,
     public initiatedWH?: IWarehouse,

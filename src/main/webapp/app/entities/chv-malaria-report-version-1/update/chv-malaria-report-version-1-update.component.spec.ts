@@ -51,14 +51,14 @@ describe('Component Tests', () => {
     describe('ngOnInit', () => {
       it('Should call User query and add missing value', () => {
         const cHVMalariaReportVersion1: ICHVMalariaReportVersion1 = { id: 456 };
-        const user: IUser = { id: 24703 };
-        cHVMalariaReportVersion1.user = user;
+        const createdBy: IUser = { id: 24703 };
+        cHVMalariaReportVersion1.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 50752 };
         cHVMalariaReportVersion1.lastUpdatedBy = lastUpdatedBy;
 
         const userCollection: IUser[] = [{ id: 80360 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [user, lastUpdatedBy];
+        const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -110,8 +110,8 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const cHVMalariaReportVersion1: ICHVMalariaReportVersion1 = { id: 456 };
-        const user: IUser = { id: 2173 };
-        cHVMalariaReportVersion1.user = user;
+        const createdBy: IUser = { id: 2173 };
+        cHVMalariaReportVersion1.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 628 };
         cHVMalariaReportVersion1.lastUpdatedBy = lastUpdatedBy;
         const chv: ICHV = { id: 84182 };
@@ -123,7 +123,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(cHVMalariaReportVersion1));
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.cHVSSharedCollection).toContain(chv);
         expect(comp.periodsSharedCollection).toContain(period);

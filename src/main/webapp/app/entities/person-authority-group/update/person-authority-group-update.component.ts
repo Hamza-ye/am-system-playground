@@ -30,7 +30,7 @@ export class PersonAuthorityGroupUpdateComponent implements OnInit {
     description: [],
     created: [],
     lastUpdated: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
   });
 
@@ -101,13 +101,13 @@ export class PersonAuthorityGroupUpdateComponent implements OnInit {
       description: personAuthorityGroup.description,
       created: personAuthorityGroup.created ? personAuthorityGroup.created.format(DATE_TIME_FORMAT) : null,
       lastUpdated: personAuthorityGroup.lastUpdated ? personAuthorityGroup.lastUpdated.format(DATE_TIME_FORMAT) : null,
-      user: personAuthorityGroup.user,
+      createdBy: personAuthorityGroup.createdBy,
       lastUpdatedBy: personAuthorityGroup.lastUpdatedBy,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      personAuthorityGroup.user,
+      personAuthorityGroup.createdBy,
       personAuthorityGroup.lastUpdatedBy
     );
   }
@@ -118,7 +118,11 @@ export class PersonAuthorityGroupUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -136,7 +140,7 @@ export class PersonAuthorityGroupUpdateComponent implements OnInit {
       lastUpdated: this.editForm.get(['lastUpdated'])!.value
         ? dayjs(this.editForm.get(['lastUpdated'])!.value, DATE_TIME_FORMAT)
         : undefined,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
     };
   }

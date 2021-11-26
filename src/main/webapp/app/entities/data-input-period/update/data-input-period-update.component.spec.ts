@@ -11,6 +11,8 @@ import { DataInputPeriodService } from '../service/data-input-period.service';
 import { IDataInputPeriod, DataInputPeriod } from '../data-input-period.model';
 import { IPeriod } from 'app/entities/period/period.model';
 import { PeriodService } from 'app/entities/period/service/period.service';
+import { IDataSet } from 'app/entities/data-set/data-set.model';
+import { DataSetService } from 'app/entities/data-set/service/data-set.service';
 
 import { DataInputPeriodUpdateComponent } from './data-input-period-update.component';
 
@@ -21,6 +23,7 @@ describe('Component Tests', () => {
     let activatedRoute: ActivatedRoute;
     let dataInputPeriodService: DataInputPeriodService;
     let periodService: PeriodService;
+    let dataSetService: DataSetService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -35,6 +38,7 @@ describe('Component Tests', () => {
       activatedRoute = TestBed.inject(ActivatedRoute);
       dataInputPeriodService = TestBed.inject(DataInputPeriodService);
       periodService = TestBed.inject(PeriodService);
+      dataSetService = TestBed.inject(DataSetService);
 
       comp = fixture.componentInstance;
     });
@@ -59,16 +63,38 @@ describe('Component Tests', () => {
         expect(comp.periodsSharedCollection).toEqual(expectedCollection);
       });
 
+      it('Should call DataSet query and add missing value', () => {
+        const dataInputPeriod: IDataInputPeriod = { id: 456 };
+        const dataSet: IDataSet = { id: 95712 };
+        dataInputPeriod.dataSet = dataSet;
+
+        const dataSetCollection: IDataSet[] = [{ id: 65532 }];
+        jest.spyOn(dataSetService, 'query').mockReturnValue(of(new HttpResponse({ body: dataSetCollection })));
+        const additionalDataSets = [dataSet];
+        const expectedCollection: IDataSet[] = [...additionalDataSets, ...dataSetCollection];
+        jest.spyOn(dataSetService, 'addDataSetToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+        activatedRoute.data = of({ dataInputPeriod });
+        comp.ngOnInit();
+
+        expect(dataSetService.query).toHaveBeenCalled();
+        expect(dataSetService.addDataSetToCollectionIfMissing).toHaveBeenCalledWith(dataSetCollection, ...additionalDataSets);
+        expect(comp.dataSetsSharedCollection).toEqual(expectedCollection);
+      });
+
       it('Should update editForm', () => {
         const dataInputPeriod: IDataInputPeriod = { id: 456 };
         const period: IPeriod = { id: 24795 };
         dataInputPeriod.period = period;
+        const dataSet: IDataSet = { id: 76976 };
+        dataInputPeriod.dataSet = dataSet;
 
         activatedRoute.data = of({ dataInputPeriod });
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(dataInputPeriod));
         expect(comp.periodsSharedCollection).toContain(period);
+        expect(comp.dataSetsSharedCollection).toContain(dataSet);
       });
     });
 
@@ -141,6 +167,14 @@ describe('Component Tests', () => {
         it('Should return tracked Period primary key', () => {
           const entity = { id: 123 };
           const trackResult = comp.trackPeriodById(0, entity);
+          expect(trackResult).toEqual(entity.id);
+        });
+      });
+
+      describe('trackDataSetById', () => {
+        it('Should return tracked DataSet primary key', () => {
+          const entity = { id: 123 };
+          const trackResult = comp.trackDataSetById(0, entity);
           expect(trackResult).toEqual(entity.id);
         });
       });

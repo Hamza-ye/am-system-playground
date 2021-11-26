@@ -92,6 +92,13 @@
     },
     {
       "relationshipType": "many-to-one",
+      "otherEntityName": "fileResource",
+      "otherEntityRelationshipName": "organisationUnit",
+      "relationshipName": "image",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
       "otherEntityName": "organisationUnit",
       "otherEntityRelationshipName": "children",
       "relationshipName": "parent",
@@ -116,7 +123,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "organisationUnit",
-      "relationshipName": "user",
+      "relationshipName": "createdBy",
       "otherEntityField": "login"
     },
     {

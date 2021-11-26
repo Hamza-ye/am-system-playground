@@ -34,13 +34,13 @@
         <dd>
           <span>{{ project.lastUpdated | formatMediumDatetime }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.project.displayed">Is Displayed</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.project.displayed">Displayed</span></dt>
         <dd>
           <span>{{ project.displayed }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.project.user">User</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.project.createdBy">Created By</span></dt>
         <dd>
-          <span>{{ project.user?.login }}</span>
+          <span>{{ project.createdBy?.login }}</span>
         </dd>
         <dt><span appTranslate="amSystemPlaygroundApp.project.lastUpdatedBy">Last Updated By</span></dt>
         <dd>

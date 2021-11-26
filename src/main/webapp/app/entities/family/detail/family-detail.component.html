@@ -26,6 +26,10 @@
         <dd>
           <span>{{ family.name }}</span>
         </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.family.familyNo">Family No</span></dt>
+        <dd>
+          <span>{{ family.familyNo }}</span>
+        </dd>
         <dt><span appTranslate="amSystemPlaygroundApp.family.created">Created</span></dt>
         <dd>
           <span>{{ family.created | formatMediumDatetime }}</span>
@@ -33,10 +37,6 @@
         <dt><span appTranslate="amSystemPlaygroundApp.family.lastUpdated">Last Updated</span></dt>
         <dd>
           <span>{{ family.lastUpdated | formatMediumDatetime }}</span>
-        </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.family.familyNo">Family No</span></dt>
-        <dd>
-          <span>{{ family.familyNo }}</span>
         </dd>
         <dt><span appTranslate="amSystemPlaygroundApp.family.address">Address</span></dt>
         <dd>
@@ -48,9 +48,9 @@
             <a [routerLink]="['/organisation-unit', family.organisationUnit?.id, 'view']">{{ family.organisationUnit?.name }}</a>
           </div>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.family.user">User</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.family.createdBy">Created By</span></dt>
         <dd>
-          <span>{{ family.user?.login }}</span>
+          <span>{{ family.createdBy?.login }}</span>
         </dd>
         <dt><span appTranslate="amSystemPlaygroundApp.family.lastUpdatedBy">Last Updated By</span></dt>
         <dd>

@@ -29,8 +29,8 @@ export class ProjectUpdateComponent implements OnInit {
     name: [],
     created: [],
     lastUpdated: [],
-    isDisplayed: [],
-    user: [],
+    displayed: [],
+    createdBy: [],
     lastUpdatedBy: [],
   });
 
@@ -100,14 +100,14 @@ export class ProjectUpdateComponent implements OnInit {
       name: project.name,
       created: project.created ? project.created.format(DATE_TIME_FORMAT) : null,
       lastUpdated: project.lastUpdated ? project.lastUpdated.format(DATE_TIME_FORMAT) : null,
-      isDisplayed: project.displayed,
-      user: project.user,
+      displayed: project.displayed,
+      createdBy: project.createdBy,
       lastUpdatedBy: project.lastUpdatedBy,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      project.user,
+      project.createdBy,
       project.lastUpdatedBy
     );
   }
@@ -118,7 +118,11 @@ export class ProjectUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -136,7 +140,7 @@ export class ProjectUpdateComponent implements OnInit {
         ? dayjs(this.editForm.get(['lastUpdated'])!.value, DATE_TIME_FORMAT)
         : undefined,
       displayed: this.editForm.get(['displayed'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
     };
   }

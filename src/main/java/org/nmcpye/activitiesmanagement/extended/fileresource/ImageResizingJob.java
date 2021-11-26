@@ -29,14 +29,14 @@ public class ImageResizingJob implements Job {
 
     private final FileResourceContentStore fileResourceContentStore;
 
-    private final FileResourceService fileResourceService;
+    private final FileResourceServiceExt fileResourceServiceExt;
 
     private final ImageProcessingService imageProcessingService;
 
-    public ImageResizingJob(FileResourceContentStore fileResourceContentStore, FileResourceService fileResourceService,
+    public ImageResizingJob(FileResourceContentStore fileResourceContentStore, FileResourceServiceExt fileResourceServiceExt,
                             ImageProcessingService imageProcessingService) {
         this.fileResourceContentStore = fileResourceContentStore;
-        this.fileResourceService = fileResourceService;
+        this.fileResourceServiceExt = fileResourceServiceExt;
         this.imageProcessingService = imageProcessingService;
     }
 
@@ -47,7 +47,7 @@ public class ImageResizingJob implements Job {
 
     @Override
     public void execute(JobConfiguration jobConfiguration) {
-        List<FileResource> fileResources = fileResourceService.getAllUnProcessedImagesFiles();
+        List<FileResource> fileResources = fileResourceServiceExt.getAllUnProcessedImagesFiles();
 
         File tmpFile = null;
 
@@ -75,7 +75,7 @@ public class ImageResizingJob implements Job {
 
                 if (storageKey != null) {
                     fileResource.setHasMultipleStorageFiles(true);
-                    fileResourceService.updateFileResource(fileResource);
+                    fileResourceServiceExt.updateFileResource(fileResource);
                     count++;
                 } else {
                     log.error("File upload failed");

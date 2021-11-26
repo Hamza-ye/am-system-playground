@@ -36,6 +36,7 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataInputPeriod.openingDate">Opening Date</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataInputPeriod.closingDate">Closing Date</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataInputPeriod.period">Period</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataInputPeriod.dataSet">Data Set</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -49,6 +50,11 @@
           <td>
             <div *ngIf="dataInputPeriod.period">
               <a [routerLink]="['/period', dataInputPeriod.period?.id, 'view']">{{ dataInputPeriod.period?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="dataInputPeriod.dataSet">
+              <a [routerLink]="['/data-set', dataInputPeriod.dataSet?.id, 'view']">{{ dataInputPeriod.dataSet?.id }}</a>
             </div>
           </td>
           <td class="text-right">

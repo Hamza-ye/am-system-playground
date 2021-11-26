@@ -266,7 +266,7 @@ public class OrganisationUnitGroupSet extends BaseDimensionalObject implements M
         this.includeSubhierarchyInAnalytics = includeSubhierarchyInAnalytics;
     }
 
-    @JsonProperty("organisationUnitGroups")
+    @JsonProperty//("organisationUnitGroups")
     // @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     @JsonSerialize(contentUsing = JacksonOrganisationUnitGroupSymbolSerializer.class)
     public Set<OrganisationUnitGroup> getOrganisationUnitGroups() {

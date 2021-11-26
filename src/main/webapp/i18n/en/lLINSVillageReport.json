@@ -32,7 +32,7 @@
       "quantityReceived": "Quantity Received",
       "comment": "Comment",
       "llinsVillageReportHistory": "Llins Village Report History",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
       "dayReached": "Day Reached",
       "targetDetails": "Target Details",

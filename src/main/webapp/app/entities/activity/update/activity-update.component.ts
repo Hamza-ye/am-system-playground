@@ -34,10 +34,9 @@ export class ActivityUpdateComponent implements OnInit {
     lastUpdated: [],
     startDate: [null, [Validators.required]],
     endDate: [null, [Validators.required]],
-    noOfDays: [null, [Validators.min(0)]],
     active: [],
-    isDisplayed: [],
-    user: [],
+    displayed: [],
+    createdBy: [],
     lastUpdatedBy: [],
     project: [null, Validators.required],
   });
@@ -115,17 +114,16 @@ export class ActivityUpdateComponent implements OnInit {
       lastUpdated: activity.lastUpdated ? activity.lastUpdated.format(DATE_TIME_FORMAT) : null,
       startDate: activity.startDate,
       endDate: activity.endDate,
-      noOfDays: activity.noOfDays,
       active: activity.active,
-      isDisplayed: activity.displayed,
-      user: activity.user,
+      displayed: activity.displayed,
+      createdBy: activity.createdBy,
       lastUpdatedBy: activity.lastUpdatedBy,
       project: activity.project,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      activity.user,
+      activity.createdBy,
       activity.lastUpdatedBy
     );
     this.projectsSharedCollection = this.projectService.addProjectToCollectionIfMissing(this.projectsSharedCollection, activity.project);
@@ -137,7 +135,11 @@ export class ActivityUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -164,10 +166,9 @@ export class ActivityUpdateComponent implements OnInit {
         : undefined,
       startDate: this.editForm.get(['startDate'])!.value,
       endDate: this.editForm.get(['endDate'])!.value,
-      noOfDays: this.editForm.get(['noOfDays'])!.value,
       active: this.editForm.get(['active'])!.value,
       displayed: this.editForm.get(['displayed'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       project: this.editForm.get(['project'])!.value,
     };

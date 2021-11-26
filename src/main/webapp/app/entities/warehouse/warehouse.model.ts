@@ -16,7 +16,7 @@ export interface IWarehouse {
   initialBalanceActual?: number;
   initiatedMovements?: IWHMovement[] | null;
   notInitiatedMovements?: IWHMovement[] | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   activity?: IActivity;
   teams?: ITeam[] | null;
@@ -35,7 +35,7 @@ export class Warehouse implements IWarehouse {
     public initialBalanceActual?: number,
     public initiatedMovements?: IWHMovement[] | null,
     public notInitiatedMovements?: IWHMovement[] | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public activity?: IActivity,
     public teams?: ITeam[] | null

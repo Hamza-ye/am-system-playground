@@ -18,6 +18,8 @@
         "title": "Demographic Data"
       },
       "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
       "created": "Created",
       "lastUpdated": "Last Updated",
       "date": "Date",
@@ -39,7 +41,7 @@
       "populationGrowthRate": "Population Growth Rate",
       "comment": "Comment",
       "organisationUnit": "Organisation Unit",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
       "source": "Source"
     }

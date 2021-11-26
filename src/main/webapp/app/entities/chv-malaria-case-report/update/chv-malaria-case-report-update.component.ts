@@ -47,7 +47,7 @@ export class CHVMalariaCaseReportUpdateComponent implements OnInit {
     barImageUrl: [],
     comment: [],
     subVillage: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     chv: [null, Validators.required],
     reportClass: [null, Validators.required],
@@ -143,7 +143,7 @@ export class CHVMalariaCaseReportUpdateComponent implements OnInit {
       barImageUrl: cHVMalariaCaseReport.barImageUrl,
       comment: cHVMalariaCaseReport.comment,
       subVillage: cHVMalariaCaseReport.subVillage,
-      user: cHVMalariaCaseReport.user,
+      createdBy: cHVMalariaCaseReport.createdBy,
       lastUpdatedBy: cHVMalariaCaseReport.lastUpdatedBy,
       chv: cHVMalariaCaseReport.chv,
       reportClass: cHVMalariaCaseReport.reportClass,
@@ -155,7 +155,7 @@ export class CHVMalariaCaseReportUpdateComponent implements OnInit {
     );
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      cHVMalariaCaseReport.user,
+      cHVMalariaCaseReport.createdBy,
       cHVMalariaCaseReport.lastUpdatedBy
     );
     this.cHVSSharedCollection = this.cHVService.addCHVToCollectionIfMissing(this.cHVSSharedCollection, cHVMalariaCaseReport.chv);
@@ -181,7 +181,11 @@ export class CHVMalariaCaseReportUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -223,7 +227,7 @@ export class CHVMalariaCaseReportUpdateComponent implements OnInit {
       barImageUrl: this.editForm.get(['barImageUrl'])!.value,
       comment: this.editForm.get(['comment'])!.value,
       subVillage: this.editForm.get(['subVillage'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       chv: this.editForm.get(['chv'])!.value,
       reportClass: this.editForm.get(['reportClass'])!.value,

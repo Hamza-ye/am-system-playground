@@ -4,6 +4,7 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -95,6 +96,7 @@ public class CasesReportClass extends BaseIdentifiableObject implements Metadata
         return this;
     }
 
+    @JsonProperty
     public String getShortName() {
         return this.shortName;
     }
@@ -108,6 +110,7 @@ public class CasesReportClass extends BaseIdentifiableObject implements Metadata
         this.shortName = shortName;
     }
 
+    @JsonProperty
     public String getDescription() {
         return this.description;
     }

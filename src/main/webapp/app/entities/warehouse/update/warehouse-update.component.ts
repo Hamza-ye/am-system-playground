@@ -35,7 +35,7 @@ export class WarehouseUpdateComponent implements OnInit {
     whNo: [null, [Validators.required, Validators.min(1)]],
     initialBalancePlan: [null, [Validators.required, Validators.min(0)]],
     initialBalanceActual: [null, [Validators.required, Validators.min(0)]],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     activity: [null, Validators.required],
   });
@@ -114,14 +114,14 @@ export class WarehouseUpdateComponent implements OnInit {
       whNo: warehouse.whNo,
       initialBalancePlan: warehouse.initialBalancePlan,
       initialBalanceActual: warehouse.initialBalanceActual,
-      user: warehouse.user,
+      createdBy: warehouse.createdBy,
       lastUpdatedBy: warehouse.lastUpdatedBy,
       activity: warehouse.activity,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      warehouse.user,
+      warehouse.createdBy,
       warehouse.lastUpdatedBy
     );
     this.activitiesSharedCollection = this.activityService.addActivityToCollectionIfMissing(
@@ -136,7 +136,11 @@ export class WarehouseUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -166,7 +170,7 @@ export class WarehouseUpdateComponent implements OnInit {
       whNo: this.editForm.get(['whNo'])!.value,
       initialBalancePlan: this.editForm.get(['initialBalancePlan'])!.value,
       initialBalanceActual: this.editForm.get(['initialBalanceActual'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       activity: this.editForm.get(['activity'])!.value,
     };

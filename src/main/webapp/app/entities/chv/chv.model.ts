@@ -17,7 +17,7 @@ export interface ICHV {
   district?: IOrganisationUnit;
   homeSubvillage?: IOrganisationUnit | null;
   managedByHf?: IOrganisationUnit | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   supervisionTeams?: ICHVTeam[] | null;
 }
@@ -36,7 +36,7 @@ export class CHV implements ICHV {
     public district?: IOrganisationUnit,
     public homeSubvillage?: IOrganisationUnit | null,
     public managedByHf?: IOrganisationUnit | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public supervisionTeams?: ICHVTeam[] | null
   ) {}

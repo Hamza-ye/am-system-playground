@@ -51,14 +51,14 @@ describe('Component Tests', () => {
     describe('ngOnInit', () => {
       it('Should call User query and add missing value', () => {
         const lLINSVillageReportHistory: ILLINSVillageReportHistory = { id: 456 };
-        const user: IUser = { id: 61056 };
-        lLINSVillageReportHistory.user = user;
+        const createdBy: IUser = { id: 61056 };
+        lLINSVillageReportHistory.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 34837 };
         lLINSVillageReportHistory.lastUpdatedBy = lastUpdatedBy;
 
         const userCollection: IUser[] = [{ id: 99170 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [user, lastUpdatedBy];
+        const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -113,8 +113,8 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const lLINSVillageReportHistory: ILLINSVillageReportHistory = { id: 456 };
-        const user: IUser = { id: 69971 };
-        lLINSVillageReportHistory.user = user;
+        const createdBy: IUser = { id: 69971 };
+        lLINSVillageReportHistory.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 43182 };
         lLINSVillageReportHistory.lastUpdatedBy = lastUpdatedBy;
         const dayReached: IWorkingDay = { id: 95777 };
@@ -126,7 +126,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(lLINSVillageReportHistory));
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.workingDaysSharedCollection).toContain(dayReached);
         expect(comp.lLINSVillageReportsSharedCollection).toContain(llinsVillageReport);

@@ -52,10 +52,11 @@
           <th scope="col">
             <span appTranslate="amSystemPlaygroundApp.organisationUnit.organisationUnitType">Organisation Unit Type</span>
           </th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.image">Image</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.parent">Parent</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.hfHomeSubVillage">Hf Home Sub Village</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.coveredByHf">Covered By Hf</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.malariaUnit">Malaria Unit</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.assignedChv">Assigned Chv</span></th>
@@ -87,6 +88,11 @@
             {{ organisationUnit.organisationUnitType }}
           </td>
           <td>
+            <div *ngIf="organisationUnit.image">
+              <a [routerLink]="['/file-resource', organisationUnit.image?.id, 'view']">{{ organisationUnit.image?.name }}</a>
+            </div>
+          </td>
+          <td>
             <div *ngIf="organisationUnit.parent">
               <a [routerLink]="['/organisation-unit', organisationUnit.parent?.id, 'view']">{{ organisationUnit.parent?.name }}</a>
             </div>
@@ -106,7 +112,7 @@
             </div>
           </td>
           <td>
-            {{ organisationUnit.user?.login }}
+            {{ organisationUnit.createdBy?.login }}
           </td>
           <td>
             {{ organisationUnit.lastUpdatedBy?.login }}

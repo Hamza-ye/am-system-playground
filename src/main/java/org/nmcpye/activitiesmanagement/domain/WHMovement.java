@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.enumeration.MovementType;
@@ -91,6 +93,8 @@ public class WHMovement implements Serializable {
     private Team team;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+    //    @Override
+    @JsonProperty
     public Long getId() {
         return id;
     }
@@ -104,6 +108,7 @@ public class WHMovement implements Serializable {
         return this;
     }
 
+    @JsonProperty
     public MovementType getMovementType() {
         return this.movementType;
     }
@@ -117,6 +122,7 @@ public class WHMovement implements Serializable {
         this.movementType = movementType;
     }
 
+    @JsonProperty
     public Integer getQuantity() {
         return this.quantity;
     }
@@ -130,6 +136,7 @@ public class WHMovement implements Serializable {
         this.quantity = quantity;
     }
 
+    @JsonProperty
     public String getReconciliationSource() {
         return this.reconciliationSource;
     }
@@ -143,6 +150,7 @@ public class WHMovement implements Serializable {
         this.reconciliationSource = reconciliationSource;
     }
 
+    @JsonProperty
     public String getReconciliationDestination() {
         return this.reconciliationDestination;
     }
@@ -156,6 +164,7 @@ public class WHMovement implements Serializable {
         this.reconciliationDestination = reconciliationDestination;
     }
 
+    @JsonProperty
     public Boolean getConfirmedByOtherSide() {
         return this.confirmedByOtherSide;
     }
@@ -169,6 +178,7 @@ public class WHMovement implements Serializable {
         this.confirmedByOtherSide = confirmedByOtherSide;
     }
 
+    @JsonProperty
     public String getComment() {
         return this.comment;
     }
@@ -205,6 +215,7 @@ public class WHMovement implements Serializable {
         return this;
     }
 
+    @JsonProperty
     public User getLastUpdatedBy() {
         return this.lastUpdatedBy;
     }
@@ -218,6 +229,7 @@ public class WHMovement implements Serializable {
         this.lastUpdatedBy = user;
     }
 
+    @JsonProperty
     public WorkingDay getDay() {
         return this.day;
     }
@@ -231,6 +243,7 @@ public class WHMovement implements Serializable {
         this.day = workingDay;
     }
 
+    @JsonProperty
     public Warehouse getInitiatedWH() {
         return this.initiatedWH;
     }
@@ -244,6 +257,7 @@ public class WHMovement implements Serializable {
         this.initiatedWH = warehouse;
     }
 
+    @JsonProperty
     public Warehouse getTheOtherSideWH() {
         return this.theOtherSideWH;
     }
@@ -257,6 +271,7 @@ public class WHMovement implements Serializable {
         this.theOtherSideWH = warehouse;
     }
 
+    @JsonProperty
     public Team getTeam() {
         return this.team;
     }

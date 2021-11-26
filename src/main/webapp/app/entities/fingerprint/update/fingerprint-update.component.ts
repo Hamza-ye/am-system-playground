@@ -33,7 +33,7 @@ export class FingerprintUpdateComponent implements OnInit {
     lastUpdated: [],
     fingerprintUrl: [],
     fingerprintOwner: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     family: [],
   });
@@ -110,14 +110,14 @@ export class FingerprintUpdateComponent implements OnInit {
       lastUpdated: fingerprint.lastUpdated ? fingerprint.lastUpdated.format(DATE_TIME_FORMAT) : null,
       fingerprintUrl: fingerprint.fingerprintUrl,
       fingerprintOwner: fingerprint.fingerprintOwner,
-      user: fingerprint.user,
+      createdBy: fingerprint.createdBy,
       lastUpdatedBy: fingerprint.lastUpdatedBy,
       family: fingerprint.family,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      fingerprint.user,
+      fingerprint.createdBy,
       fingerprint.lastUpdatedBy
     );
     this.familiesSharedCollection = this.familyService.addFamilyToCollectionIfMissing(this.familiesSharedCollection, fingerprint.family);
@@ -129,7 +129,11 @@ export class FingerprintUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -153,7 +157,7 @@ export class FingerprintUpdateComponent implements OnInit {
         : undefined,
       fingerprintUrl: this.editForm.get(['fingerprintUrl'])!.value,
       fingerprintOwner: this.editForm.get(['fingerprintOwner'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       family: this.editForm.get(['family'])!.value,
     };

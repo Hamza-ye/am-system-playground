@@ -1,6 +1,7 @@
 import * as dayjs from 'dayjs';
 import { IMalariaCasesReport } from 'app/entities/malaria-cases-report/malaria-cases-report.model';
 import { IDengueCasesReport } from 'app/entities/dengue-cases-report/dengue-cases-report.model';
+import { IFileResource } from 'app/entities/file-resource/file-resource.model';
 import { IUser } from 'app/entities/user/user.model';
 import { IMalariaUnit } from 'app/entities/malaria-unit/malaria-unit.model';
 import { ICHV } from 'app/entities/chv/chv.model';
@@ -31,10 +32,11 @@ export interface IOrganisationUnit {
   organisationUnitType?: OrganisationUnitType;
   malariaReports?: IMalariaCasesReport[] | null;
   dengueReports?: IDengueCasesReport[] | null;
+  image?: IFileResource | null;
   parent?: IOrganisationUnit | null;
   hfHomeSubVillage?: IOrganisationUnit | null;
   coveredByHf?: IOrganisationUnit | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   malariaUnit?: IMalariaUnit | null;
   assignedChv?: ICHV | null;
@@ -68,10 +70,11 @@ export class OrganisationUnit implements IOrganisationUnit {
     public organisationUnitType?: OrganisationUnitType,
     public malariaReports?: IMalariaCasesReport[] | null,
     public dengueReports?: IDengueCasesReport[] | null,
+    public image?: IFileResource | null,
     public parent?: IOrganisationUnit | null,
     public hfHomeSubVillage?: IOrganisationUnit | null,
     public coveredByHf?: IOrganisationUnit | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public malariaUnit?: IMalariaUnit | null,
     public assignedChv?: ICHV | null,

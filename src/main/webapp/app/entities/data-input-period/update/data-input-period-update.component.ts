@@ -9,6 +9,8 @@ import { IDataInputPeriod, DataInputPeriod } from '../data-input-period.model';
 import { DataInputPeriodService } from '../service/data-input-period.service';
 import { IPeriod } from 'app/entities/period/period.model';
 import { PeriodService } from 'app/entities/period/service/period.service';
+import { IDataSet } from 'app/entities/data-set/data-set.model';
+import { DataSetService } from 'app/entities/data-set/service/data-set.service';
 
 @Component({
   selector: 'app-data-input-period-update',
@@ -18,17 +20,20 @@ export class DataInputPeriodUpdateComponent implements OnInit {
   isSaving = false;
 
   periodsSharedCollection: IPeriod[] = [];
+  dataSetsSharedCollection: IDataSet[] = [];
 
   editForm = this.fb.group({
     id: [],
     openingDate: [],
     closingDate: [],
     period: [],
+    dataSet: [],
   });
 
   constructor(
     protected dataInputPeriodService: DataInputPeriodService,
     protected periodService: PeriodService,
+    protected dataSetService: DataSetService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -59,6 +64,10 @@ export class DataInputPeriodUpdateComponent implements OnInit {
     return item.id!;
   }
 
+  trackDataSetById(index: number, item: IDataSet): number {
+    return item.id!;
+  }
+
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IDataInputPeriod>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
       () => this.onSaveSuccess(),
@@ -84,9 +93,14 @@ export class DataInputPeriodUpdateComponent implements OnInit {
       openingDate: dataInputPeriod.openingDate,
       closingDate: dataInputPeriod.closingDate,
       period: dataInputPeriod.period,
+      dataSet: dataInputPeriod.dataSet,
     });
 
     this.periodsSharedCollection = this.periodService.addPeriodToCollectionIfMissing(this.periodsSharedCollection, dataInputPeriod.period);
+    this.dataSetsSharedCollection = this.dataSetService.addDataSetToCollectionIfMissing(
+      this.dataSetsSharedCollection,
+      dataInputPeriod.dataSet
+    );
   }
 
   protected loadRelationshipsOptions(): void {
@@ -95,6 +109,14 @@ export class DataInputPeriodUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IPeriod[]>) => res.body ?? []))
       .pipe(map((periods: IPeriod[]) => this.periodService.addPeriodToCollectionIfMissing(periods, this.editForm.get('period')!.value)))
       .subscribe((periods: IPeriod[]) => (this.periodsSharedCollection = periods));
+
+    this.dataSetService
+      .query()
+      .pipe(map((res: HttpResponse<IDataSet[]>) => res.body ?? []))
+      .pipe(
+        map((dataSets: IDataSet[]) => this.dataSetService.addDataSetToCollectionIfMissing(dataSets, this.editForm.get('dataSet')!.value))
+      )
+      .subscribe((dataSets: IDataSet[]) => (this.dataSetsSharedCollection = dataSets));
   }
 
   protected createFromForm(): IDataInputPeriod {
@@ -104,6 +126,7 @@ export class DataInputPeriodUpdateComponent implements OnInit {
       openingDate: this.editForm.get(['openingDate'])!.value,
       closingDate: this.editForm.get(['closingDate'])!.value,
       period: this.editForm.get(['period'])!.value,
+      dataSet: this.editForm.get(['dataSet'])!.value,
     };
   }
 }

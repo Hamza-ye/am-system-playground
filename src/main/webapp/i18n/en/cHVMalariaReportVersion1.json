@@ -38,7 +38,7 @@
       "suppsUsed": "Supps Used",
       "suppsDamagedLost": "Supps Damaged Lost",
       "comment": "Comment",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
       "chv": "Chv",
       "period": "Period"

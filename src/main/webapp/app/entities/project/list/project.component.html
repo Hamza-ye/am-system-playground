@@ -49,10 +49,10 @@
             <span appTranslate="amSystemPlaygroundApp.project.lastUpdated">Last Updated</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="displayed">
-            <span appTranslate="amSystemPlaygroundApp.project.displayed">Is Displayed</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.project.displayed">Displayed</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" appSortBy="user.login">
-            <span appTranslate="amSystemPlaygroundApp.project.user">User</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" appSortBy="createdBy.login">
+            <span appTranslate="amSystemPlaygroundApp.project.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="lastUpdatedBy.login">
             <span appTranslate="amSystemPlaygroundApp.project.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon>
@@ -72,7 +72,7 @@
           <td>{{ project.lastUpdated | formatMediumDatetime }}</td>
           <td>{{ project.displayed }}</td>
           <td>
-            {{ project.user?.login }}
+            {{ project.createdBy?.login }}
           </td>
           <td>
             {{ project.lastUpdatedBy?.login }}

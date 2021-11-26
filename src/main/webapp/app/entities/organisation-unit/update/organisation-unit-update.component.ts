@@ -10,6 +10,8 @@ import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
 import { IOrganisationUnit, OrganisationUnit } from '../organisation-unit.model';
 import { OrganisationUnitService } from '../service/organisation-unit.service';
+import { IFileResource } from 'app/entities/file-resource/file-resource.model';
+import { FileResourceService } from 'app/entities/file-resource/service/file-resource.service';
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 import { IMalariaUnit } from 'app/entities/malaria-unit/malaria-unit.model';
@@ -24,6 +26,7 @@ import { CHVService } from 'app/entities/chv/service/chv.service';
 export class OrganisationUnitUpdateComponent implements OnInit {
   isSaving = false;
 
+  fileResourcesSharedCollection: IFileResource[] = [];
   organisationUnitsSharedCollection: IOrganisationUnit[] = [];
   usersSharedCollection: IUser[] = [];
   malariaUnitsSharedCollection: IMalariaUnit[] = [];
@@ -48,10 +51,11 @@ export class OrganisationUnitUpdateComponent implements OnInit {
     email: [],
     phoneNumber: [],
     organisationUnitType: [null, [Validators.required]],
+    image: [],
     parent: [],
     hfHomeSubVillage: [],
     coveredByHf: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     malariaUnit: [],
     assignedChv: [],
@@ -59,6 +63,7 @@ export class OrganisationUnitUpdateComponent implements OnInit {
 
   constructor(
     protected organisationUnitService: OrganisationUnitService,
+    protected fileResourceService: FileResourceService,
     protected userService: UserService,
     protected malariaUnitService: MalariaUnitService,
     protected cHVService: CHVService,
@@ -92,6 +97,10 @@ export class OrganisationUnitUpdateComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.organisationUnitService.create(organisationUnit));
     }
+  }
+
+  trackFileResourceById(index: number, item: IFileResource): number {
+    return item.id!;
   }
 
   trackOrganisationUnitById(index: number, item: IOrganisationUnit): number {
@@ -149,15 +158,20 @@ export class OrganisationUnitUpdateComponent implements OnInit {
       email: organisationUnit.email,
       phoneNumber: organisationUnit.phoneNumber,
       organisationUnitType: organisationUnit.organisationUnitType,
+      image: organisationUnit.image,
       parent: organisationUnit.parent,
       hfHomeSubVillage: organisationUnit.hfHomeSubVillage,
       coveredByHf: organisationUnit.coveredByHf,
-      user: organisationUnit.user,
+      createdBy: organisationUnit.createdBy,
       lastUpdatedBy: organisationUnit.lastUpdatedBy,
       malariaUnit: organisationUnit.malariaUnit,
       assignedChv: organisationUnit.assignedChv,
     });
 
+    this.fileResourcesSharedCollection = this.fileResourceService.addFileResourceToCollectionIfMissing(
+      this.fileResourcesSharedCollection,
+      organisationUnit.image
+    );
     this.organisationUnitsSharedCollection = this.organisationUnitService.addOrganisationUnitToCollectionIfMissing(
       this.organisationUnitsSharedCollection,
       organisationUnit.parent,
@@ -166,7 +180,7 @@ export class OrganisationUnitUpdateComponent implements OnInit {
     );
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      organisationUnit.user,
+      organisationUnit.createdBy,
       organisationUnit.lastUpdatedBy
     );
     this.malariaUnitsSharedCollection = this.malariaUnitService.addMalariaUnitToCollectionIfMissing(
@@ -177,6 +191,16 @@ export class OrganisationUnitUpdateComponent implements OnInit {
   }
 
   protected loadRelationshipsOptions(): void {
+    this.fileResourceService
+      .query()
+      .pipe(map((res: HttpResponse<IFileResource[]>) => res.body ?? []))
+      .pipe(
+        map((fileResources: IFileResource[]) =>
+          this.fileResourceService.addFileResourceToCollectionIfMissing(fileResources, this.editForm.get('image')!.value)
+        )
+      )
+      .subscribe((fileResources: IFileResource[]) => (this.fileResourcesSharedCollection = fileResources));
+
     this.organisationUnitService
       .query()
       .pipe(map((res: HttpResponse<IOrganisationUnit[]>) => res.body ?? []))
@@ -197,7 +221,11 @@ export class OrganisationUnitUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -242,10 +270,11 @@ export class OrganisationUnitUpdateComponent implements OnInit {
       email: this.editForm.get(['email'])!.value,
       phoneNumber: this.editForm.get(['phoneNumber'])!.value,
       organisationUnitType: this.editForm.get(['organisationUnitType'])!.value,
+      image: this.editForm.get(['image'])!.value,
       parent: this.editForm.get(['parent'])!.value,
       hfHomeSubVillage: this.editForm.get(['hfHomeSubVillage'])!.value,
       coveredByHf: this.editForm.get(['coveredByHf'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       malariaUnit: this.editForm.get(['malariaUnit'])!.value,
       assignedChv: this.editForm.get(['assignedChv'])!.value,

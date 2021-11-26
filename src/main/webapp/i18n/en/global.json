@@ -47,6 +47,9 @@
         "dataSet": "Data Set",
         "dataInputPeriod": "Data Input Period",
         "relativePeriods": "Relative Periods",
+        "fileResource": "File Resource",
+        "externalFileResource": "External File Resource",
+        "document": "Document",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

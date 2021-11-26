@@ -53,14 +53,14 @@ describe('Component Tests', () => {
         const person: IPerson = { id: 456 };
         const userInfo: IUser = { id: 57046 };
         person.userInfo = userInfo;
-        const user: IUser = { id: 27076 };
-        person.user = user;
+        const createdBy: IUser = { id: 27076 };
+        person.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 40784 };
         person.lastUpdatedBy = lastUpdatedBy;
 
         const userCollection: IUser[] = [{ id: 6249 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [userInfo, user, lastUpdatedBy];
+        const additionalUsers = [userInfo, createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -122,8 +122,8 @@ describe('Component Tests', () => {
         const person: IPerson = { id: 456 };
         const userInfo: IUser = { id: 78698 };
         person.userInfo = userInfo;
-        const user: IUser = { id: 30282 };
-        person.user = user;
+        const createdBy: IUser = { id: 30282 };
+        person.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 5152 };
         person.lastUpdatedBy = lastUpdatedBy;
         const organisationUnits: IOrganisationUnit = { id: 960 };
@@ -138,7 +138,7 @@ describe('Component Tests', () => {
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(person));
         expect(comp.usersSharedCollection).toContain(userInfo);
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.organisationUnitsSharedCollection).toContain(organisationUnits);
         expect(comp.organisationUnitsSharedCollection).toContain(dataViewOrganisationUnits);

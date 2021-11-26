@@ -33,6 +33,8 @@
       <thead>
         <tr>
           <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.code">Code</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.created">Created</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.lastUpdated">Last Updated</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.date">Date</span></th>
@@ -60,7 +62,7 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.populationGrowthRate">Population Growth Rate</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.comment">Comment</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.organisationUnit">Organisation Unit</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicData.source">Source</span></th>
           <th scope="col"></th>
@@ -71,6 +73,8 @@
           <td>
             <a [routerLink]="['/demographic-data', demographicData.id, 'view']">{{ demographicData.id }}</a>
           </td>
+          <td>{{ demographicData.uid }}</td>
+          <td>{{ demographicData.code }}</td>
           <td>{{ demographicData.created | formatMediumDatetime }}</td>
           <td>{{ demographicData.lastUpdated | formatMediumDatetime }}</td>
           <td>{{ demographicData.date | formatMediumDate }}</td>
@@ -99,7 +103,7 @@
             </div>
           </td>
           <td>
-            {{ demographicData.user?.login }}
+            {{ demographicData.createdBy?.login }}
           </td>
           <td>
             {{ demographicData.lastUpdatedBy?.login }}

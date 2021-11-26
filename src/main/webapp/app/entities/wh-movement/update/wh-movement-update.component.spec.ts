@@ -55,14 +55,14 @@ describe('Component Tests', () => {
     describe('ngOnInit', () => {
       it('Should call User query and add missing value', () => {
         const wHMovement: IWHMovement = { id: 456 };
-        const user: IUser = { id: 55578 };
-        wHMovement.user = user;
+        const createdBy: IUser = { id: 55578 };
+        wHMovement.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 14210 };
         wHMovement.lastUpdatedBy = lastUpdatedBy;
 
         const userCollection: IUser[] = [{ id: 96808 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [user, lastUpdatedBy];
+        const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -135,8 +135,8 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const wHMovement: IWHMovement = { id: 456 };
-        const user: IUser = { id: 74123 };
-        wHMovement.user = user;
+        const createdBy: IUser = { id: 74123 };
+        wHMovement.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 1397 };
         wHMovement.lastUpdatedBy = lastUpdatedBy;
         const day: IWorkingDay = { id: 42326 };
@@ -152,7 +152,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(wHMovement));
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.workingDaysSharedCollection).toContain(day);
         expect(comp.warehousesSharedCollection).toContain(initiatedWH);

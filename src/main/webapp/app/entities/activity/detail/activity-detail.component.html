@@ -42,21 +42,17 @@
         <dd>
           <span>{{ activity.endDate | formatMediumDate }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.activity.noOfDays">No Of Days</span></dt>
-        <dd>
-          <span>{{ activity.noOfDays }}</span>
-        </dd>
         <dt><span appTranslate="amSystemPlaygroundApp.activity.active">Active</span></dt>
         <dd>
           <span>{{ activity.active }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.activity.displayed">Is Displayed</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.activity.displayed">Displayed</span></dt>
         <dd>
           <span>{{ activity.displayed }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.activity.user">User</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.activity.createdBy">Created By</span></dt>
         <dd>
-          <span>{{ activity.user?.login }}</span>
+          <span>{{ activity.createdBy?.login }}</span>
         </dd>
         <dt><span appTranslate="amSystemPlaygroundApp.activity.lastUpdatedBy">Last Updated By</span></dt>
         <dd>

@@ -38,7 +38,7 @@ export class CHVTeamUpdateComponent implements OnInit {
     lastUpdated: [],
     teamNo: [null, [Validators.required, Validators.pattern('^[0-9]{1,12}')]],
     teamType: [null, [Validators.required]],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     person: [],
     responsibleForChvs: [],
@@ -134,7 +134,7 @@ export class CHVTeamUpdateComponent implements OnInit {
       lastUpdated: cHVTeam.lastUpdated ? cHVTeam.lastUpdated.format(DATE_TIME_FORMAT) : null,
       teamNo: cHVTeam.teamNo,
       teamType: cHVTeam.teamType,
-      user: cHVTeam.user,
+      createdBy: cHVTeam.createdBy,
       lastUpdatedBy: cHVTeam.lastUpdatedBy,
       person: cHVTeam.person,
       responsibleForChvs: cHVTeam.responsibleForChvs,
@@ -142,7 +142,7 @@ export class CHVTeamUpdateComponent implements OnInit {
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      cHVTeam.user,
+      cHVTeam.createdBy,
       cHVTeam.lastUpdatedBy
     );
     this.peopleSharedCollection = this.personService.addPersonToCollectionIfMissing(this.peopleSharedCollection, cHVTeam.person);
@@ -158,7 +158,11 @@ export class CHVTeamUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -192,7 +196,7 @@ export class CHVTeamUpdateComponent implements OnInit {
         : undefined,
       teamNo: this.editForm.get(['teamNo'])!.value,
       teamType: this.editForm.get(['teamType'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       person: this.editForm.get(['person'])!.value,
       responsibleForChvs: this.editForm.get(['responsibleForChvs'])!.value,

@@ -20,7 +20,7 @@ export interface IPerson {
   selfRegistered?: boolean | null;
   disabled?: boolean | null;
   userInfo?: IUser | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   organisationUnits?: IOrganisationUnit[] | null;
   dataViewOrganisationUnits?: IOrganisationUnit[] | null;
@@ -44,7 +44,7 @@ export class Person implements IPerson {
     public selfRegistered?: boolean | null,
     public disabled?: boolean | null,
     public userInfo?: IUser | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public organisationUnits?: IOrganisationUnit[] | null,
     public dataViewOrganisationUnits?: IOrganisationUnit[] | null,

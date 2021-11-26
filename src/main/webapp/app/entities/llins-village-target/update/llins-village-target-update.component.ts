@@ -46,7 +46,7 @@ export class LLINSVillageTargetUpdateComponent implements OnInit {
     noOfDaysNeeded: [null, [Validators.min(0)]],
     quantity: [null, [Validators.required, Validators.min(0)]],
     organisationUnit: [null, Validators.required],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     dayPlanned: [null, Validators.required],
     statusOfCoverage: [],
@@ -144,7 +144,7 @@ export class LLINSVillageTargetUpdateComponent implements OnInit {
       noOfDaysNeeded: lLINSVillageTarget.noOfDaysNeeded,
       quantity: lLINSVillageTarget.quantity,
       organisationUnit: lLINSVillageTarget.organisationUnit,
-      user: lLINSVillageTarget.user,
+      createdBy: lLINSVillageTarget.createdBy,
       lastUpdatedBy: lLINSVillageTarget.lastUpdatedBy,
       dayPlanned: lLINSVillageTarget.dayPlanned,
       statusOfCoverage: lLINSVillageTarget.statusOfCoverage,
@@ -157,7 +157,7 @@ export class LLINSVillageTargetUpdateComponent implements OnInit {
     );
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      lLINSVillageTarget.user,
+      lLINSVillageTarget.createdBy,
       lLINSVillageTarget.lastUpdatedBy
     );
     this.workingDaysSharedCollection = this.workingDayService.addWorkingDayToCollectionIfMissing(
@@ -190,7 +190,11 @@ export class LLINSVillageTargetUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -241,7 +245,7 @@ export class LLINSVillageTargetUpdateComponent implements OnInit {
       noOfDaysNeeded: this.editForm.get(['noOfDaysNeeded'])!.value,
       quantity: this.editForm.get(['quantity'])!.value,
       organisationUnit: this.editForm.get(['organisationUnit'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       dayPlanned: this.editForm.get(['dayPlanned'])!.value,
       statusOfCoverage: this.editForm.get(['statusOfCoverage'])!.value,

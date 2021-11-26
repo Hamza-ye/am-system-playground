@@ -54,17 +54,14 @@
           <th scope="col" appSortBy="endDate">
             <span appTranslate="amSystemPlaygroundApp.activity.endDate">End Date</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" appSortBy="noOfDays">
-            <span appTranslate="amSystemPlaygroundApp.activity.noOfDays">No Of Days</span> <fa-icon icon="sort"></fa-icon>
-          </th>
           <th scope="col" appSortBy="active">
             <span appTranslate="amSystemPlaygroundApp.activity.active">Active</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="displayed">
-            <span appTranslate="amSystemPlaygroundApp.activity.displayed">Is Displayed</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.activity.displayed">Displayed</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" appSortBy="user.login">
-            <span appTranslate="amSystemPlaygroundApp.activity.user">User</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" appSortBy="createdBy.login">
+            <span appTranslate="amSystemPlaygroundApp.activity.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="lastUpdatedBy.login">
             <span appTranslate="amSystemPlaygroundApp.activity.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon>
@@ -87,11 +84,10 @@
           <td>{{ activity.lastUpdated | formatMediumDatetime }}</td>
           <td>{{ activity.startDate | formatMediumDate }}</td>
           <td>{{ activity.endDate | formatMediumDate }}</td>
-          <td>{{ activity.noOfDays }}</td>
           <td>{{ activity.active }}</td>
           <td>{{ activity.displayed }}</td>
           <td>
-            {{ activity.user?.login }}
+            {{ activity.createdBy?.login }}
           </td>
           <td>
             {{ activity.lastUpdatedBy?.login }}

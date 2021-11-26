@@ -24,7 +24,7 @@
       "reconciliationDestination": "Reconciliation Destination",
       "confirmedByOtherSide": "Confirmed By Other Side",
       "comment": "Comment",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
       "day": "Day",
       "initiatedWH": "Initiated WH",

@@ -47,7 +47,7 @@ export class DengueCasesReportUpdateComponent implements OnInit {
     treated: [],
     suspectedCases: [],
     comment: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     reportClass: [null, Validators.required],
     period: [null, Validators.required],
@@ -147,7 +147,7 @@ export class DengueCasesReportUpdateComponent implements OnInit {
       treated: dengueCasesReport.treated,
       suspectedCases: dengueCasesReport.suspectedCases,
       comment: dengueCasesReport.comment,
-      user: dengueCasesReport.user,
+      createdBy: dengueCasesReport.createdBy,
       lastUpdatedBy: dengueCasesReport.lastUpdatedBy,
       reportClass: dengueCasesReport.reportClass,
       period: dengueCasesReport.period,
@@ -157,7 +157,7 @@ export class DengueCasesReportUpdateComponent implements OnInit {
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      dengueCasesReport.user,
+      dengueCasesReport.createdBy,
       dengueCasesReport.lastUpdatedBy
     );
     this.casesReportClassesSharedCollection = this.casesReportClassService.addCasesReportClassToCollectionIfMissing(
@@ -184,7 +184,11 @@ export class DengueCasesReportUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -244,7 +248,7 @@ export class DengueCasesReportUpdateComponent implements OnInit {
       treated: this.editForm.get(['treated'])!.value,
       suspectedCases: this.editForm.get(['suspectedCases'])!.value,
       comment: this.editForm.get(['comment'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       reportClass: this.editForm.get(['reportClass'])!.value,
       period: this.editForm.get(['period'])!.value,

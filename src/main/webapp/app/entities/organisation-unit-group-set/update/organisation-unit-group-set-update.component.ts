@@ -34,7 +34,7 @@ export class OrganisationUnitGroupSetUpdateComponent implements OnInit {
     lastUpdated: [],
     compulsory: [],
     includeSubhierarchyInAnalytics: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     organisationUnitGroups: [],
   });
@@ -123,14 +123,14 @@ export class OrganisationUnitGroupSetUpdateComponent implements OnInit {
       lastUpdated: organisationUnitGroupSet.lastUpdated ? organisationUnitGroupSet.lastUpdated.format(DATE_TIME_FORMAT) : null,
       compulsory: organisationUnitGroupSet.compulsory,
       includeSubhierarchyInAnalytics: organisationUnitGroupSet.includeSubhierarchyInAnalytics,
-      user: organisationUnitGroupSet.user,
+      createdBy: organisationUnitGroupSet.createdBy,
       lastUpdatedBy: organisationUnitGroupSet.lastUpdatedBy,
       organisationUnitGroups: organisationUnitGroupSet.organisationUnitGroups,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      organisationUnitGroupSet.user,
+      organisationUnitGroupSet.createdBy,
       organisationUnitGroupSet.lastUpdatedBy
     );
     this.organisationUnitGroupsSharedCollection = this.organisationUnitGroupService.addOrganisationUnitGroupToCollectionIfMissing(
@@ -145,7 +145,11 @@ export class OrganisationUnitGroupSetUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -179,7 +183,7 @@ export class OrganisationUnitGroupSetUpdateComponent implements OnInit {
         : undefined,
       compulsory: this.editForm.get(['compulsory'])!.value,
       includeSubhierarchyInAnalytics: this.editForm.get(['includeSubhierarchyInAnalytics'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       organisationUnitGroups: this.editForm.get(['organisationUnitGroups'])!.value,
     };

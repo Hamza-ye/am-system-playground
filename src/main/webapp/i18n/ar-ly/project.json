@@ -23,9 +23,9 @@
       "name": "Name",
       "created": "Created",
       "lastUpdated": "Last Updated",
-      "displayed": "Is Displayed",
+      "displayed": "Displayed",
       "activity": "Activity",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By"
     }
   }

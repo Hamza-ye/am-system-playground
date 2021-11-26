@@ -40,7 +40,7 @@ export class CHVUpdateComponent implements OnInit {
     district: [null, Validators.required],
     homeSubvillage: [],
     managedByHf: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
   });
 
@@ -125,7 +125,7 @@ export class CHVUpdateComponent implements OnInit {
       district: cHV.district,
       homeSubvillage: cHV.homeSubvillage,
       managedByHf: cHV.managedByHf,
-      user: cHV.user,
+      createdBy: cHV.createdBy,
       lastUpdatedBy: cHV.lastUpdatedBy,
     });
 
@@ -136,7 +136,11 @@ export class CHVUpdateComponent implements OnInit {
       cHV.homeSubvillage,
       cHV.managedByHf
     );
-    this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(this.usersSharedCollection, cHV.user, cHV.lastUpdatedBy);
+    this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
+      this.usersSharedCollection,
+      cHV.createdBy,
+      cHV.lastUpdatedBy
+    );
   }
 
   protected loadRelationshipsOptions(): void {
@@ -166,7 +170,11 @@ export class CHVUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -188,7 +196,7 @@ export class CHVUpdateComponent implements OnInit {
       district: this.editForm.get(['district'])!.value,
       homeSubvillage: this.editForm.get(['homeSubvillage'])!.value,
       managedByHf: this.editForm.get(['managedByHf'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
     };
   }

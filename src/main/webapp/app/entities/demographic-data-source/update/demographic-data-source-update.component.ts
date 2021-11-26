@@ -29,7 +29,7 @@ export class DemographicDataSourceUpdateComponent implements OnInit {
     name: [],
     created: [],
     lastUpdated: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
   });
 
@@ -99,13 +99,13 @@ export class DemographicDataSourceUpdateComponent implements OnInit {
       name: demographicDataSource.name,
       created: demographicDataSource.created ? demographicDataSource.created.format(DATE_TIME_FORMAT) : null,
       lastUpdated: demographicDataSource.lastUpdated ? demographicDataSource.lastUpdated.format(DATE_TIME_FORMAT) : null,
-      user: demographicDataSource.user,
+      createdBy: demographicDataSource.createdBy,
       lastUpdatedBy: demographicDataSource.lastUpdatedBy,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      demographicDataSource.user,
+      demographicDataSource.createdBy,
       demographicDataSource.lastUpdatedBy
     );
   }
@@ -116,7 +116,11 @@ export class DemographicDataSourceUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -133,7 +137,7 @@ export class DemographicDataSourceUpdateComponent implements OnInit {
       lastUpdated: this.editForm.get(['lastUpdated'])!.value
         ? dayjs(this.editForm.get(['lastUpdated'])!.value, DATE_TIME_FORMAT)
         : undefined,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
     };
   }

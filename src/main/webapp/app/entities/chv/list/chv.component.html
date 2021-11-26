@@ -43,7 +43,7 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.district">District</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.homeSubvillage">Home Subvillage</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.managedByHf">Managed By Hf</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"></th>
         </tr>
@@ -80,7 +80,7 @@
             </div>
           </td>
           <td>
-            {{ cHV.user?.login }}
+            {{ cHV.createdBy?.login }}
           </td>
           <td>
             {{ cHV.lastUpdatedBy?.login }}

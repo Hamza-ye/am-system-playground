@@ -54,7 +54,7 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.suspectedCases">Suspected Cases</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.totalFrequents">Total Frequents</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.comment">Comment</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.reportClass">Report Class</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaCasesReport.period">Period</span></th>
@@ -90,7 +90,7 @@
           <td>{{ malariaCasesReport.totalFrequents }}</td>
           <td>{{ malariaCasesReport.comment }}</td>
           <td>
-            {{ malariaCasesReport.user?.login }}
+            {{ malariaCasesReport.createdBy?.login }}
           </td>
           <td>
             {{ malariaCasesReport.lastUpdatedBy?.login }}

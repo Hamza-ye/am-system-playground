@@ -43,14 +43,14 @@ describe('Component Tests', () => {
     describe('ngOnInit', () => {
       it('Should call User query and add missing value', () => {
         const demographicDataSource: IDemographicDataSource = { id: 456 };
-        const user: IUser = { id: 35206 };
-        demographicDataSource.user = user;
+        const createdBy: IUser = { id: 35206 };
+        demographicDataSource.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 11265 };
         demographicDataSource.lastUpdatedBy = lastUpdatedBy;
 
         const userCollection: IUser[] = [{ id: 24736 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [user, lastUpdatedBy];
+        const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -64,8 +64,8 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const demographicDataSource: IDemographicDataSource = { id: 456 };
-        const user: IUser = { id: 76292 };
-        demographicDataSource.user = user;
+        const createdBy: IUser = { id: 76292 };
+        demographicDataSource.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 87375 };
         demographicDataSource.lastUpdatedBy = lastUpdatedBy;
 
@@ -73,7 +73,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(demographicDataSource));
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
       });
     });

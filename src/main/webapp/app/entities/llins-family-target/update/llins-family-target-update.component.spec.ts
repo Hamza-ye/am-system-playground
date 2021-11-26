@@ -55,14 +55,14 @@ describe('Component Tests', () => {
     describe('ngOnInit', () => {
       it('Should call User query and add missing value', () => {
         const lLINSFamilyTarget: ILLINSFamilyTarget = { id: 456 };
-        const user: IUser = { id: 57566 };
-        lLINSFamilyTarget.user = user;
+        const createdBy: IUser = { id: 57566 };
+        lLINSFamilyTarget.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 50548 };
         lLINSFamilyTarget.lastUpdatedBy = lastUpdatedBy;
 
         const userCollection: IUser[] = [{ id: 67095 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [user, lastUpdatedBy];
+        const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -133,8 +133,8 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const lLINSFamilyTarget: ILLINSFamilyTarget = { id: 456 };
-        const user: IUser = { id: 24595 };
-        lLINSFamilyTarget.user = user;
+        const createdBy: IUser = { id: 24595 };
+        lLINSFamilyTarget.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 55190 };
         lLINSFamilyTarget.lastUpdatedBy = lastUpdatedBy;
         const dayPlanned: IWorkingDay = { id: 77370 };
@@ -148,7 +148,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(lLINSFamilyTarget));
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.workingDaysSharedCollection).toContain(dayPlanned);
         expect(comp.familiesSharedCollection).toContain(family);

@@ -10,7 +10,7 @@ export interface IDemographicDataSource {
   created?: dayjs.Dayjs | null;
   lastUpdated?: dayjs.Dayjs | null;
   demographicData?: IDemographicData[] | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
 }
 
@@ -23,7 +23,7 @@ export class DemographicDataSource implements IDemographicDataSource {
     public created?: dayjs.Dayjs | null,
     public lastUpdated?: dayjs.Dayjs | null,
     public demographicData?: IDemographicData[] | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null
   ) {}
 }

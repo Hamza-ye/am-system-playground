@@ -26,7 +26,7 @@
       "lastUpdated": "Last Updated",
       "symbol": "Symbol",
       "color": "Color",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
       "member": "Member",
       "groupSet": "Group Set"

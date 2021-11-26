@@ -5,8 +5,8 @@ import org.nmcpye.activitiesmanagement.domain.document.Document;
 
 import java.util.List;
 
-public interface DocumentService {
-    String ID = DocumentService.class.getName();
+public interface DocumentServiceExt {
+    String ID = DocumentServiceExt.class.getName();
 
     String DIR = "documents";
 

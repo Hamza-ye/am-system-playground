@@ -74,8 +74,8 @@
           <th scope="col" appSortBy="comment">
             <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.comment">Comment</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" appSortBy="user.login">
-            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.user">User</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" appSortBy="createdBy.login">
+            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="lastUpdatedBy.login">
             <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.lastUpdatedBy">Last Updated By</span>
@@ -113,7 +113,7 @@
           </td>
           <td>{{ lLINSFamilyReport.comment }}</td>
           <td>
-            {{ lLINSFamilyReport.user?.login }}
+            {{ lLINSFamilyReport.createdBy?.login }}
           </td>
           <td>
             {{ lLINSFamilyReport.lastUpdatedBy?.login }}

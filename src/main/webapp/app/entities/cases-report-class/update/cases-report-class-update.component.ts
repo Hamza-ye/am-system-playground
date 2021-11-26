@@ -31,7 +31,7 @@ export class CasesReportClassUpdateComponent implements OnInit {
     description: [],
     created: [],
     lastUpdated: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
   });
 
@@ -103,13 +103,13 @@ export class CasesReportClassUpdateComponent implements OnInit {
       description: casesReportClass.description,
       created: casesReportClass.created ? casesReportClass.created.format(DATE_TIME_FORMAT) : null,
       lastUpdated: casesReportClass.lastUpdated ? casesReportClass.lastUpdated.format(DATE_TIME_FORMAT) : null,
-      user: casesReportClass.user,
+      createdBy: casesReportClass.createdBy,
       lastUpdatedBy: casesReportClass.lastUpdatedBy,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      casesReportClass.user,
+      casesReportClass.createdBy,
       casesReportClass.lastUpdatedBy
     );
   }
@@ -120,7 +120,11 @@ export class CasesReportClassUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -139,7 +143,7 @@ export class CasesReportClassUpdateComponent implements OnInit {
       lastUpdated: this.editForm.get(['lastUpdated'])!.value
         ? dayjs(this.editForm.get(['lastUpdated'])!.value, DATE_TIME_FORMAT)
         : undefined,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
     };
   }

@@ -81,14 +81,14 @@ describe('Component Tests', () => {
 
       it('Should call User query and add missing value', () => {
         const lLINSVillageTarget: ILLINSVillageTarget = { id: 456 };
-        const user: IUser = { id: 23827 };
-        lLINSVillageTarget.user = user;
+        const createdBy: IUser = { id: 23827 };
+        lLINSVillageTarget.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 96102 };
         lLINSVillageTarget.lastUpdatedBy = lastUpdatedBy;
 
         const userCollection: IUser[] = [{ id: 25715 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [user, lastUpdatedBy];
+        const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -164,8 +164,8 @@ describe('Component Tests', () => {
         const lLINSVillageTarget: ILLINSVillageTarget = { id: 456 };
         const organisationUnit: IOrganisationUnit = { id: 56506 };
         lLINSVillageTarget.organisationUnit = organisationUnit;
-        const user: IUser = { id: 51409 };
-        lLINSVillageTarget.user = user;
+        const createdBy: IUser = { id: 51409 };
+        lLINSVillageTarget.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 73818 };
         lLINSVillageTarget.lastUpdatedBy = lastUpdatedBy;
         const dayPlanned: IWorkingDay = { id: 91735 };
@@ -180,7 +180,7 @@ describe('Component Tests', () => {
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(lLINSVillageTarget));
         expect(comp.organisationUnitsSharedCollection).toContain(organisationUnit);
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.workingDaysSharedCollection).toContain(dayPlanned);
         expect(comp.statusOfCoveragesSharedCollection).toContain(statusOfCoverage);

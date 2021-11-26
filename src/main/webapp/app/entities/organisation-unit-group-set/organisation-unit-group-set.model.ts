@@ -11,7 +11,7 @@ export interface IOrganisationUnitGroupSet {
   lastUpdated?: dayjs.Dayjs | null;
   compulsory?: boolean | null;
   includeSubhierarchyInAnalytics?: boolean | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   organisationUnitGroups?: IOrganisationUnitGroup[] | null;
 }
@@ -26,7 +26,7 @@ export class OrganisationUnitGroupSet implements IOrganisationUnitGroupSet {
     public lastUpdated?: dayjs.Dayjs | null,
     public compulsory?: boolean | null,
     public includeSubhierarchyInAnalytics?: boolean | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public organisationUnitGroups?: IOrganisationUnitGroup[] | null
   ) {

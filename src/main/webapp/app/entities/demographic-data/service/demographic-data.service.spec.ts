@@ -27,6 +27,8 @@ describe('Service Tests', () => {
 
       elemDefault = {
         id: 0,
+        uid: 'AAAAAAA',
+        code: 'AAAAAAA',
         created: currentDate,
         lastUpdated: currentDate,
         date: currentDate,
@@ -99,6 +101,8 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
+            uid: 'BBBBBB',
+            code: 'BBBBBB',
             created: currentDate.format(DATE_TIME_FORMAT),
             lastUpdated: currentDate.format(DATE_TIME_FORMAT),
             date: currentDate.format(DATE_FORMAT),
@@ -142,15 +146,17 @@ describe('Service Tests', () => {
       it('should partial update a DemographicData', () => {
         const patchObject = Object.assign(
           {
+            uid: 'BBBBBB',
             created: currentDate.format(DATE_TIME_FORMAT),
             date: currentDate.format(DATE_FORMAT),
-            totalPopulation: 1,
+            malePopulation: 1,
             lessThan5Population: 1,
             bw5And15Population: 1,
-            household: 1,
+            houses: 1,
+            healthFacilities: 1,
             avgNoOfRooms: 1,
-            avgRoomArea: 1,
-            avgHouseArea: 1,
+            populationGrowthRate: 1,
+            comment: 'BBBBBB',
           },
           new DemographicData()
         );
@@ -177,6 +183,8 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
+            uid: 'BBBBBB',
+            code: 'BBBBBB',
             created: currentDate.format(DATE_TIME_FORMAT),
             lastUpdated: currentDate.format(DATE_TIME_FORMAT),
             date: currentDate.format(DATE_FORMAT),
@@ -255,7 +263,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique DemographicData to an array', () => {
-          const demographicDataArray: IDemographicData[] = [{ id: 123 }, { id: 456 }, { id: 50931 }];
+          const demographicDataArray: IDemographicData[] = [{ id: 123 }, { id: 456 }, { id: 8556 }];
           const demographicDataCollection: IDemographicData[] = [{ id: 123 }];
           expectedResult = service.addDemographicDataToCollectionIfMissing(demographicDataCollection, ...demographicDataArray);
           expect(expectedResult).toHaveLength(3);

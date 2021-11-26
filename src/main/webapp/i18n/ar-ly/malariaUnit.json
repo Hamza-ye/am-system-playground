@@ -27,7 +27,7 @@
       "lastUpdated": "Last Updated",
       "organisationUnit": "Organisation Unit",
       "malariaUnitStaffMember": "Malaria Unit Staff Member",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By"
     }
   }

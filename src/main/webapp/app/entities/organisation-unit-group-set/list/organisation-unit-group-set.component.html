@@ -46,7 +46,7 @@
               >Include Subhierarchy In Analytics</span
             >
           </th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroupSet.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroupSet.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroupSet.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col">
             <span appTranslate="amSystemPlaygroundApp.organisationUnitGroupSet.organisationUnitGroup">Organisation Unit Group</span>
@@ -67,7 +67,7 @@
           <td>{{ organisationUnitGroupSet.compulsory }}</td>
           <td>{{ organisationUnitGroupSet.includeSubhierarchyInAnalytics }}</td>
           <td>
-            {{ organisationUnitGroupSet.user?.login }}
+            {{ organisationUnitGroupSet.createdBy?.login }}
           </td>
           <td>
             {{ organisationUnitGroupSet.lastUpdatedBy?.login }}

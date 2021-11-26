@@ -95,14 +95,14 @@ describe('Component Tests', () => {
 
       it('Should call User query and add missing value', () => {
         const cHV: ICHV = { id: 456 };
-        const user: IUser = { id: 27479 };
-        cHV.user = user;
+        const createdBy: IUser = { id: 27479 };
+        cHV.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 3243 };
         cHV.lastUpdatedBy = lastUpdatedBy;
 
         const userCollection: IUser[] = [{ id: 85470 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [user, lastUpdatedBy];
+        const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -124,8 +124,8 @@ describe('Component Tests', () => {
         cHV.homeSubvillage = homeSubvillage;
         const managedByHf: IOrganisationUnit = { id: 12689 };
         cHV.managedByHf = managedByHf;
-        const user: IUser = { id: 60845 };
-        cHV.user = user;
+        const createdBy: IUser = { id: 60845 };
+        cHV.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 52994 };
         cHV.lastUpdatedBy = lastUpdatedBy;
 
@@ -137,7 +137,7 @@ describe('Component Tests', () => {
         expect(comp.organisationUnitsSharedCollection).toContain(district);
         expect(comp.organisationUnitsSharedCollection).toContain(homeSubvillage);
         expect(comp.organisationUnitsSharedCollection).toContain(managedByHf);
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
       });
     });

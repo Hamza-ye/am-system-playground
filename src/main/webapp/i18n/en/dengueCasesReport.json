@@ -29,7 +29,7 @@
       "treated": "Treated",
       "suspectedCases": "Suspected Cases",
       "comment": "Comment",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
       "reportClass": "Report Class",
       "period": "Period",

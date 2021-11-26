@@ -38,7 +38,7 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicDataSource.name">Name</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicDataSource.created">Created</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicDataSource.lastUpdated">Last Updated</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicDataSource.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicDataSource.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.demographicDataSource.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"></th>
         </tr>
@@ -54,7 +54,7 @@
           <td>{{ demographicDataSource.created | formatMediumDatetime }}</td>
           <td>{{ demographicDataSource.lastUpdated | formatMediumDatetime }}</td>
           <td>
-            {{ demographicDataSource.user?.login }}
+            {{ demographicDataSource.createdBy?.login }}
           </td>
           <td>
             {{ demographicDataSource.lastUpdatedBy?.login }}

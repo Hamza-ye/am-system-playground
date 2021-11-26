@@ -45,7 +45,7 @@ export class LLINSFamilyReportUpdateComponent implements OnInit {
     quantityReceived: [null, [Validators.required, Validators.min(0)]],
     familyType: [null, [Validators.required]],
     comment: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     dayReached: [null, Validators.required],
     targetDetails: [],
@@ -140,7 +140,7 @@ export class LLINSFamilyReportUpdateComponent implements OnInit {
       quantityReceived: lLINSFamilyReport.quantityReceived,
       familyType: lLINSFamilyReport.familyType,
       comment: lLINSFamilyReport.comment,
-      user: lLINSFamilyReport.user,
+      createdBy: lLINSFamilyReport.createdBy,
       lastUpdatedBy: lLINSFamilyReport.lastUpdatedBy,
       dayReached: lLINSFamilyReport.dayReached,
       targetDetails: lLINSFamilyReport.targetDetails,
@@ -149,7 +149,7 @@ export class LLINSFamilyReportUpdateComponent implements OnInit {
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      lLINSFamilyReport.user,
+      lLINSFamilyReport.createdBy,
       lLINSFamilyReport.lastUpdatedBy
     );
     this.workingDaysSharedCollection = this.workingDayService.addWorkingDayToCollectionIfMissing(
@@ -169,7 +169,11 @@ export class LLINSFamilyReportUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -222,7 +226,7 @@ export class LLINSFamilyReportUpdateComponent implements OnInit {
       quantityReceived: this.editForm.get(['quantityReceived'])!.value,
       familyType: this.editForm.get(['familyType'])!.value,
       comment: this.editForm.get(['comment'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       dayReached: this.editForm.get(['dayReached'])!.value,
       targetDetails: this.editForm.get(['targetDetails'])!.value,

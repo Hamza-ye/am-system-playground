@@ -35,7 +35,7 @@ export class OrganisationUnitGroupUpdateComponent implements OnInit {
     lastUpdated: [],
     symbol: [],
     color: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     members: [],
   });
@@ -125,14 +125,14 @@ export class OrganisationUnitGroupUpdateComponent implements OnInit {
       lastUpdated: organisationUnitGroup.lastUpdated ? organisationUnitGroup.lastUpdated.format(DATE_TIME_FORMAT) : null,
       symbol: organisationUnitGroup.symbol,
       color: organisationUnitGroup.color,
-      user: organisationUnitGroup.user,
+      createdBy: organisationUnitGroup.createdBy,
       lastUpdatedBy: organisationUnitGroup.lastUpdatedBy,
       members: organisationUnitGroup.members,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      organisationUnitGroup.user,
+      organisationUnitGroup.createdBy,
       organisationUnitGroup.lastUpdatedBy
     );
     this.organisationUnitsSharedCollection = this.organisationUnitService.addOrganisationUnitToCollectionIfMissing(
@@ -147,7 +147,11 @@ export class OrganisationUnitGroupUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -180,7 +184,7 @@ export class OrganisationUnitGroupUpdateComponent implements OnInit {
         : undefined,
       symbol: this.editForm.get(['symbol'])!.value,
       color: this.editForm.get(['color'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       members: this.editForm.get(['members'])!.value,
     };

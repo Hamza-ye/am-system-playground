@@ -57,7 +57,7 @@ export class MalariaCasesReportUpdateComponent implements OnInit {
     suspectedCases: [],
     totalFrequents: [],
     comment: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     reportClass: [null, Validators.required],
     period: [null, Validators.required],
@@ -167,7 +167,7 @@ export class MalariaCasesReportUpdateComponent implements OnInit {
       suspectedCases: malariaCasesReport.suspectedCases,
       totalFrequents: malariaCasesReport.totalFrequents,
       comment: malariaCasesReport.comment,
-      user: malariaCasesReport.user,
+      createdBy: malariaCasesReport.createdBy,
       lastUpdatedBy: malariaCasesReport.lastUpdatedBy,
       reportClass: malariaCasesReport.reportClass,
       period: malariaCasesReport.period,
@@ -177,7 +177,7 @@ export class MalariaCasesReportUpdateComponent implements OnInit {
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      malariaCasesReport.user,
+      malariaCasesReport.createdBy,
       malariaCasesReport.lastUpdatedBy
     );
     this.casesReportClassesSharedCollection = this.casesReportClassService.addCasesReportClassToCollectionIfMissing(
@@ -204,7 +204,11 @@ export class MalariaCasesReportUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -274,7 +278,7 @@ export class MalariaCasesReportUpdateComponent implements OnInit {
       suspectedCases: this.editForm.get(['suspectedCases'])!.value,
       totalFrequents: this.editForm.get(['totalFrequents'])!.value,
       comment: this.editForm.get(['comment'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       reportClass: this.editForm.get(['reportClass'])!.value,
       period: this.editForm.get(['period'])!.value,

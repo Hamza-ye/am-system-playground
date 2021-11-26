@@ -10,7 +10,7 @@ export interface IPersonAuthorityGroup {
   description?: string | null;
   created?: dayjs.Dayjs | null;
   lastUpdated?: dayjs.Dayjs | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   members?: IPerson[] | null;
 }
@@ -24,7 +24,7 @@ export class PersonAuthorityGroup implements IPersonAuthorityGroup {
     public description?: string | null,
     public created?: dayjs.Dayjs | null,
     public lastUpdated?: dayjs.Dayjs | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public members?: IPerson[] | null
   ) {}

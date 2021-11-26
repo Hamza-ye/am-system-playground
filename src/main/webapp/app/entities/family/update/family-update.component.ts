@@ -30,12 +30,12 @@ export class FamilyUpdateComponent implements OnInit {
     uid: [null, [Validators.required, Validators.maxLength(11)]],
     code: [null, []],
     name: [],
+    familyNo: [null, [Validators.required]],
     created: [],
     lastUpdated: [],
-    familyNo: [null, [Validators.required]],
     address: [],
     organisationUnit: [null, Validators.required],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
   });
 
@@ -108,12 +108,12 @@ export class FamilyUpdateComponent implements OnInit {
       uid: family.uid,
       code: family.code,
       name: family.name,
+      familyNo: family.familyNo,
       created: family.created ? family.created.format(DATE_TIME_FORMAT) : null,
       lastUpdated: family.lastUpdated ? family.lastUpdated.format(DATE_TIME_FORMAT) : null,
-      familyNo: family.familyNo,
       address: family.address,
       organisationUnit: family.organisationUnit,
-      user: family.user,
+      createdBy: family.createdBy,
       lastUpdatedBy: family.lastUpdatedBy,
     });
 
@@ -123,7 +123,7 @@ export class FamilyUpdateComponent implements OnInit {
     );
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      family.user,
+      family.createdBy,
       family.lastUpdatedBy
     );
   }
@@ -147,7 +147,11 @@ export class FamilyUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -160,14 +164,14 @@ export class FamilyUpdateComponent implements OnInit {
       uid: this.editForm.get(['uid'])!.value,
       code: this.editForm.get(['code'])!.value,
       name: this.editForm.get(['name'])!.value,
+      familyNo: this.editForm.get(['familyNo'])!.value,
       created: this.editForm.get(['created'])!.value ? dayjs(this.editForm.get(['created'])!.value, DATE_TIME_FORMAT) : undefined,
       lastUpdated: this.editForm.get(['lastUpdated'])!.value
         ? dayjs(this.editForm.get(['lastUpdated'])!.value, DATE_TIME_FORMAT)
         : undefined,
-      familyNo: this.editForm.get(['familyNo'])!.value,
       address: this.editForm.get(['address'])!.value,
       organisationUnit: this.editForm.get(['organisationUnit'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
     };
   }

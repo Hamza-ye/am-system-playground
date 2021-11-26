@@ -39,7 +39,7 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.fingerprint.lastUpdated">Last Updated</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.fingerprint.fingerprintUrl">Fingerprint Url</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.fingerprint.fingerprintOwner">Fingerprint Owner</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.fingerprint.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.fingerprint.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.fingerprint.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.fingerprint.family">Family</span></th>
           <th scope="col"></th>
@@ -57,7 +57,7 @@
           <td>{{ fingerprint.fingerprintUrl }}</td>
           <td>{{ fingerprint.fingerprintOwner }}</td>
           <td>
-            {{ fingerprint.user?.login }}
+            {{ fingerprint.createdBy?.login }}
           </td>
           <td>
             {{ fingerprint.lastUpdatedBy?.login }}

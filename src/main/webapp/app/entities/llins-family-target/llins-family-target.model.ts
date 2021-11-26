@@ -18,7 +18,7 @@ export interface ILLINSFamilyTarget {
   familyType?: FamilyType;
   statusOfFamilyTarget?: StatusOfFamilyTarget;
   llinsFamilyReports?: ILLINSFamilyReport[] | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   dayPlanned?: IWorkingDay;
   family?: IFamily;
@@ -37,7 +37,7 @@ export class LLINSFamilyTarget implements ILLINSFamilyTarget {
     public familyType?: FamilyType,
     public statusOfFamilyTarget?: StatusOfFamilyTarget,
     public llinsFamilyReports?: ILLINSFamilyReport[] | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public dayPlanned?: IWorkingDay,
     public family?: IFamily,

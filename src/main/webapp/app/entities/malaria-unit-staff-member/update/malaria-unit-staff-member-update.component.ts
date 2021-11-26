@@ -37,7 +37,7 @@ export class MalariaUnitStaffMemberUpdateComponent implements OnInit {
     lastUpdated: [],
     memberNo: [null, [Validators.required]],
     memberType: [null, [Validators.required]],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     person: [],
     malariaUnit: [null, Validators.required],
@@ -121,7 +121,7 @@ export class MalariaUnitStaffMemberUpdateComponent implements OnInit {
       lastUpdated: malariaUnitStaffMember.lastUpdated ? malariaUnitStaffMember.lastUpdated.format(DATE_TIME_FORMAT) : null,
       memberNo: malariaUnitStaffMember.memberNo,
       memberType: malariaUnitStaffMember.memberType,
-      user: malariaUnitStaffMember.user,
+      createdBy: malariaUnitStaffMember.createdBy,
       lastUpdatedBy: malariaUnitStaffMember.lastUpdatedBy,
       person: malariaUnitStaffMember.person,
       malariaUnit: malariaUnitStaffMember.malariaUnit,
@@ -129,7 +129,7 @@ export class MalariaUnitStaffMemberUpdateComponent implements OnInit {
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      malariaUnitStaffMember.user,
+      malariaUnitStaffMember.createdBy,
       malariaUnitStaffMember.lastUpdatedBy
     );
     this.peopleSharedCollection = this.personService.addPersonToCollectionIfMissing(
@@ -148,7 +148,11 @@ export class MalariaUnitStaffMemberUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -183,7 +187,7 @@ export class MalariaUnitStaffMemberUpdateComponent implements OnInit {
         : undefined,
       memberNo: this.editForm.get(['memberNo'])!.value,
       memberType: this.editForm.get(['memberType'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       person: this.editForm.get(['person'])!.value,
       malariaUnit: this.editForm.get(['malariaUnit'])!.value,

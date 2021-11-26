@@ -10,7 +10,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public interface FileResourceService {
+public interface FileResourceServiceExt {
     FileResource getFileResource(String uid);
 
     List<FileResource> getFileResources(List<String> uids);

@@ -83,7 +83,10 @@
       "PersonAuthorityGroup",
       "DataSet",
       "DataInputPeriod",
-      "RelativePeriods"
+      "RelativePeriods",
+      "FileResource",
+      "ExternalFileResource",
+      "Document"
     ],
     "lastLiquibaseTimestamp": 1635723832000
   }

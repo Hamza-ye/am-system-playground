@@ -11,7 +11,7 @@ export interface IDataProvider {
   created?: dayjs.Dayjs | null;
   lastUpdated?: dayjs.Dayjs | null;
   mobile?: string | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   family?: IFamily | null;
 }
@@ -26,7 +26,7 @@ export class DataProvider implements IDataProvider {
     public created?: dayjs.Dayjs | null,
     public lastUpdated?: dayjs.Dayjs | null,
     public mobile?: string | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public family?: IFamily | null
   ) {}

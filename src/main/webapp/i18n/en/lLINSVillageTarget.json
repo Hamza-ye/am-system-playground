@@ -29,7 +29,7 @@
       "quantity": "Quantity",
       "llinsVillageReport": "Llins Village Report",
       "organisationUnit": "Organisation Unit",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
       "dayPlanned": "Day Planned",
       "statusOfCoverage": "Status Of Coverage",

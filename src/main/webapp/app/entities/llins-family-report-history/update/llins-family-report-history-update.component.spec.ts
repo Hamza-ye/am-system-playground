@@ -51,14 +51,14 @@ describe('Component Tests', () => {
     describe('ngOnInit', () => {
       it('Should call User query and add missing value', () => {
         const lLINSFamilyReportHistory: ILLINSFamilyReportHistory = { id: 456 };
-        const user: IUser = { id: 16250 };
-        lLINSFamilyReportHistory.user = user;
+        const createdBy: IUser = { id: 16250 };
+        lLINSFamilyReportHistory.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 65450 };
         lLINSFamilyReportHistory.lastUpdatedBy = lastUpdatedBy;
 
         const userCollection: IUser[] = [{ id: 75030 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [user, lastUpdatedBy];
+        const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -113,8 +113,8 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const lLINSFamilyReportHistory: ILLINSFamilyReportHistory = { id: 456 };
-        const user: IUser = { id: 54858 };
-        lLINSFamilyReportHistory.user = user;
+        const createdBy: IUser = { id: 54858 };
+        lLINSFamilyReportHistory.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 20016 };
         lLINSFamilyReportHistory.lastUpdatedBy = lastUpdatedBy;
         const dayReached: IWorkingDay = { id: 45590 };
@@ -126,7 +126,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(lLINSFamilyReportHistory));
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.workingDaysSharedCollection).toContain(dayReached);
         expect(comp.lLINSFamilyReportsSharedCollection).toContain(llinsFamilyReport);

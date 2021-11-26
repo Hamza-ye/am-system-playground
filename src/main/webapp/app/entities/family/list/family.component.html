@@ -42,14 +42,14 @@
           <th scope="col" appSortBy="name">
             <span appTranslate="amSystemPlaygroundApp.family.name">Name</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" appSortBy="familyNo">
+            <span appTranslate="amSystemPlaygroundApp.family.familyNo">Family No</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" appSortBy="created">
             <span appTranslate="amSystemPlaygroundApp.family.created">Created</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="lastUpdated">
             <span appTranslate="amSystemPlaygroundApp.family.lastUpdated">Last Updated</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" appSortBy="familyNo">
-            <span appTranslate="amSystemPlaygroundApp.family.familyNo">Family No</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="address">
             <span appTranslate="amSystemPlaygroundApp.family.address">Address</span> <fa-icon icon="sort"></fa-icon>
@@ -57,8 +57,8 @@
           <th scope="col" appSortBy="organisationUnit.name">
             <span appTranslate="amSystemPlaygroundApp.family.organisationUnit">Organisation Unit</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" appSortBy="user.login">
-            <span appTranslate="amSystemPlaygroundApp.family.user">User</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" appSortBy="createdBy.login">
+            <span appTranslate="amSystemPlaygroundApp.family.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="lastUpdatedBy.login">
             <span appTranslate="amSystemPlaygroundApp.family.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon>
@@ -74,9 +74,9 @@
           <td>{{ family.uid }}</td>
           <td>{{ family.code }}</td>
           <td>{{ family.name }}</td>
+          <td>{{ family.familyNo }}</td>
           <td>{{ family.created | formatMediumDatetime }}</td>
           <td>{{ family.lastUpdated | formatMediumDatetime }}</td>
-          <td>{{ family.familyNo }}</td>
           <td>{{ family.address }}</td>
           <td>
             <div *ngIf="family.organisationUnit">
@@ -84,7 +84,7 @@
             </div>
           </td>
           <td>
-            {{ family.user?.login }}
+            {{ family.createdBy?.login }}
           </td>
           <td>
             {{ family.lastUpdatedBy?.login }}

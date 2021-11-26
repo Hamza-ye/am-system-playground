@@ -39,7 +39,7 @@
       "suspectedCases": "Suspected Cases",
       "totalFrequents": "Total Frequents",
       "comment": "Comment",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
       "reportClass": "Report Class",
       "period": "Period",

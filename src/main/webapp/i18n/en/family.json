@@ -21,16 +21,16 @@
       "uid": "Uid",
       "code": "Code",
       "name": "Name",
+      "familyNo": "Family No",
       "created": "Created",
       "lastUpdated": "Last Updated",
-      "familyNo": "Family No",
       "address": "Address",
       "familyHead": "Family Head",
       "dataProvider": "Data Provider",
       "fingerprint": "Fingerprint",
       "llinsFamilyTarget": "Llins Family Target",
       "organisationUnit": "Organisation Unit",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By"
     }
   }

@@ -31,8 +31,8 @@ import java.util.stream.Collectors;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service
-public class DefaultFileResourceService
-    implements FileResourceService {
+public class DefaultFileResourceServiceExt
+    implements FileResourceServiceExt {
     private static final Duration IS_ORPHAN_TIME_DELTA = Hours.TWO.toStandardDuration();
 
     public static final Predicate<FileResource> IS_ORPHAN_PREDICATE = (fr -> !fr.isAssigned());
@@ -52,10 +52,10 @@ public class DefaultFileResourceService
 
     private final ApplicationEventPublisher fileEventPublisher;
 
-    public DefaultFileResourceService(FileResourceStore fileResourceStore,
-                                      FileResourceContentStore fileResourceContentStore,
-                                      ImageProcessingService imageProcessingService,
-                                      ApplicationEventPublisher fileEventPublisher) {
+    public DefaultFileResourceServiceExt(FileResourceStore fileResourceStore,
+                                         FileResourceContentStore fileResourceContentStore,
+                                         ImageProcessingService imageProcessingService,
+                                         ApplicationEventPublisher fileEventPublisher) {
         checkNotNull(fileResourceStore);
         checkNotNull(fileResourceContentStore);
         checkNotNull(imageProcessingService);
@@ -68,7 +68,7 @@ public class DefaultFileResourceService
     }
 
     // -------------------------------------------------------------------------
-    // FileResourceService implementation
+    // FileResourceServiceExt implementation
     // -------------------------------------------------------------------------
 
     @Override

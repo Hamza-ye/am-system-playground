@@ -22,7 +22,7 @@ export interface ICHVMalariaCaseReport {
   barImageUrl?: string | null;
   comment?: string | null;
   subVillage?: IOrganisationUnit | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   chv?: ICHV;
   reportClass?: ICasesReportClass;
@@ -45,7 +45,7 @@ export class CHVMalariaCaseReport implements ICHVMalariaCaseReport {
     public barImageUrl?: string | null,
     public comment?: string | null,
     public subVillage?: IOrganisationUnit | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public chv?: ICHV,
     public reportClass?: ICasesReportClass

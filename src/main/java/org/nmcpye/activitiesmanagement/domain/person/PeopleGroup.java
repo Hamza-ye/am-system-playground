@@ -206,18 +206,6 @@ public class PeopleGroup extends BaseIdentifiableObject implements MetadataObjec
     // Getters and setters
     // -------------------------------------------------------------------------
 
-//    @Override
-//    @JsonIgnore
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    @Override
-//    @JsonIgnore
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
-
     public UUID getUuid() {
         return uuid;
     }

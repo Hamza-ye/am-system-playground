@@ -46,6 +46,12 @@
   "relationships": [
     {
       "relationshipType": "one-to-many",
+      "otherEntityName": "dataInputPeriod",
+      "otherEntityRelationshipName": "dataSet",
+      "relationshipName": "dataInputPeriods"
+    },
+    {
+      "relationshipType": "one-to-many",
       "otherEntityName": "malariaCasesReport",
       "otherEntityRelationshipName": "dataSet",
       "relationshipName": "malariaCasesReport"
@@ -74,7 +80,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "dataSet",
-      "relationshipName": "user",
+      "relationshipName": "createdBy",
       "otherEntityField": "login"
     },
     {

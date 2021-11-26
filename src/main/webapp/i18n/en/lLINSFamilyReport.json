@@ -31,7 +31,7 @@
       "familyType": "Family Type",
       "comment": "Comment",
       "llinsFamilyReportHistory": "Llins Family Report History",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
       "dayReached": "Day Reached",
       "targetDetails": "Target Details",

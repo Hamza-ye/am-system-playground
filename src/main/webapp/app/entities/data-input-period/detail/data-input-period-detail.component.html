@@ -30,6 +30,12 @@
             <a [routerLink]="['/period', dataInputPeriod.period?.id, 'view']">{{ dataInputPeriod.period?.name }}</a>
           </div>
         </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataInputPeriod.dataSet">Data Set</span></dt>
+        <dd>
+          <div *ngIf="dataInputPeriod.dataSet">
+            <a [routerLink]="['/data-set', dataInputPeriod.dataSet?.id, 'view']">{{ dataInputPeriod.dataSet?.id }}</a>
+          </div>
+        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

@@ -28,7 +28,7 @@ export interface IMalariaCasesReport {
   suspectedCases?: number | null;
   totalFrequents?: number | null;
   comment?: string | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   reportClass?: ICasesReportClass;
   period?: IPeriod;
@@ -60,7 +60,7 @@ export class MalariaCasesReport implements IMalariaCasesReport {
     public suspectedCases?: number | null,
     public totalFrequents?: number | null,
     public comment?: string | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public reportClass?: ICasesReportClass,
     public period?: IPeriod,

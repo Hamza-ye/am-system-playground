@@ -96,14 +96,14 @@ describe('Component Tests', () => {
 
       it('Should call User query and add missing value', () => {
         const dataSet: IDataSet = { id: 456 };
-        const user: IUser = { id: 59942 };
-        dataSet.user = user;
+        const createdBy: IUser = { id: 59942 };
+        dataSet.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 49434 };
         dataSet.lastUpdatedBy = lastUpdatedBy;
 
         const userCollection: IUser[] = [{ id: 12046 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [user, lastUpdatedBy];
+        const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -143,8 +143,8 @@ describe('Component Tests', () => {
         dataSet.periodType = periodType;
         const notificationRecipients: IPeopleGroup = { id: 1845 };
         dataSet.notificationRecipients = notificationRecipients;
-        const user: IUser = { id: 64363 };
-        dataSet.user = user;
+        const createdBy: IUser = { id: 64363 };
+        dataSet.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 87846 };
         dataSet.lastUpdatedBy = lastUpdatedBy;
         const sources: IOrganisationUnit = { id: 33940 };
@@ -156,7 +156,7 @@ describe('Component Tests', () => {
         expect(comp.editForm.value).toEqual(expect.objectContaining(dataSet));
         expect(comp.periodTypesSharedCollection).toContain(periodType);
         expect(comp.peopleGroupsSharedCollection).toContain(notificationRecipients);
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.organisationUnitsSharedCollection).toContain(sources);
       });

@@ -11,7 +11,7 @@ export interface IProject {
   lastUpdated?: dayjs.Dayjs | null;
   displayed?: boolean | null;
   activities?: IActivity[] | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
 }
 
@@ -25,7 +25,7 @@ export class Project implements IProject {
     public lastUpdated?: dayjs.Dayjs | null,
     public displayed?: boolean | null,
     public activities?: IActivity[] | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null
   ) {
     this.displayed = this.displayed ?? false;

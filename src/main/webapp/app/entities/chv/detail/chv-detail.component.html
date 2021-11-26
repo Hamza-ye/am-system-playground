@@ -62,9 +62,9 @@
             <a [routerLink]="['/organisation-unit', cHV.managedByHf?.id, 'view']">{{ cHV.managedByHf?.name }}</a>
           </div>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHV.user">User</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.cHV.createdBy">Created By</span></dt>
         <dd>
-          <span>{{ cHV.user?.login }}</span>
+          <span>{{ cHV.createdBy?.login }}</span>
         </dd>
         <dt><span appTranslate="amSystemPlaygroundApp.cHV.lastUpdatedBy">Last Updated By</span></dt>
         <dd>

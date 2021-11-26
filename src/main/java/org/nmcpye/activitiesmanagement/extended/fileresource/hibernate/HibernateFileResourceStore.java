@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Set;
 
-@Repository("org.nmcpye.activitiesmanagement.extended.fileresource.FileResourceStore")
+@Repository
 public class HibernateFileResourceStore
     extends HibernateIdentifiableObjectStore<FileResource>
     implements FileResourceStore {

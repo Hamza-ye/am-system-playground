@@ -77,14 +77,14 @@ describe('Component Tests', () => {
 
       it('Should call User query and add missing value', () => {
         const cHVMalariaCaseReport: ICHVMalariaCaseReport = { id: 456 };
-        const user: IUser = { id: 1630 };
-        cHVMalariaCaseReport.user = user;
+        const createdBy: IUser = { id: 1630 };
+        cHVMalariaCaseReport.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 42451 };
         cHVMalariaCaseReport.lastUpdatedBy = lastUpdatedBy;
 
         const userCollection: IUser[] = [{ id: 87170 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [user, lastUpdatedBy];
+        const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -141,8 +141,8 @@ describe('Component Tests', () => {
         const cHVMalariaCaseReport: ICHVMalariaCaseReport = { id: 456 };
         const subVillage: IOrganisationUnit = { id: 19180 };
         cHVMalariaCaseReport.subVillage = subVillage;
-        const user: IUser = { id: 40188 };
-        cHVMalariaCaseReport.user = user;
+        const createdBy: IUser = { id: 40188 };
+        cHVMalariaCaseReport.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 38956 };
         cHVMalariaCaseReport.lastUpdatedBy = lastUpdatedBy;
         const chv: ICHV = { id: 83323 };
@@ -155,7 +155,7 @@ describe('Component Tests', () => {
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(cHVMalariaCaseReport));
         expect(comp.organisationUnitsSharedCollection).toContain(subVillage);
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.cHVSSharedCollection).toContain(chv);
         expect(comp.casesReportClassesSharedCollection).toContain(reportClass);

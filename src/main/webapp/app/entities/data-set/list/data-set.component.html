@@ -44,7 +44,7 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.timelyDays">Timely Days</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.periodType">Period Type</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.notificationRecipients">Notification Recipients</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataSet.source">Source</span></th>
           <th scope="col"></th>
@@ -75,7 +75,7 @@
             </div>
           </td>
           <td>
-            {{ dataSet.user?.login }}
+            {{ dataSet.createdBy?.login }}
           </td>
           <td>
             {{ dataSet.lastUpdatedBy?.login }}

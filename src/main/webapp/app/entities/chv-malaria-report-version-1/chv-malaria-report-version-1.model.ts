@@ -25,7 +25,7 @@ export interface ICHVMalariaReportVersion1 {
   suppsUsed?: number | null;
   suppsDamagedLost?: number | null;
   comment?: string | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   chv?: ICHV;
   period?: IPeriod;
@@ -54,7 +54,7 @@ export class CHVMalariaReportVersion1 implements ICHVMalariaReportVersion1 {
     public suppsUsed?: number | null,
     public suppsDamagedLost?: number | null,
     public comment?: string | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public chv?: ICHV,
     public period?: IPeriod

@@ -62,9 +62,9 @@
             <a [routerLink]="['/people-group', dataSet.notificationRecipients?.id, 'view']">{{ dataSet.notificationRecipients?.name }}</a>
           </div>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.dataSet.user">User</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.dataSet.createdBy">Created By</span></dt>
         <dd>
-          <span>{{ dataSet.user?.login }}</span>
+          <span>{{ dataSet.createdBy?.login }}</span>
         </dd>
         <dt><span appTranslate="amSystemPlaygroundApp.dataSet.lastUpdatedBy">Last Updated By</span></dt>
         <dd>

@@ -29,9 +29,9 @@ describe('Service Tests', () => {
         uid: 'AAAAAAA',
         code: 'AAAAAAA',
         name: 'AAAAAAA',
+        familyNo: 0,
         created: currentDate,
         lastUpdated: currentDate,
-        familyNo: 0,
         address: 'AAAAAAA',
       };
     });
@@ -85,9 +85,9 @@ describe('Service Tests', () => {
             uid: 'BBBBBB',
             code: 'BBBBBB',
             name: 'BBBBBB',
+            familyNo: 1,
             created: currentDate.format(DATE_TIME_FORMAT),
             lastUpdated: currentDate.format(DATE_TIME_FORMAT),
-            familyNo: 1,
             address: 'BBBBBB',
           },
           elemDefault
@@ -142,9 +142,9 @@ describe('Service Tests', () => {
             uid: 'BBBBBB',
             code: 'BBBBBB',
             name: 'BBBBBB',
+            familyNo: 1,
             created: currentDate.format(DATE_TIME_FORMAT),
             lastUpdated: currentDate.format(DATE_TIME_FORMAT),
-            familyNo: 1,
             address: 'BBBBBB',
           },
           elemDefault

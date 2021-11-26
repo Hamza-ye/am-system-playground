@@ -41,7 +41,7 @@ export class LLINSFamilyReportHistoryUpdateComponent implements OnInit {
     pregnantWomen: [null, [Validators.min(0)]],
     quantityReceived: [null, [Validators.min(0)]],
     familyType: [null, [Validators.required]],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     dayReached: [null, Validators.required],
     llinsFamilyReport: [null, Validators.required],
@@ -129,7 +129,7 @@ export class LLINSFamilyReportHistoryUpdateComponent implements OnInit {
       pregnantWomen: lLINSFamilyReportHistory.pregnantWomen,
       quantityReceived: lLINSFamilyReportHistory.quantityReceived,
       familyType: lLINSFamilyReportHistory.familyType,
-      user: lLINSFamilyReportHistory.user,
+      createdBy: lLINSFamilyReportHistory.createdBy,
       lastUpdatedBy: lLINSFamilyReportHistory.lastUpdatedBy,
       dayReached: lLINSFamilyReportHistory.dayReached,
       llinsFamilyReport: lLINSFamilyReportHistory.llinsFamilyReport,
@@ -137,7 +137,7 @@ export class LLINSFamilyReportHistoryUpdateComponent implements OnInit {
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      lLINSFamilyReportHistory.user,
+      lLINSFamilyReportHistory.createdBy,
       lLINSFamilyReportHistory.lastUpdatedBy
     );
     this.workingDaysSharedCollection = this.workingDayService.addWorkingDayToCollectionIfMissing(
@@ -156,7 +156,11 @@ export class LLINSFamilyReportHistoryUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -202,7 +206,7 @@ export class LLINSFamilyReportHistoryUpdateComponent implements OnInit {
       pregnantWomen: this.editForm.get(['pregnantWomen'])!.value,
       quantityReceived: this.editForm.get(['quantityReceived'])!.value,
       familyType: this.editForm.get(['familyType'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       dayReached: this.editForm.get(['dayReached'])!.value,
       llinsFamilyReport: this.editForm.get(['llinsFamilyReport'])!.value,

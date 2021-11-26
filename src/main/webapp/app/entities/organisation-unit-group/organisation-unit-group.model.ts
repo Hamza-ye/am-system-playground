@@ -13,7 +13,7 @@ export interface IOrganisationUnitGroup {
   lastUpdated?: dayjs.Dayjs | null;
   symbol?: string | null;
   color?: string | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   members?: IOrganisationUnit[] | null;
   groupSets?: IOrganisationUnitGroupSet[] | null;
@@ -30,7 +30,7 @@ export class OrganisationUnitGroup implements IOrganisationUnitGroup {
     public lastUpdated?: dayjs.Dayjs | null,
     public symbol?: string | null,
     public color?: string | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public members?: IOrganisationUnit[] | null,
     public groupSets?: IOrganisationUnitGroupSet[] | null

@@ -42,7 +42,7 @@ export class LLINSVillageReportHistoryUpdateComponent implements OnInit {
     lessThan5Females: [null, [Validators.min(0)]],
     pregnantWomen: [null, [Validators.min(0)]],
     quantityReceived: [null, [Validators.required, Validators.min(0)]],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     dayReached: [null, Validators.required],
     llinsVillageReport: [null, Validators.required],
@@ -131,7 +131,7 @@ export class LLINSVillageReportHistoryUpdateComponent implements OnInit {
       lessThan5Females: lLINSVillageReportHistory.lessThan5Females,
       pregnantWomen: lLINSVillageReportHistory.pregnantWomen,
       quantityReceived: lLINSVillageReportHistory.quantityReceived,
-      user: lLINSVillageReportHistory.user,
+      createdBy: lLINSVillageReportHistory.createdBy,
       lastUpdatedBy: lLINSVillageReportHistory.lastUpdatedBy,
       dayReached: lLINSVillageReportHistory.dayReached,
       llinsVillageReport: lLINSVillageReportHistory.llinsVillageReport,
@@ -139,7 +139,7 @@ export class LLINSVillageReportHistoryUpdateComponent implements OnInit {
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      lLINSVillageReportHistory.user,
+      lLINSVillageReportHistory.createdBy,
       lLINSVillageReportHistory.lastUpdatedBy
     );
     this.workingDaysSharedCollection = this.workingDayService.addWorkingDayToCollectionIfMissing(
@@ -158,7 +158,11 @@ export class LLINSVillageReportHistoryUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -205,7 +209,7 @@ export class LLINSVillageReportHistoryUpdateComponent implements OnInit {
       lessThan5Females: this.editForm.get(['lessThan5Females'])!.value,
       pregnantWomen: this.editForm.get(['pregnantWomen'])!.value,
       quantityReceived: this.editForm.get(['quantityReceived'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       dayReached: this.editForm.get(['dayReached'])!.value,
       llinsVillageReport: this.editForm.get(['llinsVillageReport'])!.value,

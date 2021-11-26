@@ -35,17 +35,11 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "noOfDays",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["min"],
-      "fieldValidateRulesMin": "0"
-    },
-    {
       "fieldName": "active",
       "fieldType": "Boolean"
     },
     {
-      "fieldName": "isDisplayed",
+      "fieldName": "displayed",
       "fieldType": "Boolean"
     }
   ],
@@ -60,7 +54,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "activity",
-      "relationshipName": "user",
+      "relationshipName": "createdBy",
       "otherEntityField": "login"
     },
     {

@@ -50,7 +50,7 @@ export class CHVMalariaReportVersion1UpdateComponent implements OnInit {
     suppsUsed: [],
     suppsDamagedLost: [],
     comment: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     chv: [null, Validators.required],
     period: [null, Validators.required],
@@ -147,7 +147,7 @@ export class CHVMalariaReportVersion1UpdateComponent implements OnInit {
       suppsUsed: cHVMalariaReportVersion1.suppsUsed,
       suppsDamagedLost: cHVMalariaReportVersion1.suppsDamagedLost,
       comment: cHVMalariaReportVersion1.comment,
-      user: cHVMalariaReportVersion1.user,
+      createdBy: cHVMalariaReportVersion1.createdBy,
       lastUpdatedBy: cHVMalariaReportVersion1.lastUpdatedBy,
       chv: cHVMalariaReportVersion1.chv,
       period: cHVMalariaReportVersion1.period,
@@ -155,7 +155,7 @@ export class CHVMalariaReportVersion1UpdateComponent implements OnInit {
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      cHVMalariaReportVersion1.user,
+      cHVMalariaReportVersion1.createdBy,
       cHVMalariaReportVersion1.lastUpdatedBy
     );
     this.cHVSSharedCollection = this.cHVService.addCHVToCollectionIfMissing(this.cHVSSharedCollection, cHVMalariaReportVersion1.chv);
@@ -171,7 +171,11 @@ export class CHVMalariaReportVersion1UpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -215,7 +219,7 @@ export class CHVMalariaReportVersion1UpdateComponent implements OnInit {
       suppsUsed: this.editForm.get(['suppsUsed'])!.value,
       suppsDamagedLost: this.editForm.get(['suppsDamagedLost'])!.value,
       comment: this.editForm.get(['comment'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       chv: this.editForm.get(['chv'])!.value,
       period: this.editForm.get(['period'])!.value,

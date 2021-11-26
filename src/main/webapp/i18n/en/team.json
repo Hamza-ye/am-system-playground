@@ -30,7 +30,7 @@
       "llinsVillageReport": "Llins Village Report",
       "llinsFamilyTarget": "Llins Family Target",
       "llinsFamilyReport": "Llins Family Report",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
       "person": "Person",
       "assignedToWarehouse": "Assigned To Warehouse"

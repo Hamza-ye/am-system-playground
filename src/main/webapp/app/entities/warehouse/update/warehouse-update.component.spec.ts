@@ -47,14 +47,14 @@ describe('Component Tests', () => {
     describe('ngOnInit', () => {
       it('Should call User query and add missing value', () => {
         const warehouse: IWarehouse = { id: 456 };
-        const user: IUser = { id: 12147 };
-        warehouse.user = user;
+        const createdBy: IUser = { id: 12147 };
+        warehouse.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 28118 };
         warehouse.lastUpdatedBy = lastUpdatedBy;
 
         const userCollection: IUser[] = [{ id: 36573 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [user, lastUpdatedBy];
+        const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -87,8 +87,8 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const warehouse: IWarehouse = { id: 456 };
-        const user: IUser = { id: 61585 };
-        warehouse.user = user;
+        const createdBy: IUser = { id: 61585 };
+        warehouse.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 72414 };
         warehouse.lastUpdatedBy = lastUpdatedBy;
         const activity: IActivity = { id: 62968 };
@@ -98,7 +98,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(warehouse));
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.activitiesSharedCollection).toContain(activity);
       });

@@ -10,7 +10,7 @@ export interface IFingerprint {
   lastUpdated?: dayjs.Dayjs | null;
   fingerprintUrl?: string | null;
   fingerprintOwner?: string | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   family?: IFamily | null;
 }
@@ -24,7 +24,7 @@ export class Fingerprint implements IFingerprint {
     public lastUpdated?: dayjs.Dayjs | null,
     public fingerprintUrl?: string | null,
     public fingerprintOwner?: string | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public family?: IFamily | null
   ) {}

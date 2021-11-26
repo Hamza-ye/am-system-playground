@@ -39,7 +39,7 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.personAuthorityGroup.description">Description</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.personAuthorityGroup.created">Created</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.personAuthorityGroup.lastUpdated">Last Updated</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.personAuthorityGroup.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.personAuthorityGroup.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.personAuthorityGroup.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"></th>
         </tr>
@@ -56,7 +56,7 @@
           <td>{{ personAuthorityGroup.created | formatMediumDatetime }}</td>
           <td>{{ personAuthorityGroup.lastUpdated | formatMediumDatetime }}</td>
           <td>
-            {{ personAuthorityGroup.user?.login }}
+            {{ personAuthorityGroup.createdBy?.login }}
           </td>
           <td>
             {{ personAuthorityGroup.lastUpdatedBy?.login }}

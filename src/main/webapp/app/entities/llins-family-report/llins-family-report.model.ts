@@ -21,7 +21,7 @@ export interface ILLINSFamilyReport {
   familyType?: FamilyType;
   comment?: string | null;
   llinsFamilyReportHistories?: ILLINSFamilyReportHistory[] | null;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   dayReached?: IWorkingDay;
   targetDetails?: ILLINSFamilyTarget | null;
@@ -44,7 +44,7 @@ export class LLINSFamilyReport implements ILLINSFamilyReport {
     public familyType?: FamilyType,
     public comment?: string | null,
     public llinsFamilyReportHistories?: ILLINSFamilyReportHistory[] | null,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public dayReached?: IWorkingDay,
     public targetDetails?: ILLINSFamilyTarget | null,

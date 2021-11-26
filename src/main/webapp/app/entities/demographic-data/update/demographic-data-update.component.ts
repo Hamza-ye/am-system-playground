@@ -30,6 +30,8 @@ export class DemographicDataUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
+    uid: [null, [Validators.required, Validators.maxLength(11)]],
+    code: [null, []],
     created: [],
     lastUpdated: [],
     date: [null, [Validators.required]],
@@ -51,7 +53,7 @@ export class DemographicDataUpdateComponent implements OnInit {
     populationGrowthRate: [],
     comment: [],
     organisationUnit: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     source: [null, Validators.required],
   });
@@ -127,6 +129,8 @@ export class DemographicDataUpdateComponent implements OnInit {
   protected updateForm(demographicData: IDemographicData): void {
     this.editForm.patchValue({
       id: demographicData.id,
+      uid: demographicData.uid,
+      code: demographicData.code,
       created: demographicData.created ? demographicData.created.format(DATE_TIME_FORMAT) : null,
       lastUpdated: demographicData.lastUpdated ? demographicData.lastUpdated.format(DATE_TIME_FORMAT) : null,
       date: demographicData.date,
@@ -148,7 +152,7 @@ export class DemographicDataUpdateComponent implements OnInit {
       populationGrowthRate: demographicData.populationGrowthRate,
       comment: demographicData.comment,
       organisationUnit: demographicData.organisationUnit,
-      user: demographicData.user,
+      createdBy: demographicData.createdBy,
       lastUpdatedBy: demographicData.lastUpdatedBy,
       source: demographicData.source,
     });
@@ -159,7 +163,7 @@ export class DemographicDataUpdateComponent implements OnInit {
     );
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      demographicData.user,
+      demographicData.createdBy,
       demographicData.lastUpdatedBy
     );
     this.demographicDataSourcesSharedCollection = this.demographicDataSourceService.addDemographicDataSourceToCollectionIfMissing(
@@ -187,7 +191,11 @@ export class DemographicDataUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -212,6 +220,8 @@ export class DemographicDataUpdateComponent implements OnInit {
     return {
       ...new DemographicData(),
       id: this.editForm.get(['id'])!.value,
+      uid: this.editForm.get(['uid'])!.value,
+      code: this.editForm.get(['code'])!.value,
       created: this.editForm.get(['created'])!.value ? dayjs(this.editForm.get(['created'])!.value, DATE_TIME_FORMAT) : undefined,
       lastUpdated: this.editForm.get(['lastUpdated'])!.value
         ? dayjs(this.editForm.get(['lastUpdated'])!.value, DATE_TIME_FORMAT)
@@ -235,7 +245,7 @@ export class DemographicDataUpdateComponent implements OnInit {
       populationGrowthRate: this.editForm.get(['populationGrowthRate'])!.value,
       comment: this.editForm.get(['comment'])!.value,
       organisationUnit: this.editForm.get(['organisationUnit'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       source: this.editForm.get(['source'])!.value,
     };

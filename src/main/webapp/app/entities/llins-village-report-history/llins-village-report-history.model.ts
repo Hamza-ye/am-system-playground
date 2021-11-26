@@ -17,7 +17,7 @@ export interface ILLINSVillageReportHistory {
   lessThan5Females?: number | null;
   pregnantWomen?: number | null;
   quantityReceived?: number;
-  user?: IUser | null;
+  createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   dayReached?: IWorkingDay;
   llinsVillageReport?: ILLINSVillageReport;
@@ -38,7 +38,7 @@ export class LLINSVillageReportHistory implements ILLINSVillageReportHistory {
     public lessThan5Females?: number | null,
     public pregnantWomen?: number | null,
     public quantityReceived?: number,
-    public user?: IUser | null,
+    public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public dayReached?: IWorkingDay,
     public llinsVillageReport?: ILLINSVillageReport

@@ -24,7 +24,7 @@
       "created": "Created",
       "lastUpdated": "Last Updated",
       "demographicData": "Demographic Data",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By"
     }
   }

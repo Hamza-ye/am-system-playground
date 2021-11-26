@@ -6,7 +6,9 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.User;
@@ -160,6 +162,7 @@ public class DengueCasesReport extends BaseIdentifiableObject implements Metadat
         return this;
     }
 
+    @JsonProperty
     public Integer getRdtTested() {
         return this.rdtTested;
     }
@@ -173,6 +176,7 @@ public class DengueCasesReport extends BaseIdentifiableObject implements Metadat
         this.rdtTested = rdtTested;
     }
 
+    @JsonProperty
     public Integer getRdtPositive() {
         return this.rdtPositive;
     }
@@ -186,6 +190,7 @@ public class DengueCasesReport extends BaseIdentifiableObject implements Metadat
         this.rdtPositive = rdtPositive;
     }
 
+    @JsonProperty
     public Integer getProbableCases() {
         return this.probableCases;
     }
@@ -199,6 +204,7 @@ public class DengueCasesReport extends BaseIdentifiableObject implements Metadat
         this.probableCases = probableCases;
     }
 
+    @JsonProperty
     public Integer getInpatientCases() {
         return this.inpatientCases;
     }
@@ -212,6 +218,7 @@ public class DengueCasesReport extends BaseIdentifiableObject implements Metadat
         this.inpatientCases = inpatientCases;
     }
 
+    @JsonProperty
     public Integer getDeathCases() {
         return this.deathCases;
     }
@@ -225,6 +232,7 @@ public class DengueCasesReport extends BaseIdentifiableObject implements Metadat
         this.deathCases = deathCases;
     }
 
+    @JsonProperty
     public Integer getTreated() {
         return this.treated;
     }
@@ -238,6 +246,7 @@ public class DengueCasesReport extends BaseIdentifiableObject implements Metadat
         this.treated = treated;
     }
 
+    @JsonProperty
     public Integer getSuspectedCases() {
         return this.suspectedCases;
     }
@@ -251,6 +260,7 @@ public class DengueCasesReport extends BaseIdentifiableObject implements Metadat
         this.suspectedCases = suspectedCases;
     }
 
+    @JsonProperty
     public String getComment() {
         return this.comment;
     }
@@ -274,6 +284,8 @@ public class DengueCasesReport extends BaseIdentifiableObject implements Metadat
         return this;
     }
 
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public CasesReportClass getReportClass() {
         return this.reportClass;
     }
@@ -287,6 +299,7 @@ public class DengueCasesReport extends BaseIdentifiableObject implements Metadat
         this.reportClass = casesReportClass;
     }
 
+    @JsonProperty
     public Period getPeriod() {
         return this.period;
     }
@@ -300,6 +313,8 @@ public class DengueCasesReport extends BaseIdentifiableObject implements Metadat
         this.period = period;
     }
 
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public DataSet getDataSet() {
         return this.dataSet;
     }
@@ -313,6 +328,8 @@ public class DengueCasesReport extends BaseIdentifiableObject implements Metadat
         this.dataSet = dataSet;
     }
 
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public OrganisationUnit getOrganisationUnit() {
         return this.organisationUnit;
     }

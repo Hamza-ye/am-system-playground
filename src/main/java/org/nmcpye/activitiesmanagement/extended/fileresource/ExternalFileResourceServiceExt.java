@@ -2,7 +2,7 @@ package org.nmcpye.activitiesmanagement.extended.fileresource;
 
 import org.nmcpye.activitiesmanagement.domain.fileresource.ExternalFileResource;
 
-public interface ExternalFileResourceService {
+public interface ExternalFileResourceServiceExt {
     /**
      * Retrieves ExternalFileResource based on accessToken
      *

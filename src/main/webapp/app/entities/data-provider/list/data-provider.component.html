@@ -40,7 +40,7 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataProvider.created">Created</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataProvider.lastUpdated">Last Updated</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataProvider.mobile">Mobile</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataProvider.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataProvider.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataProvider.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.dataProvider.family">Family</span></th>
           <th scope="col"></th>
@@ -59,7 +59,7 @@
           <td>{{ dataProvider.lastUpdated | formatMediumDatetime }}</td>
           <td>{{ dataProvider.mobile }}</td>
           <td>
-            {{ dataProvider.user?.login }}
+            {{ dataProvider.createdBy?.login }}
           </td>
           <td>
             {{ dataProvider.lastUpdatedBy?.login }}

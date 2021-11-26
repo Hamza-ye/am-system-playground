@@ -41,7 +41,7 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.lastUpdated">Last Updated</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.symbol">Symbol</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.color">Color</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnitGroup.member">Member</span></th>
           <th scope="col"></th>
@@ -61,7 +61,7 @@
           <td>{{ organisationUnitGroup.symbol }}</td>
           <td>{{ organisationUnitGroup.color }}</td>
           <td>
-            {{ organisationUnitGroup.user?.login }}
+            {{ organisationUnitGroup.createdBy?.login }}
           </td>
           <td>
             {{ organisationUnitGroup.lastUpdatedBy?.login }}

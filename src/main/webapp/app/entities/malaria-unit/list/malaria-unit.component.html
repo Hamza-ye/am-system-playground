@@ -40,7 +40,7 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.description">Description</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.created">Created</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.lastUpdated">Last Updated</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"></th>
         </tr>
@@ -58,7 +58,7 @@
           <td>{{ malariaUnit.created | formatMediumDatetime }}</td>
           <td>{{ malariaUnit.lastUpdated | formatMediumDatetime }}</td>
           <td>
-            {{ malariaUnit.user?.login }}
+            {{ malariaUnit.createdBy?.login }}
           </td>
           <td>
             {{ malariaUnit.lastUpdatedBy?.login }}

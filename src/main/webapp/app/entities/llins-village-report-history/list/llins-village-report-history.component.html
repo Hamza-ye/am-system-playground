@@ -55,7 +55,7 @@
           <th scope="col">
             <span appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.quantityReceived">Quantity Received</span>
           </th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.dayReached">Day Reached</span></th>
           <th scope="col">
@@ -82,7 +82,7 @@
           <td>{{ lLINSVillageReportHistory.pregnantWomen }}</td>
           <td>{{ lLINSVillageReportHistory.quantityReceived }}</td>
           <td>
-            {{ lLINSVillageReportHistory.user?.login }}
+            {{ lLINSVillageReportHistory.createdBy?.login }}
           </td>
           <td>
             {{ lLINSVillageReportHistory.lastUpdatedBy?.login }}

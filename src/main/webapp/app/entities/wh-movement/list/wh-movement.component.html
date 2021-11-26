@@ -54,8 +54,8 @@
           <th scope="col" appSortBy="comment">
             <span appTranslate="amSystemPlaygroundApp.wHMovement.comment">Comment</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" appSortBy="user.login">
-            <span appTranslate="amSystemPlaygroundApp.wHMovement.user">User</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" appSortBy="createdBy.login">
+            <span appTranslate="amSystemPlaygroundApp.wHMovement.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="lastUpdatedBy.login">
             <span appTranslate="amSystemPlaygroundApp.wHMovement.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon>
@@ -87,7 +87,7 @@
           <td>{{ wHMovement.confirmedByOtherSide }}</td>
           <td>{{ wHMovement.comment }}</td>
           <td>
-            {{ wHMovement.user?.login }}
+            {{ wHMovement.createdBy?.login }}
           </td>
           <td>
             {{ wHMovement.lastUpdatedBy?.login }}

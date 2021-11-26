@@ -36,7 +36,7 @@ export class WHMovementUpdateComponent implements OnInit {
     reconciliationDestination: [],
     confirmedByOtherSide: [],
     comment: [],
-    user: [],
+    createdBy: [],
     lastUpdatedBy: [],
     day: [null, Validators.required],
     initiatedWH: [null, Validators.required],
@@ -120,7 +120,7 @@ export class WHMovementUpdateComponent implements OnInit {
       reconciliationDestination: wHMovement.reconciliationDestination,
       confirmedByOtherSide: wHMovement.confirmedByOtherSide,
       comment: wHMovement.comment,
-      user: wHMovement.user,
+      createdBy: wHMovement.createdBy,
       lastUpdatedBy: wHMovement.lastUpdatedBy,
       day: wHMovement.day,
       initiatedWH: wHMovement.initiatedWH,
@@ -130,7 +130,7 @@ export class WHMovementUpdateComponent implements OnInit {
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      wHMovement.user,
+      wHMovement.createdBy,
       wHMovement.lastUpdatedBy
     );
     this.workingDaysSharedCollection = this.workingDayService.addWorkingDayToCollectionIfMissing(
@@ -151,7 +151,11 @@ export class WHMovementUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value, this.editForm.get('lastUpdatedBy')!.value)
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('createdBy')!.value,
+            this.editForm.get('lastUpdatedBy')!.value
+          )
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
@@ -197,7 +201,7 @@ export class WHMovementUpdateComponent implements OnInit {
       reconciliationDestination: this.editForm.get(['reconciliationDestination'])!.value,
       confirmedByOtherSide: this.editForm.get(['confirmedByOtherSide'])!.value,
       comment: this.editForm.get(['comment'])!.value,
-      user: this.editForm.get(['user'])!.value,
+      createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       day: this.editForm.get(['day'])!.value,
       initiatedWH: this.editForm.get(['initiatedWH'])!.value,

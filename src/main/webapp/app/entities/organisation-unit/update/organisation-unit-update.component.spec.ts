@@ -9,6 +9,8 @@ import { of, Subject } from 'rxjs';
 
 import { OrganisationUnitService } from '../service/organisation-unit.service';
 import { IOrganisationUnit, OrganisationUnit } from '../organisation-unit.model';
+import { IFileResource } from 'app/entities/file-resource/file-resource.model';
+import { FileResourceService } from 'app/entities/file-resource/service/file-resource.service';
 
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
@@ -25,6 +27,7 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<OrganisationUnitUpdateComponent>;
     let activatedRoute: ActivatedRoute;
     let organisationUnitService: OrganisationUnitService;
+    let fileResourceService: FileResourceService;
     let userService: UserService;
     let malariaUnitService: MalariaUnitService;
     let cHVService: CHVService;
@@ -41,6 +44,7 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(OrganisationUnitUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
       organisationUnitService = TestBed.inject(OrganisationUnitService);
+      fileResourceService = TestBed.inject(FileResourceService);
       userService = TestBed.inject(UserService);
       malariaUnitService = TestBed.inject(MalariaUnitService);
       cHVService = TestBed.inject(CHVService);
@@ -49,6 +53,28 @@ describe('Component Tests', () => {
     });
 
     describe('ngOnInit', () => {
+      it('Should call FileResource query and add missing value', () => {
+        const organisationUnit: IOrganisationUnit = { id: 456 };
+        const image: IFileResource = { id: 42187 };
+        organisationUnit.image = image;
+
+        const fileResourceCollection: IFileResource[] = [{ id: 5356 }];
+        jest.spyOn(fileResourceService, 'query').mockReturnValue(of(new HttpResponse({ body: fileResourceCollection })));
+        const additionalFileResources = [image];
+        const expectedCollection: IFileResource[] = [...additionalFileResources, ...fileResourceCollection];
+        jest.spyOn(fileResourceService, 'addFileResourceToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+        activatedRoute.data = of({ organisationUnit });
+        comp.ngOnInit();
+
+        expect(fileResourceService.query).toHaveBeenCalled();
+        expect(fileResourceService.addFileResourceToCollectionIfMissing).toHaveBeenCalledWith(
+          fileResourceCollection,
+          ...additionalFileResources
+        );
+        expect(comp.fileResourcesSharedCollection).toEqual(expectedCollection);
+      });
+
       it('Should call OrganisationUnit query and add missing value', () => {
         const organisationUnit: IOrganisationUnit = { id: 456 };
         const parent: IOrganisationUnit = { id: 71497 };
@@ -77,14 +103,14 @@ describe('Component Tests', () => {
 
       it('Should call User query and add missing value', () => {
         const organisationUnit: IOrganisationUnit = { id: 456 };
-        const user: IUser = { id: 21694 };
-        organisationUnit.user = user;
+        const createdBy: IUser = { id: 21694 };
+        organisationUnit.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 90199 };
         organisationUnit.lastUpdatedBy = lastUpdatedBy;
 
         const userCollection: IUser[] = [{ id: 55424 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-        const additionalUsers = [user, lastUpdatedBy];
+        const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -139,14 +165,16 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const organisationUnit: IOrganisationUnit = { id: 456 };
+        const image: IFileResource = { id: 90665 };
+        organisationUnit.image = image;
         const parent: IOrganisationUnit = { id: 86550 };
         organisationUnit.parent = parent;
         const hfHomeSubVillage: IOrganisationUnit = { id: 67176 };
         organisationUnit.hfHomeSubVillage = hfHomeSubVillage;
         const coveredByHf: IOrganisationUnit = { id: 87812 };
         organisationUnit.coveredByHf = coveredByHf;
-        const user: IUser = { id: 71255 };
-        organisationUnit.user = user;
+        const createdBy: IUser = { id: 71255 };
+        organisationUnit.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 15215 };
         organisationUnit.lastUpdatedBy = lastUpdatedBy;
         const malariaUnit: IMalariaUnit = { id: 37623 };
@@ -158,10 +186,11 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(organisationUnit));
+        expect(comp.fileResourcesSharedCollection).toContain(image);
         expect(comp.organisationUnitsSharedCollection).toContain(parent);
         expect(comp.organisationUnitsSharedCollection).toContain(hfHomeSubVillage);
         expect(comp.organisationUnitsSharedCollection).toContain(coveredByHf);
-        expect(comp.usersSharedCollection).toContain(user);
+        expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.malariaUnitsSharedCollection).toContain(malariaUnit);
         expect(comp.cHVSSharedCollection).toContain(assignedChv);
@@ -233,6 +262,14 @@ describe('Component Tests', () => {
     });
 
     describe('Tracking relationships identifiers', () => {
+      describe('trackFileResourceById', () => {
+        it('Should return tracked FileResource primary key', () => {
+          const entity = { id: 123 };
+          const trackResult = comp.trackFileResourceById(0, entity);
+          expect(trackResult).toEqual(entity.id);
+        });
+      });
+
       describe('trackOrganisationUnitById', () => {
         it('Should return tracked OrganisationUnit primary key', () => {
           const entity = { id: 123 };

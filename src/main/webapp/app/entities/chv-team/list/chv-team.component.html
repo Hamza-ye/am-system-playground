@@ -41,7 +41,7 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.lastUpdated">Last Updated</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.teamNo">Team No</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.teamType">Team Type</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.user">User</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.person">Person</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.responsibleForChv">Responsible For Chv</span></th>
@@ -62,7 +62,7 @@
           <td>{{ cHVTeam.teamNo }}</td>
           <td appTranslate="{{ 'amSystemPlaygroundApp.CHVTeamType.' + cHVTeam.teamType }}">{{ cHVTeam.teamType }}</td>
           <td>
-            {{ cHVTeam.user?.login }}
+            {{ cHVTeam.createdBy?.login }}
           </td>
           <td>
             {{ cHVTeam.lastUpdatedBy?.login }}

@@ -17,7 +17,7 @@ import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.extended.common.DeleteNotAllowedException;
 import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectUtils;
 import org.nmcpye.activitiesmanagement.extended.fileresource.FileResourceDomain;
-import org.nmcpye.activitiesmanagement.extended.fileresource.FileResourceService;
+import org.nmcpye.activitiesmanagement.extended.fileresource.FileResourceServiceExt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MimeTypeUtils;
 
@@ -42,7 +42,7 @@ public class OrganisationUnitServiceExtTest
 //    private DataSetService dataSetService;
 
     @Autowired
-    private FileResourceService fileResourceService;
+    private FileResourceServiceExt fileResourceServiceExt;
 
     @Autowired
     private OrganisationUnitGroupServiceExt organisationUnitGroupServiceExt;
@@ -1101,7 +1101,7 @@ public class OrganisationUnitServiceExtTest
         fileResource.setAssigned( false );
         fileResource.setCreated( new Date() );
         fileResource.setAutoFields();
-        fileResourceService.saveFileResource( fileResource, content );
+        fileResourceServiceExt.saveFileResource( fileResource, content );
 
         OrganisationUnit orgUnit = createOrganisationUnit( 'A' );
         orgUnit.setImage( fileResource );

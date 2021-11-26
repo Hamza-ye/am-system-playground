@@ -25,7 +25,7 @@
       "fieldType": "Instant"
     },
     {
-      "fieldName": "isDisplayed",
+      "fieldName": "displayed",
       "fieldType": "Boolean"
     }
   ],
@@ -40,7 +40,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "user",
       "otherEntityRelationshipName": "project",
-      "relationshipName": "user",
+      "relationshipName": "createdBy",
       "otherEntityField": "login"
     },
     {

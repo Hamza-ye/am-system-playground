@@ -24,7 +24,7 @@
       "lastUpdated": "Last Updated",
       "fingerprintUrl": "Fingerprint Url",
       "fingerprintOwner": "Fingerprint Owner",
-      "user": "User",
+      "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
       "family": "Family"
     }

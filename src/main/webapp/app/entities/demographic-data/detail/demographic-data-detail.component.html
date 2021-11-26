@@ -16,6 +16,14 @@
         <dd>
           <span>{{ demographicData.id }}</span>
         </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.uid">Uid</span></dt>
+        <dd>
+          <span>{{ demographicData.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.code">Code</span></dt>
+        <dd>
+          <span>{{ demographicData.code }}</span>
+        </dd>
         <dt><span appTranslate="amSystemPlaygroundApp.demographicData.created">Created</span></dt>
         <dd>
           <span>{{ demographicData.created | formatMediumDatetime }}</span>
@@ -106,9 +114,9 @@
             }}</a>
           </div>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.user">User</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.demographicData.createdBy">Created By</span></dt>
         <dd>
-          <span>{{ demographicData.user?.login }}</span>
+          <span>{{ demographicData.createdBy?.login }}</span>
         </dd>
         <dt><span appTranslate="amSystemPlaygroundApp.demographicData.lastUpdatedBy">Last Updated By</span></dt>
         <dd>
