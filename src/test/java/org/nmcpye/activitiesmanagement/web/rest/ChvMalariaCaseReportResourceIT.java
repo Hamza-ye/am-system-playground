@@ -1,18 +1,5 @@
 package org.nmcpye.activitiesmanagement.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
-import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.nmcpye.activitiesmanagement.IntegrationTest;
@@ -28,6 +15,20 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link ChvMalariaCaseReportResource} REST controller.
@@ -83,15 +84,15 @@ class ChvMalariaCaseReportResourceIT {
     private static AtomicLong count = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
-    private ChvMalariaCaseReportRepository cHVMalariaCaseReportRepository;
+    private ChvMalariaCaseReportRepository chvMalariaCaseReportRepository;
 
     @Autowired
     private EntityManager em;
 
     @Autowired
-    private MockMvc restCHVMalariaCaseReportMockMvc;
+    private MockMvc restChvMalariaCaseReportMockMvc;
 
-    private ChvMalariaCaseReport cHVMalariaCaseReport;
+    private ChvMalariaCaseReport chvMalariaCaseReport;
 
     /**
      * Create an entity for this test.
@@ -100,7 +101,7 @@ class ChvMalariaCaseReportResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ChvMalariaCaseReport createEntity(EntityManager em) {
-        ChvMalariaCaseReport cHVMalariaCaseReport = new ChvMalariaCaseReport()
+        ChvMalariaCaseReport chvMalariaCaseReport = new ChvMalariaCaseReport()
             .uid(DEFAULT_UID)
             .created(DEFAULT_CREATED)
             .lastUpdated(DEFAULT_LAST_UPDATED)
@@ -115,15 +116,15 @@ class ChvMalariaCaseReportResourceIT {
             .barImageUrl(DEFAULT_BAR_IMAGE_URL)
             .comment(DEFAULT_COMMENT);
         // Add required entity
-        Chv cHV;
+        Chv chv;
         if (TestUtil.findAll(em, Chv.class).isEmpty()) {
-            cHV = ChvResourceIT.createEntity(em);
-            em.persist(cHV);
+            chv = ChvResourceIT.createEntity(em);
+            em.persist(chv);
             em.flush();
         } else {
-            cHV = TestUtil.findAll(em, Chv.class).get(0);
+            chv = TestUtil.findAll(em, Chv.class).get(0);
         }
-        cHVMalariaCaseReport.setChv(cHV);
+        chvMalariaCaseReport.setChv(chv);
         // Add required entity
         CasesReportClass casesReportClass;
         if (TestUtil.findAll(em, CasesReportClass.class).isEmpty()) {
@@ -133,8 +134,8 @@ class ChvMalariaCaseReportResourceIT {
         } else {
             casesReportClass = TestUtil.findAll(em, CasesReportClass.class).get(0);
         }
-        cHVMalariaCaseReport.setReportClass(casesReportClass);
-        return cHVMalariaCaseReport;
+        chvMalariaCaseReport.setReportClass(casesReportClass);
+        return chvMalariaCaseReport;
     }
 
     /**
@@ -144,7 +145,7 @@ class ChvMalariaCaseReportResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ChvMalariaCaseReport createUpdatedEntity(EntityManager em) {
-        ChvMalariaCaseReport cHVMalariaCaseReport = new ChvMalariaCaseReport()
+        ChvMalariaCaseReport chvMalariaCaseReport = new ChvMalariaCaseReport()
             .uid(UPDATED_UID)
             .created(UPDATED_CREATED)
             .lastUpdated(UPDATED_LAST_UPDATED)
@@ -159,15 +160,15 @@ class ChvMalariaCaseReportResourceIT {
             .barImageUrl(UPDATED_BAR_IMAGE_URL)
             .comment(UPDATED_COMMENT);
         // Add required entity
-        Chv cHV;
+        Chv chv;
         if (TestUtil.findAll(em, Chv.class).isEmpty()) {
-            cHV = ChvResourceIT.createUpdatedEntity(em);
-            em.persist(cHV);
+            chv = ChvResourceIT.createUpdatedEntity(em);
+            em.persist(chv);
             em.flush();
         } else {
-            cHV = TestUtil.findAll(em, Chv.class).get(0);
+            chv = TestUtil.findAll(em, Chv.class).get(0);
         }
-        cHVMalariaCaseReport.setChv(cHV);
+        chvMalariaCaseReport.setChv(chv);
         // Add required entity
         CasesReportClass casesReportClass;
         if (TestUtil.findAll(em, CasesReportClass.class).isEmpty()) {
@@ -177,32 +178,32 @@ class ChvMalariaCaseReportResourceIT {
         } else {
             casesReportClass = TestUtil.findAll(em, CasesReportClass.class).get(0);
         }
-        cHVMalariaCaseReport.setReportClass(casesReportClass);
-        return cHVMalariaCaseReport;
+        chvMalariaCaseReport.setReportClass(casesReportClass);
+        return chvMalariaCaseReport;
     }
 
     @BeforeEach
     public void initTest() {
-        cHVMalariaCaseReport = createEntity(em);
+        chvMalariaCaseReport = createEntity(em);
     }
 
     @Test
     @Transactional
-    void createCHVMalariaCaseReport() throws Exception {
-        int databaseSizeBeforeCreate = cHVMalariaCaseReportRepository.findAll().size();
+    void createChvMalariaCaseReport() throws Exception {
+        int databaseSizeBeforeCreate = chvMalariaCaseReportRepository.findAll().size();
         // Create the ChvMalariaCaseReport
-        restCHVMalariaCaseReportMockMvc
+        restChvMalariaCaseReportMockMvc
             .perform(
                 post(ENTITY_API_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(cHVMalariaCaseReport))
+                    .content(TestUtil.convertObjectToJsonBytes(chvMalariaCaseReport))
             )
             .andExpect(status().isCreated());
 
         // Validate the ChvMalariaCaseReport in the database
-        List<ChvMalariaCaseReport> cHVMalariaCaseReportList = cHVMalariaCaseReportRepository.findAll();
-        assertThat(cHVMalariaCaseReportList).hasSize(databaseSizeBeforeCreate + 1);
-        ChvMalariaCaseReport testChvMalariaCaseReport = cHVMalariaCaseReportList.get(cHVMalariaCaseReportList.size() - 1);
+        List<ChvMalariaCaseReport> chvMalariaCaseReportList = chvMalariaCaseReportRepository.findAll();
+        assertThat(chvMalariaCaseReportList).hasSize(databaseSizeBeforeCreate + 1);
+        ChvMalariaCaseReport testChvMalariaCaseReport = chvMalariaCaseReportList.get(chvMalariaCaseReportList.size() - 1);
         assertThat(testChvMalariaCaseReport.getUid()).isEqualTo(DEFAULT_UID);
         assertThat(testChvMalariaCaseReport.getCreated()).isEqualTo(DEFAULT_CREATED);
         assertThat(testChvMalariaCaseReport.getLastUpdated()).isEqualTo(DEFAULT_LAST_UPDATED);
@@ -220,59 +221,59 @@ class ChvMalariaCaseReportResourceIT {
 
     @Test
     @Transactional
-    void createCHVMalariaCaseReportWithExistingId() throws Exception {
+    void createChvMalariaCaseReportWithExistingId() throws Exception {
         // Create the ChvMalariaCaseReport with an existing ID
-        cHVMalariaCaseReport.setId(1L);
+        chvMalariaCaseReport.setId(1L);
 
-        int databaseSizeBeforeCreate = cHVMalariaCaseReportRepository.findAll().size();
+        int databaseSizeBeforeCreate = chvMalariaCaseReportRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restCHVMalariaCaseReportMockMvc
+        restChvMalariaCaseReportMockMvc
             .perform(
                 post(ENTITY_API_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(cHVMalariaCaseReport))
+                    .content(TestUtil.convertObjectToJsonBytes(chvMalariaCaseReport))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the ChvMalariaCaseReport in the database
-        List<ChvMalariaCaseReport> cHVMalariaCaseReportList = cHVMalariaCaseReportRepository.findAll();
-        assertThat(cHVMalariaCaseReportList).hasSize(databaseSizeBeforeCreate);
+        List<ChvMalariaCaseReport> chvMalariaCaseReportList = chvMalariaCaseReportRepository.findAll();
+        assertThat(chvMalariaCaseReportList).hasSize(databaseSizeBeforeCreate);
     }
 
     @Test
     @Transactional
     void checkUidIsRequired() throws Exception {
-        int databaseSizeBeforeTest = cHVMalariaCaseReportRepository.findAll().size();
+        int databaseSizeBeforeTest = chvMalariaCaseReportRepository.findAll().size();
         // set the field null
-        cHVMalariaCaseReport.setUid(null);
+        chvMalariaCaseReport.setUid(null);
 
         // Create the ChvMalariaCaseReport, which fails.
 
-        restCHVMalariaCaseReportMockMvc
+        restChvMalariaCaseReportMockMvc
             .perform(
                 post(ENTITY_API_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(cHVMalariaCaseReport))
+                    .content(TestUtil.convertObjectToJsonBytes(chvMalariaCaseReport))
             )
             .andExpect(status().isBadRequest());
 
-        List<ChvMalariaCaseReport> cHVMalariaCaseReportList = cHVMalariaCaseReportRepository.findAll();
-        assertThat(cHVMalariaCaseReportList).hasSize(databaseSizeBeforeTest);
+        List<ChvMalariaCaseReport> chvMalariaCaseReportList = chvMalariaCaseReportRepository.findAll();
+        assertThat(chvMalariaCaseReportList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
-    void getAllCHVMalariaCaseReports() throws Exception {
+    void getAllChvMalariaCaseReports() throws Exception {
         // Initialize the database
-        cHVMalariaCaseReportRepository.saveAndFlush(cHVMalariaCaseReport);
+        chvMalariaCaseReportRepository.saveAndFlush(chvMalariaCaseReport);
 
-        // Get all the cHVMalariaCaseReportList
-        restCHVMalariaCaseReportMockMvc
+        // Get all the chvMalariaCaseReportList
+        restChvMalariaCaseReportMockMvc
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(cHVMalariaCaseReport.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(chvMalariaCaseReport.getId().intValue())))
             .andExpect(jsonPath("$.[*].uid").value(hasItem(DEFAULT_UID)))
             .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
             .andExpect(jsonPath("$.[*].lastUpdated").value(hasItem(DEFAULT_LAST_UPDATED.toString())))
@@ -290,16 +291,16 @@ class ChvMalariaCaseReportResourceIT {
 
     @Test
     @Transactional
-    void getCHVMalariaCaseReport() throws Exception {
+    void getChvMalariaCaseReport() throws Exception {
         // Initialize the database
-        cHVMalariaCaseReportRepository.saveAndFlush(cHVMalariaCaseReport);
+        chvMalariaCaseReportRepository.saveAndFlush(chvMalariaCaseReport);
 
-        // Get the cHVMalariaCaseReport
-        restCHVMalariaCaseReportMockMvc
-            .perform(get(ENTITY_API_URL_ID, cHVMalariaCaseReport.getId()))
+        // Get the chvMalariaCaseReport
+        restChvMalariaCaseReportMockMvc
+            .perform(get(ENTITY_API_URL_ID, chvMalariaCaseReport.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(cHVMalariaCaseReport.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(chvMalariaCaseReport.getId().intValue()))
             .andExpect(jsonPath("$.uid").value(DEFAULT_UID))
             .andExpect(jsonPath("$.created").value(DEFAULT_CREATED.toString()))
             .andExpect(jsonPath("$.lastUpdated").value(DEFAULT_LAST_UPDATED.toString()))
@@ -317,21 +318,21 @@ class ChvMalariaCaseReportResourceIT {
 
     @Test
     @Transactional
-    void getNonExistingCHVMalariaCaseReport() throws Exception {
-        // Get the cHVMalariaCaseReport
-        restCHVMalariaCaseReportMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
+    void getNonExistingChvMalariaCaseReport() throws Exception {
+        // Get the chvMalariaCaseReport
+        restChvMalariaCaseReportMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
     @Test
     @Transactional
-    void putNewCHVMalariaCaseReport() throws Exception {
+    void putNewChvMalariaCaseReport() throws Exception {
         // Initialize the database
-        cHVMalariaCaseReportRepository.saveAndFlush(cHVMalariaCaseReport);
+        chvMalariaCaseReportRepository.saveAndFlush(chvMalariaCaseReport);
 
-        int databaseSizeBeforeUpdate = cHVMalariaCaseReportRepository.findAll().size();
+        int databaseSizeBeforeUpdate = chvMalariaCaseReportRepository.findAll().size();
 
-        // Update the cHVMalariaCaseReport
-        ChvMalariaCaseReport updatedChvMalariaCaseReport = cHVMalariaCaseReportRepository.findById(cHVMalariaCaseReport.getId()).get();
+        // Update the chvMalariaCaseReport
+        ChvMalariaCaseReport updatedChvMalariaCaseReport = chvMalariaCaseReportRepository.findById(chvMalariaCaseReport.getId()).get();
         // Disconnect from session so that the updates on updatedChvMalariaCaseReport are not directly saved in db
         em.detach(updatedChvMalariaCaseReport);
         updatedChvMalariaCaseReport
@@ -349,7 +350,7 @@ class ChvMalariaCaseReportResourceIT {
             .barImageUrl(UPDATED_BAR_IMAGE_URL)
             .comment(UPDATED_COMMENT);
 
-        restCHVMalariaCaseReportMockMvc
+        restChvMalariaCaseReportMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, updatedChvMalariaCaseReport.getId())
                     .contentType(MediaType.APPLICATION_JSON)
@@ -358,9 +359,9 @@ class ChvMalariaCaseReportResourceIT {
             .andExpect(status().isOk());
 
         // Validate the ChvMalariaCaseReport in the database
-        List<ChvMalariaCaseReport> cHVMalariaCaseReportList = cHVMalariaCaseReportRepository.findAll();
-        assertThat(cHVMalariaCaseReportList).hasSize(databaseSizeBeforeUpdate);
-        ChvMalariaCaseReport testChvMalariaCaseReport = cHVMalariaCaseReportList.get(cHVMalariaCaseReportList.size() - 1);
+        List<ChvMalariaCaseReport> chvMalariaCaseReportList = chvMalariaCaseReportRepository.findAll();
+        assertThat(chvMalariaCaseReportList).hasSize(databaseSizeBeforeUpdate);
+        ChvMalariaCaseReport testChvMalariaCaseReport = chvMalariaCaseReportList.get(chvMalariaCaseReportList.size() - 1);
         assertThat(testChvMalariaCaseReport.getUid()).isEqualTo(UPDATED_UID);
         assertThat(testChvMalariaCaseReport.getCreated()).isEqualTo(UPDATED_CREATED);
         assertThat(testChvMalariaCaseReport.getLastUpdated()).isEqualTo(UPDATED_LAST_UPDATED);
@@ -378,83 +379,84 @@ class ChvMalariaCaseReportResourceIT {
 
     @Test
     @Transactional
-    void putNonExistingCHVMalariaCaseReport() throws Exception {
-        int databaseSizeBeforeUpdate = cHVMalariaCaseReportRepository.findAll().size();
-        cHVMalariaCaseReport.setId(count.incrementAndGet());
+    void putNonExistingChvMalariaCaseReport() throws Exception {
+        int databaseSizeBeforeUpdate = chvMalariaCaseReportRepository.findAll().size();
+        chvMalariaCaseReport.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restCHVMalariaCaseReportMockMvc
+        restChvMalariaCaseReportMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, cHVMalariaCaseReport.getId())
+                put(ENTITY_API_URL_ID, chvMalariaCaseReport.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(cHVMalariaCaseReport))
+                    .content(TestUtil.convertObjectToJsonBytes(chvMalariaCaseReport))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the ChvMalariaCaseReport in the database
-        List<ChvMalariaCaseReport> cHVMalariaCaseReportList = cHVMalariaCaseReportRepository.findAll();
-        assertThat(cHVMalariaCaseReportList).hasSize(databaseSizeBeforeUpdate);
+        List<ChvMalariaCaseReport> chvMalariaCaseReportList = chvMalariaCaseReportRepository.findAll();
+        assertThat(chvMalariaCaseReportList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void putWithIdMismatchCHVMalariaCaseReport() throws Exception {
-        int databaseSizeBeforeUpdate = cHVMalariaCaseReportRepository.findAll().size();
-        cHVMalariaCaseReport.setId(count.incrementAndGet());
+    void putWithIdMismatchChvMalariaCaseReport() throws Exception {
+        int databaseSizeBeforeUpdate = chvMalariaCaseReportRepository.findAll().size();
+        chvMalariaCaseReport.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restCHVMalariaCaseReportMockMvc
+        restChvMalariaCaseReportMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(cHVMalariaCaseReport))
+                    .content(TestUtil.convertObjectToJsonBytes(chvMalariaCaseReport))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the ChvMalariaCaseReport in the database
-        List<ChvMalariaCaseReport> cHVMalariaCaseReportList = cHVMalariaCaseReportRepository.findAll();
-        assertThat(cHVMalariaCaseReportList).hasSize(databaseSizeBeforeUpdate);
+        List<ChvMalariaCaseReport> chvMalariaCaseReportList = chvMalariaCaseReportRepository.findAll();
+        assertThat(chvMalariaCaseReportList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void putWithMissingIdPathParamCHVMalariaCaseReport() throws Exception {
-        int databaseSizeBeforeUpdate = cHVMalariaCaseReportRepository.findAll().size();
-        cHVMalariaCaseReport.setId(count.incrementAndGet());
+    void putWithMissingIdPathParamChvMalariaCaseReport() throws Exception {
+        int databaseSizeBeforeUpdate = chvMalariaCaseReportRepository.findAll().size();
+        chvMalariaCaseReport.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restCHVMalariaCaseReportMockMvc
+        restChvMalariaCaseReportMockMvc
             .perform(
-                put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cHVMalariaCaseReport))
+                put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(chvMalariaCaseReport))
             )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the ChvMalariaCaseReport in the database
-        List<ChvMalariaCaseReport> cHVMalariaCaseReportList = cHVMalariaCaseReportRepository.findAll();
-        assertThat(cHVMalariaCaseReportList).hasSize(databaseSizeBeforeUpdate);
+        List<ChvMalariaCaseReport> chvMalariaCaseReportList = chvMalariaCaseReportRepository.findAll();
+        assertThat(chvMalariaCaseReportList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void partialUpdateCHVMalariaCaseReportWithPatch() throws Exception {
+    void partialUpdateChvMalariaCaseReportWithPatch() throws Exception {
         // Initialize the database
-        cHVMalariaCaseReportRepository.saveAndFlush(cHVMalariaCaseReport);
+        chvMalariaCaseReportRepository.saveAndFlush(chvMalariaCaseReport);
 
-        int databaseSizeBeforeUpdate = cHVMalariaCaseReportRepository.findAll().size();
+        int databaseSizeBeforeUpdate = chvMalariaCaseReportRepository.findAll().size();
 
-        // Update the cHVMalariaCaseReport using partial update
+        // Update the chvMalariaCaseReport using partial update
         ChvMalariaCaseReport partialUpdatedChvMalariaCaseReport = new ChvMalariaCaseReport();
-        partialUpdatedChvMalariaCaseReport.setId(cHVMalariaCaseReport.getId());
+        partialUpdatedChvMalariaCaseReport.setId(chvMalariaCaseReport.getId());
 
         partialUpdatedChvMalariaCaseReport
+            .uid(UPDATED_UID)
             .created(UPDATED_CREATED)
             .date(UPDATED_DATE)
             .individualName(UPDATED_INDIVIDUAL_NAME)
-            .gender(UPDATED_GENDER)
-            .referral(UPDATED_REFERRAL)
-            .comment(UPDATED_COMMENT);
+            .isPregnant(UPDATED_IS_PREGNANT)
+            .suppsGiven(UPDATED_SUPPS_GIVEN)
+            .barImageUrl(UPDATED_BAR_IMAGE_URL);
 
-        restCHVMalariaCaseReportMockMvc
+        restChvMalariaCaseReportMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedChvMalariaCaseReport.getId())
                     .contentType("application/merge-patch+json")
@@ -463,35 +465,35 @@ class ChvMalariaCaseReportResourceIT {
             .andExpect(status().isOk());
 
         // Validate the ChvMalariaCaseReport in the database
-        List<ChvMalariaCaseReport> cHVMalariaCaseReportList = cHVMalariaCaseReportRepository.findAll();
-        assertThat(cHVMalariaCaseReportList).hasSize(databaseSizeBeforeUpdate);
-        ChvMalariaCaseReport testChvMalariaCaseReport = cHVMalariaCaseReportList.get(cHVMalariaCaseReportList.size() - 1);
-        assertThat(testChvMalariaCaseReport.getUid()).isEqualTo(DEFAULT_UID);
+        List<ChvMalariaCaseReport> chvMalariaCaseReportList = chvMalariaCaseReportRepository.findAll();
+        assertThat(chvMalariaCaseReportList).hasSize(databaseSizeBeforeUpdate);
+        ChvMalariaCaseReport testChvMalariaCaseReport = chvMalariaCaseReportList.get(chvMalariaCaseReportList.size() - 1);
+        assertThat(testChvMalariaCaseReport.getUid()).isEqualTo(UPDATED_UID);
         assertThat(testChvMalariaCaseReport.getCreated()).isEqualTo(UPDATED_CREATED);
         assertThat(testChvMalariaCaseReport.getLastUpdated()).isEqualTo(DEFAULT_LAST_UPDATED);
         assertThat(testChvMalariaCaseReport.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testChvMalariaCaseReport.getIndividualName()).isEqualTo(UPDATED_INDIVIDUAL_NAME);
-        assertThat(testChvMalariaCaseReport.getGender()).isEqualTo(UPDATED_GENDER);
-        assertThat(testChvMalariaCaseReport.getIsPregnant()).isEqualTo(DEFAULT_IS_PREGNANT);
+        assertThat(testChvMalariaCaseReport.getGender()).isEqualTo(DEFAULT_GENDER);
+        assertThat(testChvMalariaCaseReport.getIsPregnant()).isEqualTo(UPDATED_IS_PREGNANT);
         assertThat(testChvMalariaCaseReport.getMalariaTestResult()).isEqualTo(DEFAULT_MALARIA_TEST_RESULT);
         assertThat(testChvMalariaCaseReport.getDrugsGiven()).isEqualTo(DEFAULT_DRUGS_GIVEN);
-        assertThat(testChvMalariaCaseReport.getSuppsGiven()).isEqualTo(DEFAULT_SUPPS_GIVEN);
-        assertThat(testChvMalariaCaseReport.getReferral()).isEqualTo(UPDATED_REFERRAL);
-        assertThat(testChvMalariaCaseReport.getBarImageUrl()).isEqualTo(DEFAULT_BAR_IMAGE_URL);
-        assertThat(testChvMalariaCaseReport.getComment()).isEqualTo(UPDATED_COMMENT);
+        assertThat(testChvMalariaCaseReport.getSuppsGiven()).isEqualTo(UPDATED_SUPPS_GIVEN);
+        assertThat(testChvMalariaCaseReport.getReferral()).isEqualTo(DEFAULT_REFERRAL);
+        assertThat(testChvMalariaCaseReport.getBarImageUrl()).isEqualTo(UPDATED_BAR_IMAGE_URL);
+        assertThat(testChvMalariaCaseReport.getComment()).isEqualTo(DEFAULT_COMMENT);
     }
 
     @Test
     @Transactional
-    void fullUpdateCHVMalariaCaseReportWithPatch() throws Exception {
+    void fullUpdateChvMalariaCaseReportWithPatch() throws Exception {
         // Initialize the database
-        cHVMalariaCaseReportRepository.saveAndFlush(cHVMalariaCaseReport);
+        chvMalariaCaseReportRepository.saveAndFlush(chvMalariaCaseReport);
 
-        int databaseSizeBeforeUpdate = cHVMalariaCaseReportRepository.findAll().size();
+        int databaseSizeBeforeUpdate = chvMalariaCaseReportRepository.findAll().size();
 
-        // Update the cHVMalariaCaseReport using partial update
+        // Update the chvMalariaCaseReport using partial update
         ChvMalariaCaseReport partialUpdatedChvMalariaCaseReport = new ChvMalariaCaseReport();
-        partialUpdatedChvMalariaCaseReport.setId(cHVMalariaCaseReport.getId());
+        partialUpdatedChvMalariaCaseReport.setId(chvMalariaCaseReport.getId());
 
         partialUpdatedChvMalariaCaseReport
             .uid(UPDATED_UID)
@@ -508,7 +510,7 @@ class ChvMalariaCaseReportResourceIT {
             .barImageUrl(UPDATED_BAR_IMAGE_URL)
             .comment(UPDATED_COMMENT);
 
-        restCHVMalariaCaseReportMockMvc
+        restChvMalariaCaseReportMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedChvMalariaCaseReport.getId())
                     .contentType("application/merge-patch+json")
@@ -517,9 +519,9 @@ class ChvMalariaCaseReportResourceIT {
             .andExpect(status().isOk());
 
         // Validate the ChvMalariaCaseReport in the database
-        List<ChvMalariaCaseReport> cHVMalariaCaseReportList = cHVMalariaCaseReportRepository.findAll();
-        assertThat(cHVMalariaCaseReportList).hasSize(databaseSizeBeforeUpdate);
-        ChvMalariaCaseReport testChvMalariaCaseReport = cHVMalariaCaseReportList.get(cHVMalariaCaseReportList.size() - 1);
+        List<ChvMalariaCaseReport> chvMalariaCaseReportList = chvMalariaCaseReportRepository.findAll();
+        assertThat(chvMalariaCaseReportList).hasSize(databaseSizeBeforeUpdate);
+        ChvMalariaCaseReport testChvMalariaCaseReport = chvMalariaCaseReportList.get(chvMalariaCaseReportList.size() - 1);
         assertThat(testChvMalariaCaseReport.getUid()).isEqualTo(UPDATED_UID);
         assertThat(testChvMalariaCaseReport.getCreated()).isEqualTo(UPDATED_CREATED);
         assertThat(testChvMalariaCaseReport.getLastUpdated()).isEqualTo(UPDATED_LAST_UPDATED);
@@ -537,79 +539,79 @@ class ChvMalariaCaseReportResourceIT {
 
     @Test
     @Transactional
-    void patchNonExistingCHVMalariaCaseReport() throws Exception {
-        int databaseSizeBeforeUpdate = cHVMalariaCaseReportRepository.findAll().size();
-        cHVMalariaCaseReport.setId(count.incrementAndGet());
+    void patchNonExistingChvMalariaCaseReport() throws Exception {
+        int databaseSizeBeforeUpdate = chvMalariaCaseReportRepository.findAll().size();
+        chvMalariaCaseReport.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restCHVMalariaCaseReportMockMvc
+        restChvMalariaCaseReportMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, cHVMalariaCaseReport.getId())
+                patch(ENTITY_API_URL_ID, chvMalariaCaseReport.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(cHVMalariaCaseReport))
+                    .content(TestUtil.convertObjectToJsonBytes(chvMalariaCaseReport))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the ChvMalariaCaseReport in the database
-        List<ChvMalariaCaseReport> cHVMalariaCaseReportList = cHVMalariaCaseReportRepository.findAll();
-        assertThat(cHVMalariaCaseReportList).hasSize(databaseSizeBeforeUpdate);
+        List<ChvMalariaCaseReport> chvMalariaCaseReportList = chvMalariaCaseReportRepository.findAll();
+        assertThat(chvMalariaCaseReportList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void patchWithIdMismatchCHVMalariaCaseReport() throws Exception {
-        int databaseSizeBeforeUpdate = cHVMalariaCaseReportRepository.findAll().size();
-        cHVMalariaCaseReport.setId(count.incrementAndGet());
+    void patchWithIdMismatchChvMalariaCaseReport() throws Exception {
+        int databaseSizeBeforeUpdate = chvMalariaCaseReportRepository.findAll().size();
+        chvMalariaCaseReport.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restCHVMalariaCaseReportMockMvc
+        restChvMalariaCaseReportMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(cHVMalariaCaseReport))
+                    .content(TestUtil.convertObjectToJsonBytes(chvMalariaCaseReport))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the ChvMalariaCaseReport in the database
-        List<ChvMalariaCaseReport> cHVMalariaCaseReportList = cHVMalariaCaseReportRepository.findAll();
-        assertThat(cHVMalariaCaseReportList).hasSize(databaseSizeBeforeUpdate);
+        List<ChvMalariaCaseReport> chvMalariaCaseReportList = chvMalariaCaseReportRepository.findAll();
+        assertThat(chvMalariaCaseReportList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void patchWithMissingIdPathParamCHVMalariaCaseReport() throws Exception {
-        int databaseSizeBeforeUpdate = cHVMalariaCaseReportRepository.findAll().size();
-        cHVMalariaCaseReport.setId(count.incrementAndGet());
+    void patchWithMissingIdPathParamChvMalariaCaseReport() throws Exception {
+        int databaseSizeBeforeUpdate = chvMalariaCaseReportRepository.findAll().size();
+        chvMalariaCaseReport.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restCHVMalariaCaseReportMockMvc
+        restChvMalariaCaseReportMockMvc
             .perform(
                 patch(ENTITY_API_URL)
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(cHVMalariaCaseReport))
+                    .content(TestUtil.convertObjectToJsonBytes(chvMalariaCaseReport))
             )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the ChvMalariaCaseReport in the database
-        List<ChvMalariaCaseReport> cHVMalariaCaseReportList = cHVMalariaCaseReportRepository.findAll();
-        assertThat(cHVMalariaCaseReportList).hasSize(databaseSizeBeforeUpdate);
+        List<ChvMalariaCaseReport> chvMalariaCaseReportList = chvMalariaCaseReportRepository.findAll();
+        assertThat(chvMalariaCaseReportList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void deleteCHVMalariaCaseReport() throws Exception {
+    void deleteChvMalariaCaseReport() throws Exception {
         // Initialize the database
-        cHVMalariaCaseReportRepository.saveAndFlush(cHVMalariaCaseReport);
+        chvMalariaCaseReportRepository.saveAndFlush(chvMalariaCaseReport);
 
-        int databaseSizeBeforeDelete = cHVMalariaCaseReportRepository.findAll().size();
+        int databaseSizeBeforeDelete = chvMalariaCaseReportRepository.findAll().size();
 
-        // Delete the cHVMalariaCaseReport
-        restCHVMalariaCaseReportMockMvc
-            .perform(delete(ENTITY_API_URL_ID, cHVMalariaCaseReport.getId()).accept(MediaType.APPLICATION_JSON))
+        // Delete the chvMalariaCaseReport
+        restChvMalariaCaseReportMockMvc
+            .perform(delete(ENTITY_API_URL_ID, chvMalariaCaseReport.getId()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item
-        List<ChvMalariaCaseReport> cHVMalariaCaseReportList = cHVMalariaCaseReportRepository.findAll();
-        assertThat(cHVMalariaCaseReportList).hasSize(databaseSizeBeforeDelete - 1);
+        List<ChvMalariaCaseReport> chvMalariaCaseReportList = chvMalariaCaseReportRepository.findAll();
+        assertThat(chvMalariaCaseReportList).hasSize(databaseSizeBeforeDelete - 1);
     }
 }

@@ -2,36 +2,36 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
-import { CHVTeamDetailComponent } from './chv-team-detail.component';
+import { ChvTeamDetailComponent } from './chv-team-detail.component';
 
 describe('Component Tests', () => {
   describe('ChvTeam Management Detail Component', () => {
-    let comp: CHVTeamDetailComponent;
-    let fixture: ComponentFixture<CHVTeamDetailComponent>;
+    let comp: ChvTeamDetailComponent;
+    let fixture: ComponentFixture<ChvTeamDetailComponent>;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        declarations: [CHVTeamDetailComponent],
+        declarations: [ChvTeamDetailComponent],
         providers: [
           {
             provide: ActivatedRoute,
-            useValue: { data: of({ cHVTeam: { id: 123 } }) },
+            useValue: { data: of({ chvTeam: { id: 123 } }) },
           },
         ],
       })
-        .overrideTemplate(CHVTeamDetailComponent, '')
+        .overrideTemplate(ChvTeamDetailComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(CHVTeamDetailComponent);
+      fixture = TestBed.createComponent(ChvTeamDetailComponent);
       comp = fixture.componentInstance;
     });
 
     describe('OnInit', () => {
-      it('Should load cHVTeam on init', () => {
+      it('Should load chvTeam on init', () => {
         // WHEN
         comp.ngOnInit();
 
         // THEN
-        expect(comp.cHVTeam).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.chvTeam).toEqual(expect.objectContaining({ id: 123 }));
       });
     });
   });

@@ -2,45 +2,45 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { CHVMalariaCaseReportComponent } from '../list/chv-malaria-case-report.component';
-import { CHVMalariaCaseReportDetailComponent } from '../detail/chv-malaria-case-report-detail.component';
-import { CHVMalariaCaseReportUpdateComponent } from '../update/chv-malaria-case-report-update.component';
-import { CHVMalariaCaseReportRoutingResolveService } from './chv-malaria-case-report-routing-resolve.service';
+import { ChvMalariaCaseReportComponent } from '../list/chv-malaria-case-report.component';
+import { ChvMalariaCaseReportDetailComponent } from '../detail/chv-malaria-case-report-detail.component';
+import { ChvMalariaCaseReportUpdateComponent } from '../update/chv-malaria-case-report-update.component';
+import { ChvMalariaCaseReportRoutingResolveService } from './chv-malaria-case-report-routing-resolve.service';
 
-const cHVMalariaCaseReportRoute: Routes = [
+const chvMalariaCaseReportRoute: Routes = [
   {
     path: '',
-    component: CHVMalariaCaseReportComponent,
+    component: ChvMalariaCaseReportComponent,
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
-    component: CHVMalariaCaseReportDetailComponent,
+    component: ChvMalariaCaseReportDetailComponent,
     resolve: {
-      cHVMalariaCaseReport: CHVMalariaCaseReportRoutingResolveService,
+      chvMalariaCaseReport: ChvMalariaCaseReportRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
-    component: CHVMalariaCaseReportUpdateComponent,
+    component: ChvMalariaCaseReportUpdateComponent,
     resolve: {
-      cHVMalariaCaseReport: CHVMalariaCaseReportRoutingResolveService,
+      chvMalariaCaseReport: ChvMalariaCaseReportRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
-    component: CHVMalariaCaseReportUpdateComponent,
+    component: ChvMalariaCaseReportUpdateComponent,
     resolve: {
-      cHVMalariaCaseReport: CHVMalariaCaseReportRoutingResolveService,
+      chvMalariaCaseReport: ChvMalariaCaseReportRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(cHVMalariaCaseReportRoute)],
+  imports: [RouterModule.forChild(chvMalariaCaseReportRoute)],
   exports: [RouterModule],
 })
-export class CHVMalariaCaseReportRoutingModule {}
+export class ChvMalariaCaseReportRoutingModule {}

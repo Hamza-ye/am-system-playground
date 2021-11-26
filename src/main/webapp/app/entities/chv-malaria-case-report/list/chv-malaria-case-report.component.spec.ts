@@ -3,27 +3,27 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 
-import { CHVMalariaCaseReportService } from '../service/chv-malaria-case-report.service';
+import { ChvMalariaCaseReportService } from '../service/chv-malaria-case-report.service';
 
-import { CHVMalariaCaseReportComponent } from './chv-malaria-case-report.component';
+import { ChvMalariaCaseReportComponent } from './chv-malaria-case-report.component';
 
 describe('Component Tests', () => {
   describe('ChvMalariaCaseReport Management Component', () => {
-    let comp: CHVMalariaCaseReportComponent;
-    let fixture: ComponentFixture<CHVMalariaCaseReportComponent>;
-    let service: CHVMalariaCaseReportService;
+    let comp: ChvMalariaCaseReportComponent;
+    let fixture: ComponentFixture<ChvMalariaCaseReportComponent>;
+    let service: ChvMalariaCaseReportService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [CHVMalariaCaseReportComponent],
+        declarations: [ChvMalariaCaseReportComponent],
       })
-        .overrideTemplate(CHVMalariaCaseReportComponent, '')
+        .overrideTemplate(ChvMalariaCaseReportComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(CHVMalariaCaseReportComponent);
+      fixture = TestBed.createComponent(ChvMalariaCaseReportComponent);
       comp = fixture.componentInstance;
-      service = TestBed.inject(CHVMalariaCaseReportService);
+      service = TestBed.inject(ChvMalariaCaseReportService);
 
       const headers = new HttpHeaders().append('link', 'link;link');
       jest.spyOn(service, 'query').mockReturnValue(
@@ -42,7 +42,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.cHVMalariaCaseReports?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+      expect(comp.chvMalariaCaseReports?.[0]).toEqual(expect.objectContaining({ id: 123 }));
     });
   });
 });

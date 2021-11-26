@@ -3,10 +3,10 @@
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2
         id="app-chv-team-heading"
-        data-cy="CHVTeamCreateUpdateHeading"
-        appTranslate="amSystemPlaygroundApp.cHVTeam.home.createOrEditLabel"
+        data-cy="ChvTeamCreateUpdateHeading"
+        appTranslate="amSystemPlaygroundApp.chvTeam.home.createOrEditLabel"
       >
-        Create or edit a CHV Team
+        Create or edit a Chv Team
       </h2>
 
       <div>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVTeam.uid" for="field_uid">Uid</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvTeam.uid" for="field_uid">Uid</label>
           <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
           <div *ngIf="editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('uid')?.errors?.required" appTranslate="entity.validation.required">
@@ -36,18 +36,18 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVTeam.code" for="field_code">Code</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvTeam.code" for="field_code">Code</label>
           <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
           <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)"></div>
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVTeam.name" for="field_name">Name</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvTeam.name" for="field_name">Name</label>
           <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVTeam.description" for="field_description"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvTeam.description" for="field_description"
             >Description</label
           >
           <input
@@ -61,7 +61,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVTeam.created" for="field_created">Created</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvTeam.created" for="field_created">Created</label>
           <div class="d-flex">
             <input
               id="field_created"
@@ -76,7 +76,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVTeam.lastUpdated" for="field_lastUpdated"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvTeam.lastUpdated" for="field_lastUpdated"
             >Last Updated</label
           >
           <div class="d-flex">
@@ -93,7 +93,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVTeam.teamNo" for="field_teamNo">Team No</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvTeam.teamNo" for="field_teamNo">Team No</label>
           <input type="text" class="form-control" name="teamNo" id="field_teamNo" data-cy="teamNo" formControlName="teamNo" />
           <div *ngIf="editForm.get('teamNo')!.invalid && (editForm.get('teamNo')!.dirty || editForm.get('teamNo')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('teamNo')?.errors?.required" appTranslate="entity.validation.required">
@@ -111,15 +111,15 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVTeam.teamType" for="field_teamType">Team Type</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvTeam.teamType" for="field_teamType">Team Type</label>
           <select class="form-control" name="teamType" formControlName="teamType" id="field_teamType" data-cy="teamType">
-            <option [ngValue]="null">{{ 'amSystemPlaygroundApp.CHVTeamType.null' | translate }}</option>
-            <option value="SUPERVISOR">{{ 'amSystemPlaygroundApp.CHVTeamType.SUPERVISOR' | translate }}</option>
-            <option value="EVALUATION">{{ 'amSystemPlaygroundApp.CHVTeamType.EVALUATION' | translate }}</option>
-            <option value="HEAD_OF_ACTIVITY">{{ 'amSystemPlaygroundApp.CHVTeamType.HEAD_OF_ACTIVITY' | translate }}</option>
-            <option value="FINANCE">{{ 'amSystemPlaygroundApp.CHVTeamType.FINANCE' | translate }}</option>
-            <option value="PARTNER">{{ 'amSystemPlaygroundApp.CHVTeamType.PARTNER' | translate }}</option>
-            <option value="MOH">{{ 'amSystemPlaygroundApp.CHVTeamType.MOH' | translate }}</option>
+            <option [ngValue]="null">{{ 'amSystemPlaygroundApp.ChvTeamType.null' | translate }}</option>
+            <option value="SUPERVISOR">{{ 'amSystemPlaygroundApp.ChvTeamType.SUPERVISOR' | translate }}</option>
+            <option value="EVALUATION">{{ 'amSystemPlaygroundApp.ChvTeamType.EVALUATION' | translate }}</option>
+            <option value="HEAD_OF_ACTIVITY">{{ 'amSystemPlaygroundApp.ChvTeamType.HEAD_OF_ACTIVITY' | translate }}</option>
+            <option value="FINANCE">{{ 'amSystemPlaygroundApp.ChvTeamType.FINANCE' | translate }}</option>
+            <option value="PARTNER">{{ 'amSystemPlaygroundApp.ChvTeamType.PARTNER' | translate }}</option>
+            <option value="MOH">{{ 'amSystemPlaygroundApp.ChvTeamType.MOH' | translate }}</option>
           </select>
           <div *ngIf="editForm.get('teamType')!.invalid && (editForm.get('teamType')!.dirty || editForm.get('teamType')!.touched)">
             <small
@@ -133,7 +133,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVTeam.createdBy" for="field_createdBy">Created By</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvTeam.createdBy" for="field_createdBy">Created By</label>
           <select class="form-control" id="field_createdBy" data-cy="createdBy" name="createdBy" formControlName="createdBy">
             <option [ngValue]="null"></option>
             <option
@@ -146,7 +146,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVTeam.lastUpdatedBy" for="field_lastUpdatedBy"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvTeam.lastUpdatedBy" for="field_lastUpdatedBy"
             >Last Updated By</label
           >
           <select
@@ -167,7 +167,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVTeam.person" for="field_person">Person</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvTeam.person" for="field_person">Person</label>
           <select class="form-control" id="field_person" data-cy="person" name="person" formControlName="person">
             <option [ngValue]="null"></option>
             <option
@@ -180,7 +180,7 @@
         </div>
 
         <div class="form-group">
-          <label appTranslate="amSystemPlaygroundApp.cHVTeam.responsibleForChv" for="field_responsibleForChvs">Responsible For Chv</label>
+          <label appTranslate="amSystemPlaygroundApp.chvTeam.responsibleForChv" for="field_responsibleForChvs">Responsible For Chv</label>
           <select
             class="form-control"
             id="field_responsibleForChvs"
@@ -190,10 +190,10 @@
             formControlName="responsibleForChvs"
           >
             <option
-              [ngValue]="getSelectedCHV(cHVOption, editForm.get('responsibleForChvs')!.value)"
-              *ngFor="let cHVOption of cHVSSharedCollection; trackBy: trackCHVById"
+              [ngValue]="getSelectedChv(chvOption, editForm.get('responsibleForChvs')!.value)"
+              *ngFor="let chvOption of chvsSharedCollection; trackBy: trackChvById"
             >
-              {{ cHVOption.code }}
+              {{ chvOption.code }}
             </option>
           </select>
         </div>

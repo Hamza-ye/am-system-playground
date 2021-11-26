@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { ICHVTeam } from '../chv-team.model';
+import { IChvTeam } from '../chv-team.model';
 
 @Component({
   selector: 'app-chv-team-detail',
   templateUrl: './chv-team-detail.component.html',
 })
-export class CHVTeamDetailComponent implements OnInit {
-  cHVTeam: ICHVTeam | null = null;
+export class ChvTeamDetailComponent implements OnInit {
+  chvTeam: IChvTeam | null = null;
 
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ cHVTeam }) => {
-      this.cHVTeam = cHVTeam;
+    this.activatedRoute.data.subscribe(({ chvTeam }) => {
+      this.chvTeam = chvTeam;
     });
   }
 

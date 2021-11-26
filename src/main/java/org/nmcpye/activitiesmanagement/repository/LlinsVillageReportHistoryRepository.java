@@ -1,9 +1,11 @@
 package org.nmcpye.activitiesmanagement.repository;
 
-import java.util.List;
 import org.nmcpye.activitiesmanagement.domain.LlinsVillageReportHistory;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Spring Data SQL repository for the LlinsVillageReportHistory entity.
@@ -12,12 +14,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LlinsVillageReportHistoryRepository extends JpaRepository<LlinsVillageReportHistory, Long> {
     @Query(
-        "select lLINSVillageReportHistory from LlinsVillageReportHistory lLINSVillageReportHistory where lLINSVillageReportHistory.createdBy.login = ?#{principal.username}"
+        "select llinsVillageReportHistory from LlinsVillageReportHistory llinsVillageReportHistory where llinsVillageReportHistory.createdBy.login = ?#{principal.username}"
     )
-    List<LlinsVillageReportHistory> findByUserIsCurrentUser();
+    List<LlinsVillageReportHistory> findByCreatedByIsCurrentUser();
 
     @Query(
-        "select lLINSVillageReportHistory from LlinsVillageReportHistory lLINSVillageReportHistory where lLINSVillageReportHistory.lastUpdatedBy.login = ?#{principal.username}"
+        "select llinsVillageReportHistory from LlinsVillageReportHistory llinsVillageReportHistory where llinsVillageReportHistory.lastUpdatedBy.login = ?#{principal.username}"
     )
     List<LlinsVillageReportHistory> findByLastUpdatedByIsCurrentUser();
 }

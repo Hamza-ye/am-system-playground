@@ -1,23 +1,23 @@
 package org.nmcpye.activitiesmanagement.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.Test;
 import org.nmcpye.activitiesmanagement.web.rest.TestUtil;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class LlinsFamilyReportTest {
 
     @Test
     void equalsVerifier() throws Exception {
         TestUtil.equalsVerifier(LlinsFamilyReport.class);
-        LlinsFamilyReport lLINSFamilyReport1 = new LlinsFamilyReport();
-        lLINSFamilyReport1.setId(1L);
-        LlinsFamilyReport lLINSFamilyReport2 = new LlinsFamilyReport();
-        lLINSFamilyReport2.setId(lLINSFamilyReport1.getId());
-        assertThat(lLINSFamilyReport1).isEqualTo(lLINSFamilyReport2);
-        lLINSFamilyReport2.setId(2L);
-        assertThat(lLINSFamilyReport1).isNotEqualTo(lLINSFamilyReport2);
-        lLINSFamilyReport1.setId(null);
-        assertThat(lLINSFamilyReport1).isNotEqualTo(lLINSFamilyReport2);
+        LlinsFamilyReport llinsFamilyReport1 = new LlinsFamilyReport();
+        llinsFamilyReport1.setId(1L);
+        LlinsFamilyReport llinsFamilyReport2 = new LlinsFamilyReport();
+        llinsFamilyReport2.setId(llinsFamilyReport1.getId());
+        assertThat(llinsFamilyReport1).isEqualTo(llinsFamilyReport2);
+        llinsFamilyReport2.setId(2L);
+        assertThat(llinsFamilyReport1).isNotEqualTo(llinsFamilyReport2);
+        llinsFamilyReport1.setId(null);
+        assertThat(llinsFamilyReport1).isNotEqualTo(llinsFamilyReport2);
     }
 }

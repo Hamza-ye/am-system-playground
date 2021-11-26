@@ -1,6 +1,6 @@
-<form *ngIf="lLINSVillageReport" name="deleteForm" (ngSubmit)="confirmDelete(lLINSVillageReport.id!)">
+<form *ngIf="llinsVillageReport" name="deleteForm" (ngSubmit)="confirmDelete(llinsVillageReport.id!)">
   <div class="modal-header">
-    <h4 class="modal-title" data-cy="lLINSVillageReportDeleteDialogHeading" appTranslate="entity.delete.title">Confirm delete operation</h4>
+    <h4 class="modal-title" data-cy="llinsVillageReportDeleteDialogHeading" appTranslate="entity.delete.title">Confirm delete operation</h4>
 
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
   </div>
@@ -9,11 +9,11 @@
     <app-alert-error></app-alert-error>
 
     <p
-      id="app-delete-lLINSVillageReport-heading"
-      appTranslate="amSystemPlaygroundApp.lLINSVillageReport.delete.question"
-      [translateValues]="{ id: lLINSVillageReport.id }"
+      id="app-delete-llinsVillageReport-heading"
+      appTranslate="amSystemPlaygroundApp.llinsVillageReport.delete.question"
+      [translateValues]="{ id: llinsVillageReport.id }"
     >
-      Are you sure you want to delete this LLINS Village Report?
+      Are you sure you want to delete this Llins Village Report?
     </p>
   </div>
 
@@ -22,7 +22,7 @@
       <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
     </button>
 
-    <button id="app-confirm-delete-lLINSVillageReport" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+    <button id="app-confirm-delete-llinsVillageReport" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
       <fa-icon icon="times"></fa-icon>&nbsp;<span appTranslate="entity.action.delete">Delete</span>
     </button>
   </div>

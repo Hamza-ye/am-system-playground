@@ -1,11 +1,11 @@
 <div>
-  <h2 id="page-heading" data-cy="LLINSVillageTargetHeading">
-    <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.home.title">LLINS Village Targets</span>
+  <h2 id="page-heading" data-cy="LlinsVillageTargetHeading">
+    <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.home.title">Llins Village Targets</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.home.refreshListLabel">Refresh List</span>
+        <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.home.refreshListLabel">Refresh List</span>
       </button>
 
       <button
@@ -15,7 +15,7 @@
         [routerLink]="['/llins-village-target/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.home.createLabel"> Create a new LLINS Village Target </span>
+        <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.home.createLabel"> Create a new Llins Village Target </span>
       </button>
     </div>
   </h2>
@@ -24,121 +24,121 @@
 
   <app-alert></app-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="lLINSVillageTargets?.length === 0">
-    <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.home.notFound">No lLINSVillageTargets found</span>
+  <div class="alert alert-warning" id="no-result" *ngIf="llinsVillageTargets?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.home.notFound">No llinsVillageTargets found</span>
   </div>
 
-  <div class="table-responsive" id="entities" *ngIf="lLINSVillageTargets && lLINSVillageTargets.length > 0">
+  <div class="table-responsive" id="entities" *ngIf="llinsVillageTargets && llinsVillageTargets.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
           <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" appSortBy="uid">
-            <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.uid">Uid</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.uid">Uid</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="created">
-            <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.created">Created</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.created">Created</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="lastUpdated">
-            <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.lastUpdated">Last Updated</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.lastUpdated">Last Updated</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="residentsIndividuals">
-            <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.residentsIndividuals">Residents Individuals</span>
+            <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.residentsIndividuals">Residents Individuals</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="idpsIndividuals">
-            <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.idpsIndividuals">Idps Individuals</span>
+            <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.idpsIndividuals">Idps Individuals</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="residentsFamilies">
-            <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.residentsFamilies">Residents Families</span>
+            <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.residentsFamilies">Residents Families</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="idpsFamilies">
-            <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.idpsFamilies">Idps Families</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.idpsFamilies">Idps Families</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="noOfDaysNeeded">
-            <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.noOfDaysNeeded">No Of Days Needed</span>
+            <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.noOfDaysNeeded">No Of Days Needed</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="quantity">
-            <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.quantity">Quantity</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.quantity">Quantity</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="organisationUnit.name">
-            <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.organisationUnit">Organisation Unit</span>
+            <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.organisationUnit">Organisation Unit</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="createdBy.login">
-            <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="lastUpdatedBy.login">
-            <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.lastUpdatedBy">Last Updated By</span>
+            <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.lastUpdatedBy">Last Updated By</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="dayPlanned.dayLabel">
-            <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.dayPlanned">Day Planned</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.dayPlanned">Day Planned</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="statusOfCoverage.status">
-            <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.statusOfCoverage">Status Of Coverage</span>
+            <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.statusOfCoverage">Status Of Coverage</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="teamAssigned.name">
-            <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.teamAssigned">Team Assigned</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.teamAssigned">Team Assigned</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let lLINSVillageTarget of lLINSVillageTargets; trackBy: trackId" data-cy="entityTable">
+        <tr *ngFor="let llinsVillageTarget of llinsVillageTargets; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/llins-village-target', lLINSVillageTarget.id, 'view']">{{ lLINSVillageTarget.id }}</a>
+            <a [routerLink]="['/llins-village-target', llinsVillageTarget.id, 'view']">{{ llinsVillageTarget.id }}</a>
           </td>
-          <td>{{ lLINSVillageTarget.uid }}</td>
-          <td>{{ lLINSVillageTarget.created | formatMediumDatetime }}</td>
-          <td>{{ lLINSVillageTarget.lastUpdated | formatMediumDatetime }}</td>
-          <td>{{ lLINSVillageTarget.residentsIndividuals }}</td>
-          <td>{{ lLINSVillageTarget.idpsIndividuals }}</td>
-          <td>{{ lLINSVillageTarget.residentsFamilies }}</td>
-          <td>{{ lLINSVillageTarget.idpsFamilies }}</td>
-          <td>{{ lLINSVillageTarget.noOfDaysNeeded }}</td>
-          <td>{{ lLINSVillageTarget.quantity }}</td>
+          <td>{{ llinsVillageTarget.uid }}</td>
+          <td>{{ llinsVillageTarget.created | formatMediumDatetime }}</td>
+          <td>{{ llinsVillageTarget.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ llinsVillageTarget.residentsIndividuals }}</td>
+          <td>{{ llinsVillageTarget.idpsIndividuals }}</td>
+          <td>{{ llinsVillageTarget.residentsFamilies }}</td>
+          <td>{{ llinsVillageTarget.idpsFamilies }}</td>
+          <td>{{ llinsVillageTarget.noOfDaysNeeded }}</td>
+          <td>{{ llinsVillageTarget.quantity }}</td>
           <td>
-            <div *ngIf="lLINSVillageTarget.organisationUnit">
-              <a [routerLink]="['/organisation-unit', lLINSVillageTarget.organisationUnit?.id, 'view']">{{
-                lLINSVillageTarget.organisationUnit?.name
+            <div *ngIf="llinsVillageTarget.organisationUnit">
+              <a [routerLink]="['/organisation-unit', llinsVillageTarget.organisationUnit?.id, 'view']">{{
+                llinsVillageTarget.organisationUnit?.name
               }}</a>
             </div>
           </td>
           <td>
-            {{ lLINSVillageTarget.createdBy?.login }}
+            {{ llinsVillageTarget.createdBy?.login }}
           </td>
           <td>
-            {{ lLINSVillageTarget.lastUpdatedBy?.login }}
+            {{ llinsVillageTarget.lastUpdatedBy?.login }}
           </td>
           <td>
-            <div *ngIf="lLINSVillageTarget.dayPlanned">
-              <a [routerLink]="['/working-day', lLINSVillageTarget.dayPlanned?.id, 'view']">{{
-                lLINSVillageTarget.dayPlanned?.dayLabel
+            <div *ngIf="llinsVillageTarget.dayPlanned">
+              <a [routerLink]="['/working-day', llinsVillageTarget.dayPlanned?.id, 'view']">{{
+                llinsVillageTarget.dayPlanned?.dayLabel
               }}</a>
             </div>
           </td>
           <td>
-            <div *ngIf="lLINSVillageTarget.statusOfCoverage">
-              <a [routerLink]="['/status-of-coverage', lLINSVillageTarget.statusOfCoverage?.id, 'view']">{{
-                lLINSVillageTarget.statusOfCoverage?.status
+            <div *ngIf="llinsVillageTarget.statusOfCoverage">
+              <a [routerLink]="['/status-of-coverage', llinsVillageTarget.statusOfCoverage?.id, 'view']">{{
+                llinsVillageTarget.statusOfCoverage?.status
               }}</a>
             </div>
           </td>
           <td>
-            <div *ngIf="lLINSVillageTarget.teamAssigned">
-              <a [routerLink]="['/team', lLINSVillageTarget.teamAssigned?.id, 'view']">{{ lLINSVillageTarget.teamAssigned?.name }}</a>
+            <div *ngIf="llinsVillageTarget.teamAssigned">
+              <a [routerLink]="['/team', llinsVillageTarget.teamAssigned?.id, 'view']">{{ llinsVillageTarget.teamAssigned?.name }}</a>
             </div>
           </td>
           <td class="text-right">
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/llins-village-target', lLINSVillageTarget.id, 'view']"
+                [routerLink]="['/llins-village-target', llinsVillageTarget.id, 'view']"
                 class="btn btn-info btn-sm"
                 data-cy="entityDetailsButton"
               >
@@ -148,7 +148,7 @@
 
               <button
                 type="submit"
-                [routerLink]="['/llins-village-target', lLINSVillageTarget.id, 'edit']"
+                [routerLink]="['/llins-village-target', llinsVillageTarget.id, 'edit']"
                 class="btn btn-primary btn-sm"
                 data-cy="entityEditButton"
               >
@@ -156,7 +156,7 @@
                 <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
               </button>
 
-              <button type="submit" (click)="delete(lLINSVillageTarget)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button type="submit" (click)="delete(llinsVillageTarget)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
               </button>
@@ -167,7 +167,7 @@
     </table>
   </div>
 
-  <div *ngIf="lLINSVillageTargets && lLINSVillageTargets.length > 0">
+  <div *ngIf="llinsVillageTargets && llinsVillageTargets.length > 0">
     <div class="row justify-content-center">
       <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
     </div>

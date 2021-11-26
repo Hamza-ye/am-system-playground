@@ -5,63 +5,63 @@ import { Observable } from 'rxjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { IWHMovement, getWHMovementIdentifier } from '../wh-movement.model';
+import { IWhMovement, getWhMovementIdentifier } from '../wh-movement.model';
 
-export type EntityResponseType = HttpResponse<IWHMovement>;
-export type EntityArrayResponseType = HttpResponse<IWHMovement[]>;
+export type EntityResponseType = HttpResponse<IWhMovement>;
+export type EntityArrayResponseType = HttpResponse<IWhMovement[]>;
 
 @Injectable({ providedIn: 'root' })
-export class WHMovementService {
+export class WhMovementService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/wh-movements');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  create(wHMovement: IWHMovement): Observable<EntityResponseType> {
-    return this.http.post<IWHMovement>(this.resourceUrl, wHMovement, { observe: 'response' });
+  create(whMovement: IWhMovement): Observable<EntityResponseType> {
+    return this.http.post<IWhMovement>(this.resourceUrl, whMovement, { observe: 'response' });
   }
 
-  update(wHMovement: IWHMovement): Observable<EntityResponseType> {
-    return this.http.put<IWHMovement>(`${this.resourceUrl}/${getWHMovementIdentifier(wHMovement) as number}`, wHMovement, {
+  update(whMovement: IWhMovement): Observable<EntityResponseType> {
+    return this.http.put<IWhMovement>(`${this.resourceUrl}/${getWhMovementIdentifier(whMovement) as number}`, whMovement, {
       observe: 'response',
     });
   }
 
-  partialUpdate(wHMovement: IWHMovement): Observable<EntityResponseType> {
-    return this.http.patch<IWHMovement>(`${this.resourceUrl}/${getWHMovementIdentifier(wHMovement) as number}`, wHMovement, {
+  partialUpdate(whMovement: IWhMovement): Observable<EntityResponseType> {
+    return this.http.patch<IWhMovement>(`${this.resourceUrl}/${getWhMovementIdentifier(whMovement) as number}`, whMovement, {
       observe: 'response',
     });
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IWHMovement>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    return this.http.get<IWhMovement>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http.get<IWHMovement[]>(this.resourceUrl, { params: options, observe: 'response' });
+    return this.http.get<IWhMovement[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  addWHMovementToCollectionIfMissing(
-    wHMovementCollection: IWHMovement[],
-    ...wHMovementsToCheck: (IWHMovement | null | undefined)[]
-  ): IWHMovement[] {
-    const wHMovements: IWHMovement[] = wHMovementsToCheck.filter(isPresent);
-    if (wHMovements.length > 0) {
-      const wHMovementCollectionIdentifiers = wHMovementCollection.map(wHMovementItem => getWHMovementIdentifier(wHMovementItem)!);
-      const wHMovementsToAdd = wHMovements.filter(wHMovementItem => {
-        const wHMovementIdentifier = getWHMovementIdentifier(wHMovementItem);
-        if (wHMovementIdentifier == null || wHMovementCollectionIdentifiers.includes(wHMovementIdentifier)) {
+  addWhMovementToCollectionIfMissing(
+    whMovementCollection: IWhMovement[],
+    ...whMovementsToCheck: (IWhMovement | null | undefined)[]
+  ): IWhMovement[] {
+    const whMovements: IWhMovement[] = whMovementsToCheck.filter(isPresent);
+    if (whMovements.length > 0) {
+      const whMovementCollectionIdentifiers = whMovementCollection.map(whMovementItem => getWhMovementIdentifier(whMovementItem)!);
+      const whMovementsToAdd = whMovements.filter(whMovementItem => {
+        const whMovementIdentifier = getWhMovementIdentifier(whMovementItem);
+        if (whMovementIdentifier == null || whMovementCollectionIdentifiers.includes(whMovementIdentifier)) {
           return false;
         }
-        wHMovementCollectionIdentifiers.push(wHMovementIdentifier);
+        whMovementCollectionIdentifiers.push(whMovementIdentifier);
         return true;
       });
-      return [...wHMovementsToAdd, ...wHMovementCollection];
+      return [...whMovementsToAdd, ...whMovementCollection];
     }
-    return wHMovementCollection;
+    return whMovementCollection;
   }
 }

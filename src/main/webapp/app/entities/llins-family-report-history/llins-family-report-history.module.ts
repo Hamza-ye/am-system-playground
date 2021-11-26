@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'app/shared/shared.module';
-import { LLINSFamilyReportHistoryComponent } from './list/llins-family-report-history.component';
-import { LLINSFamilyReportHistoryDetailComponent } from './detail/llins-family-report-history-detail.component';
-import { LLINSFamilyReportHistoryUpdateComponent } from './update/llins-family-report-history-update.component';
-import { LLINSFamilyReportHistoryDeleteDialogComponent } from './delete/llins-family-report-history-delete-dialog.component';
-import { LLINSFamilyReportHistoryRoutingModule } from './route/llins-family-report-history-routing.module';
+import { LlinsFamilyReportHistoryComponent } from './list/llins-family-report-history.component';
+import { LlinsFamilyReportHistoryDetailComponent } from './detail/llins-family-report-history-detail.component';
+import { LlinsFamilyReportHistoryUpdateComponent } from './update/llins-family-report-history-update.component';
+import { LlinsFamilyReportHistoryDeleteDialogComponent } from './delete/llins-family-report-history-delete-dialog.component';
+import { LlinsFamilyReportHistoryRoutingModule } from './route/llins-family-report-history-routing.module';
 
 @NgModule({
-  imports: [SharedModule, LLINSFamilyReportHistoryRoutingModule],
+  imports: [SharedModule, LlinsFamilyReportHistoryRoutingModule],
   declarations: [
-    LLINSFamilyReportHistoryComponent,
-    LLINSFamilyReportHistoryDetailComponent,
-    LLINSFamilyReportHistoryUpdateComponent,
-    LLINSFamilyReportHistoryDeleteDialogComponent,
+    LlinsFamilyReportHistoryComponent,
+    LlinsFamilyReportHistoryDetailComponent,
+    LlinsFamilyReportHistoryUpdateComponent,
+    LlinsFamilyReportHistoryDeleteDialogComponent,
   ],
-  entryComponents: [LLINSFamilyReportHistoryDeleteDialogComponent],
+  entryComponents: [LlinsFamilyReportHistoryDeleteDialogComponent],
 })
-export class LLINSFamilyReportHistoryModule {}
+export class LlinsFamilyReportHistoryModule {}

@@ -7,40 +7,40 @@ import * as dayjs from 'dayjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { ICHVMalariaReportVersion1, getCHVMalariaReportVersion1Identifier } from '../chv-malaria-report-version-1.model';
+import { IChvMalariaReportVersion1, getChvMalariaReportVersion1Identifier } from '../chv-malaria-report-version-1.model';
 
-export type EntityResponseType = HttpResponse<ICHVMalariaReportVersion1>;
-export type EntityArrayResponseType = HttpResponse<ICHVMalariaReportVersion1[]>;
+export type EntityResponseType = HttpResponse<IChvMalariaReportVersion1>;
+export type EntityArrayResponseType = HttpResponse<IChvMalariaReportVersion1[]>;
 
 @Injectable({ providedIn: 'root' })
-export class CHVMalariaReportVersion1Service {
+export class ChvMalariaReportVersion1Service {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/chv-malaria-report-version-1-s');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  create(cHVMalariaReportVersion1: ICHVMalariaReportVersion1): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(cHVMalariaReportVersion1);
+  create(chvMalariaReportVersion1: IChvMalariaReportVersion1): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(chvMalariaReportVersion1);
     return this.http
-      .post<ICHVMalariaReportVersion1>(this.resourceUrl, copy, { observe: 'response' })
+      .post<IChvMalariaReportVersion1>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  update(cHVMalariaReportVersion1: ICHVMalariaReportVersion1): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(cHVMalariaReportVersion1);
+  update(chvMalariaReportVersion1: IChvMalariaReportVersion1): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(chvMalariaReportVersion1);
     return this.http
-      .put<ICHVMalariaReportVersion1>(
-        `${this.resourceUrl}/${getCHVMalariaReportVersion1Identifier(cHVMalariaReportVersion1) as number}`,
+      .put<IChvMalariaReportVersion1>(
+        `${this.resourceUrl}/${getChvMalariaReportVersion1Identifier(chvMalariaReportVersion1) as number}`,
         copy,
         { observe: 'response' }
       )
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  partialUpdate(cHVMalariaReportVersion1: ICHVMalariaReportVersion1): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(cHVMalariaReportVersion1);
+  partialUpdate(chvMalariaReportVersion1: IChvMalariaReportVersion1): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(chvMalariaReportVersion1);
     return this.http
-      .patch<ICHVMalariaReportVersion1>(
-        `${this.resourceUrl}/${getCHVMalariaReportVersion1Identifier(cHVMalariaReportVersion1) as number}`,
+      .patch<IChvMalariaReportVersion1>(
+        `${this.resourceUrl}/${getChvMalariaReportVersion1Identifier(chvMalariaReportVersion1) as number}`,
         copy,
         { observe: 'response' }
       )
@@ -49,14 +49,14 @@ export class CHVMalariaReportVersion1Service {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<ICHVMalariaReportVersion1>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .get<IChvMalariaReportVersion1>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
-      .get<ICHVMalariaReportVersion1[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .get<IChvMalariaReportVersion1[]>(this.resourceUrl, { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
@@ -64,35 +64,35 @@ export class CHVMalariaReportVersion1Service {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  addCHVMalariaReportVersion1ToCollectionIfMissing(
-    cHVMalariaReportVersion1Collection: ICHVMalariaReportVersion1[],
-    ...cHVMalariaReportVersion1sToCheck: (ICHVMalariaReportVersion1 | null | undefined)[]
-  ): ICHVMalariaReportVersion1[] {
-    const cHVMalariaReportVersion1s: ICHVMalariaReportVersion1[] = cHVMalariaReportVersion1sToCheck.filter(isPresent);
-    if (cHVMalariaReportVersion1s.length > 0) {
-      const cHVMalariaReportVersion1CollectionIdentifiers = cHVMalariaReportVersion1Collection.map(
-        cHVMalariaReportVersion1Item => getCHVMalariaReportVersion1Identifier(cHVMalariaReportVersion1Item)!
+  addChvMalariaReportVersion1ToCollectionIfMissing(
+    chvMalariaReportVersion1Collection: IChvMalariaReportVersion1[],
+    ...chvMalariaReportVersion1sToCheck: (IChvMalariaReportVersion1 | null | undefined)[]
+  ): IChvMalariaReportVersion1[] {
+    const chvMalariaReportVersion1s: IChvMalariaReportVersion1[] = chvMalariaReportVersion1sToCheck.filter(isPresent);
+    if (chvMalariaReportVersion1s.length > 0) {
+      const chvMalariaReportVersion1CollectionIdentifiers = chvMalariaReportVersion1Collection.map(
+        chvMalariaReportVersion1Item => getChvMalariaReportVersion1Identifier(chvMalariaReportVersion1Item)!
       );
-      const cHVMalariaReportVersion1sToAdd = cHVMalariaReportVersion1s.filter(cHVMalariaReportVersion1Item => {
-        const cHVMalariaReportVersion1Identifier = getCHVMalariaReportVersion1Identifier(cHVMalariaReportVersion1Item);
+      const chvMalariaReportVersion1sToAdd = chvMalariaReportVersion1s.filter(chvMalariaReportVersion1Item => {
+        const chvMalariaReportVersion1Identifier = getChvMalariaReportVersion1Identifier(chvMalariaReportVersion1Item);
         if (
-          cHVMalariaReportVersion1Identifier == null ||
-          cHVMalariaReportVersion1CollectionIdentifiers.includes(cHVMalariaReportVersion1Identifier)
+          chvMalariaReportVersion1Identifier == null ||
+          chvMalariaReportVersion1CollectionIdentifiers.includes(chvMalariaReportVersion1Identifier)
         ) {
           return false;
         }
-        cHVMalariaReportVersion1CollectionIdentifiers.push(cHVMalariaReportVersion1Identifier);
+        chvMalariaReportVersion1CollectionIdentifiers.push(chvMalariaReportVersion1Identifier);
         return true;
       });
-      return [...cHVMalariaReportVersion1sToAdd, ...cHVMalariaReportVersion1Collection];
+      return [...chvMalariaReportVersion1sToAdd, ...chvMalariaReportVersion1Collection];
     }
-    return cHVMalariaReportVersion1Collection;
+    return chvMalariaReportVersion1Collection;
   }
 
-  protected convertDateFromClient(cHVMalariaReportVersion1: ICHVMalariaReportVersion1): ICHVMalariaReportVersion1 {
-    return Object.assign({}, cHVMalariaReportVersion1, {
-      created: cHVMalariaReportVersion1.created?.isValid() ? cHVMalariaReportVersion1.created.toJSON() : undefined,
-      lastUpdated: cHVMalariaReportVersion1.lastUpdated?.isValid() ? cHVMalariaReportVersion1.lastUpdated.toJSON() : undefined,
+  protected convertDateFromClient(chvMalariaReportVersion1: IChvMalariaReportVersion1): IChvMalariaReportVersion1 {
+    return Object.assign({}, chvMalariaReportVersion1, {
+      created: chvMalariaReportVersion1.created?.isValid() ? chvMalariaReportVersion1.created.toJSON() : undefined,
+      lastUpdated: chvMalariaReportVersion1.lastUpdated?.isValid() ? chvMalariaReportVersion1.lastUpdated.toJSON() : undefined,
     });
   }
 
@@ -106,10 +106,10 @@ export class CHVMalariaReportVersion1Service {
 
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
-      res.body.forEach((cHVMalariaReportVersion1: ICHVMalariaReportVersion1) => {
-        cHVMalariaReportVersion1.created = cHVMalariaReportVersion1.created ? dayjs(cHVMalariaReportVersion1.created) : undefined;
-        cHVMalariaReportVersion1.lastUpdated = cHVMalariaReportVersion1.lastUpdated
-          ? dayjs(cHVMalariaReportVersion1.lastUpdated)
+      res.body.forEach((chvMalariaReportVersion1: IChvMalariaReportVersion1) => {
+        chvMalariaReportVersion1.created = chvMalariaReportVersion1.created ? dayjs(chvMalariaReportVersion1.created) : undefined;
+        chvMalariaReportVersion1.lastUpdated = chvMalariaReportVersion1.lastUpdated
+          ? dayjs(chvMalariaReportVersion1.lastUpdated)
           : undefined;
       });
     }

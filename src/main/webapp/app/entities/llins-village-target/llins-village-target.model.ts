@@ -1,12 +1,12 @@
 import * as dayjs from 'dayjs';
-import { ILLINSVillageReport } from 'app/entities/llins-village-report/llins-village-report.model';
+import { ILlinsVillageReport } from 'app/entities/llins-village-report/llins-village-report.model';
 import { IOrganisationUnit } from 'app/entities/organisation-unit/organisation-unit.model';
 import { IUser } from 'app/entities/user/user.model';
 import { IWorkingDay } from 'app/entities/working-day/working-day.model';
 import { IStatusOfCoverage } from 'app/entities/status-of-coverage/status-of-coverage.model';
 import { ITeam } from 'app/entities/team/team.model';
 
-export interface ILLINSVillageTarget {
+export interface ILlinsVillageTarget {
   id?: number;
   uid?: string;
   created?: dayjs.Dayjs | null;
@@ -17,7 +17,7 @@ export interface ILLINSVillageTarget {
   idpsFamilies?: number;
   noOfDaysNeeded?: number | null;
   quantity?: number;
-  llinsVillageReports?: ILLINSVillageReport[] | null;
+  llinsVillageReports?: ILlinsVillageReport[] | null;
   organisationUnit?: IOrganisationUnit;
   createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
@@ -26,7 +26,7 @@ export interface ILLINSVillageTarget {
   teamAssigned?: ITeam;
 }
 
-export class LLINSVillageTarget implements ILLINSVillageTarget {
+export class LlinsVillageTarget implements ILlinsVillageTarget {
   constructor(
     public id?: number,
     public uid?: string,
@@ -38,7 +38,7 @@ export class LLINSVillageTarget implements ILLINSVillageTarget {
     public idpsFamilies?: number,
     public noOfDaysNeeded?: number | null,
     public quantity?: number,
-    public llinsVillageReports?: ILLINSVillageReport[] | null,
+    public llinsVillageReports?: ILlinsVillageReport[] | null,
     public organisationUnit?: IOrganisationUnit,
     public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
@@ -48,6 +48,6 @@ export class LLINSVillageTarget implements ILLINSVillageTarget {
   ) {}
 }
 
-export function getLLINSVillageTargetIdentifier(lLINSVillageTarget: ILLINSVillageTarget): number | undefined {
-  return lLINSVillageTarget.id;
+export function getLlinsVillageTargetIdentifier(llinsVillageTarget: ILlinsVillageTarget): number | undefined {
+  return llinsVillageTarget.id;
 }

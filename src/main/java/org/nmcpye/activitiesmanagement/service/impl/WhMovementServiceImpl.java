@@ -1,6 +1,5 @@
 package org.nmcpye.activitiesmanagement.service.impl;
 
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.domain.WhMovement;
 import org.nmcpye.activitiesmanagement.repository.WhMovementRepository;
 import org.nmcpye.activitiesmanagement.service.WhMovementService;
@@ -11,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 /**
  * Service Implementation for managing {@link WhMovement}.
  */
@@ -20,68 +21,68 @@ public class WhMovementServiceImpl implements WhMovementService {
 
     private final Logger log = LoggerFactory.getLogger(WhMovementServiceImpl.class);
 
-    private final WhMovementRepository wHMovementRepository;
+    private final WhMovementRepository whMovementRepository;
 
-    public WhMovementServiceImpl(WhMovementRepository wHMovementRepository) {
-        this.wHMovementRepository = wHMovementRepository;
+    public WhMovementServiceImpl(WhMovementRepository whMovementRepository) {
+        this.whMovementRepository = whMovementRepository;
     }
 
     @Override
-    public WhMovement save(WhMovement wHMovement) {
-        log.debug("Request to save WhMovement : {}", wHMovement);
-        return wHMovementRepository.save(wHMovement);
+    public WhMovement save(WhMovement whMovement) {
+        log.debug("Request to save WhMovement : {}", whMovement);
+        return whMovementRepository.save(whMovement);
     }
 
     @Override
-    public Optional<WhMovement> partialUpdate(WhMovement wHMovement) {
-        log.debug("Request to partially update WhMovement : {}", wHMovement);
+    public Optional<WhMovement> partialUpdate(WhMovement whMovement) {
+        log.debug("Request to partially update WhMovement : {}", whMovement);
 
-        return wHMovementRepository
-            .findById(wHMovement.getId())
+        return whMovementRepository
+            .findById(whMovement.getId())
             .map(
-                existingWHMovement -> {
-                    if (wHMovement.getMovementType() != null) {
-                        existingWHMovement.setMovementType(wHMovement.getMovementType());
+                existingWhMovement -> {
+                    if (whMovement.getMovementType() != null) {
+                        existingWhMovement.setMovementType(whMovement.getMovementType());
                     }
-                    if (wHMovement.getQuantity() != null) {
-                        existingWHMovement.setQuantity(wHMovement.getQuantity());
+                    if (whMovement.getQuantity() != null) {
+                        existingWhMovement.setQuantity(whMovement.getQuantity());
                     }
-                    if (wHMovement.getReconciliationSource() != null) {
-                        existingWHMovement.setReconciliationSource(wHMovement.getReconciliationSource());
+                    if (whMovement.getReconciliationSource() != null) {
+                        existingWhMovement.setReconciliationSource(whMovement.getReconciliationSource());
                     }
-                    if (wHMovement.getReconciliationDestination() != null) {
-                        existingWHMovement.setReconciliationDestination(wHMovement.getReconciliationDestination());
+                    if (whMovement.getReconciliationDestination() != null) {
+                        existingWhMovement.setReconciliationDestination(whMovement.getReconciliationDestination());
                     }
-                    if (wHMovement.getConfirmedByOtherSide() != null) {
-                        existingWHMovement.setConfirmedByOtherSide(wHMovement.getConfirmedByOtherSide());
+                    if (whMovement.getConfirmedByOtherSide() != null) {
+                        existingWhMovement.setConfirmedByOtherSide(whMovement.getConfirmedByOtherSide());
                     }
-                    if (wHMovement.getComment() != null) {
-                        existingWHMovement.setComment(wHMovement.getComment());
+                    if (whMovement.getComment() != null) {
+                        existingWhMovement.setComment(whMovement.getComment());
                     }
 
-                    return existingWHMovement;
+                    return existingWhMovement;
                 }
             )
-            .map(wHMovementRepository::save);
+            .map(whMovementRepository::save);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Page<WhMovement> findAll(Pageable pageable) {
-        log.debug("Request to get all WHMovements");
-        return wHMovementRepository.findAll(pageable);
+        log.debug("Request to get all WhMovements");
+        return whMovementRepository.findAll(pageable);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<WhMovement> findOne(Long id) {
         log.debug("Request to get WhMovement : {}", id);
-        return wHMovementRepository.findById(id);
+        return whMovementRepository.findById(id);
     }
 
     @Override
     public void delete(Long id) {
         log.debug("Request to delete WhMovement : {}", id);
-        wHMovementRepository.deleteById(id);
+        whMovementRepository.deleteById(id);
     }
 }

@@ -3,17 +3,17 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import * as dayjs from 'dayjs';
 
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
-import { CHVTeamType } from 'app/entities/enumerations/chv-team-type.model';
-import { ICHVTeam, CHVTeam } from '../chv-team.model';
+import { ChvTeamType } from 'app/entities/enumerations/chv-team-type.model';
+import { IChvTeam, ChvTeam } from '../chv-team.model';
 
-import { CHVTeamService } from './chv-team.service';
+import { ChvTeamService } from './chv-team.service';
 
 describe('Service Tests', () => {
   describe('ChvTeam Service', () => {
-    let service: CHVTeamService;
+    let service: ChvTeamService;
     let httpMock: HttpTestingController;
-    let elemDefault: ICHVTeam;
-    let expectedResult: ICHVTeam | ICHVTeam[] | boolean | null;
+    let elemDefault: IChvTeam;
+    let expectedResult: IChvTeam | IChvTeam[] | boolean | null;
     let currentDate: dayjs.Dayjs;
 
     beforeEach(() => {
@@ -21,7 +21,7 @@ describe('Service Tests', () => {
         imports: [HttpClientTestingModule],
       });
       expectedResult = null;
-      service = TestBed.inject(CHVTeamService);
+      service = TestBed.inject(ChvTeamService);
       httpMock = TestBed.inject(HttpTestingController);
       currentDate = dayjs();
 
@@ -34,7 +34,7 @@ describe('Service Tests', () => {
         created: currentDate,
         lastUpdated: currentDate,
         teamNo: 'AAAAAAA',
-        teamType: CHVTeamType.SUPERVISOR,
+        teamType: ChvTeamType.SUPERVISOR,
       };
     });
 
@@ -73,7 +73,7 @@ describe('Service Tests', () => {
           returnedFromService
         );
 
-        service.create(new CHVTeam()).subscribe(resp => (expectedResult = resp.body));
+        service.create(new ChvTeam()).subscribe(resp => (expectedResult = resp.body));
 
         const req = httpMock.expectOne({ method: 'POST' });
         req.flush(returnedFromService);
@@ -114,14 +114,11 @@ describe('Service Tests', () => {
       it('should partial update a ChvTeam', () => {
         const patchObject = Object.assign(
           {
-            uid: 'BBBBBB',
             code: 'BBBBBB',
-            name: 'BBBBBB',
             description: 'BBBBBB',
-            created: currentDate.format(DATE_TIME_FORMAT),
-            teamNo: 'BBBBBB',
+            lastUpdated: currentDate.format(DATE_TIME_FORMAT),
           },
-          new CHVTeam()
+          new ChvTeam()
         );
 
         const returnedFromService = Object.assign(patchObject, elemDefault);
@@ -181,61 +178,61 @@ describe('Service Tests', () => {
         expect(expectedResult);
       });
 
-      describe('addCHVTeamToCollectionIfMissing', () => {
+      describe('addChvTeamToCollectionIfMissing', () => {
         it('should add a ChvTeam to an empty array', () => {
-          const cHVTeam: ICHVTeam = { id: 123 };
-          expectedResult = service.addCHVTeamToCollectionIfMissing([], cHVTeam);
+          const chvTeam: IChvTeam = { id: 123 };
+          expectedResult = service.addChvTeamToCollectionIfMissing([], chvTeam);
           expect(expectedResult).toHaveLength(1);
-          expect(expectedResult).toContain(cHVTeam);
+          expect(expectedResult).toContain(chvTeam);
         });
 
         it('should not add a ChvTeam to an array that contains it', () => {
-          const cHVTeam: ICHVTeam = { id: 123 };
-          const cHVTeamCollection: ICHVTeam[] = [
+          const chvTeam: IChvTeam = { id: 123 };
+          const chvTeamCollection: IChvTeam[] = [
             {
-              ...cHVTeam,
+              ...chvTeam,
             },
             { id: 456 },
           ];
-          expectedResult = service.addCHVTeamToCollectionIfMissing(cHVTeamCollection, cHVTeam);
+          expectedResult = service.addChvTeamToCollectionIfMissing(chvTeamCollection, chvTeam);
           expect(expectedResult).toHaveLength(2);
         });
 
         it("should add a ChvTeam to an array that doesn't contain it", () => {
-          const cHVTeam: ICHVTeam = { id: 123 };
-          const cHVTeamCollection: ICHVTeam[] = [{ id: 456 }];
-          expectedResult = service.addCHVTeamToCollectionIfMissing(cHVTeamCollection, cHVTeam);
+          const chvTeam: IChvTeam = { id: 123 };
+          const chvTeamCollection: IChvTeam[] = [{ id: 456 }];
+          expectedResult = service.addChvTeamToCollectionIfMissing(chvTeamCollection, chvTeam);
           expect(expectedResult).toHaveLength(2);
-          expect(expectedResult).toContain(cHVTeam);
+          expect(expectedResult).toContain(chvTeam);
         });
 
         it('should add only unique ChvTeam to an array', () => {
-          const cHVTeamArray: ICHVTeam[] = [{ id: 123 }, { id: 456 }, { id: 76600 }];
-          const cHVTeamCollection: ICHVTeam[] = [{ id: 123 }];
-          expectedResult = service.addCHVTeamToCollectionIfMissing(cHVTeamCollection, ...cHVTeamArray);
+          const chvTeamArray: IChvTeam[] = [{ id: 123 }, { id: 456 }, { id: 99031 }];
+          const chvTeamCollection: IChvTeam[] = [{ id: 123 }];
+          expectedResult = service.addChvTeamToCollectionIfMissing(chvTeamCollection, ...chvTeamArray);
           expect(expectedResult).toHaveLength(3);
         });
 
         it('should accept varargs', () => {
-          const cHVTeam: ICHVTeam = { id: 123 };
-          const cHVTeam2: ICHVTeam = { id: 456 };
-          expectedResult = service.addCHVTeamToCollectionIfMissing([], cHVTeam, cHVTeam2);
+          const chvTeam: IChvTeam = { id: 123 };
+          const chvTeam2: IChvTeam = { id: 456 };
+          expectedResult = service.addChvTeamToCollectionIfMissing([], chvTeam, chvTeam2);
           expect(expectedResult).toHaveLength(2);
-          expect(expectedResult).toContain(cHVTeam);
-          expect(expectedResult).toContain(cHVTeam2);
+          expect(expectedResult).toContain(chvTeam);
+          expect(expectedResult).toContain(chvTeam2);
         });
 
         it('should accept null and undefined values', () => {
-          const cHVTeam: ICHVTeam = { id: 123 };
-          expectedResult = service.addCHVTeamToCollectionIfMissing([], null, cHVTeam, undefined);
+          const chvTeam: IChvTeam = { id: 123 };
+          expectedResult = service.addChvTeamToCollectionIfMissing([], null, chvTeam, undefined);
           expect(expectedResult).toHaveLength(1);
-          expect(expectedResult).toContain(cHVTeam);
+          expect(expectedResult).toContain(chvTeam);
         });
 
         it('should return initial array if no ChvTeam is added', () => {
-          const cHVTeamCollection: ICHVTeam[] = [{ id: 123 }];
-          expectedResult = service.addCHVTeamToCollectionIfMissing(cHVTeamCollection, undefined, null);
-          expect(expectedResult).toEqual(cHVTeamCollection);
+          const chvTeamCollection: IChvTeam[] = [{ id: 123 }];
+          expectedResult = service.addChvTeamToCollectionIfMissing(chvTeamCollection, undefined, null);
+          expect(expectedResult).toEqual(chvTeamCollection);
         });
       });
     });

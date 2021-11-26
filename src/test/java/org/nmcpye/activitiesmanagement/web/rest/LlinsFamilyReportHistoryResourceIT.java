@@ -1,16 +1,5 @@
 package org.nmcpye.activitiesmanagement.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
-import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.nmcpye.activitiesmanagement.IntegrationTest;
@@ -25,6 +14,18 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link LlinsFamilyReportHistoryResource} REST controller.
@@ -74,15 +75,15 @@ class LlinsFamilyReportHistoryResourceIT {
     private static AtomicLong count = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
-    private LlinsFamilyReportHistoryRepository lLINSFamilyReportHistoryRepository;
+    private LlinsFamilyReportHistoryRepository llinsFamilyReportHistoryRepository;
 
     @Autowired
     private EntityManager em;
 
     @Autowired
-    private MockMvc restLLINSFamilyReportHistoryMockMvc;
+    private MockMvc restLlinsFamilyReportHistoryMockMvc;
 
-    private LlinsFamilyReportHistory lLINSFamilyReportHistory;
+    private LlinsFamilyReportHistory llinsFamilyReportHistory;
 
     /**
      * Create an entity for this test.
@@ -91,7 +92,7 @@ class LlinsFamilyReportHistoryResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static LlinsFamilyReportHistory createEntity(EntityManager em) {
-        LlinsFamilyReportHistory lLINSFamilyReportHistory = new LlinsFamilyReportHistory()
+        LlinsFamilyReportHistory llinsFamilyReportHistory = new LlinsFamilyReportHistory()
             .uid(DEFAULT_UID)
             .created(DEFAULT_CREATED)
             .lastUpdated(DEFAULT_LAST_UPDATED)
@@ -112,18 +113,18 @@ class LlinsFamilyReportHistoryResourceIT {
         } else {
             workingDay = TestUtil.findAll(em, WorkingDay.class).get(0);
         }
-        lLINSFamilyReportHistory.setDayReached(workingDay);
+        llinsFamilyReportHistory.setDayReached(workingDay);
         // Add required entity
-        LlinsFamilyReport lLINSFamilyReport;
+        LlinsFamilyReport llinsFamilyReport;
         if (TestUtil.findAll(em, LlinsFamilyReport.class).isEmpty()) {
-            lLINSFamilyReport = LlinsFamilyReportResourceIT.createEntity(em);
-            em.persist(lLINSFamilyReport);
+            llinsFamilyReport = LlinsFamilyReportResourceIT.createEntity(em);
+            em.persist(llinsFamilyReport);
             em.flush();
         } else {
-            lLINSFamilyReport = TestUtil.findAll(em, LlinsFamilyReport.class).get(0);
+            llinsFamilyReport = TestUtil.findAll(em, LlinsFamilyReport.class).get(0);
         }
-        lLINSFamilyReportHistory.setLlinsFamilyReport(lLINSFamilyReport);
-        return lLINSFamilyReportHistory;
+        llinsFamilyReportHistory.setLlinsFamilyReport(llinsFamilyReport);
+        return llinsFamilyReportHistory;
     }
 
     /**
@@ -133,7 +134,7 @@ class LlinsFamilyReportHistoryResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static LlinsFamilyReportHistory createUpdatedEntity(EntityManager em) {
-        LlinsFamilyReportHistory lLINSFamilyReportHistory = new LlinsFamilyReportHistory()
+        LlinsFamilyReportHistory llinsFamilyReportHistory = new LlinsFamilyReportHistory()
             .uid(UPDATED_UID)
             .created(UPDATED_CREATED)
             .lastUpdated(UPDATED_LAST_UPDATED)
@@ -154,42 +155,42 @@ class LlinsFamilyReportHistoryResourceIT {
         } else {
             workingDay = TestUtil.findAll(em, WorkingDay.class).get(0);
         }
-        lLINSFamilyReportHistory.setDayReached(workingDay);
+        llinsFamilyReportHistory.setDayReached(workingDay);
         // Add required entity
-        LlinsFamilyReport lLINSFamilyReport;
+        LlinsFamilyReport llinsFamilyReport;
         if (TestUtil.findAll(em, LlinsFamilyReport.class).isEmpty()) {
-            lLINSFamilyReport = LlinsFamilyReportResourceIT.createUpdatedEntity(em);
-            em.persist(lLINSFamilyReport);
+            llinsFamilyReport = LlinsFamilyReportResourceIT.createUpdatedEntity(em);
+            em.persist(llinsFamilyReport);
             em.flush();
         } else {
-            lLINSFamilyReport = TestUtil.findAll(em, LlinsFamilyReport.class).get(0);
+            llinsFamilyReport = TestUtil.findAll(em, LlinsFamilyReport.class).get(0);
         }
-        lLINSFamilyReportHistory.setLlinsFamilyReport(lLINSFamilyReport);
-        return lLINSFamilyReportHistory;
+        llinsFamilyReportHistory.setLlinsFamilyReport(llinsFamilyReport);
+        return llinsFamilyReportHistory;
     }
 
     @BeforeEach
     public void initTest() {
-        lLINSFamilyReportHistory = createEntity(em);
+        llinsFamilyReportHistory = createEntity(em);
     }
 
     @Test
     @Transactional
-    void createLLINSFamilyReportHistory() throws Exception {
-        int databaseSizeBeforeCreate = lLINSFamilyReportHistoryRepository.findAll().size();
+    void createLlinsFamilyReportHistory() throws Exception {
+        int databaseSizeBeforeCreate = llinsFamilyReportHistoryRepository.findAll().size();
         // Create the LlinsFamilyReportHistory
-        restLLINSFamilyReportHistoryMockMvc
+        restLlinsFamilyReportHistoryMockMvc
             .perform(
                 post(ENTITY_API_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSFamilyReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsFamilyReportHistory))
             )
             .andExpect(status().isCreated());
 
         // Validate the LlinsFamilyReportHistory in the database
-        List<LlinsFamilyReportHistory> lLINSFamilyReportHistoryList = lLINSFamilyReportHistoryRepository.findAll();
-        assertThat(lLINSFamilyReportHistoryList).hasSize(databaseSizeBeforeCreate + 1);
-        LlinsFamilyReportHistory testLlinsFamilyReportHistory = lLINSFamilyReportHistoryList.get(lLINSFamilyReportHistoryList.size() - 1);
+        List<LlinsFamilyReportHistory> llinsFamilyReportHistoryList = llinsFamilyReportHistoryRepository.findAll();
+        assertThat(llinsFamilyReportHistoryList).hasSize(databaseSizeBeforeCreate + 1);
+        LlinsFamilyReportHistory testLlinsFamilyReportHistory = llinsFamilyReportHistoryList.get(llinsFamilyReportHistoryList.size() - 1);
         assertThat(testLlinsFamilyReportHistory.getUid()).isEqualTo(DEFAULT_UID);
         assertThat(testLlinsFamilyReportHistory.getCreated()).isEqualTo(DEFAULT_CREATED);
         assertThat(testLlinsFamilyReportHistory.getLastUpdated()).isEqualTo(DEFAULT_LAST_UPDATED);
@@ -205,80 +206,80 @@ class LlinsFamilyReportHistoryResourceIT {
 
     @Test
     @Transactional
-    void createLLINSFamilyReportHistoryWithExistingId() throws Exception {
+    void createLlinsFamilyReportHistoryWithExistingId() throws Exception {
         // Create the LlinsFamilyReportHistory with an existing ID
-        lLINSFamilyReportHistory.setId(1L);
+        llinsFamilyReportHistory.setId(1L);
 
-        int databaseSizeBeforeCreate = lLINSFamilyReportHistoryRepository.findAll().size();
+        int databaseSizeBeforeCreate = llinsFamilyReportHistoryRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restLLINSFamilyReportHistoryMockMvc
+        restLlinsFamilyReportHistoryMockMvc
             .perform(
                 post(ENTITY_API_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSFamilyReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsFamilyReportHistory))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsFamilyReportHistory in the database
-        List<LlinsFamilyReportHistory> lLINSFamilyReportHistoryList = lLINSFamilyReportHistoryRepository.findAll();
-        assertThat(lLINSFamilyReportHistoryList).hasSize(databaseSizeBeforeCreate);
+        List<LlinsFamilyReportHistory> llinsFamilyReportHistoryList = llinsFamilyReportHistoryRepository.findAll();
+        assertThat(llinsFamilyReportHistoryList).hasSize(databaseSizeBeforeCreate);
     }
 
     @Test
     @Transactional
     void checkUidIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSFamilyReportHistoryRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsFamilyReportHistoryRepository.findAll().size();
         // set the field null
-        lLINSFamilyReportHistory.setUid(null);
+        llinsFamilyReportHistory.setUid(null);
 
         // Create the LlinsFamilyReportHistory, which fails.
 
-        restLLINSFamilyReportHistoryMockMvc
+        restLlinsFamilyReportHistoryMockMvc
             .perform(
                 post(ENTITY_API_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSFamilyReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsFamilyReportHistory))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsFamilyReportHistory> lLINSFamilyReportHistoryList = lLINSFamilyReportHistoryRepository.findAll();
-        assertThat(lLINSFamilyReportHistoryList).hasSize(databaseSizeBeforeTest);
+        List<LlinsFamilyReportHistory> llinsFamilyReportHistoryList = llinsFamilyReportHistoryRepository.findAll();
+        assertThat(llinsFamilyReportHistoryList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
     void checkFamilyTypeIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSFamilyReportHistoryRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsFamilyReportHistoryRepository.findAll().size();
         // set the field null
-        lLINSFamilyReportHistory.setFamilyType(null);
+        llinsFamilyReportHistory.setFamilyType(null);
 
         // Create the LlinsFamilyReportHistory, which fails.
 
-        restLLINSFamilyReportHistoryMockMvc
+        restLlinsFamilyReportHistoryMockMvc
             .perform(
                 post(ENTITY_API_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSFamilyReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsFamilyReportHistory))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsFamilyReportHistory> lLINSFamilyReportHistoryList = lLINSFamilyReportHistoryRepository.findAll();
-        assertThat(lLINSFamilyReportHistoryList).hasSize(databaseSizeBeforeTest);
+        List<LlinsFamilyReportHistory> llinsFamilyReportHistoryList = llinsFamilyReportHistoryRepository.findAll();
+        assertThat(llinsFamilyReportHistoryList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
-    void getAllLLINSFamilyReportHistories() throws Exception {
+    void getAllLlinsFamilyReportHistories() throws Exception {
         // Initialize the database
-        lLINSFamilyReportHistoryRepository.saveAndFlush(lLINSFamilyReportHistory);
+        llinsFamilyReportHistoryRepository.saveAndFlush(llinsFamilyReportHistory);
 
-        // Get all the lLINSFamilyReportHistoryList
-        restLLINSFamilyReportHistoryMockMvc
+        // Get all the llinsFamilyReportHistoryList
+        restLlinsFamilyReportHistoryMockMvc
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(lLINSFamilyReportHistory.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(llinsFamilyReportHistory.getId().intValue())))
             .andExpect(jsonPath("$.[*].uid").value(hasItem(DEFAULT_UID)))
             .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
             .andExpect(jsonPath("$.[*].lastUpdated").value(hasItem(DEFAULT_LAST_UPDATED.toString())))
@@ -294,16 +295,16 @@ class LlinsFamilyReportHistoryResourceIT {
 
     @Test
     @Transactional
-    void getLLINSFamilyReportHistory() throws Exception {
+    void getLlinsFamilyReportHistory() throws Exception {
         // Initialize the database
-        lLINSFamilyReportHistoryRepository.saveAndFlush(lLINSFamilyReportHistory);
+        llinsFamilyReportHistoryRepository.saveAndFlush(llinsFamilyReportHistory);
 
-        // Get the lLINSFamilyReportHistory
-        restLLINSFamilyReportHistoryMockMvc
-            .perform(get(ENTITY_API_URL_ID, lLINSFamilyReportHistory.getId()))
+        // Get the llinsFamilyReportHistory
+        restLlinsFamilyReportHistoryMockMvc
+            .perform(get(ENTITY_API_URL_ID, llinsFamilyReportHistory.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(lLINSFamilyReportHistory.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(llinsFamilyReportHistory.getId().intValue()))
             .andExpect(jsonPath("$.uid").value(DEFAULT_UID))
             .andExpect(jsonPath("$.created").value(DEFAULT_CREATED.toString()))
             .andExpect(jsonPath("$.lastUpdated").value(DEFAULT_LAST_UPDATED.toString()))
@@ -319,22 +320,22 @@ class LlinsFamilyReportHistoryResourceIT {
 
     @Test
     @Transactional
-    void getNonExistingLLINSFamilyReportHistory() throws Exception {
-        // Get the lLINSFamilyReportHistory
-        restLLINSFamilyReportHistoryMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
+    void getNonExistingLlinsFamilyReportHistory() throws Exception {
+        // Get the llinsFamilyReportHistory
+        restLlinsFamilyReportHistoryMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
     @Test
     @Transactional
-    void putNewLLINSFamilyReportHistory() throws Exception {
+    void putNewLlinsFamilyReportHistory() throws Exception {
         // Initialize the database
-        lLINSFamilyReportHistoryRepository.saveAndFlush(lLINSFamilyReportHistory);
+        llinsFamilyReportHistoryRepository.saveAndFlush(llinsFamilyReportHistory);
 
-        int databaseSizeBeforeUpdate = lLINSFamilyReportHistoryRepository.findAll().size();
+        int databaseSizeBeforeUpdate = llinsFamilyReportHistoryRepository.findAll().size();
 
-        // Update the lLINSFamilyReportHistory
-        LlinsFamilyReportHistory updatedLlinsFamilyReportHistory = lLINSFamilyReportHistoryRepository
-            .findById(lLINSFamilyReportHistory.getId())
+        // Update the llinsFamilyReportHistory
+        LlinsFamilyReportHistory updatedLlinsFamilyReportHistory = llinsFamilyReportHistoryRepository
+            .findById(llinsFamilyReportHistory.getId())
             .get();
         // Disconnect from session so that the updates on updatedLlinsFamilyReportHistory are not directly saved in db
         em.detach(updatedLlinsFamilyReportHistory);
@@ -351,7 +352,7 @@ class LlinsFamilyReportHistoryResourceIT {
             .quantityReceived(UPDATED_QUANTITY_RECEIVED)
             .familyType(UPDATED_FAMILY_TYPE);
 
-        restLLINSFamilyReportHistoryMockMvc
+        restLlinsFamilyReportHistoryMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, updatedLlinsFamilyReportHistory.getId())
                     .contentType(MediaType.APPLICATION_JSON)
@@ -360,9 +361,9 @@ class LlinsFamilyReportHistoryResourceIT {
             .andExpect(status().isOk());
 
         // Validate the LlinsFamilyReportHistory in the database
-        List<LlinsFamilyReportHistory> lLINSFamilyReportHistoryList = lLINSFamilyReportHistoryRepository.findAll();
-        assertThat(lLINSFamilyReportHistoryList).hasSize(databaseSizeBeforeUpdate);
-        LlinsFamilyReportHistory testLlinsFamilyReportHistory = lLINSFamilyReportHistoryList.get(lLINSFamilyReportHistoryList.size() - 1);
+        List<LlinsFamilyReportHistory> llinsFamilyReportHistoryList = llinsFamilyReportHistoryRepository.findAll();
+        assertThat(llinsFamilyReportHistoryList).hasSize(databaseSizeBeforeUpdate);
+        LlinsFamilyReportHistory testLlinsFamilyReportHistory = llinsFamilyReportHistoryList.get(llinsFamilyReportHistoryList.size() - 1);
         assertThat(testLlinsFamilyReportHistory.getUid()).isEqualTo(UPDATED_UID);
         assertThat(testLlinsFamilyReportHistory.getCreated()).isEqualTo(UPDATED_CREATED);
         assertThat(testLlinsFamilyReportHistory.getLastUpdated()).isEqualTo(UPDATED_LAST_UPDATED);
@@ -378,86 +379,85 @@ class LlinsFamilyReportHistoryResourceIT {
 
     @Test
     @Transactional
-    void putNonExistingLLINSFamilyReportHistory() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSFamilyReportHistoryRepository.findAll().size();
-        lLINSFamilyReportHistory.setId(count.incrementAndGet());
+    void putNonExistingLlinsFamilyReportHistory() throws Exception {
+        int databaseSizeBeforeUpdate = llinsFamilyReportHistoryRepository.findAll().size();
+        llinsFamilyReportHistory.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restLLINSFamilyReportHistoryMockMvc
+        restLlinsFamilyReportHistoryMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, lLINSFamilyReportHistory.getId())
+                put(ENTITY_API_URL_ID, llinsFamilyReportHistory.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSFamilyReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsFamilyReportHistory))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsFamilyReportHistory in the database
-        List<LlinsFamilyReportHistory> lLINSFamilyReportHistoryList = lLINSFamilyReportHistoryRepository.findAll();
-        assertThat(lLINSFamilyReportHistoryList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsFamilyReportHistory> llinsFamilyReportHistoryList = llinsFamilyReportHistoryRepository.findAll();
+        assertThat(llinsFamilyReportHistoryList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void putWithIdMismatchLLINSFamilyReportHistory() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSFamilyReportHistoryRepository.findAll().size();
-        lLINSFamilyReportHistory.setId(count.incrementAndGet());
+    void putWithIdMismatchLlinsFamilyReportHistory() throws Exception {
+        int databaseSizeBeforeUpdate = llinsFamilyReportHistoryRepository.findAll().size();
+        llinsFamilyReportHistory.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restLLINSFamilyReportHistoryMockMvc
+        restLlinsFamilyReportHistoryMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSFamilyReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsFamilyReportHistory))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsFamilyReportHistory in the database
-        List<LlinsFamilyReportHistory> lLINSFamilyReportHistoryList = lLINSFamilyReportHistoryRepository.findAll();
-        assertThat(lLINSFamilyReportHistoryList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsFamilyReportHistory> llinsFamilyReportHistoryList = llinsFamilyReportHistoryRepository.findAll();
+        assertThat(llinsFamilyReportHistoryList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void putWithMissingIdPathParamLLINSFamilyReportHistory() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSFamilyReportHistoryRepository.findAll().size();
-        lLINSFamilyReportHistory.setId(count.incrementAndGet());
+    void putWithMissingIdPathParamLlinsFamilyReportHistory() throws Exception {
+        int databaseSizeBeforeUpdate = llinsFamilyReportHistoryRepository.findAll().size();
+        llinsFamilyReportHistory.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restLLINSFamilyReportHistoryMockMvc
+        restLlinsFamilyReportHistoryMockMvc
             .perform(
                 put(ENTITY_API_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSFamilyReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsFamilyReportHistory))
             )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the LlinsFamilyReportHistory in the database
-        List<LlinsFamilyReportHistory> lLINSFamilyReportHistoryList = lLINSFamilyReportHistoryRepository.findAll();
-        assertThat(lLINSFamilyReportHistoryList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsFamilyReportHistory> llinsFamilyReportHistoryList = llinsFamilyReportHistoryRepository.findAll();
+        assertThat(llinsFamilyReportHistoryList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void partialUpdateLLINSFamilyReportHistoryWithPatch() throws Exception {
+    void partialUpdateLlinsFamilyReportHistoryWithPatch() throws Exception {
         // Initialize the database
-        lLINSFamilyReportHistoryRepository.saveAndFlush(lLINSFamilyReportHistory);
+        llinsFamilyReportHistoryRepository.saveAndFlush(llinsFamilyReportHistory);
 
-        int databaseSizeBeforeUpdate = lLINSFamilyReportHistoryRepository.findAll().size();
+        int databaseSizeBeforeUpdate = llinsFamilyReportHistoryRepository.findAll().size();
 
-        // Update the lLINSFamilyReportHistory using partial update
+        // Update the llinsFamilyReportHistory using partial update
         LlinsFamilyReportHistory partialUpdatedLlinsFamilyReportHistory = new LlinsFamilyReportHistory();
-        partialUpdatedLlinsFamilyReportHistory.setId(lLINSFamilyReportHistory.getId());
+        partialUpdatedLlinsFamilyReportHistory.setId(llinsFamilyReportHistory.getId());
 
         partialUpdatedLlinsFamilyReportHistory
             .uid(UPDATED_UID)
-            .lastUpdated(UPDATED_LAST_UPDATED)
+            .created(UPDATED_CREATED)
+            .documentNo(UPDATED_DOCUMENT_NO)
             .maleIndividuals(UPDATED_MALE_INDIVIDUALS)
             .femaleIndividuals(UPDATED_FEMALE_INDIVIDUALS)
-            .lessThan5Males(UPDATED_LESS_THAN_5_MALES)
-            .lessThan5Females(UPDATED_LESS_THAN_5_FEMALES)
-            .familyType(UPDATED_FAMILY_TYPE);
+            .pregnantWomen(UPDATED_PREGNANT_WOMEN);
 
-        restLLINSFamilyReportHistoryMockMvc
+        restLlinsFamilyReportHistoryMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedLlinsFamilyReportHistory.getId())
                     .contentType("application/merge-patch+json")
@@ -466,33 +466,33 @@ class LlinsFamilyReportHistoryResourceIT {
             .andExpect(status().isOk());
 
         // Validate the LlinsFamilyReportHistory in the database
-        List<LlinsFamilyReportHistory> lLINSFamilyReportHistoryList = lLINSFamilyReportHistoryRepository.findAll();
-        assertThat(lLINSFamilyReportHistoryList).hasSize(databaseSizeBeforeUpdate);
-        LlinsFamilyReportHistory testLlinsFamilyReportHistory = lLINSFamilyReportHistoryList.get(lLINSFamilyReportHistoryList.size() - 1);
+        List<LlinsFamilyReportHistory> llinsFamilyReportHistoryList = llinsFamilyReportHistoryRepository.findAll();
+        assertThat(llinsFamilyReportHistoryList).hasSize(databaseSizeBeforeUpdate);
+        LlinsFamilyReportHistory testLlinsFamilyReportHistory = llinsFamilyReportHistoryList.get(llinsFamilyReportHistoryList.size() - 1);
         assertThat(testLlinsFamilyReportHistory.getUid()).isEqualTo(UPDATED_UID);
-        assertThat(testLlinsFamilyReportHistory.getCreated()).isEqualTo(DEFAULT_CREATED);
-        assertThat(testLlinsFamilyReportHistory.getLastUpdated()).isEqualTo(UPDATED_LAST_UPDATED);
-        assertThat(testLlinsFamilyReportHistory.getDocumentNo()).isEqualTo(DEFAULT_DOCUMENT_NO);
+        assertThat(testLlinsFamilyReportHistory.getCreated()).isEqualTo(UPDATED_CREATED);
+        assertThat(testLlinsFamilyReportHistory.getLastUpdated()).isEqualTo(DEFAULT_LAST_UPDATED);
+        assertThat(testLlinsFamilyReportHistory.getDocumentNo()).isEqualTo(UPDATED_DOCUMENT_NO);
         assertThat(testLlinsFamilyReportHistory.getMaleIndividuals()).isEqualTo(UPDATED_MALE_INDIVIDUALS);
         assertThat(testLlinsFamilyReportHistory.getFemaleIndividuals()).isEqualTo(UPDATED_FEMALE_INDIVIDUALS);
-        assertThat(testLlinsFamilyReportHistory.getLessThan5Males()).isEqualTo(UPDATED_LESS_THAN_5_MALES);
-        assertThat(testLlinsFamilyReportHistory.getLessThan5Females()).isEqualTo(UPDATED_LESS_THAN_5_FEMALES);
-        assertThat(testLlinsFamilyReportHistory.getPregnantWomen()).isEqualTo(DEFAULT_PREGNANT_WOMEN);
+        assertThat(testLlinsFamilyReportHistory.getLessThan5Males()).isEqualTo(DEFAULT_LESS_THAN_5_MALES);
+        assertThat(testLlinsFamilyReportHistory.getLessThan5Females()).isEqualTo(DEFAULT_LESS_THAN_5_FEMALES);
+        assertThat(testLlinsFamilyReportHistory.getPregnantWomen()).isEqualTo(UPDATED_PREGNANT_WOMEN);
         assertThat(testLlinsFamilyReportHistory.getQuantityReceived()).isEqualTo(DEFAULT_QUANTITY_RECEIVED);
-        assertThat(testLlinsFamilyReportHistory.getFamilyType()).isEqualTo(UPDATED_FAMILY_TYPE);
+        assertThat(testLlinsFamilyReportHistory.getFamilyType()).isEqualTo(DEFAULT_FAMILY_TYPE);
     }
 
     @Test
     @Transactional
-    void fullUpdateLLINSFamilyReportHistoryWithPatch() throws Exception {
+    void fullUpdateLlinsFamilyReportHistoryWithPatch() throws Exception {
         // Initialize the database
-        lLINSFamilyReportHistoryRepository.saveAndFlush(lLINSFamilyReportHistory);
+        llinsFamilyReportHistoryRepository.saveAndFlush(llinsFamilyReportHistory);
 
-        int databaseSizeBeforeUpdate = lLINSFamilyReportHistoryRepository.findAll().size();
+        int databaseSizeBeforeUpdate = llinsFamilyReportHistoryRepository.findAll().size();
 
-        // Update the lLINSFamilyReportHistory using partial update
+        // Update the llinsFamilyReportHistory using partial update
         LlinsFamilyReportHistory partialUpdatedLlinsFamilyReportHistory = new LlinsFamilyReportHistory();
-        partialUpdatedLlinsFamilyReportHistory.setId(lLINSFamilyReportHistory.getId());
+        partialUpdatedLlinsFamilyReportHistory.setId(llinsFamilyReportHistory.getId());
 
         partialUpdatedLlinsFamilyReportHistory
             .uid(UPDATED_UID)
@@ -507,7 +507,7 @@ class LlinsFamilyReportHistoryResourceIT {
             .quantityReceived(UPDATED_QUANTITY_RECEIVED)
             .familyType(UPDATED_FAMILY_TYPE);
 
-        restLLINSFamilyReportHistoryMockMvc
+        restLlinsFamilyReportHistoryMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedLlinsFamilyReportHistory.getId())
                     .contentType("application/merge-patch+json")
@@ -516,9 +516,9 @@ class LlinsFamilyReportHistoryResourceIT {
             .andExpect(status().isOk());
 
         // Validate the LlinsFamilyReportHistory in the database
-        List<LlinsFamilyReportHistory> lLINSFamilyReportHistoryList = lLINSFamilyReportHistoryRepository.findAll();
-        assertThat(lLINSFamilyReportHistoryList).hasSize(databaseSizeBeforeUpdate);
-        LlinsFamilyReportHistory testLlinsFamilyReportHistory = lLINSFamilyReportHistoryList.get(lLINSFamilyReportHistoryList.size() - 1);
+        List<LlinsFamilyReportHistory> llinsFamilyReportHistoryList = llinsFamilyReportHistoryRepository.findAll();
+        assertThat(llinsFamilyReportHistoryList).hasSize(databaseSizeBeforeUpdate);
+        LlinsFamilyReportHistory testLlinsFamilyReportHistory = llinsFamilyReportHistoryList.get(llinsFamilyReportHistoryList.size() - 1);
         assertThat(testLlinsFamilyReportHistory.getUid()).isEqualTo(UPDATED_UID);
         assertThat(testLlinsFamilyReportHistory.getCreated()).isEqualTo(UPDATED_CREATED);
         assertThat(testLlinsFamilyReportHistory.getLastUpdated()).isEqualTo(UPDATED_LAST_UPDATED);
@@ -534,79 +534,79 @@ class LlinsFamilyReportHistoryResourceIT {
 
     @Test
     @Transactional
-    void patchNonExistingLLINSFamilyReportHistory() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSFamilyReportHistoryRepository.findAll().size();
-        lLINSFamilyReportHistory.setId(count.incrementAndGet());
+    void patchNonExistingLlinsFamilyReportHistory() throws Exception {
+        int databaseSizeBeforeUpdate = llinsFamilyReportHistoryRepository.findAll().size();
+        llinsFamilyReportHistory.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restLLINSFamilyReportHistoryMockMvc
+        restLlinsFamilyReportHistoryMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, lLINSFamilyReportHistory.getId())
+                patch(ENTITY_API_URL_ID, llinsFamilyReportHistory.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSFamilyReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsFamilyReportHistory))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsFamilyReportHistory in the database
-        List<LlinsFamilyReportHistory> lLINSFamilyReportHistoryList = lLINSFamilyReportHistoryRepository.findAll();
-        assertThat(lLINSFamilyReportHistoryList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsFamilyReportHistory> llinsFamilyReportHistoryList = llinsFamilyReportHistoryRepository.findAll();
+        assertThat(llinsFamilyReportHistoryList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void patchWithIdMismatchLLINSFamilyReportHistory() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSFamilyReportHistoryRepository.findAll().size();
-        lLINSFamilyReportHistory.setId(count.incrementAndGet());
+    void patchWithIdMismatchLlinsFamilyReportHistory() throws Exception {
+        int databaseSizeBeforeUpdate = llinsFamilyReportHistoryRepository.findAll().size();
+        llinsFamilyReportHistory.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restLLINSFamilyReportHistoryMockMvc
+        restLlinsFamilyReportHistoryMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSFamilyReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsFamilyReportHistory))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsFamilyReportHistory in the database
-        List<LlinsFamilyReportHistory> lLINSFamilyReportHistoryList = lLINSFamilyReportHistoryRepository.findAll();
-        assertThat(lLINSFamilyReportHistoryList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsFamilyReportHistory> llinsFamilyReportHistoryList = llinsFamilyReportHistoryRepository.findAll();
+        assertThat(llinsFamilyReportHistoryList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void patchWithMissingIdPathParamLLINSFamilyReportHistory() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSFamilyReportHistoryRepository.findAll().size();
-        lLINSFamilyReportHistory.setId(count.incrementAndGet());
+    void patchWithMissingIdPathParamLlinsFamilyReportHistory() throws Exception {
+        int databaseSizeBeforeUpdate = llinsFamilyReportHistoryRepository.findAll().size();
+        llinsFamilyReportHistory.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restLLINSFamilyReportHistoryMockMvc
+        restLlinsFamilyReportHistoryMockMvc
             .perform(
                 patch(ENTITY_API_URL)
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSFamilyReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsFamilyReportHistory))
             )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the LlinsFamilyReportHistory in the database
-        List<LlinsFamilyReportHistory> lLINSFamilyReportHistoryList = lLINSFamilyReportHistoryRepository.findAll();
-        assertThat(lLINSFamilyReportHistoryList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsFamilyReportHistory> llinsFamilyReportHistoryList = llinsFamilyReportHistoryRepository.findAll();
+        assertThat(llinsFamilyReportHistoryList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void deleteLLINSFamilyReportHistory() throws Exception {
+    void deleteLlinsFamilyReportHistory() throws Exception {
         // Initialize the database
-        lLINSFamilyReportHistoryRepository.saveAndFlush(lLINSFamilyReportHistory);
+        llinsFamilyReportHistoryRepository.saveAndFlush(llinsFamilyReportHistory);
 
-        int databaseSizeBeforeDelete = lLINSFamilyReportHistoryRepository.findAll().size();
+        int databaseSizeBeforeDelete = llinsFamilyReportHistoryRepository.findAll().size();
 
-        // Delete the lLINSFamilyReportHistory
-        restLLINSFamilyReportHistoryMockMvc
-            .perform(delete(ENTITY_API_URL_ID, lLINSFamilyReportHistory.getId()).accept(MediaType.APPLICATION_JSON))
+        // Delete the llinsFamilyReportHistory
+        restLlinsFamilyReportHistoryMockMvc
+            .perform(delete(ENTITY_API_URL_ID, llinsFamilyReportHistory.getId()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item
-        List<LlinsFamilyReportHistory> lLINSFamilyReportHistoryList = lLINSFamilyReportHistoryRepository.findAll();
-        assertThat(lLINSFamilyReportHistoryList).hasSize(databaseSizeBeforeDelete - 1);
+        List<LlinsFamilyReportHistory> llinsFamilyReportHistoryList = llinsFamilyReportHistoryRepository.findAll();
+        assertThat(llinsFamilyReportHistoryList).hasSize(databaseSizeBeforeDelete - 1);
     }
 }

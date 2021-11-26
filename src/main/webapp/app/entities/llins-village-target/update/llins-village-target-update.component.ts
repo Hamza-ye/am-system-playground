@@ -8,8 +8,8 @@ import { finalize, map } from 'rxjs/operators';
 import * as dayjs from 'dayjs';
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
-import { ILLINSVillageTarget, LLINSVillageTarget } from '../llins-village-target.model';
-import { LLINSVillageTargetService } from '../service/llins-village-target.service';
+import { ILlinsVillageTarget, LlinsVillageTarget } from '../llins-village-target.model';
+import { LlinsVillageTargetService } from '../service/llins-village-target.service';
 import { IOrganisationUnit } from 'app/entities/organisation-unit/organisation-unit.model';
 import { OrganisationUnitService } from 'app/entities/organisation-unit/service/organisation-unit.service';
 import { IUser } from 'app/entities/user/user.model';
@@ -25,7 +25,7 @@ import { TeamService } from 'app/entities/team/service/team.service';
   selector: 'app-llins-village-target-update',
   templateUrl: './llins-village-target-update.component.html',
 })
-export class LLINSVillageTargetUpdateComponent implements OnInit {
+export class LlinsVillageTargetUpdateComponent implements OnInit {
   isSaving = false;
 
   organisationUnitsSharedCollection: IOrganisationUnit[] = [];
@@ -54,7 +54,7 @@ export class LLINSVillageTargetUpdateComponent implements OnInit {
   });
 
   constructor(
-    protected lLINSVillageTargetService: LLINSVillageTargetService,
+    protected llinsVillageTargetService: LlinsVillageTargetService,
     protected organisationUnitService: OrganisationUnitService,
     protected userService: UserService,
     protected workingDayService: WorkingDayService,
@@ -65,14 +65,14 @@ export class LLINSVillageTargetUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ lLINSVillageTarget }) => {
-      if (lLINSVillageTarget.id === undefined) {
+    this.activatedRoute.data.subscribe(({ llinsVillageTarget }) => {
+      if (llinsVillageTarget.id === undefined) {
         const today = dayjs().startOf('day');
-        lLINSVillageTarget.created = today;
-        lLINSVillageTarget.lastUpdated = today;
+        llinsVillageTarget.created = today;
+        llinsVillageTarget.lastUpdated = today;
       }
 
-      this.updateForm(lLINSVillageTarget);
+      this.updateForm(llinsVillageTarget);
 
       this.loadRelationshipsOptions();
     });
@@ -84,11 +84,11 @@ export class LLINSVillageTargetUpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
-    const lLINSVillageTarget = this.createFromForm();
-    if (lLINSVillageTarget.id !== undefined) {
-      this.subscribeToSaveResponse(this.lLINSVillageTargetService.update(lLINSVillageTarget));
+    const llinsVillageTarget = this.createFromForm();
+    if (llinsVillageTarget.id !== undefined) {
+      this.subscribeToSaveResponse(this.llinsVillageTargetService.update(llinsVillageTarget));
     } else {
-      this.subscribeToSaveResponse(this.lLINSVillageTargetService.create(lLINSVillageTarget));
+      this.subscribeToSaveResponse(this.llinsVillageTargetService.create(llinsVillageTarget));
     }
   }
 
@@ -112,7 +112,7 @@ export class LLINSVillageTargetUpdateComponent implements OnInit {
     return item.id!;
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<ILLINSVillageTarget>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<ILlinsVillageTarget>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
       () => this.onSaveSuccess(),
       () => this.onSaveError()
@@ -131,44 +131,44 @@ export class LLINSVillageTargetUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(lLINSVillageTarget: ILLINSVillageTarget): void {
+  protected updateForm(llinsVillageTarget: ILlinsVillageTarget): void {
     this.editForm.patchValue({
-      id: lLINSVillageTarget.id,
-      uid: lLINSVillageTarget.uid,
-      created: lLINSVillageTarget.created ? lLINSVillageTarget.created.format(DATE_TIME_FORMAT) : null,
-      lastUpdated: lLINSVillageTarget.lastUpdated ? lLINSVillageTarget.lastUpdated.format(DATE_TIME_FORMAT) : null,
-      residentsIndividuals: lLINSVillageTarget.residentsIndividuals,
-      idpsIndividuals: lLINSVillageTarget.idpsIndividuals,
-      residentsFamilies: lLINSVillageTarget.residentsFamilies,
-      idpsFamilies: lLINSVillageTarget.idpsFamilies,
-      noOfDaysNeeded: lLINSVillageTarget.noOfDaysNeeded,
-      quantity: lLINSVillageTarget.quantity,
-      organisationUnit: lLINSVillageTarget.organisationUnit,
-      createdBy: lLINSVillageTarget.createdBy,
-      lastUpdatedBy: lLINSVillageTarget.lastUpdatedBy,
-      dayPlanned: lLINSVillageTarget.dayPlanned,
-      statusOfCoverage: lLINSVillageTarget.statusOfCoverage,
-      teamAssigned: lLINSVillageTarget.teamAssigned,
+      id: llinsVillageTarget.id,
+      uid: llinsVillageTarget.uid,
+      created: llinsVillageTarget.created ? llinsVillageTarget.created.format(DATE_TIME_FORMAT) : null,
+      lastUpdated: llinsVillageTarget.lastUpdated ? llinsVillageTarget.lastUpdated.format(DATE_TIME_FORMAT) : null,
+      residentsIndividuals: llinsVillageTarget.residentsIndividuals,
+      idpsIndividuals: llinsVillageTarget.idpsIndividuals,
+      residentsFamilies: llinsVillageTarget.residentsFamilies,
+      idpsFamilies: llinsVillageTarget.idpsFamilies,
+      noOfDaysNeeded: llinsVillageTarget.noOfDaysNeeded,
+      quantity: llinsVillageTarget.quantity,
+      organisationUnit: llinsVillageTarget.organisationUnit,
+      createdBy: llinsVillageTarget.createdBy,
+      lastUpdatedBy: llinsVillageTarget.lastUpdatedBy,
+      dayPlanned: llinsVillageTarget.dayPlanned,
+      statusOfCoverage: llinsVillageTarget.statusOfCoverage,
+      teamAssigned: llinsVillageTarget.teamAssigned,
     });
 
     this.organisationUnitsSharedCollection = this.organisationUnitService.addOrganisationUnitToCollectionIfMissing(
       this.organisationUnitsSharedCollection,
-      lLINSVillageTarget.organisationUnit
+      llinsVillageTarget.organisationUnit
     );
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      lLINSVillageTarget.createdBy,
-      lLINSVillageTarget.lastUpdatedBy
+      llinsVillageTarget.createdBy,
+      llinsVillageTarget.lastUpdatedBy
     );
     this.workingDaysSharedCollection = this.workingDayService.addWorkingDayToCollectionIfMissing(
       this.workingDaysSharedCollection,
-      lLINSVillageTarget.dayPlanned
+      llinsVillageTarget.dayPlanned
     );
     this.statusOfCoveragesSharedCollection = this.statusOfCoverageService.addStatusOfCoverageToCollectionIfMissing(
       this.statusOfCoveragesSharedCollection,
-      lLINSVillageTarget.statusOfCoverage
+      llinsVillageTarget.statusOfCoverage
     );
-    this.teamsSharedCollection = this.teamService.addTeamToCollectionIfMissing(this.teamsSharedCollection, lLINSVillageTarget.teamAssigned);
+    this.teamsSharedCollection = this.teamService.addTeamToCollectionIfMissing(this.teamsSharedCollection, llinsVillageTarget.teamAssigned);
   }
 
   protected loadRelationshipsOptions(): void {
@@ -229,9 +229,9 @@ export class LLINSVillageTargetUpdateComponent implements OnInit {
       .subscribe((teams: ITeam[]) => (this.teamsSharedCollection = teams));
   }
 
-  protected createFromForm(): ILLINSVillageTarget {
+  protected createFromForm(): ILlinsVillageTarget {
     return {
-      ...new LLINSVillageTarget(),
+      ...new LlinsVillageTarget(),
       id: this.editForm.get(['id'])!.value,
       uid: this.editForm.get(['uid'])!.value,
       created: this.editForm.get(['created'])!.value ? dayjs(this.editForm.get(['created'])!.value, DATE_TIME_FORMAT) : undefined,

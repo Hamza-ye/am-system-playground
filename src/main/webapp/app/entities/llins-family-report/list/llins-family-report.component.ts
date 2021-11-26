@@ -4,18 +4,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ILLINSFamilyReport } from '../llins-family-report.model';
+import { ILlinsFamilyReport } from '../llins-family-report.model';
 
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
-import { LLINSFamilyReportService } from '../service/llins-family-report.service';
-import { LLINSFamilyReportDeleteDialogComponent } from '../delete/llins-family-report-delete-dialog.component';
+import { LlinsFamilyReportService } from '../service/llins-family-report.service';
+import { LlinsFamilyReportDeleteDialogComponent } from '../delete/llins-family-report-delete-dialog.component';
 
 @Component({
   selector: 'app-llins-family-report',
   templateUrl: './llins-family-report.component.html',
 })
-export class LLINSFamilyReportComponent implements OnInit {
-  lLINSFamilyReports?: ILLINSFamilyReport[];
+export class LlinsFamilyReportComponent implements OnInit {
+  llinsFamilyReports?: ILlinsFamilyReport[];
   isLoading = false;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -25,7 +25,7 @@ export class LLINSFamilyReportComponent implements OnInit {
   ngbPaginationPage = 1;
 
   constructor(
-    protected lLINSFamilyReportService: LLINSFamilyReportService,
+    protected llinsFamilyReportService: LlinsFamilyReportService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected modalService: NgbModal
@@ -35,14 +35,14 @@ export class LLINSFamilyReportComponent implements OnInit {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
 
-    this.lLINSFamilyReportService
+    this.llinsFamilyReportService
       .query({
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),
       })
       .subscribe(
-        (res: HttpResponse<ILLINSFamilyReport[]>) => {
+        (res: HttpResponse<ILlinsFamilyReport[]>) => {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
         },
@@ -57,13 +57,13 @@ export class LLINSFamilyReportComponent implements OnInit {
     this.handleNavigation();
   }
 
-  trackId(index: number, item: ILLINSFamilyReport): number {
+  trackId(index: number, item: ILlinsFamilyReport): number {
     return item.id!;
   }
 
-  delete(lLINSFamilyReport: ILLINSFamilyReport): void {
-    const modalRef = this.modalService.open(LLINSFamilyReportDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.lLINSFamilyReport = lLINSFamilyReport;
+  delete(llinsFamilyReport: ILlinsFamilyReport): void {
+    const modalRef = this.modalService.open(LlinsFamilyReportDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.llinsFamilyReport = llinsFamilyReport;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {
@@ -95,7 +95,7 @@ export class LLINSFamilyReportComponent implements OnInit {
     });
   }
 
-  protected onSuccess(data: ILLINSFamilyReport[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
+  protected onSuccess(data: ILlinsFamilyReport[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
     if (navigate) {
@@ -107,7 +107,7 @@ export class LLINSFamilyReportComponent implements OnInit {
         },
       });
     }
-    this.lLINSFamilyReports = data ?? [];
+    this.llinsFamilyReports = data ?? [];
     this.ngbPaginationPage = this.page;
   }
 

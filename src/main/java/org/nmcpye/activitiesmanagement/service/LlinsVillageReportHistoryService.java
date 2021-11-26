@@ -1,38 +1,39 @@
 package org.nmcpye.activitiesmanagement.service;
 
+import org.nmcpye.activitiesmanagement.domain.LlinsVillageReportHistory;
+
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.LlinsVillageReportHistory;
 
 /**
  * Service Interface for managing {@link LlinsVillageReportHistory}.
  */
 public interface LlinsVillageReportHistoryService {
     /**
-     * Save a lLINSVillageReportHistory.
+     * Save a llinsVillageReportHistory.
      *
-     * @param lLINSVillageReportHistory the entity to save.
+     * @param llinsVillageReportHistory the entity to save.
      * @return the persisted entity.
      */
-    LlinsVillageReportHistory save(LlinsVillageReportHistory lLINSVillageReportHistory);
+    LlinsVillageReportHistory save(LlinsVillageReportHistory llinsVillageReportHistory);
 
     /**
-     * Partially updates a lLINSVillageReportHistory.
+     * Partially updates a llinsVillageReportHistory.
      *
-     * @param lLINSVillageReportHistory the entity to update partially.
+     * @param llinsVillageReportHistory the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<LlinsVillageReportHistory> partialUpdate(LlinsVillageReportHistory lLINSVillageReportHistory);
+    Optional<LlinsVillageReportHistory> partialUpdate(LlinsVillageReportHistory llinsVillageReportHistory);
 
     /**
-     * Get all the lLINSVillageReportHistories.
+     * Get all the llinsVillageReportHistories.
      *
      * @return the list of entities.
      */
     List<LlinsVillageReportHistory> findAll();
 
     /**
-     * Get the "id" lLINSVillageReportHistory.
+     * Get the "id" llinsVillageReportHistory.
      *
      * @param id the id of the entity.
      * @return the entity.
@@ -40,7 +41,7 @@ public interface LlinsVillageReportHistoryService {
     Optional<LlinsVillageReportHistory> findOne(Long id);
 
     /**
-     * Delete the "id" lLINSVillageReportHistory.
+     * Delete the "id" llinsVillageReportHistory.
      *
      * @param id the id of the entity.
      */

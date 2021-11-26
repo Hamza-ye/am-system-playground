@@ -1,0 +1,35 @@
+{
+  "amSystemPlaygroundApp": {
+    "chvTeam": {
+      "home": {
+        "title": "Chv Teams",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Chv Team",
+        "createOrEditLabel": "Create or edit a Chv Team",
+        "notFound": "No Chv Teams found"
+      },
+      "created": "A new Chv Team is created with identifier {{ param }}",
+      "updated": "A Chv Team is updated with identifier {{ param }}",
+      "deleted": "A Chv Team is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Chv Team {{ id }}?"
+      },
+      "detail": {
+        "title": "Chv Team"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "name": "Name",
+      "description": "Description",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "teamNo": "Team No",
+      "teamType": "Team Type",
+      "createdBy": "Created By",
+      "lastUpdatedBy": "Last Updated By",
+      "person": "Person",
+      "responsibleForChv": "Responsible For Chv"
+    }
+  }
+}

@@ -1,11 +1,11 @@
 <div>
-  <h2 id="page-heading" data-cy="CHVTeamHeading">
-    <span appTranslate="amSystemPlaygroundApp.cHVTeam.home.title">CHV Teams</span>
+  <h2 id="page-heading" data-cy="ChvTeamHeading">
+    <span appTranslate="amSystemPlaygroundApp.chvTeam.home.title">Chv Teams</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span appTranslate="amSystemPlaygroundApp.cHVTeam.home.refreshListLabel">Refresh List</span>
+        <span appTranslate="amSystemPlaygroundApp.chvTeam.home.refreshListLabel">Refresh List</span>
       </button>
 
       <button
@@ -15,7 +15,7 @@
         [routerLink]="['/chv-team/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span appTranslate="amSystemPlaygroundApp.cHVTeam.home.createLabel"> Create a new CHV Team </span>
+        <span appTranslate="amSystemPlaygroundApp.chvTeam.home.createLabel"> Create a new Chv Team </span>
       </button>
     </div>
   </h2>
@@ -24,56 +24,56 @@
 
   <app-alert></app-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="cHVTeams?.length === 0">
-    <span appTranslate="amSystemPlaygroundApp.cHVTeam.home.notFound">No cHVTeams found</span>
+  <div class="alert alert-warning" id="no-result" *ngIf="chvTeams?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.chvTeam.home.notFound">No chvTeams found</span>
   </div>
 
-  <div class="table-responsive" id="entities" *ngIf="cHVTeams && cHVTeams.length > 0">
+  <div class="table-responsive" id="entities" *ngIf="chvTeams && chvTeams.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
           <th scope="col"><span appTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.uid">Uid</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.code">Code</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.name">Name</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.description">Description</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.created">Created</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.lastUpdated">Last Updated</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.teamNo">Team No</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.teamType">Team Type</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.createdBy">Created By</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.lastUpdatedBy">Last Updated By</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.person">Person</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHVTeam.responsibleForChv">Responsible For Chv</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.code">Code</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.name">Name</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.description">Description</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.teamNo">Team No</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.teamType">Team Type</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.createdBy">Created By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.person">Person</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.responsibleForChv">Responsible For Chv</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let cHVTeam of cHVTeams; trackBy: trackId" data-cy="entityTable">
+        <tr *ngFor="let chvTeam of chvTeams; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/chv-team', cHVTeam.id, 'view']">{{ cHVTeam.id }}</a>
+            <a [routerLink]="['/chv-team', chvTeam.id, 'view']">{{ chvTeam.id }}</a>
           </td>
-          <td>{{ cHVTeam.uid }}</td>
-          <td>{{ cHVTeam.code }}</td>
-          <td>{{ cHVTeam.name }}</td>
-          <td>{{ cHVTeam.description }}</td>
-          <td>{{ cHVTeam.created | formatMediumDatetime }}</td>
-          <td>{{ cHVTeam.lastUpdated | formatMediumDatetime }}</td>
-          <td>{{ cHVTeam.teamNo }}</td>
-          <td appTranslate="{{ 'amSystemPlaygroundApp.ChvTeamType.' + cHVTeam.teamType }}">{{ cHVTeam.teamType }}</td>
+          <td>{{ chvTeam.uid }}</td>
+          <td>{{ chvTeam.code }}</td>
+          <td>{{ chvTeam.name }}</td>
+          <td>{{ chvTeam.description }}</td>
+          <td>{{ chvTeam.created | formatMediumDatetime }}</td>
+          <td>{{ chvTeam.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ chvTeam.teamNo }}</td>
+          <td appTranslate="{{ 'amSystemPlaygroundApp.ChvTeamType.' + chvTeam.teamType }}">{{ chvTeam.teamType }}</td>
           <td>
-            {{ cHVTeam.createdBy?.login }}
-          </td>
-          <td>
-            {{ cHVTeam.lastUpdatedBy?.login }}
+            {{ chvTeam.createdBy?.login }}
           </td>
           <td>
-            <div *ngIf="cHVTeam.person">
-              <a [routerLink]="['/person', cHVTeam.person?.id, 'view']">{{ cHVTeam.person?.name }}</a>
+            {{ chvTeam.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <div *ngIf="chvTeam.person">
+              <a [routerLink]="['/person', chvTeam.person?.id, 'view']">{{ chvTeam.person?.name }}</a>
             </div>
           </td>
           <td>
-            <span *ngFor="let responsibleForChv of cHVTeam.responsibleForChvs; let last = last">
+            <span *ngFor="let responsibleForChv of chvTeam.responsibleForChvs; let last = last">
               <a class="form-control-static" [routerLink]="['/chv', responsibleForChv.id, 'view']">{{ responsibleForChv.code }}</a
               >{{ last ? '' : ', ' }}
             </span>
@@ -82,7 +82,7 @@
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/chv-team', cHVTeam.id, 'view']"
+                [routerLink]="['/chv-team', chvTeam.id, 'view']"
                 class="btn btn-info btn-sm"
                 data-cy="entityDetailsButton"
               >
@@ -92,7 +92,7 @@
 
               <button
                 type="submit"
-                [routerLink]="['/chv-team', cHVTeam.id, 'edit']"
+                [routerLink]="['/chv-team', chvTeam.id, 'edit']"
                 class="btn btn-primary btn-sm"
                 data-cy="entityEditButton"
               >
@@ -100,7 +100,7 @@
                 <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
               </button>
 
-              <button type="submit" (click)="delete(cHVTeam)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button type="submit" (click)="delete(chvTeam)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
               </button>

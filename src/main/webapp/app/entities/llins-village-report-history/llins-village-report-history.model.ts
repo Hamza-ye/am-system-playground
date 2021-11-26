@@ -1,9 +1,9 @@
 import * as dayjs from 'dayjs';
 import { IUser } from 'app/entities/user/user.model';
 import { IWorkingDay } from 'app/entities/working-day/working-day.model';
-import { ILLINSVillageReport } from 'app/entities/llins-village-report/llins-village-report.model';
+import { ILlinsVillageReport } from 'app/entities/llins-village-report/llins-village-report.model';
 
-export interface ILLINSVillageReportHistory {
+export interface ILlinsVillageReportHistory {
   id?: number;
   uid?: string;
   created?: dayjs.Dayjs | null;
@@ -20,10 +20,10 @@ export interface ILLINSVillageReportHistory {
   createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   dayReached?: IWorkingDay;
-  llinsVillageReport?: ILLINSVillageReport;
+  llinsVillageReport?: ILlinsVillageReport;
 }
 
-export class LLINSVillageReportHistory implements ILLINSVillageReportHistory {
+export class LlinsVillageReportHistory implements ILlinsVillageReportHistory {
   constructor(
     public id?: number,
     public uid?: string,
@@ -41,10 +41,10 @@ export class LLINSVillageReportHistory implements ILLINSVillageReportHistory {
     public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public dayReached?: IWorkingDay,
-    public llinsVillageReport?: ILLINSVillageReport
+    public llinsVillageReport?: ILlinsVillageReport
   ) {}
 }
 
-export function getLLINSVillageReportHistoryIdentifier(lLINSVillageReportHistory: ILLINSVillageReportHistory): number | undefined {
-  return lLINSVillageReportHistory.id;
+export function getLlinsVillageReportHistoryIdentifier(llinsVillageReportHistory: ILlinsVillageReportHistory): number | undefined {
+  return llinsVillageReportHistory.id;
 }

@@ -1,9 +1,11 @@
 package org.nmcpye.activitiesmanagement.repository;
 
-import java.util.List;
 import org.nmcpye.activitiesmanagement.domain.ChvMalariaCaseReport;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Spring Data SQL repository for the ChvMalariaCaseReport entity.
@@ -12,12 +14,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ChvMalariaCaseReportRepository extends JpaRepository<ChvMalariaCaseReport, Long> {
     @Query(
-        "select cHVMalariaCaseReport from ChvMalariaCaseReport cHVMalariaCaseReport where cHVMalariaCaseReport.createdBy.login = ?#{principal.username}"
+        "select chvMalariaCaseReport from ChvMalariaCaseReport chvMalariaCaseReport where chvMalariaCaseReport.createdBy.login = ?#{principal.username}"
     )
-    List<ChvMalariaCaseReport> findByUserIsCurrentUser();
+    List<ChvMalariaCaseReport> findByCreatedByIsCurrentUser();
 
     @Query(
-        "select cHVMalariaCaseReport from ChvMalariaCaseReport cHVMalariaCaseReport where cHVMalariaCaseReport.lastUpdatedBy.login = ?#{principal.username}"
+        "select chvMalariaCaseReport from ChvMalariaCaseReport chvMalariaCaseReport where chvMalariaCaseReport.lastUpdatedBy.login = ?#{principal.username}"
     )
     List<ChvMalariaCaseReport> findByLastUpdatedByIsCurrentUser();
 }

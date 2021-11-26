@@ -7,8 +7,8 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { of, Subject } from 'rxjs';
 
-import { LLINSFamilyTargetService } from '../service/llins-family-target.service';
-import { ILLINSFamilyTarget, LLINSFamilyTarget } from '../llins-family-target.model';
+import { LlinsFamilyTargetService } from '../service/llins-family-target.service';
+import { ILlinsFamilyTarget, LlinsFamilyTarget } from '../llins-family-target.model';
 
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
@@ -19,14 +19,14 @@ import { FamilyService } from 'app/entities/family/service/family.service';
 import { ITeam } from 'app/entities/team/team.model';
 import { TeamService } from 'app/entities/team/service/team.service';
 
-import { LLINSFamilyTargetUpdateComponent } from './llins-family-target-update.component';
+import { LlinsFamilyTargetUpdateComponent } from './llins-family-target-update.component';
 
 describe('Component Tests', () => {
   describe('LlinsFamilyTarget Management Update Component', () => {
-    let comp: LLINSFamilyTargetUpdateComponent;
-    let fixture: ComponentFixture<LLINSFamilyTargetUpdateComponent>;
+    let comp: LlinsFamilyTargetUpdateComponent;
+    let fixture: ComponentFixture<LlinsFamilyTargetUpdateComponent>;
     let activatedRoute: ActivatedRoute;
-    let lLINSFamilyTargetService: LLINSFamilyTargetService;
+    let llinsFamilyTargetService: LlinsFamilyTargetService;
     let userService: UserService;
     let workingDayService: WorkingDayService;
     let familyService: FamilyService;
@@ -35,15 +35,15 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [LLINSFamilyTargetUpdateComponent],
+        declarations: [LlinsFamilyTargetUpdateComponent],
         providers: [FormBuilder, ActivatedRoute],
       })
-        .overrideTemplate(LLINSFamilyTargetUpdateComponent, '')
+        .overrideTemplate(LlinsFamilyTargetUpdateComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(LLINSFamilyTargetUpdateComponent);
+      fixture = TestBed.createComponent(LlinsFamilyTargetUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
-      lLINSFamilyTargetService = TestBed.inject(LLINSFamilyTargetService);
+      llinsFamilyTargetService = TestBed.inject(LlinsFamilyTargetService);
       userService = TestBed.inject(UserService);
       workingDayService = TestBed.inject(WorkingDayService);
       familyService = TestBed.inject(FamilyService);
@@ -54,19 +54,19 @@ describe('Component Tests', () => {
 
     describe('ngOnInit', () => {
       it('Should call User query and add missing value', () => {
-        const lLINSFamilyTarget: ILLINSFamilyTarget = { id: 456 };
-        const createdBy: IUser = { id: 57566 };
-        lLINSFamilyTarget.createdBy = createdBy;
-        const lastUpdatedBy: IUser = { id: 50548 };
-        lLINSFamilyTarget.lastUpdatedBy = lastUpdatedBy;
+        const llinsFamilyTarget: ILlinsFamilyTarget = { id: 456 };
+        const createdBy: IUser = { id: 60057 };
+        llinsFamilyTarget.createdBy = createdBy;
+        const lastUpdatedBy: IUser = { id: 42752 };
+        llinsFamilyTarget.lastUpdatedBy = lastUpdatedBy;
 
-        const userCollection: IUser[] = [{ id: 67095 }];
+        const userCollection: IUser[] = [{ id: 82449 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
         const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ lLINSFamilyTarget });
+        activatedRoute.data = of({ llinsFamilyTarget });
         comp.ngOnInit();
 
         expect(userService.query).toHaveBeenCalled();
@@ -75,17 +75,17 @@ describe('Component Tests', () => {
       });
 
       it('Should call WorkingDay query and add missing value', () => {
-        const lLINSFamilyTarget: ILLINSFamilyTarget = { id: 456 };
-        const dayPlanned: IWorkingDay = { id: 16885 };
-        lLINSFamilyTarget.dayPlanned = dayPlanned;
+        const llinsFamilyTarget: ILlinsFamilyTarget = { id: 456 };
+        const dayPlanned: IWorkingDay = { id: 62023 };
+        llinsFamilyTarget.dayPlanned = dayPlanned;
 
-        const workingDayCollection: IWorkingDay[] = [{ id: 30852 }];
+        const workingDayCollection: IWorkingDay[] = [{ id: 87926 }];
         jest.spyOn(workingDayService, 'query').mockReturnValue(of(new HttpResponse({ body: workingDayCollection })));
         const additionalWorkingDays = [dayPlanned];
         const expectedCollection: IWorkingDay[] = [...additionalWorkingDays, ...workingDayCollection];
         jest.spyOn(workingDayService, 'addWorkingDayToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ lLINSFamilyTarget });
+        activatedRoute.data = of({ llinsFamilyTarget });
         comp.ngOnInit();
 
         expect(workingDayService.query).toHaveBeenCalled();
@@ -94,17 +94,17 @@ describe('Component Tests', () => {
       });
 
       it('Should call Family query and add missing value', () => {
-        const lLINSFamilyTarget: ILLINSFamilyTarget = { id: 456 };
-        const family: IFamily = { id: 49747 };
-        lLINSFamilyTarget.family = family;
+        const llinsFamilyTarget: ILlinsFamilyTarget = { id: 456 };
+        const family: IFamily = { id: 70040 };
+        llinsFamilyTarget.family = family;
 
-        const familyCollection: IFamily[] = [{ id: 62522 }];
+        const familyCollection: IFamily[] = [{ id: 36021 }];
         jest.spyOn(familyService, 'query').mockReturnValue(of(new HttpResponse({ body: familyCollection })));
         const additionalFamilies = [family];
         const expectedCollection: IFamily[] = [...additionalFamilies, ...familyCollection];
         jest.spyOn(familyService, 'addFamilyToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ lLINSFamilyTarget });
+        activatedRoute.data = of({ llinsFamilyTarget });
         comp.ngOnInit();
 
         expect(familyService.query).toHaveBeenCalled();
@@ -113,17 +113,17 @@ describe('Component Tests', () => {
       });
 
       it('Should call Team query and add missing value', () => {
-        const lLINSFamilyTarget: ILLINSFamilyTarget = { id: 456 };
-        const teamAssigned: ITeam = { id: 53637 };
-        lLINSFamilyTarget.teamAssigned = teamAssigned;
+        const llinsFamilyTarget: ILlinsFamilyTarget = { id: 456 };
+        const teamAssigned: ITeam = { id: 14494 };
+        llinsFamilyTarget.teamAssigned = teamAssigned;
 
-        const teamCollection: ITeam[] = [{ id: 72449 }];
+        const teamCollection: ITeam[] = [{ id: 15842 }];
         jest.spyOn(teamService, 'query').mockReturnValue(of(new HttpResponse({ body: teamCollection })));
         const additionalTeams = [teamAssigned];
         const expectedCollection: ITeam[] = [...additionalTeams, ...teamCollection];
         jest.spyOn(teamService, 'addTeamToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ lLINSFamilyTarget });
+        activatedRoute.data = of({ llinsFamilyTarget });
         comp.ngOnInit();
 
         expect(teamService.query).toHaveBeenCalled();
@@ -132,22 +132,22 @@ describe('Component Tests', () => {
       });
 
       it('Should update editForm', () => {
-        const lLINSFamilyTarget: ILLINSFamilyTarget = { id: 456 };
-        const createdBy: IUser = { id: 24595 };
-        lLINSFamilyTarget.createdBy = createdBy;
-        const lastUpdatedBy: IUser = { id: 55190 };
-        lLINSFamilyTarget.lastUpdatedBy = lastUpdatedBy;
-        const dayPlanned: IWorkingDay = { id: 77370 };
-        lLINSFamilyTarget.dayPlanned = dayPlanned;
-        const family: IFamily = { id: 49624 };
-        lLINSFamilyTarget.family = family;
-        const teamAssigned: ITeam = { id: 57311 };
-        lLINSFamilyTarget.teamAssigned = teamAssigned;
+        const llinsFamilyTarget: ILlinsFamilyTarget = { id: 456 };
+        const createdBy: IUser = { id: 68018 };
+        llinsFamilyTarget.createdBy = createdBy;
+        const lastUpdatedBy: IUser = { id: 25917 };
+        llinsFamilyTarget.lastUpdatedBy = lastUpdatedBy;
+        const dayPlanned: IWorkingDay = { id: 9246 };
+        llinsFamilyTarget.dayPlanned = dayPlanned;
+        const family: IFamily = { id: 38747 };
+        llinsFamilyTarget.family = family;
+        const teamAssigned: ITeam = { id: 71021 };
+        llinsFamilyTarget.teamAssigned = teamAssigned;
 
-        activatedRoute.data = of({ lLINSFamilyTarget });
+        activatedRoute.data = of({ llinsFamilyTarget });
         comp.ngOnInit();
 
-        expect(comp.editForm.value).toEqual(expect.objectContaining(lLINSFamilyTarget));
+        expect(comp.editForm.value).toEqual(expect.objectContaining(llinsFamilyTarget));
         expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.workingDaysSharedCollection).toContain(dayPlanned);
@@ -159,53 +159,53 @@ describe('Component Tests', () => {
     describe('save', () => {
       it('Should call update service on save for existing entity', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<LLINSFamilyTarget>>();
-        const lLINSFamilyTarget = { id: 123 };
-        jest.spyOn(lLINSFamilyTargetService, 'update').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<LlinsFamilyTarget>>();
+        const llinsFamilyTarget = { id: 123 };
+        jest.spyOn(llinsFamilyTargetService, 'update').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ lLINSFamilyTarget });
+        activatedRoute.data = of({ llinsFamilyTarget });
         comp.ngOnInit();
 
         // WHEN
         comp.save();
         expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: lLINSFamilyTarget }));
+        saveSubject.next(new HttpResponse({ body: llinsFamilyTarget }));
         saveSubject.complete();
 
         // THEN
         expect(comp.previousState).toHaveBeenCalled();
-        expect(lLINSFamilyTargetService.update).toHaveBeenCalledWith(lLINSFamilyTarget);
+        expect(llinsFamilyTargetService.update).toHaveBeenCalledWith(llinsFamilyTarget);
         expect(comp.isSaving).toEqual(false);
       });
 
       it('Should call create service on save for new entity', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<LLINSFamilyTarget>>();
-        const lLINSFamilyTarget = new LLINSFamilyTarget();
-        jest.spyOn(lLINSFamilyTargetService, 'create').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<LlinsFamilyTarget>>();
+        const llinsFamilyTarget = new LlinsFamilyTarget();
+        jest.spyOn(llinsFamilyTargetService, 'create').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ lLINSFamilyTarget });
+        activatedRoute.data = of({ llinsFamilyTarget });
         comp.ngOnInit();
 
         // WHEN
         comp.save();
         expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: lLINSFamilyTarget }));
+        saveSubject.next(new HttpResponse({ body: llinsFamilyTarget }));
         saveSubject.complete();
 
         // THEN
-        expect(lLINSFamilyTargetService.create).toHaveBeenCalledWith(lLINSFamilyTarget);
+        expect(llinsFamilyTargetService.create).toHaveBeenCalledWith(llinsFamilyTarget);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).toHaveBeenCalled();
       });
 
       it('Should set isSaving to false on error', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<LLINSFamilyTarget>>();
-        const lLINSFamilyTarget = { id: 123 };
-        jest.spyOn(lLINSFamilyTargetService, 'update').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<LlinsFamilyTarget>>();
+        const llinsFamilyTarget = { id: 123 };
+        jest.spyOn(llinsFamilyTargetService, 'update').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ lLINSFamilyTarget });
+        activatedRoute.data = of({ llinsFamilyTarget });
         comp.ngOnInit();
 
         // WHEN
@@ -214,7 +214,7 @@ describe('Component Tests', () => {
         saveSubject.error('This is an error!');
 
         // THEN
-        expect(lLINSFamilyTargetService.update).toHaveBeenCalledWith(lLINSFamilyTarget);
+        expect(llinsFamilyTargetService.update).toHaveBeenCalledWith(llinsFamilyTarget);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).not.toHaveBeenCalled();
       });

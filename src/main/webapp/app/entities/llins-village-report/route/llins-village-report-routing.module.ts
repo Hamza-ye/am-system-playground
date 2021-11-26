@@ -2,45 +2,45 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { LLINSVillageReportComponent } from '../list/llins-village-report.component';
-import { LLINSVillageReportDetailComponent } from '../detail/llins-village-report-detail.component';
-import { LLINSVillageReportUpdateComponent } from '../update/llins-village-report-update.component';
-import { LLINSVillageReportRoutingResolveService } from './llins-village-report-routing-resolve.service';
+import { LlinsVillageReportComponent } from '../list/llins-village-report.component';
+import { LlinsVillageReportDetailComponent } from '../detail/llins-village-report-detail.component';
+import { LlinsVillageReportUpdateComponent } from '../update/llins-village-report-update.component';
+import { LlinsVillageReportRoutingResolveService } from './llins-village-report-routing-resolve.service';
 
-const lLINSVillageReportRoute: Routes = [
+const llinsVillageReportRoute: Routes = [
   {
     path: '',
-    component: LLINSVillageReportComponent,
+    component: LlinsVillageReportComponent,
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
-    component: LLINSVillageReportDetailComponent,
+    component: LlinsVillageReportDetailComponent,
     resolve: {
-      lLINSVillageReport: LLINSVillageReportRoutingResolveService,
+      llinsVillageReport: LlinsVillageReportRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
-    component: LLINSVillageReportUpdateComponent,
+    component: LlinsVillageReportUpdateComponent,
     resolve: {
-      lLINSVillageReport: LLINSVillageReportRoutingResolveService,
+      llinsVillageReport: LlinsVillageReportRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
-    component: LLINSVillageReportUpdateComponent,
+    component: LlinsVillageReportUpdateComponent,
     resolve: {
-      lLINSVillageReport: LLINSVillageReportRoutingResolveService,
+      llinsVillageReport: LlinsVillageReportRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(lLINSVillageReportRoute)],
+  imports: [RouterModule.forChild(llinsVillageReportRoute)],
   exports: [RouterModule],
 })
-export class LLINSVillageReportRoutingModule {}
+export class LlinsVillageReportRoutingModule {}

@@ -2,27 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ILLINSVillageReport } from '../llins-village-report.model';
-import { LLINSVillageReportService } from '../service/llins-village-report.service';
-import { LLINSVillageReportDeleteDialogComponent } from '../delete/llins-village-report-delete-dialog.component';
+import { ILlinsVillageReport } from '../llins-village-report.model';
+import { LlinsVillageReportService } from '../service/llins-village-report.service';
+import { LlinsVillageReportDeleteDialogComponent } from '../delete/llins-village-report-delete-dialog.component';
 
 @Component({
   selector: 'app-llins-village-report',
   templateUrl: './llins-village-report.component.html',
 })
-export class LLINSVillageReportComponent implements OnInit {
-  lLINSVillageReports?: ILLINSVillageReport[];
+export class LlinsVillageReportComponent implements OnInit {
+  llinsVillageReports?: ILlinsVillageReport[];
   isLoading = false;
 
-  constructor(protected lLINSVillageReportService: LLINSVillageReportService, protected modalService: NgbModal) {}
+  constructor(protected llinsVillageReportService: LlinsVillageReportService, protected modalService: NgbModal) {}
 
   loadAll(): void {
     this.isLoading = true;
 
-    this.lLINSVillageReportService.query().subscribe(
-      (res: HttpResponse<ILLINSVillageReport[]>) => {
+    this.llinsVillageReportService.query().subscribe(
+      (res: HttpResponse<ILlinsVillageReport[]>) => {
         this.isLoading = false;
-        this.lLINSVillageReports = res.body ?? [];
+        this.llinsVillageReports = res.body ?? [];
       },
       () => {
         this.isLoading = false;
@@ -34,13 +34,13 @@ export class LLINSVillageReportComponent implements OnInit {
     this.loadAll();
   }
 
-  trackId(index: number, item: ILLINSVillageReport): number {
+  trackId(index: number, item: ILlinsVillageReport): number {
     return item.id!;
   }
 
-  delete(lLINSVillageReport: ILLINSVillageReport): void {
-    const modalRef = this.modalService.open(LLINSVillageReportDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.lLINSVillageReport = lLINSVillageReport;
+  delete(llinsVillageReport: ILlinsVillageReport): void {
+    const modalRef = this.modalService.open(LlinsVillageReportDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.llinsVillageReport = llinsVillageReport;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {

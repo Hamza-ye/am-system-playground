@@ -1,0 +1,47 @@
+{
+  "amSystemPlaygroundApp": {
+    "chvMalariaReportVersion1": {
+      "home": {
+        "title": "Chv Malaria Report Version 1 S",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Chv Malaria Report Version 1",
+        "createOrEditLabel": "Create or edit a Chv Malaria Report Version 1",
+        "notFound": "No Chv Malaria Report Version 1 S found"
+      },
+      "created": "A new Chv Malaria Report Version 1 is created with identifier {{ param }}",
+      "updated": "A Chv Malaria Report Version 1 is updated with identifier {{ param }}",
+      "deleted": "A Chv Malaria Report Version 1 is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Chv Malaria Report Version 1 {{ id }}?"
+      },
+      "detail": {
+        "title": "Chv Malaria Report Version 1"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "tested": "Tested",
+      "positive": "Positive",
+      "drugsGiven": "Drugs Given",
+      "suppsGiven": "Supps Given",
+      "rdtBalance": "Rdt Balance",
+      "rdtReceived": "Rdt Received",
+      "rdtUsed": "Rdt Used",
+      "rdtDamagedLost": "Rdt Damaged Lost",
+      "drugsBalance": "Drugs Balance",
+      "drugsReceived": "Drugs Received",
+      "drugsUsed": "Drugs Used",
+      "drugsDamagedLost": "Drugs Damaged Lost",
+      "suppsBalance": "Supps Balance",
+      "suppsReceived": "Supps Received",
+      "suppsUsed": "Supps Used",
+      "suppsDamagedLost": "Supps Damaged Lost",
+      "comment": "Comment",
+      "createdBy": "Created By",
+      "lastUpdatedBy": "Last Updated By",
+      "chv": "Chv",
+      "period": "Period"
+    }
+  }
+}

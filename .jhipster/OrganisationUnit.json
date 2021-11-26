@@ -141,7 +141,7 @@
     },
     {
       "relationshipType": "many-to-one",
-      "otherEntityName": "cHV",
+      "otherEntityName": "chv",
       "otherEntityRelationshipName": "coveredSubVillage",
       "relationshipName": "assignedChv"
     },

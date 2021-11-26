@@ -1,19 +1,10 @@
 package org.nmcpye.activitiesmanagement.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
-import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.nmcpye.activitiesmanagement.IntegrationTest;
-import org.nmcpye.activitiesmanagement.domain.WhMovement;
 import org.nmcpye.activitiesmanagement.domain.Warehouse;
+import org.nmcpye.activitiesmanagement.domain.WhMovement;
 import org.nmcpye.activitiesmanagement.domain.WorkingDay;
 import org.nmcpye.activitiesmanagement.domain.enumeration.MovementType;
 import org.nmcpye.activitiesmanagement.repository.WhMovementRepository;
@@ -23,6 +14,16 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link WhMovementResource} REST controller.
@@ -57,15 +58,15 @@ class WhMovementResourceIT {
     private static AtomicLong count = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
-    private WhMovementRepository wHMovementRepository;
+    private WhMovementRepository whMovementRepository;
 
     @Autowired
     private EntityManager em;
 
     @Autowired
-    private MockMvc restWHMovementMockMvc;
+    private MockMvc restWhMovementMockMvc;
 
-    private WhMovement wHMovement;
+    private WhMovement whMovement;
 
     /**
      * Create an entity for this test.
@@ -74,7 +75,7 @@ class WhMovementResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static WhMovement createEntity(EntityManager em) {
-        WhMovement wHMovement = new WhMovement()
+        WhMovement whMovement = new WhMovement()
             .movementType(DEFAULT_MOVEMENT_TYPE)
             .quantity(DEFAULT_QUANTITY)
             .reconciliationSource(DEFAULT_RECONCILIATION_SOURCE)
@@ -90,7 +91,7 @@ class WhMovementResourceIT {
         } else {
             workingDay = TestUtil.findAll(em, WorkingDay.class).get(0);
         }
-        wHMovement.setDay(workingDay);
+        whMovement.setDay(workingDay);
         // Add required entity
         Warehouse warehouse;
         if (TestUtil.findAll(em, Warehouse.class).isEmpty()) {
@@ -100,8 +101,8 @@ class WhMovementResourceIT {
         } else {
             warehouse = TestUtil.findAll(em, Warehouse.class).get(0);
         }
-        wHMovement.setInitiatedWh(warehouse);
-        return wHMovement;
+        whMovement.setInitiatedWh(warehouse);
+        return whMovement;
     }
 
     /**
@@ -111,7 +112,7 @@ class WhMovementResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static WhMovement createUpdatedEntity(EntityManager em) {
-        WhMovement wHMovement = new WhMovement()
+        WhMovement whMovement = new WhMovement()
             .movementType(UPDATED_MOVEMENT_TYPE)
             .quantity(UPDATED_QUANTITY)
             .reconciliationSource(UPDATED_RECONCILIATION_SOURCE)
@@ -127,7 +128,7 @@ class WhMovementResourceIT {
         } else {
             workingDay = TestUtil.findAll(em, WorkingDay.class).get(0);
         }
-        wHMovement.setDay(workingDay);
+        whMovement.setDay(workingDay);
         // Add required entity
         Warehouse warehouse;
         if (TestUtil.findAll(em, Warehouse.class).isEmpty()) {
@@ -137,28 +138,28 @@ class WhMovementResourceIT {
         } else {
             warehouse = TestUtil.findAll(em, Warehouse.class).get(0);
         }
-        wHMovement.setInitiatedWh(warehouse);
-        return wHMovement;
+        whMovement.setInitiatedWh(warehouse);
+        return whMovement;
     }
 
     @BeforeEach
     public void initTest() {
-        wHMovement = createEntity(em);
+        whMovement = createEntity(em);
     }
 
     @Test
     @Transactional
-    void createWHMovement() throws Exception {
-        int databaseSizeBeforeCreate = wHMovementRepository.findAll().size();
+    void createWhMovement() throws Exception {
+        int databaseSizeBeforeCreate = whMovementRepository.findAll().size();
         // Create the WhMovement
-        restWHMovementMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(wHMovement)))
+        restWhMovementMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(whMovement)))
             .andExpect(status().isCreated());
 
         // Validate the WhMovement in the database
-        List<WhMovement> wHMovementList = wHMovementRepository.findAll();
-        assertThat(wHMovementList).hasSize(databaseSizeBeforeCreate + 1);
-        WhMovement testWhMovement = wHMovementList.get(wHMovementList.size() - 1);
+        List<WhMovement> whMovementList = whMovementRepository.findAll();
+        assertThat(whMovementList).hasSize(databaseSizeBeforeCreate + 1);
+        WhMovement testWhMovement = whMovementList.get(whMovementList.size() - 1);
         assertThat(testWhMovement.getMovementType()).isEqualTo(DEFAULT_MOVEMENT_TYPE);
         assertThat(testWhMovement.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
         assertThat(testWhMovement.getReconciliationSource()).isEqualTo(DEFAULT_RECONCILIATION_SOURCE);
@@ -169,68 +170,68 @@ class WhMovementResourceIT {
 
     @Test
     @Transactional
-    void createWHMovementWithExistingId() throws Exception {
+    void createWhMovementWithExistingId() throws Exception {
         // Create the WhMovement with an existing ID
-        wHMovement.setId(1L);
+        whMovement.setId(1L);
 
-        int databaseSizeBeforeCreate = wHMovementRepository.findAll().size();
+        int databaseSizeBeforeCreate = whMovementRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restWHMovementMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(wHMovement)))
+        restWhMovementMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(whMovement)))
             .andExpect(status().isBadRequest());
 
         // Validate the WhMovement in the database
-        List<WhMovement> wHMovementList = wHMovementRepository.findAll();
-        assertThat(wHMovementList).hasSize(databaseSizeBeforeCreate);
+        List<WhMovement> whMovementList = whMovementRepository.findAll();
+        assertThat(whMovementList).hasSize(databaseSizeBeforeCreate);
     }
 
     @Test
     @Transactional
     void checkMovementTypeIsRequired() throws Exception {
-        int databaseSizeBeforeTest = wHMovementRepository.findAll().size();
+        int databaseSizeBeforeTest = whMovementRepository.findAll().size();
         // set the field null
-        wHMovement.setMovementType(null);
+        whMovement.setMovementType(null);
 
         // Create the WhMovement, which fails.
 
-        restWHMovementMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(wHMovement)))
+        restWhMovementMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(whMovement)))
             .andExpect(status().isBadRequest());
 
-        List<WhMovement> wHMovementList = wHMovementRepository.findAll();
-        assertThat(wHMovementList).hasSize(databaseSizeBeforeTest);
+        List<WhMovement> whMovementList = whMovementRepository.findAll();
+        assertThat(whMovementList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
     void checkQuantityIsRequired() throws Exception {
-        int databaseSizeBeforeTest = wHMovementRepository.findAll().size();
+        int databaseSizeBeforeTest = whMovementRepository.findAll().size();
         // set the field null
-        wHMovement.setQuantity(null);
+        whMovement.setQuantity(null);
 
         // Create the WhMovement, which fails.
 
-        restWHMovementMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(wHMovement)))
+        restWhMovementMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(whMovement)))
             .andExpect(status().isBadRequest());
 
-        List<WhMovement> wHMovementList = wHMovementRepository.findAll();
-        assertThat(wHMovementList).hasSize(databaseSizeBeforeTest);
+        List<WhMovement> whMovementList = whMovementRepository.findAll();
+        assertThat(whMovementList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
-    void getAllWHMovements() throws Exception {
+    void getAllWhMovements() throws Exception {
         // Initialize the database
-        wHMovementRepository.saveAndFlush(wHMovement);
+        whMovementRepository.saveAndFlush(whMovement);
 
-        // Get all the wHMovementList
-        restWHMovementMockMvc
+        // Get all the whMovementList
+        restWhMovementMockMvc
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(wHMovement.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(whMovement.getId().intValue())))
             .andExpect(jsonPath("$.[*].movementType").value(hasItem(DEFAULT_MOVEMENT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY)))
             .andExpect(jsonPath("$.[*].reconciliationSource").value(hasItem(DEFAULT_RECONCILIATION_SOURCE)))
@@ -241,16 +242,16 @@ class WhMovementResourceIT {
 
     @Test
     @Transactional
-    void getWHMovement() throws Exception {
+    void getWhMovement() throws Exception {
         // Initialize the database
-        wHMovementRepository.saveAndFlush(wHMovement);
+        whMovementRepository.saveAndFlush(whMovement);
 
-        // Get the wHMovement
-        restWHMovementMockMvc
-            .perform(get(ENTITY_API_URL_ID, wHMovement.getId()))
+        // Get the whMovement
+        restWhMovementMockMvc
+            .perform(get(ENTITY_API_URL_ID, whMovement.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(wHMovement.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(whMovement.getId().intValue()))
             .andExpect(jsonPath("$.movementType").value(DEFAULT_MOVEMENT_TYPE.toString()))
             .andExpect(jsonPath("$.quantity").value(DEFAULT_QUANTITY))
             .andExpect(jsonPath("$.reconciliationSource").value(DEFAULT_RECONCILIATION_SOURCE))
@@ -261,21 +262,21 @@ class WhMovementResourceIT {
 
     @Test
     @Transactional
-    void getNonExistingWHMovement() throws Exception {
-        // Get the wHMovement
-        restWHMovementMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
+    void getNonExistingWhMovement() throws Exception {
+        // Get the whMovement
+        restWhMovementMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
     @Test
     @Transactional
-    void putNewWHMovement() throws Exception {
+    void putNewWhMovement() throws Exception {
         // Initialize the database
-        wHMovementRepository.saveAndFlush(wHMovement);
+        whMovementRepository.saveAndFlush(whMovement);
 
-        int databaseSizeBeforeUpdate = wHMovementRepository.findAll().size();
+        int databaseSizeBeforeUpdate = whMovementRepository.findAll().size();
 
-        // Update the wHMovement
-        WhMovement updatedWhMovement = wHMovementRepository.findById(wHMovement.getId()).get();
+        // Update the whMovement
+        WhMovement updatedWhMovement = whMovementRepository.findById(whMovement.getId()).get();
         // Disconnect from session so that the updates on updatedWhMovement are not directly saved in db
         em.detach(updatedWhMovement);
         updatedWhMovement
@@ -286,7 +287,7 @@ class WhMovementResourceIT {
             .confirmedByOtherSide(UPDATED_CONFIRMED_BY_OTHER_SIDE)
             .comment(UPDATED_COMMENT);
 
-        restWHMovementMockMvc
+        restWhMovementMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, updatedWhMovement.getId())
                     .contentType(MediaType.APPLICATION_JSON)
@@ -295,9 +296,9 @@ class WhMovementResourceIT {
             .andExpect(status().isOk());
 
         // Validate the WhMovement in the database
-        List<WhMovement> wHMovementList = wHMovementRepository.findAll();
-        assertThat(wHMovementList).hasSize(databaseSizeBeforeUpdate);
-        WhMovement testWhMovement = wHMovementList.get(wHMovementList.size() - 1);
+        List<WhMovement> whMovementList = whMovementRepository.findAll();
+        assertThat(whMovementList).hasSize(databaseSizeBeforeUpdate);
+        WhMovement testWhMovement = whMovementList.get(whMovementList.size() - 1);
         assertThat(testWhMovement.getMovementType()).isEqualTo(UPDATED_MOVEMENT_TYPE);
         assertThat(testWhMovement.getQuantity()).isEqualTo(UPDATED_QUANTITY);
         assertThat(testWhMovement.getReconciliationSource()).isEqualTo(UPDATED_RECONCILIATION_SOURCE);
@@ -308,75 +309,75 @@ class WhMovementResourceIT {
 
     @Test
     @Transactional
-    void putNonExistingWHMovement() throws Exception {
-        int databaseSizeBeforeUpdate = wHMovementRepository.findAll().size();
-        wHMovement.setId(count.incrementAndGet());
+    void putNonExistingWhMovement() throws Exception {
+        int databaseSizeBeforeUpdate = whMovementRepository.findAll().size();
+        whMovement.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restWHMovementMockMvc
+        restWhMovementMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, wHMovement.getId())
+                put(ENTITY_API_URL_ID, whMovement.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(wHMovement))
+                    .content(TestUtil.convertObjectToJsonBytes(whMovement))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the WhMovement in the database
-        List<WhMovement> wHMovementList = wHMovementRepository.findAll();
-        assertThat(wHMovementList).hasSize(databaseSizeBeforeUpdate);
+        List<WhMovement> whMovementList = whMovementRepository.findAll();
+        assertThat(whMovementList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void putWithIdMismatchWHMovement() throws Exception {
-        int databaseSizeBeforeUpdate = wHMovementRepository.findAll().size();
-        wHMovement.setId(count.incrementAndGet());
+    void putWithIdMismatchWhMovement() throws Exception {
+        int databaseSizeBeforeUpdate = whMovementRepository.findAll().size();
+        whMovement.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restWHMovementMockMvc
+        restWhMovementMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(wHMovement))
+                    .content(TestUtil.convertObjectToJsonBytes(whMovement))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the WhMovement in the database
-        List<WhMovement> wHMovementList = wHMovementRepository.findAll();
-        assertThat(wHMovementList).hasSize(databaseSizeBeforeUpdate);
+        List<WhMovement> whMovementList = whMovementRepository.findAll();
+        assertThat(whMovementList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void putWithMissingIdPathParamWHMovement() throws Exception {
-        int databaseSizeBeforeUpdate = wHMovementRepository.findAll().size();
-        wHMovement.setId(count.incrementAndGet());
+    void putWithMissingIdPathParamWhMovement() throws Exception {
+        int databaseSizeBeforeUpdate = whMovementRepository.findAll().size();
+        whMovement.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restWHMovementMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(wHMovement)))
+        restWhMovementMockMvc
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(whMovement)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the WhMovement in the database
-        List<WhMovement> wHMovementList = wHMovementRepository.findAll();
-        assertThat(wHMovementList).hasSize(databaseSizeBeforeUpdate);
+        List<WhMovement> whMovementList = whMovementRepository.findAll();
+        assertThat(whMovementList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void partialUpdateWHMovementWithPatch() throws Exception {
+    void partialUpdateWhMovementWithPatch() throws Exception {
         // Initialize the database
-        wHMovementRepository.saveAndFlush(wHMovement);
+        whMovementRepository.saveAndFlush(whMovement);
 
-        int databaseSizeBeforeUpdate = wHMovementRepository.findAll().size();
+        int databaseSizeBeforeUpdate = whMovementRepository.findAll().size();
 
-        // Update the wHMovement using partial update
+        // Update the whMovement using partial update
         WhMovement partialUpdatedWhMovement = new WhMovement();
-        partialUpdatedWhMovement.setId(wHMovement.getId());
+        partialUpdatedWhMovement.setId(whMovement.getId());
 
-        partialUpdatedWhMovement.quantity(UPDATED_QUANTITY).reconciliationSource(UPDATED_RECONCILIATION_SOURCE).comment(UPDATED_COMMENT);
+        partialUpdatedWhMovement.quantity(UPDATED_QUANTITY).reconciliationDestination(UPDATED_RECONCILIATION_DESTINATION);
 
-        restWHMovementMockMvc
+        restWhMovementMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedWhMovement.getId())
                     .contentType("application/merge-patch+json")
@@ -385,28 +386,28 @@ class WhMovementResourceIT {
             .andExpect(status().isOk());
 
         // Validate the WhMovement in the database
-        List<WhMovement> wHMovementList = wHMovementRepository.findAll();
-        assertThat(wHMovementList).hasSize(databaseSizeBeforeUpdate);
-        WhMovement testWhMovement = wHMovementList.get(wHMovementList.size() - 1);
+        List<WhMovement> whMovementList = whMovementRepository.findAll();
+        assertThat(whMovementList).hasSize(databaseSizeBeforeUpdate);
+        WhMovement testWhMovement = whMovementList.get(whMovementList.size() - 1);
         assertThat(testWhMovement.getMovementType()).isEqualTo(DEFAULT_MOVEMENT_TYPE);
         assertThat(testWhMovement.getQuantity()).isEqualTo(UPDATED_QUANTITY);
-        assertThat(testWhMovement.getReconciliationSource()).isEqualTo(UPDATED_RECONCILIATION_SOURCE);
-        assertThat(testWhMovement.getReconciliationDestination()).isEqualTo(DEFAULT_RECONCILIATION_DESTINATION);
+        assertThat(testWhMovement.getReconciliationSource()).isEqualTo(DEFAULT_RECONCILIATION_SOURCE);
+        assertThat(testWhMovement.getReconciliationDestination()).isEqualTo(UPDATED_RECONCILIATION_DESTINATION);
         assertThat(testWhMovement.getConfirmedByOtherSide()).isEqualTo(DEFAULT_CONFIRMED_BY_OTHER_SIDE);
-        assertThat(testWhMovement.getComment()).isEqualTo(UPDATED_COMMENT);
+        assertThat(testWhMovement.getComment()).isEqualTo(DEFAULT_COMMENT);
     }
 
     @Test
     @Transactional
-    void fullUpdateWHMovementWithPatch() throws Exception {
+    void fullUpdateWhMovementWithPatch() throws Exception {
         // Initialize the database
-        wHMovementRepository.saveAndFlush(wHMovement);
+        whMovementRepository.saveAndFlush(whMovement);
 
-        int databaseSizeBeforeUpdate = wHMovementRepository.findAll().size();
+        int databaseSizeBeforeUpdate = whMovementRepository.findAll().size();
 
-        // Update the wHMovement using partial update
+        // Update the whMovement using partial update
         WhMovement partialUpdatedWhMovement = new WhMovement();
-        partialUpdatedWhMovement.setId(wHMovement.getId());
+        partialUpdatedWhMovement.setId(whMovement.getId());
 
         partialUpdatedWhMovement
             .movementType(UPDATED_MOVEMENT_TYPE)
@@ -416,7 +417,7 @@ class WhMovementResourceIT {
             .confirmedByOtherSide(UPDATED_CONFIRMED_BY_OTHER_SIDE)
             .comment(UPDATED_COMMENT);
 
-        restWHMovementMockMvc
+        restWhMovementMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedWhMovement.getId())
                     .contentType("application/merge-patch+json")
@@ -425,9 +426,9 @@ class WhMovementResourceIT {
             .andExpect(status().isOk());
 
         // Validate the WhMovement in the database
-        List<WhMovement> wHMovementList = wHMovementRepository.findAll();
-        assertThat(wHMovementList).hasSize(databaseSizeBeforeUpdate);
-        WhMovement testWhMovement = wHMovementList.get(wHMovementList.size() - 1);
+        List<WhMovement> whMovementList = whMovementRepository.findAll();
+        assertThat(whMovementList).hasSize(databaseSizeBeforeUpdate);
+        WhMovement testWhMovement = whMovementList.get(whMovementList.size() - 1);
         assertThat(testWhMovement.getMovementType()).isEqualTo(UPDATED_MOVEMENT_TYPE);
         assertThat(testWhMovement.getQuantity()).isEqualTo(UPDATED_QUANTITY);
         assertThat(testWhMovement.getReconciliationSource()).isEqualTo(UPDATED_RECONCILIATION_SOURCE);
@@ -438,77 +439,77 @@ class WhMovementResourceIT {
 
     @Test
     @Transactional
-    void patchNonExistingWHMovement() throws Exception {
-        int databaseSizeBeforeUpdate = wHMovementRepository.findAll().size();
-        wHMovement.setId(count.incrementAndGet());
+    void patchNonExistingWhMovement() throws Exception {
+        int databaseSizeBeforeUpdate = whMovementRepository.findAll().size();
+        whMovement.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restWHMovementMockMvc
+        restWhMovementMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, wHMovement.getId())
+                patch(ENTITY_API_URL_ID, whMovement.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(wHMovement))
+                    .content(TestUtil.convertObjectToJsonBytes(whMovement))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the WhMovement in the database
-        List<WhMovement> wHMovementList = wHMovementRepository.findAll();
-        assertThat(wHMovementList).hasSize(databaseSizeBeforeUpdate);
+        List<WhMovement> whMovementList = whMovementRepository.findAll();
+        assertThat(whMovementList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void patchWithIdMismatchWHMovement() throws Exception {
-        int databaseSizeBeforeUpdate = wHMovementRepository.findAll().size();
-        wHMovement.setId(count.incrementAndGet());
+    void patchWithIdMismatchWhMovement() throws Exception {
+        int databaseSizeBeforeUpdate = whMovementRepository.findAll().size();
+        whMovement.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restWHMovementMockMvc
+        restWhMovementMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(wHMovement))
+                    .content(TestUtil.convertObjectToJsonBytes(whMovement))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the WhMovement in the database
-        List<WhMovement> wHMovementList = wHMovementRepository.findAll();
-        assertThat(wHMovementList).hasSize(databaseSizeBeforeUpdate);
+        List<WhMovement> whMovementList = whMovementRepository.findAll();
+        assertThat(whMovementList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void patchWithMissingIdPathParamWHMovement() throws Exception {
-        int databaseSizeBeforeUpdate = wHMovementRepository.findAll().size();
-        wHMovement.setId(count.incrementAndGet());
+    void patchWithMissingIdPathParamWhMovement() throws Exception {
+        int databaseSizeBeforeUpdate = whMovementRepository.findAll().size();
+        whMovement.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restWHMovementMockMvc
+        restWhMovementMockMvc
             .perform(
-                patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(wHMovement))
+                patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(whMovement))
             )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the WhMovement in the database
-        List<WhMovement> wHMovementList = wHMovementRepository.findAll();
-        assertThat(wHMovementList).hasSize(databaseSizeBeforeUpdate);
+        List<WhMovement> whMovementList = whMovementRepository.findAll();
+        assertThat(whMovementList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void deleteWHMovement() throws Exception {
+    void deleteWhMovement() throws Exception {
         // Initialize the database
-        wHMovementRepository.saveAndFlush(wHMovement);
+        whMovementRepository.saveAndFlush(whMovement);
 
-        int databaseSizeBeforeDelete = wHMovementRepository.findAll().size();
+        int databaseSizeBeforeDelete = whMovementRepository.findAll().size();
 
-        // Delete the wHMovement
-        restWHMovementMockMvc
-            .perform(delete(ENTITY_API_URL_ID, wHMovement.getId()).accept(MediaType.APPLICATION_JSON))
+        // Delete the whMovement
+        restWhMovementMockMvc
+            .perform(delete(ENTITY_API_URL_ID, whMovement.getId()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item
-        List<WhMovement> wHMovementList = wHMovementRepository.findAll();
-        assertThat(wHMovementList).hasSize(databaseSizeBeforeDelete - 1);
+        List<WhMovement> whMovementList = whMovementRepository.findAll();
+        assertThat(whMovementList).hasSize(databaseSizeBeforeDelete - 1);
     }
 }

@@ -4,20 +4,20 @@ import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { ICHV, CHV } from '../chv.model';
-import { CHVService } from '../service/chv.service';
+import { IChv, Chv } from '../chv.model';
+import { ChvService } from '../service/chv.service';
 
 @Injectable({ providedIn: 'root' })
-export class CHVRoutingResolveService implements Resolve<ICHV> {
-  constructor(protected service: CHVService, protected router: Router) {}
+export class ChvRoutingResolveService implements Resolve<IChv> {
+  constructor(protected service: ChvService, protected router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<ICHV> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot): Observable<IChv> | Observable<never> {
     const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
-        mergeMap((cHV: HttpResponse<CHV>) => {
-          if (cHV.body) {
-            return of(cHV.body);
+        mergeMap((chv: HttpResponse<Chv>) => {
+          if (chv.body) {
+            return of(chv.body);
           } else {
             this.router.navigate(['404']);
             return EMPTY;
@@ -25,6 +25,6 @@ export class CHVRoutingResolveService implements Resolve<ICHV> {
         })
       );
     }
-    return of(new CHV());
+    return of(new Chv());
   }
 }

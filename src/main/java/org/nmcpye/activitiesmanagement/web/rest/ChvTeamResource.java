@@ -1,12 +1,5 @@
 package org.nmcpye.activitiesmanagement.web.rest;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.nmcpye.activitiesmanagement.domain.ChvTeam;
 import org.nmcpye.activitiesmanagement.repository.ChvTeamRepository;
 import org.nmcpye.activitiesmanagement.service.ChvTeamService;
@@ -19,8 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 /**
- * REST controller for managing {@link ChvTeam}.
+ * REST controller for managing {@link org.nmcpye.activitiesmanagement.domain.ChvTeam}.
  */
 @RestController
 @RequestMapping("/api")
@@ -28,34 +29,34 @@ public class ChvTeamResource {
 
     private final Logger log = LoggerFactory.getLogger(ChvTeamResource.class);
 
-    private static final String ENTITY_NAME = "cHVTeam";
+    private static final String ENTITY_NAME = "chvTeam";
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final ChvTeamService chvTeamService;
 
-    private final ChvTeamRepository cHVTeamRepository;
+    private final ChvTeamRepository chvTeamRepository;
 
-    public ChvTeamResource(ChvTeamService chvTeamService, ChvTeamRepository cHVTeamRepository) {
+    public ChvTeamResource(ChvTeamService chvTeamService, ChvTeamRepository chvTeamRepository) {
         this.chvTeamService = chvTeamService;
-        this.cHVTeamRepository = cHVTeamRepository;
+        this.chvTeamRepository = chvTeamRepository;
     }
 
     /**
-     * {@code POST  /chv-teams} : Create a new cHVTeam.
+     * {@code POST  /chv-teams} : Create a new chvTeam.
      *
-     * @param cHVTeam the cHVTeam to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new cHVTeam, or with status {@code 400 (Bad Request)} if the cHVTeam has already an ID.
+     * @param chvTeam the chvTeam to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new chvTeam, or with status {@code 400 (Bad Request)} if the chvTeam has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/chv-teams")
-    public ResponseEntity<ChvTeam> createCHVTeam(@Valid @RequestBody ChvTeam cHVTeam) throws URISyntaxException {
-        log.debug("REST request to save ChvTeam : {}", cHVTeam);
-        if (cHVTeam.getId() != null) {
-            throw new BadRequestAlertException("A new cHVTeam cannot already have an ID", ENTITY_NAME, "idexists");
+    public ResponseEntity<ChvTeam> createChvTeam(@Valid @RequestBody ChvTeam chvTeam) throws URISyntaxException {
+        log.debug("REST request to save ChvTeam : {}", chvTeam);
+        if (chvTeam.getId() != null) {
+            throw new BadRequestAlertException("A new chvTeam cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ChvTeam result = chvTeamService.save(cHVTeam);
+        ChvTeam result = chvTeamService.save(chvTeam);
         return ResponseEntity
             .created(new URI("/api/chv-teams/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
@@ -63,108 +64,108 @@ public class ChvTeamResource {
     }
 
     /**
-     * {@code PUT  /chv-teams/:id} : Updates an existing cHVTeam.
+     * {@code PUT  /chv-teams/:id} : Updates an existing chvTeam.
      *
-     * @param id the id of the cHVTeam to save.
-     * @param cHVTeam the cHVTeam to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated cHVTeam,
-     * or with status {@code 400 (Bad Request)} if the cHVTeam is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the cHVTeam couldn't be updated.
+     * @param id the id of the chvTeam to save.
+     * @param chvTeam the chvTeam to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated chvTeam,
+     * or with status {@code 400 (Bad Request)} if the chvTeam is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the chvTeam couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/chv-teams/{id}")
-    public ResponseEntity<ChvTeam> updateCHVTeam(
+    public ResponseEntity<ChvTeam> updateChvTeam(
         @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody ChvTeam cHVTeam
+        @Valid @RequestBody ChvTeam chvTeam
     ) throws URISyntaxException {
-        log.debug("REST request to update ChvTeam : {}, {}", id, cHVTeam);
-        if (cHVTeam.getId() == null) {
+        log.debug("REST request to update ChvTeam : {}, {}", id, chvTeam);
+        if (chvTeam.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, cHVTeam.getId())) {
+        if (!Objects.equals(id, chvTeam.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        if (!cHVTeamRepository.existsById(id)) {
+        if (!chvTeamRepository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        ChvTeam result = chvTeamService.save(cHVTeam);
+        ChvTeam result = chvTeamService.save(chvTeam);
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, cHVTeam.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, chvTeam.getId().toString()))
             .body(result);
     }
 
     /**
-     * {@code PATCH  /chv-teams/:id} : Partial updates given fields of an existing cHVTeam, field will ignore if it is null
+     * {@code PATCH  /chv-teams/:id} : Partial updates given fields of an existing chvTeam, field will ignore if it is null
      *
-     * @param id the id of the cHVTeam to save.
-     * @param cHVTeam the cHVTeam to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated cHVTeam,
-     * or with status {@code 400 (Bad Request)} if the cHVTeam is not valid,
-     * or with status {@code 404 (Not Found)} if the cHVTeam is not found,
-     * or with status {@code 500 (Internal Server Error)} if the cHVTeam couldn't be updated.
+     * @param id the id of the chvTeam to save.
+     * @param chvTeam the chvTeam to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated chvTeam,
+     * or with status {@code 400 (Bad Request)} if the chvTeam is not valid,
+     * or with status {@code 404 (Not Found)} if the chvTeam is not found,
+     * or with status {@code 500 (Internal Server Error)} if the chvTeam couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/chv-teams/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<ChvTeam> partialUpdateCHVTeam(
+    public ResponseEntity<ChvTeam> partialUpdateChvTeam(
         @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody ChvTeam cHVTeam
+        @NotNull @RequestBody ChvTeam chvTeam
     ) throws URISyntaxException {
-        log.debug("REST request to partial update ChvTeam partially : {}, {}", id, cHVTeam);
-        if (cHVTeam.getId() == null) {
+        log.debug("REST request to partial update ChvTeam partially : {}, {}", id, chvTeam);
+        if (chvTeam.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, cHVTeam.getId())) {
+        if (!Objects.equals(id, chvTeam.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        if (!cHVTeamRepository.existsById(id)) {
+        if (!chvTeamRepository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<ChvTeam> result = chvTeamService.partialUpdate(cHVTeam);
+        Optional<ChvTeam> result = chvTeamService.partialUpdate(chvTeam);
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, cHVTeam.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, chvTeam.getId().toString())
         );
     }
 
     /**
-     * {@code GET  /chv-teams} : get all the cHVTeams.
+     * {@code GET  /chv-teams} : get all the chvTeams.
      *
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of cHVTeams in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of chvTeams in body.
      */
     @GetMapping("/chv-teams")
-    public List<ChvTeam> getAllCHVTeams(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
-        log.debug("REST request to get all CHVTeams");
+    public List<ChvTeam> getAllChvTeams(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+        log.debug("REST request to get all ChvTeams");
         return chvTeamService.findAll();
     }
 
     /**
-     * {@code GET  /chv-teams/:id} : get the "id" cHVTeam.
+     * {@code GET  /chv-teams/:id} : get the "id" chvTeam.
      *
-     * @param id the id of the cHVTeam to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the cHVTeam, or with status {@code 404 (Not Found)}.
+     * @param id the id of the chvTeam to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the chvTeam, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/chv-teams/{id}")
-    public ResponseEntity<ChvTeam> getCHVTeam(@PathVariable Long id) {
+    public ResponseEntity<ChvTeam> getChvTeam(@PathVariable Long id) {
         log.debug("REST request to get ChvTeam : {}", id);
-        Optional<ChvTeam> cHVTeam = chvTeamService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(cHVTeam);
+        Optional<ChvTeam> chvTeam = chvTeamService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(chvTeam);
     }
 
     /**
-     * {@code DELETE  /chv-teams/:id} : delete the "id" cHVTeam.
+     * {@code DELETE  /chv-teams/:id} : delete the "id" chvTeam.
      *
-     * @param id the id of the cHVTeam to delete.
+     * @param id the id of the chvTeam to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/chv-teams/{id}")
-    public ResponseEntity<Void> deleteCHVTeam(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteChvTeam(@PathVariable Long id) {
         log.debug("REST request to delete ChvTeam : {}", id);
         chvTeamService.delete(id);
         return ResponseEntity

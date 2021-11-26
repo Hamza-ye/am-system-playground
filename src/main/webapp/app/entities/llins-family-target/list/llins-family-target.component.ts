@@ -4,18 +4,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ILLINSFamilyTarget } from '../llins-family-target.model';
+import { ILlinsFamilyTarget } from '../llins-family-target.model';
 
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
-import { LLINSFamilyTargetService } from '../service/llins-family-target.service';
-import { LLINSFamilyTargetDeleteDialogComponent } from '../delete/llins-family-target-delete-dialog.component';
+import { LlinsFamilyTargetService } from '../service/llins-family-target.service';
+import { LlinsFamilyTargetDeleteDialogComponent } from '../delete/llins-family-target-delete-dialog.component';
 
 @Component({
   selector: 'app-llins-family-target',
   templateUrl: './llins-family-target.component.html',
 })
-export class LLINSFamilyTargetComponent implements OnInit {
-  lLINSFamilyTargets?: ILLINSFamilyTarget[];
+export class LlinsFamilyTargetComponent implements OnInit {
+  llinsFamilyTargets?: ILlinsFamilyTarget[];
   isLoading = false;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -25,7 +25,7 @@ export class LLINSFamilyTargetComponent implements OnInit {
   ngbPaginationPage = 1;
 
   constructor(
-    protected lLINSFamilyTargetService: LLINSFamilyTargetService,
+    protected llinsFamilyTargetService: LlinsFamilyTargetService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected modalService: NgbModal
@@ -35,14 +35,14 @@ export class LLINSFamilyTargetComponent implements OnInit {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
 
-    this.lLINSFamilyTargetService
+    this.llinsFamilyTargetService
       .query({
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),
       })
       .subscribe(
-        (res: HttpResponse<ILLINSFamilyTarget[]>) => {
+        (res: HttpResponse<ILlinsFamilyTarget[]>) => {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
         },
@@ -57,13 +57,13 @@ export class LLINSFamilyTargetComponent implements OnInit {
     this.handleNavigation();
   }
 
-  trackId(index: number, item: ILLINSFamilyTarget): number {
+  trackId(index: number, item: ILlinsFamilyTarget): number {
     return item.id!;
   }
 
-  delete(lLINSFamilyTarget: ILLINSFamilyTarget): void {
-    const modalRef = this.modalService.open(LLINSFamilyTargetDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.lLINSFamilyTarget = lLINSFamilyTarget;
+  delete(llinsFamilyTarget: ILlinsFamilyTarget): void {
+    const modalRef = this.modalService.open(LlinsFamilyTargetDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.llinsFamilyTarget = llinsFamilyTarget;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {
@@ -95,7 +95,7 @@ export class LLINSFamilyTargetComponent implements OnInit {
     });
   }
 
-  protected onSuccess(data: ILLINSFamilyTarget[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
+  protected onSuccess(data: ILlinsFamilyTarget[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
     if (navigate) {
@@ -107,7 +107,7 @@ export class LLINSFamilyTargetComponent implements OnInit {
         },
       });
     }
-    this.lLINSFamilyTargets = data ?? [];
+    this.llinsFamilyTargets = data ?? [];
     this.ngbPaginationPage = this.page;
   }
 

@@ -1,38 +1,39 @@
 package org.nmcpye.activitiesmanagement.service;
 
+import org.nmcpye.activitiesmanagement.domain.LlinsVillageReport;
+
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.LlinsVillageReport;
 
 /**
  * Service Interface for managing {@link LlinsVillageReport}.
  */
 public interface LlinsVillageReportService {
     /**
-     * Save a lLINSVillageReport.
+     * Save a llinsVillageReport.
      *
-     * @param lLINSVillageReport the entity to save.
+     * @param llinsVillageReport the entity to save.
      * @return the persisted entity.
      */
-    LlinsVillageReport save(LlinsVillageReport lLINSVillageReport);
+    LlinsVillageReport save(LlinsVillageReport llinsVillageReport);
 
     /**
-     * Partially updates a lLINSVillageReport.
+     * Partially updates a llinsVillageReport.
      *
-     * @param lLINSVillageReport the entity to update partially.
+     * @param llinsVillageReport the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<LlinsVillageReport> partialUpdate(LlinsVillageReport lLINSVillageReport);
+    Optional<LlinsVillageReport> partialUpdate(LlinsVillageReport llinsVillageReport);
 
     /**
-     * Get all the lLINSVillageReports.
+     * Get all the llinsVillageReports.
      *
      * @return the list of entities.
      */
     List<LlinsVillageReport> findAll();
 
     /**
-     * Get the "id" lLINSVillageReport.
+     * Get the "id" llinsVillageReport.
      *
      * @param id the id of the entity.
      * @return the entity.
@@ -40,7 +41,7 @@ public interface LlinsVillageReportService {
     Optional<LlinsVillageReport> findOne(Long id);
 
     /**
-     * Delete the "id" lLINSVillageReport.
+     * Delete the "id" llinsVillageReport.
      *
      * @param id the id of the entity.
      */

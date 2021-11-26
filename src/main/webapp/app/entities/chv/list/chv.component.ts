@@ -2,27 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ICHV } from '../chv.model';
-import { CHVService } from '../service/chv.service';
-import { CHVDeleteDialogComponent } from '../delete/chv-delete-dialog.component';
+import { IChv } from '../chv.model';
+import { ChvService } from '../service/chv.service';
+import { ChvDeleteDialogComponent } from '../delete/chv-delete-dialog.component';
 
 @Component({
   selector: 'app-chv',
   templateUrl: './chv.component.html',
 })
-export class CHVComponent implements OnInit {
-  cHVS?: ICHV[];
+export class ChvComponent implements OnInit {
+  chvs?: IChv[];
   isLoading = false;
 
-  constructor(protected cHVService: CHVService, protected modalService: NgbModal) {}
+  constructor(protected chvService: ChvService, protected modalService: NgbModal) {}
 
   loadAll(): void {
     this.isLoading = true;
 
-    this.cHVService.query().subscribe(
-      (res: HttpResponse<ICHV[]>) => {
+    this.chvService.query().subscribe(
+      (res: HttpResponse<IChv[]>) => {
         this.isLoading = false;
-        this.cHVS = res.body ?? [];
+        this.chvs = res.body ?? [];
       },
       () => {
         this.isLoading = false;
@@ -34,13 +34,13 @@ export class CHVComponent implements OnInit {
     this.loadAll();
   }
 
-  trackId(index: number, item: ICHV): number {
+  trackId(index: number, item: IChv): number {
     return item.id!;
   }
 
-  delete(cHV: ICHV): void {
-    const modalRef = this.modalService.open(CHVDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.cHV = cHV;
+  delete(chv: IChv): void {
+    const modalRef = this.modalService.open(ChvDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.chv = chv;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {

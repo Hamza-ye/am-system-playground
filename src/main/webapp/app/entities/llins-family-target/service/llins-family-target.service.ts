@@ -7,37 +7,37 @@ import * as dayjs from 'dayjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { ILLINSFamilyTarget, getLLINSFamilyTargetIdentifier } from '../llins-family-target.model';
+import { ILlinsFamilyTarget, getLlinsFamilyTargetIdentifier } from '../llins-family-target.model';
 
-export type EntityResponseType = HttpResponse<ILLINSFamilyTarget>;
-export type EntityArrayResponseType = HttpResponse<ILLINSFamilyTarget[]>;
+export type EntityResponseType = HttpResponse<ILlinsFamilyTarget>;
+export type EntityArrayResponseType = HttpResponse<ILlinsFamilyTarget[]>;
 
 @Injectable({ providedIn: 'root' })
-export class LLINSFamilyTargetService {
+export class LlinsFamilyTargetService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/llins-family-targets');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  create(lLINSFamilyTarget: ILLINSFamilyTarget): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(lLINSFamilyTarget);
+  create(llinsFamilyTarget: ILlinsFamilyTarget): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(llinsFamilyTarget);
     return this.http
-      .post<ILLINSFamilyTarget>(this.resourceUrl, copy, { observe: 'response' })
+      .post<ILlinsFamilyTarget>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  update(lLINSFamilyTarget: ILLINSFamilyTarget): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(lLINSFamilyTarget);
+  update(llinsFamilyTarget: ILlinsFamilyTarget): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(llinsFamilyTarget);
     return this.http
-      .put<ILLINSFamilyTarget>(`${this.resourceUrl}/${getLLINSFamilyTargetIdentifier(lLINSFamilyTarget) as number}`, copy, {
+      .put<ILlinsFamilyTarget>(`${this.resourceUrl}/${getLlinsFamilyTargetIdentifier(llinsFamilyTarget) as number}`, copy, {
         observe: 'response',
       })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  partialUpdate(lLINSFamilyTarget: ILLINSFamilyTarget): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(lLINSFamilyTarget);
+  partialUpdate(llinsFamilyTarget: ILlinsFamilyTarget): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(llinsFamilyTarget);
     return this.http
-      .patch<ILLINSFamilyTarget>(`${this.resourceUrl}/${getLLINSFamilyTargetIdentifier(lLINSFamilyTarget) as number}`, copy, {
+      .patch<ILlinsFamilyTarget>(`${this.resourceUrl}/${getLlinsFamilyTargetIdentifier(llinsFamilyTarget) as number}`, copy, {
         observe: 'response',
       })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
@@ -45,14 +45,14 @@ export class LLINSFamilyTargetService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<ILLINSFamilyTarget>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .get<ILlinsFamilyTarget>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
-      .get<ILLINSFamilyTarget[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .get<ILlinsFamilyTarget[]>(this.resourceUrl, { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
@@ -60,32 +60,32 @@ export class LLINSFamilyTargetService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  addLLINSFamilyTargetToCollectionIfMissing(
-    lLINSFamilyTargetCollection: ILLINSFamilyTarget[],
-    ...lLINSFamilyTargetsToCheck: (ILLINSFamilyTarget | null | undefined)[]
-  ): ILLINSFamilyTarget[] {
-    const lLINSFamilyTargets: ILLINSFamilyTarget[] = lLINSFamilyTargetsToCheck.filter(isPresent);
-    if (lLINSFamilyTargets.length > 0) {
-      const lLINSFamilyTargetCollectionIdentifiers = lLINSFamilyTargetCollection.map(
-        lLINSFamilyTargetItem => getLLINSFamilyTargetIdentifier(lLINSFamilyTargetItem)!
+  addLlinsFamilyTargetToCollectionIfMissing(
+    llinsFamilyTargetCollection: ILlinsFamilyTarget[],
+    ...llinsFamilyTargetsToCheck: (ILlinsFamilyTarget | null | undefined)[]
+  ): ILlinsFamilyTarget[] {
+    const llinsFamilyTargets: ILlinsFamilyTarget[] = llinsFamilyTargetsToCheck.filter(isPresent);
+    if (llinsFamilyTargets.length > 0) {
+      const llinsFamilyTargetCollectionIdentifiers = llinsFamilyTargetCollection.map(
+        llinsFamilyTargetItem => getLlinsFamilyTargetIdentifier(llinsFamilyTargetItem)!
       );
-      const lLINSFamilyTargetsToAdd = lLINSFamilyTargets.filter(lLINSFamilyTargetItem => {
-        const lLINSFamilyTargetIdentifier = getLLINSFamilyTargetIdentifier(lLINSFamilyTargetItem);
-        if (lLINSFamilyTargetIdentifier == null || lLINSFamilyTargetCollectionIdentifiers.includes(lLINSFamilyTargetIdentifier)) {
+      const llinsFamilyTargetsToAdd = llinsFamilyTargets.filter(llinsFamilyTargetItem => {
+        const llinsFamilyTargetIdentifier = getLlinsFamilyTargetIdentifier(llinsFamilyTargetItem);
+        if (llinsFamilyTargetIdentifier == null || llinsFamilyTargetCollectionIdentifiers.includes(llinsFamilyTargetIdentifier)) {
           return false;
         }
-        lLINSFamilyTargetCollectionIdentifiers.push(lLINSFamilyTargetIdentifier);
+        llinsFamilyTargetCollectionIdentifiers.push(llinsFamilyTargetIdentifier);
         return true;
       });
-      return [...lLINSFamilyTargetsToAdd, ...lLINSFamilyTargetCollection];
+      return [...llinsFamilyTargetsToAdd, ...llinsFamilyTargetCollection];
     }
-    return lLINSFamilyTargetCollection;
+    return llinsFamilyTargetCollection;
   }
 
-  protected convertDateFromClient(lLINSFamilyTarget: ILLINSFamilyTarget): ILLINSFamilyTarget {
-    return Object.assign({}, lLINSFamilyTarget, {
-      created: lLINSFamilyTarget.created?.isValid() ? lLINSFamilyTarget.created.toJSON() : undefined,
-      lastUpdated: lLINSFamilyTarget.lastUpdated?.isValid() ? lLINSFamilyTarget.lastUpdated.toJSON() : undefined,
+  protected convertDateFromClient(llinsFamilyTarget: ILlinsFamilyTarget): ILlinsFamilyTarget {
+    return Object.assign({}, llinsFamilyTarget, {
+      created: llinsFamilyTarget.created?.isValid() ? llinsFamilyTarget.created.toJSON() : undefined,
+      lastUpdated: llinsFamilyTarget.lastUpdated?.isValid() ? llinsFamilyTarget.lastUpdated.toJSON() : undefined,
     });
   }
 
@@ -99,9 +99,9 @@ export class LLINSFamilyTargetService {
 
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
-      res.body.forEach((lLINSFamilyTarget: ILLINSFamilyTarget) => {
-        lLINSFamilyTarget.created = lLINSFamilyTarget.created ? dayjs(lLINSFamilyTarget.created) : undefined;
-        lLINSFamilyTarget.lastUpdated = lLINSFamilyTarget.lastUpdated ? dayjs(lLINSFamilyTarget.lastUpdated) : undefined;
+      res.body.forEach((llinsFamilyTarget: ILlinsFamilyTarget) => {
+        llinsFamilyTarget.created = llinsFamilyTarget.created ? dayjs(llinsFamilyTarget.created) : undefined;
+        llinsFamilyTarget.lastUpdated = llinsFamilyTarget.lastUpdated ? dayjs(llinsFamilyTarget.lastUpdated) : undefined;
       });
     }
     return res;

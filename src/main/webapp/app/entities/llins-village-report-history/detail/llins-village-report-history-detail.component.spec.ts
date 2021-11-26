@@ -2,36 +2,36 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
-import { LLINSVillageReportHistoryDetailComponent } from './llins-village-report-history-detail.component';
+import { LlinsVillageReportHistoryDetailComponent } from './llins-village-report-history-detail.component';
 
 describe('Component Tests', () => {
   describe('LlinsVillageReportHistory Management Detail Component', () => {
-    let comp: LLINSVillageReportHistoryDetailComponent;
-    let fixture: ComponentFixture<LLINSVillageReportHistoryDetailComponent>;
+    let comp: LlinsVillageReportHistoryDetailComponent;
+    let fixture: ComponentFixture<LlinsVillageReportHistoryDetailComponent>;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        declarations: [LLINSVillageReportHistoryDetailComponent],
+        declarations: [LlinsVillageReportHistoryDetailComponent],
         providers: [
           {
             provide: ActivatedRoute,
-            useValue: { data: of({ lLINSVillageReportHistory: { id: 123 } }) },
+            useValue: { data: of({ llinsVillageReportHistory: { id: 123 } }) },
           },
         ],
       })
-        .overrideTemplate(LLINSVillageReportHistoryDetailComponent, '')
+        .overrideTemplate(LlinsVillageReportHistoryDetailComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(LLINSVillageReportHistoryDetailComponent);
+      fixture = TestBed.createComponent(LlinsVillageReportHistoryDetailComponent);
       comp = fixture.componentInstance;
     });
 
     describe('OnInit', () => {
-      it('Should load lLINSVillageReportHistory on init', () => {
+      it('Should load llinsVillageReportHistory on init', () => {
         // WHEN
         comp.ngOnInit();
 
         // THEN
-        expect(comp.lLINSVillageReportHistory).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.llinsVillageReportHistory).toEqual(expect.objectContaining({ id: 123 }));
       });
     });
   });

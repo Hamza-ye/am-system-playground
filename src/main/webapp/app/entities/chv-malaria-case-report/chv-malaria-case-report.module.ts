@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'app/shared/shared.module';
-import { CHVMalariaCaseReportComponent } from './list/chv-malaria-case-report.component';
-import { CHVMalariaCaseReportDetailComponent } from './detail/chv-malaria-case-report-detail.component';
-import { CHVMalariaCaseReportUpdateComponent } from './update/chv-malaria-case-report-update.component';
-import { CHVMalariaCaseReportDeleteDialogComponent } from './delete/chv-malaria-case-report-delete-dialog.component';
-import { CHVMalariaCaseReportRoutingModule } from './route/chv-malaria-case-report-routing.module';
+import { ChvMalariaCaseReportComponent } from './list/chv-malaria-case-report.component';
+import { ChvMalariaCaseReportDetailComponent } from './detail/chv-malaria-case-report-detail.component';
+import { ChvMalariaCaseReportUpdateComponent } from './update/chv-malaria-case-report-update.component';
+import { ChvMalariaCaseReportDeleteDialogComponent } from './delete/chv-malaria-case-report-delete-dialog.component';
+import { ChvMalariaCaseReportRoutingModule } from './route/chv-malaria-case-report-routing.module';
 
 @NgModule({
-  imports: [SharedModule, CHVMalariaCaseReportRoutingModule],
+  imports: [SharedModule, ChvMalariaCaseReportRoutingModule],
   declarations: [
-    CHVMalariaCaseReportComponent,
-    CHVMalariaCaseReportDetailComponent,
-    CHVMalariaCaseReportUpdateComponent,
-    CHVMalariaCaseReportDeleteDialogComponent,
+    ChvMalariaCaseReportComponent,
+    ChvMalariaCaseReportDetailComponent,
+    ChvMalariaCaseReportUpdateComponent,
+    ChvMalariaCaseReportDeleteDialogComponent,
   ],
-  entryComponents: [CHVMalariaCaseReportDeleteDialogComponent],
+  entryComponents: [ChvMalariaCaseReportDeleteDialogComponent],
 })
-export class CHVMalariaCaseReportModule {}
+export class ChvMalariaCaseReportModule {}

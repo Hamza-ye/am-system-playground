@@ -1,6 +1,6 @@
-<form *ngIf="lLINSFamilyTarget" name="deleteForm" (ngSubmit)="confirmDelete(lLINSFamilyTarget.id!)">
+<form *ngIf="llinsFamilyTarget" name="deleteForm" (ngSubmit)="confirmDelete(llinsFamilyTarget.id!)">
   <div class="modal-header">
-    <h4 class="modal-title" data-cy="lLINSFamilyTargetDeleteDialogHeading" appTranslate="entity.delete.title">Confirm delete operation</h4>
+    <h4 class="modal-title" data-cy="llinsFamilyTargetDeleteDialogHeading" appTranslate="entity.delete.title">Confirm delete operation</h4>
 
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
   </div>
@@ -9,11 +9,11 @@
     <app-alert-error></app-alert-error>
 
     <p
-      id="app-delete-lLINSFamilyTarget-heading"
-      appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.delete.question"
-      [translateValues]="{ id: lLINSFamilyTarget.id }"
+      id="app-delete-llinsFamilyTarget-heading"
+      appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.delete.question"
+      [translateValues]="{ id: llinsFamilyTarget.id }"
     >
-      Are you sure you want to delete this LLINS Family Target?
+      Are you sure you want to delete this Llins Family Target?
     </p>
   </div>
 
@@ -22,7 +22,7 @@
       <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
     </button>
 
-    <button id="app-confirm-delete-lLINSFamilyTarget" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+    <button id="app-confirm-delete-llinsFamilyTarget" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
       <fa-icon icon="times"></fa-icon>&nbsp;<span appTranslate="entity.action.delete">Delete</span>
     </button>
   </div>

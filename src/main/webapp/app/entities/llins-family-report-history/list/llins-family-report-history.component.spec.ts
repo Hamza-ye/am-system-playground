@@ -3,27 +3,27 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 
-import { LLINSFamilyReportHistoryService } from '../service/llins-family-report-history.service';
+import { LlinsFamilyReportHistoryService } from '../service/llins-family-report-history.service';
 
-import { LLINSFamilyReportHistoryComponent } from './llins-family-report-history.component';
+import { LlinsFamilyReportHistoryComponent } from './llins-family-report-history.component';
 
 describe('Component Tests', () => {
   describe('LlinsFamilyReportHistory Management Component', () => {
-    let comp: LLINSFamilyReportHistoryComponent;
-    let fixture: ComponentFixture<LLINSFamilyReportHistoryComponent>;
-    let service: LLINSFamilyReportHistoryService;
+    let comp: LlinsFamilyReportHistoryComponent;
+    let fixture: ComponentFixture<LlinsFamilyReportHistoryComponent>;
+    let service: LlinsFamilyReportHistoryService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [LLINSFamilyReportHistoryComponent],
+        declarations: [LlinsFamilyReportHistoryComponent],
       })
-        .overrideTemplate(LLINSFamilyReportHistoryComponent, '')
+        .overrideTemplate(LlinsFamilyReportHistoryComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(LLINSFamilyReportHistoryComponent);
+      fixture = TestBed.createComponent(LlinsFamilyReportHistoryComponent);
       comp = fixture.componentInstance;
-      service = TestBed.inject(LLINSFamilyReportHistoryService);
+      service = TestBed.inject(LlinsFamilyReportHistoryService);
 
       const headers = new HttpHeaders().append('link', 'link;link');
       jest.spyOn(service, 'query').mockReturnValue(
@@ -42,7 +42,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.lLINSFamilyReportHistories?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+      expect(comp.llinsFamilyReportHistories?.[0]).toEqual(expect.objectContaining({ id: 123 }));
     });
   });
 });

@@ -3,10 +3,10 @@
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2
         id="app-llins-village-target-heading"
-        data-cy="LLINSVillageTargetCreateUpdateHeading"
-        appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.home.createOrEditLabel"
+        data-cy="LlinsVillageTargetCreateUpdateHeading"
+        appTranslate="amSystemPlaygroundApp.llinsVillageTarget.home.createOrEditLabel"
       >
-        Create or edit a LLINS Village Target
+        Create or edit a Llins Village Target
       </h2>
 
       <div>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.uid" for="field_uid">Uid</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsVillageTarget.uid" for="field_uid">Uid</label>
           <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
           <div *ngIf="editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('uid')?.errors?.required" appTranslate="entity.validation.required">
@@ -36,7 +36,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.created" for="field_created"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsVillageTarget.created" for="field_created"
             >Created</label
           >
           <div class="d-flex">
@@ -53,7 +53,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.lastUpdated" for="field_lastUpdated"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsVillageTarget.lastUpdated" for="field_lastUpdated"
             >Last Updated</label
           >
           <div class="d-flex">
@@ -72,7 +72,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.residentsIndividuals"
+            appTranslate="amSystemPlaygroundApp.llinsVillageTarget.residentsIndividuals"
             for="field_residentsIndividuals"
             >Residents Individuals</label
           >
@@ -118,7 +118,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.idpsIndividuals"
+            appTranslate="amSystemPlaygroundApp.llinsVillageTarget.idpsIndividuals"
             for="field_idpsIndividuals"
             >Idps Individuals</label
           >
@@ -164,7 +164,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.residentsFamilies"
+            appTranslate="amSystemPlaygroundApp.llinsVillageTarget.residentsFamilies"
             for="field_residentsFamilies"
             >Residents Families</label
           >
@@ -208,7 +208,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.idpsFamilies" for="field_idpsFamilies"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsVillageTarget.idpsFamilies" for="field_idpsFamilies"
             >Idps Families</label
           >
           <input
@@ -250,7 +250,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.noOfDaysNeeded"
+            appTranslate="amSystemPlaygroundApp.llinsVillageTarget.noOfDaysNeeded"
             for="field_noOfDaysNeeded"
             >No Of Days Needed</label
           >
@@ -286,7 +286,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.quantity" for="field_quantity"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsVillageTarget.quantity" for="field_quantity"
             >Quantity</label
           >
           <input type="number" class="form-control" name="quantity" id="field_quantity" data-cy="quantity" formControlName="quantity" />
@@ -319,7 +319,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.organisationUnit"
+            appTranslate="amSystemPlaygroundApp.llinsVillageTarget.organisationUnit"
             for="field_organisationUnit"
             >Organisation Unit</label
           >
@@ -359,7 +359,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.createdBy" for="field_createdBy"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsVillageTarget.createdBy" for="field_createdBy"
             >Created By</label
           >
           <select class="form-control" id="field_createdBy" data-cy="createdBy" name="createdBy" formControlName="createdBy">
@@ -374,7 +374,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.lastUpdatedBy" for="field_lastUpdatedBy"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsVillageTarget.lastUpdatedBy" for="field_lastUpdatedBy"
             >Last Updated By</label
           >
           <select
@@ -395,7 +395,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.dayPlanned" for="field_dayPlanned"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsVillageTarget.dayPlanned" for="field_dayPlanned"
             >Day Planned</label
           >
           <select class="form-control" id="field_dayPlanned" data-cy="dayPlanned" name="dayPlanned" formControlName="dayPlanned">
@@ -425,7 +425,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.statusOfCoverage"
+            appTranslate="amSystemPlaygroundApp.llinsVillageTarget.statusOfCoverage"
             for="field_statusOfCoverage"
             >Status Of Coverage</label
           >
@@ -451,7 +451,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.teamAssigned" for="field_teamAssigned"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsVillageTarget.teamAssigned" for="field_teamAssigned"
             >Team Assigned</label
           >
           <select class="form-control" id="field_teamAssigned" data-cy="teamAssigned" name="teamAssigned" formControlName="teamAssigned">

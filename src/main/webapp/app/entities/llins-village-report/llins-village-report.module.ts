@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'app/shared/shared.module';
-import { LLINSVillageReportComponent } from './list/llins-village-report.component';
-import { LLINSVillageReportDetailComponent } from './detail/llins-village-report-detail.component';
-import { LLINSVillageReportUpdateComponent } from './update/llins-village-report-update.component';
-import { LLINSVillageReportDeleteDialogComponent } from './delete/llins-village-report-delete-dialog.component';
-import { LLINSVillageReportRoutingModule } from './route/llins-village-report-routing.module';
+import { LlinsVillageReportComponent } from './list/llins-village-report.component';
+import { LlinsVillageReportDetailComponent } from './detail/llins-village-report-detail.component';
+import { LlinsVillageReportUpdateComponent } from './update/llins-village-report-update.component';
+import { LlinsVillageReportDeleteDialogComponent } from './delete/llins-village-report-delete-dialog.component';
+import { LlinsVillageReportRoutingModule } from './route/llins-village-report-routing.module';
 
 @NgModule({
-  imports: [SharedModule, LLINSVillageReportRoutingModule],
+  imports: [SharedModule, LlinsVillageReportRoutingModule],
   declarations: [
-    LLINSVillageReportComponent,
-    LLINSVillageReportDetailComponent,
-    LLINSVillageReportUpdateComponent,
-    LLINSVillageReportDeleteDialogComponent,
+    LlinsVillageReportComponent,
+    LlinsVillageReportDetailComponent,
+    LlinsVillageReportUpdateComponent,
+    LlinsVillageReportDeleteDialogComponent,
   ],
-  entryComponents: [LLINSVillageReportDeleteDialogComponent],
+  entryComponents: [LlinsVillageReportDeleteDialogComponent],
 })
-export class LLINSVillageReportModule {}
+export class LlinsVillageReportModule {}

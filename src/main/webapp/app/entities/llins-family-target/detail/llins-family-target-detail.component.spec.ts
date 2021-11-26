@@ -2,36 +2,36 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
-import { LLINSFamilyTargetDetailComponent } from './llins-family-target-detail.component';
+import { LlinsFamilyTargetDetailComponent } from './llins-family-target-detail.component';
 
 describe('Component Tests', () => {
   describe('LlinsFamilyTarget Management Detail Component', () => {
-    let comp: LLINSFamilyTargetDetailComponent;
-    let fixture: ComponentFixture<LLINSFamilyTargetDetailComponent>;
+    let comp: LlinsFamilyTargetDetailComponent;
+    let fixture: ComponentFixture<LlinsFamilyTargetDetailComponent>;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        declarations: [LLINSFamilyTargetDetailComponent],
+        declarations: [LlinsFamilyTargetDetailComponent],
         providers: [
           {
             provide: ActivatedRoute,
-            useValue: { data: of({ lLINSFamilyTarget: { id: 123 } }) },
+            useValue: { data: of({ llinsFamilyTarget: { id: 123 } }) },
           },
         ],
       })
-        .overrideTemplate(LLINSFamilyTargetDetailComponent, '')
+        .overrideTemplate(LlinsFamilyTargetDetailComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(LLINSFamilyTargetDetailComponent);
+      fixture = TestBed.createComponent(LlinsFamilyTargetDetailComponent);
       comp = fixture.componentInstance;
     });
 
     describe('OnInit', () => {
-      it('Should load lLINSFamilyTarget on init', () => {
+      it('Should load llinsFamilyTarget on init', () => {
         // WHEN
         comp.ngOnInit();
 
         // THEN
-        expect(comp.lLINSFamilyTarget).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.llinsFamilyTarget).toEqual(expect.objectContaining({ id: 123 }));
       });
     });
   });

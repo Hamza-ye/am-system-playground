@@ -1,7 +1,5 @@
 package org.nmcpye.activitiesmanagement.service.impl;
 
-import java.util.List;
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.domain.chv.Chv;
 import org.nmcpye.activitiesmanagement.repository.ChvRepository;
 import org.nmcpye.activitiesmanagement.service.ChvService;
@@ -9,6 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Service Implementation for managing {@link Chv}.
@@ -19,68 +20,68 @@ public class ChvServiceImpl implements ChvService {
 
     private final Logger log = LoggerFactory.getLogger(ChvServiceImpl.class);
 
-    private final ChvRepository cHVRepository;
+    private final ChvRepository chvRepository;
 
-    public ChvServiceImpl(ChvRepository cHVRepository) {
-        this.cHVRepository = cHVRepository;
+    public ChvServiceImpl(ChvRepository chvRepository) {
+        this.chvRepository = chvRepository;
     }
 
     @Override
-    public Chv save(Chv cHV) {
-        log.debug("Request to save Chv : {}", cHV);
-        return cHVRepository.save(cHV);
+    public Chv save(Chv chv) {
+        log.debug("Request to save Chv : {}", chv);
+        return chvRepository.save(chv);
     }
 
     @Override
-    public Optional<Chv> partialUpdate(Chv cHV) {
-        log.debug("Request to partially update Chv : {}", cHV);
+    public Optional<Chv> partialUpdate(Chv chv) {
+        log.debug("Request to partially update Chv : {}", chv);
 
-        return cHVRepository
-            .findById(cHV.getId())
+        return chvRepository
+            .findById(chv.getId())
             .map(
-                existingCHV -> {
-                    if (cHV.getUid() != null) {
-                        existingCHV.setUid(cHV.getUid());
+                existingChv -> {
+                    if (chv.getUid() != null) {
+                        existingChv.setUid(chv.getUid());
                     }
-                    if (cHV.getCode() != null) {
-                        existingCHV.setCode(cHV.getCode());
+                    if (chv.getCode() != null) {
+                        existingChv.setCode(chv.getCode());
                     }
-                    if (cHV.getDescription() != null) {
-                        existingCHV.setDescription(cHV.getDescription());
+                    if (chv.getDescription() != null) {
+                        existingChv.setDescription(chv.getDescription());
                     }
-                    if (cHV.getCreated() != null) {
-                        existingCHV.setCreated(cHV.getCreated());
+                    if (chv.getCreated() != null) {
+                        existingChv.setCreated(chv.getCreated());
                     }
-                    if (cHV.getLastUpdated() != null) {
-                        existingCHV.setLastUpdated(cHV.getLastUpdated());
+                    if (chv.getLastUpdated() != null) {
+                        existingChv.setLastUpdated(chv.getLastUpdated());
                     }
-                    if (cHV.getMobile() != null) {
-                        existingCHV.setMobile(cHV.getMobile());
+                    if (chv.getMobile() != null) {
+                        existingChv.setMobile(chv.getMobile());
                     }
 
-                    return existingCHV;
+                    return existingChv;
                 }
             )
-            .map(cHVRepository::save);
+            .map(chvRepository::save);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Chv> findAll() {
-        log.debug("Request to get all CHVS");
-        return cHVRepository.findAll();
+        log.debug("Request to get all Chvs");
+        return chvRepository.findAll();
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<Chv> findOne(Long id) {
         log.debug("Request to get Chv : {}", id);
-        return cHVRepository.findById(id);
+        return chvRepository.findById(id);
     }
 
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Chv : {}", id);
-        cHVRepository.deleteById(id);
+        chvRepository.deleteById(id);
     }
 }

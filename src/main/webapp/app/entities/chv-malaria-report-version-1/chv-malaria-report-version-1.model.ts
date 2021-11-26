@@ -1,9 +1,9 @@
 import * as dayjs from 'dayjs';
 import { IUser } from 'app/entities/user/user.model';
-import { ICHV } from 'app/entities/chv/chv.model';
+import { IChv } from 'app/entities/chv/chv.model';
 import { IPeriod } from 'app/entities/period/period.model';
 
-export interface ICHVMalariaReportVersion1 {
+export interface IChvMalariaReportVersion1 {
   id?: number;
   uid?: string;
   created?: dayjs.Dayjs | null;
@@ -27,11 +27,11 @@ export interface ICHVMalariaReportVersion1 {
   comment?: string | null;
   createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
-  chv?: ICHV;
+  chv?: IChv;
   period?: IPeriod;
 }
 
-export class CHVMalariaReportVersion1 implements ICHVMalariaReportVersion1 {
+export class ChvMalariaReportVersion1 implements IChvMalariaReportVersion1 {
   constructor(
     public id?: number,
     public uid?: string,
@@ -56,11 +56,11 @@ export class CHVMalariaReportVersion1 implements ICHVMalariaReportVersion1 {
     public comment?: string | null,
     public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
-    public chv?: ICHV,
+    public chv?: IChv,
     public period?: IPeriod
   ) {}
 }
 
-export function getCHVMalariaReportVersion1Identifier(cHVMalariaReportVersion1: ICHVMalariaReportVersion1): number | undefined {
-  return cHVMalariaReportVersion1.id;
+export function getChvMalariaReportVersion1Identifier(chvMalariaReportVersion1: IChvMalariaReportVersion1): number | undefined {
+  return chvMalariaReportVersion1.id;
 }

@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
@@ -111,6 +113,21 @@ public class PeopleGroup extends BaseIdentifiableObject implements MetadataObjec
     private Set<Person> members = new HashSet<>();
 
     /**
+     * People groups (if any) that members of this people group can manage
+     * the members within.
+     */
+    @ManyToMany//(mappedBy = "managedByGroups")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JoinTable(
+        name = "people_group_managed",
+        joinColumns = @JoinColumn(name = "managed_by_group_id"),
+        inverseJoinColumns = @JoinColumn(name = "managed_group_id")
+    )
+    @Fetch(FetchMode.JOIN)
+    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "members", "managedByGroups", "managedGroups" }, allowSetters = true)
+    private Set<PeopleGroup> managedGroups = new HashSet<>();
+
+    /**
      * People groups (if any) whose members can manage the members of this
      * People group.
      */
@@ -124,21 +141,6 @@ public class PeopleGroup extends BaseIdentifiableObject implements MetadataObjec
 //    )
     @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "members", "managedByGroups", "managedGroups" }, allowSetters = true)
     private Set<PeopleGroup> managedByGroups = new HashSet<>();
-
-    /**
-     * People groups (if any) that members of this people group can manage
-     * the members within.
-     */
-    @ManyToMany//(mappedBy = "managedByGroups")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JoinTable(
-        name = "people_group_managed",
-        joinColumns = @JoinColumn(name = "managed_by_group_id"),
-        inverseJoinColumns = @JoinColumn(name = "managed_group_id")
-    )
-    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "members", "managedByGroups", "managedGroups" }, allowSetters = true)
-    private Set<PeopleGroup> managedGroups = new HashSet<>();
-
     // -------------------------------------------------------------------------
     // Constructors
     // -------------------------------------------------------------------------

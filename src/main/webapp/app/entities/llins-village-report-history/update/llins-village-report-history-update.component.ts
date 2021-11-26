@@ -8,25 +8,25 @@ import { finalize, map } from 'rxjs/operators';
 import * as dayjs from 'dayjs';
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
-import { ILLINSVillageReportHistory, LLINSVillageReportHistory } from '../llins-village-report-history.model';
-import { LLINSVillageReportHistoryService } from '../service/llins-village-report-history.service';
+import { ILlinsVillageReportHistory, LlinsVillageReportHistory } from '../llins-village-report-history.model';
+import { LlinsVillageReportHistoryService } from '../service/llins-village-report-history.service';
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 import { IWorkingDay } from 'app/entities/working-day/working-day.model';
 import { WorkingDayService } from 'app/entities/working-day/service/working-day.service';
-import { ILLINSVillageReport } from 'app/entities/llins-village-report/llins-village-report.model';
-import { LLINSVillageReportService } from 'app/entities/llins-village-report/service/llins-village-report.service';
+import { ILlinsVillageReport } from 'app/entities/llins-village-report/llins-village-report.model';
+import { LlinsVillageReportService } from 'app/entities/llins-village-report/service/llins-village-report.service';
 
 @Component({
   selector: 'app-llins-village-report-history-update',
   templateUrl: './llins-village-report-history-update.component.html',
 })
-export class LLINSVillageReportHistoryUpdateComponent implements OnInit {
+export class LlinsVillageReportHistoryUpdateComponent implements OnInit {
   isSaving = false;
 
   usersSharedCollection: IUser[] = [];
   workingDaysSharedCollection: IWorkingDay[] = [];
-  lLINSVillageReportsSharedCollection: ILLINSVillageReport[] = [];
+  llinsVillageReportsSharedCollection: ILlinsVillageReport[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -49,23 +49,23 @@ export class LLINSVillageReportHistoryUpdateComponent implements OnInit {
   });
 
   constructor(
-    protected lLINSVillageReportHistoryService: LLINSVillageReportHistoryService,
+    protected llinsVillageReportHistoryService: LlinsVillageReportHistoryService,
     protected userService: UserService,
     protected workingDayService: WorkingDayService,
-    protected lLINSVillageReportService: LLINSVillageReportService,
+    protected llinsVillageReportService: LlinsVillageReportService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ lLINSVillageReportHistory }) => {
-      if (lLINSVillageReportHistory.id === undefined) {
+    this.activatedRoute.data.subscribe(({ llinsVillageReportHistory }) => {
+      if (llinsVillageReportHistory.id === undefined) {
         const today = dayjs().startOf('day');
-        lLINSVillageReportHistory.created = today;
-        lLINSVillageReportHistory.lastUpdated = today;
+        llinsVillageReportHistory.created = today;
+        llinsVillageReportHistory.lastUpdated = today;
       }
 
-      this.updateForm(lLINSVillageReportHistory);
+      this.updateForm(llinsVillageReportHistory);
 
       this.loadRelationshipsOptions();
     });
@@ -77,11 +77,11 @@ export class LLINSVillageReportHistoryUpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
-    const lLINSVillageReportHistory = this.createFromForm();
-    if (lLINSVillageReportHistory.id !== undefined) {
-      this.subscribeToSaveResponse(this.lLINSVillageReportHistoryService.update(lLINSVillageReportHistory));
+    const llinsVillageReportHistory = this.createFromForm();
+    if (llinsVillageReportHistory.id !== undefined) {
+      this.subscribeToSaveResponse(this.llinsVillageReportHistoryService.update(llinsVillageReportHistory));
     } else {
-      this.subscribeToSaveResponse(this.lLINSVillageReportHistoryService.create(lLINSVillageReportHistory));
+      this.subscribeToSaveResponse(this.llinsVillageReportHistoryService.create(llinsVillageReportHistory));
     }
   }
 
@@ -93,11 +93,11 @@ export class LLINSVillageReportHistoryUpdateComponent implements OnInit {
     return item.id!;
   }
 
-  trackLLINSVillageReportById(index: number, item: ILLINSVillageReport): number {
+  trackLlinsVillageReportById(index: number, item: ILlinsVillageReport): number {
     return item.id!;
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<ILLINSVillageReportHistory>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<ILlinsVillageReportHistory>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
       () => this.onSaveSuccess(),
       () => this.onSaveError()
@@ -116,39 +116,39 @@ export class LLINSVillageReportHistoryUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(lLINSVillageReportHistory: ILLINSVillageReportHistory): void {
+  protected updateForm(llinsVillageReportHistory: ILlinsVillageReportHistory): void {
     this.editForm.patchValue({
-      id: lLINSVillageReportHistory.id,
-      uid: lLINSVillageReportHistory.uid,
-      created: lLINSVillageReportHistory.created ? lLINSVillageReportHistory.created.format(DATE_TIME_FORMAT) : null,
-      lastUpdated: lLINSVillageReportHistory.lastUpdated ? lLINSVillageReportHistory.lastUpdated.format(DATE_TIME_FORMAT) : null,
-      houses: lLINSVillageReportHistory.houses,
-      residentHousehold: lLINSVillageReportHistory.residentHousehold,
-      idpsHousehold: lLINSVillageReportHistory.idpsHousehold,
-      maleIndividuals: lLINSVillageReportHistory.maleIndividuals,
-      femaleIndividuals: lLINSVillageReportHistory.femaleIndividuals,
-      lessThan5Males: lLINSVillageReportHistory.lessThan5Males,
-      lessThan5Females: lLINSVillageReportHistory.lessThan5Females,
-      pregnantWomen: lLINSVillageReportHistory.pregnantWomen,
-      quantityReceived: lLINSVillageReportHistory.quantityReceived,
-      createdBy: lLINSVillageReportHistory.createdBy,
-      lastUpdatedBy: lLINSVillageReportHistory.lastUpdatedBy,
-      dayReached: lLINSVillageReportHistory.dayReached,
-      llinsVillageReport: lLINSVillageReportHistory.llinsVillageReport,
+      id: llinsVillageReportHistory.id,
+      uid: llinsVillageReportHistory.uid,
+      created: llinsVillageReportHistory.created ? llinsVillageReportHistory.created.format(DATE_TIME_FORMAT) : null,
+      lastUpdated: llinsVillageReportHistory.lastUpdated ? llinsVillageReportHistory.lastUpdated.format(DATE_TIME_FORMAT) : null,
+      houses: llinsVillageReportHistory.houses,
+      residentHousehold: llinsVillageReportHistory.residentHousehold,
+      idpsHousehold: llinsVillageReportHistory.idpsHousehold,
+      maleIndividuals: llinsVillageReportHistory.maleIndividuals,
+      femaleIndividuals: llinsVillageReportHistory.femaleIndividuals,
+      lessThan5Males: llinsVillageReportHistory.lessThan5Males,
+      lessThan5Females: llinsVillageReportHistory.lessThan5Females,
+      pregnantWomen: llinsVillageReportHistory.pregnantWomen,
+      quantityReceived: llinsVillageReportHistory.quantityReceived,
+      createdBy: llinsVillageReportHistory.createdBy,
+      lastUpdatedBy: llinsVillageReportHistory.lastUpdatedBy,
+      dayReached: llinsVillageReportHistory.dayReached,
+      llinsVillageReport: llinsVillageReportHistory.llinsVillageReport,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      lLINSVillageReportHistory.createdBy,
-      lLINSVillageReportHistory.lastUpdatedBy
+      llinsVillageReportHistory.createdBy,
+      llinsVillageReportHistory.lastUpdatedBy
     );
     this.workingDaysSharedCollection = this.workingDayService.addWorkingDayToCollectionIfMissing(
       this.workingDaysSharedCollection,
-      lLINSVillageReportHistory.dayReached
+      llinsVillageReportHistory.dayReached
     );
-    this.lLINSVillageReportsSharedCollection = this.lLINSVillageReportService.addLLINSVillageReportToCollectionIfMissing(
-      this.lLINSVillageReportsSharedCollection,
-      lLINSVillageReportHistory.llinsVillageReport
+    this.llinsVillageReportsSharedCollection = this.llinsVillageReportService.addLlinsVillageReportToCollectionIfMissing(
+      this.llinsVillageReportsSharedCollection,
+      llinsVillageReportHistory.llinsVillageReport
     );
   }
 
@@ -177,23 +177,23 @@ export class LLINSVillageReportHistoryUpdateComponent implements OnInit {
       )
       .subscribe((workingDays: IWorkingDay[]) => (this.workingDaysSharedCollection = workingDays));
 
-    this.lLINSVillageReportService
+    this.llinsVillageReportService
       .query()
-      .pipe(map((res: HttpResponse<ILLINSVillageReport[]>) => res.body ?? []))
+      .pipe(map((res: HttpResponse<ILlinsVillageReport[]>) => res.body ?? []))
       .pipe(
-        map((lLINSVillageReports: ILLINSVillageReport[]) =>
-          this.lLINSVillageReportService.addLLINSVillageReportToCollectionIfMissing(
-            lLINSVillageReports,
+        map((llinsVillageReports: ILlinsVillageReport[]) =>
+          this.llinsVillageReportService.addLlinsVillageReportToCollectionIfMissing(
+            llinsVillageReports,
             this.editForm.get('llinsVillageReport')!.value
           )
         )
       )
-      .subscribe((lLINSVillageReports: ILLINSVillageReport[]) => (this.lLINSVillageReportsSharedCollection = lLINSVillageReports));
+      .subscribe((llinsVillageReports: ILlinsVillageReport[]) => (this.llinsVillageReportsSharedCollection = llinsVillageReports));
   }
 
-  protected createFromForm(): ILLINSVillageReportHistory {
+  protected createFromForm(): ILlinsVillageReportHistory {
     return {
-      ...new LLINSVillageReportHistory(),
+      ...new LlinsVillageReportHistory(),
       id: this.editForm.get(['id'])!.value,
       uid: this.editForm.get(['uid'])!.value,
       created: this.editForm.get(['created'])!.value ? dayjs(this.editForm.get(['created'])!.value, DATE_TIME_FORMAT) : undefined,

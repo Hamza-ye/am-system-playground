@@ -6,28 +6,28 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { WHMovementService } from '../service/wh-movement.service';
+import { WhMovementService } from '../service/wh-movement.service';
 
-import { WHMovementDeleteDialogComponent } from './wh-movement-delete-dialog.component';
+import { WhMovementDeleteDialogComponent } from './wh-movement-delete-dialog.component';
 
 describe('Component Tests', () => {
   describe('WhMovement Management Delete Component', () => {
-    let comp: WHMovementDeleteDialogComponent;
-    let fixture: ComponentFixture<WHMovementDeleteDialogComponent>;
-    let service: WHMovementService;
+    let comp: WhMovementDeleteDialogComponent;
+    let fixture: ComponentFixture<WhMovementDeleteDialogComponent>;
+    let service: WhMovementService;
     let mockActiveModal: NgbActiveModal;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [WHMovementDeleteDialogComponent],
+        declarations: [WhMovementDeleteDialogComponent],
         providers: [NgbActiveModal],
       })
-        .overrideTemplate(WHMovementDeleteDialogComponent, '')
+        .overrideTemplate(WhMovementDeleteDialogComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(WHMovementDeleteDialogComponent);
+      fixture = TestBed.createComponent(WhMovementDeleteDialogComponent);
       comp = fixture.componentInstance;
-      service = TestBed.inject(WHMovementService);
+      service = TestBed.inject(WhMovementService);
       mockActiveModal = TestBed.inject(NgbActiveModal);
     });
 

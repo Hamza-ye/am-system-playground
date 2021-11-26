@@ -6,28 +6,28 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { CHVService } from '../service/chv.service';
+import { ChvService } from '../service/chv.service';
 
-import { CHVDeleteDialogComponent } from './chv-delete-dialog.component';
+import { ChvDeleteDialogComponent } from './chv-delete-dialog.component';
 
 describe('Component Tests', () => {
   describe('Chv Management Delete Component', () => {
-    let comp: CHVDeleteDialogComponent;
-    let fixture: ComponentFixture<CHVDeleteDialogComponent>;
-    let service: CHVService;
+    let comp: ChvDeleteDialogComponent;
+    let fixture: ComponentFixture<ChvDeleteDialogComponent>;
+    let service: ChvService;
     let mockActiveModal: NgbActiveModal;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [CHVDeleteDialogComponent],
+        declarations: [ChvDeleteDialogComponent],
         providers: [NgbActiveModal],
       })
-        .overrideTemplate(CHVDeleteDialogComponent, '')
+        .overrideTemplate(ChvDeleteDialogComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(CHVDeleteDialogComponent);
+      fixture = TestBed.createComponent(ChvDeleteDialogComponent);
       comp = fixture.componentInstance;
-      service = TestBed.inject(CHVService);
+      service = TestBed.inject(ChvService);
       mockActiveModal = TestBed.inject(NgbActiveModal);
     });
 

@@ -1,4 +1,4 @@
-export enum CHVTeamType {
+export enum ChvTeamType {
   SUPERVISOR = 'SUPERVISOR',
 
   EVALUATION = 'EVALUATION',

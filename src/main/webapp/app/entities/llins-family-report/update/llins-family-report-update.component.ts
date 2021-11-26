@@ -8,14 +8,14 @@ import { finalize, map } from 'rxjs/operators';
 import * as dayjs from 'dayjs';
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
-import { ILLINSFamilyReport, LLINSFamilyReport } from '../llins-family-report.model';
-import { LLINSFamilyReportService } from '../service/llins-family-report.service';
+import { ILlinsFamilyReport, LlinsFamilyReport } from '../llins-family-report.model';
+import { LlinsFamilyReportService } from '../service/llins-family-report.service';
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 import { IWorkingDay } from 'app/entities/working-day/working-day.model';
 import { WorkingDayService } from 'app/entities/working-day/service/working-day.service';
-import { ILLINSFamilyTarget } from 'app/entities/llins-family-target/llins-family-target.model';
-import { LLINSFamilyTargetService } from 'app/entities/llins-family-target/service/llins-family-target.service';
+import { ILlinsFamilyTarget } from 'app/entities/llins-family-target/llins-family-target.model';
+import { LlinsFamilyTargetService } from 'app/entities/llins-family-target/service/llins-family-target.service';
 import { ITeam } from 'app/entities/team/team.model';
 import { TeamService } from 'app/entities/team/service/team.service';
 
@@ -23,12 +23,12 @@ import { TeamService } from 'app/entities/team/service/team.service';
   selector: 'app-llins-family-report-update',
   templateUrl: './llins-family-report-update.component.html',
 })
-export class LLINSFamilyReportUpdateComponent implements OnInit {
+export class LlinsFamilyReportUpdateComponent implements OnInit {
   isSaving = false;
 
   usersSharedCollection: IUser[] = [];
   workingDaysSharedCollection: IWorkingDay[] = [];
-  lLINSFamilyTargetsSharedCollection: ILLINSFamilyTarget[] = [];
+  llinsFamilyTargetsSharedCollection: ILlinsFamilyTarget[] = [];
   teamsSharedCollection: ITeam[] = [];
 
   editForm = this.fb.group({
@@ -53,24 +53,24 @@ export class LLINSFamilyReportUpdateComponent implements OnInit {
   });
 
   constructor(
-    protected lLINSFamilyReportService: LLINSFamilyReportService,
+    protected llinsFamilyReportService: LlinsFamilyReportService,
     protected userService: UserService,
     protected workingDayService: WorkingDayService,
-    protected lLINSFamilyTargetService: LLINSFamilyTargetService,
+    protected llinsFamilyTargetService: LlinsFamilyTargetService,
     protected teamService: TeamService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ lLINSFamilyReport }) => {
-      if (lLINSFamilyReport.id === undefined) {
+    this.activatedRoute.data.subscribe(({ llinsFamilyReport }) => {
+      if (llinsFamilyReport.id === undefined) {
         const today = dayjs().startOf('day');
-        lLINSFamilyReport.created = today;
-        lLINSFamilyReport.lastUpdated = today;
+        llinsFamilyReport.created = today;
+        llinsFamilyReport.lastUpdated = today;
       }
 
-      this.updateForm(lLINSFamilyReport);
+      this.updateForm(llinsFamilyReport);
 
       this.loadRelationshipsOptions();
     });
@@ -82,11 +82,11 @@ export class LLINSFamilyReportUpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
-    const lLINSFamilyReport = this.createFromForm();
-    if (lLINSFamilyReport.id !== undefined) {
-      this.subscribeToSaveResponse(this.lLINSFamilyReportService.update(lLINSFamilyReport));
+    const llinsFamilyReport = this.createFromForm();
+    if (llinsFamilyReport.id !== undefined) {
+      this.subscribeToSaveResponse(this.llinsFamilyReportService.update(llinsFamilyReport));
     } else {
-      this.subscribeToSaveResponse(this.lLINSFamilyReportService.create(lLINSFamilyReport));
+      this.subscribeToSaveResponse(this.llinsFamilyReportService.create(llinsFamilyReport));
     }
   }
 
@@ -98,7 +98,7 @@ export class LLINSFamilyReportUpdateComponent implements OnInit {
     return item.id!;
   }
 
-  trackLLINSFamilyTargetById(index: number, item: ILLINSFamilyTarget): number {
+  trackLlinsFamilyTargetById(index: number, item: ILlinsFamilyTarget): number {
     return item.id!;
   }
 
@@ -106,7 +106,7 @@ export class LLINSFamilyReportUpdateComponent implements OnInit {
     return item.id!;
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<ILLINSFamilyReport>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<ILlinsFamilyReport>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
       () => this.onSaveSuccess(),
       () => this.onSaveError()
@@ -125,42 +125,42 @@ export class LLINSFamilyReportUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(lLINSFamilyReport: ILLINSFamilyReport): void {
+  protected updateForm(llinsFamilyReport: ILlinsFamilyReport): void {
     this.editForm.patchValue({
-      id: lLINSFamilyReport.id,
-      uid: lLINSFamilyReport.uid,
-      created: lLINSFamilyReport.created ? lLINSFamilyReport.created.format(DATE_TIME_FORMAT) : null,
-      lastUpdated: lLINSFamilyReport.lastUpdated ? lLINSFamilyReport.lastUpdated.format(DATE_TIME_FORMAT) : null,
-      checkNo: lLINSFamilyReport.checkNo,
-      maleIndividuals: lLINSFamilyReport.maleIndividuals,
-      femaleIndividuals: lLINSFamilyReport.femaleIndividuals,
-      lessThan5Males: lLINSFamilyReport.lessThan5Males,
-      lessThan5Females: lLINSFamilyReport.lessThan5Females,
-      pregnantWomen: lLINSFamilyReport.pregnantWomen,
-      quantityReceived: lLINSFamilyReport.quantityReceived,
-      familyType: lLINSFamilyReport.familyType,
-      comment: lLINSFamilyReport.comment,
-      createdBy: lLINSFamilyReport.createdBy,
-      lastUpdatedBy: lLINSFamilyReport.lastUpdatedBy,
-      dayReached: lLINSFamilyReport.dayReached,
-      targetDetails: lLINSFamilyReport.targetDetails,
-      executingTeam: lLINSFamilyReport.executingTeam,
+      id: llinsFamilyReport.id,
+      uid: llinsFamilyReport.uid,
+      created: llinsFamilyReport.created ? llinsFamilyReport.created.format(DATE_TIME_FORMAT) : null,
+      lastUpdated: llinsFamilyReport.lastUpdated ? llinsFamilyReport.lastUpdated.format(DATE_TIME_FORMAT) : null,
+      checkNo: llinsFamilyReport.checkNo,
+      maleIndividuals: llinsFamilyReport.maleIndividuals,
+      femaleIndividuals: llinsFamilyReport.femaleIndividuals,
+      lessThan5Males: llinsFamilyReport.lessThan5Males,
+      lessThan5Females: llinsFamilyReport.lessThan5Females,
+      pregnantWomen: llinsFamilyReport.pregnantWomen,
+      quantityReceived: llinsFamilyReport.quantityReceived,
+      familyType: llinsFamilyReport.familyType,
+      comment: llinsFamilyReport.comment,
+      createdBy: llinsFamilyReport.createdBy,
+      lastUpdatedBy: llinsFamilyReport.lastUpdatedBy,
+      dayReached: llinsFamilyReport.dayReached,
+      targetDetails: llinsFamilyReport.targetDetails,
+      executingTeam: llinsFamilyReport.executingTeam,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      lLINSFamilyReport.createdBy,
-      lLINSFamilyReport.lastUpdatedBy
+      llinsFamilyReport.createdBy,
+      llinsFamilyReport.lastUpdatedBy
     );
     this.workingDaysSharedCollection = this.workingDayService.addWorkingDayToCollectionIfMissing(
       this.workingDaysSharedCollection,
-      lLINSFamilyReport.dayReached
+      llinsFamilyReport.dayReached
     );
-    this.lLINSFamilyTargetsSharedCollection = this.lLINSFamilyTargetService.addLLINSFamilyTargetToCollectionIfMissing(
-      this.lLINSFamilyTargetsSharedCollection,
-      lLINSFamilyReport.targetDetails
+    this.llinsFamilyTargetsSharedCollection = this.llinsFamilyTargetService.addLlinsFamilyTargetToCollectionIfMissing(
+      this.llinsFamilyTargetsSharedCollection,
+      llinsFamilyReport.targetDetails
     );
-    this.teamsSharedCollection = this.teamService.addTeamToCollectionIfMissing(this.teamsSharedCollection, lLINSFamilyReport.executingTeam);
+    this.teamsSharedCollection = this.teamService.addTeamToCollectionIfMissing(this.teamsSharedCollection, llinsFamilyReport.executingTeam);
   }
 
   protected loadRelationshipsOptions(): void {
@@ -188,18 +188,18 @@ export class LLINSFamilyReportUpdateComponent implements OnInit {
       )
       .subscribe((workingDays: IWorkingDay[]) => (this.workingDaysSharedCollection = workingDays));
 
-    this.lLINSFamilyTargetService
+    this.llinsFamilyTargetService
       .query()
-      .pipe(map((res: HttpResponse<ILLINSFamilyTarget[]>) => res.body ?? []))
+      .pipe(map((res: HttpResponse<ILlinsFamilyTarget[]>) => res.body ?? []))
       .pipe(
-        map((lLINSFamilyTargets: ILLINSFamilyTarget[]) =>
-          this.lLINSFamilyTargetService.addLLINSFamilyTargetToCollectionIfMissing(
-            lLINSFamilyTargets,
+        map((llinsFamilyTargets: ILlinsFamilyTarget[]) =>
+          this.llinsFamilyTargetService.addLlinsFamilyTargetToCollectionIfMissing(
+            llinsFamilyTargets,
             this.editForm.get('targetDetails')!.value
           )
         )
       )
-      .subscribe((lLINSFamilyTargets: ILLINSFamilyTarget[]) => (this.lLINSFamilyTargetsSharedCollection = lLINSFamilyTargets));
+      .subscribe((llinsFamilyTargets: ILlinsFamilyTarget[]) => (this.llinsFamilyTargetsSharedCollection = llinsFamilyTargets));
 
     this.teamService
       .query()
@@ -208,9 +208,9 @@ export class LLINSFamilyReportUpdateComponent implements OnInit {
       .subscribe((teams: ITeam[]) => (this.teamsSharedCollection = teams));
   }
 
-  protected createFromForm(): ILLINSFamilyReport {
+  protected createFromForm(): ILlinsFamilyReport {
     return {
-      ...new LLINSFamilyReport(),
+      ...new LlinsFamilyReport(),
       id: this.editForm.get(['id'])!.value,
       uid: this.editForm.get(['uid'])!.value,
       created: this.editForm.get(['created'])!.value ? dayjs(this.editForm.get(['created'])!.value, DATE_TIME_FORMAT) : undefined,

@@ -3,10 +3,10 @@
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2
         id="app-chv-malaria-report-version-1-heading"
-        data-cy="CHVMalariaReportVersion1CreateUpdateHeading"
-        appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.home.createOrEditLabel"
+        data-cy="ChvMalariaReportVersion1CreateUpdateHeading"
+        appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.home.createOrEditLabel"
       >
-        Create or edit a CHV Malaria Report Version 1
+        Create or edit a Chv Malaria Report Version 1
       </h2>
 
       <div>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.uid" for="field_uid">Uid</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.uid" for="field_uid">Uid</label>
           <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
           <div *ngIf="editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('uid')?.errors?.required" appTranslate="entity.validation.required">
@@ -36,7 +36,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.created" for="field_created"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.created" for="field_created"
             >Created</label
           >
           <div class="d-flex">
@@ -55,7 +55,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.lastUpdated"
+            appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.lastUpdated"
             for="field_lastUpdated"
             >Last Updated</label
           >
@@ -73,21 +73,21 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.tested" for="field_tested"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.tested" for="field_tested"
             >Tested</label
           >
           <input type="number" class="form-control" name="tested" id="field_tested" data-cy="tested" formControlName="tested" />
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.positive" for="field_positive"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.positive" for="field_positive"
             >Positive</label
           >
           <input type="number" class="form-control" name="positive" id="field_positive" data-cy="positive" formControlName="positive" />
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.drugsGiven" for="field_drugsGiven"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.drugsGiven" for="field_drugsGiven"
             >Drugs Given</label
           >
           <input
@@ -101,7 +101,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.suppsGiven" for="field_suppsGiven"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.suppsGiven" for="field_suppsGiven"
             >Supps Given</label
           >
           <input
@@ -115,7 +115,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.rdtBalance" for="field_rdtBalance"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.rdtBalance" for="field_rdtBalance"
             >Rdt Balance</label
           >
           <input
@@ -131,7 +131,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.rdtReceived"
+            appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.rdtReceived"
             for="field_rdtReceived"
             >Rdt Received</label
           >
@@ -146,7 +146,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.rdtUsed" for="field_rdtUsed"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.rdtUsed" for="field_rdtUsed"
             >Rdt Used</label
           >
           <input type="number" class="form-control" name="rdtUsed" id="field_rdtUsed" data-cy="rdtUsed" formControlName="rdtUsed" />
@@ -155,7 +155,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.rdtDamagedLost"
+            appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.rdtDamagedLost"
             for="field_rdtDamagedLost"
             >Rdt Damaged Lost</label
           >
@@ -172,7 +172,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.drugsBalance"
+            appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.drugsBalance"
             for="field_drugsBalance"
             >Drugs Balance</label
           >
@@ -189,7 +189,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.drugsReceived"
+            appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.drugsReceived"
             for="field_drugsReceived"
             >Drugs Received</label
           >
@@ -204,7 +204,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.drugsUsed" for="field_drugsUsed"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.drugsUsed" for="field_drugsUsed"
             >Drugs Used</label
           >
           <input type="number" class="form-control" name="drugsUsed" id="field_drugsUsed" data-cy="drugsUsed" formControlName="drugsUsed" />
@@ -213,7 +213,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.drugsDamagedLost"
+            appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.drugsDamagedLost"
             for="field_drugsDamagedLost"
             >Drugs Damaged Lost</label
           >
@@ -230,7 +230,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.suppsBalance"
+            appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.suppsBalance"
             for="field_suppsBalance"
             >Supps Balance</label
           >
@@ -247,7 +247,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.suppsReceived"
+            appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.suppsReceived"
             for="field_suppsReceived"
             >Supps Received</label
           >
@@ -262,7 +262,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.suppsUsed" for="field_suppsUsed"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.suppsUsed" for="field_suppsUsed"
             >Supps Used</label
           >
           <input type="number" class="form-control" name="suppsUsed" id="field_suppsUsed" data-cy="suppsUsed" formControlName="suppsUsed" />
@@ -271,7 +271,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.suppsDamagedLost"
+            appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.suppsDamagedLost"
             for="field_suppsDamagedLost"
             >Supps Damaged Lost</label
           >
@@ -286,14 +286,14 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.comment" for="field_comment"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.comment" for="field_comment"
             >Comment</label
           >
           <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.createdBy" for="field_createdBy"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.createdBy" for="field_createdBy"
             >Created By</label
           >
           <select class="form-control" id="field_createdBy" data-cy="createdBy" name="createdBy" formControlName="createdBy">
@@ -310,7 +310,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.lastUpdatedBy"
+            appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.lastUpdatedBy"
             for="field_lastUpdatedBy"
             >Last Updated By</label
           >
@@ -332,14 +332,14 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.chv" for="field_chv">Chv</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.chv" for="field_chv">Chv</label>
           <select class="form-control" id="field_chv" data-cy="chv" name="chv" formControlName="chv">
             <option *ngIf="!editForm.get('chv')!.value" [ngValue]="null" selected></option>
             <option
-              [ngValue]="cHVOption.id === editForm.get('chv')!.value?.id ? editForm.get('chv')!.value : cHVOption"
-              *ngFor="let cHVOption of cHVSSharedCollection; trackBy: trackCHVById"
+              [ngValue]="chvOption.id === editForm.get('chv')!.value?.id ? editForm.get('chv')!.value : chvOption"
+              *ngFor="let chvOption of chvsSharedCollection; trackBy: trackChvById"
             >
-              {{ cHVOption.code }}
+              {{ chvOption.code }}
             </option>
           </select>
         </div>
@@ -350,7 +350,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaReportVersion1.period" for="field_period"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.period" for="field_period"
             >Period</label
           >
           <select class="form-control" id="field_period" data-cy="period" name="period" formControlName="period">

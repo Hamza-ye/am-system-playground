@@ -6,28 +6,28 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { LLINSVillageReportHistoryService } from '../service/llins-village-report-history.service';
+import { LlinsVillageReportHistoryService } from '../service/llins-village-report-history.service';
 
-import { LLINSVillageReportHistoryDeleteDialogComponent } from './llins-village-report-history-delete-dialog.component';
+import { LlinsVillageReportHistoryDeleteDialogComponent } from './llins-village-report-history-delete-dialog.component';
 
 describe('Component Tests', () => {
   describe('LlinsVillageReportHistory Management Delete Component', () => {
-    let comp: LLINSVillageReportHistoryDeleteDialogComponent;
-    let fixture: ComponentFixture<LLINSVillageReportHistoryDeleteDialogComponent>;
-    let service: LLINSVillageReportHistoryService;
+    let comp: LlinsVillageReportHistoryDeleteDialogComponent;
+    let fixture: ComponentFixture<LlinsVillageReportHistoryDeleteDialogComponent>;
+    let service: LlinsVillageReportHistoryService;
     let mockActiveModal: NgbActiveModal;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [LLINSVillageReportHistoryDeleteDialogComponent],
+        declarations: [LlinsVillageReportHistoryDeleteDialogComponent],
         providers: [NgbActiveModal],
       })
-        .overrideTemplate(LLINSVillageReportHistoryDeleteDialogComponent, '')
+        .overrideTemplate(LlinsVillageReportHistoryDeleteDialogComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(LLINSVillageReportHistoryDeleteDialogComponent);
+      fixture = TestBed.createComponent(LlinsVillageReportHistoryDeleteDialogComponent);
       comp = fixture.componentInstance;
-      service = TestBed.inject(LLINSVillageReportHistoryService);
+      service = TestBed.inject(LlinsVillageReportHistoryService);
       mockActiveModal = TestBed.inject(NgbActiveModal);
     });
 

@@ -1,5 +1,5 @@
 import * as dayjs from 'dayjs';
-import { ILLINSFamilyReport } from 'app/entities/llins-family-report/llins-family-report.model';
+import { ILlinsFamilyReport } from 'app/entities/llins-family-report/llins-family-report.model';
 import { IUser } from 'app/entities/user/user.model';
 import { IWorkingDay } from 'app/entities/working-day/working-day.model';
 import { IFamily } from 'app/entities/family/family.model';
@@ -7,7 +7,7 @@ import { ITeam } from 'app/entities/team/team.model';
 import { FamilyType } from 'app/entities/enumerations/family-type.model';
 import { StatusOfFamilyTarget } from 'app/entities/enumerations/status-of-family-target.model';
 
-export interface ILLINSFamilyTarget {
+export interface ILlinsFamilyTarget {
   id?: number;
   uid?: string;
   created?: dayjs.Dayjs | null;
@@ -17,7 +17,7 @@ export interface ILLINSFamilyTarget {
   quantityPlanned?: number;
   familyType?: FamilyType;
   statusOfFamilyTarget?: StatusOfFamilyTarget;
-  llinsFamilyReports?: ILLINSFamilyReport[] | null;
+  llinsFamilyReports?: ILlinsFamilyReport[] | null;
   createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   dayPlanned?: IWorkingDay;
@@ -25,7 +25,7 @@ export interface ILLINSFamilyTarget {
   teamAssigned?: ITeam;
 }
 
-export class LLINSFamilyTarget implements ILLINSFamilyTarget {
+export class LlinsFamilyTarget implements ILlinsFamilyTarget {
   constructor(
     public id?: number,
     public uid?: string,
@@ -36,7 +36,7 @@ export class LLINSFamilyTarget implements ILLINSFamilyTarget {
     public quantityPlanned?: number,
     public familyType?: FamilyType,
     public statusOfFamilyTarget?: StatusOfFamilyTarget,
-    public llinsFamilyReports?: ILLINSFamilyReport[] | null,
+    public llinsFamilyReports?: ILlinsFamilyReport[] | null,
     public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public dayPlanned?: IWorkingDay,
@@ -45,6 +45,6 @@ export class LLINSFamilyTarget implements ILLINSFamilyTarget {
   ) {}
 }
 
-export function getLLINSFamilyTargetIdentifier(lLINSFamilyTarget: ILLINSFamilyTarget): number | undefined {
-  return lLINSFamilyTarget.id;
+export function getLlinsFamilyTargetIdentifier(llinsFamilyTarget: ILlinsFamilyTarget): number | undefined {
+  return llinsFamilyTarget.id;
 }

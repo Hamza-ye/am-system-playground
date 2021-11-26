@@ -5,16 +5,16 @@ import * as dayjs from 'dayjs';
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { FamilyType } from 'app/entities/enumerations/family-type.model';
 import { StatusOfFamilyTarget } from 'app/entities/enumerations/status-of-family-target.model';
-import { ILLINSFamilyTarget, LLINSFamilyTarget } from '../llins-family-target.model';
+import { ILlinsFamilyTarget, LlinsFamilyTarget } from '../llins-family-target.model';
 
-import { LLINSFamilyTargetService } from './llins-family-target.service';
+import { LlinsFamilyTargetService } from './llins-family-target.service';
 
 describe('Service Tests', () => {
   describe('LlinsFamilyTarget Service', () => {
-    let service: LLINSFamilyTargetService;
+    let service: LlinsFamilyTargetService;
     let httpMock: HttpTestingController;
-    let elemDefault: ILLINSFamilyTarget;
-    let expectedResult: ILLINSFamilyTarget | ILLINSFamilyTarget[] | boolean | null;
+    let elemDefault: ILlinsFamilyTarget;
+    let expectedResult: ILlinsFamilyTarget | ILlinsFamilyTarget[] | boolean | null;
     let currentDate: dayjs.Dayjs;
 
     beforeEach(() => {
@@ -22,7 +22,7 @@ describe('Service Tests', () => {
         imports: [HttpClientTestingModule],
       });
       expectedResult = null;
-      service = TestBed.inject(LLINSFamilyTargetService);
+      service = TestBed.inject(LlinsFamilyTargetService);
       httpMock = TestBed.inject(HttpTestingController);
       currentDate = dayjs();
 
@@ -74,7 +74,7 @@ describe('Service Tests', () => {
           returnedFromService
         );
 
-        service.create(new LLINSFamilyTarget()).subscribe(resp => (expectedResult = resp.body));
+        service.create(new LlinsFamilyTarget()).subscribe(resp => (expectedResult = resp.body));
 
         const req = httpMock.expectOne({ method: 'POST' });
         req.flush(returnedFromService);
@@ -115,11 +115,11 @@ describe('Service Tests', () => {
       it('should partial update a LlinsFamilyTarget', () => {
         const patchObject = Object.assign(
           {
-            residentsIndividualsPlanned: 1,
+            uid: 'BBBBBB',
             idpsIndividualsPlanned: 1,
             familyType: 'BBBBBB',
           },
-          new LLINSFamilyTarget()
+          new LlinsFamilyTarget()
         );
 
         const returnedFromService = Object.assign(patchObject, elemDefault);
@@ -179,61 +179,61 @@ describe('Service Tests', () => {
         expect(expectedResult);
       });
 
-      describe('addLLINSFamilyTargetToCollectionIfMissing', () => {
+      describe('addLlinsFamilyTargetToCollectionIfMissing', () => {
         it('should add a LlinsFamilyTarget to an empty array', () => {
-          const lLINSFamilyTarget: ILLINSFamilyTarget = { id: 123 };
-          expectedResult = service.addLLINSFamilyTargetToCollectionIfMissing([], lLINSFamilyTarget);
+          const llinsFamilyTarget: ILlinsFamilyTarget = { id: 123 };
+          expectedResult = service.addLlinsFamilyTargetToCollectionIfMissing([], llinsFamilyTarget);
           expect(expectedResult).toHaveLength(1);
-          expect(expectedResult).toContain(lLINSFamilyTarget);
+          expect(expectedResult).toContain(llinsFamilyTarget);
         });
 
         it('should not add a LlinsFamilyTarget to an array that contains it', () => {
-          const lLINSFamilyTarget: ILLINSFamilyTarget = { id: 123 };
-          const lLINSFamilyTargetCollection: ILLINSFamilyTarget[] = [
+          const llinsFamilyTarget: ILlinsFamilyTarget = { id: 123 };
+          const llinsFamilyTargetCollection: ILlinsFamilyTarget[] = [
             {
-              ...lLINSFamilyTarget,
+              ...llinsFamilyTarget,
             },
             { id: 456 },
           ];
-          expectedResult = service.addLLINSFamilyTargetToCollectionIfMissing(lLINSFamilyTargetCollection, lLINSFamilyTarget);
+          expectedResult = service.addLlinsFamilyTargetToCollectionIfMissing(llinsFamilyTargetCollection, llinsFamilyTarget);
           expect(expectedResult).toHaveLength(2);
         });
 
         it("should add a LlinsFamilyTarget to an array that doesn't contain it", () => {
-          const lLINSFamilyTarget: ILLINSFamilyTarget = { id: 123 };
-          const lLINSFamilyTargetCollection: ILLINSFamilyTarget[] = [{ id: 456 }];
-          expectedResult = service.addLLINSFamilyTargetToCollectionIfMissing(lLINSFamilyTargetCollection, lLINSFamilyTarget);
+          const llinsFamilyTarget: ILlinsFamilyTarget = { id: 123 };
+          const llinsFamilyTargetCollection: ILlinsFamilyTarget[] = [{ id: 456 }];
+          expectedResult = service.addLlinsFamilyTargetToCollectionIfMissing(llinsFamilyTargetCollection, llinsFamilyTarget);
           expect(expectedResult).toHaveLength(2);
-          expect(expectedResult).toContain(lLINSFamilyTarget);
+          expect(expectedResult).toContain(llinsFamilyTarget);
         });
 
         it('should add only unique LlinsFamilyTarget to an array', () => {
-          const lLINSFamilyTargetArray: ILLINSFamilyTarget[] = [{ id: 123 }, { id: 456 }, { id: 32760 }];
-          const lLINSFamilyTargetCollection: ILLINSFamilyTarget[] = [{ id: 123 }];
-          expectedResult = service.addLLINSFamilyTargetToCollectionIfMissing(lLINSFamilyTargetCollection, ...lLINSFamilyTargetArray);
+          const llinsFamilyTargetArray: ILlinsFamilyTarget[] = [{ id: 123 }, { id: 456 }, { id: 30876 }];
+          const llinsFamilyTargetCollection: ILlinsFamilyTarget[] = [{ id: 123 }];
+          expectedResult = service.addLlinsFamilyTargetToCollectionIfMissing(llinsFamilyTargetCollection, ...llinsFamilyTargetArray);
           expect(expectedResult).toHaveLength(3);
         });
 
         it('should accept varargs', () => {
-          const lLINSFamilyTarget: ILLINSFamilyTarget = { id: 123 };
-          const lLINSFamilyTarget2: ILLINSFamilyTarget = { id: 456 };
-          expectedResult = service.addLLINSFamilyTargetToCollectionIfMissing([], lLINSFamilyTarget, lLINSFamilyTarget2);
+          const llinsFamilyTarget: ILlinsFamilyTarget = { id: 123 };
+          const llinsFamilyTarget2: ILlinsFamilyTarget = { id: 456 };
+          expectedResult = service.addLlinsFamilyTargetToCollectionIfMissing([], llinsFamilyTarget, llinsFamilyTarget2);
           expect(expectedResult).toHaveLength(2);
-          expect(expectedResult).toContain(lLINSFamilyTarget);
-          expect(expectedResult).toContain(lLINSFamilyTarget2);
+          expect(expectedResult).toContain(llinsFamilyTarget);
+          expect(expectedResult).toContain(llinsFamilyTarget2);
         });
 
         it('should accept null and undefined values', () => {
-          const lLINSFamilyTarget: ILLINSFamilyTarget = { id: 123 };
-          expectedResult = service.addLLINSFamilyTargetToCollectionIfMissing([], null, lLINSFamilyTarget, undefined);
+          const llinsFamilyTarget: ILlinsFamilyTarget = { id: 123 };
+          expectedResult = service.addLlinsFamilyTargetToCollectionIfMissing([], null, llinsFamilyTarget, undefined);
           expect(expectedResult).toHaveLength(1);
-          expect(expectedResult).toContain(lLINSFamilyTarget);
+          expect(expectedResult).toContain(llinsFamilyTarget);
         });
 
         it('should return initial array if no LlinsFamilyTarget is added', () => {
-          const lLINSFamilyTargetCollection: ILLINSFamilyTarget[] = [{ id: 123 }];
-          expectedResult = service.addLLINSFamilyTargetToCollectionIfMissing(lLINSFamilyTargetCollection, undefined, null);
-          expect(expectedResult).toEqual(lLINSFamilyTargetCollection);
+          const llinsFamilyTargetCollection: ILlinsFamilyTarget[] = [{ id: 123 }];
+          expectedResult = service.addLlinsFamilyTargetToCollectionIfMissing(llinsFamilyTargetCollection, undefined, null);
+          expect(expectedResult).toEqual(llinsFamilyTargetCollection);
         });
       });
     });

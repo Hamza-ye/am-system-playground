@@ -7,48 +7,48 @@ import * as dayjs from 'dayjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { ICHVTeam, getCHVTeamIdentifier } from '../chv-team.model';
+import { IChvTeam, getChvTeamIdentifier } from '../chv-team.model';
 
-export type EntityResponseType = HttpResponse<ICHVTeam>;
-export type EntityArrayResponseType = HttpResponse<ICHVTeam[]>;
+export type EntityResponseType = HttpResponse<IChvTeam>;
+export type EntityArrayResponseType = HttpResponse<IChvTeam[]>;
 
 @Injectable({ providedIn: 'root' })
-export class CHVTeamService {
+export class ChvTeamService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/chv-teams');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  create(cHVTeam: ICHVTeam): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(cHVTeam);
+  create(chvTeam: IChvTeam): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(chvTeam);
     return this.http
-      .post<ICHVTeam>(this.resourceUrl, copy, { observe: 'response' })
+      .post<IChvTeam>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  update(cHVTeam: ICHVTeam): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(cHVTeam);
+  update(chvTeam: IChvTeam): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(chvTeam);
     return this.http
-      .put<ICHVTeam>(`${this.resourceUrl}/${getCHVTeamIdentifier(cHVTeam) as number}`, copy, { observe: 'response' })
+      .put<IChvTeam>(`${this.resourceUrl}/${getChvTeamIdentifier(chvTeam) as number}`, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  partialUpdate(cHVTeam: ICHVTeam): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(cHVTeam);
+  partialUpdate(chvTeam: IChvTeam): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(chvTeam);
     return this.http
-      .patch<ICHVTeam>(`${this.resourceUrl}/${getCHVTeamIdentifier(cHVTeam) as number}`, copy, { observe: 'response' })
+      .patch<IChvTeam>(`${this.resourceUrl}/${getChvTeamIdentifier(chvTeam) as number}`, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<ICHVTeam>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .get<IChvTeam>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
-      .get<ICHVTeam[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .get<IChvTeam[]>(this.resourceUrl, { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
@@ -56,27 +56,27 @@ export class CHVTeamService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  addCHVTeamToCollectionIfMissing(cHVTeamCollection: ICHVTeam[], ...cHVTeamsToCheck: (ICHVTeam | null | undefined)[]): ICHVTeam[] {
-    const cHVTeams: ICHVTeam[] = cHVTeamsToCheck.filter(isPresent);
-    if (cHVTeams.length > 0) {
-      const cHVTeamCollectionIdentifiers = cHVTeamCollection.map(cHVTeamItem => getCHVTeamIdentifier(cHVTeamItem)!);
-      const cHVTeamsToAdd = cHVTeams.filter(cHVTeamItem => {
-        const cHVTeamIdentifier = getCHVTeamIdentifier(cHVTeamItem);
-        if (cHVTeamIdentifier == null || cHVTeamCollectionIdentifiers.includes(cHVTeamIdentifier)) {
+  addChvTeamToCollectionIfMissing(chvTeamCollection: IChvTeam[], ...chvTeamsToCheck: (IChvTeam | null | undefined)[]): IChvTeam[] {
+    const chvTeams: IChvTeam[] = chvTeamsToCheck.filter(isPresent);
+    if (chvTeams.length > 0) {
+      const chvTeamCollectionIdentifiers = chvTeamCollection.map(chvTeamItem => getChvTeamIdentifier(chvTeamItem)!);
+      const chvTeamsToAdd = chvTeams.filter(chvTeamItem => {
+        const chvTeamIdentifier = getChvTeamIdentifier(chvTeamItem);
+        if (chvTeamIdentifier == null || chvTeamCollectionIdentifiers.includes(chvTeamIdentifier)) {
           return false;
         }
-        cHVTeamCollectionIdentifiers.push(cHVTeamIdentifier);
+        chvTeamCollectionIdentifiers.push(chvTeamIdentifier);
         return true;
       });
-      return [...cHVTeamsToAdd, ...cHVTeamCollection];
+      return [...chvTeamsToAdd, ...chvTeamCollection];
     }
-    return cHVTeamCollection;
+    return chvTeamCollection;
   }
 
-  protected convertDateFromClient(cHVTeam: ICHVTeam): ICHVTeam {
-    return Object.assign({}, cHVTeam, {
-      created: cHVTeam.created?.isValid() ? cHVTeam.created.toJSON() : undefined,
-      lastUpdated: cHVTeam.lastUpdated?.isValid() ? cHVTeam.lastUpdated.toJSON() : undefined,
+  protected convertDateFromClient(chvTeam: IChvTeam): IChvTeam {
+    return Object.assign({}, chvTeam, {
+      created: chvTeam.created?.isValid() ? chvTeam.created.toJSON() : undefined,
+      lastUpdated: chvTeam.lastUpdated?.isValid() ? chvTeam.lastUpdated.toJSON() : undefined,
     });
   }
 
@@ -90,9 +90,9 @@ export class CHVTeamService {
 
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
-      res.body.forEach((cHVTeam: ICHVTeam) => {
-        cHVTeam.created = cHVTeam.created ? dayjs(cHVTeam.created) : undefined;
-        cHVTeam.lastUpdated = cHVTeam.lastUpdated ? dayjs(cHVTeam.lastUpdated) : undefined;
+      res.body.forEach((chvTeam: IChvTeam) => {
+        chvTeam.created = chvTeam.created ? dayjs(chvTeam.created) : undefined;
+        chvTeam.lastUpdated = chvTeam.lastUpdated ? dayjs(chvTeam.lastUpdated) : undefined;
       });
     }
     return res;

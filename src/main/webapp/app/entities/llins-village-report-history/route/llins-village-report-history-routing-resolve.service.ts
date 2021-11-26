@@ -4,20 +4,20 @@ import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { ILLINSVillageReportHistory, LLINSVillageReportHistory } from '../llins-village-report-history.model';
-import { LLINSVillageReportHistoryService } from '../service/llins-village-report-history.service';
+import { ILlinsVillageReportHistory, LlinsVillageReportHistory } from '../llins-village-report-history.model';
+import { LlinsVillageReportHistoryService } from '../service/llins-village-report-history.service';
 
 @Injectable({ providedIn: 'root' })
-export class LLINSVillageReportHistoryRoutingResolveService implements Resolve<ILLINSVillageReportHistory> {
-  constructor(protected service: LLINSVillageReportHistoryService, protected router: Router) {}
+export class LlinsVillageReportHistoryRoutingResolveService implements Resolve<ILlinsVillageReportHistory> {
+  constructor(protected service: LlinsVillageReportHistoryService, protected router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<ILLINSVillageReportHistory> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot): Observable<ILlinsVillageReportHistory> | Observable<never> {
     const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
-        mergeMap((lLINSVillageReportHistory: HttpResponse<LLINSVillageReportHistory>) => {
-          if (lLINSVillageReportHistory.body) {
-            return of(lLINSVillageReportHistory.body);
+        mergeMap((llinsVillageReportHistory: HttpResponse<LlinsVillageReportHistory>) => {
+          if (llinsVillageReportHistory.body) {
+            return of(llinsVillageReportHistory.body);
           } else {
             this.router.navigate(['404']);
             return EMPTY;
@@ -25,6 +25,6 @@ export class LLINSVillageReportHistoryRoutingResolveService implements Resolve<I
         })
       );
     }
-    return of(new LLINSVillageReportHistory());
+    return of(new LlinsVillageReportHistory());
   }
 }

@@ -6,28 +6,28 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { LLINSVillageReportService } from '../service/llins-village-report.service';
+import { LlinsVillageReportService } from '../service/llins-village-report.service';
 
-import { LLINSVillageReportDeleteDialogComponent } from './llins-village-report-delete-dialog.component';
+import { LlinsVillageReportDeleteDialogComponent } from './llins-village-report-delete-dialog.component';
 
 describe('Component Tests', () => {
   describe('LlinsVillageReport Management Delete Component', () => {
-    let comp: LLINSVillageReportDeleteDialogComponent;
-    let fixture: ComponentFixture<LLINSVillageReportDeleteDialogComponent>;
-    let service: LLINSVillageReportService;
+    let comp: LlinsVillageReportDeleteDialogComponent;
+    let fixture: ComponentFixture<LlinsVillageReportDeleteDialogComponent>;
+    let service: LlinsVillageReportService;
     let mockActiveModal: NgbActiveModal;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [LLINSVillageReportDeleteDialogComponent],
+        declarations: [LlinsVillageReportDeleteDialogComponent],
         providers: [NgbActiveModal],
       })
-        .overrideTemplate(LLINSVillageReportDeleteDialogComponent, '')
+        .overrideTemplate(LlinsVillageReportDeleteDialogComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(LLINSVillageReportDeleteDialogComponent);
+      fixture = TestBed.createComponent(LlinsVillageReportDeleteDialogComponent);
       comp = fixture.componentInstance;
-      service = TestBed.inject(LLINSVillageReportService);
+      service = TestBed.inject(LlinsVillageReportService);
       mockActiveModal = TestBed.inject(NgbActiveModal);
     });
 

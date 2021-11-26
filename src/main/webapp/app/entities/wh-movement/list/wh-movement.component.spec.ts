@@ -6,20 +6,20 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 
-import { WHMovementService } from '../service/wh-movement.service';
+import { WhMovementService } from '../service/wh-movement.service';
 
-import { WHMovementComponent } from './wh-movement.component';
+import { WhMovementComponent } from './wh-movement.component';
 
 describe('Component Tests', () => {
   describe('WhMovement Management Component', () => {
-    let comp: WHMovementComponent;
-    let fixture: ComponentFixture<WHMovementComponent>;
-    let service: WHMovementService;
+    let comp: WhMovementComponent;
+    let fixture: ComponentFixture<WhMovementComponent>;
+    let service: WhMovementService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [WHMovementComponent],
+        declarations: [WhMovementComponent],
         providers: [
           Router,
           {
@@ -39,12 +39,12 @@ describe('Component Tests', () => {
           },
         ],
       })
-        .overrideTemplate(WHMovementComponent, '')
+        .overrideTemplate(WhMovementComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(WHMovementComponent);
+      fixture = TestBed.createComponent(WhMovementComponent);
       comp = fixture.componentInstance;
-      service = TestBed.inject(WHMovementService);
+      service = TestBed.inject(WhMovementService);
 
       const headers = new HttpHeaders().append('link', 'link;link');
       jest.spyOn(service, 'query').mockReturnValue(
@@ -63,7 +63,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.wHMovements?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+      expect(comp.whMovements?.[0]).toEqual(expect.objectContaining({ id: 123 }));
     });
 
     it('should load a page', () => {
@@ -72,7 +72,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.wHMovements?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+      expect(comp.whMovements?.[0]).toEqual(expect.objectContaining({ id: 123 }));
     });
 
     it('should calculate the sort attribute for an id', () => {

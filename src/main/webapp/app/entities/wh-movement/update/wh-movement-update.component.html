@@ -3,10 +3,10 @@
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2
         id="app-wh-movement-heading"
-        data-cy="WHMovementCreateUpdateHeading"
-        appTranslate="amSystemPlaygroundApp.wHMovement.home.createOrEditLabel"
+        data-cy="WhMovementCreateUpdateHeading"
+        appTranslate="amSystemPlaygroundApp.whMovement.home.createOrEditLabel"
       >
-        Create or edit a WH Movement
+        Create or edit a Wh Movement
       </h2>
 
       <div>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.wHMovement.movementType" for="field_movementType"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.whMovement.movementType" for="field_movementType"
             >Movement Type</label
           >
           <select class="form-control" name="movementType" formControlName="movementType" id="field_movementType" data-cy="movementType">
@@ -42,7 +42,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.wHMovement.quantity" for="field_quantity">Quantity</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.whMovement.quantity" for="field_quantity">Quantity</label>
           <input type="number" class="form-control" name="quantity" id="field_quantity" data-cy="quantity" formControlName="quantity" />
           <div *ngIf="editForm.get('quantity')!.invalid && (editForm.get('quantity')!.dirty || editForm.get('quantity')!.touched)">
             <small
@@ -73,7 +73,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.wHMovement.reconciliationSource"
+            appTranslate="amSystemPlaygroundApp.whMovement.reconciliationSource"
             for="field_reconciliationSource"
             >Reconciliation Source</label
           >
@@ -90,7 +90,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.wHMovement.reconciliationDestination"
+            appTranslate="amSystemPlaygroundApp.whMovement.reconciliationDestination"
             for="field_reconciliationDestination"
             >Reconciliation Destination</label
           >
@@ -107,7 +107,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.wHMovement.confirmedByOtherSide"
+            appTranslate="amSystemPlaygroundApp.whMovement.confirmedByOtherSide"
             for="field_confirmedByOtherSide"
             >Confirmed By Other Side</label
           >
@@ -122,12 +122,12 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.wHMovement.comment" for="field_comment">Comment</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.whMovement.comment" for="field_comment">Comment</label>
           <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.wHMovement.createdBy" for="field_createdBy"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.whMovement.createdBy" for="field_createdBy"
             >Created By</label
           >
           <select class="form-control" id="field_createdBy" data-cy="createdBy" name="createdBy" formControlName="createdBy">
@@ -142,7 +142,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.wHMovement.lastUpdatedBy" for="field_lastUpdatedBy"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.whMovement.lastUpdatedBy" for="field_lastUpdatedBy"
             >Last Updated By</label
           >
           <select
@@ -163,7 +163,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.wHMovement.day" for="field_day">Day</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.whMovement.day" for="field_day">Day</label>
           <select class="form-control" id="field_day" data-cy="day" name="day" formControlName="day">
             <option *ngIf="!editForm.get('day')!.value" [ngValue]="null" selected></option>
             <option
@@ -181,14 +181,14 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.wHMovement.initiatedWH" for="field_initiatedWH"
-            >Initiated WH</label
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.whMovement.initiatedWh" for="field_initiatedWh"
+            >Initiated Wh</label
           >
-          <select class="form-control" id="field_initiatedWH" data-cy="initiatedWH" name="initiatedWH" formControlName="initiatedWH">
-            <option *ngIf="!editForm.get('initiatedWH')!.value" [ngValue]="null" selected></option>
+          <select class="form-control" id="field_initiatedWh" data-cy="initiatedWh" name="initiatedWh" formControlName="initiatedWh">
+            <option *ngIf="!editForm.get('initiatedWh')!.value" [ngValue]="null" selected></option>
             <option
               [ngValue]="
-                warehouseOption.id === editForm.get('initiatedWH')!.value?.id ? editForm.get('initiatedWH')!.value : warehouseOption
+                warehouseOption.id === editForm.get('initiatedWh')!.value?.id ? editForm.get('initiatedWh')!.value : warehouseOption
               "
               *ngFor="let warehouseOption of warehousesSharedCollection; trackBy: trackWarehouseById"
             >
@@ -197,11 +197,11 @@
           </select>
         </div>
         <div
-          *ngIf="editForm.get(['initiatedWH'])!.invalid && (editForm.get(['initiatedWH'])!.dirty || editForm.get(['initiatedWH'])!.touched)"
+          *ngIf="editForm.get(['initiatedWh'])!.invalid && (editForm.get(['initiatedWh'])!.dirty || editForm.get(['initiatedWh'])!.touched)"
         >
           <small
             class="form-text text-danger"
-            *ngIf="editForm.get(['initiatedWH'])?.errors?.required"
+            *ngIf="editForm.get(['initiatedWh'])?.errors?.required"
             appTranslate="entity.validation.required"
           >
             This field is required.
@@ -209,20 +209,20 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.wHMovement.theOtherSideWH" for="field_theOtherSideWH"
-            >The Other Side WH</label
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.whMovement.theOtherSideWh" for="field_theOtherSideWh"
+            >The Other Side Wh</label
           >
           <select
             class="form-control"
-            id="field_theOtherSideWH"
-            data-cy="theOtherSideWH"
-            name="theOtherSideWH"
-            formControlName="theOtherSideWH"
+            id="field_theOtherSideWh"
+            data-cy="theOtherSideWh"
+            name="theOtherSideWh"
+            formControlName="theOtherSideWh"
           >
             <option [ngValue]="null"></option>
             <option
               [ngValue]="
-                warehouseOption.id === editForm.get('theOtherSideWH')!.value?.id ? editForm.get('theOtherSideWH')!.value : warehouseOption
+                warehouseOption.id === editForm.get('theOtherSideWh')!.value?.id ? editForm.get('theOtherSideWh')!.value : warehouseOption
               "
               *ngFor="let warehouseOption of warehousesSharedCollection; trackBy: trackWarehouseById"
             >
@@ -232,7 +232,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.wHMovement.team" for="field_team">Team</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.whMovement.team" for="field_team">Team</label>
           <select class="form-control" id="field_team" data-cy="team" name="team" formControlName="team">
             <option [ngValue]="null"></option>
             <option

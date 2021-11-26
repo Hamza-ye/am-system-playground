@@ -1,6 +1,5 @@
 package org.nmcpye.activitiesmanagement.service.impl;
 
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.domain.LlinsFamilyTarget;
 import org.nmcpye.activitiesmanagement.repository.LlinsFamilyTargetRepository;
 import org.nmcpye.activitiesmanagement.service.LlinsFamilyTargetService;
@@ -11,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 /**
  * Service Implementation for managing {@link LlinsFamilyTarget}.
  */
@@ -20,74 +21,74 @@ public class LlinsFamilyTargetServiceImpl implements LlinsFamilyTargetService {
 
     private final Logger log = LoggerFactory.getLogger(LlinsFamilyTargetServiceImpl.class);
 
-    private final LlinsFamilyTargetRepository lLINSFamilyTargetRepository;
+    private final LlinsFamilyTargetRepository llinsFamilyTargetRepository;
 
-    public LlinsFamilyTargetServiceImpl(LlinsFamilyTargetRepository lLINSFamilyTargetRepository) {
-        this.lLINSFamilyTargetRepository = lLINSFamilyTargetRepository;
+    public LlinsFamilyTargetServiceImpl(LlinsFamilyTargetRepository llinsFamilyTargetRepository) {
+        this.llinsFamilyTargetRepository = llinsFamilyTargetRepository;
     }
 
     @Override
-    public LlinsFamilyTarget save(LlinsFamilyTarget lLINSFamilyTarget) {
-        log.debug("Request to save LlinsFamilyTarget : {}", lLINSFamilyTarget);
-        return lLINSFamilyTargetRepository.save(lLINSFamilyTarget);
+    public LlinsFamilyTarget save(LlinsFamilyTarget llinsFamilyTarget) {
+        log.debug("Request to save LlinsFamilyTarget : {}", llinsFamilyTarget);
+        return llinsFamilyTargetRepository.save(llinsFamilyTarget);
     }
 
     @Override
-    public Optional<LlinsFamilyTarget> partialUpdate(LlinsFamilyTarget lLINSFamilyTarget) {
-        log.debug("Request to partially update LlinsFamilyTarget : {}", lLINSFamilyTarget);
+    public Optional<LlinsFamilyTarget> partialUpdate(LlinsFamilyTarget llinsFamilyTarget) {
+        log.debug("Request to partially update LlinsFamilyTarget : {}", llinsFamilyTarget);
 
-        return lLINSFamilyTargetRepository
-            .findById(lLINSFamilyTarget.getId())
+        return llinsFamilyTargetRepository
+            .findById(llinsFamilyTarget.getId())
             .map(
-                existingLLINSFamilyTarget -> {
-                    if (lLINSFamilyTarget.getUid() != null) {
-                        existingLLINSFamilyTarget.setUid(lLINSFamilyTarget.getUid());
+                existingLlinsFamilyTarget -> {
+                    if (llinsFamilyTarget.getUid() != null) {
+                        existingLlinsFamilyTarget.setUid(llinsFamilyTarget.getUid());
                     }
-                    if (lLINSFamilyTarget.getCreated() != null) {
-                        existingLLINSFamilyTarget.setCreated(lLINSFamilyTarget.getCreated());
+                    if (llinsFamilyTarget.getCreated() != null) {
+                        existingLlinsFamilyTarget.setCreated(llinsFamilyTarget.getCreated());
                     }
-                    if (lLINSFamilyTarget.getLastUpdated() != null) {
-                        existingLLINSFamilyTarget.setLastUpdated(lLINSFamilyTarget.getLastUpdated());
+                    if (llinsFamilyTarget.getLastUpdated() != null) {
+                        existingLlinsFamilyTarget.setLastUpdated(llinsFamilyTarget.getLastUpdated());
                     }
-                    if (lLINSFamilyTarget.getResidentsIndividualsPlanned() != null) {
-                        existingLLINSFamilyTarget.setResidentsIndividualsPlanned(lLINSFamilyTarget.getResidentsIndividualsPlanned());
+                    if (llinsFamilyTarget.getResidentsIndividualsPlanned() != null) {
+                        existingLlinsFamilyTarget.setResidentsIndividualsPlanned(llinsFamilyTarget.getResidentsIndividualsPlanned());
                     }
-                    if (lLINSFamilyTarget.getIdpsIndividualsPlanned() != null) {
-                        existingLLINSFamilyTarget.setIdpsIndividualsPlanned(lLINSFamilyTarget.getIdpsIndividualsPlanned());
+                    if (llinsFamilyTarget.getIdpsIndividualsPlanned() != null) {
+                        existingLlinsFamilyTarget.setIdpsIndividualsPlanned(llinsFamilyTarget.getIdpsIndividualsPlanned());
                     }
-                    if (lLINSFamilyTarget.getQuantityPlanned() != null) {
-                        existingLLINSFamilyTarget.setQuantityPlanned(lLINSFamilyTarget.getQuantityPlanned());
+                    if (llinsFamilyTarget.getQuantityPlanned() != null) {
+                        existingLlinsFamilyTarget.setQuantityPlanned(llinsFamilyTarget.getQuantityPlanned());
                     }
-                    if (lLINSFamilyTarget.getFamilyType() != null) {
-                        existingLLINSFamilyTarget.setFamilyType(lLINSFamilyTarget.getFamilyType());
+                    if (llinsFamilyTarget.getFamilyType() != null) {
+                        existingLlinsFamilyTarget.setFamilyType(llinsFamilyTarget.getFamilyType());
                     }
-                    if (lLINSFamilyTarget.getStatusOfFamilyTarget() != null) {
-                        existingLLINSFamilyTarget.setStatusOfFamilyTarget(lLINSFamilyTarget.getStatusOfFamilyTarget());
+                    if (llinsFamilyTarget.getStatusOfFamilyTarget() != null) {
+                        existingLlinsFamilyTarget.setStatusOfFamilyTarget(llinsFamilyTarget.getStatusOfFamilyTarget());
                     }
 
-                    return existingLLINSFamilyTarget;
+                    return existingLlinsFamilyTarget;
                 }
             )
-            .map(lLINSFamilyTargetRepository::save);
+            .map(llinsFamilyTargetRepository::save);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Page<LlinsFamilyTarget> findAll(Pageable pageable) {
-        log.debug("Request to get all LLINSFamilyTargets");
-        return lLINSFamilyTargetRepository.findAll(pageable);
+        log.debug("Request to get all LlinsFamilyTargets");
+        return llinsFamilyTargetRepository.findAll(pageable);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<LlinsFamilyTarget> findOne(Long id) {
         log.debug("Request to get LlinsFamilyTarget : {}", id);
-        return lLINSFamilyTargetRepository.findById(id);
+        return llinsFamilyTargetRepository.findById(id);
     }
 
     @Override
     public void delete(Long id) {
         log.debug("Request to delete LlinsFamilyTarget : {}", id);
-        lLINSFamilyTargetRepository.deleteById(id);
+        llinsFamilyTargetRepository.deleteById(id);
     }
 }

@@ -1,7 +1,5 @@
 package org.nmcpye.activitiesmanagement.service.impl;
 
-import java.util.List;
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.domain.LlinsVillageReportHistory;
 import org.nmcpye.activitiesmanagement.repository.LlinsVillageReportHistoryRepository;
 import org.nmcpye.activitiesmanagement.service.LlinsVillageReportHistoryService;
@@ -9,6 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Service Implementation for managing {@link LlinsVillageReportHistory}.
@@ -19,86 +20,86 @@ public class LlinsVillageReportHistoryServiceImpl implements LlinsVillageReportH
 
     private final Logger log = LoggerFactory.getLogger(LlinsVillageReportHistoryServiceImpl.class);
 
-    private final LlinsVillageReportHistoryRepository lLINSVillageReportHistoryRepository;
+    private final LlinsVillageReportHistoryRepository llinsVillageReportHistoryRepository;
 
-    public LlinsVillageReportHistoryServiceImpl(LlinsVillageReportHistoryRepository lLINSVillageReportHistoryRepository) {
-        this.lLINSVillageReportHistoryRepository = lLINSVillageReportHistoryRepository;
+    public LlinsVillageReportHistoryServiceImpl(LlinsVillageReportHistoryRepository llinsVillageReportHistoryRepository) {
+        this.llinsVillageReportHistoryRepository = llinsVillageReportHistoryRepository;
     }
 
     @Override
-    public LlinsVillageReportHistory save(LlinsVillageReportHistory lLINSVillageReportHistory) {
-        log.debug("Request to save LlinsVillageReportHistory : {}", lLINSVillageReportHistory);
-        return lLINSVillageReportHistoryRepository.save(lLINSVillageReportHistory);
+    public LlinsVillageReportHistory save(LlinsVillageReportHistory llinsVillageReportHistory) {
+        log.debug("Request to save LlinsVillageReportHistory : {}", llinsVillageReportHistory);
+        return llinsVillageReportHistoryRepository.save(llinsVillageReportHistory);
     }
 
     @Override
-    public Optional<LlinsVillageReportHistory> partialUpdate(LlinsVillageReportHistory lLINSVillageReportHistory) {
-        log.debug("Request to partially update LlinsVillageReportHistory : {}", lLINSVillageReportHistory);
+    public Optional<LlinsVillageReportHistory> partialUpdate(LlinsVillageReportHistory llinsVillageReportHistory) {
+        log.debug("Request to partially update LlinsVillageReportHistory : {}", llinsVillageReportHistory);
 
-        return lLINSVillageReportHistoryRepository
-            .findById(lLINSVillageReportHistory.getId())
+        return llinsVillageReportHistoryRepository
+            .findById(llinsVillageReportHistory.getId())
             .map(
-                existingLLINSVillageReportHistory -> {
-                    if (lLINSVillageReportHistory.getUid() != null) {
-                        existingLLINSVillageReportHistory.setUid(lLINSVillageReportHistory.getUid());
+                existingLlinsVillageReportHistory -> {
+                    if (llinsVillageReportHistory.getUid() != null) {
+                        existingLlinsVillageReportHistory.setUid(llinsVillageReportHistory.getUid());
                     }
-                    if (lLINSVillageReportHistory.getCreated() != null) {
-                        existingLLINSVillageReportHistory.setCreated(lLINSVillageReportHistory.getCreated());
+                    if (llinsVillageReportHistory.getCreated() != null) {
+                        existingLlinsVillageReportHistory.setCreated(llinsVillageReportHistory.getCreated());
                     }
-                    if (lLINSVillageReportHistory.getLastUpdated() != null) {
-                        existingLLINSVillageReportHistory.setLastUpdated(lLINSVillageReportHistory.getLastUpdated());
+                    if (llinsVillageReportHistory.getLastUpdated() != null) {
+                        existingLlinsVillageReportHistory.setLastUpdated(llinsVillageReportHistory.getLastUpdated());
                     }
-                    if (lLINSVillageReportHistory.getHouses() != null) {
-                        existingLLINSVillageReportHistory.setHouses(lLINSVillageReportHistory.getHouses());
+                    if (llinsVillageReportHistory.getHouses() != null) {
+                        existingLlinsVillageReportHistory.setHouses(llinsVillageReportHistory.getHouses());
                     }
-                    if (lLINSVillageReportHistory.getResidentHousehold() != null) {
-                        existingLLINSVillageReportHistory.setResidentHousehold(lLINSVillageReportHistory.getResidentHousehold());
+                    if (llinsVillageReportHistory.getResidentHousehold() != null) {
+                        existingLlinsVillageReportHistory.setResidentHousehold(llinsVillageReportHistory.getResidentHousehold());
                     }
-                    if (lLINSVillageReportHistory.getIdpsHousehold() != null) {
-                        existingLLINSVillageReportHistory.setIdpsHousehold(lLINSVillageReportHistory.getIdpsHousehold());
+                    if (llinsVillageReportHistory.getIdpsHousehold() != null) {
+                        existingLlinsVillageReportHistory.setIdpsHousehold(llinsVillageReportHistory.getIdpsHousehold());
                     }
-                    if (lLINSVillageReportHistory.getMaleIndividuals() != null) {
-                        existingLLINSVillageReportHistory.setMaleIndividuals(lLINSVillageReportHistory.getMaleIndividuals());
+                    if (llinsVillageReportHistory.getMaleIndividuals() != null) {
+                        existingLlinsVillageReportHistory.setMaleIndividuals(llinsVillageReportHistory.getMaleIndividuals());
                     }
-                    if (lLINSVillageReportHistory.getFemaleIndividuals() != null) {
-                        existingLLINSVillageReportHistory.setFemaleIndividuals(lLINSVillageReportHistory.getFemaleIndividuals());
+                    if (llinsVillageReportHistory.getFemaleIndividuals() != null) {
+                        existingLlinsVillageReportHistory.setFemaleIndividuals(llinsVillageReportHistory.getFemaleIndividuals());
                     }
-                    if (lLINSVillageReportHistory.getLessThan5Males() != null) {
-                        existingLLINSVillageReportHistory.setLessThan5Males(lLINSVillageReportHistory.getLessThan5Males());
+                    if (llinsVillageReportHistory.getLessThan5Males() != null) {
+                        existingLlinsVillageReportHistory.setLessThan5Males(llinsVillageReportHistory.getLessThan5Males());
                     }
-                    if (lLINSVillageReportHistory.getLessThan5Females() != null) {
-                        existingLLINSVillageReportHistory.setLessThan5Females(lLINSVillageReportHistory.getLessThan5Females());
+                    if (llinsVillageReportHistory.getLessThan5Females() != null) {
+                        existingLlinsVillageReportHistory.setLessThan5Females(llinsVillageReportHistory.getLessThan5Females());
                     }
-                    if (lLINSVillageReportHistory.getPregnantWomen() != null) {
-                        existingLLINSVillageReportHistory.setPregnantWomen(lLINSVillageReportHistory.getPregnantWomen());
+                    if (llinsVillageReportHistory.getPregnantWomen() != null) {
+                        existingLlinsVillageReportHistory.setPregnantWomen(llinsVillageReportHistory.getPregnantWomen());
                     }
-                    if (lLINSVillageReportHistory.getQuantityReceived() != null) {
-                        existingLLINSVillageReportHistory.setQuantityReceived(lLINSVillageReportHistory.getQuantityReceived());
+                    if (llinsVillageReportHistory.getQuantityReceived() != null) {
+                        existingLlinsVillageReportHistory.setQuantityReceived(llinsVillageReportHistory.getQuantityReceived());
                     }
 
-                    return existingLLINSVillageReportHistory;
+                    return existingLlinsVillageReportHistory;
                 }
             )
-            .map(lLINSVillageReportHistoryRepository::save);
+            .map(llinsVillageReportHistoryRepository::save);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<LlinsVillageReportHistory> findAll() {
-        log.debug("Request to get all LLINSVillageReportHistories");
-        return lLINSVillageReportHistoryRepository.findAll();
+        log.debug("Request to get all LlinsVillageReportHistories");
+        return llinsVillageReportHistoryRepository.findAll();
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<LlinsVillageReportHistory> findOne(Long id) {
         log.debug("Request to get LlinsVillageReportHistory : {}", id);
-        return lLINSVillageReportHistoryRepository.findById(id);
+        return llinsVillageReportHistoryRepository.findById(id);
     }
 
     @Override
     public void delete(Long id) {
         log.debug("Request to delete LlinsVillageReportHistory : {}", id);
-        lLINSVillageReportHistoryRepository.deleteById(id);
+        llinsVillageReportHistoryRepository.deleteById(id);
     }
 }

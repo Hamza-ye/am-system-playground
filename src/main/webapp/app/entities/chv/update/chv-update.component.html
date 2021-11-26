@@ -1,8 +1,8 @@
 <div class="row justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="app-chv-heading" data-cy="CHVCreateUpdateHeading" appTranslate="amSystemPlaygroundApp.cHV.home.createOrEditLabel">
-        Create or edit a CHV
+      <h2 id="app-chv-heading" data-cy="ChvCreateUpdateHeading" appTranslate="amSystemPlaygroundApp.chv.home.createOrEditLabel">
+        Create or edit a Chv
       </h2>
 
       <div>
@@ -14,7 +14,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHV.uid" for="field_uid">Uid</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chv.uid" for="field_uid">Uid</label>
           <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
           <div *ngIf="editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('uid')?.errors?.required" appTranslate="entity.validation.required">
@@ -32,13 +32,13 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHV.code" for="field_code">Code</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chv.code" for="field_code">Code</label>
           <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
           <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)"></div>
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHV.description" for="field_description">Description</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chv.description" for="field_description">Description</label>
           <input
             type="text"
             class="form-control"
@@ -50,7 +50,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHV.created" for="field_created">Created</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chv.created" for="field_created">Created</label>
           <div class="d-flex">
             <input
               id="field_created"
@@ -65,7 +65,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHV.lastUpdated" for="field_lastUpdated"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chv.lastUpdated" for="field_lastUpdated"
             >Last Updated</label
           >
           <div class="d-flex">
@@ -82,12 +82,12 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHV.mobile" for="field_mobile">Mobile</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chv.mobile" for="field_mobile">Mobile</label>
           <input type="text" class="form-control" name="mobile" id="field_mobile" data-cy="mobile" formControlName="mobile" />
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHV.person" for="field_person">Person</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chv.person" for="field_person">Person</label>
           <select class="form-control" id="field_person" data-cy="person" name="person" formControlName="person">
             <option [ngValue]="null"></option>
             <option
@@ -100,7 +100,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHV.district" for="field_district">District</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chv.district" for="field_district">District</label>
           <select class="form-control" id="field_district" data-cy="district" name="district" formControlName="district">
             <option *ngIf="!editForm.get('district')!.value" [ngValue]="null" selected></option>
             <option
@@ -124,7 +124,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHV.homeSubvillage" for="field_homeSubvillage"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chv.homeSubvillage" for="field_homeSubvillage"
             >Home Subvillage</label
           >
           <select
@@ -149,7 +149,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHV.managedByHf" for="field_managedByHf"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chv.managedByHf" for="field_managedByHf"
             >Managed By Hf</label
           >
           <select class="form-control" id="field_managedByHf" data-cy="managedByHf" name="managedByHf" formControlName="managedByHf">
@@ -168,7 +168,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHV.createdBy" for="field_createdBy">Created By</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chv.createdBy" for="field_createdBy">Created By</label>
           <select class="form-control" id="field_createdBy" data-cy="createdBy" name="createdBy" formControlName="createdBy">
             <option [ngValue]="null"></option>
             <option
@@ -181,7 +181,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHV.lastUpdatedBy" for="field_lastUpdatedBy"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chv.lastUpdatedBy" for="field_lastUpdatedBy"
             >Last Updated By</label
           >
           <select

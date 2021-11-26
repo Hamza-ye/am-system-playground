@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { LLINSVillageTargetComponent } from '../list/llins-village-target.component';
-import { LLINSVillageTargetDetailComponent } from '../detail/llins-village-target-detail.component';
-import { LLINSVillageTargetUpdateComponent } from '../update/llins-village-target-update.component';
-import { LLINSVillageTargetRoutingResolveService } from './llins-village-target-routing-resolve.service';
+import { LlinsVillageTargetComponent } from '../list/llins-village-target.component';
+import { LlinsVillageTargetDetailComponent } from '../detail/llins-village-target-detail.component';
+import { LlinsVillageTargetUpdateComponent } from '../update/llins-village-target-update.component';
+import { LlinsVillageTargetRoutingResolveService } from './llins-village-target-routing-resolve.service';
 
-const lLINSVillageTargetRoute: Routes = [
+const llinsVillageTargetRoute: Routes = [
   {
     path: '',
-    component: LLINSVillageTargetComponent,
+    component: LlinsVillageTargetComponent,
     data: {
       defaultSort: 'id,asc',
     },
@@ -18,32 +18,32 @@ const lLINSVillageTargetRoute: Routes = [
   },
   {
     path: ':id/view',
-    component: LLINSVillageTargetDetailComponent,
+    component: LlinsVillageTargetDetailComponent,
     resolve: {
-      lLINSVillageTarget: LLINSVillageTargetRoutingResolveService,
+      llinsVillageTarget: LlinsVillageTargetRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
-    component: LLINSVillageTargetUpdateComponent,
+    component: LlinsVillageTargetUpdateComponent,
     resolve: {
-      lLINSVillageTarget: LLINSVillageTargetRoutingResolveService,
+      llinsVillageTarget: LlinsVillageTargetRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
-    component: LLINSVillageTargetUpdateComponent,
+    component: LlinsVillageTargetUpdateComponent,
     resolve: {
-      lLINSVillageTarget: LLINSVillageTargetRoutingResolveService,
+      llinsVillageTarget: LlinsVillageTargetRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(lLINSVillageTargetRoute)],
+  imports: [RouterModule.forChild(llinsVillageTargetRoute)],
   exports: [RouterModule],
 })
-export class LLINSVillageTargetRoutingModule {}
+export class LlinsVillageTargetRoutingModule {}

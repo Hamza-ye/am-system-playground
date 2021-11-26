@@ -1,12 +1,12 @@
 import * as dayjs from 'dayjs';
-import { ILLINSFamilyReportHistory } from 'app/entities/llins-family-report-history/llins-family-report-history.model';
+import { ILlinsFamilyReportHistory } from 'app/entities/llins-family-report-history/llins-family-report-history.model';
 import { IUser } from 'app/entities/user/user.model';
 import { IWorkingDay } from 'app/entities/working-day/working-day.model';
-import { ILLINSFamilyTarget } from 'app/entities/llins-family-target/llins-family-target.model';
+import { ILlinsFamilyTarget } from 'app/entities/llins-family-target/llins-family-target.model';
 import { ITeam } from 'app/entities/team/team.model';
 import { FamilyType } from 'app/entities/enumerations/family-type.model';
 
-export interface ILLINSFamilyReport {
+export interface ILlinsFamilyReport {
   id?: number;
   uid?: string;
   created?: dayjs.Dayjs | null;
@@ -20,15 +20,15 @@ export interface ILLINSFamilyReport {
   quantityReceived?: number;
   familyType?: FamilyType;
   comment?: string | null;
-  llinsFamilyReportHistories?: ILLINSFamilyReportHistory[] | null;
+  llinsFamilyReportHistories?: ILlinsFamilyReportHistory[] | null;
   createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   dayReached?: IWorkingDay;
-  targetDetails?: ILLINSFamilyTarget | null;
+  targetDetails?: ILlinsFamilyTarget | null;
   executingTeam?: ITeam;
 }
 
-export class LLINSFamilyReport implements ILLINSFamilyReport {
+export class LlinsFamilyReport implements ILlinsFamilyReport {
   constructor(
     public id?: number,
     public uid?: string,
@@ -43,15 +43,15 @@ export class LLINSFamilyReport implements ILLINSFamilyReport {
     public quantityReceived?: number,
     public familyType?: FamilyType,
     public comment?: string | null,
-    public llinsFamilyReportHistories?: ILLINSFamilyReportHistory[] | null,
+    public llinsFamilyReportHistories?: ILlinsFamilyReportHistory[] | null,
     public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public dayReached?: IWorkingDay,
-    public targetDetails?: ILLINSFamilyTarget | null,
+    public targetDetails?: ILlinsFamilyTarget | null,
     public executingTeam?: ITeam
   ) {}
 }
 
-export function getLLINSFamilyReportIdentifier(lLINSFamilyReport: ILLINSFamilyReport): number | undefined {
-  return lLINSFamilyReport.id;
+export function getLlinsFamilyReportIdentifier(llinsFamilyReport: ILlinsFamilyReport): number | undefined {
+  return llinsFamilyReport.id;
 }

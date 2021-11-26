@@ -4,7 +4,7 @@ import { IDengueCasesReport } from 'app/entities/dengue-cases-report/dengue-case
 import { IFileResource } from 'app/entities/file-resource/file-resource.model';
 import { IUser } from 'app/entities/user/user.model';
 import { IMalariaUnit } from 'app/entities/malaria-unit/malaria-unit.model';
-import { ICHV } from 'app/entities/chv/chv.model';
+import { IChv } from 'app/entities/chv/chv.model';
 import { IDemographicData } from 'app/entities/demographic-data/demographic-data.model';
 import { IOrganisationUnitGroup } from 'app/entities/organisation-unit-group/organisation-unit-group.model';
 import { IPerson } from 'app/entities/person/person.model';
@@ -39,7 +39,7 @@ export interface IOrganisationUnit {
   createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   malariaUnit?: IMalariaUnit | null;
-  assignedChv?: ICHV | null;
+  assignedChv?: IChv | null;
   children?: IOrganisationUnit[] | null;
   demographicData?: IDemographicData[] | null;
   groups?: IOrganisationUnitGroup[] | null;
@@ -77,7 +77,7 @@ export class OrganisationUnit implements IOrganisationUnit {
     public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public malariaUnit?: IMalariaUnit | null,
-    public assignedChv?: ICHV | null,
+    public assignedChv?: IChv | null,
     public children?: IOrganisationUnit[] | null,
     public demographicData?: IDemographicData[] | null,
     public groups?: IOrganisationUnitGroup[] | null,

@@ -1,11 +1,11 @@
 <div>
-  <h2 id="page-heading" data-cy="LLINSFamilyReportHistoryHeading">
-    <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.home.title">LLINS Family Report Histories</span>
+  <h2 id="page-heading" data-cy="LlinsFamilyReportHistoryHeading">
+    <span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.home.title">Llins Family Report Histories</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.home.refreshListLabel">Refresh List</span>
+        <span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.home.refreshListLabel">Refresh List</span>
       </button>
 
       <button
@@ -15,8 +15,8 @@
         [routerLink]="['/llins-family-report-history/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.home.createLabel">
-          Create a new LLINS Family Report History
+        <span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.home.createLabel">
+          Create a new Llins Family Report History
         </span>
       </button>
     </div>
@@ -26,74 +26,74 @@
 
   <app-alert></app-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="lLINSFamilyReportHistories?.length === 0">
-    <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.home.notFound">No lLINSFamilyReportHistories found</span>
+  <div class="alert alert-warning" id="no-result" *ngIf="llinsFamilyReportHistories?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.home.notFound">No llinsFamilyReportHistories found</span>
   </div>
 
-  <div class="table-responsive" id="entities" *ngIf="lLINSFamilyReportHistories && lLINSFamilyReportHistories.length > 0">
+  <div class="table-responsive" id="entities" *ngIf="llinsFamilyReportHistories && llinsFamilyReportHistories.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
           <th scope="col"><span appTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.uid">Uid</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.created">Created</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.lastUpdated">Last Updated</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.documentNo">Document No</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.maleIndividuals">Male Individuals</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.documentNo">Document No</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.maleIndividuals">Male Individuals</span></th>
           <th scope="col">
-            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.femaleIndividuals">Female Individuals</span>
+            <span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.femaleIndividuals">Female Individuals</span>
           </th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.lessThan5Males">Less Than 5 Males</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.lessThan5Males">Less Than 5 Males</span></th>
           <th scope="col">
-            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.lessThan5Females">Less Than 5 Females</span>
+            <span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.lessThan5Females">Less Than 5 Females</span>
           </th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.pregnantWomen">Pregnant Women</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.quantityReceived">Quantity Received</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.familyType">Family Type</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.createdBy">Created By</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.lastUpdatedBy">Last Updated By</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.dayReached">Day Reached</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.pregnantWomen">Pregnant Women</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.quantityReceived">Quantity Received</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.familyType">Family Type</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.createdBy">Created By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.dayReached">Day Reached</span></th>
           <th scope="col">
-            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.llinsFamilyReport">Llins Family Report</span>
+            <span appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.llinsFamilyReport">Llins Family Report</span>
           </th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let lLINSFamilyReportHistory of lLINSFamilyReportHistories; trackBy: trackId" data-cy="entityTable">
+        <tr *ngFor="let llinsFamilyReportHistory of llinsFamilyReportHistories; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/llins-family-report-history', lLINSFamilyReportHistory.id, 'view']">{{ lLINSFamilyReportHistory.id }}</a>
+            <a [routerLink]="['/llins-family-report-history', llinsFamilyReportHistory.id, 'view']">{{ llinsFamilyReportHistory.id }}</a>
           </td>
-          <td>{{ lLINSFamilyReportHistory.uid }}</td>
-          <td>{{ lLINSFamilyReportHistory.created | formatMediumDatetime }}</td>
-          <td>{{ lLINSFamilyReportHistory.lastUpdated | formatMediumDatetime }}</td>
-          <td>{{ lLINSFamilyReportHistory.documentNo }}</td>
-          <td>{{ lLINSFamilyReportHistory.maleIndividuals }}</td>
-          <td>{{ lLINSFamilyReportHistory.femaleIndividuals }}</td>
-          <td>{{ lLINSFamilyReportHistory.lessThan5Males }}</td>
-          <td>{{ lLINSFamilyReportHistory.lessThan5Females }}</td>
-          <td>{{ lLINSFamilyReportHistory.pregnantWomen }}</td>
-          <td>{{ lLINSFamilyReportHistory.quantityReceived }}</td>
-          <td appTranslate="{{ 'amSystemPlaygroundApp.FamilyType.' + lLINSFamilyReportHistory.familyType }}">
-            {{ lLINSFamilyReportHistory.familyType }}
-          </td>
-          <td>
-            {{ lLINSFamilyReportHistory.createdBy?.login }}
+          <td>{{ llinsFamilyReportHistory.uid }}</td>
+          <td>{{ llinsFamilyReportHistory.created | formatMediumDatetime }}</td>
+          <td>{{ llinsFamilyReportHistory.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ llinsFamilyReportHistory.documentNo }}</td>
+          <td>{{ llinsFamilyReportHistory.maleIndividuals }}</td>
+          <td>{{ llinsFamilyReportHistory.femaleIndividuals }}</td>
+          <td>{{ llinsFamilyReportHistory.lessThan5Males }}</td>
+          <td>{{ llinsFamilyReportHistory.lessThan5Females }}</td>
+          <td>{{ llinsFamilyReportHistory.pregnantWomen }}</td>
+          <td>{{ llinsFamilyReportHistory.quantityReceived }}</td>
+          <td appTranslate="{{ 'amSystemPlaygroundApp.FamilyType.' + llinsFamilyReportHistory.familyType }}">
+            {{ llinsFamilyReportHistory.familyType }}
           </td>
           <td>
-            {{ lLINSFamilyReportHistory.lastUpdatedBy?.login }}
+            {{ llinsFamilyReportHistory.createdBy?.login }}
           </td>
           <td>
-            <div *ngIf="lLINSFamilyReportHistory.dayReached">
-              <a [routerLink]="['/working-day', lLINSFamilyReportHistory.dayReached?.id, 'view']">{{
-                lLINSFamilyReportHistory.dayReached?.dayLabel
+            {{ llinsFamilyReportHistory.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <div *ngIf="llinsFamilyReportHistory.dayReached">
+              <a [routerLink]="['/working-day', llinsFamilyReportHistory.dayReached?.id, 'view']">{{
+                llinsFamilyReportHistory.dayReached?.dayLabel
               }}</a>
             </div>
           </td>
           <td>
-            <div *ngIf="lLINSFamilyReportHistory.llinsFamilyReport">
-              <a [routerLink]="['/llins-family-report', lLINSFamilyReportHistory.llinsFamilyReport?.id, 'view']">{{
-                lLINSFamilyReportHistory.llinsFamilyReport?.id
+            <div *ngIf="llinsFamilyReportHistory.llinsFamilyReport">
+              <a [routerLink]="['/llins-family-report', llinsFamilyReportHistory.llinsFamilyReport?.id, 'view']">{{
+                llinsFamilyReportHistory.llinsFamilyReport?.id
               }}</a>
             </div>
           </td>
@@ -101,7 +101,7 @@
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/llins-family-report-history', lLINSFamilyReportHistory.id, 'view']"
+                [routerLink]="['/llins-family-report-history', llinsFamilyReportHistory.id, 'view']"
                 class="btn btn-info btn-sm"
                 data-cy="entityDetailsButton"
               >
@@ -111,7 +111,7 @@
 
               <button
                 type="submit"
-                [routerLink]="['/llins-family-report-history', lLINSFamilyReportHistory.id, 'edit']"
+                [routerLink]="['/llins-family-report-history', llinsFamilyReportHistory.id, 'edit']"
                 class="btn btn-primary btn-sm"
                 data-cy="entityEditButton"
               >
@@ -119,7 +119,7 @@
                 <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
               </button>
 
-              <button type="submit" (click)="delete(lLINSFamilyReportHistory)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button type="submit" (click)="delete(llinsFamilyReportHistory)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
               </button>

@@ -7,37 +7,37 @@ import * as dayjs from 'dayjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { ILLINSFamilyReport, getLLINSFamilyReportIdentifier } from '../llins-family-report.model';
+import { ILlinsFamilyReport, getLlinsFamilyReportIdentifier } from '../llins-family-report.model';
 
-export type EntityResponseType = HttpResponse<ILLINSFamilyReport>;
-export type EntityArrayResponseType = HttpResponse<ILLINSFamilyReport[]>;
+export type EntityResponseType = HttpResponse<ILlinsFamilyReport>;
+export type EntityArrayResponseType = HttpResponse<ILlinsFamilyReport[]>;
 
 @Injectable({ providedIn: 'root' })
-export class LLINSFamilyReportService {
+export class LlinsFamilyReportService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/llins-family-reports');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  create(lLINSFamilyReport: ILLINSFamilyReport): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(lLINSFamilyReport);
+  create(llinsFamilyReport: ILlinsFamilyReport): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(llinsFamilyReport);
     return this.http
-      .post<ILLINSFamilyReport>(this.resourceUrl, copy, { observe: 'response' })
+      .post<ILlinsFamilyReport>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  update(lLINSFamilyReport: ILLINSFamilyReport): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(lLINSFamilyReport);
+  update(llinsFamilyReport: ILlinsFamilyReport): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(llinsFamilyReport);
     return this.http
-      .put<ILLINSFamilyReport>(`${this.resourceUrl}/${getLLINSFamilyReportIdentifier(lLINSFamilyReport) as number}`, copy, {
+      .put<ILlinsFamilyReport>(`${this.resourceUrl}/${getLlinsFamilyReportIdentifier(llinsFamilyReport) as number}`, copy, {
         observe: 'response',
       })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  partialUpdate(lLINSFamilyReport: ILLINSFamilyReport): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(lLINSFamilyReport);
+  partialUpdate(llinsFamilyReport: ILlinsFamilyReport): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(llinsFamilyReport);
     return this.http
-      .patch<ILLINSFamilyReport>(`${this.resourceUrl}/${getLLINSFamilyReportIdentifier(lLINSFamilyReport) as number}`, copy, {
+      .patch<ILlinsFamilyReport>(`${this.resourceUrl}/${getLlinsFamilyReportIdentifier(llinsFamilyReport) as number}`, copy, {
         observe: 'response',
       })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
@@ -45,14 +45,14 @@ export class LLINSFamilyReportService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<ILLINSFamilyReport>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .get<ILlinsFamilyReport>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
-      .get<ILLINSFamilyReport[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .get<ILlinsFamilyReport[]>(this.resourceUrl, { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
@@ -60,32 +60,32 @@ export class LLINSFamilyReportService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  addLLINSFamilyReportToCollectionIfMissing(
-    lLINSFamilyReportCollection: ILLINSFamilyReport[],
-    ...lLINSFamilyReportsToCheck: (ILLINSFamilyReport | null | undefined)[]
-  ): ILLINSFamilyReport[] {
-    const lLINSFamilyReports: ILLINSFamilyReport[] = lLINSFamilyReportsToCheck.filter(isPresent);
-    if (lLINSFamilyReports.length > 0) {
-      const lLINSFamilyReportCollectionIdentifiers = lLINSFamilyReportCollection.map(
-        lLINSFamilyReportItem => getLLINSFamilyReportIdentifier(lLINSFamilyReportItem)!
+  addLlinsFamilyReportToCollectionIfMissing(
+    llinsFamilyReportCollection: ILlinsFamilyReport[],
+    ...llinsFamilyReportsToCheck: (ILlinsFamilyReport | null | undefined)[]
+  ): ILlinsFamilyReport[] {
+    const llinsFamilyReports: ILlinsFamilyReport[] = llinsFamilyReportsToCheck.filter(isPresent);
+    if (llinsFamilyReports.length > 0) {
+      const llinsFamilyReportCollectionIdentifiers = llinsFamilyReportCollection.map(
+        llinsFamilyReportItem => getLlinsFamilyReportIdentifier(llinsFamilyReportItem)!
       );
-      const lLINSFamilyReportsToAdd = lLINSFamilyReports.filter(lLINSFamilyReportItem => {
-        const lLINSFamilyReportIdentifier = getLLINSFamilyReportIdentifier(lLINSFamilyReportItem);
-        if (lLINSFamilyReportIdentifier == null || lLINSFamilyReportCollectionIdentifiers.includes(lLINSFamilyReportIdentifier)) {
+      const llinsFamilyReportsToAdd = llinsFamilyReports.filter(llinsFamilyReportItem => {
+        const llinsFamilyReportIdentifier = getLlinsFamilyReportIdentifier(llinsFamilyReportItem);
+        if (llinsFamilyReportIdentifier == null || llinsFamilyReportCollectionIdentifiers.includes(llinsFamilyReportIdentifier)) {
           return false;
         }
-        lLINSFamilyReportCollectionIdentifiers.push(lLINSFamilyReportIdentifier);
+        llinsFamilyReportCollectionIdentifiers.push(llinsFamilyReportIdentifier);
         return true;
       });
-      return [...lLINSFamilyReportsToAdd, ...lLINSFamilyReportCollection];
+      return [...llinsFamilyReportsToAdd, ...llinsFamilyReportCollection];
     }
-    return lLINSFamilyReportCollection;
+    return llinsFamilyReportCollection;
   }
 
-  protected convertDateFromClient(lLINSFamilyReport: ILLINSFamilyReport): ILLINSFamilyReport {
-    return Object.assign({}, lLINSFamilyReport, {
-      created: lLINSFamilyReport.created?.isValid() ? lLINSFamilyReport.created.toJSON() : undefined,
-      lastUpdated: lLINSFamilyReport.lastUpdated?.isValid() ? lLINSFamilyReport.lastUpdated.toJSON() : undefined,
+  protected convertDateFromClient(llinsFamilyReport: ILlinsFamilyReport): ILlinsFamilyReport {
+    return Object.assign({}, llinsFamilyReport, {
+      created: llinsFamilyReport.created?.isValid() ? llinsFamilyReport.created.toJSON() : undefined,
+      lastUpdated: llinsFamilyReport.lastUpdated?.isValid() ? llinsFamilyReport.lastUpdated.toJSON() : undefined,
     });
   }
 
@@ -99,9 +99,9 @@ export class LLINSFamilyReportService {
 
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
-      res.body.forEach((lLINSFamilyReport: ILLINSFamilyReport) => {
-        lLINSFamilyReport.created = lLINSFamilyReport.created ? dayjs(lLINSFamilyReport.created) : undefined;
-        lLINSFamilyReport.lastUpdated = lLINSFamilyReport.lastUpdated ? dayjs(lLINSFamilyReport.lastUpdated) : undefined;
+      res.body.forEach((llinsFamilyReport: ILlinsFamilyReport) => {
+        llinsFamilyReport.created = llinsFamilyReport.created ? dayjs(llinsFamilyReport.created) : undefined;
+        llinsFamilyReport.lastUpdated = llinsFamilyReport.lastUpdated ? dayjs(llinsFamilyReport.lastUpdated) : undefined;
       });
     }
     return res;

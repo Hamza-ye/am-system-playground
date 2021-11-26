@@ -1,11 +1,11 @@
 <div>
-  <h2 id="page-heading" data-cy="LLINSFamilyTargetHeading">
-    <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.home.title">LLINS Family Targets</span>
+  <h2 id="page-heading" data-cy="LlinsFamilyTargetHeading">
+    <span appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.home.title">Llins Family Targets</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.home.refreshListLabel">Refresh List</span>
+        <span appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.home.refreshListLabel">Refresh List</span>
       </button>
 
       <button
@@ -15,7 +15,7 @@
         [routerLink]="['/llins-family-target/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.home.createLabel"> Create a new LLINS Family Target </span>
+        <span appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.home.createLabel"> Create a new Llins Family Target </span>
       </button>
     </div>
   </h2>
@@ -24,105 +24,105 @@
 
   <app-alert></app-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="lLINSFamilyTargets?.length === 0">
-    <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.home.notFound">No lLINSFamilyTargets found</span>
+  <div class="alert alert-warning" id="no-result" *ngIf="llinsFamilyTargets?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.home.notFound">No llinsFamilyTargets found</span>
   </div>
 
-  <div class="table-responsive" id="entities" *ngIf="lLINSFamilyTargets && lLINSFamilyTargets.length > 0">
+  <div class="table-responsive" id="entities" *ngIf="llinsFamilyTargets && llinsFamilyTargets.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
           <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" appSortBy="uid">
-            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.uid">Uid</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.uid">Uid</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="created">
-            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.created">Created</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.created">Created</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="lastUpdated">
-            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.lastUpdated">Last Updated</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.lastUpdated">Last Updated</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="residentsIndividualsPlanned">
-            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.residentsIndividualsPlanned">Residents Individuals Planned</span>
+            <span appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.residentsIndividualsPlanned">Residents Individuals Planned</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="idpsIndividualsPlanned">
-            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.idpsIndividualsPlanned">Idps Individuals Planned</span>
+            <span appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.idpsIndividualsPlanned">Idps Individuals Planned</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="quantityPlanned">
-            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.quantityPlanned">Quantity Planned</span>
+            <span appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.quantityPlanned">Quantity Planned</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="familyType">
-            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.familyType">Family Type</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.familyType">Family Type</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="statusOfFamilyTarget">
-            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.statusOfFamilyTarget">Status Of Family Target</span>
+            <span appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.statusOfFamilyTarget">Status Of Family Target</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="createdBy.login">
-            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="lastUpdatedBy.login">
-            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.lastUpdatedBy">Last Updated By</span>
+            <span appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.lastUpdatedBy">Last Updated By</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="dayPlanned.dayLabel">
-            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.dayPlanned">Day Planned</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.dayPlanned">Day Planned</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="family.familyNo">
-            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.family">Family</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.family">Family</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="teamAssigned.name">
-            <span appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.teamAssigned">Team Assigned</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.teamAssigned">Team Assigned</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let lLINSFamilyTarget of lLINSFamilyTargets; trackBy: trackId" data-cy="entityTable">
+        <tr *ngFor="let llinsFamilyTarget of llinsFamilyTargets; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/llins-family-target', lLINSFamilyTarget.id, 'view']">{{ lLINSFamilyTarget.id }}</a>
+            <a [routerLink]="['/llins-family-target', llinsFamilyTarget.id, 'view']">{{ llinsFamilyTarget.id }}</a>
           </td>
-          <td>{{ lLINSFamilyTarget.uid }}</td>
-          <td>{{ lLINSFamilyTarget.created | formatMediumDatetime }}</td>
-          <td>{{ lLINSFamilyTarget.lastUpdated | formatMediumDatetime }}</td>
-          <td>{{ lLINSFamilyTarget.residentsIndividualsPlanned }}</td>
-          <td>{{ lLINSFamilyTarget.idpsIndividualsPlanned }}</td>
-          <td>{{ lLINSFamilyTarget.quantityPlanned }}</td>
-          <td appTranslate="{{ 'amSystemPlaygroundApp.FamilyType.' + lLINSFamilyTarget.familyType }}">
-            {{ lLINSFamilyTarget.familyType }}
+          <td>{{ llinsFamilyTarget.uid }}</td>
+          <td>{{ llinsFamilyTarget.created | formatMediumDatetime }}</td>
+          <td>{{ llinsFamilyTarget.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ llinsFamilyTarget.residentsIndividualsPlanned }}</td>
+          <td>{{ llinsFamilyTarget.idpsIndividualsPlanned }}</td>
+          <td>{{ llinsFamilyTarget.quantityPlanned }}</td>
+          <td appTranslate="{{ 'amSystemPlaygroundApp.FamilyType.' + llinsFamilyTarget.familyType }}">
+            {{ llinsFamilyTarget.familyType }}
           </td>
-          <td appTranslate="{{ 'amSystemPlaygroundApp.StatusOfFamilyTarget.' + lLINSFamilyTarget.statusOfFamilyTarget }}">
-            {{ lLINSFamilyTarget.statusOfFamilyTarget }}
-          </td>
-          <td>
-            {{ lLINSFamilyTarget.createdBy?.login }}
+          <td appTranslate="{{ 'amSystemPlaygroundApp.StatusOfFamilyTarget.' + llinsFamilyTarget.statusOfFamilyTarget }}">
+            {{ llinsFamilyTarget.statusOfFamilyTarget }}
           </td>
           <td>
-            {{ lLINSFamilyTarget.lastUpdatedBy?.login }}
+            {{ llinsFamilyTarget.createdBy?.login }}
           </td>
           <td>
-            <div *ngIf="lLINSFamilyTarget.dayPlanned">
-              <a [routerLink]="['/working-day', lLINSFamilyTarget.dayPlanned?.id, 'view']">{{ lLINSFamilyTarget.dayPlanned?.dayLabel }}</a>
+            {{ llinsFamilyTarget.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <div *ngIf="llinsFamilyTarget.dayPlanned">
+              <a [routerLink]="['/working-day', llinsFamilyTarget.dayPlanned?.id, 'view']">{{ llinsFamilyTarget.dayPlanned?.dayLabel }}</a>
             </div>
           </td>
           <td>
-            <div *ngIf="lLINSFamilyTarget.family">
-              <a [routerLink]="['/family', lLINSFamilyTarget.family?.id, 'view']">{{ lLINSFamilyTarget.family?.familyNo }}</a>
+            <div *ngIf="llinsFamilyTarget.family">
+              <a [routerLink]="['/family', llinsFamilyTarget.family?.id, 'view']">{{ llinsFamilyTarget.family?.familyNo }}</a>
             </div>
           </td>
           <td>
-            <div *ngIf="lLINSFamilyTarget.teamAssigned">
-              <a [routerLink]="['/team', lLINSFamilyTarget.teamAssigned?.id, 'view']">{{ lLINSFamilyTarget.teamAssigned?.name }}</a>
+            <div *ngIf="llinsFamilyTarget.teamAssigned">
+              <a [routerLink]="['/team', llinsFamilyTarget.teamAssigned?.id, 'view']">{{ llinsFamilyTarget.teamAssigned?.name }}</a>
             </div>
           </td>
           <td class="text-right">
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/llins-family-target', lLINSFamilyTarget.id, 'view']"
+                [routerLink]="['/llins-family-target', llinsFamilyTarget.id, 'view']"
                 class="btn btn-info btn-sm"
                 data-cy="entityDetailsButton"
               >
@@ -132,7 +132,7 @@
 
               <button
                 type="submit"
-                [routerLink]="['/llins-family-target', lLINSFamilyTarget.id, 'edit']"
+                [routerLink]="['/llins-family-target', llinsFamilyTarget.id, 'edit']"
                 class="btn btn-primary btn-sm"
                 data-cy="entityEditButton"
               >
@@ -140,7 +140,7 @@
                 <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
               </button>
 
-              <button type="submit" (click)="delete(lLINSFamilyTarget)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button type="submit" (click)="delete(llinsFamilyTarget)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
               </button>
@@ -151,7 +151,7 @@
     </table>
   </div>
 
-  <div *ngIf="lLINSFamilyTargets && lLINSFamilyTargets.length > 0">
+  <div *ngIf="llinsFamilyTargets && llinsFamilyTargets.length > 0">
     <div class="row justify-content-center">
       <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
     </div>

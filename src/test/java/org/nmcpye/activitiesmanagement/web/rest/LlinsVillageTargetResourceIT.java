@@ -1,23 +1,12 @@
 package org.nmcpye.activitiesmanagement.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
-import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.nmcpye.activitiesmanagement.IntegrationTest;
 import org.nmcpye.activitiesmanagement.domain.LlinsVillageTarget;
-import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.Team;
 import org.nmcpye.activitiesmanagement.domain.WorkingDay;
+import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.repository.LlinsVillageTargetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,6 +14,18 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link LlinsVillageTargetResource} REST controller.
@@ -68,24 +69,24 @@ class LlinsVillageTargetResourceIT {
     private static AtomicLong count = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
-    private LlinsVillageTargetRepository lLINSVillageTargetRepository;
+    private LlinsVillageTargetRepository llinsVillageTargetRepository;
 
     @Autowired
     private EntityManager em;
 
     @Autowired
-    private MockMvc restLLINSVillageTargetMockMvc;
+    private MockMvc restLlinsVillageTargetMockMvc;
 
-    private LlinsVillageTarget lLINSVillageTarget;
+    private LlinsVillageTarget llinsVillageTarget;
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static LlinsVillageTarget createEntity(EntityManager em) {
-        LlinsVillageTarget lLINSVillageTarget = new LlinsVillageTarget()
+        LlinsVillageTarget llinsVillageTarget = new LlinsVillageTarget()
             .uid(DEFAULT_UID)
             .created(DEFAULT_CREATED)
             .lastUpdated(DEFAULT_LAST_UPDATED)
@@ -104,7 +105,7 @@ class LlinsVillageTargetResourceIT {
         } else {
             organisationUnit = TestUtil.findAll(em, OrganisationUnit.class).get(0);
         }
-        lLINSVillageTarget.setOrganisationUnit(organisationUnit);
+        llinsVillageTarget.setOrganisationUnit(organisationUnit);
         // Add required entity
         WorkingDay workingDay;
         if (TestUtil.findAll(em, WorkingDay.class).isEmpty()) {
@@ -114,7 +115,7 @@ class LlinsVillageTargetResourceIT {
         } else {
             workingDay = TestUtil.findAll(em, WorkingDay.class).get(0);
         }
-        lLINSVillageTarget.setDayPlanned(workingDay);
+        llinsVillageTarget.setDayPlanned(workingDay);
         // Add required entity
         Team team;
         if (TestUtil.findAll(em, Team.class).isEmpty()) {
@@ -124,18 +125,18 @@ class LlinsVillageTargetResourceIT {
         } else {
             team = TestUtil.findAll(em, Team.class).get(0);
         }
-        lLINSVillageTarget.setTeamAssigned(team);
-        return lLINSVillageTarget;
+        llinsVillageTarget.setTeamAssigned(team);
+        return llinsVillageTarget;
     }
 
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static LlinsVillageTarget createUpdatedEntity(EntityManager em) {
-        LlinsVillageTarget lLINSVillageTarget = new LlinsVillageTarget()
+        LlinsVillageTarget llinsVillageTarget = new LlinsVillageTarget()
             .uid(UPDATED_UID)
             .created(UPDATED_CREATED)
             .lastUpdated(UPDATED_LAST_UPDATED)
@@ -154,7 +155,7 @@ class LlinsVillageTargetResourceIT {
         } else {
             organisationUnit = TestUtil.findAll(em, OrganisationUnit.class).get(0);
         }
-        lLINSVillageTarget.setOrganisationUnit(organisationUnit);
+        llinsVillageTarget.setOrganisationUnit(organisationUnit);
         // Add required entity
         WorkingDay workingDay;
         if (TestUtil.findAll(em, WorkingDay.class).isEmpty()) {
@@ -164,7 +165,7 @@ class LlinsVillageTargetResourceIT {
         } else {
             workingDay = TestUtil.findAll(em, WorkingDay.class).get(0);
         }
-        lLINSVillageTarget.setDayPlanned(workingDay);
+        llinsVillageTarget.setDayPlanned(workingDay);
         // Add required entity
         Team team;
         if (TestUtil.findAll(em, Team.class).isEmpty()) {
@@ -174,30 +175,30 @@ class LlinsVillageTargetResourceIT {
         } else {
             team = TestUtil.findAll(em, Team.class).get(0);
         }
-        lLINSVillageTarget.setTeamAssigned(team);
-        return lLINSVillageTarget;
+        llinsVillageTarget.setTeamAssigned(team);
+        return llinsVillageTarget;
     }
 
     @BeforeEach
     public void initTest() {
-        lLINSVillageTarget = createEntity(em);
+        llinsVillageTarget = createEntity(em);
     }
 
     @Test
     @Transactional
-    void createLLINSVillageTarget() throws Exception {
-        int databaseSizeBeforeCreate = lLINSVillageTargetRepository.findAll().size();
+    void createLlinsVillageTarget() throws Exception {
+        int databaseSizeBeforeCreate = llinsVillageTargetRepository.findAll().size();
         // Create the LlinsVillageTarget
-        restLLINSVillageTargetMockMvc
+        restLlinsVillageTargetMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(lLINSVillageTarget))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(llinsVillageTarget))
             )
             .andExpect(status().isCreated());
 
         // Validate the LlinsVillageTarget in the database
-        List<LlinsVillageTarget> lLINSVillageTargetList = lLINSVillageTargetRepository.findAll();
-        assertThat(lLINSVillageTargetList).hasSize(databaseSizeBeforeCreate + 1);
-        LlinsVillageTarget testLlinsVillageTarget = lLINSVillageTargetList.get(lLINSVillageTargetList.size() - 1);
+        List<LlinsVillageTarget> llinsVillageTargetList = llinsVillageTargetRepository.findAll();
+        assertThat(llinsVillageTargetList).hasSize(databaseSizeBeforeCreate + 1);
+        LlinsVillageTarget testLlinsVillageTarget = llinsVillageTargetList.get(llinsVillageTargetList.size() - 1);
         assertThat(testLlinsVillageTarget.getUid()).isEqualTo(DEFAULT_UID);
         assertThat(testLlinsVillageTarget.getCreated()).isEqualTo(DEFAULT_CREATED);
         assertThat(testLlinsVillageTarget.getLastUpdated()).isEqualTo(DEFAULT_LAST_UPDATED);
@@ -211,150 +212,150 @@ class LlinsVillageTargetResourceIT {
 
     @Test
     @Transactional
-    void createLLINSVillageTargetWithExistingId() throws Exception {
+    void createLlinsVillageTargetWithExistingId() throws Exception {
         // Create the LlinsVillageTarget with an existing ID
-        lLINSVillageTarget.setId(1L);
+        llinsVillageTarget.setId(1L);
 
-        int databaseSizeBeforeCreate = lLINSVillageTargetRepository.findAll().size();
+        int databaseSizeBeforeCreate = llinsVillageTargetRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restLLINSVillageTargetMockMvc
+        restLlinsVillageTargetMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(lLINSVillageTarget))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(llinsVillageTarget))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsVillageTarget in the database
-        List<LlinsVillageTarget> lLINSVillageTargetList = lLINSVillageTargetRepository.findAll();
-        assertThat(lLINSVillageTargetList).hasSize(databaseSizeBeforeCreate);
+        List<LlinsVillageTarget> llinsVillageTargetList = llinsVillageTargetRepository.findAll();
+        assertThat(llinsVillageTargetList).hasSize(databaseSizeBeforeCreate);
     }
 
     @Test
     @Transactional
     void checkUidIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSVillageTargetRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsVillageTargetRepository.findAll().size();
         // set the field null
-        lLINSVillageTarget.setUid(null);
+        llinsVillageTarget.setUid(null);
 
         // Create the LlinsVillageTarget, which fails.
 
-        restLLINSVillageTargetMockMvc
+        restLlinsVillageTargetMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(lLINSVillageTarget))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(llinsVillageTarget))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsVillageTarget> lLINSVillageTargetList = lLINSVillageTargetRepository.findAll();
-        assertThat(lLINSVillageTargetList).hasSize(databaseSizeBeforeTest);
+        List<LlinsVillageTarget> llinsVillageTargetList = llinsVillageTargetRepository.findAll();
+        assertThat(llinsVillageTargetList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
     void checkResidentsIndividualsIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSVillageTargetRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsVillageTargetRepository.findAll().size();
         // set the field null
-        lLINSVillageTarget.setResidentsIndividuals(null);
+        llinsVillageTarget.setResidentsIndividuals(null);
 
         // Create the LlinsVillageTarget, which fails.
 
-        restLLINSVillageTargetMockMvc
+        restLlinsVillageTargetMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(lLINSVillageTarget))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(llinsVillageTarget))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsVillageTarget> lLINSVillageTargetList = lLINSVillageTargetRepository.findAll();
-        assertThat(lLINSVillageTargetList).hasSize(databaseSizeBeforeTest);
+        List<LlinsVillageTarget> llinsVillageTargetList = llinsVillageTargetRepository.findAll();
+        assertThat(llinsVillageTargetList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
     void checkIdpsIndividualsIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSVillageTargetRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsVillageTargetRepository.findAll().size();
         // set the field null
-        lLINSVillageTarget.setIdpsIndividuals(null);
+        llinsVillageTarget.setIdpsIndividuals(null);
 
         // Create the LlinsVillageTarget, which fails.
 
-        restLLINSVillageTargetMockMvc
+        restLlinsVillageTargetMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(lLINSVillageTarget))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(llinsVillageTarget))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsVillageTarget> lLINSVillageTargetList = lLINSVillageTargetRepository.findAll();
-        assertThat(lLINSVillageTargetList).hasSize(databaseSizeBeforeTest);
+        List<LlinsVillageTarget> llinsVillageTargetList = llinsVillageTargetRepository.findAll();
+        assertThat(llinsVillageTargetList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
     void checkResidentsFamiliesIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSVillageTargetRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsVillageTargetRepository.findAll().size();
         // set the field null
-        lLINSVillageTarget.setResidentsFamilies(null);
+        llinsVillageTarget.setResidentsFamilies(null);
 
         // Create the LlinsVillageTarget, which fails.
 
-        restLLINSVillageTargetMockMvc
+        restLlinsVillageTargetMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(lLINSVillageTarget))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(llinsVillageTarget))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsVillageTarget> lLINSVillageTargetList = lLINSVillageTargetRepository.findAll();
-        assertThat(lLINSVillageTargetList).hasSize(databaseSizeBeforeTest);
+        List<LlinsVillageTarget> llinsVillageTargetList = llinsVillageTargetRepository.findAll();
+        assertThat(llinsVillageTargetList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
     void checkIdpsFamiliesIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSVillageTargetRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsVillageTargetRepository.findAll().size();
         // set the field null
-        lLINSVillageTarget.setIdpsFamilies(null);
+        llinsVillageTarget.setIdpsFamilies(null);
 
         // Create the LlinsVillageTarget, which fails.
 
-        restLLINSVillageTargetMockMvc
+        restLlinsVillageTargetMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(lLINSVillageTarget))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(llinsVillageTarget))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsVillageTarget> lLINSVillageTargetList = lLINSVillageTargetRepository.findAll();
-        assertThat(lLINSVillageTargetList).hasSize(databaseSizeBeforeTest);
+        List<LlinsVillageTarget> llinsVillageTargetList = llinsVillageTargetRepository.findAll();
+        assertThat(llinsVillageTargetList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
     void checkQuantityIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSVillageTargetRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsVillageTargetRepository.findAll().size();
         // set the field null
-        lLINSVillageTarget.setQuantity(null);
+        llinsVillageTarget.setQuantity(null);
 
         // Create the LlinsVillageTarget, which fails.
 
-        restLLINSVillageTargetMockMvc
+        restLlinsVillageTargetMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(lLINSVillageTarget))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(llinsVillageTarget))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsVillageTarget> lLINSVillageTargetList = lLINSVillageTargetRepository.findAll();
-        assertThat(lLINSVillageTargetList).hasSize(databaseSizeBeforeTest);
+        List<LlinsVillageTarget> llinsVillageTargetList = llinsVillageTargetRepository.findAll();
+        assertThat(llinsVillageTargetList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
-    void getAllLLINSVillageTargets() throws Exception {
+    void getAllLlinsVillageTargets() throws Exception {
         // Initialize the database
-        lLINSVillageTargetRepository.saveAndFlush(lLINSVillageTarget);
+        llinsVillageTargetRepository.saveAndFlush(llinsVillageTarget);
 
-        // Get all the lLINSVillageTargetList
-        restLLINSVillageTargetMockMvc
+        // Get all the llinsVillageTargetList
+        restLlinsVillageTargetMockMvc
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(lLINSVillageTarget.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(llinsVillageTarget.getId().intValue())))
             .andExpect(jsonPath("$.[*].uid").value(hasItem(DEFAULT_UID)))
             .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
             .andExpect(jsonPath("$.[*].lastUpdated").value(hasItem(DEFAULT_LAST_UPDATED.toString())))
@@ -368,16 +369,16 @@ class LlinsVillageTargetResourceIT {
 
     @Test
     @Transactional
-    void getLLINSVillageTarget() throws Exception {
+    void getLlinsVillageTarget() throws Exception {
         // Initialize the database
-        lLINSVillageTargetRepository.saveAndFlush(lLINSVillageTarget);
+        llinsVillageTargetRepository.saveAndFlush(llinsVillageTarget);
 
-        // Get the lLINSVillageTarget
-        restLLINSVillageTargetMockMvc
-            .perform(get(ENTITY_API_URL_ID, lLINSVillageTarget.getId()))
+        // Get the llinsVillageTarget
+        restLlinsVillageTargetMockMvc
+            .perform(get(ENTITY_API_URL_ID, llinsVillageTarget.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(lLINSVillageTarget.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(llinsVillageTarget.getId().intValue()))
             .andExpect(jsonPath("$.uid").value(DEFAULT_UID))
             .andExpect(jsonPath("$.created").value(DEFAULT_CREATED.toString()))
             .andExpect(jsonPath("$.lastUpdated").value(DEFAULT_LAST_UPDATED.toString()))
@@ -391,21 +392,21 @@ class LlinsVillageTargetResourceIT {
 
     @Test
     @Transactional
-    void getNonExistingLLINSVillageTarget() throws Exception {
-        // Get the lLINSVillageTarget
-        restLLINSVillageTargetMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
+    void getNonExistingLlinsVillageTarget() throws Exception {
+        // Get the llinsVillageTarget
+        restLlinsVillageTargetMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
     @Test
     @Transactional
-    void putNewLLINSVillageTarget() throws Exception {
+    void putNewLlinsVillageTarget() throws Exception {
         // Initialize the database
-        lLINSVillageTargetRepository.saveAndFlush(lLINSVillageTarget);
+        llinsVillageTargetRepository.saveAndFlush(llinsVillageTarget);
 
-        int databaseSizeBeforeUpdate = lLINSVillageTargetRepository.findAll().size();
+        int databaseSizeBeforeUpdate = llinsVillageTargetRepository.findAll().size();
 
-        // Update the lLINSVillageTarget
-        LlinsVillageTarget updatedLlinsVillageTarget = lLINSVillageTargetRepository.findById(lLINSVillageTarget.getId()).get();
+        // Update the llinsVillageTarget
+        LlinsVillageTarget updatedLlinsVillageTarget = llinsVillageTargetRepository.findById(llinsVillageTarget.getId()).get();
         // Disconnect from session so that the updates on updatedLlinsVillageTarget are not directly saved in db
         em.detach(updatedLlinsVillageTarget);
         updatedLlinsVillageTarget
@@ -419,7 +420,7 @@ class LlinsVillageTargetResourceIT {
             .noOfDaysNeeded(UPDATED_NO_OF_DAYS_NEEDED)
             .quantity(UPDATED_QUANTITY);
 
-        restLLINSVillageTargetMockMvc
+        restLlinsVillageTargetMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, updatedLlinsVillageTarget.getId())
                     .contentType(MediaType.APPLICATION_JSON)
@@ -428,9 +429,9 @@ class LlinsVillageTargetResourceIT {
             .andExpect(status().isOk());
 
         // Validate the LlinsVillageTarget in the database
-        List<LlinsVillageTarget> lLINSVillageTargetList = lLINSVillageTargetRepository.findAll();
-        assertThat(lLINSVillageTargetList).hasSize(databaseSizeBeforeUpdate);
-        LlinsVillageTarget testLlinsVillageTarget = lLINSVillageTargetList.get(lLINSVillageTargetList.size() - 1);
+        List<LlinsVillageTarget> llinsVillageTargetList = llinsVillageTargetRepository.findAll();
+        assertThat(llinsVillageTargetList).hasSize(databaseSizeBeforeUpdate);
+        LlinsVillageTarget testLlinsVillageTarget = llinsVillageTargetList.get(llinsVillageTargetList.size() - 1);
         assertThat(testLlinsVillageTarget.getUid()).isEqualTo(UPDATED_UID);
         assertThat(testLlinsVillageTarget.getCreated()).isEqualTo(UPDATED_CREATED);
         assertThat(testLlinsVillageTarget.getLastUpdated()).isEqualTo(UPDATED_LAST_UPDATED);
@@ -444,81 +445,82 @@ class LlinsVillageTargetResourceIT {
 
     @Test
     @Transactional
-    void putNonExistingLLINSVillageTarget() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSVillageTargetRepository.findAll().size();
-        lLINSVillageTarget.setId(count.incrementAndGet());
+    void putNonExistingLlinsVillageTarget() throws Exception {
+        int databaseSizeBeforeUpdate = llinsVillageTargetRepository.findAll().size();
+        llinsVillageTarget.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restLLINSVillageTargetMockMvc
+        restLlinsVillageTargetMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, lLINSVillageTarget.getId())
+                put(ENTITY_API_URL_ID, llinsVillageTarget.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSVillageTarget))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsVillageTarget))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsVillageTarget in the database
-        List<LlinsVillageTarget> lLINSVillageTargetList = lLINSVillageTargetRepository.findAll();
-        assertThat(lLINSVillageTargetList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsVillageTarget> llinsVillageTargetList = llinsVillageTargetRepository.findAll();
+        assertThat(llinsVillageTargetList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void putWithIdMismatchLLINSVillageTarget() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSVillageTargetRepository.findAll().size();
-        lLINSVillageTarget.setId(count.incrementAndGet());
+    void putWithIdMismatchLlinsVillageTarget() throws Exception {
+        int databaseSizeBeforeUpdate = llinsVillageTargetRepository.findAll().size();
+        llinsVillageTarget.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restLLINSVillageTargetMockMvc
+        restLlinsVillageTargetMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSVillageTarget))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsVillageTarget))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsVillageTarget in the database
-        List<LlinsVillageTarget> lLINSVillageTargetList = lLINSVillageTargetRepository.findAll();
-        assertThat(lLINSVillageTargetList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsVillageTarget> llinsVillageTargetList = llinsVillageTargetRepository.findAll();
+        assertThat(llinsVillageTargetList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void putWithMissingIdPathParamLLINSVillageTarget() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSVillageTargetRepository.findAll().size();
-        lLINSVillageTarget.setId(count.incrementAndGet());
+    void putWithMissingIdPathParamLlinsVillageTarget() throws Exception {
+        int databaseSizeBeforeUpdate = llinsVillageTargetRepository.findAll().size();
+        llinsVillageTarget.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restLLINSVillageTargetMockMvc
+        restLlinsVillageTargetMockMvc
             .perform(
-                put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(lLINSVillageTarget))
+                put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(llinsVillageTarget))
             )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the LlinsVillageTarget in the database
-        List<LlinsVillageTarget> lLINSVillageTargetList = lLINSVillageTargetRepository.findAll();
-        assertThat(lLINSVillageTargetList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsVillageTarget> llinsVillageTargetList = llinsVillageTargetRepository.findAll();
+        assertThat(llinsVillageTargetList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void partialUpdateLLINSVillageTargetWithPatch() throws Exception {
+    void partialUpdateLlinsVillageTargetWithPatch() throws Exception {
         // Initialize the database
-        lLINSVillageTargetRepository.saveAndFlush(lLINSVillageTarget);
+        llinsVillageTargetRepository.saveAndFlush(llinsVillageTarget);
 
-        int databaseSizeBeforeUpdate = lLINSVillageTargetRepository.findAll().size();
+        int databaseSizeBeforeUpdate = llinsVillageTargetRepository.findAll().size();
 
-        // Update the lLINSVillageTarget using partial update
+        // Update the llinsVillageTarget using partial update
         LlinsVillageTarget partialUpdatedLlinsVillageTarget = new LlinsVillageTarget();
-        partialUpdatedLlinsVillageTarget.setId(lLINSVillageTarget.getId());
+        partialUpdatedLlinsVillageTarget.setId(llinsVillageTarget.getId());
 
         partialUpdatedLlinsVillageTarget
+            .uid(UPDATED_UID)
             .lastUpdated(UPDATED_LAST_UPDATED)
-            .residentsIndividuals(UPDATED_RESIDENTS_INDIVIDUALS)
             .residentsFamilies(UPDATED_RESIDENTS_FAMILIES)
-            .idpsFamilies(UPDATED_IDPS_FAMILIES);
+            .noOfDaysNeeded(UPDATED_NO_OF_DAYS_NEEDED)
+            .quantity(UPDATED_QUANTITY);
 
-        restLLINSVillageTargetMockMvc
+        restLlinsVillageTargetMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedLlinsVillageTarget.getId())
                     .contentType("application/merge-patch+json")
@@ -527,31 +529,31 @@ class LlinsVillageTargetResourceIT {
             .andExpect(status().isOk());
 
         // Validate the LlinsVillageTarget in the database
-        List<LlinsVillageTarget> lLINSVillageTargetList = lLINSVillageTargetRepository.findAll();
-        assertThat(lLINSVillageTargetList).hasSize(databaseSizeBeforeUpdate);
-        LlinsVillageTarget testLlinsVillageTarget = lLINSVillageTargetList.get(lLINSVillageTargetList.size() - 1);
-        assertThat(testLlinsVillageTarget.getUid()).isEqualTo(DEFAULT_UID);
+        List<LlinsVillageTarget> llinsVillageTargetList = llinsVillageTargetRepository.findAll();
+        assertThat(llinsVillageTargetList).hasSize(databaseSizeBeforeUpdate);
+        LlinsVillageTarget testLlinsVillageTarget = llinsVillageTargetList.get(llinsVillageTargetList.size() - 1);
+        assertThat(testLlinsVillageTarget.getUid()).isEqualTo(UPDATED_UID);
         assertThat(testLlinsVillageTarget.getCreated()).isEqualTo(DEFAULT_CREATED);
         assertThat(testLlinsVillageTarget.getLastUpdated()).isEqualTo(UPDATED_LAST_UPDATED);
-        assertThat(testLlinsVillageTarget.getResidentsIndividuals()).isEqualTo(UPDATED_RESIDENTS_INDIVIDUALS);
+        assertThat(testLlinsVillageTarget.getResidentsIndividuals()).isEqualTo(DEFAULT_RESIDENTS_INDIVIDUALS);
         assertThat(testLlinsVillageTarget.getIdpsIndividuals()).isEqualTo(DEFAULT_IDPS_INDIVIDUALS);
         assertThat(testLlinsVillageTarget.getResidentsFamilies()).isEqualTo(UPDATED_RESIDENTS_FAMILIES);
-        assertThat(testLlinsVillageTarget.getIdpsFamilies()).isEqualTo(UPDATED_IDPS_FAMILIES);
-        assertThat(testLlinsVillageTarget.getNoOfDaysNeeded()).isEqualTo(DEFAULT_NO_OF_DAYS_NEEDED);
-        assertThat(testLlinsVillageTarget.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
+        assertThat(testLlinsVillageTarget.getIdpsFamilies()).isEqualTo(DEFAULT_IDPS_FAMILIES);
+        assertThat(testLlinsVillageTarget.getNoOfDaysNeeded()).isEqualTo(UPDATED_NO_OF_DAYS_NEEDED);
+        assertThat(testLlinsVillageTarget.getQuantity()).isEqualTo(UPDATED_QUANTITY);
     }
 
     @Test
     @Transactional
-    void fullUpdateLLINSVillageTargetWithPatch() throws Exception {
+    void fullUpdateLlinsVillageTargetWithPatch() throws Exception {
         // Initialize the database
-        lLINSVillageTargetRepository.saveAndFlush(lLINSVillageTarget);
+        llinsVillageTargetRepository.saveAndFlush(llinsVillageTarget);
 
-        int databaseSizeBeforeUpdate = lLINSVillageTargetRepository.findAll().size();
+        int databaseSizeBeforeUpdate = llinsVillageTargetRepository.findAll().size();
 
-        // Update the lLINSVillageTarget using partial update
+        // Update the llinsVillageTarget using partial update
         LlinsVillageTarget partialUpdatedLlinsVillageTarget = new LlinsVillageTarget();
-        partialUpdatedLlinsVillageTarget.setId(lLINSVillageTarget.getId());
+        partialUpdatedLlinsVillageTarget.setId(llinsVillageTarget.getId());
 
         partialUpdatedLlinsVillageTarget
             .uid(UPDATED_UID)
@@ -564,7 +566,7 @@ class LlinsVillageTargetResourceIT {
             .noOfDaysNeeded(UPDATED_NO_OF_DAYS_NEEDED)
             .quantity(UPDATED_QUANTITY);
 
-        restLLINSVillageTargetMockMvc
+        restLlinsVillageTargetMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedLlinsVillageTarget.getId())
                     .contentType("application/merge-patch+json")
@@ -573,9 +575,9 @@ class LlinsVillageTargetResourceIT {
             .andExpect(status().isOk());
 
         // Validate the LlinsVillageTarget in the database
-        List<LlinsVillageTarget> lLINSVillageTargetList = lLINSVillageTargetRepository.findAll();
-        assertThat(lLINSVillageTargetList).hasSize(databaseSizeBeforeUpdate);
-        LlinsVillageTarget testLlinsVillageTarget = lLINSVillageTargetList.get(lLINSVillageTargetList.size() - 1);
+        List<LlinsVillageTarget> llinsVillageTargetList = llinsVillageTargetRepository.findAll();
+        assertThat(llinsVillageTargetList).hasSize(databaseSizeBeforeUpdate);
+        LlinsVillageTarget testLlinsVillageTarget = llinsVillageTargetList.get(llinsVillageTargetList.size() - 1);
         assertThat(testLlinsVillageTarget.getUid()).isEqualTo(UPDATED_UID);
         assertThat(testLlinsVillageTarget.getCreated()).isEqualTo(UPDATED_CREATED);
         assertThat(testLlinsVillageTarget.getLastUpdated()).isEqualTo(UPDATED_LAST_UPDATED);
@@ -589,79 +591,79 @@ class LlinsVillageTargetResourceIT {
 
     @Test
     @Transactional
-    void patchNonExistingLLINSVillageTarget() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSVillageTargetRepository.findAll().size();
-        lLINSVillageTarget.setId(count.incrementAndGet());
+    void patchNonExistingLlinsVillageTarget() throws Exception {
+        int databaseSizeBeforeUpdate = llinsVillageTargetRepository.findAll().size();
+        llinsVillageTarget.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restLLINSVillageTargetMockMvc
+        restLlinsVillageTargetMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, lLINSVillageTarget.getId())
+                patch(ENTITY_API_URL_ID, llinsVillageTarget.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSVillageTarget))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsVillageTarget))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsVillageTarget in the database
-        List<LlinsVillageTarget> lLINSVillageTargetList = lLINSVillageTargetRepository.findAll();
-        assertThat(lLINSVillageTargetList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsVillageTarget> llinsVillageTargetList = llinsVillageTargetRepository.findAll();
+        assertThat(llinsVillageTargetList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void patchWithIdMismatchLLINSVillageTarget() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSVillageTargetRepository.findAll().size();
-        lLINSVillageTarget.setId(count.incrementAndGet());
+    void patchWithIdMismatchLlinsVillageTarget() throws Exception {
+        int databaseSizeBeforeUpdate = llinsVillageTargetRepository.findAll().size();
+        llinsVillageTarget.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restLLINSVillageTargetMockMvc
+        restLlinsVillageTargetMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSVillageTarget))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsVillageTarget))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsVillageTarget in the database
-        List<LlinsVillageTarget> lLINSVillageTargetList = lLINSVillageTargetRepository.findAll();
-        assertThat(lLINSVillageTargetList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsVillageTarget> llinsVillageTargetList = llinsVillageTargetRepository.findAll();
+        assertThat(llinsVillageTargetList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void patchWithMissingIdPathParamLLINSVillageTarget() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSVillageTargetRepository.findAll().size();
-        lLINSVillageTarget.setId(count.incrementAndGet());
+    void patchWithMissingIdPathParamLlinsVillageTarget() throws Exception {
+        int databaseSizeBeforeUpdate = llinsVillageTargetRepository.findAll().size();
+        llinsVillageTarget.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restLLINSVillageTargetMockMvc
+        restLlinsVillageTargetMockMvc
             .perform(
                 patch(ENTITY_API_URL)
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSVillageTarget))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsVillageTarget))
             )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the LlinsVillageTarget in the database
-        List<LlinsVillageTarget> lLINSVillageTargetList = lLINSVillageTargetRepository.findAll();
-        assertThat(lLINSVillageTargetList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsVillageTarget> llinsVillageTargetList = llinsVillageTargetRepository.findAll();
+        assertThat(llinsVillageTargetList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void deleteLLINSVillageTarget() throws Exception {
+    void deleteLlinsVillageTarget() throws Exception {
         // Initialize the database
-        lLINSVillageTargetRepository.saveAndFlush(lLINSVillageTarget);
+        llinsVillageTargetRepository.saveAndFlush(llinsVillageTarget);
 
-        int databaseSizeBeforeDelete = lLINSVillageTargetRepository.findAll().size();
+        int databaseSizeBeforeDelete = llinsVillageTargetRepository.findAll().size();
 
-        // Delete the lLINSVillageTarget
-        restLLINSVillageTargetMockMvc
-            .perform(delete(ENTITY_API_URL_ID, lLINSVillageTarget.getId()).accept(MediaType.APPLICATION_JSON))
+        // Delete the llinsVillageTarget
+        restLlinsVillageTargetMockMvc
+            .perform(delete(ENTITY_API_URL_ID, llinsVillageTarget.getId()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item
-        List<LlinsVillageTarget> lLINSVillageTargetList = lLINSVillageTargetRepository.findAll();
-        assertThat(lLINSVillageTargetList).hasSize(databaseSizeBeforeDelete - 1);
+        List<LlinsVillageTarget> llinsVillageTargetList = llinsVillageTargetRepository.findAll();
+        assertThat(llinsVillageTargetList).hasSize(databaseSizeBeforeDelete - 1);
     }
 }

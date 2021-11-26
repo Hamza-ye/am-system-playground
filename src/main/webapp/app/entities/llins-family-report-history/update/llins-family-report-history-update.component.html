@@ -3,10 +3,10 @@
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2
         id="app-llins-family-report-history-heading"
-        data-cy="LLINSFamilyReportHistoryCreateUpdateHeading"
-        appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.home.createOrEditLabel"
+        data-cy="LlinsFamilyReportHistoryCreateUpdateHeading"
+        appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.home.createOrEditLabel"
       >
-        Create or edit a LLINS Family Report History
+        Create or edit a Llins Family Report History
       </h2>
 
       <div>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.uid" for="field_uid">Uid</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.uid" for="field_uid">Uid</label>
           <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
           <div *ngIf="editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('uid')?.errors?.required" appTranslate="entity.validation.required">
@@ -36,7 +36,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.created" for="field_created"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.created" for="field_created"
             >Created</label
           >
           <div class="d-flex">
@@ -55,7 +55,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.lastUpdated"
+            appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.lastUpdated"
             for="field_lastUpdated"
             >Last Updated</label
           >
@@ -73,7 +73,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.documentNo" for="field_documentNo"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.documentNo" for="field_documentNo"
             >Document No</label
           >
           <input
@@ -89,7 +89,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.maleIndividuals"
+            appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.maleIndividuals"
             for="field_maleIndividuals"
             >Male Individuals</label
           >
@@ -128,7 +128,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.femaleIndividuals"
+            appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.femaleIndividuals"
             for="field_femaleIndividuals"
             >Female Individuals</label
           >
@@ -167,7 +167,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.lessThan5Males"
+            appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.lessThan5Males"
             for="field_lessThan5Males"
             >Less Than 5 Males</label
           >
@@ -205,7 +205,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.lessThan5Females"
+            appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.lessThan5Females"
             for="field_lessThan5Females"
             >Less Than 5 Females</label
           >
@@ -244,7 +244,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.pregnantWomen"
+            appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.pregnantWomen"
             for="field_pregnantWomen"
             >Pregnant Women</label
           >
@@ -282,7 +282,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.quantityReceived"
+            appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.quantityReceived"
             for="field_quantityReceived"
             >Quantity Received</label
           >
@@ -319,7 +319,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.familyType" for="field_familyType"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.familyType" for="field_familyType"
             >Family Type</label
           >
           <select class="form-control" name="familyType" formControlName="familyType" id="field_familyType" data-cy="familyType">
@@ -339,7 +339,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.createdBy" for="field_createdBy"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.createdBy" for="field_createdBy"
             >Created By</label
           >
           <select class="form-control" id="field_createdBy" data-cy="createdBy" name="createdBy" formControlName="createdBy">
@@ -356,7 +356,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.lastUpdatedBy"
+            appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.lastUpdatedBy"
             for="field_lastUpdatedBy"
             >Last Updated By</label
           >
@@ -378,7 +378,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.dayReached" for="field_dayReached"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.dayReached" for="field_dayReached"
             >Day Reached</label
           >
           <select class="form-control" id="field_dayReached" data-cy="dayReached" name="dayReached" formControlName="dayReached">
@@ -408,7 +408,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSFamilyReportHistory.llinsFamilyReport"
+            appTranslate="amSystemPlaygroundApp.llinsFamilyReportHistory.llinsFamilyReport"
             for="field_llinsFamilyReport"
             >Llins Family Report</label
           >
@@ -422,13 +422,13 @@
             <option *ngIf="!editForm.get('llinsFamilyReport')!.value" [ngValue]="null" selected></option>
             <option
               [ngValue]="
-                lLINSFamilyReportOption.id === editForm.get('llinsFamilyReport')!.value?.id
+                llinsFamilyReportOption.id === editForm.get('llinsFamilyReport')!.value?.id
                   ? editForm.get('llinsFamilyReport')!.value
-                  : lLINSFamilyReportOption
+                  : llinsFamilyReportOption
               "
-              *ngFor="let lLINSFamilyReportOption of lLINSFamilyReportsSharedCollection; trackBy: trackLLINSFamilyReportById"
+              *ngFor="let llinsFamilyReportOption of llinsFamilyReportsSharedCollection; trackBy: trackLlinsFamilyReportById"
             >
-              {{ lLINSFamilyReportOption.id }}
+              {{ llinsFamilyReportOption.id }}
             </option>
           </select>
         </div>

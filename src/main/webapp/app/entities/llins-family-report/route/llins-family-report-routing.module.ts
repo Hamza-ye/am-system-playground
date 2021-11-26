@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { LLINSFamilyReportComponent } from '../list/llins-family-report.component';
-import { LLINSFamilyReportDetailComponent } from '../detail/llins-family-report-detail.component';
-import { LLINSFamilyReportUpdateComponent } from '../update/llins-family-report-update.component';
-import { LLINSFamilyReportRoutingResolveService } from './llins-family-report-routing-resolve.service';
+import { LlinsFamilyReportComponent } from '../list/llins-family-report.component';
+import { LlinsFamilyReportDetailComponent } from '../detail/llins-family-report-detail.component';
+import { LlinsFamilyReportUpdateComponent } from '../update/llins-family-report-update.component';
+import { LlinsFamilyReportRoutingResolveService } from './llins-family-report-routing-resolve.service';
 
-const lLINSFamilyReportRoute: Routes = [
+const llinsFamilyReportRoute: Routes = [
   {
     path: '',
-    component: LLINSFamilyReportComponent,
+    component: LlinsFamilyReportComponent,
     data: {
       defaultSort: 'id,asc',
     },
@@ -18,32 +18,32 @@ const lLINSFamilyReportRoute: Routes = [
   },
   {
     path: ':id/view',
-    component: LLINSFamilyReportDetailComponent,
+    component: LlinsFamilyReportDetailComponent,
     resolve: {
-      lLINSFamilyReport: LLINSFamilyReportRoutingResolveService,
+      llinsFamilyReport: LlinsFamilyReportRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
-    component: LLINSFamilyReportUpdateComponent,
+    component: LlinsFamilyReportUpdateComponent,
     resolve: {
-      lLINSFamilyReport: LLINSFamilyReportRoutingResolveService,
+      llinsFamilyReport: LlinsFamilyReportRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
-    component: LLINSFamilyReportUpdateComponent,
+    component: LlinsFamilyReportUpdateComponent,
     resolve: {
-      lLINSFamilyReport: LLINSFamilyReportRoutingResolveService,
+      llinsFamilyReport: LlinsFamilyReportRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(lLINSFamilyReportRoute)],
+  imports: [RouterModule.forChild(llinsFamilyReportRoute)],
   exports: [RouterModule],
 })
-export class LLINSFamilyReportRoutingModule {}
+export class LlinsFamilyReportRoutingModule {}

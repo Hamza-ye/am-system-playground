@@ -1,5 +1,5 @@
 import * as dayjs from 'dayjs';
-import { IWHMovement } from 'app/entities/wh-movement/wh-movement.model';
+import { IWhMovement } from 'app/entities/wh-movement/wh-movement.model';
 import { IUser } from 'app/entities/user/user.model';
 import { IActivity } from 'app/entities/activity/activity.model';
 import { ITeam } from 'app/entities/team/team.model';
@@ -14,8 +14,8 @@ export interface IWarehouse {
   whNo?: number;
   initialBalancePlan?: number;
   initialBalanceActual?: number;
-  initiatedMovements?: IWHMovement[] | null;
-  notInitiatedMovements?: IWHMovement[] | null;
+  initiatedMovements?: IWhMovement[] | null;
+  notInitiatedMovements?: IWhMovement[] | null;
   createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   activity?: IActivity;
@@ -33,8 +33,8 @@ export class Warehouse implements IWarehouse {
     public whNo?: number,
     public initialBalancePlan?: number,
     public initialBalanceActual?: number,
-    public initiatedMovements?: IWHMovement[] | null,
-    public notInitiatedMovements?: IWHMovement[] | null,
+    public initiatedMovements?: IWhMovement[] | null,
+    public notInitiatedMovements?: IWhMovement[] | null,
     public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public activity?: IActivity,

@@ -41,8 +41,8 @@ import { RouterModule } from '@angular/router';
       },
       {
         path: 'wh-movement',
-        data: { pageTitle: 'amSystemPlaygroundApp.wHMovement.home.title' },
-        loadChildren: () => import('./wh-movement/wh-movement.module').then(m => m.WHMovementModule),
+        data: { pageTitle: 'amSystemPlaygroundApp.whMovement.home.title' },
+        loadChildren: () => import('./wh-movement/wh-movement.module').then(m => m.WhMovementModule),
       },
       {
         path: 'family',
@@ -66,8 +66,8 @@ import { RouterModule } from '@angular/router';
       },
       {
         path: 'llins-village-target',
-        data: { pageTitle: 'amSystemPlaygroundApp.lLINSVillageTarget.home.title' },
-        loadChildren: () => import('./llins-village-target/llins-village-target.module').then(m => m.LLINSVillageTargetModule),
+        data: { pageTitle: 'amSystemPlaygroundApp.llinsVillageTarget.home.title' },
+        loadChildren: () => import('./llins-village-target/llins-village-target.module').then(m => m.LlinsVillageTargetModule),
       },
       {
         path: 'status-of-coverage',
@@ -76,30 +76,30 @@ import { RouterModule } from '@angular/router';
       },
       {
         path: 'llins-family-target',
-        data: { pageTitle: 'amSystemPlaygroundApp.lLINSFamilyTarget.home.title' },
-        loadChildren: () => import('./llins-family-target/llins-family-target.module').then(m => m.LLINSFamilyTargetModule),
+        data: { pageTitle: 'amSystemPlaygroundApp.llinsFamilyTarget.home.title' },
+        loadChildren: () => import('./llins-family-target/llins-family-target.module').then(m => m.LlinsFamilyTargetModule),
       },
       {
         path: 'llins-family-report',
-        data: { pageTitle: 'amSystemPlaygroundApp.lLINSFamilyReport.home.title' },
-        loadChildren: () => import('./llins-family-report/llins-family-report.module').then(m => m.LLINSFamilyReportModule),
+        data: { pageTitle: 'amSystemPlaygroundApp.llinsFamilyReport.home.title' },
+        loadChildren: () => import('./llins-family-report/llins-family-report.module').then(m => m.LlinsFamilyReportModule),
       },
       {
         path: 'llins-village-report',
-        data: { pageTitle: 'amSystemPlaygroundApp.lLINSVillageReport.home.title' },
-        loadChildren: () => import('./llins-village-report/llins-village-report.module').then(m => m.LLINSVillageReportModule),
+        data: { pageTitle: 'amSystemPlaygroundApp.llinsVillageReport.home.title' },
+        loadChildren: () => import('./llins-village-report/llins-village-report.module').then(m => m.LlinsVillageReportModule),
       },
       {
         path: 'llins-family-report-history',
-        data: { pageTitle: 'amSystemPlaygroundApp.lLINSFamilyReportHistory.home.title' },
+        data: { pageTitle: 'amSystemPlaygroundApp.llinsFamilyReportHistory.home.title' },
         loadChildren: () =>
-          import('./llins-family-report-history/llins-family-report-history.module').then(m => m.LLINSFamilyReportHistoryModule),
+          import('./llins-family-report-history/llins-family-report-history.module').then(m => m.LlinsFamilyReportHistoryModule),
       },
       {
         path: 'llins-village-report-history',
-        data: { pageTitle: 'amSystemPlaygroundApp.lLINSVillageReportHistory.home.title' },
+        data: { pageTitle: 'amSystemPlaygroundApp.llinsVillageReportHistory.home.title' },
         loadChildren: () =>
-          import('./llins-village-report-history/llins-village-report-history.module').then(m => m.LLINSVillageReportHistoryModule),
+          import('./llins-village-report-history/llins-village-report-history.module').then(m => m.LlinsVillageReportHistoryModule),
       },
       {
         path: 'working-day',
@@ -144,24 +144,24 @@ import { RouterModule } from '@angular/router';
       },
       {
         path: 'chv',
-        data: { pageTitle: 'amSystemPlaygroundApp.cHV.home.title' },
-        loadChildren: () => import('./chv/chv.module').then(m => m.CHVModule),
+        data: { pageTitle: 'amSystemPlaygroundApp.chv.home.title' },
+        loadChildren: () => import('./chv/chv.module').then(m => m.ChvModule),
       },
       {
         path: 'chv-team',
-        data: { pageTitle: 'amSystemPlaygroundApp.cHVTeam.home.title' },
-        loadChildren: () => import('./chv-team/chv-team.module').then(m => m.CHVTeamModule),
+        data: { pageTitle: 'amSystemPlaygroundApp.chvTeam.home.title' },
+        loadChildren: () => import('./chv-team/chv-team.module').then(m => m.ChvTeamModule),
       },
       {
         path: 'chv-malaria-report-version-1',
-        data: { pageTitle: 'amSystemPlaygroundApp.cHVMalariaReportVersion1.home.title' },
+        data: { pageTitle: 'amSystemPlaygroundApp.chvMalariaReportVersion1.home.title' },
         loadChildren: () =>
-          import('./chv-malaria-report-version-1/chv-malaria-report-version-1.module').then(m => m.CHVMalariaReportVersion1Module),
+          import('./chv-malaria-report-version-1/chv-malaria-report-version-1.module').then(m => m.ChvMalariaReportVersion1Module),
       },
       {
         path: 'chv-malaria-case-report',
-        data: { pageTitle: 'amSystemPlaygroundApp.cHVMalariaCaseReport.home.title' },
-        loadChildren: () => import('./chv-malaria-case-report/chv-malaria-case-report.module').then(m => m.CHVMalariaCaseReportModule),
+        data: { pageTitle: 'amSystemPlaygroundApp.chvMalariaCaseReport.home.title' },
+        loadChildren: () => import('./chv-malaria-case-report/chv-malaria-case-report.module').then(m => m.ChvMalariaCaseReportModule),
       },
       {
         path: 'organisation-unit',

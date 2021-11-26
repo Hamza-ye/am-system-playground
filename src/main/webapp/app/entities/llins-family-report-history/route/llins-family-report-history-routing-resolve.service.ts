@@ -4,20 +4,20 @@ import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { ILLINSFamilyReportHistory, LLINSFamilyReportHistory } from '../llins-family-report-history.model';
-import { LLINSFamilyReportHistoryService } from '../service/llins-family-report-history.service';
+import { ILlinsFamilyReportHistory, LlinsFamilyReportHistory } from '../llins-family-report-history.model';
+import { LlinsFamilyReportHistoryService } from '../service/llins-family-report-history.service';
 
 @Injectable({ providedIn: 'root' })
-export class LLINSFamilyReportHistoryRoutingResolveService implements Resolve<ILLINSFamilyReportHistory> {
-  constructor(protected service: LLINSFamilyReportHistoryService, protected router: Router) {}
+export class LlinsFamilyReportHistoryRoutingResolveService implements Resolve<ILlinsFamilyReportHistory> {
+  constructor(protected service: LlinsFamilyReportHistoryService, protected router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<ILLINSFamilyReportHistory> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot): Observable<ILlinsFamilyReportHistory> | Observable<never> {
     const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
-        mergeMap((lLINSFamilyReportHistory: HttpResponse<LLINSFamilyReportHistory>) => {
-          if (lLINSFamilyReportHistory.body) {
-            return of(lLINSFamilyReportHistory.body);
+        mergeMap((llinsFamilyReportHistory: HttpResponse<LlinsFamilyReportHistory>) => {
+          if (llinsFamilyReportHistory.body) {
+            return of(llinsFamilyReportHistory.body);
           } else {
             this.router.navigate(['404']);
             return EMPTY;
@@ -25,6 +25,6 @@ export class LLINSFamilyReportHistoryRoutingResolveService implements Resolve<IL
         })
       );
     }
-    return of(new LLINSFamilyReportHistory());
+    return of(new LlinsFamilyReportHistory());
   }
 }

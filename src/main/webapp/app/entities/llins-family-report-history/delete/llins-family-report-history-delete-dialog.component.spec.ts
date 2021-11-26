@@ -6,28 +6,28 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { LLINSFamilyReportHistoryService } from '../service/llins-family-report-history.service';
+import { LlinsFamilyReportHistoryService } from '../service/llins-family-report-history.service';
 
-import { LLINSFamilyReportHistoryDeleteDialogComponent } from './llins-family-report-history-delete-dialog.component';
+import { LlinsFamilyReportHistoryDeleteDialogComponent } from './llins-family-report-history-delete-dialog.component';
 
 describe('Component Tests', () => {
   describe('LlinsFamilyReportHistory Management Delete Component', () => {
-    let comp: LLINSFamilyReportHistoryDeleteDialogComponent;
-    let fixture: ComponentFixture<LLINSFamilyReportHistoryDeleteDialogComponent>;
-    let service: LLINSFamilyReportHistoryService;
+    let comp: LlinsFamilyReportHistoryDeleteDialogComponent;
+    let fixture: ComponentFixture<LlinsFamilyReportHistoryDeleteDialogComponent>;
+    let service: LlinsFamilyReportHistoryService;
     let mockActiveModal: NgbActiveModal;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [LLINSFamilyReportHistoryDeleteDialogComponent],
+        declarations: [LlinsFamilyReportHistoryDeleteDialogComponent],
         providers: [NgbActiveModal],
       })
-        .overrideTemplate(LLINSFamilyReportHistoryDeleteDialogComponent, '')
+        .overrideTemplate(LlinsFamilyReportHistoryDeleteDialogComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(LLINSFamilyReportHistoryDeleteDialogComponent);
+      fixture = TestBed.createComponent(LlinsFamilyReportHistoryDeleteDialogComponent);
       comp = fixture.componentInstance;
-      service = TestBed.inject(LLINSFamilyReportHistoryService);
+      service = TestBed.inject(LlinsFamilyReportHistoryService);
       mockActiveModal = TestBed.inject(NgbActiveModal);
     });
 

@@ -1,10 +1,10 @@
 import * as dayjs from 'dayjs';
 import { IUser } from 'app/entities/user/user.model';
 import { IWorkingDay } from 'app/entities/working-day/working-day.model';
-import { ILLINSFamilyReport } from 'app/entities/llins-family-report/llins-family-report.model';
+import { ILlinsFamilyReport } from 'app/entities/llins-family-report/llins-family-report.model';
 import { FamilyType } from 'app/entities/enumerations/family-type.model';
 
-export interface ILLINSFamilyReportHistory {
+export interface ILlinsFamilyReportHistory {
   id?: number;
   uid?: string;
   created?: dayjs.Dayjs | null;
@@ -20,10 +20,10 @@ export interface ILLINSFamilyReportHistory {
   createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   dayReached?: IWorkingDay;
-  llinsFamilyReport?: ILLINSFamilyReport;
+  llinsFamilyReport?: ILlinsFamilyReport;
 }
 
-export class LLINSFamilyReportHistory implements ILLINSFamilyReportHistory {
+export class LlinsFamilyReportHistory implements ILlinsFamilyReportHistory {
   constructor(
     public id?: number,
     public uid?: string,
@@ -40,10 +40,10 @@ export class LLINSFamilyReportHistory implements ILLINSFamilyReportHistory {
     public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public dayReached?: IWorkingDay,
-    public llinsFamilyReport?: ILLINSFamilyReport
+    public llinsFamilyReport?: ILlinsFamilyReport
   ) {}
 }
 
-export function getLLINSFamilyReportHistoryIdentifier(lLINSFamilyReportHistory: ILLINSFamilyReportHistory): number | undefined {
-  return lLINSFamilyReportHistory.id;
+export function getLlinsFamilyReportHistoryIdentifier(llinsFamilyReportHistory: ILlinsFamilyReportHistory): number | undefined {
+  return llinsFamilyReportHistory.id;
 }

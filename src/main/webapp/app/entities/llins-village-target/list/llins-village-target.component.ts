@@ -4,18 +4,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ILLINSVillageTarget } from '../llins-village-target.model';
+import { ILlinsVillageTarget } from '../llins-village-target.model';
 
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
-import { LLINSVillageTargetService } from '../service/llins-village-target.service';
-import { LLINSVillageTargetDeleteDialogComponent } from '../delete/llins-village-target-delete-dialog.component';
+import { LlinsVillageTargetService } from '../service/llins-village-target.service';
+import { LlinsVillageTargetDeleteDialogComponent } from '../delete/llins-village-target-delete-dialog.component';
 
 @Component({
   selector: 'app-llins-village-target',
   templateUrl: './llins-village-target.component.html',
 })
-export class LLINSVillageTargetComponent implements OnInit {
-  lLINSVillageTargets?: ILLINSVillageTarget[];
+export class LlinsVillageTargetComponent implements OnInit {
+  llinsVillageTargets?: ILlinsVillageTarget[];
   isLoading = false;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -25,7 +25,7 @@ export class LLINSVillageTargetComponent implements OnInit {
   ngbPaginationPage = 1;
 
   constructor(
-    protected lLINSVillageTargetService: LLINSVillageTargetService,
+    protected llinsVillageTargetService: LlinsVillageTargetService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected modalService: NgbModal
@@ -35,14 +35,14 @@ export class LLINSVillageTargetComponent implements OnInit {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
 
-    this.lLINSVillageTargetService
+    this.llinsVillageTargetService
       .query({
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),
       })
       .subscribe(
-        (res: HttpResponse<ILLINSVillageTarget[]>) => {
+        (res: HttpResponse<ILlinsVillageTarget[]>) => {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
         },
@@ -57,13 +57,13 @@ export class LLINSVillageTargetComponent implements OnInit {
     this.handleNavigation();
   }
 
-  trackId(index: number, item: ILLINSVillageTarget): number {
+  trackId(index: number, item: ILlinsVillageTarget): number {
     return item.id!;
   }
 
-  delete(lLINSVillageTarget: ILLINSVillageTarget): void {
-    const modalRef = this.modalService.open(LLINSVillageTargetDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.lLINSVillageTarget = lLINSVillageTarget;
+  delete(llinsVillageTarget: ILlinsVillageTarget): void {
+    const modalRef = this.modalService.open(LlinsVillageTargetDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.llinsVillageTarget = llinsVillageTarget;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {
@@ -95,7 +95,7 @@ export class LLINSVillageTargetComponent implements OnInit {
     });
   }
 
-  protected onSuccess(data: ILLINSVillageTarget[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
+  protected onSuccess(data: ILlinsVillageTarget[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
     if (navigate) {
@@ -107,7 +107,7 @@ export class LLINSVillageTargetComponent implements OnInit {
         },
       });
     }
-    this.lLINSVillageTargets = data ?? [];
+    this.llinsVillageTargets = data ?? [];
     this.ngbPaginationPage = this.page;
   }
 

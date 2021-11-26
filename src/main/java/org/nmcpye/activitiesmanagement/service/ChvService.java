@@ -1,38 +1,39 @@
 package org.nmcpye.activitiesmanagement.service;
 
+import org.nmcpye.activitiesmanagement.domain.chv.Chv;
+
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.chv.Chv;
 
 /**
  * Service Interface for managing {@link Chv}.
  */
 public interface ChvService {
     /**
-     * Save a cHV.
+     * Save a chv.
      *
-     * @param cHV the entity to save.
+     * @param chv the entity to save.
      * @return the persisted entity.
      */
-    Chv save(Chv cHV);
+    Chv save(Chv chv);
 
     /**
-     * Partially updates a cHV.
+     * Partially updates a chv.
      *
-     * @param cHV the entity to update partially.
+     * @param chv the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<Chv> partialUpdate(Chv cHV);
+    Optional<Chv> partialUpdate(Chv chv);
 
     /**
-     * Get all the cHVS.
+     * Get all the chvs.
      *
      * @return the list of entities.
      */
     List<Chv> findAll();
 
     /**
-     * Get the "id" cHV.
+     * Get the "id" chv.
      *
      * @param id the id of the entity.
      * @return the entity.
@@ -40,7 +41,7 @@ public interface ChvService {
     Optional<Chv> findOne(Long id);
 
     /**
-     * Delete the "id" cHV.
+     * Delete the "id" chv.
      *
      * @param id the id of the entity.
      */

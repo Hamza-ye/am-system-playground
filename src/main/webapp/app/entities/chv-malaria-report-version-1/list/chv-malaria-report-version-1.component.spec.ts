@@ -3,27 +3,27 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 
-import { CHVMalariaReportVersion1Service } from '../service/chv-malaria-report-version-1.service';
+import { ChvMalariaReportVersion1Service } from '../service/chv-malaria-report-version-1.service';
 
-import { CHVMalariaReportVersion1Component } from './chv-malaria-report-version-1.component';
+import { ChvMalariaReportVersion1Component } from './chv-malaria-report-version-1.component';
 
 describe('Component Tests', () => {
   describe('ChvMalariaReportVersion1 Management Component', () => {
-    let comp: CHVMalariaReportVersion1Component;
-    let fixture: ComponentFixture<CHVMalariaReportVersion1Component>;
-    let service: CHVMalariaReportVersion1Service;
+    let comp: ChvMalariaReportVersion1Component;
+    let fixture: ComponentFixture<ChvMalariaReportVersion1Component>;
+    let service: ChvMalariaReportVersion1Service;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [CHVMalariaReportVersion1Component],
+        declarations: [ChvMalariaReportVersion1Component],
       })
-        .overrideTemplate(CHVMalariaReportVersion1Component, '')
+        .overrideTemplate(ChvMalariaReportVersion1Component, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(CHVMalariaReportVersion1Component);
+      fixture = TestBed.createComponent(ChvMalariaReportVersion1Component);
       comp = fixture.componentInstance;
-      service = TestBed.inject(CHVMalariaReportVersion1Service);
+      service = TestBed.inject(ChvMalariaReportVersion1Service);
 
       const headers = new HttpHeaders().append('link', 'link;link');
       jest.spyOn(service, 'query').mockReturnValue(
@@ -42,7 +42,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.cHVMalariaReportVersion1s?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+      expect(comp.chvMalariaReportVersion1s?.[0]).toEqual(expect.objectContaining({ id: 123 }));
     });
   });
 });

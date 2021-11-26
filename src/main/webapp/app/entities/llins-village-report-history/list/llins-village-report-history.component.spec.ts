@@ -3,27 +3,27 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 
-import { LLINSVillageReportHistoryService } from '../service/llins-village-report-history.service';
+import { LlinsVillageReportHistoryService } from '../service/llins-village-report-history.service';
 
-import { LLINSVillageReportHistoryComponent } from './llins-village-report-history.component';
+import { LlinsVillageReportHistoryComponent } from './llins-village-report-history.component';
 
 describe('Component Tests', () => {
   describe('LlinsVillageReportHistory Management Component', () => {
-    let comp: LLINSVillageReportHistoryComponent;
-    let fixture: ComponentFixture<LLINSVillageReportHistoryComponent>;
-    let service: LLINSVillageReportHistoryService;
+    let comp: LlinsVillageReportHistoryComponent;
+    let fixture: ComponentFixture<LlinsVillageReportHistoryComponent>;
+    let service: LlinsVillageReportHistoryService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [LLINSVillageReportHistoryComponent],
+        declarations: [LlinsVillageReportHistoryComponent],
       })
-        .overrideTemplate(LLINSVillageReportHistoryComponent, '')
+        .overrideTemplate(LlinsVillageReportHistoryComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(LLINSVillageReportHistoryComponent);
+      fixture = TestBed.createComponent(LlinsVillageReportHistoryComponent);
       comp = fixture.componentInstance;
-      service = TestBed.inject(LLINSVillageReportHistoryService);
+      service = TestBed.inject(LlinsVillageReportHistoryService);
 
       const headers = new HttpHeaders().append('link', 'link;link');
       jest.spyOn(service, 'query').mockReturnValue(
@@ -42,7 +42,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.lLINSVillageReportHistories?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+      expect(comp.llinsVillageReportHistories?.[0]).toEqual(expect.objectContaining({ id: 123 }));
     });
   });
 });

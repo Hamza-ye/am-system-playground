@@ -8,12 +8,12 @@ import { finalize, map } from 'rxjs/operators';
 import * as dayjs from 'dayjs';
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
-import { ICHVMalariaReportVersion1, CHVMalariaReportVersion1 } from '../chv-malaria-report-version-1.model';
-import { CHVMalariaReportVersion1Service } from '../service/chv-malaria-report-version-1.service';
+import { IChvMalariaReportVersion1, ChvMalariaReportVersion1 } from '../chv-malaria-report-version-1.model';
+import { ChvMalariaReportVersion1Service } from '../service/chv-malaria-report-version-1.service';
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
-import { ICHV } from 'app/entities/chv/chv.model';
-import { CHVService } from 'app/entities/chv/service/chv.service';
+import { IChv } from 'app/entities/chv/chv.model';
+import { ChvService } from 'app/entities/chv/service/chv.service';
 import { IPeriod } from 'app/entities/period/period.model';
 import { PeriodService } from 'app/entities/period/service/period.service';
 
@@ -21,11 +21,11 @@ import { PeriodService } from 'app/entities/period/service/period.service';
   selector: 'app-chv-malaria-report-version-1-update',
   templateUrl: './chv-malaria-report-version-1-update.component.html',
 })
-export class CHVMalariaReportVersion1UpdateComponent implements OnInit {
+export class ChvMalariaReportVersion1UpdateComponent implements OnInit {
   isSaving = false;
 
   usersSharedCollection: IUser[] = [];
-  cHVSSharedCollection: ICHV[] = [];
+  chvsSharedCollection: IChv[] = [];
   periodsSharedCollection: IPeriod[] = [];
 
   editForm = this.fb.group({
@@ -57,23 +57,23 @@ export class CHVMalariaReportVersion1UpdateComponent implements OnInit {
   });
 
   constructor(
-    protected cHVMalariaReportVersion1Service: CHVMalariaReportVersion1Service,
+    protected chvMalariaReportVersion1Service: ChvMalariaReportVersion1Service,
     protected userService: UserService,
-    protected cHVService: CHVService,
+    protected chvService: ChvService,
     protected periodService: PeriodService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ cHVMalariaReportVersion1 }) => {
-      if (cHVMalariaReportVersion1.id === undefined) {
+    this.activatedRoute.data.subscribe(({ chvMalariaReportVersion1 }) => {
+      if (chvMalariaReportVersion1.id === undefined) {
         const today = dayjs().startOf('day');
-        cHVMalariaReportVersion1.created = today;
-        cHVMalariaReportVersion1.lastUpdated = today;
+        chvMalariaReportVersion1.created = today;
+        chvMalariaReportVersion1.lastUpdated = today;
       }
 
-      this.updateForm(cHVMalariaReportVersion1);
+      this.updateForm(chvMalariaReportVersion1);
 
       this.loadRelationshipsOptions();
     });
@@ -85,11 +85,11 @@ export class CHVMalariaReportVersion1UpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
-    const cHVMalariaReportVersion1 = this.createFromForm();
-    if (cHVMalariaReportVersion1.id !== undefined) {
-      this.subscribeToSaveResponse(this.cHVMalariaReportVersion1Service.update(cHVMalariaReportVersion1));
+    const chvMalariaReportVersion1 = this.createFromForm();
+    if (chvMalariaReportVersion1.id !== undefined) {
+      this.subscribeToSaveResponse(this.chvMalariaReportVersion1Service.update(chvMalariaReportVersion1));
     } else {
-      this.subscribeToSaveResponse(this.cHVMalariaReportVersion1Service.create(cHVMalariaReportVersion1));
+      this.subscribeToSaveResponse(this.chvMalariaReportVersion1Service.create(chvMalariaReportVersion1));
     }
   }
 
@@ -97,7 +97,7 @@ export class CHVMalariaReportVersion1UpdateComponent implements OnInit {
     return item.id!;
   }
 
-  trackCHVById(index: number, item: ICHV): number {
+  trackChvById(index: number, item: IChv): number {
     return item.id!;
   }
 
@@ -105,7 +105,7 @@ export class CHVMalariaReportVersion1UpdateComponent implements OnInit {
     return item.id!;
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<ICHVMalariaReportVersion1>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IChvMalariaReportVersion1>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
       () => this.onSaveSuccess(),
       () => this.onSaveError()
@@ -124,44 +124,44 @@ export class CHVMalariaReportVersion1UpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(cHVMalariaReportVersion1: ICHVMalariaReportVersion1): void {
+  protected updateForm(chvMalariaReportVersion1: IChvMalariaReportVersion1): void {
     this.editForm.patchValue({
-      id: cHVMalariaReportVersion1.id,
-      uid: cHVMalariaReportVersion1.uid,
-      created: cHVMalariaReportVersion1.created ? cHVMalariaReportVersion1.created.format(DATE_TIME_FORMAT) : null,
-      lastUpdated: cHVMalariaReportVersion1.lastUpdated ? cHVMalariaReportVersion1.lastUpdated.format(DATE_TIME_FORMAT) : null,
-      tested: cHVMalariaReportVersion1.tested,
-      positive: cHVMalariaReportVersion1.positive,
-      drugsGiven: cHVMalariaReportVersion1.drugsGiven,
-      suppsGiven: cHVMalariaReportVersion1.suppsGiven,
-      rdtBalance: cHVMalariaReportVersion1.rdtBalance,
-      rdtReceived: cHVMalariaReportVersion1.rdtReceived,
-      rdtUsed: cHVMalariaReportVersion1.rdtUsed,
-      rdtDamagedLost: cHVMalariaReportVersion1.rdtDamagedLost,
-      drugsBalance: cHVMalariaReportVersion1.drugsBalance,
-      drugsReceived: cHVMalariaReportVersion1.drugsReceived,
-      drugsUsed: cHVMalariaReportVersion1.drugsUsed,
-      drugsDamagedLost: cHVMalariaReportVersion1.drugsDamagedLost,
-      suppsBalance: cHVMalariaReportVersion1.suppsBalance,
-      suppsReceived: cHVMalariaReportVersion1.suppsReceived,
-      suppsUsed: cHVMalariaReportVersion1.suppsUsed,
-      suppsDamagedLost: cHVMalariaReportVersion1.suppsDamagedLost,
-      comment: cHVMalariaReportVersion1.comment,
-      createdBy: cHVMalariaReportVersion1.createdBy,
-      lastUpdatedBy: cHVMalariaReportVersion1.lastUpdatedBy,
-      chv: cHVMalariaReportVersion1.chv,
-      period: cHVMalariaReportVersion1.period,
+      id: chvMalariaReportVersion1.id,
+      uid: chvMalariaReportVersion1.uid,
+      created: chvMalariaReportVersion1.created ? chvMalariaReportVersion1.created.format(DATE_TIME_FORMAT) : null,
+      lastUpdated: chvMalariaReportVersion1.lastUpdated ? chvMalariaReportVersion1.lastUpdated.format(DATE_TIME_FORMAT) : null,
+      tested: chvMalariaReportVersion1.tested,
+      positive: chvMalariaReportVersion1.positive,
+      drugsGiven: chvMalariaReportVersion1.drugsGiven,
+      suppsGiven: chvMalariaReportVersion1.suppsGiven,
+      rdtBalance: chvMalariaReportVersion1.rdtBalance,
+      rdtReceived: chvMalariaReportVersion1.rdtReceived,
+      rdtUsed: chvMalariaReportVersion1.rdtUsed,
+      rdtDamagedLost: chvMalariaReportVersion1.rdtDamagedLost,
+      drugsBalance: chvMalariaReportVersion1.drugsBalance,
+      drugsReceived: chvMalariaReportVersion1.drugsReceived,
+      drugsUsed: chvMalariaReportVersion1.drugsUsed,
+      drugsDamagedLost: chvMalariaReportVersion1.drugsDamagedLost,
+      suppsBalance: chvMalariaReportVersion1.suppsBalance,
+      suppsReceived: chvMalariaReportVersion1.suppsReceived,
+      suppsUsed: chvMalariaReportVersion1.suppsUsed,
+      suppsDamagedLost: chvMalariaReportVersion1.suppsDamagedLost,
+      comment: chvMalariaReportVersion1.comment,
+      createdBy: chvMalariaReportVersion1.createdBy,
+      lastUpdatedBy: chvMalariaReportVersion1.lastUpdatedBy,
+      chv: chvMalariaReportVersion1.chv,
+      period: chvMalariaReportVersion1.period,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      cHVMalariaReportVersion1.createdBy,
-      cHVMalariaReportVersion1.lastUpdatedBy
+      chvMalariaReportVersion1.createdBy,
+      chvMalariaReportVersion1.lastUpdatedBy
     );
-    this.cHVSSharedCollection = this.cHVService.addCHVToCollectionIfMissing(this.cHVSSharedCollection, cHVMalariaReportVersion1.chv);
+    this.chvsSharedCollection = this.chvService.addChvToCollectionIfMissing(this.chvsSharedCollection, chvMalariaReportVersion1.chv);
     this.periodsSharedCollection = this.periodService.addPeriodToCollectionIfMissing(
       this.periodsSharedCollection,
-      cHVMalariaReportVersion1.period
+      chvMalariaReportVersion1.period
     );
   }
 
@@ -180,11 +180,11 @@ export class CHVMalariaReportVersion1UpdateComponent implements OnInit {
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
 
-    this.cHVService
+    this.chvService
       .query()
-      .pipe(map((res: HttpResponse<ICHV[]>) => res.body ?? []))
-      .pipe(map((cHVS: ICHV[]) => this.cHVService.addCHVToCollectionIfMissing(cHVS, this.editForm.get('chv')!.value)))
-      .subscribe((cHVS: ICHV[]) => (this.cHVSSharedCollection = cHVS));
+      .pipe(map((res: HttpResponse<IChv[]>) => res.body ?? []))
+      .pipe(map((chvs: IChv[]) => this.chvService.addChvToCollectionIfMissing(chvs, this.editForm.get('chv')!.value)))
+      .subscribe((chvs: IChv[]) => (this.chvsSharedCollection = chvs));
 
     this.periodService
       .query()
@@ -193,9 +193,9 @@ export class CHVMalariaReportVersion1UpdateComponent implements OnInit {
       .subscribe((periods: IPeriod[]) => (this.periodsSharedCollection = periods));
   }
 
-  protected createFromForm(): ICHVMalariaReportVersion1 {
+  protected createFromForm(): IChvMalariaReportVersion1 {
     return {
-      ...new CHVMalariaReportVersion1(),
+      ...new ChvMalariaReportVersion1(),
       id: this.editForm.get(['id'])!.value,
       uid: this.editForm.get(['uid'])!.value,
       created: this.editForm.get(['created'])!.value ? dayjs(this.editForm.get(['created'])!.value, DATE_TIME_FORMAT) : undefined,

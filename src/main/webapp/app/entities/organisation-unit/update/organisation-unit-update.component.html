@@ -387,10 +387,10 @@
           <select class="form-control" id="field_assignedChv" data-cy="assignedChv" name="assignedChv" formControlName="assignedChv">
             <option [ngValue]="null"></option>
             <option
-              [ngValue]="cHVOption.id === editForm.get('assignedChv')!.value?.id ? editForm.get('assignedChv')!.value : cHVOption"
-              *ngFor="let cHVOption of cHVSSharedCollection; trackBy: trackCHVById"
+              [ngValue]="chvOption.id === editForm.get('assignedChv')!.value?.id ? editForm.get('assignedChv')!.value : chvOption"
+              *ngFor="let chvOption of chvsSharedCollection; trackBy: trackChvById"
             >
-              {{ cHVOption.id }}
+              {{ chvOption.id }}
             </option>
           </select>
         </div>

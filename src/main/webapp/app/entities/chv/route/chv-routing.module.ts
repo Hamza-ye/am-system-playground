@@ -2,45 +2,45 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { CHVComponent } from '../list/chv.component';
-import { CHVDetailComponent } from '../detail/chv-detail.component';
-import { CHVUpdateComponent } from '../update/chv-update.component';
-import { CHVRoutingResolveService } from './chv-routing-resolve.service';
+import { ChvComponent } from '../list/chv.component';
+import { ChvDetailComponent } from '../detail/chv-detail.component';
+import { ChvUpdateComponent } from '../update/chv-update.component';
+import { ChvRoutingResolveService } from './chv-routing-resolve.service';
 
-const cHVRoute: Routes = [
+const chvRoute: Routes = [
   {
     path: '',
-    component: CHVComponent,
+    component: ChvComponent,
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
-    component: CHVDetailComponent,
+    component: ChvDetailComponent,
     resolve: {
-      cHV: CHVRoutingResolveService,
+      chv: ChvRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
-    component: CHVUpdateComponent,
+    component: ChvUpdateComponent,
     resolve: {
-      cHV: CHVRoutingResolveService,
+      chv: ChvRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
-    component: CHVUpdateComponent,
+    component: ChvUpdateComponent,
     resolve: {
-      cHV: CHVRoutingResolveService,
+      chv: ChvRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(cHVRoute)],
+  imports: [RouterModule.forChild(chvRoute)],
   exports: [RouterModule],
 })
-export class CHVRoutingModule {}
+export class ChvRoutingModule {}

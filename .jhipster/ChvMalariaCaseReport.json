@@ -1,0 +1,110 @@
+{
+  "name": "ChvMalariaCaseReport",
+  "fields": [
+    {
+      "fieldName": "uid",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "11"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastUpdated",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "individualName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "Gender",
+      "fieldValues": "MALE,FEMALE"
+    },
+    {
+      "fieldName": "isPregnant",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "malariaTestResult",
+      "fieldType": "MalariaTestResult",
+      "fieldValues": "POSITIVE,NEGATIVE"
+    },
+    {
+      "fieldName": "drugsGiven",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "suppsGiven",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "referral",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "barImageUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisationUnit",
+      "otherEntityRelationshipName": "chvMalariaCaseReport",
+      "relationshipName": "subVillage",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "chvMalariaCaseReport",
+      "relationshipName": "createdBy",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "chvMalariaCaseReport",
+      "relationshipName": "lastUpdatedBy",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "chv",
+      "otherEntityRelationshipName": "chvMalariaCaseReport",
+      "relationshipValidateRules": "required",
+      "relationshipName": "chv",
+      "otherEntityField": "code"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "casesReportClass",
+      "otherEntityRelationshipName": "chvMalariaCaseReport",
+      "relationshipValidateRules": "required",
+      "relationshipName": "reportClass",
+      "otherEntityField": "name"
+    }
+  ],
+  "entityTableName": "chv_malaria_case_report",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211126181846"
+}

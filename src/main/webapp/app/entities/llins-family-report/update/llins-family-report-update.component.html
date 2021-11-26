@@ -3,10 +3,10 @@
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2
         id="app-llins-family-report-heading"
-        data-cy="LLINSFamilyReportCreateUpdateHeading"
-        appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.home.createOrEditLabel"
+        data-cy="LlinsFamilyReportCreateUpdateHeading"
+        appTranslate="amSystemPlaygroundApp.llinsFamilyReport.home.createOrEditLabel"
       >
-        Create or edit a LLINS Family Report
+        Create or edit a Llins Family Report
       </h2>
 
       <div>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.uid" for="field_uid">Uid</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReport.uid" for="field_uid">Uid</label>
           <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
           <div *ngIf="editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('uid')?.errors?.required" appTranslate="entity.validation.required">
@@ -36,7 +36,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.created" for="field_created"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReport.created" for="field_created"
             >Created</label
           >
           <div class="d-flex">
@@ -53,7 +53,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.lastUpdated" for="field_lastUpdated"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReport.lastUpdated" for="field_lastUpdated"
             >Last Updated</label
           >
           <div class="d-flex">
@@ -70,7 +70,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.checkNo" for="field_checkNo"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReport.checkNo" for="field_checkNo"
             >Check No</label
           >
           <input type="number" class="form-control" name="checkNo" id="field_checkNo" data-cy="checkNo" formControlName="checkNo" />
@@ -79,7 +79,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.maleIndividuals"
+            appTranslate="amSystemPlaygroundApp.llinsFamilyReport.maleIndividuals"
             for="field_maleIndividuals"
             >Male Individuals</label
           >
@@ -125,7 +125,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.femaleIndividuals"
+            appTranslate="amSystemPlaygroundApp.llinsFamilyReport.femaleIndividuals"
             for="field_femaleIndividuals"
             >Female Individuals</label
           >
@@ -169,7 +169,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.lessThan5Males" for="field_lessThan5Males"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReport.lessThan5Males" for="field_lessThan5Males"
             >Less Than 5 Males</label
           >
           <input
@@ -213,7 +213,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.lessThan5Females"
+            appTranslate="amSystemPlaygroundApp.llinsFamilyReport.lessThan5Females"
             for="field_lessThan5Females"
             >Less Than 5 Females</label
           >
@@ -257,7 +257,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.pregnantWomen" for="field_pregnantWomen"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReport.pregnantWomen" for="field_pregnantWomen"
             >Pregnant Women</label
           >
           <input
@@ -301,7 +301,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.quantityReceived"
+            appTranslate="amSystemPlaygroundApp.llinsFamilyReport.quantityReceived"
             for="field_quantityReceived"
             >Quantity Received</label
           >
@@ -345,7 +345,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.familyType" for="field_familyType"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReport.familyType" for="field_familyType"
             >Family Type</label
           >
           <select class="form-control" name="familyType" formControlName="familyType" id="field_familyType" data-cy="familyType">
@@ -365,14 +365,14 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.comment" for="field_comment"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReport.comment" for="field_comment"
             >Comment</label
           >
           <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.createdBy" for="field_createdBy"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReport.createdBy" for="field_createdBy"
             >Created By</label
           >
           <select class="form-control" id="field_createdBy" data-cy="createdBy" name="createdBy" formControlName="createdBy">
@@ -387,7 +387,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.lastUpdatedBy" for="field_lastUpdatedBy"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReport.lastUpdatedBy" for="field_lastUpdatedBy"
             >Last Updated By</label
           >
           <select
@@ -408,7 +408,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.dayReached" for="field_dayReached"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReport.dayReached" for="field_dayReached"
             >Day Reached</label
           >
           <select class="form-control" id="field_dayReached" data-cy="dayReached" name="dayReached" formControlName="dayReached">
@@ -436,7 +436,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.targetDetails" for="field_targetDetails"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReport.targetDetails" for="field_targetDetails"
             >Target Details</label
           >
           <select
@@ -449,19 +449,19 @@
             <option [ngValue]="null"></option>
             <option
               [ngValue]="
-                lLINSFamilyTargetOption.id === editForm.get('targetDetails')!.value?.id
+                llinsFamilyTargetOption.id === editForm.get('targetDetails')!.value?.id
                   ? editForm.get('targetDetails')!.value
-                  : lLINSFamilyTargetOption
+                  : llinsFamilyTargetOption
               "
-              *ngFor="let lLINSFamilyTargetOption of lLINSFamilyTargetsSharedCollection; trackBy: trackLLINSFamilyTargetById"
+              *ngFor="let llinsFamilyTargetOption of llinsFamilyTargetsSharedCollection; trackBy: trackLlinsFamilyTargetById"
             >
-              {{ lLINSFamilyTargetOption.id }}
+              {{ llinsFamilyTargetOption.id }}
             </option>
           </select>
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.executingTeam" for="field_executingTeam"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyReport.executingTeam" for="field_executingTeam"
             >Executing Team</label
           >
           <select

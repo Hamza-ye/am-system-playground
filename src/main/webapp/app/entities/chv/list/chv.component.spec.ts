@@ -3,27 +3,27 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 
-import { CHVService } from '../service/chv.service';
+import { ChvService } from '../service/chv.service';
 
-import { CHVComponent } from './chv.component';
+import { ChvComponent } from './chv.component';
 
 describe('Component Tests', () => {
   describe('Chv Management Component', () => {
-    let comp: CHVComponent;
-    let fixture: ComponentFixture<CHVComponent>;
-    let service: CHVService;
+    let comp: ChvComponent;
+    let fixture: ComponentFixture<ChvComponent>;
+    let service: ChvService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [CHVComponent],
+        declarations: [ChvComponent],
       })
-        .overrideTemplate(CHVComponent, '')
+        .overrideTemplate(ChvComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(CHVComponent);
+      fixture = TestBed.createComponent(ChvComponent);
       comp = fixture.componentInstance;
-      service = TestBed.inject(CHVService);
+      service = TestBed.inject(ChvService);
 
       const headers = new HttpHeaders().append('link', 'link;link');
       jest.spyOn(service, 'query').mockReturnValue(
@@ -42,7 +42,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.cHVS?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+      expect(comp.chvs?.[0]).toEqual(expect.objectContaining({ id: 123 }));
     });
   });
 });

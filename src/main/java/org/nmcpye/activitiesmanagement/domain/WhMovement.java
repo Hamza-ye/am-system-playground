@@ -200,6 +200,11 @@ public class WhMovement implements Serializable {
     }
 
     //    @Override
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    //    @Override
     @Deprecated
     public User getUser() {
         return createdBy;

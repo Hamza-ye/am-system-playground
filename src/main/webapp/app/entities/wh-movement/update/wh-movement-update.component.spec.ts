@@ -7,8 +7,8 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { of, Subject } from 'rxjs';
 
-import { WHMovementService } from '../service/wh-movement.service';
-import { IWHMovement, WHMovement } from '../wh-movement.model';
+import { WhMovementService } from '../service/wh-movement.service';
+import { IWhMovement, WhMovement } from '../wh-movement.model';
 
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
@@ -19,14 +19,14 @@ import { WarehouseService } from 'app/entities/warehouse/service/warehouse.servi
 import { ITeam } from 'app/entities/team/team.model';
 import { TeamService } from 'app/entities/team/service/team.service';
 
-import { WHMovementUpdateComponent } from './wh-movement-update.component';
+import { WhMovementUpdateComponent } from './wh-movement-update.component';
 
 describe('Component Tests', () => {
   describe('WhMovement Management Update Component', () => {
-    let comp: WHMovementUpdateComponent;
-    let fixture: ComponentFixture<WHMovementUpdateComponent>;
+    let comp: WhMovementUpdateComponent;
+    let fixture: ComponentFixture<WhMovementUpdateComponent>;
     let activatedRoute: ActivatedRoute;
-    let wHMovementService: WHMovementService;
+    let whMovementService: WhMovementService;
     let userService: UserService;
     let workingDayService: WorkingDayService;
     let warehouseService: WarehouseService;
@@ -35,15 +35,15 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [WHMovementUpdateComponent],
+        declarations: [WhMovementUpdateComponent],
         providers: [FormBuilder, ActivatedRoute],
       })
-        .overrideTemplate(WHMovementUpdateComponent, '')
+        .overrideTemplate(WhMovementUpdateComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(WHMovementUpdateComponent);
+      fixture = TestBed.createComponent(WhMovementUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
-      wHMovementService = TestBed.inject(WHMovementService);
+      whMovementService = TestBed.inject(WhMovementService);
       userService = TestBed.inject(UserService);
       workingDayService = TestBed.inject(WorkingDayService);
       warehouseService = TestBed.inject(WarehouseService);
@@ -54,19 +54,19 @@ describe('Component Tests', () => {
 
     describe('ngOnInit', () => {
       it('Should call User query and add missing value', () => {
-        const wHMovement: IWHMovement = { id: 456 };
-        const createdBy: IUser = { id: 55578 };
-        wHMovement.createdBy = createdBy;
-        const lastUpdatedBy: IUser = { id: 14210 };
-        wHMovement.lastUpdatedBy = lastUpdatedBy;
+        const whMovement: IWhMovement = { id: 456 };
+        const createdBy: IUser = { id: 99427 };
+        whMovement.createdBy = createdBy;
+        const lastUpdatedBy: IUser = { id: 93412 };
+        whMovement.lastUpdatedBy = lastUpdatedBy;
 
-        const userCollection: IUser[] = [{ id: 96808 }];
+        const userCollection: IUser[] = [{ id: 67046 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
         const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ wHMovement });
+        activatedRoute.data = of({ whMovement });
         comp.ngOnInit();
 
         expect(userService.query).toHaveBeenCalled();
@@ -75,17 +75,17 @@ describe('Component Tests', () => {
       });
 
       it('Should call WorkingDay query and add missing value', () => {
-        const wHMovement: IWHMovement = { id: 456 };
-        const day: IWorkingDay = { id: 27809 };
-        wHMovement.day = day;
+        const whMovement: IWhMovement = { id: 456 };
+        const day: IWorkingDay = { id: 89551 };
+        whMovement.day = day;
 
-        const workingDayCollection: IWorkingDay[] = [{ id: 53376 }];
+        const workingDayCollection: IWorkingDay[] = [{ id: 12922 }];
         jest.spyOn(workingDayService, 'query').mockReturnValue(of(new HttpResponse({ body: workingDayCollection })));
         const additionalWorkingDays = [day];
         const expectedCollection: IWorkingDay[] = [...additionalWorkingDays, ...workingDayCollection];
         jest.spyOn(workingDayService, 'addWorkingDayToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ wHMovement });
+        activatedRoute.data = of({ whMovement });
         comp.ngOnInit();
 
         expect(workingDayService.query).toHaveBeenCalled();
@@ -94,19 +94,19 @@ describe('Component Tests', () => {
       });
 
       it('Should call Warehouse query and add missing value', () => {
-        const wHMovement: IWHMovement = { id: 456 };
-        const initiatedWH: IWarehouse = { id: 99308 };
-        wHMovement.initiatedWH = initiatedWH;
-        const theOtherSideWH: IWarehouse = { id: 57131 };
-        wHMovement.theOtherSideWH = theOtherSideWH;
+        const whMovement: IWhMovement = { id: 456 };
+        const initiatedWh: IWarehouse = { id: 15625 };
+        whMovement.initiatedWh = initiatedWh;
+        const theOtherSideWh: IWarehouse = { id: 85564 };
+        whMovement.theOtherSideWh = theOtherSideWh;
 
-        const warehouseCollection: IWarehouse[] = [{ id: 98814 }];
+        const warehouseCollection: IWarehouse[] = [{ id: 76894 }];
         jest.spyOn(warehouseService, 'query').mockReturnValue(of(new HttpResponse({ body: warehouseCollection })));
-        const additionalWarehouses = [initiatedWH, theOtherSideWH];
+        const additionalWarehouses = [initiatedWh, theOtherSideWh];
         const expectedCollection: IWarehouse[] = [...additionalWarehouses, ...warehouseCollection];
         jest.spyOn(warehouseService, 'addWarehouseToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ wHMovement });
+        activatedRoute.data = of({ whMovement });
         comp.ngOnInit();
 
         expect(warehouseService.query).toHaveBeenCalled();
@@ -115,17 +115,17 @@ describe('Component Tests', () => {
       });
 
       it('Should call Team query and add missing value', () => {
-        const wHMovement: IWHMovement = { id: 456 };
-        const team: ITeam = { id: 30961 };
-        wHMovement.team = team;
+        const whMovement: IWhMovement = { id: 456 };
+        const team: ITeam = { id: 83979 };
+        whMovement.team = team;
 
-        const teamCollection: ITeam[] = [{ id: 71432 }];
+        const teamCollection: ITeam[] = [{ id: 86606 }];
         jest.spyOn(teamService, 'query').mockReturnValue(of(new HttpResponse({ body: teamCollection })));
         const additionalTeams = [team];
         const expectedCollection: ITeam[] = [...additionalTeams, ...teamCollection];
         jest.spyOn(teamService, 'addTeamToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ wHMovement });
+        activatedRoute.data = of({ whMovement });
         comp.ngOnInit();
 
         expect(teamService.query).toHaveBeenCalled();
@@ -134,29 +134,29 @@ describe('Component Tests', () => {
       });
 
       it('Should update editForm', () => {
-        const wHMovement: IWHMovement = { id: 456 };
-        const createdBy: IUser = { id: 74123 };
-        wHMovement.createdBy = createdBy;
-        const lastUpdatedBy: IUser = { id: 1397 };
-        wHMovement.lastUpdatedBy = lastUpdatedBy;
-        const day: IWorkingDay = { id: 42326 };
-        wHMovement.day = day;
-        const initiatedWH: IWarehouse = { id: 53602 };
-        wHMovement.initiatedWH = initiatedWH;
-        const theOtherSideWH: IWarehouse = { id: 4877 };
-        wHMovement.theOtherSideWH = theOtherSideWH;
-        const team: ITeam = { id: 9463 };
-        wHMovement.team = team;
+        const whMovement: IWhMovement = { id: 456 };
+        const createdBy: IUser = { id: 24298 };
+        whMovement.createdBy = createdBy;
+        const lastUpdatedBy: IUser = { id: 50076 };
+        whMovement.lastUpdatedBy = lastUpdatedBy;
+        const day: IWorkingDay = { id: 42271 };
+        whMovement.day = day;
+        const initiatedWh: IWarehouse = { id: 32532 };
+        whMovement.initiatedWh = initiatedWh;
+        const theOtherSideWh: IWarehouse = { id: 97076 };
+        whMovement.theOtherSideWh = theOtherSideWh;
+        const team: ITeam = { id: 45372 };
+        whMovement.team = team;
 
-        activatedRoute.data = of({ wHMovement });
+        activatedRoute.data = of({ whMovement });
         comp.ngOnInit();
 
-        expect(comp.editForm.value).toEqual(expect.objectContaining(wHMovement));
+        expect(comp.editForm.value).toEqual(expect.objectContaining(whMovement));
         expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.workingDaysSharedCollection).toContain(day);
-        expect(comp.warehousesSharedCollection).toContain(initiatedWH);
-        expect(comp.warehousesSharedCollection).toContain(theOtherSideWH);
+        expect(comp.warehousesSharedCollection).toContain(initiatedWh);
+        expect(comp.warehousesSharedCollection).toContain(theOtherSideWh);
         expect(comp.teamsSharedCollection).toContain(team);
       });
     });
@@ -164,53 +164,53 @@ describe('Component Tests', () => {
     describe('save', () => {
       it('Should call update service on save for existing entity', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<WHMovement>>();
-        const wHMovement = { id: 123 };
-        jest.spyOn(wHMovementService, 'update').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<WhMovement>>();
+        const whMovement = { id: 123 };
+        jest.spyOn(whMovementService, 'update').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ wHMovement });
+        activatedRoute.data = of({ whMovement });
         comp.ngOnInit();
 
         // WHEN
         comp.save();
         expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: wHMovement }));
+        saveSubject.next(new HttpResponse({ body: whMovement }));
         saveSubject.complete();
 
         // THEN
         expect(comp.previousState).toHaveBeenCalled();
-        expect(wHMovementService.update).toHaveBeenCalledWith(wHMovement);
+        expect(whMovementService.update).toHaveBeenCalledWith(whMovement);
         expect(comp.isSaving).toEqual(false);
       });
 
       it('Should call create service on save for new entity', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<WHMovement>>();
-        const wHMovement = new WHMovement();
-        jest.spyOn(wHMovementService, 'create').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<WhMovement>>();
+        const whMovement = new WhMovement();
+        jest.spyOn(whMovementService, 'create').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ wHMovement });
+        activatedRoute.data = of({ whMovement });
         comp.ngOnInit();
 
         // WHEN
         comp.save();
         expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: wHMovement }));
+        saveSubject.next(new HttpResponse({ body: whMovement }));
         saveSubject.complete();
 
         // THEN
-        expect(wHMovementService.create).toHaveBeenCalledWith(wHMovement);
+        expect(whMovementService.create).toHaveBeenCalledWith(whMovement);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).toHaveBeenCalled();
       });
 
       it('Should set isSaving to false on error', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<WHMovement>>();
-        const wHMovement = { id: 123 };
-        jest.spyOn(wHMovementService, 'update').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<WhMovement>>();
+        const whMovement = { id: 123 };
+        jest.spyOn(whMovementService, 'update').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ wHMovement });
+        activatedRoute.data = of({ whMovement });
         comp.ngOnInit();
 
         // WHEN
@@ -219,7 +219,7 @@ describe('Component Tests', () => {
         saveSubject.error('This is an error!');
 
         // THEN
-        expect(wHMovementService.update).toHaveBeenCalledWith(wHMovement);
+        expect(whMovementService.update).toHaveBeenCalledWith(whMovement);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).not.toHaveBeenCalled();
       });

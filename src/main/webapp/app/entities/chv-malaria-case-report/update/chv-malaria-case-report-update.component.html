@@ -3,10 +3,10 @@
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2
         id="app-chv-malaria-case-report-heading"
-        data-cy="CHVMalariaCaseReportCreateUpdateHeading"
-        appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.home.createOrEditLabel"
+        data-cy="ChvMalariaCaseReportCreateUpdateHeading"
+        appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.home.createOrEditLabel"
       >
-        Create or edit a CHV Malaria Case Report
+        Create or edit a Chv Malaria Case Report
       </h2>
 
       <div>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.uid" for="field_uid">Uid</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.uid" for="field_uid">Uid</label>
           <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
           <div *ngIf="editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('uid')?.errors?.required" appTranslate="entity.validation.required">
@@ -36,7 +36,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.created" for="field_created"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.created" for="field_created"
             >Created</label
           >
           <div class="d-flex">
@@ -53,7 +53,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.lastUpdated" for="field_lastUpdated"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.lastUpdated" for="field_lastUpdated"
             >Last Updated</label
           >
           <div class="d-flex">
@@ -70,7 +70,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.date" for="field_date">Date</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.date" for="field_date">Date</label>
           <div class="input-group">
             <input
               id="field_date"
@@ -91,7 +91,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.individualName"
+            appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.individualName"
             for="field_individualName"
             >Individual Name</label
           >
@@ -106,7 +106,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.gender" for="field_gender"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.gender" for="field_gender"
             >Gender</label
           >
           <select class="form-control" name="gender" formControlName="gender" id="field_gender" data-cy="gender">
@@ -117,7 +117,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.isPregnant" for="field_isPregnant"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.isPregnant" for="field_isPregnant"
             >Is Pregnant</label
           >
           <input
@@ -133,7 +133,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.malariaTestResult"
+            appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.malariaTestResult"
             for="field_malariaTestResult"
             >Malaria Test Result</label
           >
@@ -151,7 +151,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.drugsGiven" for="field_drugsGiven"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.drugsGiven" for="field_drugsGiven"
             >Drugs Given</label
           >
           <input
@@ -165,7 +165,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.suppsGiven" for="field_suppsGiven"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.suppsGiven" for="field_suppsGiven"
             >Supps Given</label
           >
           <input
@@ -179,14 +179,14 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.referral" for="field_referral"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.referral" for="field_referral"
             >Referral</label
           >
           <input type="checkbox" class="form-check" name="referral" id="field_referral" data-cy="referral" formControlName="referral" />
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.barImageUrl" for="field_barImageUrl"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.barImageUrl" for="field_barImageUrl"
             >Bar Image Url</label
           >
           <input
@@ -200,14 +200,14 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.comment" for="field_comment"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.comment" for="field_comment"
             >Comment</label
           >
           <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.subVillage" for="field_subVillage"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.subVillage" for="field_subVillage"
             >Sub Village</label
           >
           <select class="form-control" id="field_subVillage" data-cy="subVillage" name="subVillage" formControlName="subVillage">
@@ -226,7 +226,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.createdBy" for="field_createdBy"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.createdBy" for="field_createdBy"
             >Created By</label
           >
           <select class="form-control" id="field_createdBy" data-cy="createdBy" name="createdBy" formControlName="createdBy">
@@ -243,7 +243,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.lastUpdatedBy"
+            appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.lastUpdatedBy"
             for="field_lastUpdatedBy"
             >Last Updated By</label
           >
@@ -265,14 +265,14 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.chv" for="field_chv">Chv</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.chv" for="field_chv">Chv</label>
           <select class="form-control" id="field_chv" data-cy="chv" name="chv" formControlName="chv">
             <option *ngIf="!editForm.get('chv')!.value" [ngValue]="null" selected></option>
             <option
-              [ngValue]="cHVOption.id === editForm.get('chv')!.value?.id ? editForm.get('chv')!.value : cHVOption"
-              *ngFor="let cHVOption of cHVSSharedCollection; trackBy: trackCHVById"
+              [ngValue]="chvOption.id === editForm.get('chv')!.value?.id ? editForm.get('chv')!.value : chvOption"
+              *ngFor="let chvOption of chvsSharedCollection; trackBy: trackChvById"
             >
-              {{ cHVOption.code }}
+              {{ chvOption.code }}
             </option>
           </select>
         </div>
@@ -283,7 +283,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.reportClass" for="field_reportClass"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.reportClass" for="field_reportClass"
             >Report Class</label
           >
           <select class="form-control" id="field_reportClass" data-cy="reportClass" name="reportClass" formControlName="reportClass">

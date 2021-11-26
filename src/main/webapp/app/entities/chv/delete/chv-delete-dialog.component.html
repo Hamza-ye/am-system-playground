@@ -1,6 +1,6 @@
-<form *ngIf="cHV" name="deleteForm" (ngSubmit)="confirmDelete(cHV.id!)">
+<form *ngIf="chv" name="deleteForm" (ngSubmit)="confirmDelete(chv.id!)">
   <div class="modal-header">
-    <h4 class="modal-title" data-cy="cHVDeleteDialogHeading" appTranslate="entity.delete.title">Confirm delete operation</h4>
+    <h4 class="modal-title" data-cy="chvDeleteDialogHeading" appTranslate="entity.delete.title">Confirm delete operation</h4>
 
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
   </div>
@@ -8,8 +8,8 @@
   <div class="modal-body">
     <app-alert-error></app-alert-error>
 
-    <p id="app-delete-cHV-heading" appTranslate="amSystemPlaygroundApp.cHV.delete.question" [translateValues]="{ id: cHV.id }">
-      Are you sure you want to delete this CHV?
+    <p id="app-delete-chv-heading" appTranslate="amSystemPlaygroundApp.chv.delete.question" [translateValues]="{ id: chv.id }">
+      Are you sure you want to delete this Chv?
     </p>
   </div>
 
@@ -18,7 +18,7 @@
       <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
     </button>
 
-    <button id="app-confirm-delete-cHV" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+    <button id="app-confirm-delete-chv" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
       <fa-icon icon="times"></fa-icon>&nbsp;<span appTranslate="entity.action.delete">Delete</span>
     </button>
   </div>

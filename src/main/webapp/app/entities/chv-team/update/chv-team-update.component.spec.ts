@@ -7,62 +7,62 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { of, Subject } from 'rxjs';
 
-import { CHVTeamService } from '../service/chv-team.service';
-import { ICHVTeam, CHVTeam } from '../chv-team.model';
+import { ChvTeamService } from '../service/chv-team.service';
+import { IChvTeam, ChvTeam } from '../chv-team.model';
 
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 import { IPerson } from 'app/entities/person/person.model';
 import { PersonService } from 'app/entities/person/service/person.service';
-import { ICHV } from 'app/entities/chv/chv.model';
-import { CHVService } from 'app/entities/chv/service/chv.service';
+import { IChv } from 'app/entities/chv/chv.model';
+import { ChvService } from 'app/entities/chv/service/chv.service';
 
-import { CHVTeamUpdateComponent } from './chv-team-update.component';
+import { ChvTeamUpdateComponent } from './chv-team-update.component';
 
 describe('Component Tests', () => {
   describe('ChvTeam Management Update Component', () => {
-    let comp: CHVTeamUpdateComponent;
-    let fixture: ComponentFixture<CHVTeamUpdateComponent>;
+    let comp: ChvTeamUpdateComponent;
+    let fixture: ComponentFixture<ChvTeamUpdateComponent>;
     let activatedRoute: ActivatedRoute;
-    let cHVTeamService: CHVTeamService;
+    let chvTeamService: ChvTeamService;
     let userService: UserService;
     let personService: PersonService;
-    let cHVService: CHVService;
+    let chvService: ChvService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [CHVTeamUpdateComponent],
+        declarations: [ChvTeamUpdateComponent],
         providers: [FormBuilder, ActivatedRoute],
       })
-        .overrideTemplate(CHVTeamUpdateComponent, '')
+        .overrideTemplate(ChvTeamUpdateComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(CHVTeamUpdateComponent);
+      fixture = TestBed.createComponent(ChvTeamUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
-      cHVTeamService = TestBed.inject(CHVTeamService);
+      chvTeamService = TestBed.inject(ChvTeamService);
       userService = TestBed.inject(UserService);
       personService = TestBed.inject(PersonService);
-      cHVService = TestBed.inject(CHVService);
+      chvService = TestBed.inject(ChvService);
 
       comp = fixture.componentInstance;
     });
 
     describe('ngOnInit', () => {
       it('Should call User query and add missing value', () => {
-        const cHVTeam: ICHVTeam = { id: 456 };
-        const createdBy: IUser = { id: 36917 };
-        cHVTeam.createdBy = createdBy;
-        const lastUpdatedBy: IUser = { id: 31318 };
-        cHVTeam.lastUpdatedBy = lastUpdatedBy;
+        const chvTeam: IChvTeam = { id: 456 };
+        const createdBy: IUser = { id: 10463 };
+        chvTeam.createdBy = createdBy;
+        const lastUpdatedBy: IUser = { id: 41907 };
+        chvTeam.lastUpdatedBy = lastUpdatedBy;
 
-        const userCollection: IUser[] = [{ id: 9674 }];
+        const userCollection: IUser[] = [{ id: 66729 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
         const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ cHVTeam });
+        activatedRoute.data = of({ chvTeam });
         comp.ngOnInit();
 
         expect(userService.query).toHaveBeenCalled();
@@ -71,17 +71,17 @@ describe('Component Tests', () => {
       });
 
       it('Should call Person query and add missing value', () => {
-        const cHVTeam: ICHVTeam = { id: 456 };
-        const person: IPerson = { id: 82619 };
-        cHVTeam.person = person;
+        const chvTeam: IChvTeam = { id: 456 };
+        const person: IPerson = { id: 15224 };
+        chvTeam.person = person;
 
-        const personCollection: IPerson[] = [{ id: 80723 }];
+        const personCollection: IPerson[] = [{ id: 73866 }];
         jest.spyOn(personService, 'query').mockReturnValue(of(new HttpResponse({ body: personCollection })));
         const additionalPeople = [person];
         const expectedCollection: IPerson[] = [...additionalPeople, ...personCollection];
         jest.spyOn(personService, 'addPersonToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ cHVTeam });
+        activatedRoute.data = of({ chvTeam });
         comp.ngOnInit();
 
         expect(personService.query).toHaveBeenCalled();
@@ -90,96 +90,96 @@ describe('Component Tests', () => {
       });
 
       it('Should call Chv query and add missing value', () => {
-        const cHVTeam: ICHVTeam = { id: 456 };
-        const responsibleForChvs: ICHV[] = [{ id: 67602 }];
-        cHVTeam.responsibleForChvs = responsibleForChvs;
+        const chvTeam: IChvTeam = { id: 456 };
+        const responsibleForChvs: IChv[] = [{ id: 14101 }];
+        chvTeam.responsibleForChvs = responsibleForChvs;
 
-        const cHVCollection: ICHV[] = [{ id: 28823 }];
-        jest.spyOn(cHVService, 'query').mockReturnValue(of(new HttpResponse({ body: cHVCollection })));
-        const additionalCHVS = [...responsibleForChvs];
-        const expectedCollection: ICHV[] = [...additionalCHVS, ...cHVCollection];
-        jest.spyOn(cHVService, 'addCHVToCollectionIfMissing').mockReturnValue(expectedCollection);
+        const chvCollection: IChv[] = [{ id: 42484 }];
+        jest.spyOn(chvService, 'query').mockReturnValue(of(new HttpResponse({ body: chvCollection })));
+        const additionalChvs = [...responsibleForChvs];
+        const expectedCollection: IChv[] = [...additionalChvs, ...chvCollection];
+        jest.spyOn(chvService, 'addChvToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ cHVTeam });
+        activatedRoute.data = of({ chvTeam });
         comp.ngOnInit();
 
-        expect(cHVService.query).toHaveBeenCalled();
-        expect(cHVService.addCHVToCollectionIfMissing).toHaveBeenCalledWith(cHVCollection, ...additionalCHVS);
-        expect(comp.cHVSSharedCollection).toEqual(expectedCollection);
+        expect(chvService.query).toHaveBeenCalled();
+        expect(chvService.addChvToCollectionIfMissing).toHaveBeenCalledWith(chvCollection, ...additionalChvs);
+        expect(comp.chvsSharedCollection).toEqual(expectedCollection);
       });
 
       it('Should update editForm', () => {
-        const cHVTeam: ICHVTeam = { id: 456 };
-        const createdBy: IUser = { id: 77039 };
-        cHVTeam.createdBy = createdBy;
-        const lastUpdatedBy: IUser = { id: 38654 };
-        cHVTeam.lastUpdatedBy = lastUpdatedBy;
-        const person: IPerson = { id: 55290 };
-        cHVTeam.person = person;
-        const responsibleForChvs: ICHV = { id: 99667 };
-        cHVTeam.responsibleForChvs = [responsibleForChvs];
+        const chvTeam: IChvTeam = { id: 456 };
+        const createdBy: IUser = { id: 46351 };
+        chvTeam.createdBy = createdBy;
+        const lastUpdatedBy: IUser = { id: 62764 };
+        chvTeam.lastUpdatedBy = lastUpdatedBy;
+        const person: IPerson = { id: 63620 };
+        chvTeam.person = person;
+        const responsibleForChvs: IChv = { id: 62970 };
+        chvTeam.responsibleForChvs = [responsibleForChvs];
 
-        activatedRoute.data = of({ cHVTeam });
+        activatedRoute.data = of({ chvTeam });
         comp.ngOnInit();
 
-        expect(comp.editForm.value).toEqual(expect.objectContaining(cHVTeam));
+        expect(comp.editForm.value).toEqual(expect.objectContaining(chvTeam));
         expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.peopleSharedCollection).toContain(person);
-        expect(comp.cHVSSharedCollection).toContain(responsibleForChvs);
+        expect(comp.chvsSharedCollection).toContain(responsibleForChvs);
       });
     });
 
     describe('save', () => {
       it('Should call update service on save for existing entity', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<CHVTeam>>();
-        const cHVTeam = { id: 123 };
-        jest.spyOn(cHVTeamService, 'update').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<ChvTeam>>();
+        const chvTeam = { id: 123 };
+        jest.spyOn(chvTeamService, 'update').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ cHVTeam });
+        activatedRoute.data = of({ chvTeam });
         comp.ngOnInit();
 
         // WHEN
         comp.save();
         expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: cHVTeam }));
+        saveSubject.next(new HttpResponse({ body: chvTeam }));
         saveSubject.complete();
 
         // THEN
         expect(comp.previousState).toHaveBeenCalled();
-        expect(cHVTeamService.update).toHaveBeenCalledWith(cHVTeam);
+        expect(chvTeamService.update).toHaveBeenCalledWith(chvTeam);
         expect(comp.isSaving).toEqual(false);
       });
 
       it('Should call create service on save for new entity', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<CHVTeam>>();
-        const cHVTeam = new CHVTeam();
-        jest.spyOn(cHVTeamService, 'create').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<ChvTeam>>();
+        const chvTeam = new ChvTeam();
+        jest.spyOn(chvTeamService, 'create').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ cHVTeam });
+        activatedRoute.data = of({ chvTeam });
         comp.ngOnInit();
 
         // WHEN
         comp.save();
         expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: cHVTeam }));
+        saveSubject.next(new HttpResponse({ body: chvTeam }));
         saveSubject.complete();
 
         // THEN
-        expect(cHVTeamService.create).toHaveBeenCalledWith(cHVTeam);
+        expect(chvTeamService.create).toHaveBeenCalledWith(chvTeam);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).toHaveBeenCalled();
       });
 
       it('Should set isSaving to false on error', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<CHVTeam>>();
-        const cHVTeam = { id: 123 };
-        jest.spyOn(cHVTeamService, 'update').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<ChvTeam>>();
+        const chvTeam = { id: 123 };
+        jest.spyOn(chvTeamService, 'update').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ cHVTeam });
+        activatedRoute.data = of({ chvTeam });
         comp.ngOnInit();
 
         // WHEN
@@ -188,7 +188,7 @@ describe('Component Tests', () => {
         saveSubject.error('This is an error!');
 
         // THEN
-        expect(cHVTeamService.update).toHaveBeenCalledWith(cHVTeam);
+        expect(chvTeamService.update).toHaveBeenCalledWith(chvTeam);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).not.toHaveBeenCalled();
       });
@@ -211,20 +211,20 @@ describe('Component Tests', () => {
         });
       });
 
-      describe('trackCHVById', () => {
+      describe('trackChvById', () => {
         it('Should return tracked Chv primary key', () => {
           const entity = { id: 123 };
-          const trackResult = comp.trackCHVById(0, entity);
+          const trackResult = comp.trackChvById(0, entity);
           expect(trackResult).toEqual(entity.id);
         });
       });
     });
 
     describe('Getting selected relationships', () => {
-      describe('getSelectedCHV', () => {
+      describe('getSelectedChv', () => {
         it('Should return option if no Chv is selected', () => {
           const option = { id: 123 };
-          const result = comp.getSelectedCHV(option);
+          const result = comp.getSelectedChv(option);
           expect(result === option).toEqual(true);
         });
 
@@ -232,7 +232,7 @@ describe('Component Tests', () => {
           const option = { id: 123 };
           const selected = { id: 123 };
           const selected2 = { id: 456 };
-          const result = comp.getSelectedCHV(option, [selected2, selected]);
+          const result = comp.getSelectedChv(option, [selected2, selected]);
           expect(result === selected).toEqual(true);
           expect(result === selected2).toEqual(false);
           expect(result === option).toEqual(false);
@@ -241,7 +241,7 @@ describe('Component Tests', () => {
         it('Should return option if this Chv is not selected', () => {
           const option = { id: 123 };
           const selected = { id: 456 };
-          const result = comp.getSelectedCHV(option, [selected]);
+          const result = comp.getSelectedChv(option, [selected]);
           expect(result === option).toEqual(true);
           expect(result === selected).toEqual(false);
         });

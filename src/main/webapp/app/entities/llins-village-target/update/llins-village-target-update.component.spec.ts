@@ -7,8 +7,8 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { of, Subject } from 'rxjs';
 
-import { LLINSVillageTargetService } from '../service/llins-village-target.service';
-import { ILLINSVillageTarget, LLINSVillageTarget } from '../llins-village-target.model';
+import { LlinsVillageTargetService } from '../service/llins-village-target.service';
+import { ILlinsVillageTarget, LlinsVillageTarget } from '../llins-village-target.model';
 import { IOrganisationUnit } from 'app/entities/organisation-unit/organisation-unit.model';
 import { OrganisationUnitService } from 'app/entities/organisation-unit/service/organisation-unit.service';
 
@@ -21,14 +21,14 @@ import { StatusOfCoverageService } from 'app/entities/status-of-coverage/service
 import { ITeam } from 'app/entities/team/team.model';
 import { TeamService } from 'app/entities/team/service/team.service';
 
-import { LLINSVillageTargetUpdateComponent } from './llins-village-target-update.component';
+import { LlinsVillageTargetUpdateComponent } from './llins-village-target-update.component';
 
 describe('Component Tests', () => {
   describe('LlinsVillageTarget Management Update Component', () => {
-    let comp: LLINSVillageTargetUpdateComponent;
-    let fixture: ComponentFixture<LLINSVillageTargetUpdateComponent>;
+    let comp: LlinsVillageTargetUpdateComponent;
+    let fixture: ComponentFixture<LlinsVillageTargetUpdateComponent>;
     let activatedRoute: ActivatedRoute;
-    let lLINSVillageTargetService: LLINSVillageTargetService;
+    let llinsVillageTargetService: LlinsVillageTargetService;
     let organisationUnitService: OrganisationUnitService;
     let userService: UserService;
     let workingDayService: WorkingDayService;
@@ -38,15 +38,15 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [LLINSVillageTargetUpdateComponent],
+        declarations: [LlinsVillageTargetUpdateComponent],
         providers: [FormBuilder, ActivatedRoute],
       })
-        .overrideTemplate(LLINSVillageTargetUpdateComponent, '')
+        .overrideTemplate(LlinsVillageTargetUpdateComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(LLINSVillageTargetUpdateComponent);
+      fixture = TestBed.createComponent(LlinsVillageTargetUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
-      lLINSVillageTargetService = TestBed.inject(LLINSVillageTargetService);
+      llinsVillageTargetService = TestBed.inject(LlinsVillageTargetService);
       organisationUnitService = TestBed.inject(OrganisationUnitService);
       userService = TestBed.inject(UserService);
       workingDayService = TestBed.inject(WorkingDayService);
@@ -58,17 +58,17 @@ describe('Component Tests', () => {
 
     describe('ngOnInit', () => {
       it('Should call OrganisationUnit query and add missing value', () => {
-        const lLINSVillageTarget: ILLINSVillageTarget = { id: 456 };
-        const organisationUnit: IOrganisationUnit = { id: 11032 };
-        lLINSVillageTarget.organisationUnit = organisationUnit;
+        const llinsVillageTarget: ILlinsVillageTarget = { id: 456 };
+        const organisationUnit: IOrganisationUnit = { id: 84903 };
+        llinsVillageTarget.organisationUnit = organisationUnit;
 
-        const organisationUnitCollection: IOrganisationUnit[] = [{ id: 44349 }];
+        const organisationUnitCollection: IOrganisationUnit[] = [{ id: 14693 }];
         jest.spyOn(organisationUnitService, 'query').mockReturnValue(of(new HttpResponse({ body: organisationUnitCollection })));
         const additionalOrganisationUnits = [organisationUnit];
         const expectedCollection: IOrganisationUnit[] = [...additionalOrganisationUnits, ...organisationUnitCollection];
         jest.spyOn(organisationUnitService, 'addOrganisationUnitToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ lLINSVillageTarget });
+        activatedRoute.data = of({ llinsVillageTarget });
         comp.ngOnInit();
 
         expect(organisationUnitService.query).toHaveBeenCalled();
@@ -80,19 +80,19 @@ describe('Component Tests', () => {
       });
 
       it('Should call User query and add missing value', () => {
-        const lLINSVillageTarget: ILLINSVillageTarget = { id: 456 };
-        const createdBy: IUser = { id: 23827 };
-        lLINSVillageTarget.createdBy = createdBy;
-        const lastUpdatedBy: IUser = { id: 96102 };
-        lLINSVillageTarget.lastUpdatedBy = lastUpdatedBy;
+        const llinsVillageTarget: ILlinsVillageTarget = { id: 456 };
+        const createdBy: IUser = { id: 21334 };
+        llinsVillageTarget.createdBy = createdBy;
+        const lastUpdatedBy: IUser = { id: 71871 };
+        llinsVillageTarget.lastUpdatedBy = lastUpdatedBy;
 
-        const userCollection: IUser[] = [{ id: 25715 }];
+        const userCollection: IUser[] = [{ id: 90912 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
         const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ lLINSVillageTarget });
+        activatedRoute.data = of({ llinsVillageTarget });
         comp.ngOnInit();
 
         expect(userService.query).toHaveBeenCalled();
@@ -101,17 +101,17 @@ describe('Component Tests', () => {
       });
 
       it('Should call WorkingDay query and add missing value', () => {
-        const lLINSVillageTarget: ILLINSVillageTarget = { id: 456 };
-        const dayPlanned: IWorkingDay = { id: 29584 };
-        lLINSVillageTarget.dayPlanned = dayPlanned;
+        const llinsVillageTarget: ILlinsVillageTarget = { id: 456 };
+        const dayPlanned: IWorkingDay = { id: 55886 };
+        llinsVillageTarget.dayPlanned = dayPlanned;
 
-        const workingDayCollection: IWorkingDay[] = [{ id: 46198 }];
+        const workingDayCollection: IWorkingDay[] = [{ id: 79181 }];
         jest.spyOn(workingDayService, 'query').mockReturnValue(of(new HttpResponse({ body: workingDayCollection })));
         const additionalWorkingDays = [dayPlanned];
         const expectedCollection: IWorkingDay[] = [...additionalWorkingDays, ...workingDayCollection];
         jest.spyOn(workingDayService, 'addWorkingDayToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ lLINSVillageTarget });
+        activatedRoute.data = of({ llinsVillageTarget });
         comp.ngOnInit();
 
         expect(workingDayService.query).toHaveBeenCalled();
@@ -120,17 +120,17 @@ describe('Component Tests', () => {
       });
 
       it('Should call StatusOfCoverage query and add missing value', () => {
-        const lLINSVillageTarget: ILLINSVillageTarget = { id: 456 };
-        const statusOfCoverage: IStatusOfCoverage = { id: 44282 };
-        lLINSVillageTarget.statusOfCoverage = statusOfCoverage;
+        const llinsVillageTarget: ILlinsVillageTarget = { id: 456 };
+        const statusOfCoverage: IStatusOfCoverage = { id: 35734 };
+        llinsVillageTarget.statusOfCoverage = statusOfCoverage;
 
-        const statusOfCoverageCollection: IStatusOfCoverage[] = [{ id: 9906 }];
+        const statusOfCoverageCollection: IStatusOfCoverage[] = [{ id: 58832 }];
         jest.spyOn(statusOfCoverageService, 'query').mockReturnValue(of(new HttpResponse({ body: statusOfCoverageCollection })));
         const additionalStatusOfCoverages = [statusOfCoverage];
         const expectedCollection: IStatusOfCoverage[] = [...additionalStatusOfCoverages, ...statusOfCoverageCollection];
         jest.spyOn(statusOfCoverageService, 'addStatusOfCoverageToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ lLINSVillageTarget });
+        activatedRoute.data = of({ llinsVillageTarget });
         comp.ngOnInit();
 
         expect(statusOfCoverageService.query).toHaveBeenCalled();
@@ -142,17 +142,17 @@ describe('Component Tests', () => {
       });
 
       it('Should call Team query and add missing value', () => {
-        const lLINSVillageTarget: ILLINSVillageTarget = { id: 456 };
-        const teamAssigned: ITeam = { id: 29884 };
-        lLINSVillageTarget.teamAssigned = teamAssigned;
+        const llinsVillageTarget: ILlinsVillageTarget = { id: 456 };
+        const teamAssigned: ITeam = { id: 10662 };
+        llinsVillageTarget.teamAssigned = teamAssigned;
 
-        const teamCollection: ITeam[] = [{ id: 276 }];
+        const teamCollection: ITeam[] = [{ id: 79595 }];
         jest.spyOn(teamService, 'query').mockReturnValue(of(new HttpResponse({ body: teamCollection })));
         const additionalTeams = [teamAssigned];
         const expectedCollection: ITeam[] = [...additionalTeams, ...teamCollection];
         jest.spyOn(teamService, 'addTeamToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ lLINSVillageTarget });
+        activatedRoute.data = of({ llinsVillageTarget });
         comp.ngOnInit();
 
         expect(teamService.query).toHaveBeenCalled();
@@ -161,24 +161,24 @@ describe('Component Tests', () => {
       });
 
       it('Should update editForm', () => {
-        const lLINSVillageTarget: ILLINSVillageTarget = { id: 456 };
-        const organisationUnit: IOrganisationUnit = { id: 56506 };
-        lLINSVillageTarget.organisationUnit = organisationUnit;
-        const createdBy: IUser = { id: 51409 };
-        lLINSVillageTarget.createdBy = createdBy;
-        const lastUpdatedBy: IUser = { id: 73818 };
-        lLINSVillageTarget.lastUpdatedBy = lastUpdatedBy;
-        const dayPlanned: IWorkingDay = { id: 91735 };
-        lLINSVillageTarget.dayPlanned = dayPlanned;
-        const statusOfCoverage: IStatusOfCoverage = { id: 52302 };
-        lLINSVillageTarget.statusOfCoverage = statusOfCoverage;
-        const teamAssigned: ITeam = { id: 9347 };
-        lLINSVillageTarget.teamAssigned = teamAssigned;
+        const llinsVillageTarget: ILlinsVillageTarget = { id: 456 };
+        const organisationUnit: IOrganisationUnit = { id: 64493 };
+        llinsVillageTarget.organisationUnit = organisationUnit;
+        const createdBy: IUser = { id: 90892 };
+        llinsVillageTarget.createdBy = createdBy;
+        const lastUpdatedBy: IUser = { id: 11509 };
+        llinsVillageTarget.lastUpdatedBy = lastUpdatedBy;
+        const dayPlanned: IWorkingDay = { id: 78378 };
+        llinsVillageTarget.dayPlanned = dayPlanned;
+        const statusOfCoverage: IStatusOfCoverage = { id: 45840 };
+        llinsVillageTarget.statusOfCoverage = statusOfCoverage;
+        const teamAssigned: ITeam = { id: 75325 };
+        llinsVillageTarget.teamAssigned = teamAssigned;
 
-        activatedRoute.data = of({ lLINSVillageTarget });
+        activatedRoute.data = of({ llinsVillageTarget });
         comp.ngOnInit();
 
-        expect(comp.editForm.value).toEqual(expect.objectContaining(lLINSVillageTarget));
+        expect(comp.editForm.value).toEqual(expect.objectContaining(llinsVillageTarget));
         expect(comp.organisationUnitsSharedCollection).toContain(organisationUnit);
         expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
@@ -191,53 +191,53 @@ describe('Component Tests', () => {
     describe('save', () => {
       it('Should call update service on save for existing entity', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<LLINSVillageTarget>>();
-        const lLINSVillageTarget = { id: 123 };
-        jest.spyOn(lLINSVillageTargetService, 'update').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<LlinsVillageTarget>>();
+        const llinsVillageTarget = { id: 123 };
+        jest.spyOn(llinsVillageTargetService, 'update').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ lLINSVillageTarget });
+        activatedRoute.data = of({ llinsVillageTarget });
         comp.ngOnInit();
 
         // WHEN
         comp.save();
         expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: lLINSVillageTarget }));
+        saveSubject.next(new HttpResponse({ body: llinsVillageTarget }));
         saveSubject.complete();
 
         // THEN
         expect(comp.previousState).toHaveBeenCalled();
-        expect(lLINSVillageTargetService.update).toHaveBeenCalledWith(lLINSVillageTarget);
+        expect(llinsVillageTargetService.update).toHaveBeenCalledWith(llinsVillageTarget);
         expect(comp.isSaving).toEqual(false);
       });
 
       it('Should call create service on save for new entity', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<LLINSVillageTarget>>();
-        const lLINSVillageTarget = new LLINSVillageTarget();
-        jest.spyOn(lLINSVillageTargetService, 'create').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<LlinsVillageTarget>>();
+        const llinsVillageTarget = new LlinsVillageTarget();
+        jest.spyOn(llinsVillageTargetService, 'create').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ lLINSVillageTarget });
+        activatedRoute.data = of({ llinsVillageTarget });
         comp.ngOnInit();
 
         // WHEN
         comp.save();
         expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: lLINSVillageTarget }));
+        saveSubject.next(new HttpResponse({ body: llinsVillageTarget }));
         saveSubject.complete();
 
         // THEN
-        expect(lLINSVillageTargetService.create).toHaveBeenCalledWith(lLINSVillageTarget);
+        expect(llinsVillageTargetService.create).toHaveBeenCalledWith(llinsVillageTarget);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).toHaveBeenCalled();
       });
 
       it('Should set isSaving to false on error', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<LLINSVillageTarget>>();
-        const lLINSVillageTarget = { id: 123 };
-        jest.spyOn(lLINSVillageTargetService, 'update').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<LlinsVillageTarget>>();
+        const llinsVillageTarget = { id: 123 };
+        jest.spyOn(llinsVillageTargetService, 'update').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ lLINSVillageTarget });
+        activatedRoute.data = of({ llinsVillageTarget });
         comp.ngOnInit();
 
         // WHEN
@@ -246,7 +246,7 @@ describe('Component Tests', () => {
         saveSubject.error('This is an error!');
 
         // THEN
-        expect(lLINSVillageTargetService.update).toHaveBeenCalledWith(lLINSVillageTarget);
+        expect(llinsVillageTargetService.update).toHaveBeenCalledWith(llinsVillageTarget);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).not.toHaveBeenCalled();
       });

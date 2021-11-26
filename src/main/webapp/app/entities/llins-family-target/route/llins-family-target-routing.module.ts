@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { LLINSFamilyTargetComponent } from '../list/llins-family-target.component';
-import { LLINSFamilyTargetDetailComponent } from '../detail/llins-family-target-detail.component';
-import { LLINSFamilyTargetUpdateComponent } from '../update/llins-family-target-update.component';
-import { LLINSFamilyTargetRoutingResolveService } from './llins-family-target-routing-resolve.service';
+import { LlinsFamilyTargetComponent } from '../list/llins-family-target.component';
+import { LlinsFamilyTargetDetailComponent } from '../detail/llins-family-target-detail.component';
+import { LlinsFamilyTargetUpdateComponent } from '../update/llins-family-target-update.component';
+import { LlinsFamilyTargetRoutingResolveService } from './llins-family-target-routing-resolve.service';
 
-const lLINSFamilyTargetRoute: Routes = [
+const llinsFamilyTargetRoute: Routes = [
   {
     path: '',
-    component: LLINSFamilyTargetComponent,
+    component: LlinsFamilyTargetComponent,
     data: {
       defaultSort: 'id,asc',
     },
@@ -18,32 +18,32 @@ const lLINSFamilyTargetRoute: Routes = [
   },
   {
     path: ':id/view',
-    component: LLINSFamilyTargetDetailComponent,
+    component: LlinsFamilyTargetDetailComponent,
     resolve: {
-      lLINSFamilyTarget: LLINSFamilyTargetRoutingResolveService,
+      llinsFamilyTarget: LlinsFamilyTargetRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
-    component: LLINSFamilyTargetUpdateComponent,
+    component: LlinsFamilyTargetUpdateComponent,
     resolve: {
-      lLINSFamilyTarget: LLINSFamilyTargetRoutingResolveService,
+      llinsFamilyTarget: LlinsFamilyTargetRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
-    component: LLINSFamilyTargetUpdateComponent,
+    component: LlinsFamilyTargetUpdateComponent,
     resolve: {
-      lLINSFamilyTarget: LLINSFamilyTargetRoutingResolveService,
+      llinsFamilyTarget: LlinsFamilyTargetRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(lLINSFamilyTargetRoute)],
+  imports: [RouterModule.forChild(llinsFamilyTargetRoute)],
   exports: [RouterModule],
 })
-export class LLINSFamilyTargetRoutingModule {}
+export class LlinsFamilyTargetRoutingModule {}

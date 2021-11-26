@@ -1,12 +1,5 @@
 package org.nmcpye.activitiesmanagement.web.rest;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.nmcpye.activitiesmanagement.domain.ChvMalariaReportVersion1;
 import org.nmcpye.activitiesmanagement.repository.ChvMalariaReportVersion1Repository;
 import org.nmcpye.activitiesmanagement.service.ChvMalariaReportVersion1Service;
@@ -19,8 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 /**
- * REST controller for managing {@link ChvMalariaReportVersion1}.
+ * REST controller for managing {@link org.nmcpye.activitiesmanagement.domain.ChvMalariaReportVersion1}.
  */
 @RestController
 @RequestMapping("/api")
@@ -28,39 +29,39 @@ public class ChvMalariaReportVersion1Resource {
 
     private final Logger log = LoggerFactory.getLogger(ChvMalariaReportVersion1Resource.class);
 
-    private static final String ENTITY_NAME = "cHVMalariaReportVersion1";
+    private static final String ENTITY_NAME = "chvMalariaReportVersion1";
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final ChvMalariaReportVersion1Service cHVMalariaReportVersion1Service;
+    private final ChvMalariaReportVersion1Service chvMalariaReportVersion1Service;
 
-    private final ChvMalariaReportVersion1Repository cHVMalariaReportVersion1Repository;
+    private final ChvMalariaReportVersion1Repository chvMalariaReportVersion1Repository;
 
     public ChvMalariaReportVersion1Resource(
-        ChvMalariaReportVersion1Service cHVMalariaReportVersion1Service,
-        ChvMalariaReportVersion1Repository cHVMalariaReportVersion1Repository
+        ChvMalariaReportVersion1Service chvMalariaReportVersion1Service,
+        ChvMalariaReportVersion1Repository chvMalariaReportVersion1Repository
     ) {
-        this.cHVMalariaReportVersion1Service = cHVMalariaReportVersion1Service;
-        this.cHVMalariaReportVersion1Repository = cHVMalariaReportVersion1Repository;
+        this.chvMalariaReportVersion1Service = chvMalariaReportVersion1Service;
+        this.chvMalariaReportVersion1Repository = chvMalariaReportVersion1Repository;
     }
 
     /**
-     * {@code POST  /chv-malaria-report-version-1-s} : Create a new cHVMalariaReportVersion1.
+     * {@code POST  /chv-malaria-report-version-1-s} : Create a new chvMalariaReportVersion1.
      *
-     * @param cHVMalariaReportVersion1 the cHVMalariaReportVersion1 to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new cHVMalariaReportVersion1, or with status {@code 400 (Bad Request)} if the cHVMalariaReportVersion1 has already an ID.
+     * @param chvMalariaReportVersion1 the chvMalariaReportVersion1 to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new chvMalariaReportVersion1, or with status {@code 400 (Bad Request)} if the chvMalariaReportVersion1 has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/chv-malaria-report-version-1-s")
-    public ResponseEntity<ChvMalariaReportVersion1> createCHVMalariaReportVersion1(
-        @Valid @RequestBody ChvMalariaReportVersion1 cHVMalariaReportVersion1
+    public ResponseEntity<ChvMalariaReportVersion1> createChvMalariaReportVersion1(
+        @Valid @RequestBody ChvMalariaReportVersion1 chvMalariaReportVersion1
     ) throws URISyntaxException {
-        log.debug("REST request to save ChvMalariaReportVersion1 : {}", cHVMalariaReportVersion1);
-        if (cHVMalariaReportVersion1.getId() != null) {
-            throw new BadRequestAlertException("A new cHVMalariaReportVersion1 cannot already have an ID", ENTITY_NAME, "idexists");
+        log.debug("REST request to save ChvMalariaReportVersion1 : {}", chvMalariaReportVersion1);
+        if (chvMalariaReportVersion1.getId() != null) {
+            throw new BadRequestAlertException("A new chvMalariaReportVersion1 cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ChvMalariaReportVersion1 result = cHVMalariaReportVersion1Service.save(cHVMalariaReportVersion1);
+        ChvMalariaReportVersion1 result = chvMalariaReportVersion1Service.save(chvMalariaReportVersion1);
         return ResponseEntity
             .created(new URI("/api/chv-malaria-report-version-1-s/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
@@ -68,109 +69,109 @@ public class ChvMalariaReportVersion1Resource {
     }
 
     /**
-     * {@code PUT  /chv-malaria-report-version-1-s/:id} : Updates an existing cHVMalariaReportVersion1.
+     * {@code PUT  /chv-malaria-report-version-1-s/:id} : Updates an existing chvMalariaReportVersion1.
      *
-     * @param id the id of the cHVMalariaReportVersion1 to save.
-     * @param cHVMalariaReportVersion1 the cHVMalariaReportVersion1 to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated cHVMalariaReportVersion1,
-     * or with status {@code 400 (Bad Request)} if the cHVMalariaReportVersion1 is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the cHVMalariaReportVersion1 couldn't be updated.
+     * @param id the id of the chvMalariaReportVersion1 to save.
+     * @param chvMalariaReportVersion1 the chvMalariaReportVersion1 to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated chvMalariaReportVersion1,
+     * or with status {@code 400 (Bad Request)} if the chvMalariaReportVersion1 is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the chvMalariaReportVersion1 couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/chv-malaria-report-version-1-s/{id}")
-    public ResponseEntity<ChvMalariaReportVersion1> updateCHVMalariaReportVersion1(
+    public ResponseEntity<ChvMalariaReportVersion1> updateChvMalariaReportVersion1(
         @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody ChvMalariaReportVersion1 cHVMalariaReportVersion1
+        @Valid @RequestBody ChvMalariaReportVersion1 chvMalariaReportVersion1
     ) throws URISyntaxException {
-        log.debug("REST request to update ChvMalariaReportVersion1 : {}, {}", id, cHVMalariaReportVersion1);
-        if (cHVMalariaReportVersion1.getId() == null) {
+        log.debug("REST request to update ChvMalariaReportVersion1 : {}, {}", id, chvMalariaReportVersion1);
+        if (chvMalariaReportVersion1.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, cHVMalariaReportVersion1.getId())) {
+        if (!Objects.equals(id, chvMalariaReportVersion1.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        if (!cHVMalariaReportVersion1Repository.existsById(id)) {
+        if (!chvMalariaReportVersion1Repository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        ChvMalariaReportVersion1 result = cHVMalariaReportVersion1Service.save(cHVMalariaReportVersion1);
+        ChvMalariaReportVersion1 result = chvMalariaReportVersion1Service.save(chvMalariaReportVersion1);
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, cHVMalariaReportVersion1.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, chvMalariaReportVersion1.getId().toString()))
             .body(result);
     }
 
     /**
-     * {@code PATCH  /chv-malaria-report-version-1-s/:id} : Partial updates given fields of an existing cHVMalariaReportVersion1, field will ignore if it is null
+     * {@code PATCH  /chv-malaria-report-version-1-s/:id} : Partial updates given fields of an existing chvMalariaReportVersion1, field will ignore if it is null
      *
-     * @param id the id of the cHVMalariaReportVersion1 to save.
-     * @param cHVMalariaReportVersion1 the cHVMalariaReportVersion1 to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated cHVMalariaReportVersion1,
-     * or with status {@code 400 (Bad Request)} if the cHVMalariaReportVersion1 is not valid,
-     * or with status {@code 404 (Not Found)} if the cHVMalariaReportVersion1 is not found,
-     * or with status {@code 500 (Internal Server Error)} if the cHVMalariaReportVersion1 couldn't be updated.
+     * @param id the id of the chvMalariaReportVersion1 to save.
+     * @param chvMalariaReportVersion1 the chvMalariaReportVersion1 to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated chvMalariaReportVersion1,
+     * or with status {@code 400 (Bad Request)} if the chvMalariaReportVersion1 is not valid,
+     * or with status {@code 404 (Not Found)} if the chvMalariaReportVersion1 is not found,
+     * or with status {@code 500 (Internal Server Error)} if the chvMalariaReportVersion1 couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/chv-malaria-report-version-1-s/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<ChvMalariaReportVersion1> partialUpdateCHVMalariaReportVersion1(
+    public ResponseEntity<ChvMalariaReportVersion1> partialUpdateChvMalariaReportVersion1(
         @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody ChvMalariaReportVersion1 cHVMalariaReportVersion1
+        @NotNull @RequestBody ChvMalariaReportVersion1 chvMalariaReportVersion1
     ) throws URISyntaxException {
-        log.debug("REST request to partial update ChvMalariaReportVersion1 partially : {}, {}", id, cHVMalariaReportVersion1);
-        if (cHVMalariaReportVersion1.getId() == null) {
+        log.debug("REST request to partial update ChvMalariaReportVersion1 partially : {}, {}", id, chvMalariaReportVersion1);
+        if (chvMalariaReportVersion1.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, cHVMalariaReportVersion1.getId())) {
+        if (!Objects.equals(id, chvMalariaReportVersion1.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
-        if (!cHVMalariaReportVersion1Repository.existsById(id)) {
+        if (!chvMalariaReportVersion1Repository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<ChvMalariaReportVersion1> result = cHVMalariaReportVersion1Service.partialUpdate(cHVMalariaReportVersion1);
+        Optional<ChvMalariaReportVersion1> result = chvMalariaReportVersion1Service.partialUpdate(chvMalariaReportVersion1);
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, cHVMalariaReportVersion1.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, chvMalariaReportVersion1.getId().toString())
         );
     }
 
     /**
-     * {@code GET  /chv-malaria-report-version-1-s} : get all the cHVMalariaReportVersion1s.
+     * {@code GET  /chv-malaria-report-version-1-s} : get all the chvMalariaReportVersion1s.
      *
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of cHVMalariaReportVersion1s in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of chvMalariaReportVersion1s in body.
      */
     @GetMapping("/chv-malaria-report-version-1-s")
-    public List<ChvMalariaReportVersion1> getAllCHVMalariaReportVersion1s() {
-        log.debug("REST request to get all CHVMalariaReportVersion1s");
-        return cHVMalariaReportVersion1Service.findAll();
+    public List<ChvMalariaReportVersion1> getAllChvMalariaReportVersion1s() {
+        log.debug("REST request to get all ChvMalariaReportVersion1s");
+        return chvMalariaReportVersion1Service.findAll();
     }
 
     /**
-     * {@code GET  /chv-malaria-report-version-1-s/:id} : get the "id" cHVMalariaReportVersion1.
+     * {@code GET  /chv-malaria-report-version-1-s/:id} : get the "id" chvMalariaReportVersion1.
      *
-     * @param id the id of the cHVMalariaReportVersion1 to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the cHVMalariaReportVersion1, or with status {@code 404 (Not Found)}.
+     * @param id the id of the chvMalariaReportVersion1 to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the chvMalariaReportVersion1, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/chv-malaria-report-version-1-s/{id}")
-    public ResponseEntity<ChvMalariaReportVersion1> getCHVMalariaReportVersion1(@PathVariable Long id) {
+    public ResponseEntity<ChvMalariaReportVersion1> getChvMalariaReportVersion1(@PathVariable Long id) {
         log.debug("REST request to get ChvMalariaReportVersion1 : {}", id);
-        Optional<ChvMalariaReportVersion1> cHVMalariaReportVersion1 = cHVMalariaReportVersion1Service.findOne(id);
-        return ResponseUtil.wrapOrNotFound(cHVMalariaReportVersion1);
+        Optional<ChvMalariaReportVersion1> chvMalariaReportVersion1 = chvMalariaReportVersion1Service.findOne(id);
+        return ResponseUtil.wrapOrNotFound(chvMalariaReportVersion1);
     }
 
     /**
-     * {@code DELETE  /chv-malaria-report-version-1-s/:id} : delete the "id" cHVMalariaReportVersion1.
+     * {@code DELETE  /chv-malaria-report-version-1-s/:id} : delete the "id" chvMalariaReportVersion1.
      *
-     * @param id the id of the cHVMalariaReportVersion1 to delete.
+     * @param id the id of the chvMalariaReportVersion1 to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/chv-malaria-report-version-1-s/{id}")
-    public ResponseEntity<Void> deleteCHVMalariaReportVersion1(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteChvMalariaReportVersion1(@PathVariable Long id) {
         log.debug("REST request to delete ChvMalariaReportVersion1 : {}", id);
-        cHVMalariaReportVersion1Service.delete(id);
+        chvMalariaReportVersion1Service.delete(id);
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))

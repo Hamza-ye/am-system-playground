@@ -1,7 +1,5 @@
 package org.nmcpye.activitiesmanagement.service.impl;
 
-import java.util.List;
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.domain.LlinsFamilyReportHistory;
 import org.nmcpye.activitiesmanagement.repository.LlinsFamilyReportHistoryRepository;
 import org.nmcpye.activitiesmanagement.service.LlinsFamilyReportHistoryService;
@@ -9,6 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Service Implementation for managing {@link LlinsFamilyReportHistory}.
@@ -19,83 +20,83 @@ public class LlinsFamilyReportHistoryServiceImpl implements LlinsFamilyReportHis
 
     private final Logger log = LoggerFactory.getLogger(LlinsFamilyReportHistoryServiceImpl.class);
 
-    private final LlinsFamilyReportHistoryRepository lLINSFamilyReportHistoryRepository;
+    private final LlinsFamilyReportHistoryRepository llinsFamilyReportHistoryRepository;
 
-    public LlinsFamilyReportHistoryServiceImpl(LlinsFamilyReportHistoryRepository lLINSFamilyReportHistoryRepository) {
-        this.lLINSFamilyReportHistoryRepository = lLINSFamilyReportHistoryRepository;
+    public LlinsFamilyReportHistoryServiceImpl(LlinsFamilyReportHistoryRepository llinsFamilyReportHistoryRepository) {
+        this.llinsFamilyReportHistoryRepository = llinsFamilyReportHistoryRepository;
     }
 
     @Override
-    public LlinsFamilyReportHistory save(LlinsFamilyReportHistory lLINSFamilyReportHistory) {
-        log.debug("Request to save LlinsFamilyReportHistory : {}", lLINSFamilyReportHistory);
-        return lLINSFamilyReportHistoryRepository.save(lLINSFamilyReportHistory);
+    public LlinsFamilyReportHistory save(LlinsFamilyReportHistory llinsFamilyReportHistory) {
+        log.debug("Request to save LlinsFamilyReportHistory : {}", llinsFamilyReportHistory);
+        return llinsFamilyReportHistoryRepository.save(llinsFamilyReportHistory);
     }
 
     @Override
-    public Optional<LlinsFamilyReportHistory> partialUpdate(LlinsFamilyReportHistory lLINSFamilyReportHistory) {
-        log.debug("Request to partially update LlinsFamilyReportHistory : {}", lLINSFamilyReportHistory);
+    public Optional<LlinsFamilyReportHistory> partialUpdate(LlinsFamilyReportHistory llinsFamilyReportHistory) {
+        log.debug("Request to partially update LlinsFamilyReportHistory : {}", llinsFamilyReportHistory);
 
-        return lLINSFamilyReportHistoryRepository
-            .findById(lLINSFamilyReportHistory.getId())
+        return llinsFamilyReportHistoryRepository
+            .findById(llinsFamilyReportHistory.getId())
             .map(
-                existingLLINSFamilyReportHistory -> {
-                    if (lLINSFamilyReportHistory.getUid() != null) {
-                        existingLLINSFamilyReportHistory.setUid(lLINSFamilyReportHistory.getUid());
+                existingLlinsFamilyReportHistory -> {
+                    if (llinsFamilyReportHistory.getUid() != null) {
+                        existingLlinsFamilyReportHistory.setUid(llinsFamilyReportHistory.getUid());
                     }
-                    if (lLINSFamilyReportHistory.getCreated() != null) {
-                        existingLLINSFamilyReportHistory.setCreated(lLINSFamilyReportHistory.getCreated());
+                    if (llinsFamilyReportHistory.getCreated() != null) {
+                        existingLlinsFamilyReportHistory.setCreated(llinsFamilyReportHistory.getCreated());
                     }
-                    if (lLINSFamilyReportHistory.getLastUpdated() != null) {
-                        existingLLINSFamilyReportHistory.setLastUpdated(lLINSFamilyReportHistory.getLastUpdated());
+                    if (llinsFamilyReportHistory.getLastUpdated() != null) {
+                        existingLlinsFamilyReportHistory.setLastUpdated(llinsFamilyReportHistory.getLastUpdated());
                     }
-                    if (lLINSFamilyReportHistory.getDocumentNo() != null) {
-                        existingLLINSFamilyReportHistory.setDocumentNo(lLINSFamilyReportHistory.getDocumentNo());
+                    if (llinsFamilyReportHistory.getDocumentNo() != null) {
+                        existingLlinsFamilyReportHistory.setDocumentNo(llinsFamilyReportHistory.getDocumentNo());
                     }
-                    if (lLINSFamilyReportHistory.getMaleIndividuals() != null) {
-                        existingLLINSFamilyReportHistory.setMaleIndividuals(lLINSFamilyReportHistory.getMaleIndividuals());
+                    if (llinsFamilyReportHistory.getMaleIndividuals() != null) {
+                        existingLlinsFamilyReportHistory.setMaleIndividuals(llinsFamilyReportHistory.getMaleIndividuals());
                     }
-                    if (lLINSFamilyReportHistory.getFemaleIndividuals() != null) {
-                        existingLLINSFamilyReportHistory.setFemaleIndividuals(lLINSFamilyReportHistory.getFemaleIndividuals());
+                    if (llinsFamilyReportHistory.getFemaleIndividuals() != null) {
+                        existingLlinsFamilyReportHistory.setFemaleIndividuals(llinsFamilyReportHistory.getFemaleIndividuals());
                     }
-                    if (lLINSFamilyReportHistory.getLessThan5Males() != null) {
-                        existingLLINSFamilyReportHistory.setLessThan5Males(lLINSFamilyReportHistory.getLessThan5Males());
+                    if (llinsFamilyReportHistory.getLessThan5Males() != null) {
+                        existingLlinsFamilyReportHistory.setLessThan5Males(llinsFamilyReportHistory.getLessThan5Males());
                     }
-                    if (lLINSFamilyReportHistory.getLessThan5Females() != null) {
-                        existingLLINSFamilyReportHistory.setLessThan5Females(lLINSFamilyReportHistory.getLessThan5Females());
+                    if (llinsFamilyReportHistory.getLessThan5Females() != null) {
+                        existingLlinsFamilyReportHistory.setLessThan5Females(llinsFamilyReportHistory.getLessThan5Females());
                     }
-                    if (lLINSFamilyReportHistory.getPregnantWomen() != null) {
-                        existingLLINSFamilyReportHistory.setPregnantWomen(lLINSFamilyReportHistory.getPregnantWomen());
+                    if (llinsFamilyReportHistory.getPregnantWomen() != null) {
+                        existingLlinsFamilyReportHistory.setPregnantWomen(llinsFamilyReportHistory.getPregnantWomen());
                     }
-                    if (lLINSFamilyReportHistory.getQuantityReceived() != null) {
-                        existingLLINSFamilyReportHistory.setQuantityReceived(lLINSFamilyReportHistory.getQuantityReceived());
+                    if (llinsFamilyReportHistory.getQuantityReceived() != null) {
+                        existingLlinsFamilyReportHistory.setQuantityReceived(llinsFamilyReportHistory.getQuantityReceived());
                     }
-                    if (lLINSFamilyReportHistory.getFamilyType() != null) {
-                        existingLLINSFamilyReportHistory.setFamilyType(lLINSFamilyReportHistory.getFamilyType());
+                    if (llinsFamilyReportHistory.getFamilyType() != null) {
+                        existingLlinsFamilyReportHistory.setFamilyType(llinsFamilyReportHistory.getFamilyType());
                     }
 
-                    return existingLLINSFamilyReportHistory;
+                    return existingLlinsFamilyReportHistory;
                 }
             )
-            .map(lLINSFamilyReportHistoryRepository::save);
+            .map(llinsFamilyReportHistoryRepository::save);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<LlinsFamilyReportHistory> findAll() {
-        log.debug("Request to get all LLINSFamilyReportHistories");
-        return lLINSFamilyReportHistoryRepository.findAll();
+        log.debug("Request to get all LlinsFamilyReportHistories");
+        return llinsFamilyReportHistoryRepository.findAll();
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<LlinsFamilyReportHistory> findOne(Long id) {
         log.debug("Request to get LlinsFamilyReportHistory : {}", id);
-        return lLINSFamilyReportHistoryRepository.findById(id);
+        return llinsFamilyReportHistoryRepository.findById(id);
     }
 
     @Override
     public void delete(Long id) {
         log.debug("Request to delete LlinsFamilyReportHistory : {}", id);
-        lLINSFamilyReportHistoryRepository.deleteById(id);
+        llinsFamilyReportHistoryRepository.deleteById(id);
     }
 }

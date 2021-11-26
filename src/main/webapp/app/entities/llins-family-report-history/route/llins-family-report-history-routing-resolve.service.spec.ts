@@ -6,18 +6,18 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { of } from 'rxjs';
 
-import { ILLINSFamilyReportHistory, LLINSFamilyReportHistory } from '../llins-family-report-history.model';
-import { LLINSFamilyReportHistoryService } from '../service/llins-family-report-history.service';
+import { ILlinsFamilyReportHistory, LlinsFamilyReportHistory } from '../llins-family-report-history.model';
+import { LlinsFamilyReportHistoryService } from '../service/llins-family-report-history.service';
 
-import { LLINSFamilyReportHistoryRoutingResolveService } from './llins-family-report-history-routing-resolve.service';
+import { LlinsFamilyReportHistoryRoutingResolveService } from './llins-family-report-history-routing-resolve.service';
 
 describe('Service Tests', () => {
   describe('LlinsFamilyReportHistory routing resolve service', () => {
     let mockRouter: Router;
     let mockActivatedRouteSnapshot: ActivatedRouteSnapshot;
-    let routingResolveService: LLINSFamilyReportHistoryRoutingResolveService;
-    let service: LLINSFamilyReportHistoryService;
-    let resultLLINSFamilyReportHistory: ILLINSFamilyReportHistory | undefined;
+    let routingResolveService: LlinsFamilyReportHistoryRoutingResolveService;
+    let service: LlinsFamilyReportHistoryService;
+    let resultLlinsFamilyReportHistory: ILlinsFamilyReportHistory | undefined;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -26,55 +26,55 @@ describe('Service Tests', () => {
       });
       mockRouter = TestBed.inject(Router);
       mockActivatedRouteSnapshot = TestBed.inject(ActivatedRouteSnapshot);
-      routingResolveService = TestBed.inject(LLINSFamilyReportHistoryRoutingResolveService);
-      service = TestBed.inject(LLINSFamilyReportHistoryService);
-      resultLLINSFamilyReportHistory = undefined;
+      routingResolveService = TestBed.inject(LlinsFamilyReportHistoryRoutingResolveService);
+      service = TestBed.inject(LlinsFamilyReportHistoryService);
+      resultLlinsFamilyReportHistory = undefined;
     });
 
     describe('resolve', () => {
-      it('should return ILLINSFamilyReportHistory returned by find', () => {
+      it('should return ILlinsFamilyReportHistory returned by find', () => {
         // GIVEN
         service.find = jest.fn(id => of(new HttpResponse({ body: { id } })));
         mockActivatedRouteSnapshot.params = { id: 123 };
 
         // WHEN
         routingResolveService.resolve(mockActivatedRouteSnapshot).subscribe(result => {
-          resultLLINSFamilyReportHistory = result;
+          resultLlinsFamilyReportHistory = result;
         });
 
         // THEN
         expect(service.find).toBeCalledWith(123);
-        expect(resultLLINSFamilyReportHistory).toEqual({ id: 123 });
+        expect(resultLlinsFamilyReportHistory).toEqual({ id: 123 });
       });
 
-      it('should return new ILLINSFamilyReportHistory if id is not provided', () => {
+      it('should return new ILlinsFamilyReportHistory if id is not provided', () => {
         // GIVEN
         service.find = jest.fn();
         mockActivatedRouteSnapshot.params = {};
 
         // WHEN
         routingResolveService.resolve(mockActivatedRouteSnapshot).subscribe(result => {
-          resultLLINSFamilyReportHistory = result;
+          resultLlinsFamilyReportHistory = result;
         });
 
         // THEN
         expect(service.find).not.toBeCalled();
-        expect(resultLLINSFamilyReportHistory).toEqual(new LLINSFamilyReportHistory());
+        expect(resultLlinsFamilyReportHistory).toEqual(new LlinsFamilyReportHistory());
       });
 
       it('should route to 404 page if data not found in server', () => {
         // GIVEN
-        jest.spyOn(service, 'find').mockReturnValue(of(new HttpResponse({ body: null as unknown as LLINSFamilyReportHistory })));
+        jest.spyOn(service, 'find').mockReturnValue(of(new HttpResponse({ body: null as unknown as LlinsFamilyReportHistory })));
         mockActivatedRouteSnapshot.params = { id: 123 };
 
         // WHEN
         routingResolveService.resolve(mockActivatedRouteSnapshot).subscribe(result => {
-          resultLLINSFamilyReportHistory = result;
+          resultLlinsFamilyReportHistory = result;
         });
 
         // THEN
         expect(service.find).toBeCalledWith(123);
-        expect(resultLLINSFamilyReportHistory).toEqual(undefined);
+        expect(resultLlinsFamilyReportHistory).toEqual(undefined);
         expect(mockRouter.navigate).toHaveBeenCalledWith(['404']);
       });
     });

@@ -1,9 +1,9 @@
 import * as dayjs from 'dayjs';
-import { IWHMovement } from 'app/entities/wh-movement/wh-movement.model';
-import { ILLINSVillageTarget } from 'app/entities/llins-village-target/llins-village-target.model';
-import { ILLINSVillageReport } from 'app/entities/llins-village-report/llins-village-report.model';
-import { ILLINSFamilyTarget } from 'app/entities/llins-family-target/llins-family-target.model';
-import { ILLINSFamilyReport } from 'app/entities/llins-family-report/llins-family-report.model';
+import { IWhMovement } from 'app/entities/wh-movement/wh-movement.model';
+import { ILlinsVillageTarget } from 'app/entities/llins-village-target/llins-village-target.model';
+import { ILlinsVillageReport } from 'app/entities/llins-village-report/llins-village-report.model';
+import { ILlinsFamilyTarget } from 'app/entities/llins-family-target/llins-family-target.model';
+import { ILlinsFamilyReport } from 'app/entities/llins-family-report/llins-family-report.model';
 import { IUser } from 'app/entities/user/user.model';
 import { IPerson } from 'app/entities/person/person.model';
 import { IWarehouse } from 'app/entities/warehouse/warehouse.model';
@@ -18,11 +18,11 @@ export interface ITeam {
   lastUpdated?: dayjs.Dayjs | null;
   teamNo?: number;
   teamType?: TeamType;
-  whMovements?: IWHMovement[] | null;
-  llinsVillageTargets?: ILLINSVillageTarget[] | null;
-  llinsVillageReports?: ILLINSVillageReport[] | null;
-  llinsFamilyTargets?: ILLINSFamilyTarget[] | null;
-  llinsFamilyReports?: ILLINSFamilyReport[] | null;
+  whMovements?: IWhMovement[] | null;
+  llinsVillageTargets?: ILlinsVillageTarget[] | null;
+  llinsVillageReports?: ILlinsVillageReport[] | null;
+  llinsFamilyTargets?: ILlinsFamilyTarget[] | null;
+  llinsFamilyReports?: ILlinsFamilyReport[] | null;
   createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   person?: IPerson | null;
@@ -39,11 +39,11 @@ export class Team implements ITeam {
     public lastUpdated?: dayjs.Dayjs | null,
     public teamNo?: number,
     public teamType?: TeamType,
-    public whMovements?: IWHMovement[] | null,
-    public llinsVillageTargets?: ILLINSVillageTarget[] | null,
-    public llinsVillageReports?: ILLINSVillageReport[] | null,
-    public llinsFamilyTargets?: ILLINSFamilyTarget[] | null,
-    public llinsFamilyReports?: ILLINSFamilyReport[] | null,
+    public whMovements?: IWhMovement[] | null,
+    public llinsVillageTargets?: ILlinsVillageTarget[] | null,
+    public llinsVillageReports?: ILlinsVillageReport[] | null,
+    public llinsFamilyTargets?: ILlinsFamilyTarget[] | null,
+    public llinsFamilyReports?: ILlinsFamilyReport[] | null,
     public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public person?: IPerson | null,

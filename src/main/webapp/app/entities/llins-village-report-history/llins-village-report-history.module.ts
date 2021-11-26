@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'app/shared/shared.module';
-import { LLINSVillageReportHistoryComponent } from './list/llins-village-report-history.component';
-import { LLINSVillageReportHistoryDetailComponent } from './detail/llins-village-report-history-detail.component';
-import { LLINSVillageReportHistoryUpdateComponent } from './update/llins-village-report-history-update.component';
-import { LLINSVillageReportHistoryDeleteDialogComponent } from './delete/llins-village-report-history-delete-dialog.component';
-import { LLINSVillageReportHistoryRoutingModule } from './route/llins-village-report-history-routing.module';
+import { LlinsVillageReportHistoryComponent } from './list/llins-village-report-history.component';
+import { LlinsVillageReportHistoryDetailComponent } from './detail/llins-village-report-history-detail.component';
+import { LlinsVillageReportHistoryUpdateComponent } from './update/llins-village-report-history-update.component';
+import { LlinsVillageReportHistoryDeleteDialogComponent } from './delete/llins-village-report-history-delete-dialog.component';
+import { LlinsVillageReportHistoryRoutingModule } from './route/llins-village-report-history-routing.module';
 
 @NgModule({
-  imports: [SharedModule, LLINSVillageReportHistoryRoutingModule],
+  imports: [SharedModule, LlinsVillageReportHistoryRoutingModule],
   declarations: [
-    LLINSVillageReportHistoryComponent,
-    LLINSVillageReportHistoryDetailComponent,
-    LLINSVillageReportHistoryUpdateComponent,
-    LLINSVillageReportHistoryDeleteDialogComponent,
+    LlinsVillageReportHistoryComponent,
+    LlinsVillageReportHistoryDetailComponent,
+    LlinsVillageReportHistoryUpdateComponent,
+    LlinsVillageReportHistoryDeleteDialogComponent,
   ],
-  entryComponents: [LLINSVillageReportHistoryDeleteDialogComponent],
+  entryComponents: [LlinsVillageReportHistoryDeleteDialogComponent],
 })
-export class LLINSVillageReportHistoryModule {}
+export class LlinsVillageReportHistoryModule {}

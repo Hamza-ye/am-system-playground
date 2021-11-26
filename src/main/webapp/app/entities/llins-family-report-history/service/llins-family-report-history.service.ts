@@ -7,40 +7,40 @@ import * as dayjs from 'dayjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { ILLINSFamilyReportHistory, getLLINSFamilyReportHistoryIdentifier } from '../llins-family-report-history.model';
+import { ILlinsFamilyReportHistory, getLlinsFamilyReportHistoryIdentifier } from '../llins-family-report-history.model';
 
-export type EntityResponseType = HttpResponse<ILLINSFamilyReportHistory>;
-export type EntityArrayResponseType = HttpResponse<ILLINSFamilyReportHistory[]>;
+export type EntityResponseType = HttpResponse<ILlinsFamilyReportHistory>;
+export type EntityArrayResponseType = HttpResponse<ILlinsFamilyReportHistory[]>;
 
 @Injectable({ providedIn: 'root' })
-export class LLINSFamilyReportHistoryService {
+export class LlinsFamilyReportHistoryService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/llins-family-report-histories');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  create(lLINSFamilyReportHistory: ILLINSFamilyReportHistory): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(lLINSFamilyReportHistory);
+  create(llinsFamilyReportHistory: ILlinsFamilyReportHistory): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(llinsFamilyReportHistory);
     return this.http
-      .post<ILLINSFamilyReportHistory>(this.resourceUrl, copy, { observe: 'response' })
+      .post<ILlinsFamilyReportHistory>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  update(lLINSFamilyReportHistory: ILLINSFamilyReportHistory): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(lLINSFamilyReportHistory);
+  update(llinsFamilyReportHistory: ILlinsFamilyReportHistory): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(llinsFamilyReportHistory);
     return this.http
-      .put<ILLINSFamilyReportHistory>(
-        `${this.resourceUrl}/${getLLINSFamilyReportHistoryIdentifier(lLINSFamilyReportHistory) as number}`,
+      .put<ILlinsFamilyReportHistory>(
+        `${this.resourceUrl}/${getLlinsFamilyReportHistoryIdentifier(llinsFamilyReportHistory) as number}`,
         copy,
         { observe: 'response' }
       )
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  partialUpdate(lLINSFamilyReportHistory: ILLINSFamilyReportHistory): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(lLINSFamilyReportHistory);
+  partialUpdate(llinsFamilyReportHistory: ILlinsFamilyReportHistory): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(llinsFamilyReportHistory);
     return this.http
-      .patch<ILLINSFamilyReportHistory>(
-        `${this.resourceUrl}/${getLLINSFamilyReportHistoryIdentifier(lLINSFamilyReportHistory) as number}`,
+      .patch<ILlinsFamilyReportHistory>(
+        `${this.resourceUrl}/${getLlinsFamilyReportHistoryIdentifier(llinsFamilyReportHistory) as number}`,
         copy,
         { observe: 'response' }
       )
@@ -49,14 +49,14 @@ export class LLINSFamilyReportHistoryService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<ILLINSFamilyReportHistory>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .get<ILlinsFamilyReportHistory>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
-      .get<ILLINSFamilyReportHistory[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .get<ILlinsFamilyReportHistory[]>(this.resourceUrl, { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
@@ -64,35 +64,35 @@ export class LLINSFamilyReportHistoryService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  addLLINSFamilyReportHistoryToCollectionIfMissing(
-    lLINSFamilyReportHistoryCollection: ILLINSFamilyReportHistory[],
-    ...lLINSFamilyReportHistoriesToCheck: (ILLINSFamilyReportHistory | null | undefined)[]
-  ): ILLINSFamilyReportHistory[] {
-    const lLINSFamilyReportHistories: ILLINSFamilyReportHistory[] = lLINSFamilyReportHistoriesToCheck.filter(isPresent);
-    if (lLINSFamilyReportHistories.length > 0) {
-      const lLINSFamilyReportHistoryCollectionIdentifiers = lLINSFamilyReportHistoryCollection.map(
-        lLINSFamilyReportHistoryItem => getLLINSFamilyReportHistoryIdentifier(lLINSFamilyReportHistoryItem)!
+  addLlinsFamilyReportHistoryToCollectionIfMissing(
+    llinsFamilyReportHistoryCollection: ILlinsFamilyReportHistory[],
+    ...llinsFamilyReportHistoriesToCheck: (ILlinsFamilyReportHistory | null | undefined)[]
+  ): ILlinsFamilyReportHistory[] {
+    const llinsFamilyReportHistories: ILlinsFamilyReportHistory[] = llinsFamilyReportHistoriesToCheck.filter(isPresent);
+    if (llinsFamilyReportHistories.length > 0) {
+      const llinsFamilyReportHistoryCollectionIdentifiers = llinsFamilyReportHistoryCollection.map(
+        llinsFamilyReportHistoryItem => getLlinsFamilyReportHistoryIdentifier(llinsFamilyReportHistoryItem)!
       );
-      const lLINSFamilyReportHistoriesToAdd = lLINSFamilyReportHistories.filter(lLINSFamilyReportHistoryItem => {
-        const lLINSFamilyReportHistoryIdentifier = getLLINSFamilyReportHistoryIdentifier(lLINSFamilyReportHistoryItem);
+      const llinsFamilyReportHistoriesToAdd = llinsFamilyReportHistories.filter(llinsFamilyReportHistoryItem => {
+        const llinsFamilyReportHistoryIdentifier = getLlinsFamilyReportHistoryIdentifier(llinsFamilyReportHistoryItem);
         if (
-          lLINSFamilyReportHistoryIdentifier == null ||
-          lLINSFamilyReportHistoryCollectionIdentifiers.includes(lLINSFamilyReportHistoryIdentifier)
+          llinsFamilyReportHistoryIdentifier == null ||
+          llinsFamilyReportHistoryCollectionIdentifiers.includes(llinsFamilyReportHistoryIdentifier)
         ) {
           return false;
         }
-        lLINSFamilyReportHistoryCollectionIdentifiers.push(lLINSFamilyReportHistoryIdentifier);
+        llinsFamilyReportHistoryCollectionIdentifiers.push(llinsFamilyReportHistoryIdentifier);
         return true;
       });
-      return [...lLINSFamilyReportHistoriesToAdd, ...lLINSFamilyReportHistoryCollection];
+      return [...llinsFamilyReportHistoriesToAdd, ...llinsFamilyReportHistoryCollection];
     }
-    return lLINSFamilyReportHistoryCollection;
+    return llinsFamilyReportHistoryCollection;
   }
 
-  protected convertDateFromClient(lLINSFamilyReportHistory: ILLINSFamilyReportHistory): ILLINSFamilyReportHistory {
-    return Object.assign({}, lLINSFamilyReportHistory, {
-      created: lLINSFamilyReportHistory.created?.isValid() ? lLINSFamilyReportHistory.created.toJSON() : undefined,
-      lastUpdated: lLINSFamilyReportHistory.lastUpdated?.isValid() ? lLINSFamilyReportHistory.lastUpdated.toJSON() : undefined,
+  protected convertDateFromClient(llinsFamilyReportHistory: ILlinsFamilyReportHistory): ILlinsFamilyReportHistory {
+    return Object.assign({}, llinsFamilyReportHistory, {
+      created: llinsFamilyReportHistory.created?.isValid() ? llinsFamilyReportHistory.created.toJSON() : undefined,
+      lastUpdated: llinsFamilyReportHistory.lastUpdated?.isValid() ? llinsFamilyReportHistory.lastUpdated.toJSON() : undefined,
     });
   }
 
@@ -106,10 +106,10 @@ export class LLINSFamilyReportHistoryService {
 
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
-      res.body.forEach((lLINSFamilyReportHistory: ILLINSFamilyReportHistory) => {
-        lLINSFamilyReportHistory.created = lLINSFamilyReportHistory.created ? dayjs(lLINSFamilyReportHistory.created) : undefined;
-        lLINSFamilyReportHistory.lastUpdated = lLINSFamilyReportHistory.lastUpdated
-          ? dayjs(lLINSFamilyReportHistory.lastUpdated)
+      res.body.forEach((llinsFamilyReportHistory: ILlinsFamilyReportHistory) => {
+        llinsFamilyReportHistory.created = llinsFamilyReportHistory.created ? dayjs(llinsFamilyReportHistory.created) : undefined;
+        llinsFamilyReportHistory.lastUpdated = llinsFamilyReportHistory.lastUpdated
+          ? dayjs(llinsFamilyReportHistory.lastUpdated)
           : undefined;
       });
     }

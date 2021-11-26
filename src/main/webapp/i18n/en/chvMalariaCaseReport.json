@@ -1,0 +1,41 @@
+{
+  "amSystemPlaygroundApp": {
+    "chvMalariaCaseReport": {
+      "home": {
+        "title": "Chv Malaria Case Reports",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Chv Malaria Case Report",
+        "createOrEditLabel": "Create or edit a Chv Malaria Case Report",
+        "notFound": "No Chv Malaria Case Reports found"
+      },
+      "created": "A new Chv Malaria Case Report is created with identifier {{ param }}",
+      "updated": "A Chv Malaria Case Report is updated with identifier {{ param }}",
+      "deleted": "A Chv Malaria Case Report is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Chv Malaria Case Report {{ id }}?"
+      },
+      "detail": {
+        "title": "Chv Malaria Case Report"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "date": "Date",
+      "individualName": "Individual Name",
+      "gender": "Gender",
+      "isPregnant": "Is Pregnant",
+      "malariaTestResult": "Malaria Test Result",
+      "drugsGiven": "Drugs Given",
+      "suppsGiven": "Supps Given",
+      "referral": "Referral",
+      "barImageUrl": "Bar Image Url",
+      "comment": "Comment",
+      "subVillage": "Sub Village",
+      "createdBy": "Created By",
+      "lastUpdatedBy": "Last Updated By",
+      "chv": "Chv",
+      "reportClass": "Report Class"
+    }
+  }
+}

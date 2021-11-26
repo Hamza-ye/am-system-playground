@@ -1,38 +1,39 @@
 package org.nmcpye.activitiesmanagement.service;
 
+import org.nmcpye.activitiesmanagement.domain.LlinsFamilyReportHistory;
+
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.LlinsFamilyReportHistory;
 
 /**
  * Service Interface for managing {@link LlinsFamilyReportHistory}.
  */
 public interface LlinsFamilyReportHistoryService {
     /**
-     * Save a lLINSFamilyReportHistory.
+     * Save a llinsFamilyReportHistory.
      *
-     * @param lLINSFamilyReportHistory the entity to save.
+     * @param llinsFamilyReportHistory the entity to save.
      * @return the persisted entity.
      */
-    LlinsFamilyReportHistory save(LlinsFamilyReportHistory lLINSFamilyReportHistory);
+    LlinsFamilyReportHistory save(LlinsFamilyReportHistory llinsFamilyReportHistory);
 
     /**
-     * Partially updates a lLINSFamilyReportHistory.
+     * Partially updates a llinsFamilyReportHistory.
      *
-     * @param lLINSFamilyReportHistory the entity to update partially.
+     * @param llinsFamilyReportHistory the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<LlinsFamilyReportHistory> partialUpdate(LlinsFamilyReportHistory lLINSFamilyReportHistory);
+    Optional<LlinsFamilyReportHistory> partialUpdate(LlinsFamilyReportHistory llinsFamilyReportHistory);
 
     /**
-     * Get all the lLINSFamilyReportHistories.
+     * Get all the llinsFamilyReportHistories.
      *
      * @return the list of entities.
      */
     List<LlinsFamilyReportHistory> findAll();
 
     /**
-     * Get the "id" lLINSFamilyReportHistory.
+     * Get the "id" llinsFamilyReportHistory.
      *
      * @param id the id of the entity.
      * @return the entity.
@@ -40,7 +41,7 @@ public interface LlinsFamilyReportHistoryService {
     Optional<LlinsFamilyReportHistory> findOne(Long id);
 
     /**
-     * Delete the "id" lLINSFamilyReportHistory.
+     * Delete the "id" llinsFamilyReportHistory.
      *
      * @param id the id of the entity.
      */

@@ -4,20 +4,20 @@ import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { ICHVTeam, CHVTeam } from '../chv-team.model';
-import { CHVTeamService } from '../service/chv-team.service';
+import { IChvTeam, ChvTeam } from '../chv-team.model';
+import { ChvTeamService } from '../service/chv-team.service';
 
 @Injectable({ providedIn: 'root' })
-export class CHVTeamRoutingResolveService implements Resolve<ICHVTeam> {
-  constructor(protected service: CHVTeamService, protected router: Router) {}
+export class ChvTeamRoutingResolveService implements Resolve<IChvTeam> {
+  constructor(protected service: ChvTeamService, protected router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<ICHVTeam> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot): Observable<IChvTeam> | Observable<never> {
     const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
-        mergeMap((cHVTeam: HttpResponse<CHVTeam>) => {
-          if (cHVTeam.body) {
-            return of(cHVTeam.body);
+        mergeMap((chvTeam: HttpResponse<ChvTeam>) => {
+          if (chvTeam.body) {
+            return of(chvTeam.body);
           } else {
             this.router.navigate(['404']);
             return EMPTY;
@@ -25,6 +25,6 @@ export class CHVTeamRoutingResolveService implements Resolve<ICHVTeam> {
         })
       );
     }
-    return of(new CHVTeam());
+    return of(new ChvTeam());
   }
 }

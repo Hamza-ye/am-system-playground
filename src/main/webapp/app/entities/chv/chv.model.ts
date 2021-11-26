@@ -2,9 +2,9 @@ import * as dayjs from 'dayjs';
 import { IPerson } from 'app/entities/person/person.model';
 import { IOrganisationUnit } from 'app/entities/organisation-unit/organisation-unit.model';
 import { IUser } from 'app/entities/user/user.model';
-import { ICHVTeam } from 'app/entities/chv-team/chv-team.model';
+import { IChvTeam } from 'app/entities/chv-team/chv-team.model';
 
-export interface ICHV {
+export interface IChv {
   id?: number;
   uid?: string;
   code?: string | null;
@@ -19,10 +19,10 @@ export interface ICHV {
   managedByHf?: IOrganisationUnit | null;
   createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
-  supervisionTeams?: ICHVTeam[] | null;
+  supervisionTeams?: IChvTeam[] | null;
 }
 
-export class CHV implements ICHV {
+export class Chv implements IChv {
   constructor(
     public id?: number,
     public uid?: string,
@@ -38,10 +38,10 @@ export class CHV implements ICHV {
     public managedByHf?: IOrganisationUnit | null,
     public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
-    public supervisionTeams?: ICHVTeam[] | null
+    public supervisionTeams?: IChvTeam[] | null
   ) {}
 }
 
-export function getCHVIdentifier(cHV: ICHV): number | undefined {
-  return cHV.id;
+export function getChvIdentifier(chv: IChv): number | undefined {
+  return chv.id;
 }

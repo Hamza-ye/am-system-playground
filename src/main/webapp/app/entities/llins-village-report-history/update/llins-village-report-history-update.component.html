@@ -3,10 +3,10 @@
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2
         id="app-llins-village-report-history-heading"
-        data-cy="LLINSVillageReportHistoryCreateUpdateHeading"
-        appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.home.createOrEditLabel"
+        data-cy="LlinsVillageReportHistoryCreateUpdateHeading"
+        appTranslate="amSystemPlaygroundApp.llinsVillageReportHistory.home.createOrEditLabel"
       >
-        Create or edit a LLINS Village Report History
+        Create or edit a Llins Village Report History
       </h2>
 
       <div>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.uid" for="field_uid">Uid</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsVillageReportHistory.uid" for="field_uid">Uid</label>
           <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
           <div *ngIf="editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('uid')?.errors?.required" appTranslate="entity.validation.required">
@@ -36,7 +36,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.created" for="field_created"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsVillageReportHistory.created" for="field_created"
             >Created</label
           >
           <div class="d-flex">
@@ -55,7 +55,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.lastUpdated"
+            appTranslate="amSystemPlaygroundApp.llinsVillageReportHistory.lastUpdated"
             for="field_lastUpdated"
             >Last Updated</label
           >
@@ -73,7 +73,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.houses" for="field_houses"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsVillageReportHistory.houses" for="field_houses"
             >Houses</label
           >
           <input type="number" class="form-control" name="houses" id="field_houses" data-cy="houses" formControlName="houses" />
@@ -98,7 +98,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.residentHousehold"
+            appTranslate="amSystemPlaygroundApp.llinsVillageReportHistory.residentHousehold"
             for="field_residentHousehold"
             >Resident Household</label
           >
@@ -144,7 +144,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.idpsHousehold"
+            appTranslate="amSystemPlaygroundApp.llinsVillageReportHistory.idpsHousehold"
             for="field_idpsHousehold"
             >Idps Household</label
           >
@@ -189,7 +189,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.maleIndividuals"
+            appTranslate="amSystemPlaygroundApp.llinsVillageReportHistory.maleIndividuals"
             for="field_maleIndividuals"
             >Male Individuals</label
           >
@@ -228,7 +228,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.femaleIndividuals"
+            appTranslate="amSystemPlaygroundApp.llinsVillageReportHistory.femaleIndividuals"
             for="field_femaleIndividuals"
             >Female Individuals</label
           >
@@ -267,7 +267,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.lessThan5Males"
+            appTranslate="amSystemPlaygroundApp.llinsVillageReportHistory.lessThan5Males"
             for="field_lessThan5Males"
             >Less Than 5 Males</label
           >
@@ -305,7 +305,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.lessThan5Females"
+            appTranslate="amSystemPlaygroundApp.llinsVillageReportHistory.lessThan5Females"
             for="field_lessThan5Females"
             >Less Than 5 Females</label
           >
@@ -344,7 +344,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.pregnantWomen"
+            appTranslate="amSystemPlaygroundApp.llinsVillageReportHistory.pregnantWomen"
             for="field_pregnantWomen"
             >Pregnant Women</label
           >
@@ -382,7 +382,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.quantityReceived"
+            appTranslate="amSystemPlaygroundApp.llinsVillageReportHistory.quantityReceived"
             for="field_quantityReceived"
             >Quantity Received</label
           >
@@ -426,7 +426,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.createdBy" for="field_createdBy"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsVillageReportHistory.createdBy" for="field_createdBy"
             >Created By</label
           >
           <select class="form-control" id="field_createdBy" data-cy="createdBy" name="createdBy" formControlName="createdBy">
@@ -443,7 +443,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.lastUpdatedBy"
+            appTranslate="amSystemPlaygroundApp.llinsVillageReportHistory.lastUpdatedBy"
             for="field_lastUpdatedBy"
             >Last Updated By</label
           >
@@ -465,7 +465,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.dayReached" for="field_dayReached"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsVillageReportHistory.dayReached" for="field_dayReached"
             >Day Reached</label
           >
           <select class="form-control" id="field_dayReached" data-cy="dayReached" name="dayReached" formControlName="dayReached">
@@ -495,7 +495,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSVillageReportHistory.llinsVillageReport"
+            appTranslate="amSystemPlaygroundApp.llinsVillageReportHistory.llinsVillageReport"
             for="field_llinsVillageReport"
             >Llins Village Report</label
           >
@@ -509,13 +509,13 @@
             <option *ngIf="!editForm.get('llinsVillageReport')!.value" [ngValue]="null" selected></option>
             <option
               [ngValue]="
-                lLINSVillageReportOption.id === editForm.get('llinsVillageReport')!.value?.id
+                llinsVillageReportOption.id === editForm.get('llinsVillageReport')!.value?.id
                   ? editForm.get('llinsVillageReport')!.value
-                  : lLINSVillageReportOption
+                  : llinsVillageReportOption
               "
-              *ngFor="let lLINSVillageReportOption of lLINSVillageReportsSharedCollection; trackBy: trackLLINSVillageReportById"
+              *ngFor="let llinsVillageReportOption of llinsVillageReportsSharedCollection; trackBy: trackLlinsVillageReportById"
             >
-              {{ lLINSVillageReportOption.id }}
+              {{ llinsVillageReportOption.id }}
             </option>
           </select>
         </div>

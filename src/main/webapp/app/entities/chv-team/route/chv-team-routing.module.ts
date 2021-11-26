@@ -2,45 +2,45 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { CHVTeamComponent } from '../list/chv-team.component';
-import { CHVTeamDetailComponent } from '../detail/chv-team-detail.component';
-import { CHVTeamUpdateComponent } from '../update/chv-team-update.component';
-import { CHVTeamRoutingResolveService } from './chv-team-routing-resolve.service';
+import { ChvTeamComponent } from '../list/chv-team.component';
+import { ChvTeamDetailComponent } from '../detail/chv-team-detail.component';
+import { ChvTeamUpdateComponent } from '../update/chv-team-update.component';
+import { ChvTeamRoutingResolveService } from './chv-team-routing-resolve.service';
 
-const cHVTeamRoute: Routes = [
+const chvTeamRoute: Routes = [
   {
     path: '',
-    component: CHVTeamComponent,
+    component: ChvTeamComponent,
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
-    component: CHVTeamDetailComponent,
+    component: ChvTeamDetailComponent,
     resolve: {
-      cHVTeam: CHVTeamRoutingResolveService,
+      chvTeam: ChvTeamRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
-    component: CHVTeamUpdateComponent,
+    component: ChvTeamUpdateComponent,
     resolve: {
-      cHVTeam: CHVTeamRoutingResolveService,
+      chvTeam: ChvTeamRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
-    component: CHVTeamUpdateComponent,
+    component: ChvTeamUpdateComponent,
     resolve: {
-      cHVTeam: CHVTeamRoutingResolveService,
+      chvTeam: ChvTeamRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(cHVTeamRoute)],
+  imports: [RouterModule.forChild(chvTeamRoute)],
   exports: [RouterModule],
 })
-export class CHVTeamRoutingModule {}
+export class ChvTeamRoutingModule {}

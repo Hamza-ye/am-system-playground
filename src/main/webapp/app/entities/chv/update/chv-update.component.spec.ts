@@ -7,8 +7,8 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { of, Subject } from 'rxjs';
 
-import { CHVService } from '../service/chv.service';
-import { ICHV, CHV } from '../chv.model';
+import { ChvService } from '../service/chv.service';
+import { IChv, Chv } from '../chv.model';
 import { IPerson } from 'app/entities/person/person.model';
 import { PersonService } from 'app/entities/person/service/person.service';
 import { IOrganisationUnit } from 'app/entities/organisation-unit/organisation-unit.model';
@@ -17,14 +17,14 @@ import { OrganisationUnitService } from 'app/entities/organisation-unit/service/
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 
-import { CHVUpdateComponent } from './chv-update.component';
+import { ChvUpdateComponent } from './chv-update.component';
 
 describe('Component Tests', () => {
   describe('Chv Management Update Component', () => {
-    let comp: CHVUpdateComponent;
-    let fixture: ComponentFixture<CHVUpdateComponent>;
+    let comp: ChvUpdateComponent;
+    let fixture: ComponentFixture<ChvUpdateComponent>;
     let activatedRoute: ActivatedRoute;
-    let cHVService: CHVService;
+    let chvService: ChvService;
     let personService: PersonService;
     let organisationUnitService: OrganisationUnitService;
     let userService: UserService;
@@ -32,15 +32,15 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [CHVUpdateComponent],
+        declarations: [ChvUpdateComponent],
         providers: [FormBuilder, ActivatedRoute],
       })
-        .overrideTemplate(CHVUpdateComponent, '')
+        .overrideTemplate(ChvUpdateComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(CHVUpdateComponent);
+      fixture = TestBed.createComponent(ChvUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
-      cHVService = TestBed.inject(CHVService);
+      chvService = TestBed.inject(ChvService);
       personService = TestBed.inject(PersonService);
       organisationUnitService = TestBed.inject(OrganisationUnitService);
       userService = TestBed.inject(UserService);
@@ -50,16 +50,16 @@ describe('Component Tests', () => {
 
     describe('ngOnInit', () => {
       it('Should call person query and add missing value', () => {
-        const cHV: ICHV = { id: 456 };
-        const person: IPerson = { id: 7324 };
-        cHV.person = person;
+        const chv: IChv = { id: 456 };
+        const person: IPerson = { id: 82132 };
+        chv.person = person;
 
-        const personCollection: IPerson[] = [{ id: 7490 }];
+        const personCollection: IPerson[] = [{ id: 51281 }];
         jest.spyOn(personService, 'query').mockReturnValue(of(new HttpResponse({ body: personCollection })));
         const expectedCollection: IPerson[] = [person, ...personCollection];
         jest.spyOn(personService, 'addPersonToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ cHV });
+        activatedRoute.data = of({ chv });
         comp.ngOnInit();
 
         expect(personService.query).toHaveBeenCalled();
@@ -68,21 +68,21 @@ describe('Component Tests', () => {
       });
 
       it('Should call OrganisationUnit query and add missing value', () => {
-        const cHV: ICHV = { id: 456 };
-        const district: IOrganisationUnit = { id: 44024 };
-        cHV.district = district;
-        const homeSubvillage: IOrganisationUnit = { id: 92699 };
-        cHV.homeSubvillage = homeSubvillage;
-        const managedByHf: IOrganisationUnit = { id: 96270 };
-        cHV.managedByHf = managedByHf;
+        const chv: IChv = { id: 456 };
+        const district: IOrganisationUnit = { id: 59321 };
+        chv.district = district;
+        const homeSubvillage: IOrganisationUnit = { id: 35786 };
+        chv.homeSubvillage = homeSubvillage;
+        const managedByHf: IOrganisationUnit = { id: 27546 };
+        chv.managedByHf = managedByHf;
 
-        const organisationUnitCollection: IOrganisationUnit[] = [{ id: 99218 }];
+        const organisationUnitCollection: IOrganisationUnit[] = [{ id: 27495 }];
         jest.spyOn(organisationUnitService, 'query').mockReturnValue(of(new HttpResponse({ body: organisationUnitCollection })));
         const additionalOrganisationUnits = [district, homeSubvillage, managedByHf];
         const expectedCollection: IOrganisationUnit[] = [...additionalOrganisationUnits, ...organisationUnitCollection];
         jest.spyOn(organisationUnitService, 'addOrganisationUnitToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ cHV });
+        activatedRoute.data = of({ chv });
         comp.ngOnInit();
 
         expect(organisationUnitService.query).toHaveBeenCalled();
@@ -94,19 +94,19 @@ describe('Component Tests', () => {
       });
 
       it('Should call User query and add missing value', () => {
-        const cHV: ICHV = { id: 456 };
-        const createdBy: IUser = { id: 27479 };
-        cHV.createdBy = createdBy;
-        const lastUpdatedBy: IUser = { id: 3243 };
-        cHV.lastUpdatedBy = lastUpdatedBy;
+        const chv: IChv = { id: 456 };
+        const createdBy: IUser = { id: 44806 };
+        chv.createdBy = createdBy;
+        const lastUpdatedBy: IUser = { id: 81668 };
+        chv.lastUpdatedBy = lastUpdatedBy;
 
-        const userCollection: IUser[] = [{ id: 85470 }];
+        const userCollection: IUser[] = [{ id: 22554 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
         const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ cHV });
+        activatedRoute.data = of({ chv });
         comp.ngOnInit();
 
         expect(userService.query).toHaveBeenCalled();
@@ -115,24 +115,24 @@ describe('Component Tests', () => {
       });
 
       it('Should update editForm', () => {
-        const cHV: ICHV = { id: 456 };
-        const person: IPerson = { id: 20550 };
-        cHV.person = person;
-        const district: IOrganisationUnit = { id: 72627 };
-        cHV.district = district;
-        const homeSubvillage: IOrganisationUnit = { id: 7781 };
-        cHV.homeSubvillage = homeSubvillage;
-        const managedByHf: IOrganisationUnit = { id: 12689 };
-        cHV.managedByHf = managedByHf;
-        const createdBy: IUser = { id: 60845 };
-        cHV.createdBy = createdBy;
-        const lastUpdatedBy: IUser = { id: 52994 };
-        cHV.lastUpdatedBy = lastUpdatedBy;
+        const chv: IChv = { id: 456 };
+        const person: IPerson = { id: 54958 };
+        chv.person = person;
+        const district: IOrganisationUnit = { id: 17822 };
+        chv.district = district;
+        const homeSubvillage: IOrganisationUnit = { id: 55557 };
+        chv.homeSubvillage = homeSubvillage;
+        const managedByHf: IOrganisationUnit = { id: 49632 };
+        chv.managedByHf = managedByHf;
+        const createdBy: IUser = { id: 7006 };
+        chv.createdBy = createdBy;
+        const lastUpdatedBy: IUser = { id: 94159 };
+        chv.lastUpdatedBy = lastUpdatedBy;
 
-        activatedRoute.data = of({ cHV });
+        activatedRoute.data = of({ chv });
         comp.ngOnInit();
 
-        expect(comp.editForm.value).toEqual(expect.objectContaining(cHV));
+        expect(comp.editForm.value).toEqual(expect.objectContaining(chv));
         expect(comp.peopleCollection).toContain(person);
         expect(comp.organisationUnitsSharedCollection).toContain(district);
         expect(comp.organisationUnitsSharedCollection).toContain(homeSubvillage);
@@ -145,53 +145,53 @@ describe('Component Tests', () => {
     describe('save', () => {
       it('Should call update service on save for existing entity', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<CHV>>();
-        const cHV = { id: 123 };
-        jest.spyOn(cHVService, 'update').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<Chv>>();
+        const chv = { id: 123 };
+        jest.spyOn(chvService, 'update').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ cHV });
+        activatedRoute.data = of({ chv });
         comp.ngOnInit();
 
         // WHEN
         comp.save();
         expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: cHV }));
+        saveSubject.next(new HttpResponse({ body: chv }));
         saveSubject.complete();
 
         // THEN
         expect(comp.previousState).toHaveBeenCalled();
-        expect(cHVService.update).toHaveBeenCalledWith(cHV);
+        expect(chvService.update).toHaveBeenCalledWith(chv);
         expect(comp.isSaving).toEqual(false);
       });
 
       it('Should call create service on save for new entity', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<CHV>>();
-        const cHV = new CHV();
-        jest.spyOn(cHVService, 'create').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<Chv>>();
+        const chv = new Chv();
+        jest.spyOn(chvService, 'create').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ cHV });
+        activatedRoute.data = of({ chv });
         comp.ngOnInit();
 
         // WHEN
         comp.save();
         expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: cHV }));
+        saveSubject.next(new HttpResponse({ body: chv }));
         saveSubject.complete();
 
         // THEN
-        expect(cHVService.create).toHaveBeenCalledWith(cHV);
+        expect(chvService.create).toHaveBeenCalledWith(chv);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).toHaveBeenCalled();
       });
 
       it('Should set isSaving to false on error', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<CHV>>();
-        const cHV = { id: 123 };
-        jest.spyOn(cHVService, 'update').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<Chv>>();
+        const chv = { id: 123 };
+        jest.spyOn(chvService, 'update').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ cHV });
+        activatedRoute.data = of({ chv });
         comp.ngOnInit();
 
         // WHEN
@@ -200,7 +200,7 @@ describe('Component Tests', () => {
         saveSubject.error('This is an error!');
 
         // THEN
-        expect(cHVService.update).toHaveBeenCalledWith(cHV);
+        expect(chvService.update).toHaveBeenCalledWith(chv);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).not.toHaveBeenCalled();
       });

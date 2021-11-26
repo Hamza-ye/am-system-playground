@@ -1,32 +1,33 @@
 package org.nmcpye.activitiesmanagement.service;
 
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.domain.WhMovement;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.Optional;
 
 /**
  * Service Interface for managing {@link WhMovement}.
  */
 public interface WhMovementService {
     /**
-     * Save a wHMovement.
+     * Save a whMovement.
      *
-     * @param wHMovement the entity to save.
+     * @param whMovement the entity to save.
      * @return the persisted entity.
      */
-    WhMovement save(WhMovement wHMovement);
+    WhMovement save(WhMovement whMovement);
 
     /**
-     * Partially updates a wHMovement.
+     * Partially updates a whMovement.
      *
-     * @param wHMovement the entity to update partially.
+     * @param whMovement the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<WhMovement> partialUpdate(WhMovement wHMovement);
+    Optional<WhMovement> partialUpdate(WhMovement whMovement);
 
     /**
-     * Get all the wHMovements.
+     * Get all the whMovements.
      *
      * @param pageable the pagination information.
      * @return the list of entities.
@@ -34,7 +35,7 @@ public interface WhMovementService {
     Page<WhMovement> findAll(Pageable pageable);
 
     /**
-     * Get the "id" wHMovement.
+     * Get the "id" whMovement.
      *
      * @param id the id of the entity.
      * @return the entity.
@@ -42,7 +43,7 @@ public interface WhMovementService {
     Optional<WhMovement> findOne(Long id);
 
     /**
-     * Delete the "id" wHMovement.
+     * Delete the "id" whMovement.
      *
      * @param id the id of the entity.
      */

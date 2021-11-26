@@ -7,42 +7,42 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { of, Subject } from 'rxjs';
 
-import { CHVMalariaReportVersion1Service } from '../service/chv-malaria-report-version-1.service';
-import { ICHVMalariaReportVersion1, CHVMalariaReportVersion1 } from '../chv-malaria-report-version-1.model';
+import { ChvMalariaReportVersion1Service } from '../service/chv-malaria-report-version-1.service';
+import { IChvMalariaReportVersion1, ChvMalariaReportVersion1 } from '../chv-malaria-report-version-1.model';
 
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
-import { ICHV } from 'app/entities/chv/chv.model';
-import { CHVService } from 'app/entities/chv/service/chv.service';
+import { IChv } from 'app/entities/chv/chv.model';
+import { ChvService } from 'app/entities/chv/service/chv.service';
 import { IPeriod } from 'app/entities/period/period.model';
 import { PeriodService } from 'app/entities/period/service/period.service';
 
-import { CHVMalariaReportVersion1UpdateComponent } from './chv-malaria-report-version-1-update.component';
+import { ChvMalariaReportVersion1UpdateComponent } from './chv-malaria-report-version-1-update.component';
 
 describe('Component Tests', () => {
   describe('ChvMalariaReportVersion1 Management Update Component', () => {
-    let comp: CHVMalariaReportVersion1UpdateComponent;
-    let fixture: ComponentFixture<CHVMalariaReportVersion1UpdateComponent>;
+    let comp: ChvMalariaReportVersion1UpdateComponent;
+    let fixture: ComponentFixture<ChvMalariaReportVersion1UpdateComponent>;
     let activatedRoute: ActivatedRoute;
-    let cHVMalariaReportVersion1Service: CHVMalariaReportVersion1Service;
+    let chvMalariaReportVersion1Service: ChvMalariaReportVersion1Service;
     let userService: UserService;
-    let cHVService: CHVService;
+    let chvService: ChvService;
     let periodService: PeriodService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [CHVMalariaReportVersion1UpdateComponent],
+        declarations: [ChvMalariaReportVersion1UpdateComponent],
         providers: [FormBuilder, ActivatedRoute],
       })
-        .overrideTemplate(CHVMalariaReportVersion1UpdateComponent, '')
+        .overrideTemplate(ChvMalariaReportVersion1UpdateComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(CHVMalariaReportVersion1UpdateComponent);
+      fixture = TestBed.createComponent(ChvMalariaReportVersion1UpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
-      cHVMalariaReportVersion1Service = TestBed.inject(CHVMalariaReportVersion1Service);
+      chvMalariaReportVersion1Service = TestBed.inject(ChvMalariaReportVersion1Service);
       userService = TestBed.inject(UserService);
-      cHVService = TestBed.inject(CHVService);
+      chvService = TestBed.inject(ChvService);
       periodService = TestBed.inject(PeriodService);
 
       comp = fixture.componentInstance;
@@ -50,19 +50,19 @@ describe('Component Tests', () => {
 
     describe('ngOnInit', () => {
       it('Should call User query and add missing value', () => {
-        const cHVMalariaReportVersion1: ICHVMalariaReportVersion1 = { id: 456 };
-        const createdBy: IUser = { id: 24703 };
-        cHVMalariaReportVersion1.createdBy = createdBy;
-        const lastUpdatedBy: IUser = { id: 50752 };
-        cHVMalariaReportVersion1.lastUpdatedBy = lastUpdatedBy;
+        const chvMalariaReportVersion1: IChvMalariaReportVersion1 = { id: 456 };
+        const createdBy: IUser = { id: 97266 };
+        chvMalariaReportVersion1.createdBy = createdBy;
+        const lastUpdatedBy: IUser = { id: 35297 };
+        chvMalariaReportVersion1.lastUpdatedBy = lastUpdatedBy;
 
-        const userCollection: IUser[] = [{ id: 80360 }];
+        const userCollection: IUser[] = [{ id: 42546 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
         const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ cHVMalariaReportVersion1 });
+        activatedRoute.data = of({ chvMalariaReportVersion1 });
         comp.ngOnInit();
 
         expect(userService.query).toHaveBeenCalled();
@@ -71,36 +71,36 @@ describe('Component Tests', () => {
       });
 
       it('Should call Chv query and add missing value', () => {
-        const cHVMalariaReportVersion1: ICHVMalariaReportVersion1 = { id: 456 };
-        const chv: ICHV = { id: 45406 };
-        cHVMalariaReportVersion1.chv = chv;
+        const chvMalariaReportVersion1: IChvMalariaReportVersion1 = { id: 456 };
+        const chv: IChv = { id: 44154 };
+        chvMalariaReportVersion1.chv = chv;
 
-        const cHVCollection: ICHV[] = [{ id: 92783 }];
-        jest.spyOn(cHVService, 'query').mockReturnValue(of(new HttpResponse({ body: cHVCollection })));
-        const additionalCHVS = [chv];
-        const expectedCollection: ICHV[] = [...additionalCHVS, ...cHVCollection];
-        jest.spyOn(cHVService, 'addCHVToCollectionIfMissing').mockReturnValue(expectedCollection);
+        const chvCollection: IChv[] = [{ id: 52841 }];
+        jest.spyOn(chvService, 'query').mockReturnValue(of(new HttpResponse({ body: chvCollection })));
+        const additionalChvs = [chv];
+        const expectedCollection: IChv[] = [...additionalChvs, ...chvCollection];
+        jest.spyOn(chvService, 'addChvToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ cHVMalariaReportVersion1 });
+        activatedRoute.data = of({ chvMalariaReportVersion1 });
         comp.ngOnInit();
 
-        expect(cHVService.query).toHaveBeenCalled();
-        expect(cHVService.addCHVToCollectionIfMissing).toHaveBeenCalledWith(cHVCollection, ...additionalCHVS);
-        expect(comp.cHVSSharedCollection).toEqual(expectedCollection);
+        expect(chvService.query).toHaveBeenCalled();
+        expect(chvService.addChvToCollectionIfMissing).toHaveBeenCalledWith(chvCollection, ...additionalChvs);
+        expect(comp.chvsSharedCollection).toEqual(expectedCollection);
       });
 
       it('Should call Period query and add missing value', () => {
-        const cHVMalariaReportVersion1: ICHVMalariaReportVersion1 = { id: 456 };
-        const period: IPeriod = { id: 88875 };
-        cHVMalariaReportVersion1.period = period;
+        const chvMalariaReportVersion1: IChvMalariaReportVersion1 = { id: 456 };
+        const period: IPeriod = { id: 84183 };
+        chvMalariaReportVersion1.period = period;
 
-        const periodCollection: IPeriod[] = [{ id: 91383 }];
+        const periodCollection: IPeriod[] = [{ id: 53882 }];
         jest.spyOn(periodService, 'query').mockReturnValue(of(new HttpResponse({ body: periodCollection })));
         const additionalPeriods = [period];
         const expectedCollection: IPeriod[] = [...additionalPeriods, ...periodCollection];
         jest.spyOn(periodService, 'addPeriodToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ cHVMalariaReportVersion1 });
+        activatedRoute.data = of({ chvMalariaReportVersion1 });
         comp.ngOnInit();
 
         expect(periodService.query).toHaveBeenCalled();
@@ -109,23 +109,23 @@ describe('Component Tests', () => {
       });
 
       it('Should update editForm', () => {
-        const cHVMalariaReportVersion1: ICHVMalariaReportVersion1 = { id: 456 };
-        const createdBy: IUser = { id: 2173 };
-        cHVMalariaReportVersion1.createdBy = createdBy;
-        const lastUpdatedBy: IUser = { id: 628 };
-        cHVMalariaReportVersion1.lastUpdatedBy = lastUpdatedBy;
-        const chv: ICHV = { id: 84182 };
-        cHVMalariaReportVersion1.chv = chv;
-        const period: IPeriod = { id: 46926 };
-        cHVMalariaReportVersion1.period = period;
+        const chvMalariaReportVersion1: IChvMalariaReportVersion1 = { id: 456 };
+        const createdBy: IUser = { id: 60235 };
+        chvMalariaReportVersion1.createdBy = createdBy;
+        const lastUpdatedBy: IUser = { id: 64333 };
+        chvMalariaReportVersion1.lastUpdatedBy = lastUpdatedBy;
+        const chv: IChv = { id: 31726 };
+        chvMalariaReportVersion1.chv = chv;
+        const period: IPeriod = { id: 47278 };
+        chvMalariaReportVersion1.period = period;
 
-        activatedRoute.data = of({ cHVMalariaReportVersion1 });
+        activatedRoute.data = of({ chvMalariaReportVersion1 });
         comp.ngOnInit();
 
-        expect(comp.editForm.value).toEqual(expect.objectContaining(cHVMalariaReportVersion1));
+        expect(comp.editForm.value).toEqual(expect.objectContaining(chvMalariaReportVersion1));
         expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
-        expect(comp.cHVSSharedCollection).toContain(chv);
+        expect(comp.chvsSharedCollection).toContain(chv);
         expect(comp.periodsSharedCollection).toContain(period);
       });
     });
@@ -133,53 +133,53 @@ describe('Component Tests', () => {
     describe('save', () => {
       it('Should call update service on save for existing entity', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<CHVMalariaReportVersion1>>();
-        const cHVMalariaReportVersion1 = { id: 123 };
-        jest.spyOn(cHVMalariaReportVersion1Service, 'update').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<ChvMalariaReportVersion1>>();
+        const chvMalariaReportVersion1 = { id: 123 };
+        jest.spyOn(chvMalariaReportVersion1Service, 'update').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ cHVMalariaReportVersion1 });
+        activatedRoute.data = of({ chvMalariaReportVersion1 });
         comp.ngOnInit();
 
         // WHEN
         comp.save();
         expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: cHVMalariaReportVersion1 }));
+        saveSubject.next(new HttpResponse({ body: chvMalariaReportVersion1 }));
         saveSubject.complete();
 
         // THEN
         expect(comp.previousState).toHaveBeenCalled();
-        expect(cHVMalariaReportVersion1Service.update).toHaveBeenCalledWith(cHVMalariaReportVersion1);
+        expect(chvMalariaReportVersion1Service.update).toHaveBeenCalledWith(chvMalariaReportVersion1);
         expect(comp.isSaving).toEqual(false);
       });
 
       it('Should call create service on save for new entity', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<CHVMalariaReportVersion1>>();
-        const cHVMalariaReportVersion1 = new CHVMalariaReportVersion1();
-        jest.spyOn(cHVMalariaReportVersion1Service, 'create').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<ChvMalariaReportVersion1>>();
+        const chvMalariaReportVersion1 = new ChvMalariaReportVersion1();
+        jest.spyOn(chvMalariaReportVersion1Service, 'create').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ cHVMalariaReportVersion1 });
+        activatedRoute.data = of({ chvMalariaReportVersion1 });
         comp.ngOnInit();
 
         // WHEN
         comp.save();
         expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: cHVMalariaReportVersion1 }));
+        saveSubject.next(new HttpResponse({ body: chvMalariaReportVersion1 }));
         saveSubject.complete();
 
         // THEN
-        expect(cHVMalariaReportVersion1Service.create).toHaveBeenCalledWith(cHVMalariaReportVersion1);
+        expect(chvMalariaReportVersion1Service.create).toHaveBeenCalledWith(chvMalariaReportVersion1);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).toHaveBeenCalled();
       });
 
       it('Should set isSaving to false on error', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<CHVMalariaReportVersion1>>();
-        const cHVMalariaReportVersion1 = { id: 123 };
-        jest.spyOn(cHVMalariaReportVersion1Service, 'update').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<ChvMalariaReportVersion1>>();
+        const chvMalariaReportVersion1 = { id: 123 };
+        jest.spyOn(chvMalariaReportVersion1Service, 'update').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ cHVMalariaReportVersion1 });
+        activatedRoute.data = of({ chvMalariaReportVersion1 });
         comp.ngOnInit();
 
         // WHEN
@@ -188,7 +188,7 @@ describe('Component Tests', () => {
         saveSubject.error('This is an error!');
 
         // THEN
-        expect(cHVMalariaReportVersion1Service.update).toHaveBeenCalledWith(cHVMalariaReportVersion1);
+        expect(chvMalariaReportVersion1Service.update).toHaveBeenCalledWith(chvMalariaReportVersion1);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).not.toHaveBeenCalled();
       });
@@ -203,10 +203,10 @@ describe('Component Tests', () => {
         });
       });
 
-      describe('trackCHVById', () => {
+      describe('trackChvById', () => {
         it('Should return tracked Chv primary key', () => {
           const entity = { id: 123 };
-          const trackResult = comp.trackCHVById(0, entity);
+          const trackResult = comp.trackChvById(0, entity);
           expect(trackResult).toEqual(entity.id);
         });
       });

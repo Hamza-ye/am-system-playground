@@ -1,18 +1,5 @@
 package org.nmcpye.activitiesmanagement.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
-import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,6 +17,20 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link ChvTeamResource} REST controller.
@@ -58,8 +59,8 @@ class ChvTeamResourceIT {
     private static final Instant DEFAULT_LAST_UPDATED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_LAST_UPDATED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_TEAM_NO = "7396113127";
-    private static final String UPDATED_TEAM_NO = "05";
+    private static final String DEFAULT_TEAM_NO = "9";
+    private static final String UPDATED_TEAM_NO = "8397042395";
 
     private static final ChvTeamType DEFAULT_TEAM_TYPE = ChvTeamType.SUPERVISOR;
     private static final ChvTeamType UPDATED_TEAM_TYPE = ChvTeamType.EVALUATION;
@@ -74,10 +75,10 @@ class ChvTeamResourceIT {
     private ChvTeamRepository chvTeamRepository;
 
     @Mock
-    private ChvTeamRepository cHVTeamRepositoryMock;
+    private ChvTeamRepository chvTeamRepositoryMock;
 
     @Mock
-    private ChvTeamService cHVTeamServiceMock;
+    private ChvTeamService chvTeamServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -85,7 +86,7 @@ class ChvTeamResourceIT {
     @Autowired
     private MockMvc restChvTeamMockMvc;
 
-    private ChvTeam cHVTeam;
+    private ChvTeam chvTeam;
 
     /**
      * Create an entity for this test.
@@ -127,7 +128,7 @@ class ChvTeamResourceIT {
 
     @BeforeEach
     public void initTest() {
-        cHVTeam = createEntity(em);
+        chvTeam = createEntity(em);
     }
 
     @Test
@@ -136,13 +137,13 @@ class ChvTeamResourceIT {
         int databaseSizeBeforeCreate = chvTeamRepository.findAll().size();
         // Create the ChvTeam
         restChvTeamMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cHVTeam)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(chvTeam)))
             .andExpect(status().isCreated());
 
         // Validate the ChvTeam in the database
-        List<ChvTeam> chvTeam = chvTeamRepository.findAll();
-        assertThat(chvTeam).hasSize(databaseSizeBeforeCreate + 1);
-        ChvTeam testChvTeam = chvTeam.get(chvTeam.size() - 1);
+        List<ChvTeam> chvTeamList = chvTeamRepository.findAll();
+        assertThat(chvTeamList).hasSize(databaseSizeBeforeCreate + 1);
+        ChvTeam testChvTeam = chvTeamList.get(chvTeamList.size() - 1);
         assertThat(testChvTeam.getUid()).isEqualTo(DEFAULT_UID);
         assertThat(testChvTeam.getCode()).isEqualTo(DEFAULT_CODE);
         assertThat(testChvTeam.getName()).isEqualTo(DEFAULT_NAME);
@@ -157,18 +158,18 @@ class ChvTeamResourceIT {
     @Transactional
     void createChvTeamWithExistingId() throws Exception {
         // Create the ChvTeam with an existing ID
-        cHVTeam.setId(1L);
+        chvTeam.setId(1L);
 
         int databaseSizeBeforeCreate = chvTeamRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restChvTeamMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cHVTeam)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(chvTeam)))
             .andExpect(status().isBadRequest());
 
         // Validate the ChvTeam in the database
-        List<ChvTeam> cHVTeamList = chvTeamRepository.findAll();
-        assertThat(cHVTeamList).hasSize(databaseSizeBeforeCreate);
+        List<ChvTeam> chvTeamList = chvTeamRepository.findAll();
+        assertThat(chvTeamList).hasSize(databaseSizeBeforeCreate);
     }
 
     @Test
@@ -176,16 +177,16 @@ class ChvTeamResourceIT {
     void checkUidIsRequired() throws Exception {
         int databaseSizeBeforeTest = chvTeamRepository.findAll().size();
         // set the field null
-        cHVTeam.setUid(null);
+        chvTeam.setUid(null);
 
         // Create the ChvTeam, which fails.
 
         restChvTeamMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cHVTeam)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(chvTeam)))
             .andExpect(status().isBadRequest());
 
-        List<ChvTeam> cHVTeamList = chvTeamRepository.findAll();
-        assertThat(cHVTeamList).hasSize(databaseSizeBeforeTest);
+        List<ChvTeam> chvTeamList = chvTeamRepository.findAll();
+        assertThat(chvTeamList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -193,16 +194,16 @@ class ChvTeamResourceIT {
     void checkTeamNoIsRequired() throws Exception {
         int databaseSizeBeforeTest = chvTeamRepository.findAll().size();
         // set the field null
-        cHVTeam.setTeamNo(null);
+        chvTeam.setTeamNo(null);
 
         // Create the ChvTeam, which fails.
 
         restChvTeamMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cHVTeam)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(chvTeam)))
             .andExpect(status().isBadRequest());
 
-        List<ChvTeam> cHVTeamList = chvTeamRepository.findAll();
-        assertThat(cHVTeamList).hasSize(databaseSizeBeforeTest);
+        List<ChvTeam> chvTeamList = chvTeamRepository.findAll();
+        assertThat(chvTeamList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -210,30 +211,30 @@ class ChvTeamResourceIT {
     void checkTeamTypeIsRequired() throws Exception {
         int databaseSizeBeforeTest = chvTeamRepository.findAll().size();
         // set the field null
-        cHVTeam.setTeamType(null);
+        chvTeam.setTeamType(null);
 
         // Create the ChvTeam, which fails.
 
         restChvTeamMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cHVTeam)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(chvTeam)))
             .andExpect(status().isBadRequest());
 
-        List<ChvTeam> cHVTeamList = chvTeamRepository.findAll();
-        assertThat(cHVTeamList).hasSize(databaseSizeBeforeTest);
+        List<ChvTeam> chvTeamList = chvTeamRepository.findAll();
+        assertThat(chvTeamList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
     void getAllChvTeams() throws Exception {
         // Initialize the database
-        chvTeamRepository.saveAndFlush(cHVTeam);
+        chvTeamRepository.saveAndFlush(chvTeam);
 
-        // Get all the cHVTeamList
+        // Get all the chvTeamList
         restChvTeamMockMvc
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(cHVTeam.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(chvTeam.getId().intValue())))
             .andExpect(jsonPath("$.[*].uid").value(hasItem(DEFAULT_UID)))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
@@ -246,34 +247,34 @@ class ChvTeamResourceIT {
 
     @SuppressWarnings({ "unchecked" })
     void getAllChvTeamsWithEagerRelationshipsIsEnabled() throws Exception {
-        when(cHVTeamServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+        when(chvTeamServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         restChvTeamMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
 
-        verify(cHVTeamServiceMock, times(1)).findAllWithEagerRelationships(any());
+        verify(chvTeamServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @SuppressWarnings({ "unchecked" })
     void getAllChvTeamsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(cHVTeamServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+        when(chvTeamServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         restChvTeamMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
 
-        verify(cHVTeamServiceMock, times(1)).findAllWithEagerRelationships(any());
+        verify(chvTeamServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @Test
     @Transactional
     void getChvTeam() throws Exception {
         // Initialize the database
-        chvTeamRepository.saveAndFlush(cHVTeam);
+        chvTeamRepository.saveAndFlush(chvTeam);
 
-        // Get the cHVTeam
+        // Get the chvTeam
         restChvTeamMockMvc
-            .perform(get(ENTITY_API_URL_ID, cHVTeam.getId()))
+            .perform(get(ENTITY_API_URL_ID, chvTeam.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(cHVTeam.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(chvTeam.getId().intValue()))
             .andExpect(jsonPath("$.uid").value(DEFAULT_UID))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
@@ -287,7 +288,7 @@ class ChvTeamResourceIT {
     @Test
     @Transactional
     void getNonExistingChvTeam() throws Exception {
-        // Get the cHVTeam
+        // Get the chvTeam
         restChvTeamMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
@@ -295,12 +296,12 @@ class ChvTeamResourceIT {
     @Transactional
     void putNewChvTeam() throws Exception {
         // Initialize the database
-        chvTeamRepository.saveAndFlush(cHVTeam);
+        chvTeamRepository.saveAndFlush(chvTeam);
 
         int databaseSizeBeforeUpdate = chvTeamRepository.findAll().size();
 
-        // Update the cHVTeam
-        ChvTeam updatedChvTeam = chvTeamRepository.findById(cHVTeam.getId()).get();
+        // Update the chvTeam
+        ChvTeam updatedChvTeam = chvTeamRepository.findById(chvTeam.getId()).get();
         // Disconnect from session so that the updates on updatedChvTeam are not directly saved in db
         em.detach(updatedChvTeam);
         updatedChvTeam
@@ -322,9 +323,9 @@ class ChvTeamResourceIT {
             .andExpect(status().isOk());
 
         // Validate the ChvTeam in the database
-        List<ChvTeam> cHVTeamList = chvTeamRepository.findAll();
-        assertThat(cHVTeamList).hasSize(databaseSizeBeforeUpdate);
-        ChvTeam testChvTeam = cHVTeamList.get(cHVTeamList.size() - 1);
+        List<ChvTeam> chvTeamList = chvTeamRepository.findAll();
+        assertThat(chvTeamList).hasSize(databaseSizeBeforeUpdate);
+        ChvTeam testChvTeam = chvTeamList.get(chvTeamList.size() - 1);
         assertThat(testChvTeam.getUid()).isEqualTo(UPDATED_UID);
         assertThat(testChvTeam.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testChvTeam.getName()).isEqualTo(UPDATED_NAME);
@@ -337,77 +338,78 @@ class ChvTeamResourceIT {
 
     @Test
     @Transactional
-    void putNonExistingCHVTeam() throws Exception {
+    void putNonExistingChvTeam() throws Exception {
         int databaseSizeBeforeUpdate = chvTeamRepository.findAll().size();
-        cHVTeam.setId(count.incrementAndGet());
+        chvTeam.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restChvTeamMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, cHVTeam.getId())
+                put(ENTITY_API_URL_ID, chvTeam.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(cHVTeam))
+                    .content(TestUtil.convertObjectToJsonBytes(chvTeam))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the ChvTeam in the database
-        List<ChvTeam> cHVTeamList = chvTeamRepository.findAll();
-        assertThat(cHVTeamList).hasSize(databaseSizeBeforeUpdate);
+        List<ChvTeam> chvTeamList = chvTeamRepository.findAll();
+        assertThat(chvTeamList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void putWithIdMismatchCHVTeam() throws Exception {
+    void putWithIdMismatchChvTeam() throws Exception {
         int databaseSizeBeforeUpdate = chvTeamRepository.findAll().size();
-        cHVTeam.setId(count.incrementAndGet());
+        chvTeam.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restChvTeamMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(cHVTeam))
+                    .content(TestUtil.convertObjectToJsonBytes(chvTeam))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the ChvTeam in the database
-        List<ChvTeam> cHVTeamList = chvTeamRepository.findAll();
-        assertThat(cHVTeamList).hasSize(databaseSizeBeforeUpdate);
+        List<ChvTeam> chvTeamList = chvTeamRepository.findAll();
+        assertThat(chvTeamList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void putWithMissingIdPathParamCHVTeam() throws Exception {
+    void putWithMissingIdPathParamChvTeam() throws Exception {
         int databaseSizeBeforeUpdate = chvTeamRepository.findAll().size();
-        cHVTeam.setId(count.incrementAndGet());
+        chvTeam.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restChvTeamMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cHVTeam)))
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(chvTeam)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the ChvTeam in the database
-        List<ChvTeam> cHVTeamList = chvTeamRepository.findAll();
-        assertThat(cHVTeamList).hasSize(databaseSizeBeforeUpdate);
+        List<ChvTeam> chvTeamList = chvTeamRepository.findAll();
+        assertThat(chvTeamList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void partialUpdateCHVTeamWithPatch() throws Exception {
+    void partialUpdateChvTeamWithPatch() throws Exception {
         // Initialize the database
-        chvTeamRepository.saveAndFlush(cHVTeam);
+        chvTeamRepository.saveAndFlush(chvTeam);
 
         int databaseSizeBeforeUpdate = chvTeamRepository.findAll().size();
 
-        // Update the cHVTeam using partial update
+        // Update the chvTeam using partial update
         ChvTeam partialUpdatedChvTeam = new ChvTeam();
-        partialUpdatedChvTeam.setId(cHVTeam.getId());
+        partialUpdatedChvTeam.setId(chvTeam.getId());
 
         partialUpdatedChvTeam
-            .code(UPDATED_CODE)
+            .uid(UPDATED_UID)
+            .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION)
-            .lastUpdated(UPDATED_LAST_UPDATED)
-            .teamType(UPDATED_TEAM_TYPE);
+            .created(UPDATED_CREATED)
+            .teamNo(UPDATED_TEAM_NO);
 
         restChvTeamMockMvc
             .perform(
@@ -418,30 +420,30 @@ class ChvTeamResourceIT {
             .andExpect(status().isOk());
 
         // Validate the ChvTeam in the database
-        List<ChvTeam> cHVTeamList = chvTeamRepository.findAll();
-        assertThat(cHVTeamList).hasSize(databaseSizeBeforeUpdate);
-        ChvTeam testChvTeam = cHVTeamList.get(cHVTeamList.size() - 1);
-        assertThat(testChvTeam.getUid()).isEqualTo(DEFAULT_UID);
-        assertThat(testChvTeam.getCode()).isEqualTo(UPDATED_CODE);
-        assertThat(testChvTeam.getName()).isEqualTo(DEFAULT_NAME);
+        List<ChvTeam> chvTeamList = chvTeamRepository.findAll();
+        assertThat(chvTeamList).hasSize(databaseSizeBeforeUpdate);
+        ChvTeam testChvTeam = chvTeamList.get(chvTeamList.size() - 1);
+        assertThat(testChvTeam.getUid()).isEqualTo(UPDATED_UID);
+        assertThat(testChvTeam.getCode()).isEqualTo(DEFAULT_CODE);
+        assertThat(testChvTeam.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testChvTeam.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testChvTeam.getCreated()).isEqualTo(DEFAULT_CREATED);
-        assertThat(testChvTeam.getLastUpdated()).isEqualTo(UPDATED_LAST_UPDATED);
-        assertThat(testChvTeam.getTeamNo()).isEqualTo(DEFAULT_TEAM_NO);
-        assertThat(testChvTeam.getTeamType()).isEqualTo(UPDATED_TEAM_TYPE);
+        assertThat(testChvTeam.getCreated()).isEqualTo(UPDATED_CREATED);
+        assertThat(testChvTeam.getLastUpdated()).isEqualTo(DEFAULT_LAST_UPDATED);
+        assertThat(testChvTeam.getTeamNo()).isEqualTo(UPDATED_TEAM_NO);
+        assertThat(testChvTeam.getTeamType()).isEqualTo(DEFAULT_TEAM_TYPE);
     }
 
     @Test
     @Transactional
-    void fullUpdateCHVTeamWithPatch() throws Exception {
+    void fullUpdateChvTeamWithPatch() throws Exception {
         // Initialize the database
-        chvTeamRepository.saveAndFlush(cHVTeam);
+        chvTeamRepository.saveAndFlush(chvTeam);
 
         int databaseSizeBeforeUpdate = chvTeamRepository.findAll().size();
 
-        // Update the cHVTeam using partial update
+        // Update the chvTeam using partial update
         ChvTeam partialUpdatedChvTeam = new ChvTeam();
-        partialUpdatedChvTeam.setId(cHVTeam.getId());
+        partialUpdatedChvTeam.setId(chvTeam.getId());
 
         partialUpdatedChvTeam
             .uid(UPDATED_UID)
@@ -462,9 +464,9 @@ class ChvTeamResourceIT {
             .andExpect(status().isOk());
 
         // Validate the ChvTeam in the database
-        List<ChvTeam> cHVTeamList = chvTeamRepository.findAll();
-        assertThat(cHVTeamList).hasSize(databaseSizeBeforeUpdate);
-        ChvTeam testChvTeam = cHVTeamList.get(cHVTeamList.size() - 1);
+        List<ChvTeam> chvTeamList = chvTeamRepository.findAll();
+        assertThat(chvTeamList).hasSize(databaseSizeBeforeUpdate);
+        ChvTeam testChvTeam = chvTeamList.get(chvTeamList.size() - 1);
         assertThat(testChvTeam.getUid()).isEqualTo(UPDATED_UID);
         assertThat(testChvTeam.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testChvTeam.getName()).isEqualTo(UPDATED_NAME);
@@ -477,75 +479,75 @@ class ChvTeamResourceIT {
 
     @Test
     @Transactional
-    void patchNonExistingCHVTeam() throws Exception {
+    void patchNonExistingChvTeam() throws Exception {
         int databaseSizeBeforeUpdate = chvTeamRepository.findAll().size();
-        cHVTeam.setId(count.incrementAndGet());
+        chvTeam.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restChvTeamMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, cHVTeam.getId())
+                patch(ENTITY_API_URL_ID, chvTeam.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(cHVTeam))
+                    .content(TestUtil.convertObjectToJsonBytes(chvTeam))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the ChvTeam in the database
-        List<ChvTeam> cHVTeamList = chvTeamRepository.findAll();
-        assertThat(cHVTeamList).hasSize(databaseSizeBeforeUpdate);
+        List<ChvTeam> chvTeamList = chvTeamRepository.findAll();
+        assertThat(chvTeamList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void patchWithIdMismatchCHVTeam() throws Exception {
+    void patchWithIdMismatchChvTeam() throws Exception {
         int databaseSizeBeforeUpdate = chvTeamRepository.findAll().size();
-        cHVTeam.setId(count.incrementAndGet());
+        chvTeam.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restChvTeamMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(cHVTeam))
+                    .content(TestUtil.convertObjectToJsonBytes(chvTeam))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the ChvTeam in the database
-        List<ChvTeam> cHVTeamList = chvTeamRepository.findAll();
-        assertThat(cHVTeamList).hasSize(databaseSizeBeforeUpdate);
+        List<ChvTeam> chvTeamList = chvTeamRepository.findAll();
+        assertThat(chvTeamList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void patchWithMissingIdPathParamCHVTeam() throws Exception {
+    void patchWithMissingIdPathParamChvTeam() throws Exception {
         int databaseSizeBeforeUpdate = chvTeamRepository.findAll().size();
-        cHVTeam.setId(count.incrementAndGet());
+        chvTeam.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restChvTeamMockMvc
-            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(cHVTeam)))
+            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(chvTeam)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the ChvTeam in the database
-        List<ChvTeam> cHVTeamList = chvTeamRepository.findAll();
-        assertThat(cHVTeamList).hasSize(databaseSizeBeforeUpdate);
+        List<ChvTeam> chvTeamList = chvTeamRepository.findAll();
+        assertThat(chvTeamList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void deleteCHVTeam() throws Exception {
+    void deleteChvTeam() throws Exception {
         // Initialize the database
-        chvTeamRepository.saveAndFlush(cHVTeam);
+        chvTeamRepository.saveAndFlush(chvTeam);
 
         int databaseSizeBeforeDelete = chvTeamRepository.findAll().size();
 
-        // Delete the cHVTeam
+        // Delete the chvTeam
         restChvTeamMockMvc
-            .perform(delete(ENTITY_API_URL_ID, cHVTeam.getId()).accept(MediaType.APPLICATION_JSON))
+            .perform(delete(ENTITY_API_URL_ID, chvTeam.getId()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item
-        List<ChvTeam> cHVTeamList = chvTeamRepository.findAll();
-        assertThat(cHVTeamList).hasSize(databaseSizeBeforeDelete - 1);
+        List<ChvTeam> chvTeamList = chvTeamRepository.findAll();
+        assertThat(chvTeamList).hasSize(databaseSizeBeforeDelete - 1);
     }
 }

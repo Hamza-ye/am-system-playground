@@ -1,8 +1,8 @@
 <div class="row justify-content-center">
   <div class="col-8">
-    <div *ngIf="cHVMalariaCaseReport">
-      <h2 data-cy="cHVMalariaCaseReportDetailsHeading">
-        <span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.detail.title">CHV Malaria Case Report</span>
+    <div *ngIf="chvMalariaCaseReport">
+      <h2 data-cy="chvMalariaCaseReportDetailsHeading">
+        <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.detail.title">Chv Malaria Case Report</span>
       </h2>
 
       <hr />
@@ -14,89 +14,89 @@
       <dl class="row-md jh-entity-details">
         <dt><span appTranslate="global.field.id">ID</span></dt>
         <dd>
-          <span>{{ cHVMalariaCaseReport.id }}</span>
+          <span>{{ chvMalariaCaseReport.id }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.uid">Uid</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.uid">Uid</span></dt>
         <dd>
-          <span>{{ cHVMalariaCaseReport.uid }}</span>
+          <span>{{ chvMalariaCaseReport.uid }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.created">Created</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.created">Created</span></dt>
         <dd>
-          <span>{{ cHVMalariaCaseReport.created | formatMediumDatetime }}</span>
+          <span>{{ chvMalariaCaseReport.created | formatMediumDatetime }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.lastUpdated">Last Updated</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.lastUpdated">Last Updated</span></dt>
         <dd>
-          <span>{{ cHVMalariaCaseReport.lastUpdated | formatMediumDatetime }}</span>
+          <span>{{ chvMalariaCaseReport.lastUpdated | formatMediumDatetime }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.date">Date</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.date">Date</span></dt>
         <dd>
-          <span>{{ cHVMalariaCaseReport.date | formatMediumDate }}</span>
+          <span>{{ chvMalariaCaseReport.date | formatMediumDate }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.individualName">Individual Name</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.individualName">Individual Name</span></dt>
         <dd>
-          <span>{{ cHVMalariaCaseReport.individualName }}</span>
+          <span>{{ chvMalariaCaseReport.individualName }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.gender">Gender</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.gender">Gender</span></dt>
         <dd>
-          <span appTranslate="{{ 'amSystemPlaygroundApp.Gender.' + cHVMalariaCaseReport.gender }}">{{ cHVMalariaCaseReport.gender }}</span>
+          <span appTranslate="{{ 'amSystemPlaygroundApp.Gender.' + chvMalariaCaseReport.gender }}">{{ chvMalariaCaseReport.gender }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.isPregnant">Is Pregnant</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.isPregnant">Is Pregnant</span></dt>
         <dd>
-          <span>{{ cHVMalariaCaseReport.isPregnant }}</span>
+          <span>{{ chvMalariaCaseReport.isPregnant }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.malariaTestResult">Malaria Test Result</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.malariaTestResult">Malaria Test Result</span></dt>
         <dd>
-          <span appTranslate="{{ 'amSystemPlaygroundApp.MalariaTestResult.' + cHVMalariaCaseReport.malariaTestResult }}">{{
-            cHVMalariaCaseReport.malariaTestResult
+          <span appTranslate="{{ 'amSystemPlaygroundApp.MalariaTestResult.' + chvMalariaCaseReport.malariaTestResult }}">{{
+            chvMalariaCaseReport.malariaTestResult
           }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.drugsGiven">Drugs Given</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.drugsGiven">Drugs Given</span></dt>
         <dd>
-          <span>{{ cHVMalariaCaseReport.drugsGiven }}</span>
+          <span>{{ chvMalariaCaseReport.drugsGiven }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.suppsGiven">Supps Given</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.suppsGiven">Supps Given</span></dt>
         <dd>
-          <span>{{ cHVMalariaCaseReport.suppsGiven }}</span>
+          <span>{{ chvMalariaCaseReport.suppsGiven }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.referral">Referral</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.referral">Referral</span></dt>
         <dd>
-          <span>{{ cHVMalariaCaseReport.referral }}</span>
+          <span>{{ chvMalariaCaseReport.referral }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.barImageUrl">Bar Image Url</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.barImageUrl">Bar Image Url</span></dt>
         <dd>
-          <span>{{ cHVMalariaCaseReport.barImageUrl }}</span>
+          <span>{{ chvMalariaCaseReport.barImageUrl }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.comment">Comment</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.comment">Comment</span></dt>
         <dd>
-          <span>{{ cHVMalariaCaseReport.comment }}</span>
+          <span>{{ chvMalariaCaseReport.comment }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.subVillage">Sub Village</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.subVillage">Sub Village</span></dt>
         <dd>
-          <div *ngIf="cHVMalariaCaseReport.subVillage">
-            <a [routerLink]="['/organisation-unit', cHVMalariaCaseReport.subVillage?.id, 'view']">{{
-              cHVMalariaCaseReport.subVillage?.name
+          <div *ngIf="chvMalariaCaseReport.subVillage">
+            <a [routerLink]="['/organisation-unit', chvMalariaCaseReport.subVillage?.id, 'view']">{{
+              chvMalariaCaseReport.subVillage?.name
             }}</a>
           </div>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.createdBy">Created By</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.createdBy">Created By</span></dt>
         <dd>
-          <span>{{ cHVMalariaCaseReport.createdBy?.login }}</span>
+          <span>{{ chvMalariaCaseReport.createdBy?.login }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.lastUpdatedBy">Last Updated By</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.lastUpdatedBy">Last Updated By</span></dt>
         <dd>
-          <span>{{ cHVMalariaCaseReport.lastUpdatedBy?.login }}</span>
+          <span>{{ chvMalariaCaseReport.lastUpdatedBy?.login }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.chv">Chv</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.chv">Chv</span></dt>
         <dd>
-          <div *ngIf="cHVMalariaCaseReport.chv">
-            <a [routerLink]="['/chv', cHVMalariaCaseReport.chv?.id, 'view']">{{ cHVMalariaCaseReport.chv?.code }}</a>
+          <div *ngIf="chvMalariaCaseReport.chv">
+            <a [routerLink]="['/chv', chvMalariaCaseReport.chv?.id, 'view']">{{ chvMalariaCaseReport.chv?.code }}</a>
           </div>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.cHVMalariaCaseReport.reportClass">Report Class</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.reportClass">Report Class</span></dt>
         <dd>
-          <div *ngIf="cHVMalariaCaseReport.reportClass">
-            <a [routerLink]="['/cases-report-class', cHVMalariaCaseReport.reportClass?.id, 'view']">{{
-              cHVMalariaCaseReport.reportClass?.name
+          <div *ngIf="chvMalariaCaseReport.reportClass">
+            <a [routerLink]="['/cases-report-class', chvMalariaCaseReport.reportClass?.id, 'view']">{{
+              chvMalariaCaseReport.reportClass?.name
             }}</a>
           </div>
         </dd>
@@ -106,7 +106,7 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/chv-malaria-case-report', cHVMalariaCaseReport.id, 'edit']" class="btn btn-primary">
+      <button type="button" [routerLink]="['/chv-malaria-case-report', chvMalariaCaseReport.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

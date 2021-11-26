@@ -1,8 +1,8 @@
 <div class="row justify-content-center">
   <div class="col-8">
-    <div *ngIf="lLINSFamilyReport">
-      <h2 data-cy="lLINSFamilyReportDetailsHeading">
-        <span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.detail.title">LLINS Family Report</span>
+    <div *ngIf="llinsFamilyReport">
+      <h2 data-cy="llinsFamilyReportDetailsHeading">
+        <span appTranslate="amSystemPlaygroundApp.llinsFamilyReport.detail.title">Llins Family Report</span>
       </h2>
 
       <hr />
@@ -14,84 +14,84 @@
       <dl class="row-md jh-entity-details">
         <dt><span appTranslate="global.field.id">ID</span></dt>
         <dd>
-          <span>{{ lLINSFamilyReport.id }}</span>
+          <span>{{ llinsFamilyReport.id }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.uid">Uid</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsFamilyReport.uid">Uid</span></dt>
         <dd>
-          <span>{{ lLINSFamilyReport.uid }}</span>
+          <span>{{ llinsFamilyReport.uid }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.created">Created</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsFamilyReport.created">Created</span></dt>
         <dd>
-          <span>{{ lLINSFamilyReport.created | formatMediumDatetime }}</span>
+          <span>{{ llinsFamilyReport.created | formatMediumDatetime }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.lastUpdated">Last Updated</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsFamilyReport.lastUpdated">Last Updated</span></dt>
         <dd>
-          <span>{{ lLINSFamilyReport.lastUpdated | formatMediumDatetime }}</span>
+          <span>{{ llinsFamilyReport.lastUpdated | formatMediumDatetime }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.checkNo">Check No</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsFamilyReport.checkNo">Check No</span></dt>
         <dd>
-          <span>{{ lLINSFamilyReport.checkNo }}</span>
+          <span>{{ llinsFamilyReport.checkNo }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.maleIndividuals">Male Individuals</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsFamilyReport.maleIndividuals">Male Individuals</span></dt>
         <dd>
-          <span>{{ lLINSFamilyReport.maleIndividuals }}</span>
+          <span>{{ llinsFamilyReport.maleIndividuals }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.femaleIndividuals">Female Individuals</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsFamilyReport.femaleIndividuals">Female Individuals</span></dt>
         <dd>
-          <span>{{ lLINSFamilyReport.femaleIndividuals }}</span>
+          <span>{{ llinsFamilyReport.femaleIndividuals }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.lessThan5Males">Less Than 5 Males</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsFamilyReport.lessThan5Males">Less Than 5 Males</span></dt>
         <dd>
-          <span>{{ lLINSFamilyReport.lessThan5Males }}</span>
+          <span>{{ llinsFamilyReport.lessThan5Males }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.lessThan5Females">Less Than 5 Females</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsFamilyReport.lessThan5Females">Less Than 5 Females</span></dt>
         <dd>
-          <span>{{ lLINSFamilyReport.lessThan5Females }}</span>
+          <span>{{ llinsFamilyReport.lessThan5Females }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.pregnantWomen">Pregnant Women</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsFamilyReport.pregnantWomen">Pregnant Women</span></dt>
         <dd>
-          <span>{{ lLINSFamilyReport.pregnantWomen }}</span>
+          <span>{{ llinsFamilyReport.pregnantWomen }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.quantityReceived">Quantity Received</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsFamilyReport.quantityReceived">Quantity Received</span></dt>
         <dd>
-          <span>{{ lLINSFamilyReport.quantityReceived }}</span>
+          <span>{{ llinsFamilyReport.quantityReceived }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.familyType">Family Type</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsFamilyReport.familyType">Family Type</span></dt>
         <dd>
-          <span appTranslate="{{ 'amSystemPlaygroundApp.FamilyType.' + lLINSFamilyReport.familyType }}">{{
-            lLINSFamilyReport.familyType
+          <span appTranslate="{{ 'amSystemPlaygroundApp.FamilyType.' + llinsFamilyReport.familyType }}">{{
+            llinsFamilyReport.familyType
           }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.comment">Comment</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsFamilyReport.comment">Comment</span></dt>
         <dd>
-          <span>{{ lLINSFamilyReport.comment }}</span>
+          <span>{{ llinsFamilyReport.comment }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.createdBy">Created By</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsFamilyReport.createdBy">Created By</span></dt>
         <dd>
-          <span>{{ lLINSFamilyReport.createdBy?.login }}</span>
+          <span>{{ llinsFamilyReport.createdBy?.login }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.lastUpdatedBy">Last Updated By</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsFamilyReport.lastUpdatedBy">Last Updated By</span></dt>
         <dd>
-          <span>{{ lLINSFamilyReport.lastUpdatedBy?.login }}</span>
+          <span>{{ llinsFamilyReport.lastUpdatedBy?.login }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.dayReached">Day Reached</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsFamilyReport.dayReached">Day Reached</span></dt>
         <dd>
-          <div *ngIf="lLINSFamilyReport.dayReached">
-            <a [routerLink]="['/working-day', lLINSFamilyReport.dayReached?.id, 'view']">{{ lLINSFamilyReport.dayReached?.dayLabel }}</a>
+          <div *ngIf="llinsFamilyReport.dayReached">
+            <a [routerLink]="['/working-day', llinsFamilyReport.dayReached?.id, 'view']">{{ llinsFamilyReport.dayReached?.dayLabel }}</a>
           </div>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.targetDetails">Target Details</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsFamilyReport.targetDetails">Target Details</span></dt>
         <dd>
-          <div *ngIf="lLINSFamilyReport.targetDetails">
-            <a [routerLink]="['/llins-family-target', lLINSFamilyReport.targetDetails?.id, 'view']">{{
-              lLINSFamilyReport.targetDetails?.id
+          <div *ngIf="llinsFamilyReport.targetDetails">
+            <a [routerLink]="['/llins-family-target', llinsFamilyReport.targetDetails?.id, 'view']">{{
+              llinsFamilyReport.targetDetails?.id
             }}</a>
           </div>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSFamilyReport.executingTeam">Executing Team</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsFamilyReport.executingTeam">Executing Team</span></dt>
         <dd>
-          <div *ngIf="lLINSFamilyReport.executingTeam">
-            <a [routerLink]="['/team', lLINSFamilyReport.executingTeam?.id, 'view']">{{ lLINSFamilyReport.executingTeam?.name }}</a>
+          <div *ngIf="llinsFamilyReport.executingTeam">
+            <a [routerLink]="['/team', llinsFamilyReport.executingTeam?.id, 'view']">{{ llinsFamilyReport.executingTeam?.name }}</a>
           </div>
         </dd>
       </dl>
@@ -100,7 +100,7 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/llins-family-report', lLINSFamilyReport.id, 'edit']" class="btn btn-primary">
+      <button type="button" [routerLink]="['/llins-family-report', llinsFamilyReport.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

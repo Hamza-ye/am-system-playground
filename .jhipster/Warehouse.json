@@ -46,14 +46,14 @@
   "relationships": [
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "wHMovement",
-      "otherEntityRelationshipName": "initiatedWH",
+      "otherEntityName": "whMovement",
+      "otherEntityRelationshipName": "initiatedWh",
       "relationshipName": "initiatedMovement"
     },
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "wHMovement",
-      "otherEntityRelationshipName": "theOtherSideWH",
+      "otherEntityName": "whMovement",
+      "otherEntityRelationshipName": "theOtherSideWh",
       "relationshipName": "notInitiatedMovement"
     },
     {

@@ -1,0 +1,38 @@
+{
+  "amSystemPlaygroundApp": {
+    "llinsFamilyReportHistory": {
+      "home": {
+        "title": "Llins Family Report Histories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Llins Family Report History",
+        "createOrEditLabel": "Create or edit a Llins Family Report History",
+        "notFound": "No Llins Family Report Histories found"
+      },
+      "created": "A new Llins Family Report History is created with identifier {{ param }}",
+      "updated": "A Llins Family Report History is updated with identifier {{ param }}",
+      "deleted": "A Llins Family Report History is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Llins Family Report History {{ id }}?"
+      },
+      "detail": {
+        "title": "Llins Family Report History"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "documentNo": "Document No",
+      "maleIndividuals": "Male Individuals",
+      "femaleIndividuals": "Female Individuals",
+      "lessThan5Males": "Less Than 5 Males",
+      "lessThan5Females": "Less Than 5 Females",
+      "pregnantWomen": "Pregnant Women",
+      "quantityReceived": "Quantity Received",
+      "familyType": "Family Type",
+      "createdBy": "Created By",
+      "lastUpdatedBy": "Last Updated By",
+      "dayReached": "Day Reached",
+      "llinsFamilyReport": "Llins Family Report"
+    }
+  }
+}

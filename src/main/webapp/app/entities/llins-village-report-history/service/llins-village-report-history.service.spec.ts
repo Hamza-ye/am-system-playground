@@ -3,16 +3,16 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import * as dayjs from 'dayjs';
 
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
-import { ILLINSVillageReportHistory, LLINSVillageReportHistory } from '../llins-village-report-history.model';
+import { ILlinsVillageReportHistory, LlinsVillageReportHistory } from '../llins-village-report-history.model';
 
-import { LLINSVillageReportHistoryService } from './llins-village-report-history.service';
+import { LlinsVillageReportHistoryService } from './llins-village-report-history.service';
 
 describe('Service Tests', () => {
   describe('LlinsVillageReportHistory Service', () => {
-    let service: LLINSVillageReportHistoryService;
+    let service: LlinsVillageReportHistoryService;
     let httpMock: HttpTestingController;
-    let elemDefault: ILLINSVillageReportHistory;
-    let expectedResult: ILLINSVillageReportHistory | ILLINSVillageReportHistory[] | boolean | null;
+    let elemDefault: ILlinsVillageReportHistory;
+    let expectedResult: ILlinsVillageReportHistory | ILlinsVillageReportHistory[] | boolean | null;
     let currentDate: dayjs.Dayjs;
 
     beforeEach(() => {
@@ -20,7 +20,7 @@ describe('Service Tests', () => {
         imports: [HttpClientTestingModule],
       });
       expectedResult = null;
-      service = TestBed.inject(LLINSVillageReportHistoryService);
+      service = TestBed.inject(LlinsVillageReportHistoryService);
       httpMock = TestBed.inject(HttpTestingController);
       currentDate = dayjs();
 
@@ -76,7 +76,7 @@ describe('Service Tests', () => {
           returnedFromService
         );
 
-        service.create(new LLINSVillageReportHistory()).subscribe(resp => (expectedResult = resp.body));
+        service.create(new LlinsVillageReportHistory()).subscribe(resp => (expectedResult = resp.body));
 
         const req = httpMock.expectOne({ method: 'POST' });
         req.flush(returnedFromService);
@@ -122,14 +122,15 @@ describe('Service Tests', () => {
         const patchObject = Object.assign(
           {
             created: currentDate.format(DATE_TIME_FORMAT),
+            lastUpdated: currentDate.format(DATE_TIME_FORMAT),
             houses: 1,
-            residentHousehold: 1,
+            idpsHousehold: 1,
+            maleIndividuals: 1,
             femaleIndividuals: 1,
             lessThan5Males: 1,
-            pregnantWomen: 1,
             quantityReceived: 1,
           },
-          new LLINSVillageReportHistory()
+          new LlinsVillageReportHistory()
         );
 
         const returnedFromService = Object.assign(patchObject, elemDefault);
@@ -193,74 +194,74 @@ describe('Service Tests', () => {
         expect(expectedResult);
       });
 
-      describe('addLLINSVillageReportHistoryToCollectionIfMissing', () => {
+      describe('addLlinsVillageReportHistoryToCollectionIfMissing', () => {
         it('should add a LlinsVillageReportHistory to an empty array', () => {
-          const lLINSVillageReportHistory: ILLINSVillageReportHistory = { id: 123 };
-          expectedResult = service.addLLINSVillageReportHistoryToCollectionIfMissing([], lLINSVillageReportHistory);
+          const llinsVillageReportHistory: ILlinsVillageReportHistory = { id: 123 };
+          expectedResult = service.addLlinsVillageReportHistoryToCollectionIfMissing([], llinsVillageReportHistory);
           expect(expectedResult).toHaveLength(1);
-          expect(expectedResult).toContain(lLINSVillageReportHistory);
+          expect(expectedResult).toContain(llinsVillageReportHistory);
         });
 
         it('should not add a LlinsVillageReportHistory to an array that contains it', () => {
-          const lLINSVillageReportHistory: ILLINSVillageReportHistory = { id: 123 };
-          const lLINSVillageReportHistoryCollection: ILLINSVillageReportHistory[] = [
+          const llinsVillageReportHistory: ILlinsVillageReportHistory = { id: 123 };
+          const llinsVillageReportHistoryCollection: ILlinsVillageReportHistory[] = [
             {
-              ...lLINSVillageReportHistory,
+              ...llinsVillageReportHistory,
             },
             { id: 456 },
           ];
-          expectedResult = service.addLLINSVillageReportHistoryToCollectionIfMissing(
-            lLINSVillageReportHistoryCollection,
-            lLINSVillageReportHistory
+          expectedResult = service.addLlinsVillageReportHistoryToCollectionIfMissing(
+            llinsVillageReportHistoryCollection,
+            llinsVillageReportHistory
           );
           expect(expectedResult).toHaveLength(2);
         });
 
         it("should add a LlinsVillageReportHistory to an array that doesn't contain it", () => {
-          const lLINSVillageReportHistory: ILLINSVillageReportHistory = { id: 123 };
-          const lLINSVillageReportHistoryCollection: ILLINSVillageReportHistory[] = [{ id: 456 }];
-          expectedResult = service.addLLINSVillageReportHistoryToCollectionIfMissing(
-            lLINSVillageReportHistoryCollection,
-            lLINSVillageReportHistory
+          const llinsVillageReportHistory: ILlinsVillageReportHistory = { id: 123 };
+          const llinsVillageReportHistoryCollection: ILlinsVillageReportHistory[] = [{ id: 456 }];
+          expectedResult = service.addLlinsVillageReportHistoryToCollectionIfMissing(
+            llinsVillageReportHistoryCollection,
+            llinsVillageReportHistory
           );
           expect(expectedResult).toHaveLength(2);
-          expect(expectedResult).toContain(lLINSVillageReportHistory);
+          expect(expectedResult).toContain(llinsVillageReportHistory);
         });
 
         it('should add only unique LlinsVillageReportHistory to an array', () => {
-          const lLINSVillageReportHistoryArray: ILLINSVillageReportHistory[] = [{ id: 123 }, { id: 456 }, { id: 45001 }];
-          const lLINSVillageReportHistoryCollection: ILLINSVillageReportHistory[] = [{ id: 123 }];
-          expectedResult = service.addLLINSVillageReportHistoryToCollectionIfMissing(
-            lLINSVillageReportHistoryCollection,
-            ...lLINSVillageReportHistoryArray
+          const llinsVillageReportHistoryArray: ILlinsVillageReportHistory[] = [{ id: 123 }, { id: 456 }, { id: 66706 }];
+          const llinsVillageReportHistoryCollection: ILlinsVillageReportHistory[] = [{ id: 123 }];
+          expectedResult = service.addLlinsVillageReportHistoryToCollectionIfMissing(
+            llinsVillageReportHistoryCollection,
+            ...llinsVillageReportHistoryArray
           );
           expect(expectedResult).toHaveLength(3);
         });
 
         it('should accept varargs', () => {
-          const lLINSVillageReportHistory: ILLINSVillageReportHistory = { id: 123 };
-          const lLINSVillageReportHistory2: ILLINSVillageReportHistory = { id: 456 };
-          expectedResult = service.addLLINSVillageReportHistoryToCollectionIfMissing(
+          const llinsVillageReportHistory: ILlinsVillageReportHistory = { id: 123 };
+          const llinsVillageReportHistory2: ILlinsVillageReportHistory = { id: 456 };
+          expectedResult = service.addLlinsVillageReportHistoryToCollectionIfMissing(
             [],
-            lLINSVillageReportHistory,
-            lLINSVillageReportHistory2
+            llinsVillageReportHistory,
+            llinsVillageReportHistory2
           );
           expect(expectedResult).toHaveLength(2);
-          expect(expectedResult).toContain(lLINSVillageReportHistory);
-          expect(expectedResult).toContain(lLINSVillageReportHistory2);
+          expect(expectedResult).toContain(llinsVillageReportHistory);
+          expect(expectedResult).toContain(llinsVillageReportHistory2);
         });
 
         it('should accept null and undefined values', () => {
-          const lLINSVillageReportHistory: ILLINSVillageReportHistory = { id: 123 };
-          expectedResult = service.addLLINSVillageReportHistoryToCollectionIfMissing([], null, lLINSVillageReportHistory, undefined);
+          const llinsVillageReportHistory: ILlinsVillageReportHistory = { id: 123 };
+          expectedResult = service.addLlinsVillageReportHistoryToCollectionIfMissing([], null, llinsVillageReportHistory, undefined);
           expect(expectedResult).toHaveLength(1);
-          expect(expectedResult).toContain(lLINSVillageReportHistory);
+          expect(expectedResult).toContain(llinsVillageReportHistory);
         });
 
         it('should return initial array if no LlinsVillageReportHistory is added', () => {
-          const lLINSVillageReportHistoryCollection: ILLINSVillageReportHistory[] = [{ id: 123 }];
-          expectedResult = service.addLLINSVillageReportHistoryToCollectionIfMissing(lLINSVillageReportHistoryCollection, undefined, null);
-          expect(expectedResult).toEqual(lLINSVillageReportHistoryCollection);
+          const llinsVillageReportHistoryCollection: ILlinsVillageReportHistory[] = [{ id: 123 }];
+          expectedResult = service.addLlinsVillageReportHistoryToCollectionIfMissing(llinsVillageReportHistoryCollection, undefined, null);
+          expect(expectedResult).toEqual(llinsVillageReportHistoryCollection);
         });
       });
     });

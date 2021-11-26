@@ -3,10 +3,10 @@
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2
         id="app-llins-family-target-heading"
-        data-cy="LLINSFamilyTargetCreateUpdateHeading"
-        appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.home.createOrEditLabel"
+        data-cy="LlinsFamilyTargetCreateUpdateHeading"
+        appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.home.createOrEditLabel"
       >
-        Create or edit a LLINS Family Target
+        Create or edit a Llins Family Target
       </h2>
 
       <div>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.uid" for="field_uid">Uid</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.uid" for="field_uid">Uid</label>
           <input type="text" class="form-control" name="uid" id="field_uid" data-cy="uid" formControlName="uid" />
           <div *ngIf="editForm.get('uid')!.invalid && (editForm.get('uid')!.dirty || editForm.get('uid')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('uid')?.errors?.required" appTranslate="entity.validation.required">
@@ -36,7 +36,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.created" for="field_created"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.created" for="field_created"
             >Created</label
           >
           <div class="d-flex">
@@ -53,7 +53,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.lastUpdated" for="field_lastUpdated"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.lastUpdated" for="field_lastUpdated"
             >Last Updated</label
           >
           <div class="d-flex">
@@ -72,7 +72,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.residentsIndividualsPlanned"
+            appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.residentsIndividualsPlanned"
             for="field_residentsIndividualsPlanned"
             >Residents Individuals Planned</label
           >
@@ -118,7 +118,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.idpsIndividualsPlanned"
+            appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.idpsIndividualsPlanned"
             for="field_idpsIndividualsPlanned"
             >Idps Individuals Planned</label
           >
@@ -164,7 +164,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.quantityPlanned"
+            appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.quantityPlanned"
             for="field_quantityPlanned"
             >Quantity Planned</label
           >
@@ -208,7 +208,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.familyType" for="field_familyType"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.familyType" for="field_familyType"
             >Family Type</label
           >
           <select class="form-control" name="familyType" formControlName="familyType" id="field_familyType" data-cy="familyType">
@@ -230,7 +230,7 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.statusOfFamilyTarget"
+            appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.statusOfFamilyTarget"
             for="field_statusOfFamilyTarget"
             >Status Of Family Target</label
           >
@@ -266,7 +266,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.createdBy" for="field_createdBy"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.createdBy" for="field_createdBy"
             >Created By</label
           >
           <select class="form-control" id="field_createdBy" data-cy="createdBy" name="createdBy" formControlName="createdBy">
@@ -281,7 +281,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.lastUpdatedBy" for="field_lastUpdatedBy"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.lastUpdatedBy" for="field_lastUpdatedBy"
             >Last Updated By</label
           >
           <select
@@ -302,7 +302,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.dayPlanned" for="field_dayPlanned"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.dayPlanned" for="field_dayPlanned"
             >Day Planned</label
           >
           <select class="form-control" id="field_dayPlanned" data-cy="dayPlanned" name="dayPlanned" formControlName="dayPlanned">
@@ -330,7 +330,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.family" for="field_family">Family</label>
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.family" for="field_family">Family</label>
           <select class="form-control" id="field_family" data-cy="family" name="family" formControlName="family">
             <option *ngIf="!editForm.get('family')!.value" [ngValue]="null" selected></option>
             <option
@@ -348,7 +348,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.lLINSFamilyTarget.teamAssigned" for="field_teamAssigned"
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.llinsFamilyTarget.teamAssigned" for="field_teamAssigned"
             >Team Assigned</label
           >
           <select class="form-control" id="field_teamAssigned" data-cy="teamAssigned" name="teamAssigned" formControlName="teamAssigned">

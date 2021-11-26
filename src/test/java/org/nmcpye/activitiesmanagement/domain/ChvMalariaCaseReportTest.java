@@ -1,23 +1,23 @@
 package org.nmcpye.activitiesmanagement.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.Test;
 import org.nmcpye.activitiesmanagement.web.rest.TestUtil;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class ChvMalariaCaseReportTest {
 
     @Test
     void equalsVerifier() throws Exception {
         TestUtil.equalsVerifier(ChvMalariaCaseReport.class);
-        ChvMalariaCaseReport cHVMalariaCaseReport1 = new ChvMalariaCaseReport();
-        cHVMalariaCaseReport1.setId(1L);
-        ChvMalariaCaseReport cHVMalariaCaseReport2 = new ChvMalariaCaseReport();
-        cHVMalariaCaseReport2.setId(cHVMalariaCaseReport1.getId());
-        assertThat(cHVMalariaCaseReport1).isEqualTo(cHVMalariaCaseReport2);
-        cHVMalariaCaseReport2.setId(2L);
-        assertThat(cHVMalariaCaseReport1).isNotEqualTo(cHVMalariaCaseReport2);
-        cHVMalariaCaseReport1.setId(null);
-        assertThat(cHVMalariaCaseReport1).isNotEqualTo(cHVMalariaCaseReport2);
+        ChvMalariaCaseReport chvMalariaCaseReport1 = new ChvMalariaCaseReport();
+        chvMalariaCaseReport1.setId(1L);
+        ChvMalariaCaseReport chvMalariaCaseReport2 = new ChvMalariaCaseReport();
+        chvMalariaCaseReport2.setId(chvMalariaCaseReport1.getId());
+        assertThat(chvMalariaCaseReport1).isEqualTo(chvMalariaCaseReport2);
+        chvMalariaCaseReport2.setId(2L);
+        assertThat(chvMalariaCaseReport1).isNotEqualTo(chvMalariaCaseReport2);
+        chvMalariaCaseReport1.setId(null);
+        assertThat(chvMalariaCaseReport1).isNotEqualTo(chvMalariaCaseReport2);
     }
 }

@@ -2,36 +2,36 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
-import { WHMovementDetailComponent } from './wh-movement-detail.component';
+import { WhMovementDetailComponent } from './wh-movement-detail.component';
 
 describe('Component Tests', () => {
   describe('WhMovement Management Detail Component', () => {
-    let comp: WHMovementDetailComponent;
-    let fixture: ComponentFixture<WHMovementDetailComponent>;
+    let comp: WhMovementDetailComponent;
+    let fixture: ComponentFixture<WhMovementDetailComponent>;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        declarations: [WHMovementDetailComponent],
+        declarations: [WhMovementDetailComponent],
         providers: [
           {
             provide: ActivatedRoute,
-            useValue: { data: of({ wHMovement: { id: 123 } }) },
+            useValue: { data: of({ whMovement: { id: 123 } }) },
           },
         ],
       })
-        .overrideTemplate(WHMovementDetailComponent, '')
+        .overrideTemplate(WhMovementDetailComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(WHMovementDetailComponent);
+      fixture = TestBed.createComponent(WhMovementDetailComponent);
       comp = fixture.componentInstance;
     });
 
     describe('OnInit', () => {
-      it('Should load wHMovement on init', () => {
+      it('Should load whMovement on init', () => {
         // WHEN
         comp.ngOnInit();
 
         // THEN
-        expect(comp.wHMovement).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.whMovement).toEqual(expect.objectContaining({ id: 123 }));
       });
     });
   });

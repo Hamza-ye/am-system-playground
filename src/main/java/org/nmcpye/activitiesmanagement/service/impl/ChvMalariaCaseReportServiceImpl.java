@@ -1,7 +1,5 @@
 package org.nmcpye.activitiesmanagement.service.impl;
 
-import java.util.List;
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.domain.ChvMalariaCaseReport;
 import org.nmcpye.activitiesmanagement.repository.ChvMalariaCaseReportRepository;
 import org.nmcpye.activitiesmanagement.service.ChvMalariaCaseReportService;
@@ -9,6 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Service Implementation for managing {@link ChvMalariaCaseReport}.
@@ -19,89 +20,89 @@ public class ChvMalariaCaseReportServiceImpl implements ChvMalariaCaseReportServ
 
     private final Logger log = LoggerFactory.getLogger(ChvMalariaCaseReportServiceImpl.class);
 
-    private final ChvMalariaCaseReportRepository cHVMalariaCaseReportRepository;
+    private final ChvMalariaCaseReportRepository chvMalariaCaseReportRepository;
 
-    public ChvMalariaCaseReportServiceImpl(ChvMalariaCaseReportRepository cHVMalariaCaseReportRepository) {
-        this.cHVMalariaCaseReportRepository = cHVMalariaCaseReportRepository;
+    public ChvMalariaCaseReportServiceImpl(ChvMalariaCaseReportRepository chvMalariaCaseReportRepository) {
+        this.chvMalariaCaseReportRepository = chvMalariaCaseReportRepository;
     }
 
     @Override
-    public ChvMalariaCaseReport save(ChvMalariaCaseReport cHVMalariaCaseReport) {
-        log.debug("Request to save ChvMalariaCaseReport : {}", cHVMalariaCaseReport);
-        return cHVMalariaCaseReportRepository.save(cHVMalariaCaseReport);
+    public ChvMalariaCaseReport save(ChvMalariaCaseReport chvMalariaCaseReport) {
+        log.debug("Request to save ChvMalariaCaseReport : {}", chvMalariaCaseReport);
+        return chvMalariaCaseReportRepository.save(chvMalariaCaseReport);
     }
 
     @Override
-    public Optional<ChvMalariaCaseReport> partialUpdate(ChvMalariaCaseReport cHVMalariaCaseReport) {
-        log.debug("Request to partially update ChvMalariaCaseReport : {}", cHVMalariaCaseReport);
+    public Optional<ChvMalariaCaseReport> partialUpdate(ChvMalariaCaseReport chvMalariaCaseReport) {
+        log.debug("Request to partially update ChvMalariaCaseReport : {}", chvMalariaCaseReport);
 
-        return cHVMalariaCaseReportRepository
-            .findById(cHVMalariaCaseReport.getId())
+        return chvMalariaCaseReportRepository
+            .findById(chvMalariaCaseReport.getId())
             .map(
-                existingCHVMalariaCaseReport -> {
-                    if (cHVMalariaCaseReport.getUid() != null) {
-                        existingCHVMalariaCaseReport.setUid(cHVMalariaCaseReport.getUid());
+                existingChvMalariaCaseReport -> {
+                    if (chvMalariaCaseReport.getUid() != null) {
+                        existingChvMalariaCaseReport.setUid(chvMalariaCaseReport.getUid());
                     }
-                    if (cHVMalariaCaseReport.getCreated() != null) {
-                        existingCHVMalariaCaseReport.setCreated(cHVMalariaCaseReport.getCreated());
+                    if (chvMalariaCaseReport.getCreated() != null) {
+                        existingChvMalariaCaseReport.setCreated(chvMalariaCaseReport.getCreated());
                     }
-                    if (cHVMalariaCaseReport.getLastUpdated() != null) {
-                        existingCHVMalariaCaseReport.setLastUpdated(cHVMalariaCaseReport.getLastUpdated());
+                    if (chvMalariaCaseReport.getLastUpdated() != null) {
+                        existingChvMalariaCaseReport.setLastUpdated(chvMalariaCaseReport.getLastUpdated());
                     }
-                    if (cHVMalariaCaseReport.getDate() != null) {
-                        existingCHVMalariaCaseReport.setDate(cHVMalariaCaseReport.getDate());
+                    if (chvMalariaCaseReport.getDate() != null) {
+                        existingChvMalariaCaseReport.setDate(chvMalariaCaseReport.getDate());
                     }
-                    if (cHVMalariaCaseReport.getIndividualName() != null) {
-                        existingCHVMalariaCaseReport.setIndividualName(cHVMalariaCaseReport.getIndividualName());
+                    if (chvMalariaCaseReport.getIndividualName() != null) {
+                        existingChvMalariaCaseReport.setIndividualName(chvMalariaCaseReport.getIndividualName());
                     }
-                    if (cHVMalariaCaseReport.getGender() != null) {
-                        existingCHVMalariaCaseReport.setGender(cHVMalariaCaseReport.getGender());
+                    if (chvMalariaCaseReport.getGender() != null) {
+                        existingChvMalariaCaseReport.setGender(chvMalariaCaseReport.getGender());
                     }
-                    if (cHVMalariaCaseReport.getIsPregnant() != null) {
-                        existingCHVMalariaCaseReport.setIsPregnant(cHVMalariaCaseReport.getIsPregnant());
+                    if (chvMalariaCaseReport.getIsPregnant() != null) {
+                        existingChvMalariaCaseReport.setIsPregnant(chvMalariaCaseReport.getIsPregnant());
                     }
-                    if (cHVMalariaCaseReport.getMalariaTestResult() != null) {
-                        existingCHVMalariaCaseReport.setMalariaTestResult(cHVMalariaCaseReport.getMalariaTestResult());
+                    if (chvMalariaCaseReport.getMalariaTestResult() != null) {
+                        existingChvMalariaCaseReport.setMalariaTestResult(chvMalariaCaseReport.getMalariaTestResult());
                     }
-                    if (cHVMalariaCaseReport.getDrugsGiven() != null) {
-                        existingCHVMalariaCaseReport.setDrugsGiven(cHVMalariaCaseReport.getDrugsGiven());
+                    if (chvMalariaCaseReport.getDrugsGiven() != null) {
+                        existingChvMalariaCaseReport.setDrugsGiven(chvMalariaCaseReport.getDrugsGiven());
                     }
-                    if (cHVMalariaCaseReport.getSuppsGiven() != null) {
-                        existingCHVMalariaCaseReport.setSuppsGiven(cHVMalariaCaseReport.getSuppsGiven());
+                    if (chvMalariaCaseReport.getSuppsGiven() != null) {
+                        existingChvMalariaCaseReport.setSuppsGiven(chvMalariaCaseReport.getSuppsGiven());
                     }
-                    if (cHVMalariaCaseReport.getReferral() != null) {
-                        existingCHVMalariaCaseReport.setReferral(cHVMalariaCaseReport.getReferral());
+                    if (chvMalariaCaseReport.getReferral() != null) {
+                        existingChvMalariaCaseReport.setReferral(chvMalariaCaseReport.getReferral());
                     }
-                    if (cHVMalariaCaseReport.getBarImageUrl() != null) {
-                        existingCHVMalariaCaseReport.setBarImageUrl(cHVMalariaCaseReport.getBarImageUrl());
+                    if (chvMalariaCaseReport.getBarImageUrl() != null) {
+                        existingChvMalariaCaseReport.setBarImageUrl(chvMalariaCaseReport.getBarImageUrl());
                     }
-                    if (cHVMalariaCaseReport.getComment() != null) {
-                        existingCHVMalariaCaseReport.setComment(cHVMalariaCaseReport.getComment());
+                    if (chvMalariaCaseReport.getComment() != null) {
+                        existingChvMalariaCaseReport.setComment(chvMalariaCaseReport.getComment());
                     }
 
-                    return existingCHVMalariaCaseReport;
+                    return existingChvMalariaCaseReport;
                 }
             )
-            .map(cHVMalariaCaseReportRepository::save);
+            .map(chvMalariaCaseReportRepository::save);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<ChvMalariaCaseReport> findAll() {
-        log.debug("Request to get all CHVMalariaCaseReports");
-        return cHVMalariaCaseReportRepository.findAll();
+        log.debug("Request to get all ChvMalariaCaseReports");
+        return chvMalariaCaseReportRepository.findAll();
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<ChvMalariaCaseReport> findOne(Long id) {
         log.debug("Request to get ChvMalariaCaseReport : {}", id);
-        return cHVMalariaCaseReportRepository.findById(id);
+        return chvMalariaCaseReportRepository.findById(id);
     }
 
     @Override
     public void delete(Long id) {
         log.debug("Request to delete ChvMalariaCaseReport : {}", id);
-        cHVMalariaCaseReportRepository.deleteById(id);
+        chvMalariaCaseReportRepository.deleteById(id);
     }
 }

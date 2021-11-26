@@ -1,9 +1,11 @@
 package org.nmcpye.activitiesmanagement.repository;
 
-import java.util.List;
 import org.nmcpye.activitiesmanagement.domain.chv.Chv;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Spring Data SQL repository for the Chv entity.
@@ -11,9 +13,9 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface ChvRepository extends JpaRepository<Chv, Long> {
-    @Query("select cHV from Chv cHV where cHV.createdBy.login = ?#{principal.username}")
-    List<Chv> findByUserIsCurrentUser();
+    @Query("select chv from Chv chv where chv.createdBy.login = ?#{principal.username}")
+    List<Chv> findByCreatedByIsCurrentUser();
 
-    @Query("select cHV from Chv cHV where cHV.lastUpdatedBy.login = ?#{principal.username}")
+    @Query("select chv from Chv chv where chv.lastUpdatedBy.login = ?#{principal.username}")
     List<Chv> findByLastUpdatedByIsCurrentUser();
 }

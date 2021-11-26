@@ -1,8 +1,8 @@
 <div class="row justify-content-center">
   <div class="col-8">
-    <div *ngIf="lLINSVillageTarget">
-      <h2 data-cy="lLINSVillageTargetDetailsHeading">
-        <span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.detail.title">LLINS Village Target</span>
+    <div *ngIf="llinsVillageTarget">
+      <h2 data-cy="llinsVillageTargetDetailsHeading">
+        <span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.detail.title">Llins Village Target</span>
       </h2>
 
       <hr />
@@ -14,78 +14,78 @@
       <dl class="row-md jh-entity-details">
         <dt><span appTranslate="global.field.id">ID</span></dt>
         <dd>
-          <span>{{ lLINSVillageTarget.id }}</span>
+          <span>{{ llinsVillageTarget.id }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.uid">Uid</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.uid">Uid</span></dt>
         <dd>
-          <span>{{ lLINSVillageTarget.uid }}</span>
+          <span>{{ llinsVillageTarget.uid }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.created">Created</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.created">Created</span></dt>
         <dd>
-          <span>{{ lLINSVillageTarget.created | formatMediumDatetime }}</span>
+          <span>{{ llinsVillageTarget.created | formatMediumDatetime }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.lastUpdated">Last Updated</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.lastUpdated">Last Updated</span></dt>
         <dd>
-          <span>{{ lLINSVillageTarget.lastUpdated | formatMediumDatetime }}</span>
+          <span>{{ llinsVillageTarget.lastUpdated | formatMediumDatetime }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.residentsIndividuals">Residents Individuals</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.residentsIndividuals">Residents Individuals</span></dt>
         <dd>
-          <span>{{ lLINSVillageTarget.residentsIndividuals }}</span>
+          <span>{{ llinsVillageTarget.residentsIndividuals }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.idpsIndividuals">Idps Individuals</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.idpsIndividuals">Idps Individuals</span></dt>
         <dd>
-          <span>{{ lLINSVillageTarget.idpsIndividuals }}</span>
+          <span>{{ llinsVillageTarget.idpsIndividuals }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.residentsFamilies">Residents Families</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.residentsFamilies">Residents Families</span></dt>
         <dd>
-          <span>{{ lLINSVillageTarget.residentsFamilies }}</span>
+          <span>{{ llinsVillageTarget.residentsFamilies }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.idpsFamilies">Idps Families</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.idpsFamilies">Idps Families</span></dt>
         <dd>
-          <span>{{ lLINSVillageTarget.idpsFamilies }}</span>
+          <span>{{ llinsVillageTarget.idpsFamilies }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.noOfDaysNeeded">No Of Days Needed</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.noOfDaysNeeded">No Of Days Needed</span></dt>
         <dd>
-          <span>{{ lLINSVillageTarget.noOfDaysNeeded }}</span>
+          <span>{{ llinsVillageTarget.noOfDaysNeeded }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.quantity">Quantity</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.quantity">Quantity</span></dt>
         <dd>
-          <span>{{ lLINSVillageTarget.quantity }}</span>
+          <span>{{ llinsVillageTarget.quantity }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.organisationUnit">Organisation Unit</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.organisationUnit">Organisation Unit</span></dt>
         <dd>
-          <div *ngIf="lLINSVillageTarget.organisationUnit">
-            <a [routerLink]="['/organisation-unit', lLINSVillageTarget.organisationUnit?.id, 'view']">{{
-              lLINSVillageTarget.organisationUnit?.name
+          <div *ngIf="llinsVillageTarget.organisationUnit">
+            <a [routerLink]="['/organisation-unit', llinsVillageTarget.organisationUnit?.id, 'view']">{{
+              llinsVillageTarget.organisationUnit?.name
             }}</a>
           </div>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.createdBy">Created By</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.createdBy">Created By</span></dt>
         <dd>
-          <span>{{ lLINSVillageTarget.createdBy?.login }}</span>
+          <span>{{ llinsVillageTarget.createdBy?.login }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.lastUpdatedBy">Last Updated By</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.lastUpdatedBy">Last Updated By</span></dt>
         <dd>
-          <span>{{ lLINSVillageTarget.lastUpdatedBy?.login }}</span>
+          <span>{{ llinsVillageTarget.lastUpdatedBy?.login }}</span>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.dayPlanned">Day Planned</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.dayPlanned">Day Planned</span></dt>
         <dd>
-          <div *ngIf="lLINSVillageTarget.dayPlanned">
-            <a [routerLink]="['/working-day', lLINSVillageTarget.dayPlanned?.id, 'view']">{{ lLINSVillageTarget.dayPlanned?.dayLabel }}</a>
+          <div *ngIf="llinsVillageTarget.dayPlanned">
+            <a [routerLink]="['/working-day', llinsVillageTarget.dayPlanned?.id, 'view']">{{ llinsVillageTarget.dayPlanned?.dayLabel }}</a>
           </div>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.statusOfCoverage">Status Of Coverage</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.statusOfCoverage">Status Of Coverage</span></dt>
         <dd>
-          <div *ngIf="lLINSVillageTarget.statusOfCoverage">
-            <a [routerLink]="['/status-of-coverage', lLINSVillageTarget.statusOfCoverage?.id, 'view']">{{
-              lLINSVillageTarget.statusOfCoverage?.status
+          <div *ngIf="llinsVillageTarget.statusOfCoverage">
+            <a [routerLink]="['/status-of-coverage', llinsVillageTarget.statusOfCoverage?.id, 'view']">{{
+              llinsVillageTarget.statusOfCoverage?.status
             }}</a>
           </div>
         </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.lLINSVillageTarget.teamAssigned">Team Assigned</span></dt>
+        <dt><span appTranslate="amSystemPlaygroundApp.llinsVillageTarget.teamAssigned">Team Assigned</span></dt>
         <dd>
-          <div *ngIf="lLINSVillageTarget.teamAssigned">
-            <a [routerLink]="['/team', lLINSVillageTarget.teamAssigned?.id, 'view']">{{ lLINSVillageTarget.teamAssigned?.name }}</a>
+          <div *ngIf="llinsVillageTarget.teamAssigned">
+            <a [routerLink]="['/team', llinsVillageTarget.teamAssigned?.id, 'view']">{{ llinsVillageTarget.teamAssigned?.name }}</a>
           </div>
         </dd>
       </dl>
@@ -94,7 +94,7 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/llins-village-target', lLINSVillageTarget.id, 'edit']" class="btn btn-primary">
+      <button type="button" [routerLink]="['/llins-village-target', llinsVillageTarget.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

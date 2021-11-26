@@ -7,62 +7,62 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { of, Subject } from 'rxjs';
 
-import { LLINSFamilyReportHistoryService } from '../service/llins-family-report-history.service';
-import { ILLINSFamilyReportHistory, LLINSFamilyReportHistory } from '../llins-family-report-history.model';
+import { LlinsFamilyReportHistoryService } from '../service/llins-family-report-history.service';
+import { ILlinsFamilyReportHistory, LlinsFamilyReportHistory } from '../llins-family-report-history.model';
 
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 import { IWorkingDay } from 'app/entities/working-day/working-day.model';
 import { WorkingDayService } from 'app/entities/working-day/service/working-day.service';
-import { ILLINSFamilyReport } from 'app/entities/llins-family-report/llins-family-report.model';
-import { LLINSFamilyReportService } from 'app/entities/llins-family-report/service/llins-family-report.service';
+import { ILlinsFamilyReport } from 'app/entities/llins-family-report/llins-family-report.model';
+import { LlinsFamilyReportService } from 'app/entities/llins-family-report/service/llins-family-report.service';
 
-import { LLINSFamilyReportHistoryUpdateComponent } from './llins-family-report-history-update.component';
+import { LlinsFamilyReportHistoryUpdateComponent } from './llins-family-report-history-update.component';
 
 describe('Component Tests', () => {
   describe('LlinsFamilyReportHistory Management Update Component', () => {
-    let comp: LLINSFamilyReportHistoryUpdateComponent;
-    let fixture: ComponentFixture<LLINSFamilyReportHistoryUpdateComponent>;
+    let comp: LlinsFamilyReportHistoryUpdateComponent;
+    let fixture: ComponentFixture<LlinsFamilyReportHistoryUpdateComponent>;
     let activatedRoute: ActivatedRoute;
-    let lLINSFamilyReportHistoryService: LLINSFamilyReportHistoryService;
+    let llinsFamilyReportHistoryService: LlinsFamilyReportHistoryService;
     let userService: UserService;
     let workingDayService: WorkingDayService;
-    let lLINSFamilyReportService: LLINSFamilyReportService;
+    let llinsFamilyReportService: LlinsFamilyReportService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [LLINSFamilyReportHistoryUpdateComponent],
+        declarations: [LlinsFamilyReportHistoryUpdateComponent],
         providers: [FormBuilder, ActivatedRoute],
       })
-        .overrideTemplate(LLINSFamilyReportHistoryUpdateComponent, '')
+        .overrideTemplate(LlinsFamilyReportHistoryUpdateComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(LLINSFamilyReportHistoryUpdateComponent);
+      fixture = TestBed.createComponent(LlinsFamilyReportHistoryUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
-      lLINSFamilyReportHistoryService = TestBed.inject(LLINSFamilyReportHistoryService);
+      llinsFamilyReportHistoryService = TestBed.inject(LlinsFamilyReportHistoryService);
       userService = TestBed.inject(UserService);
       workingDayService = TestBed.inject(WorkingDayService);
-      lLINSFamilyReportService = TestBed.inject(LLINSFamilyReportService);
+      llinsFamilyReportService = TestBed.inject(LlinsFamilyReportService);
 
       comp = fixture.componentInstance;
     });
 
     describe('ngOnInit', () => {
       it('Should call User query and add missing value', () => {
-        const lLINSFamilyReportHistory: ILLINSFamilyReportHistory = { id: 456 };
-        const createdBy: IUser = { id: 16250 };
-        lLINSFamilyReportHistory.createdBy = createdBy;
-        const lastUpdatedBy: IUser = { id: 65450 };
-        lLINSFamilyReportHistory.lastUpdatedBy = lastUpdatedBy;
+        const llinsFamilyReportHistory: ILlinsFamilyReportHistory = { id: 456 };
+        const createdBy: IUser = { id: 68963 };
+        llinsFamilyReportHistory.createdBy = createdBy;
+        const lastUpdatedBy: IUser = { id: 78926 };
+        llinsFamilyReportHistory.lastUpdatedBy = lastUpdatedBy;
 
-        const userCollection: IUser[] = [{ id: 75030 }];
+        const userCollection: IUser[] = [{ id: 18567 }];
         jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
         const additionalUsers = [createdBy, lastUpdatedBy];
         const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
         jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ lLINSFamilyReportHistory });
+        activatedRoute.data = of({ llinsFamilyReportHistory });
         comp.ngOnInit();
 
         expect(userService.query).toHaveBeenCalled();
@@ -71,17 +71,17 @@ describe('Component Tests', () => {
       });
 
       it('Should call WorkingDay query and add missing value', () => {
-        const lLINSFamilyReportHistory: ILLINSFamilyReportHistory = { id: 456 };
-        const dayReached: IWorkingDay = { id: 5714 };
-        lLINSFamilyReportHistory.dayReached = dayReached;
+        const llinsFamilyReportHistory: ILlinsFamilyReportHistory = { id: 456 };
+        const dayReached: IWorkingDay = { id: 58313 };
+        llinsFamilyReportHistory.dayReached = dayReached;
 
-        const workingDayCollection: IWorkingDay[] = [{ id: 17724 }];
+        const workingDayCollection: IWorkingDay[] = [{ id: 4269 }];
         jest.spyOn(workingDayService, 'query').mockReturnValue(of(new HttpResponse({ body: workingDayCollection })));
         const additionalWorkingDays = [dayReached];
         const expectedCollection: IWorkingDay[] = [...additionalWorkingDays, ...workingDayCollection];
         jest.spyOn(workingDayService, 'addWorkingDayToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ lLINSFamilyReportHistory });
+        activatedRoute.data = of({ llinsFamilyReportHistory });
         comp.ngOnInit();
 
         expect(workingDayService.query).toHaveBeenCalled();
@@ -90,99 +90,99 @@ describe('Component Tests', () => {
       });
 
       it('Should call LlinsFamilyReport query and add missing value', () => {
-        const lLINSFamilyReportHistory: ILLINSFamilyReportHistory = { id: 456 };
-        const llinsFamilyReport: ILLINSFamilyReport = { id: 34861 };
-        lLINSFamilyReportHistory.llinsFamilyReport = llinsFamilyReport;
+        const llinsFamilyReportHistory: ILlinsFamilyReportHistory = { id: 456 };
+        const llinsFamilyReport: ILlinsFamilyReport = { id: 11264 };
+        llinsFamilyReportHistory.llinsFamilyReport = llinsFamilyReport;
 
-        const lLINSFamilyReportCollection: ILLINSFamilyReport[] = [{ id: 4412 }];
-        jest.spyOn(lLINSFamilyReportService, 'query').mockReturnValue(of(new HttpResponse({ body: lLINSFamilyReportCollection })));
-        const additionalLLINSFamilyReports = [llinsFamilyReport];
-        const expectedCollection: ILLINSFamilyReport[] = [...additionalLLINSFamilyReports, ...lLINSFamilyReportCollection];
-        jest.spyOn(lLINSFamilyReportService, 'addLLINSFamilyReportToCollectionIfMissing').mockReturnValue(expectedCollection);
+        const llinsFamilyReportCollection: ILlinsFamilyReport[] = [{ id: 48873 }];
+        jest.spyOn(llinsFamilyReportService, 'query').mockReturnValue(of(new HttpResponse({ body: llinsFamilyReportCollection })));
+        const additionalLlinsFamilyReports = [llinsFamilyReport];
+        const expectedCollection: ILlinsFamilyReport[] = [...additionalLlinsFamilyReports, ...llinsFamilyReportCollection];
+        jest.spyOn(llinsFamilyReportService, 'addLlinsFamilyReportToCollectionIfMissing').mockReturnValue(expectedCollection);
 
-        activatedRoute.data = of({ lLINSFamilyReportHistory });
+        activatedRoute.data = of({ llinsFamilyReportHistory });
         comp.ngOnInit();
 
-        expect(lLINSFamilyReportService.query).toHaveBeenCalled();
-        expect(lLINSFamilyReportService.addLLINSFamilyReportToCollectionIfMissing).toHaveBeenCalledWith(
-          lLINSFamilyReportCollection,
-          ...additionalLLINSFamilyReports
+        expect(llinsFamilyReportService.query).toHaveBeenCalled();
+        expect(llinsFamilyReportService.addLlinsFamilyReportToCollectionIfMissing).toHaveBeenCalledWith(
+          llinsFamilyReportCollection,
+          ...additionalLlinsFamilyReports
         );
-        expect(comp.lLINSFamilyReportsSharedCollection).toEqual(expectedCollection);
+        expect(comp.llinsFamilyReportsSharedCollection).toEqual(expectedCollection);
       });
 
       it('Should update editForm', () => {
-        const lLINSFamilyReportHistory: ILLINSFamilyReportHistory = { id: 456 };
-        const createdBy: IUser = { id: 54858 };
-        lLINSFamilyReportHistory.createdBy = createdBy;
-        const lastUpdatedBy: IUser = { id: 20016 };
-        lLINSFamilyReportHistory.lastUpdatedBy = lastUpdatedBy;
-        const dayReached: IWorkingDay = { id: 45590 };
-        lLINSFamilyReportHistory.dayReached = dayReached;
-        const llinsFamilyReport: ILLINSFamilyReport = { id: 49191 };
-        lLINSFamilyReportHistory.llinsFamilyReport = llinsFamilyReport;
+        const llinsFamilyReportHistory: ILlinsFamilyReportHistory = { id: 456 };
+        const createdBy: IUser = { id: 25713 };
+        llinsFamilyReportHistory.createdBy = createdBy;
+        const lastUpdatedBy: IUser = { id: 79131 };
+        llinsFamilyReportHistory.lastUpdatedBy = lastUpdatedBy;
+        const dayReached: IWorkingDay = { id: 68340 };
+        llinsFamilyReportHistory.dayReached = dayReached;
+        const llinsFamilyReport: ILlinsFamilyReport = { id: 86701 };
+        llinsFamilyReportHistory.llinsFamilyReport = llinsFamilyReport;
 
-        activatedRoute.data = of({ lLINSFamilyReportHistory });
+        activatedRoute.data = of({ llinsFamilyReportHistory });
         comp.ngOnInit();
 
-        expect(comp.editForm.value).toEqual(expect.objectContaining(lLINSFamilyReportHistory));
+        expect(comp.editForm.value).toEqual(expect.objectContaining(llinsFamilyReportHistory));
         expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.workingDaysSharedCollection).toContain(dayReached);
-        expect(comp.lLINSFamilyReportsSharedCollection).toContain(llinsFamilyReport);
+        expect(comp.llinsFamilyReportsSharedCollection).toContain(llinsFamilyReport);
       });
     });
 
     describe('save', () => {
       it('Should call update service on save for existing entity', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<LLINSFamilyReportHistory>>();
-        const lLINSFamilyReportHistory = { id: 123 };
-        jest.spyOn(lLINSFamilyReportHistoryService, 'update').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<LlinsFamilyReportHistory>>();
+        const llinsFamilyReportHistory = { id: 123 };
+        jest.spyOn(llinsFamilyReportHistoryService, 'update').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ lLINSFamilyReportHistory });
+        activatedRoute.data = of({ llinsFamilyReportHistory });
         comp.ngOnInit();
 
         // WHEN
         comp.save();
         expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: lLINSFamilyReportHistory }));
+        saveSubject.next(new HttpResponse({ body: llinsFamilyReportHistory }));
         saveSubject.complete();
 
         // THEN
         expect(comp.previousState).toHaveBeenCalled();
-        expect(lLINSFamilyReportHistoryService.update).toHaveBeenCalledWith(lLINSFamilyReportHistory);
+        expect(llinsFamilyReportHistoryService.update).toHaveBeenCalledWith(llinsFamilyReportHistory);
         expect(comp.isSaving).toEqual(false);
       });
 
       it('Should call create service on save for new entity', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<LLINSFamilyReportHistory>>();
-        const lLINSFamilyReportHistory = new LLINSFamilyReportHistory();
-        jest.spyOn(lLINSFamilyReportHistoryService, 'create').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<LlinsFamilyReportHistory>>();
+        const llinsFamilyReportHistory = new LlinsFamilyReportHistory();
+        jest.spyOn(llinsFamilyReportHistoryService, 'create').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ lLINSFamilyReportHistory });
+        activatedRoute.data = of({ llinsFamilyReportHistory });
         comp.ngOnInit();
 
         // WHEN
         comp.save();
         expect(comp.isSaving).toEqual(true);
-        saveSubject.next(new HttpResponse({ body: lLINSFamilyReportHistory }));
+        saveSubject.next(new HttpResponse({ body: llinsFamilyReportHistory }));
         saveSubject.complete();
 
         // THEN
-        expect(lLINSFamilyReportHistoryService.create).toHaveBeenCalledWith(lLINSFamilyReportHistory);
+        expect(llinsFamilyReportHistoryService.create).toHaveBeenCalledWith(llinsFamilyReportHistory);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).toHaveBeenCalled();
       });
 
       it('Should set isSaving to false on error', () => {
         // GIVEN
-        const saveSubject = new Subject<HttpResponse<LLINSFamilyReportHistory>>();
-        const lLINSFamilyReportHistory = { id: 123 };
-        jest.spyOn(lLINSFamilyReportHistoryService, 'update').mockReturnValue(saveSubject);
+        const saveSubject = new Subject<HttpResponse<LlinsFamilyReportHistory>>();
+        const llinsFamilyReportHistory = { id: 123 };
+        jest.spyOn(llinsFamilyReportHistoryService, 'update').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
-        activatedRoute.data = of({ lLINSFamilyReportHistory });
+        activatedRoute.data = of({ llinsFamilyReportHistory });
         comp.ngOnInit();
 
         // WHEN
@@ -191,7 +191,7 @@ describe('Component Tests', () => {
         saveSubject.error('This is an error!');
 
         // THEN
-        expect(lLINSFamilyReportHistoryService.update).toHaveBeenCalledWith(lLINSFamilyReportHistory);
+        expect(llinsFamilyReportHistoryService.update).toHaveBeenCalledWith(llinsFamilyReportHistory);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).not.toHaveBeenCalled();
       });
@@ -214,10 +214,10 @@ describe('Component Tests', () => {
         });
       });
 
-      describe('trackLLINSFamilyReportById', () => {
+      describe('trackLlinsFamilyReportById', () => {
         it('Should return tracked LlinsFamilyReport primary key', () => {
           const entity = { id: 123 };
-          const trackResult = comp.trackLLINSFamilyReportById(0, entity);
+          const trackResult = comp.trackLlinsFamilyReportById(0, entity);
           expect(trackResult).toEqual(entity.id);
         });
       });

@@ -2,36 +2,36 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
-import { LLINSFamilyReportDetailComponent } from './llins-family-report-detail.component';
+import { LlinsFamilyReportDetailComponent } from './llins-family-report-detail.component';
 
 describe('Component Tests', () => {
   describe('LlinsFamilyReport Management Detail Component', () => {
-    let comp: LLINSFamilyReportDetailComponent;
-    let fixture: ComponentFixture<LLINSFamilyReportDetailComponent>;
+    let comp: LlinsFamilyReportDetailComponent;
+    let fixture: ComponentFixture<LlinsFamilyReportDetailComponent>;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        declarations: [LLINSFamilyReportDetailComponent],
+        declarations: [LlinsFamilyReportDetailComponent],
         providers: [
           {
             provide: ActivatedRoute,
-            useValue: { data: of({ lLINSFamilyReport: { id: 123 } }) },
+            useValue: { data: of({ llinsFamilyReport: { id: 123 } }) },
           },
         ],
       })
-        .overrideTemplate(LLINSFamilyReportDetailComponent, '')
+        .overrideTemplate(LlinsFamilyReportDetailComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(LLINSFamilyReportDetailComponent);
+      fixture = TestBed.createComponent(LlinsFamilyReportDetailComponent);
       comp = fixture.componentInstance;
     });
 
     describe('OnInit', () => {
-      it('Should load lLINSFamilyReport on init', () => {
+      it('Should load llinsFamilyReport on init', () => {
         // WHEN
         comp.ngOnInit();
 
         // THEN
-        expect(comp.lLINSFamilyReport).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.llinsFamilyReport).toEqual(expect.objectContaining({ id: 123 }));
       });
     });
   });

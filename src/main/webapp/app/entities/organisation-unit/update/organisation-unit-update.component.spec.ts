@@ -16,8 +16,8 @@ import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 import { IMalariaUnit } from 'app/entities/malaria-unit/malaria-unit.model';
 import { MalariaUnitService } from 'app/entities/malaria-unit/service/malaria-unit.service';
-import { ICHV } from 'app/entities/chv/chv.model';
-import { CHVService } from 'app/entities/chv/service/chv.service';
+import { IChv } from 'app/entities/chv/chv.model';
+import { ChvService } from 'app/entities/chv/service/chv.service';
 
 import { OrganisationUnitUpdateComponent } from './organisation-unit-update.component';
 
@@ -30,7 +30,7 @@ describe('Component Tests', () => {
     let fileResourceService: FileResourceService;
     let userService: UserService;
     let malariaUnitService: MalariaUnitService;
-    let cHVService: CHVService;
+    let chvService: ChvService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -47,7 +47,7 @@ describe('Component Tests', () => {
       fileResourceService = TestBed.inject(FileResourceService);
       userService = TestBed.inject(UserService);
       malariaUnitService = TestBed.inject(MalariaUnitService);
-      cHVService = TestBed.inject(CHVService);
+      chvService = TestBed.inject(ChvService);
 
       comp = fixture.componentInstance;
     });
@@ -146,21 +146,21 @@ describe('Component Tests', () => {
 
       it('Should call Chv query and add missing value', () => {
         const organisationUnit: IOrganisationUnit = { id: 456 };
-        const assignedChv: ICHV = { id: 76826 };
+        const assignedChv: IChv = { id: 76826 };
         organisationUnit.assignedChv = assignedChv;
 
-        const cHVCollection: ICHV[] = [{ id: 82396 }];
-        jest.spyOn(cHVService, 'query').mockReturnValue(of(new HttpResponse({ body: cHVCollection })));
-        const additionalCHVS = [assignedChv];
-        const expectedCollection: ICHV[] = [...additionalCHVS, ...cHVCollection];
-        jest.spyOn(cHVService, 'addCHVToCollectionIfMissing').mockReturnValue(expectedCollection);
+        const chvCollection: IChv[] = [{ id: 82396 }];
+        jest.spyOn(chvService, 'query').mockReturnValue(of(new HttpResponse({ body: chvCollection })));
+        const additionalChvs = [assignedChv];
+        const expectedCollection: IChv[] = [...additionalChvs, ...chvCollection];
+        jest.spyOn(chvService, 'addChvToCollectionIfMissing').mockReturnValue(expectedCollection);
 
         activatedRoute.data = of({ organisationUnit });
         comp.ngOnInit();
 
-        expect(cHVService.query).toHaveBeenCalled();
-        expect(cHVService.addCHVToCollectionIfMissing).toHaveBeenCalledWith(cHVCollection, ...additionalCHVS);
-        expect(comp.cHVSSharedCollection).toEqual(expectedCollection);
+        expect(chvService.query).toHaveBeenCalled();
+        expect(chvService.addChvToCollectionIfMissing).toHaveBeenCalledWith(chvCollection, ...additionalChvs);
+        expect(comp.chvsSharedCollection).toEqual(expectedCollection);
       });
 
       it('Should update editForm', () => {
@@ -179,7 +179,7 @@ describe('Component Tests', () => {
         organisationUnit.lastUpdatedBy = lastUpdatedBy;
         const malariaUnit: IMalariaUnit = { id: 37623 };
         organisationUnit.malariaUnit = malariaUnit;
-        const assignedChv: ICHV = { id: 43173 };
+        const assignedChv: IChv = { id: 43173 };
         organisationUnit.assignedChv = assignedChv;
 
         activatedRoute.data = of({ organisationUnit });
@@ -193,7 +193,7 @@ describe('Component Tests', () => {
         expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.malariaUnitsSharedCollection).toContain(malariaUnit);
-        expect(comp.cHVSSharedCollection).toContain(assignedChv);
+        expect(comp.chvsSharedCollection).toContain(assignedChv);
       });
     });
 
@@ -294,10 +294,10 @@ describe('Component Tests', () => {
         });
       });
 
-      describe('trackCHVById', () => {
+      describe('trackChvById', () => {
         it('Should return tracked Chv primary key', () => {
           const entity = { id: 123 };
-          const trackResult = comp.trackCHVById(0, entity);
+          const trackResult = comp.trackChvById(0, entity);
           expect(trackResult).toEqual(entity.id);
         });
       });

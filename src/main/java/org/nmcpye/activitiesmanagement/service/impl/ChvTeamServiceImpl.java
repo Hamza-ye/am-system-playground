@@ -1,7 +1,5 @@
 package org.nmcpye.activitiesmanagement.service.impl;
 
-import java.util.List;
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.domain.ChvTeam;
 import org.nmcpye.activitiesmanagement.repository.ChvTeamRepository;
 import org.nmcpye.activitiesmanagement.service.ChvTeamService;
@@ -12,6 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Optional;
+
 /**
  * Service Implementation for managing {@link ChvTeam}.
  */
@@ -21,78 +22,78 @@ public class ChvTeamServiceImpl implements ChvTeamService {
 
     private final Logger log = LoggerFactory.getLogger(ChvTeamServiceImpl.class);
 
-    private final ChvTeamRepository cHVTeamRepository;
+    private final ChvTeamRepository chvTeamRepository;
 
-    public ChvTeamServiceImpl(ChvTeamRepository cHVTeamRepository) {
-        this.cHVTeamRepository = cHVTeamRepository;
+    public ChvTeamServiceImpl(ChvTeamRepository chvTeamRepository) {
+        this.chvTeamRepository = chvTeamRepository;
     }
 
     @Override
-    public ChvTeam save(ChvTeam cHVTeam) {
-        log.debug("Request to save ChvTeam : {}", cHVTeam);
-        return cHVTeamRepository.save(cHVTeam);
+    public ChvTeam save(ChvTeam chvTeam) {
+        log.debug("Request to save ChvTeam : {}", chvTeam);
+        return chvTeamRepository.save(chvTeam);
     }
 
     @Override
-    public Optional<ChvTeam> partialUpdate(ChvTeam cHVTeam) {
-        log.debug("Request to partially update ChvTeam : {}", cHVTeam);
+    public Optional<ChvTeam> partialUpdate(ChvTeam chvTeam) {
+        log.debug("Request to partially update ChvTeam : {}", chvTeam);
 
-        return cHVTeamRepository
-            .findById(cHVTeam.getId())
+        return chvTeamRepository
+            .findById(chvTeam.getId())
             .map(
-                existingCHVTeam -> {
-                    if (cHVTeam.getUid() != null) {
-                        existingCHVTeam.setUid(cHVTeam.getUid());
+                existingChvTeam -> {
+                    if (chvTeam.getUid() != null) {
+                        existingChvTeam.setUid(chvTeam.getUid());
                     }
-                    if (cHVTeam.getCode() != null) {
-                        existingCHVTeam.setCode(cHVTeam.getCode());
+                    if (chvTeam.getCode() != null) {
+                        existingChvTeam.setCode(chvTeam.getCode());
                     }
-                    if (cHVTeam.getName() != null) {
-                        existingCHVTeam.setName(cHVTeam.getName());
+                    if (chvTeam.getName() != null) {
+                        existingChvTeam.setName(chvTeam.getName());
                     }
-                    if (cHVTeam.getDescription() != null) {
-                        existingCHVTeam.setDescription(cHVTeam.getDescription());
+                    if (chvTeam.getDescription() != null) {
+                        existingChvTeam.setDescription(chvTeam.getDescription());
                     }
-                    if (cHVTeam.getCreated() != null) {
-                        existingCHVTeam.setCreated(cHVTeam.getCreated());
+                    if (chvTeam.getCreated() != null) {
+                        existingChvTeam.setCreated(chvTeam.getCreated());
                     }
-                    if (cHVTeam.getLastUpdated() != null) {
-                        existingCHVTeam.setLastUpdated(cHVTeam.getLastUpdated());
+                    if (chvTeam.getLastUpdated() != null) {
+                        existingChvTeam.setLastUpdated(chvTeam.getLastUpdated());
                     }
-                    if (cHVTeam.getTeamNo() != null) {
-                        existingCHVTeam.setTeamNo(cHVTeam.getTeamNo());
+                    if (chvTeam.getTeamNo() != null) {
+                        existingChvTeam.setTeamNo(chvTeam.getTeamNo());
                     }
-                    if (cHVTeam.getTeamType() != null) {
-                        existingCHVTeam.setTeamType(cHVTeam.getTeamType());
+                    if (chvTeam.getTeamType() != null) {
+                        existingChvTeam.setTeamType(chvTeam.getTeamType());
                     }
 
-                    return existingCHVTeam;
+                    return existingChvTeam;
                 }
             )
-            .map(cHVTeamRepository::save);
+            .map(chvTeamRepository::save);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<ChvTeam> findAll() {
-        log.debug("Request to get all CHVTeams");
-        return cHVTeamRepository.findAllWithEagerRelationships();
+        log.debug("Request to get all ChvTeams");
+        return chvTeamRepository.findAllWithEagerRelationships();
     }
 
     public Page<ChvTeam> findAllWithEagerRelationships(Pageable pageable) {
-        return cHVTeamRepository.findAllWithEagerRelationships(pageable);
+        return chvTeamRepository.findAllWithEagerRelationships(pageable);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<ChvTeam> findOne(Long id) {
         log.debug("Request to get ChvTeam : {}", id);
-        return cHVTeamRepository.findOneWithEagerRelationships(id);
+        return chvTeamRepository.findOneWithEagerRelationships(id);
     }
 
     @Override
     public void delete(Long id) {
         log.debug("Request to delete ChvTeam : {}", id);
-        cHVTeamRepository.deleteById(id);
+        chvTeamRepository.deleteById(id);
     }
 }

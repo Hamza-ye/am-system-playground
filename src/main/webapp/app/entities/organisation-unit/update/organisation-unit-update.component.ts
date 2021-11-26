@@ -16,8 +16,8 @@ import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 import { IMalariaUnit } from 'app/entities/malaria-unit/malaria-unit.model';
 import { MalariaUnitService } from 'app/entities/malaria-unit/service/malaria-unit.service';
-import { ICHV } from 'app/entities/chv/chv.model';
-import { CHVService } from 'app/entities/chv/service/chv.service';
+import { IChv } from 'app/entities/chv/chv.model';
+import { ChvService } from 'app/entities/chv/service/chv.service';
 
 @Component({
   selector: 'app-organisation-unit-update',
@@ -30,7 +30,7 @@ export class OrganisationUnitUpdateComponent implements OnInit {
   organisationUnitsSharedCollection: IOrganisationUnit[] = [];
   usersSharedCollection: IUser[] = [];
   malariaUnitsSharedCollection: IMalariaUnit[] = [];
-  cHVSSharedCollection: ICHV[] = [];
+  chvsSharedCollection: IChv[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -66,7 +66,7 @@ export class OrganisationUnitUpdateComponent implements OnInit {
     protected fileResourceService: FileResourceService,
     protected userService: UserService,
     protected malariaUnitService: MalariaUnitService,
-    protected cHVService: CHVService,
+    protected chvService: ChvService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -115,7 +115,7 @@ export class OrganisationUnitUpdateComponent implements OnInit {
     return item.id!;
   }
 
-  trackCHVById(index: number, item: ICHV): number {
+  trackChvById(index: number, item: IChv): number {
     return item.id!;
   }
 
@@ -187,7 +187,7 @@ export class OrganisationUnitUpdateComponent implements OnInit {
       this.malariaUnitsSharedCollection,
       organisationUnit.malariaUnit
     );
-    this.cHVSSharedCollection = this.cHVService.addCHVToCollectionIfMissing(this.cHVSSharedCollection, organisationUnit.assignedChv);
+    this.chvsSharedCollection = this.chvService.addChvToCollectionIfMissing(this.chvsSharedCollection, organisationUnit.assignedChv);
   }
 
   protected loadRelationshipsOptions(): void {
@@ -240,11 +240,11 @@ export class OrganisationUnitUpdateComponent implements OnInit {
       )
       .subscribe((malariaUnits: IMalariaUnit[]) => (this.malariaUnitsSharedCollection = malariaUnits));
 
-    this.cHVService
+    this.chvService
       .query()
-      .pipe(map((res: HttpResponse<ICHV[]>) => res.body ?? []))
-      .pipe(map((cHVS: ICHV[]) => this.cHVService.addCHVToCollectionIfMissing(cHVS, this.editForm.get('assignedChv')!.value)))
-      .subscribe((cHVS: ICHV[]) => (this.cHVSSharedCollection = cHVS));
+      .pipe(map((res: HttpResponse<IChv[]>) => res.body ?? []))
+      .pipe(map((chvs: IChv[]) => this.chvService.addChvToCollectionIfMissing(chvs, this.editForm.get('assignedChv')!.value)))
+      .subscribe((chvs: IChv[]) => (this.chvsSharedCollection = chvs));
   }
 
   protected createFromForm(): IOrganisationUnit {

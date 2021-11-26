@@ -1,38 +1,39 @@
 package org.nmcpye.activitiesmanagement.service;
 
+import org.nmcpye.activitiesmanagement.domain.ChvMalariaReportVersion1;
+
 import java.util.List;
 import java.util.Optional;
-import org.nmcpye.activitiesmanagement.domain.ChvMalariaReportVersion1;
 
 /**
  * Service Interface for managing {@link ChvMalariaReportVersion1}.
  */
 public interface ChvMalariaReportVersion1Service {
     /**
-     * Save a cHVMalariaReportVersion1.
+     * Save a chvMalariaReportVersion1.
      *
-     * @param cHVMalariaReportVersion1 the entity to save.
+     * @param chvMalariaReportVersion1 the entity to save.
      * @return the persisted entity.
      */
-    ChvMalariaReportVersion1 save(ChvMalariaReportVersion1 cHVMalariaReportVersion1);
+    ChvMalariaReportVersion1 save(ChvMalariaReportVersion1 chvMalariaReportVersion1);
 
     /**
-     * Partially updates a cHVMalariaReportVersion1.
+     * Partially updates a chvMalariaReportVersion1.
      *
-     * @param cHVMalariaReportVersion1 the entity to update partially.
+     * @param chvMalariaReportVersion1 the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<ChvMalariaReportVersion1> partialUpdate(ChvMalariaReportVersion1 cHVMalariaReportVersion1);
+    Optional<ChvMalariaReportVersion1> partialUpdate(ChvMalariaReportVersion1 chvMalariaReportVersion1);
 
     /**
-     * Get all the cHVMalariaReportVersion1s.
+     * Get all the chvMalariaReportVersion1s.
      *
      * @return the list of entities.
      */
     List<ChvMalariaReportVersion1> findAll();
 
     /**
-     * Get the "id" cHVMalariaReportVersion1.
+     * Get the "id" chvMalariaReportVersion1.
      *
      * @param id the id of the entity.
      * @return the entity.
@@ -40,7 +41,7 @@ public interface ChvMalariaReportVersion1Service {
     Optional<ChvMalariaReportVersion1> findOne(Long id);
 
     /**
-     * Delete the "id" cHVMalariaReportVersion1.
+     * Delete the "id" chvMalariaReportVersion1.
      *
      * @param id the id of the entity.
      */

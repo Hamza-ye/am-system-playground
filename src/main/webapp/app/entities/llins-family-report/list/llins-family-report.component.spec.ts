@@ -6,20 +6,20 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 
-import { LLINSFamilyReportService } from '../service/llins-family-report.service';
+import { LlinsFamilyReportService } from '../service/llins-family-report.service';
 
-import { LLINSFamilyReportComponent } from './llins-family-report.component';
+import { LlinsFamilyReportComponent } from './llins-family-report.component';
 
 describe('Component Tests', () => {
   describe('LlinsFamilyReport Management Component', () => {
-    let comp: LLINSFamilyReportComponent;
-    let fixture: ComponentFixture<LLINSFamilyReportComponent>;
-    let service: LLINSFamilyReportService;
+    let comp: LlinsFamilyReportComponent;
+    let fixture: ComponentFixture<LlinsFamilyReportComponent>;
+    let service: LlinsFamilyReportService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [LLINSFamilyReportComponent],
+        declarations: [LlinsFamilyReportComponent],
         providers: [
           Router,
           {
@@ -39,12 +39,12 @@ describe('Component Tests', () => {
           },
         ],
       })
-        .overrideTemplate(LLINSFamilyReportComponent, '')
+        .overrideTemplate(LlinsFamilyReportComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(LLINSFamilyReportComponent);
+      fixture = TestBed.createComponent(LlinsFamilyReportComponent);
       comp = fixture.componentInstance;
-      service = TestBed.inject(LLINSFamilyReportService);
+      service = TestBed.inject(LlinsFamilyReportService);
 
       const headers = new HttpHeaders().append('link', 'link;link');
       jest.spyOn(service, 'query').mockReturnValue(
@@ -63,7 +63,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.lLINSFamilyReports?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+      expect(comp.llinsFamilyReports?.[0]).toEqual(expect.objectContaining({ id: 123 }));
     });
 
     it('should load a page', () => {
@@ -72,7 +72,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.lLINSFamilyReports?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+      expect(comp.llinsFamilyReports?.[0]).toEqual(expect.objectContaining({ id: 123 }));
     });
 
     it('should calculate the sort attribute for an id', () => {

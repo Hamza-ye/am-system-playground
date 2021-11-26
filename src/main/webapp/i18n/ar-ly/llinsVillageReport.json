@@ -1,0 +1,42 @@
+{
+  "amSystemPlaygroundApp": {
+    "llinsVillageReport": {
+      "home": {
+        "title": "Llins Village Reports",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Llins Village Report",
+        "createOrEditLabel": "Create or edit a Llins Village Report",
+        "notFound": "No Llins Village Reports found"
+      },
+      "created": "A new Llins Village Report is created with identifier {{ param }}",
+      "updated": "A Llins Village Report is updated with identifier {{ param }}",
+      "deleted": "A Llins Village Report is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Llins Village Report {{ id }}?"
+      },
+      "detail": {
+        "title": "Llins Village Report"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "houses": "Houses",
+      "residentHousehold": "Resident Household",
+      "idpsHousehold": "Idps Household",
+      "maleIndividuals": "Male Individuals",
+      "femaleIndividuals": "Female Individuals",
+      "lessThan5Males": "Less Than 5 Males",
+      "lessThan5Females": "Less Than 5 Females",
+      "pregnantWomen": "Pregnant Women",
+      "quantityReceived": "Quantity Received",
+      "comment": "Comment",
+      "llinsVillageReportHistory": "Llins Village Report History",
+      "createdBy": "Created By",
+      "lastUpdatedBy": "Last Updated By",
+      "dayReached": "Day Reached",
+      "targetDetails": "Target Details",
+      "executingTeam": "Executing Team"
+    }
+  }
+}

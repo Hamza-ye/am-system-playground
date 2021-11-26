@@ -1,16 +1,5 @@
 package org.nmcpye.activitiesmanagement.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
-import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.nmcpye.activitiesmanagement.IntegrationTest;
@@ -27,6 +16,18 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link LlinsFamilyTargetResource} REST controller.
@@ -67,15 +68,15 @@ class LlinsFamilyTargetResourceIT {
     private static AtomicLong count = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
-    private LlinsFamilyTargetRepository lLINSFamilyTargetRepository;
+    private LlinsFamilyTargetRepository llinsFamilyTargetRepository;
 
     @Autowired
     private EntityManager em;
 
     @Autowired
-    private MockMvc restLLINSFamilyTargetMockMvc;
+    private MockMvc restLlinsFamilyTargetMockMvc;
 
-    private LlinsFamilyTarget lLINSFamilyTarget;
+    private LlinsFamilyTarget llinsFamilyTarget;
 
     /**
      * Create an entity for this test.
@@ -84,7 +85,7 @@ class LlinsFamilyTargetResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static LlinsFamilyTarget createEntity(EntityManager em) {
-        LlinsFamilyTarget lLINSFamilyTarget = new LlinsFamilyTarget()
+        LlinsFamilyTarget llinsFamilyTarget = new LlinsFamilyTarget()
             .uid(DEFAULT_UID)
             .created(DEFAULT_CREATED)
             .lastUpdated(DEFAULT_LAST_UPDATED)
@@ -102,7 +103,7 @@ class LlinsFamilyTargetResourceIT {
         } else {
             workingDay = TestUtil.findAll(em, WorkingDay.class).get(0);
         }
-        lLINSFamilyTarget.setDayPlanned(workingDay);
+        llinsFamilyTarget.setDayPlanned(workingDay);
         // Add required entity
         Family family;
         if (TestUtil.findAll(em, Family.class).isEmpty()) {
@@ -112,7 +113,7 @@ class LlinsFamilyTargetResourceIT {
         } else {
             family = TestUtil.findAll(em, Family.class).get(0);
         }
-        lLINSFamilyTarget.setFamily(family);
+        llinsFamilyTarget.setFamily(family);
         // Add required entity
         Team team;
         if (TestUtil.findAll(em, Team.class).isEmpty()) {
@@ -122,8 +123,8 @@ class LlinsFamilyTargetResourceIT {
         } else {
             team = TestUtil.findAll(em, Team.class).get(0);
         }
-        lLINSFamilyTarget.setTeamAssigned(team);
-        return lLINSFamilyTarget;
+        llinsFamilyTarget.setTeamAssigned(team);
+        return llinsFamilyTarget;
     }
 
     /**
@@ -133,7 +134,7 @@ class LlinsFamilyTargetResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static LlinsFamilyTarget createUpdatedEntity(EntityManager em) {
-        LlinsFamilyTarget lLINSFamilyTarget = new LlinsFamilyTarget()
+        LlinsFamilyTarget llinsFamilyTarget = new LlinsFamilyTarget()
             .uid(UPDATED_UID)
             .created(UPDATED_CREATED)
             .lastUpdated(UPDATED_LAST_UPDATED)
@@ -151,7 +152,7 @@ class LlinsFamilyTargetResourceIT {
         } else {
             workingDay = TestUtil.findAll(em, WorkingDay.class).get(0);
         }
-        lLINSFamilyTarget.setDayPlanned(workingDay);
+        llinsFamilyTarget.setDayPlanned(workingDay);
         // Add required entity
         Family family;
         if (TestUtil.findAll(em, Family.class).isEmpty()) {
@@ -161,7 +162,7 @@ class LlinsFamilyTargetResourceIT {
         } else {
             family = TestUtil.findAll(em, Family.class).get(0);
         }
-        lLINSFamilyTarget.setFamily(family);
+        llinsFamilyTarget.setFamily(family);
         // Add required entity
         Team team;
         if (TestUtil.findAll(em, Team.class).isEmpty()) {
@@ -171,30 +172,30 @@ class LlinsFamilyTargetResourceIT {
         } else {
             team = TestUtil.findAll(em, Team.class).get(0);
         }
-        lLINSFamilyTarget.setTeamAssigned(team);
-        return lLINSFamilyTarget;
+        llinsFamilyTarget.setTeamAssigned(team);
+        return llinsFamilyTarget;
     }
 
     @BeforeEach
     public void initTest() {
-        lLINSFamilyTarget = createEntity(em);
+        llinsFamilyTarget = createEntity(em);
     }
 
     @Test
     @Transactional
-    void createLLINSFamilyTarget() throws Exception {
-        int databaseSizeBeforeCreate = lLINSFamilyTargetRepository.findAll().size();
+    void createLlinsFamilyTarget() throws Exception {
+        int databaseSizeBeforeCreate = llinsFamilyTargetRepository.findAll().size();
         // Create the LlinsFamilyTarget
-        restLLINSFamilyTargetMockMvc
+        restLlinsFamilyTargetMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(lLINSFamilyTarget))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(llinsFamilyTarget))
             )
             .andExpect(status().isCreated());
 
         // Validate the LlinsFamilyTarget in the database
-        List<LlinsFamilyTarget> lLINSFamilyTargetList = lLINSFamilyTargetRepository.findAll();
-        assertThat(lLINSFamilyTargetList).hasSize(databaseSizeBeforeCreate + 1);
-        LlinsFamilyTarget testLlinsFamilyTarget = lLINSFamilyTargetList.get(lLINSFamilyTargetList.size() - 1);
+        List<LlinsFamilyTarget> llinsFamilyTargetList = llinsFamilyTargetRepository.findAll();
+        assertThat(llinsFamilyTargetList).hasSize(databaseSizeBeforeCreate + 1);
+        LlinsFamilyTarget testLlinsFamilyTarget = llinsFamilyTargetList.get(llinsFamilyTargetList.size() - 1);
         assertThat(testLlinsFamilyTarget.getUid()).isEqualTo(DEFAULT_UID);
         assertThat(testLlinsFamilyTarget.getCreated()).isEqualTo(DEFAULT_CREATED);
         assertThat(testLlinsFamilyTarget.getLastUpdated()).isEqualTo(DEFAULT_LAST_UPDATED);
@@ -207,150 +208,150 @@ class LlinsFamilyTargetResourceIT {
 
     @Test
     @Transactional
-    void createLLINSFamilyTargetWithExistingId() throws Exception {
+    void createLlinsFamilyTargetWithExistingId() throws Exception {
         // Create the LlinsFamilyTarget with an existing ID
-        lLINSFamilyTarget.setId(1L);
+        llinsFamilyTarget.setId(1L);
 
-        int databaseSizeBeforeCreate = lLINSFamilyTargetRepository.findAll().size();
+        int databaseSizeBeforeCreate = llinsFamilyTargetRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restLLINSFamilyTargetMockMvc
+        restLlinsFamilyTargetMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(lLINSFamilyTarget))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(llinsFamilyTarget))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsFamilyTarget in the database
-        List<LlinsFamilyTarget> lLINSFamilyTargetList = lLINSFamilyTargetRepository.findAll();
-        assertThat(lLINSFamilyTargetList).hasSize(databaseSizeBeforeCreate);
+        List<LlinsFamilyTarget> llinsFamilyTargetList = llinsFamilyTargetRepository.findAll();
+        assertThat(llinsFamilyTargetList).hasSize(databaseSizeBeforeCreate);
     }
 
     @Test
     @Transactional
     void checkUidIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSFamilyTargetRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsFamilyTargetRepository.findAll().size();
         // set the field null
-        lLINSFamilyTarget.setUid(null);
+        llinsFamilyTarget.setUid(null);
 
         // Create the LlinsFamilyTarget, which fails.
 
-        restLLINSFamilyTargetMockMvc
+        restLlinsFamilyTargetMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(lLINSFamilyTarget))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(llinsFamilyTarget))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsFamilyTarget> lLINSFamilyTargetList = lLINSFamilyTargetRepository.findAll();
-        assertThat(lLINSFamilyTargetList).hasSize(databaseSizeBeforeTest);
+        List<LlinsFamilyTarget> llinsFamilyTargetList = llinsFamilyTargetRepository.findAll();
+        assertThat(llinsFamilyTargetList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
     void checkResidentsIndividualsPlannedIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSFamilyTargetRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsFamilyTargetRepository.findAll().size();
         // set the field null
-        lLINSFamilyTarget.setResidentsIndividualsPlanned(null);
+        llinsFamilyTarget.setResidentsIndividualsPlanned(null);
 
         // Create the LlinsFamilyTarget, which fails.
 
-        restLLINSFamilyTargetMockMvc
+        restLlinsFamilyTargetMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(lLINSFamilyTarget))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(llinsFamilyTarget))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsFamilyTarget> lLINSFamilyTargetList = lLINSFamilyTargetRepository.findAll();
-        assertThat(lLINSFamilyTargetList).hasSize(databaseSizeBeforeTest);
+        List<LlinsFamilyTarget> llinsFamilyTargetList = llinsFamilyTargetRepository.findAll();
+        assertThat(llinsFamilyTargetList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
     void checkIdpsIndividualsPlannedIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSFamilyTargetRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsFamilyTargetRepository.findAll().size();
         // set the field null
-        lLINSFamilyTarget.setIdpsIndividualsPlanned(null);
+        llinsFamilyTarget.setIdpsIndividualsPlanned(null);
 
         // Create the LlinsFamilyTarget, which fails.
 
-        restLLINSFamilyTargetMockMvc
+        restLlinsFamilyTargetMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(lLINSFamilyTarget))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(llinsFamilyTarget))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsFamilyTarget> lLINSFamilyTargetList = lLINSFamilyTargetRepository.findAll();
-        assertThat(lLINSFamilyTargetList).hasSize(databaseSizeBeforeTest);
+        List<LlinsFamilyTarget> llinsFamilyTargetList = llinsFamilyTargetRepository.findAll();
+        assertThat(llinsFamilyTargetList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
     void checkQuantityPlannedIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSFamilyTargetRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsFamilyTargetRepository.findAll().size();
         // set the field null
-        lLINSFamilyTarget.setQuantityPlanned(null);
+        llinsFamilyTarget.setQuantityPlanned(null);
 
         // Create the LlinsFamilyTarget, which fails.
 
-        restLLINSFamilyTargetMockMvc
+        restLlinsFamilyTargetMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(lLINSFamilyTarget))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(llinsFamilyTarget))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsFamilyTarget> lLINSFamilyTargetList = lLINSFamilyTargetRepository.findAll();
-        assertThat(lLINSFamilyTargetList).hasSize(databaseSizeBeforeTest);
+        List<LlinsFamilyTarget> llinsFamilyTargetList = llinsFamilyTargetRepository.findAll();
+        assertThat(llinsFamilyTargetList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
     void checkFamilyTypeIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSFamilyTargetRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsFamilyTargetRepository.findAll().size();
         // set the field null
-        lLINSFamilyTarget.setFamilyType(null);
+        llinsFamilyTarget.setFamilyType(null);
 
         // Create the LlinsFamilyTarget, which fails.
 
-        restLLINSFamilyTargetMockMvc
+        restLlinsFamilyTargetMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(lLINSFamilyTarget))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(llinsFamilyTarget))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsFamilyTarget> lLINSFamilyTargetList = lLINSFamilyTargetRepository.findAll();
-        assertThat(lLINSFamilyTargetList).hasSize(databaseSizeBeforeTest);
+        List<LlinsFamilyTarget> llinsFamilyTargetList = llinsFamilyTargetRepository.findAll();
+        assertThat(llinsFamilyTargetList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
     void checkStatusOfFamilyTargetIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSFamilyTargetRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsFamilyTargetRepository.findAll().size();
         // set the field null
-        lLINSFamilyTarget.setStatusOfFamilyTarget(null);
+        llinsFamilyTarget.setStatusOfFamilyTarget(null);
 
         // Create the LlinsFamilyTarget, which fails.
 
-        restLLINSFamilyTargetMockMvc
+        restLlinsFamilyTargetMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(lLINSFamilyTarget))
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(llinsFamilyTarget))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsFamilyTarget> lLINSFamilyTargetList = lLINSFamilyTargetRepository.findAll();
-        assertThat(lLINSFamilyTargetList).hasSize(databaseSizeBeforeTest);
+        List<LlinsFamilyTarget> llinsFamilyTargetList = llinsFamilyTargetRepository.findAll();
+        assertThat(llinsFamilyTargetList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
-    void getAllLLINSFamilyTargets() throws Exception {
+    void getAllLlinsFamilyTargets() throws Exception {
         // Initialize the database
-        lLINSFamilyTargetRepository.saveAndFlush(lLINSFamilyTarget);
+        llinsFamilyTargetRepository.saveAndFlush(llinsFamilyTarget);
 
-        // Get all the lLINSFamilyTargetList
-        restLLINSFamilyTargetMockMvc
+        // Get all the llinsFamilyTargetList
+        restLlinsFamilyTargetMockMvc
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(lLINSFamilyTarget.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(llinsFamilyTarget.getId().intValue())))
             .andExpect(jsonPath("$.[*].uid").value(hasItem(DEFAULT_UID)))
             .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
             .andExpect(jsonPath("$.[*].lastUpdated").value(hasItem(DEFAULT_LAST_UPDATED.toString())))
@@ -363,16 +364,16 @@ class LlinsFamilyTargetResourceIT {
 
     @Test
     @Transactional
-    void getLLINSFamilyTarget() throws Exception {
+    void getLlinsFamilyTarget() throws Exception {
         // Initialize the database
-        lLINSFamilyTargetRepository.saveAndFlush(lLINSFamilyTarget);
+        llinsFamilyTargetRepository.saveAndFlush(llinsFamilyTarget);
 
-        // Get the lLINSFamilyTarget
-        restLLINSFamilyTargetMockMvc
-            .perform(get(ENTITY_API_URL_ID, lLINSFamilyTarget.getId()))
+        // Get the llinsFamilyTarget
+        restLlinsFamilyTargetMockMvc
+            .perform(get(ENTITY_API_URL_ID, llinsFamilyTarget.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(lLINSFamilyTarget.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(llinsFamilyTarget.getId().intValue()))
             .andExpect(jsonPath("$.uid").value(DEFAULT_UID))
             .andExpect(jsonPath("$.created").value(DEFAULT_CREATED.toString()))
             .andExpect(jsonPath("$.lastUpdated").value(DEFAULT_LAST_UPDATED.toString()))
@@ -385,21 +386,21 @@ class LlinsFamilyTargetResourceIT {
 
     @Test
     @Transactional
-    void getNonExistingLLINSFamilyTarget() throws Exception {
-        // Get the lLINSFamilyTarget
-        restLLINSFamilyTargetMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
+    void getNonExistingLlinsFamilyTarget() throws Exception {
+        // Get the llinsFamilyTarget
+        restLlinsFamilyTargetMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
     @Test
     @Transactional
-    void putNewLLINSFamilyTarget() throws Exception {
+    void putNewLlinsFamilyTarget() throws Exception {
         // Initialize the database
-        lLINSFamilyTargetRepository.saveAndFlush(lLINSFamilyTarget);
+        llinsFamilyTargetRepository.saveAndFlush(llinsFamilyTarget);
 
-        int databaseSizeBeforeUpdate = lLINSFamilyTargetRepository.findAll().size();
+        int databaseSizeBeforeUpdate = llinsFamilyTargetRepository.findAll().size();
 
-        // Update the lLINSFamilyTarget
-        LlinsFamilyTarget updatedLlinsFamilyTarget = lLINSFamilyTargetRepository.findById(lLINSFamilyTarget.getId()).get();
+        // Update the llinsFamilyTarget
+        LlinsFamilyTarget updatedLlinsFamilyTarget = llinsFamilyTargetRepository.findById(llinsFamilyTarget.getId()).get();
         // Disconnect from session so that the updates on updatedLlinsFamilyTarget are not directly saved in db
         em.detach(updatedLlinsFamilyTarget);
         updatedLlinsFamilyTarget
@@ -412,7 +413,7 @@ class LlinsFamilyTargetResourceIT {
             .familyType(UPDATED_FAMILY_TYPE)
             .statusOfFamilyTarget(UPDATED_STATUS_OF_FAMILY_TARGET);
 
-        restLLINSFamilyTargetMockMvc
+        restLlinsFamilyTargetMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, updatedLlinsFamilyTarget.getId())
                     .contentType(MediaType.APPLICATION_JSON)
@@ -421,9 +422,9 @@ class LlinsFamilyTargetResourceIT {
             .andExpect(status().isOk());
 
         // Validate the LlinsFamilyTarget in the database
-        List<LlinsFamilyTarget> lLINSFamilyTargetList = lLINSFamilyTargetRepository.findAll();
-        assertThat(lLINSFamilyTargetList).hasSize(databaseSizeBeforeUpdate);
-        LlinsFamilyTarget testLlinsFamilyTarget = lLINSFamilyTargetList.get(lLINSFamilyTargetList.size() - 1);
+        List<LlinsFamilyTarget> llinsFamilyTargetList = llinsFamilyTargetRepository.findAll();
+        assertThat(llinsFamilyTargetList).hasSize(databaseSizeBeforeUpdate);
+        LlinsFamilyTarget testLlinsFamilyTarget = llinsFamilyTargetList.get(llinsFamilyTargetList.size() - 1);
         assertThat(testLlinsFamilyTarget.getUid()).isEqualTo(UPDATED_UID);
         assertThat(testLlinsFamilyTarget.getCreated()).isEqualTo(UPDATED_CREATED);
         assertThat(testLlinsFamilyTarget.getLastUpdated()).isEqualTo(UPDATED_LAST_UPDATED);
@@ -436,77 +437,75 @@ class LlinsFamilyTargetResourceIT {
 
     @Test
     @Transactional
-    void putNonExistingLLINSFamilyTarget() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSFamilyTargetRepository.findAll().size();
-        lLINSFamilyTarget.setId(count.incrementAndGet());
+    void putNonExistingLlinsFamilyTarget() throws Exception {
+        int databaseSizeBeforeUpdate = llinsFamilyTargetRepository.findAll().size();
+        llinsFamilyTarget.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restLLINSFamilyTargetMockMvc
+        restLlinsFamilyTargetMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, lLINSFamilyTarget.getId())
+                put(ENTITY_API_URL_ID, llinsFamilyTarget.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSFamilyTarget))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsFamilyTarget))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsFamilyTarget in the database
-        List<LlinsFamilyTarget> lLINSFamilyTargetList = lLINSFamilyTargetRepository.findAll();
-        assertThat(lLINSFamilyTargetList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsFamilyTarget> llinsFamilyTargetList = llinsFamilyTargetRepository.findAll();
+        assertThat(llinsFamilyTargetList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void putWithIdMismatchLLINSFamilyTarget() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSFamilyTargetRepository.findAll().size();
-        lLINSFamilyTarget.setId(count.incrementAndGet());
+    void putWithIdMismatchLlinsFamilyTarget() throws Exception {
+        int databaseSizeBeforeUpdate = llinsFamilyTargetRepository.findAll().size();
+        llinsFamilyTarget.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restLLINSFamilyTargetMockMvc
+        restLlinsFamilyTargetMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSFamilyTarget))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsFamilyTarget))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsFamilyTarget in the database
-        List<LlinsFamilyTarget> lLINSFamilyTargetList = lLINSFamilyTargetRepository.findAll();
-        assertThat(lLINSFamilyTargetList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsFamilyTarget> llinsFamilyTargetList = llinsFamilyTargetRepository.findAll();
+        assertThat(llinsFamilyTargetList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void putWithMissingIdPathParamLLINSFamilyTarget() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSFamilyTargetRepository.findAll().size();
-        lLINSFamilyTarget.setId(count.incrementAndGet());
+    void putWithMissingIdPathParamLlinsFamilyTarget() throws Exception {
+        int databaseSizeBeforeUpdate = llinsFamilyTargetRepository.findAll().size();
+        llinsFamilyTarget.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restLLINSFamilyTargetMockMvc
+        restLlinsFamilyTargetMockMvc
             .perform(
-                put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(lLINSFamilyTarget))
+                put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(llinsFamilyTarget))
             )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the LlinsFamilyTarget in the database
-        List<LlinsFamilyTarget> lLINSFamilyTargetList = lLINSFamilyTargetRepository.findAll();
-        assertThat(lLINSFamilyTargetList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsFamilyTarget> llinsFamilyTargetList = llinsFamilyTargetRepository.findAll();
+        assertThat(llinsFamilyTargetList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void partialUpdateLLINSFamilyTargetWithPatch() throws Exception {
+    void partialUpdateLlinsFamilyTargetWithPatch() throws Exception {
         // Initialize the database
-        lLINSFamilyTargetRepository.saveAndFlush(lLINSFamilyTarget);
+        llinsFamilyTargetRepository.saveAndFlush(llinsFamilyTarget);
 
-        int databaseSizeBeforeUpdate = lLINSFamilyTargetRepository.findAll().size();
+        int databaseSizeBeforeUpdate = llinsFamilyTargetRepository.findAll().size();
 
-        // Update the lLINSFamilyTarget using partial update
+        // Update the llinsFamilyTarget using partial update
         LlinsFamilyTarget partialUpdatedLlinsFamilyTarget = new LlinsFamilyTarget();
-        partialUpdatedLlinsFamilyTarget.setId(lLINSFamilyTarget.getId());
+        partialUpdatedLlinsFamilyTarget.setId(llinsFamilyTarget.getId());
 
-        partialUpdatedLlinsFamilyTarget.idpsIndividualsPlanned(UPDATED_IDPS_INDIVIDUALS_PLANNED).familyType(UPDATED_FAMILY_TYPE);
-
-        restLLINSFamilyTargetMockMvc
+        restLlinsFamilyTargetMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedLlinsFamilyTarget.getId())
                     .contentType("application/merge-patch+json")
@@ -515,30 +514,30 @@ class LlinsFamilyTargetResourceIT {
             .andExpect(status().isOk());
 
         // Validate the LlinsFamilyTarget in the database
-        List<LlinsFamilyTarget> lLINSFamilyTargetList = lLINSFamilyTargetRepository.findAll();
-        assertThat(lLINSFamilyTargetList).hasSize(databaseSizeBeforeUpdate);
-        LlinsFamilyTarget testLlinsFamilyTarget = lLINSFamilyTargetList.get(lLINSFamilyTargetList.size() - 1);
+        List<LlinsFamilyTarget> llinsFamilyTargetList = llinsFamilyTargetRepository.findAll();
+        assertThat(llinsFamilyTargetList).hasSize(databaseSizeBeforeUpdate);
+        LlinsFamilyTarget testLlinsFamilyTarget = llinsFamilyTargetList.get(llinsFamilyTargetList.size() - 1);
         assertThat(testLlinsFamilyTarget.getUid()).isEqualTo(DEFAULT_UID);
         assertThat(testLlinsFamilyTarget.getCreated()).isEqualTo(DEFAULT_CREATED);
         assertThat(testLlinsFamilyTarget.getLastUpdated()).isEqualTo(DEFAULT_LAST_UPDATED);
         assertThat(testLlinsFamilyTarget.getResidentsIndividualsPlanned()).isEqualTo(DEFAULT_RESIDENTS_INDIVIDUALS_PLANNED);
-        assertThat(testLlinsFamilyTarget.getIdpsIndividualsPlanned()).isEqualTo(UPDATED_IDPS_INDIVIDUALS_PLANNED);
+        assertThat(testLlinsFamilyTarget.getIdpsIndividualsPlanned()).isEqualTo(DEFAULT_IDPS_INDIVIDUALS_PLANNED);
         assertThat(testLlinsFamilyTarget.getQuantityPlanned()).isEqualTo(DEFAULT_QUANTITY_PLANNED);
-        assertThat(testLlinsFamilyTarget.getFamilyType()).isEqualTo(UPDATED_FAMILY_TYPE);
+        assertThat(testLlinsFamilyTarget.getFamilyType()).isEqualTo(DEFAULT_FAMILY_TYPE);
         assertThat(testLlinsFamilyTarget.getStatusOfFamilyTarget()).isEqualTo(DEFAULT_STATUS_OF_FAMILY_TARGET);
     }
 
     @Test
     @Transactional
-    void fullUpdateLLINSFamilyTargetWithPatch() throws Exception {
+    void fullUpdateLlinsFamilyTargetWithPatch() throws Exception {
         // Initialize the database
-        lLINSFamilyTargetRepository.saveAndFlush(lLINSFamilyTarget);
+        llinsFamilyTargetRepository.saveAndFlush(llinsFamilyTarget);
 
-        int databaseSizeBeforeUpdate = lLINSFamilyTargetRepository.findAll().size();
+        int databaseSizeBeforeUpdate = llinsFamilyTargetRepository.findAll().size();
 
-        // Update the lLINSFamilyTarget using partial update
+        // Update the llinsFamilyTarget using partial update
         LlinsFamilyTarget partialUpdatedLlinsFamilyTarget = new LlinsFamilyTarget();
-        partialUpdatedLlinsFamilyTarget.setId(lLINSFamilyTarget.getId());
+        partialUpdatedLlinsFamilyTarget.setId(llinsFamilyTarget.getId());
 
         partialUpdatedLlinsFamilyTarget
             .uid(UPDATED_UID)
@@ -550,7 +549,7 @@ class LlinsFamilyTargetResourceIT {
             .familyType(UPDATED_FAMILY_TYPE)
             .statusOfFamilyTarget(UPDATED_STATUS_OF_FAMILY_TARGET);
 
-        restLLINSFamilyTargetMockMvc
+        restLlinsFamilyTargetMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedLlinsFamilyTarget.getId())
                     .contentType("application/merge-patch+json")
@@ -559,9 +558,9 @@ class LlinsFamilyTargetResourceIT {
             .andExpect(status().isOk());
 
         // Validate the LlinsFamilyTarget in the database
-        List<LlinsFamilyTarget> lLINSFamilyTargetList = lLINSFamilyTargetRepository.findAll();
-        assertThat(lLINSFamilyTargetList).hasSize(databaseSizeBeforeUpdate);
-        LlinsFamilyTarget testLlinsFamilyTarget = lLINSFamilyTargetList.get(lLINSFamilyTargetList.size() - 1);
+        List<LlinsFamilyTarget> llinsFamilyTargetList = llinsFamilyTargetRepository.findAll();
+        assertThat(llinsFamilyTargetList).hasSize(databaseSizeBeforeUpdate);
+        LlinsFamilyTarget testLlinsFamilyTarget = llinsFamilyTargetList.get(llinsFamilyTargetList.size() - 1);
         assertThat(testLlinsFamilyTarget.getUid()).isEqualTo(UPDATED_UID);
         assertThat(testLlinsFamilyTarget.getCreated()).isEqualTo(UPDATED_CREATED);
         assertThat(testLlinsFamilyTarget.getLastUpdated()).isEqualTo(UPDATED_LAST_UPDATED);
@@ -574,79 +573,79 @@ class LlinsFamilyTargetResourceIT {
 
     @Test
     @Transactional
-    void patchNonExistingLLINSFamilyTarget() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSFamilyTargetRepository.findAll().size();
-        lLINSFamilyTarget.setId(count.incrementAndGet());
+    void patchNonExistingLlinsFamilyTarget() throws Exception {
+        int databaseSizeBeforeUpdate = llinsFamilyTargetRepository.findAll().size();
+        llinsFamilyTarget.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restLLINSFamilyTargetMockMvc
+        restLlinsFamilyTargetMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, lLINSFamilyTarget.getId())
+                patch(ENTITY_API_URL_ID, llinsFamilyTarget.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSFamilyTarget))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsFamilyTarget))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsFamilyTarget in the database
-        List<LlinsFamilyTarget> lLINSFamilyTargetList = lLINSFamilyTargetRepository.findAll();
-        assertThat(lLINSFamilyTargetList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsFamilyTarget> llinsFamilyTargetList = llinsFamilyTargetRepository.findAll();
+        assertThat(llinsFamilyTargetList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void patchWithIdMismatchLLINSFamilyTarget() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSFamilyTargetRepository.findAll().size();
-        lLINSFamilyTarget.setId(count.incrementAndGet());
+    void patchWithIdMismatchLlinsFamilyTarget() throws Exception {
+        int databaseSizeBeforeUpdate = llinsFamilyTargetRepository.findAll().size();
+        llinsFamilyTarget.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restLLINSFamilyTargetMockMvc
+        restLlinsFamilyTargetMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSFamilyTarget))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsFamilyTarget))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsFamilyTarget in the database
-        List<LlinsFamilyTarget> lLINSFamilyTargetList = lLINSFamilyTargetRepository.findAll();
-        assertThat(lLINSFamilyTargetList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsFamilyTarget> llinsFamilyTargetList = llinsFamilyTargetRepository.findAll();
+        assertThat(llinsFamilyTargetList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void patchWithMissingIdPathParamLLINSFamilyTarget() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSFamilyTargetRepository.findAll().size();
-        lLINSFamilyTarget.setId(count.incrementAndGet());
+    void patchWithMissingIdPathParamLlinsFamilyTarget() throws Exception {
+        int databaseSizeBeforeUpdate = llinsFamilyTargetRepository.findAll().size();
+        llinsFamilyTarget.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restLLINSFamilyTargetMockMvc
+        restLlinsFamilyTargetMockMvc
             .perform(
                 patch(ENTITY_API_URL)
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSFamilyTarget))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsFamilyTarget))
             )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the LlinsFamilyTarget in the database
-        List<LlinsFamilyTarget> lLINSFamilyTargetList = lLINSFamilyTargetRepository.findAll();
-        assertThat(lLINSFamilyTargetList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsFamilyTarget> llinsFamilyTargetList = llinsFamilyTargetRepository.findAll();
+        assertThat(llinsFamilyTargetList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void deleteLLINSFamilyTarget() throws Exception {
+    void deleteLlinsFamilyTarget() throws Exception {
         // Initialize the database
-        lLINSFamilyTargetRepository.saveAndFlush(lLINSFamilyTarget);
+        llinsFamilyTargetRepository.saveAndFlush(llinsFamilyTarget);
 
-        int databaseSizeBeforeDelete = lLINSFamilyTargetRepository.findAll().size();
+        int databaseSizeBeforeDelete = llinsFamilyTargetRepository.findAll().size();
 
-        // Delete the lLINSFamilyTarget
-        restLLINSFamilyTargetMockMvc
-            .perform(delete(ENTITY_API_URL_ID, lLINSFamilyTarget.getId()).accept(MediaType.APPLICATION_JSON))
+        // Delete the llinsFamilyTarget
+        restLlinsFamilyTargetMockMvc
+            .perform(delete(ENTITY_API_URL_ID, llinsFamilyTarget.getId()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item
-        List<LlinsFamilyTarget> lLINSFamilyTargetList = lLINSFamilyTargetRepository.findAll();
-        assertThat(lLINSFamilyTargetList).hasSize(databaseSizeBeforeDelete - 1);
+        List<LlinsFamilyTarget> llinsFamilyTargetList = llinsFamilyTargetRepository.findAll();
+        assertThat(llinsFamilyTargetList).hasSize(databaseSizeBeforeDelete - 1);
     }
 }

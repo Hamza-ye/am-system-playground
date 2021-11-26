@@ -1,11 +1,11 @@
 <div>
-  <h2 id="page-heading" data-cy="CHVHeading">
-    <span appTranslate="amSystemPlaygroundApp.cHV.home.title">CHVS</span>
+  <h2 id="page-heading" data-cy="ChvHeading">
+    <span appTranslate="amSystemPlaygroundApp.chv.home.title">Chvs</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span appTranslate="amSystemPlaygroundApp.cHV.home.refreshListLabel">Refresh List</span>
+        <span appTranslate="amSystemPlaygroundApp.chv.home.refreshListLabel">Refresh List</span>
       </button>
 
       <button
@@ -15,7 +15,7 @@
         [routerLink]="['/chv/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span appTranslate="amSystemPlaygroundApp.cHV.home.createLabel"> Create a new CHV </span>
+        <span appTranslate="amSystemPlaygroundApp.chv.home.createLabel"> Create a new Chv </span>
       </button>
     </div>
   </h2>
@@ -24,80 +24,80 @@
 
   <app-alert></app-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="cHVS?.length === 0">
-    <span appTranslate="amSystemPlaygroundApp.cHV.home.notFound">No cHVS found</span>
+  <div class="alert alert-warning" id="no-result" *ngIf="chvs?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.chv.home.notFound">No chvs found</span>
   </div>
 
-  <div class="table-responsive" id="entities" *ngIf="cHVS && cHVS.length > 0">
+  <div class="table-responsive" id="entities" *ngIf="chvs && chvs.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
           <th scope="col"><span appTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.uid">Uid</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.code">Code</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.description">Description</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.created">Created</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.lastUpdated">Last Updated</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.mobile">Mobile</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.person">Person</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.district">District</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.homeSubvillage">Home Subvillage</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.managedByHf">Managed By Hf</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.createdBy">Created By</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.cHV.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.code">Code</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.description">Description</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.mobile">Mobile</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.person">Person</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.district">District</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.homeSubvillage">Home Subvillage</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.managedByHf">Managed By Hf</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.createdBy">Created By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let cHV of cHVS; trackBy: trackId" data-cy="entityTable">
+        <tr *ngFor="let chv of chvs; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/chv', cHV.id, 'view']">{{ cHV.id }}</a>
+            <a [routerLink]="['/chv', chv.id, 'view']">{{ chv.id }}</a>
           </td>
-          <td>{{ cHV.uid }}</td>
-          <td>{{ cHV.code }}</td>
-          <td>{{ cHV.description }}</td>
-          <td>{{ cHV.created | formatMediumDatetime }}</td>
-          <td>{{ cHV.lastUpdated | formatMediumDatetime }}</td>
-          <td>{{ cHV.mobile }}</td>
+          <td>{{ chv.uid }}</td>
+          <td>{{ chv.code }}</td>
+          <td>{{ chv.description }}</td>
+          <td>{{ chv.created | formatMediumDatetime }}</td>
+          <td>{{ chv.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ chv.mobile }}</td>
           <td>
-            <div *ngIf="cHV.person">
-              <a [routerLink]="['/person', cHV.person?.id, 'view']">{{ cHV.person?.name }}</a>
+            <div *ngIf="chv.person">
+              <a [routerLink]="['/person', chv.person?.id, 'view']">{{ chv.person?.name }}</a>
             </div>
           </td>
           <td>
-            <div *ngIf="cHV.district">
-              <a [routerLink]="['/organisation-unit', cHV.district?.id, 'view']">{{ cHV.district?.name }}</a>
+            <div *ngIf="chv.district">
+              <a [routerLink]="['/organisation-unit', chv.district?.id, 'view']">{{ chv.district?.name }}</a>
             </div>
           </td>
           <td>
-            <div *ngIf="cHV.homeSubvillage">
-              <a [routerLink]="['/organisation-unit', cHV.homeSubvillage?.id, 'view']">{{ cHV.homeSubvillage?.name }}</a>
+            <div *ngIf="chv.homeSubvillage">
+              <a [routerLink]="['/organisation-unit', chv.homeSubvillage?.id, 'view']">{{ chv.homeSubvillage?.name }}</a>
             </div>
           </td>
           <td>
-            <div *ngIf="cHV.managedByHf">
-              <a [routerLink]="['/organisation-unit', cHV.managedByHf?.id, 'view']">{{ cHV.managedByHf?.name }}</a>
+            <div *ngIf="chv.managedByHf">
+              <a [routerLink]="['/organisation-unit', chv.managedByHf?.id, 'view']">{{ chv.managedByHf?.name }}</a>
             </div>
           </td>
           <td>
-            {{ cHV.createdBy?.login }}
+            {{ chv.createdBy?.login }}
           </td>
           <td>
-            {{ cHV.lastUpdatedBy?.login }}
+            {{ chv.lastUpdatedBy?.login }}
           </td>
           <td class="text-right">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/chv', cHV.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+              <button type="submit" [routerLink]="['/chv', chv.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
               </button>
 
-              <button type="submit" [routerLink]="['/chv', cHV.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+              <button type="submit" [routerLink]="['/chv', chv.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
               </button>
 
-              <button type="submit" (click)="delete(cHV)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button type="submit" (click)="delete(chv)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
               </button>

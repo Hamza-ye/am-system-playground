@@ -6,28 +6,28 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { LLINSFamilyTargetService } from '../service/llins-family-target.service';
+import { LlinsFamilyTargetService } from '../service/llins-family-target.service';
 
-import { LLINSFamilyTargetDeleteDialogComponent } from './llins-family-target-delete-dialog.component';
+import { LlinsFamilyTargetDeleteDialogComponent } from './llins-family-target-delete-dialog.component';
 
 describe('Component Tests', () => {
   describe('LlinsFamilyTarget Management Delete Component', () => {
-    let comp: LLINSFamilyTargetDeleteDialogComponent;
-    let fixture: ComponentFixture<LLINSFamilyTargetDeleteDialogComponent>;
-    let service: LLINSFamilyTargetService;
+    let comp: LlinsFamilyTargetDeleteDialogComponent;
+    let fixture: ComponentFixture<LlinsFamilyTargetDeleteDialogComponent>;
+    let service: LlinsFamilyTargetService;
     let mockActiveModal: NgbActiveModal;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [LLINSFamilyTargetDeleteDialogComponent],
+        declarations: [LlinsFamilyTargetDeleteDialogComponent],
         providers: [NgbActiveModal],
       })
-        .overrideTemplate(LLINSFamilyTargetDeleteDialogComponent, '')
+        .overrideTemplate(LlinsFamilyTargetDeleteDialogComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(LLINSFamilyTargetDeleteDialogComponent);
+      fixture = TestBed.createComponent(LlinsFamilyTargetDeleteDialogComponent);
       comp = fixture.componentInstance;
-      service = TestBed.inject(LLINSFamilyTargetService);
+      service = TestBed.inject(LlinsFamilyTargetService);
       mockActiveModal = TestBed.inject(NgbActiveModal);
     });
 

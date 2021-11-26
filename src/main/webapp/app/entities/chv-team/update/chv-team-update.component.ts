@@ -8,25 +8,25 @@ import { finalize, map } from 'rxjs/operators';
 import * as dayjs from 'dayjs';
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
-import { ICHVTeam, CHVTeam } from '../chv-team.model';
-import { CHVTeamService } from '../service/chv-team.service';
+import { IChvTeam, ChvTeam } from '../chv-team.model';
+import { ChvTeamService } from '../service/chv-team.service';
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 import { IPerson } from 'app/entities/person/person.model';
 import { PersonService } from 'app/entities/person/service/person.service';
-import { ICHV } from 'app/entities/chv/chv.model';
-import { CHVService } from 'app/entities/chv/service/chv.service';
+import { IChv } from 'app/entities/chv/chv.model';
+import { ChvService } from 'app/entities/chv/service/chv.service';
 
 @Component({
   selector: 'app-chv-team-update',
   templateUrl: './chv-team-update.component.html',
 })
-export class CHVTeamUpdateComponent implements OnInit {
+export class ChvTeamUpdateComponent implements OnInit {
   isSaving = false;
 
   usersSharedCollection: IUser[] = [];
   peopleSharedCollection: IPerson[] = [];
-  cHVSSharedCollection: ICHV[] = [];
+  chvsSharedCollection: IChv[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -45,23 +45,23 @@ export class CHVTeamUpdateComponent implements OnInit {
   });
 
   constructor(
-    protected cHVTeamService: CHVTeamService,
+    protected chvTeamService: ChvTeamService,
     protected userService: UserService,
     protected personService: PersonService,
-    protected cHVService: CHVService,
+    protected chvService: ChvService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ cHVTeam }) => {
-      if (cHVTeam.id === undefined) {
+    this.activatedRoute.data.subscribe(({ chvTeam }) => {
+      if (chvTeam.id === undefined) {
         const today = dayjs().startOf('day');
-        cHVTeam.created = today;
-        cHVTeam.lastUpdated = today;
+        chvTeam.created = today;
+        chvTeam.lastUpdated = today;
       }
 
-      this.updateForm(cHVTeam);
+      this.updateForm(chvTeam);
 
       this.loadRelationshipsOptions();
     });
@@ -73,11 +73,11 @@ export class CHVTeamUpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
-    const cHVTeam = this.createFromForm();
-    if (cHVTeam.id !== undefined) {
-      this.subscribeToSaveResponse(this.cHVTeamService.update(cHVTeam));
+    const chvTeam = this.createFromForm();
+    if (chvTeam.id !== undefined) {
+      this.subscribeToSaveResponse(this.chvTeamService.update(chvTeam));
     } else {
-      this.subscribeToSaveResponse(this.cHVTeamService.create(cHVTeam));
+      this.subscribeToSaveResponse(this.chvTeamService.create(chvTeam));
     }
   }
 
@@ -89,11 +89,11 @@ export class CHVTeamUpdateComponent implements OnInit {
     return item.id!;
   }
 
-  trackCHVById(index: number, item: ICHV): number {
+  trackChvById(index: number, item: IChv): number {
     return item.id!;
   }
 
-  getSelectedCHV(option: ICHV, selectedVals?: ICHV[]): ICHV {
+  getSelectedChv(option: IChv, selectedVals?: IChv[]): IChv {
     if (selectedVals) {
       for (const selectedVal of selectedVals) {
         if (option.id === selectedVal.id) {
@@ -104,7 +104,7 @@ export class CHVTeamUpdateComponent implements OnInit {
     return option;
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<ICHVTeam>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IChvTeam>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
       () => this.onSaveSuccess(),
       () => this.onSaveError()
@@ -123,32 +123,32 @@ export class CHVTeamUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(cHVTeam: ICHVTeam): void {
+  protected updateForm(chvTeam: IChvTeam): void {
     this.editForm.patchValue({
-      id: cHVTeam.id,
-      uid: cHVTeam.uid,
-      code: cHVTeam.code,
-      name: cHVTeam.name,
-      description: cHVTeam.description,
-      created: cHVTeam.created ? cHVTeam.created.format(DATE_TIME_FORMAT) : null,
-      lastUpdated: cHVTeam.lastUpdated ? cHVTeam.lastUpdated.format(DATE_TIME_FORMAT) : null,
-      teamNo: cHVTeam.teamNo,
-      teamType: cHVTeam.teamType,
-      createdBy: cHVTeam.createdBy,
-      lastUpdatedBy: cHVTeam.lastUpdatedBy,
-      person: cHVTeam.person,
-      responsibleForChvs: cHVTeam.responsibleForChvs,
+      id: chvTeam.id,
+      uid: chvTeam.uid,
+      code: chvTeam.code,
+      name: chvTeam.name,
+      description: chvTeam.description,
+      created: chvTeam.created ? chvTeam.created.format(DATE_TIME_FORMAT) : null,
+      lastUpdated: chvTeam.lastUpdated ? chvTeam.lastUpdated.format(DATE_TIME_FORMAT) : null,
+      teamNo: chvTeam.teamNo,
+      teamType: chvTeam.teamType,
+      createdBy: chvTeam.createdBy,
+      lastUpdatedBy: chvTeam.lastUpdatedBy,
+      person: chvTeam.person,
+      responsibleForChvs: chvTeam.responsibleForChvs,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      cHVTeam.createdBy,
-      cHVTeam.lastUpdatedBy
+      chvTeam.createdBy,
+      chvTeam.lastUpdatedBy
     );
-    this.peopleSharedCollection = this.personService.addPersonToCollectionIfMissing(this.peopleSharedCollection, cHVTeam.person);
-    this.cHVSSharedCollection = this.cHVService.addCHVToCollectionIfMissing(
-      this.cHVSSharedCollection,
-      ...(cHVTeam.responsibleForChvs ?? [])
+    this.peopleSharedCollection = this.personService.addPersonToCollectionIfMissing(this.peopleSharedCollection, chvTeam.person);
+    this.chvsSharedCollection = this.chvService.addChvToCollectionIfMissing(
+      this.chvsSharedCollection,
+      ...(chvTeam.responsibleForChvs ?? [])
     );
   }
 
@@ -173,18 +173,18 @@ export class CHVTeamUpdateComponent implements OnInit {
       .pipe(map((people: IPerson[]) => this.personService.addPersonToCollectionIfMissing(people, this.editForm.get('person')!.value)))
       .subscribe((people: IPerson[]) => (this.peopleSharedCollection = people));
 
-    this.cHVService
+    this.chvService
       .query()
-      .pipe(map((res: HttpResponse<ICHV[]>) => res.body ?? []))
+      .pipe(map((res: HttpResponse<IChv[]>) => res.body ?? []))
       .pipe(
-        map((cHVS: ICHV[]) => this.cHVService.addCHVToCollectionIfMissing(cHVS, ...(this.editForm.get('responsibleForChvs')!.value ?? [])))
+        map((chvs: IChv[]) => this.chvService.addChvToCollectionIfMissing(chvs, ...(this.editForm.get('responsibleForChvs')!.value ?? [])))
       )
-      .subscribe((cHVS: ICHV[]) => (this.cHVSSharedCollection = cHVS));
+      .subscribe((chvs: IChv[]) => (this.chvsSharedCollection = chvs));
   }
 
-  protected createFromForm(): ICHVTeam {
+  protected createFromForm(): IChvTeam {
     return {
-      ...new CHVTeam(),
+      ...new ChvTeam(),
       id: this.editForm.get(['id'])!.value,
       uid: this.editForm.get(['uid'])!.value,
       code: this.editForm.get(['code'])!.value,

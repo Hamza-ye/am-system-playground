@@ -1,11 +1,11 @@
 <div>
-  <h2 id="page-heading" data-cy="WHMovementHeading">
-    <span appTranslate="amSystemPlaygroundApp.wHMovement.home.title">WH Movements</span>
+  <h2 id="page-heading" data-cy="WhMovementHeading">
+    <span appTranslate="amSystemPlaygroundApp.whMovement.home.title">Wh Movements</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span appTranslate="amSystemPlaygroundApp.wHMovement.home.refreshListLabel">Refresh List</span>
+        <span appTranslate="amSystemPlaygroundApp.whMovement.home.refreshListLabel">Refresh List</span>
       </button>
 
       <button
@@ -15,7 +15,7 @@
         [routerLink]="['/wh-movement/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span appTranslate="amSystemPlaygroundApp.wHMovement.home.createLabel"> Create a new WH Movement </span>
+        <span appTranslate="amSystemPlaygroundApp.whMovement.home.createLabel"> Create a new Wh Movement </span>
       </button>
     </div>
   </h2>
@@ -24,99 +24,99 @@
 
   <app-alert></app-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="wHMovements?.length === 0">
-    <span appTranslate="amSystemPlaygroundApp.wHMovement.home.notFound">No wHMovements found</span>
+  <div class="alert alert-warning" id="no-result" *ngIf="whMovements?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.whMovement.home.notFound">No whMovements found</span>
   </div>
 
-  <div class="table-responsive" id="entities" *ngIf="wHMovements && wHMovements.length > 0">
+  <div class="table-responsive" id="entities" *ngIf="whMovements && whMovements.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
           <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" appSortBy="movementType">
-            <span appTranslate="amSystemPlaygroundApp.wHMovement.movementType">Movement Type</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.whMovement.movementType">Movement Type</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="quantity">
-            <span appTranslate="amSystemPlaygroundApp.wHMovement.quantity">Quantity</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.whMovement.quantity">Quantity</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="reconciliationSource">
-            <span appTranslate="amSystemPlaygroundApp.wHMovement.reconciliationSource">Reconciliation Source</span>
+            <span appTranslate="amSystemPlaygroundApp.whMovement.reconciliationSource">Reconciliation Source</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="reconciliationDestination">
-            <span appTranslate="amSystemPlaygroundApp.wHMovement.reconciliationDestination">Reconciliation Destination</span>
+            <span appTranslate="amSystemPlaygroundApp.whMovement.reconciliationDestination">Reconciliation Destination</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="confirmedByOtherSide">
-            <span appTranslate="amSystemPlaygroundApp.wHMovement.confirmedByOtherSide">Confirmed By Other Side</span>
+            <span appTranslate="amSystemPlaygroundApp.whMovement.confirmedByOtherSide">Confirmed By Other Side</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="comment">
-            <span appTranslate="amSystemPlaygroundApp.wHMovement.comment">Comment</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.whMovement.comment">Comment</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="createdBy.login">
-            <span appTranslate="amSystemPlaygroundApp.wHMovement.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.whMovement.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="lastUpdatedBy.login">
-            <span appTranslate="amSystemPlaygroundApp.wHMovement.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.whMovement.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="day.dayLabel">
-            <span appTranslate="amSystemPlaygroundApp.wHMovement.day">Day</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.whMovement.day">Day</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" appSortBy="initiatedWH.name">
-            <span appTranslate="amSystemPlaygroundApp.wHMovement.initiatedWH">Initiated WH</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" appSortBy="initiatedWh.name">
+            <span appTranslate="amSystemPlaygroundApp.whMovement.initiatedWh">Initiated Wh</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" appSortBy="theOtherSideWH.name">
-            <span appTranslate="amSystemPlaygroundApp.wHMovement.theOtherSideWH">The Other Side WH</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" appSortBy="theOtherSideWh.name">
+            <span appTranslate="amSystemPlaygroundApp.whMovement.theOtherSideWh">The Other Side Wh</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" appSortBy="team.name">
-            <span appTranslate="amSystemPlaygroundApp.wHMovement.team">Team</span> <fa-icon icon="sort"></fa-icon>
+            <span appTranslate="amSystemPlaygroundApp.whMovement.team">Team</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let wHMovement of wHMovements; trackBy: trackId" data-cy="entityTable">
+        <tr *ngFor="let whMovement of whMovements; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/wh-movement', wHMovement.id, 'view']">{{ wHMovement.id }}</a>
+            <a [routerLink]="['/wh-movement', whMovement.id, 'view']">{{ whMovement.id }}</a>
           </td>
-          <td appTranslate="{{ 'amSystemPlaygroundApp.MovementType.' + wHMovement.movementType }}">{{ wHMovement.movementType }}</td>
-          <td>{{ wHMovement.quantity }}</td>
-          <td>{{ wHMovement.reconciliationSource }}</td>
-          <td>{{ wHMovement.reconciliationDestination }}</td>
-          <td>{{ wHMovement.confirmedByOtherSide }}</td>
-          <td>{{ wHMovement.comment }}</td>
+          <td appTranslate="{{ 'amSystemPlaygroundApp.MovementType.' + whMovement.movementType }}">{{ whMovement.movementType }}</td>
+          <td>{{ whMovement.quantity }}</td>
+          <td>{{ whMovement.reconciliationSource }}</td>
+          <td>{{ whMovement.reconciliationDestination }}</td>
+          <td>{{ whMovement.confirmedByOtherSide }}</td>
+          <td>{{ whMovement.comment }}</td>
           <td>
-            {{ wHMovement.createdBy?.login }}
-          </td>
-          <td>
-            {{ wHMovement.lastUpdatedBy?.login }}
+            {{ whMovement.createdBy?.login }}
           </td>
           <td>
-            <div *ngIf="wHMovement.day">
-              <a [routerLink]="['/working-day', wHMovement.day?.id, 'view']">{{ wHMovement.day?.dayLabel }}</a>
+            {{ whMovement.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <div *ngIf="whMovement.day">
+              <a [routerLink]="['/working-day', whMovement.day?.id, 'view']">{{ whMovement.day?.dayLabel }}</a>
             </div>
           </td>
           <td>
-            <div *ngIf="wHMovement.initiatedWH">
-              <a [routerLink]="['/warehouse', wHMovement.initiatedWH?.id, 'view']">{{ wHMovement.initiatedWH?.name }}</a>
+            <div *ngIf="whMovement.initiatedWh">
+              <a [routerLink]="['/warehouse', whMovement.initiatedWh?.id, 'view']">{{ whMovement.initiatedWh?.name }}</a>
             </div>
           </td>
           <td>
-            <div *ngIf="wHMovement.theOtherSideWH">
-              <a [routerLink]="['/warehouse', wHMovement.theOtherSideWH?.id, 'view']">{{ wHMovement.theOtherSideWH?.name }}</a>
+            <div *ngIf="whMovement.theOtherSideWh">
+              <a [routerLink]="['/warehouse', whMovement.theOtherSideWh?.id, 'view']">{{ whMovement.theOtherSideWh?.name }}</a>
             </div>
           </td>
           <td>
-            <div *ngIf="wHMovement.team">
-              <a [routerLink]="['/team', wHMovement.team?.id, 'view']">{{ wHMovement.team?.name }}</a>
+            <div *ngIf="whMovement.team">
+              <a [routerLink]="['/team', whMovement.team?.id, 'view']">{{ whMovement.team?.name }}</a>
             </div>
           </td>
           <td class="text-right">
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/wh-movement', wHMovement.id, 'view']"
+                [routerLink]="['/wh-movement', whMovement.id, 'view']"
                 class="btn btn-info btn-sm"
                 data-cy="entityDetailsButton"
               >
@@ -126,7 +126,7 @@
 
               <button
                 type="submit"
-                [routerLink]="['/wh-movement', wHMovement.id, 'edit']"
+                [routerLink]="['/wh-movement', whMovement.id, 'edit']"
                 class="btn btn-primary btn-sm"
                 data-cy="entityEditButton"
               >
@@ -134,7 +134,7 @@
                 <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
               </button>
 
-              <button type="submit" (click)="delete(wHMovement)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button type="submit" (click)="delete(whMovement)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
               </button>
@@ -145,7 +145,7 @@
     </table>
   </div>
 
-  <div *ngIf="wHMovements && wHMovements.length > 0">
+  <div *ngIf="whMovements && whMovements.length > 0">
     <div class="row justify-content-center">
       <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
     </div>

@@ -7,48 +7,48 @@ import * as dayjs from 'dayjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { ICHV, getCHVIdentifier } from '../chv.model';
+import { IChv, getChvIdentifier } from '../chv.model';
 
-export type EntityResponseType = HttpResponse<ICHV>;
-export type EntityArrayResponseType = HttpResponse<ICHV[]>;
+export type EntityResponseType = HttpResponse<IChv>;
+export type EntityArrayResponseType = HttpResponse<IChv[]>;
 
 @Injectable({ providedIn: 'root' })
-export class CHVService {
+export class ChvService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/chvs');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  create(cHV: ICHV): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(cHV);
+  create(chv: IChv): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(chv);
     return this.http
-      .post<ICHV>(this.resourceUrl, copy, { observe: 'response' })
+      .post<IChv>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  update(cHV: ICHV): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(cHV);
+  update(chv: IChv): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(chv);
     return this.http
-      .put<ICHV>(`${this.resourceUrl}/${getCHVIdentifier(cHV) as number}`, copy, { observe: 'response' })
+      .put<IChv>(`${this.resourceUrl}/${getChvIdentifier(chv) as number}`, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  partialUpdate(cHV: ICHV): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(cHV);
+  partialUpdate(chv: IChv): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(chv);
     return this.http
-      .patch<ICHV>(`${this.resourceUrl}/${getCHVIdentifier(cHV) as number}`, copy, { observe: 'response' })
+      .patch<IChv>(`${this.resourceUrl}/${getChvIdentifier(chv) as number}`, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<ICHV>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .get<IChv>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
-      .get<ICHV[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .get<IChv[]>(this.resourceUrl, { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
@@ -56,27 +56,27 @@ export class CHVService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  addCHVToCollectionIfMissing(cHVCollection: ICHV[], ...cHVSToCheck: (ICHV | null | undefined)[]): ICHV[] {
-    const cHVS: ICHV[] = cHVSToCheck.filter(isPresent);
-    if (cHVS.length > 0) {
-      const cHVCollectionIdentifiers = cHVCollection.map(cHVItem => getCHVIdentifier(cHVItem)!);
-      const cHVSToAdd = cHVS.filter(cHVItem => {
-        const cHVIdentifier = getCHVIdentifier(cHVItem);
-        if (cHVIdentifier == null || cHVCollectionIdentifiers.includes(cHVIdentifier)) {
+  addChvToCollectionIfMissing(chvCollection: IChv[], ...chvsToCheck: (IChv | null | undefined)[]): IChv[] {
+    const chvs: IChv[] = chvsToCheck.filter(isPresent);
+    if (chvs.length > 0) {
+      const chvCollectionIdentifiers = chvCollection.map(chvItem => getChvIdentifier(chvItem)!);
+      const chvsToAdd = chvs.filter(chvItem => {
+        const chvIdentifier = getChvIdentifier(chvItem);
+        if (chvIdentifier == null || chvCollectionIdentifiers.includes(chvIdentifier)) {
           return false;
         }
-        cHVCollectionIdentifiers.push(cHVIdentifier);
+        chvCollectionIdentifiers.push(chvIdentifier);
         return true;
       });
-      return [...cHVSToAdd, ...cHVCollection];
+      return [...chvsToAdd, ...chvCollection];
     }
-    return cHVCollection;
+    return chvCollection;
   }
 
-  protected convertDateFromClient(cHV: ICHV): ICHV {
-    return Object.assign({}, cHV, {
-      created: cHV.created?.isValid() ? cHV.created.toJSON() : undefined,
-      lastUpdated: cHV.lastUpdated?.isValid() ? cHV.lastUpdated.toJSON() : undefined,
+  protected convertDateFromClient(chv: IChv): IChv {
+    return Object.assign({}, chv, {
+      created: chv.created?.isValid() ? chv.created.toJSON() : undefined,
+      lastUpdated: chv.lastUpdated?.isValid() ? chv.lastUpdated.toJSON() : undefined,
     });
   }
 
@@ -90,9 +90,9 @@ export class CHVService {
 
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
-      res.body.forEach((cHV: ICHV) => {
-        cHV.created = cHV.created ? dayjs(cHV.created) : undefined;
-        cHV.lastUpdated = cHV.lastUpdated ? dayjs(cHV.lastUpdated) : undefined;
+      res.body.forEach((chv: IChv) => {
+        chv.created = chv.created ? dayjs(chv.created) : undefined;
+        chv.lastUpdated = chv.lastUpdated ? dayjs(chv.lastUpdated) : undefined;
       });
     }
     return res;

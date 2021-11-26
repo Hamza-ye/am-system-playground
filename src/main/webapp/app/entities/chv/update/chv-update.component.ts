@@ -8,8 +8,8 @@ import { finalize, map } from 'rxjs/operators';
 import * as dayjs from 'dayjs';
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
-import { ICHV, CHV } from '../chv.model';
-import { CHVService } from '../service/chv.service';
+import { IChv, Chv } from '../chv.model';
+import { ChvService } from '../service/chv.service';
 import { IPerson } from 'app/entities/person/person.model';
 import { PersonService } from 'app/entities/person/service/person.service';
 import { IOrganisationUnit } from 'app/entities/organisation-unit/organisation-unit.model';
@@ -21,7 +21,7 @@ import { UserService } from 'app/entities/user/user.service';
   selector: 'app-chv-update',
   templateUrl: './chv-update.component.html',
 })
-export class CHVUpdateComponent implements OnInit {
+export class ChvUpdateComponent implements OnInit {
   isSaving = false;
 
   peopleCollection: IPerson[] = [];
@@ -45,7 +45,7 @@ export class CHVUpdateComponent implements OnInit {
   });
 
   constructor(
-    protected cHVService: CHVService,
+    protected chvService: ChvService,
     protected personService: PersonService,
     protected organisationUnitService: OrganisationUnitService,
     protected userService: UserService,
@@ -54,14 +54,14 @@ export class CHVUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ cHV }) => {
-      if (cHV.id === undefined) {
+    this.activatedRoute.data.subscribe(({ chv }) => {
+      if (chv.id === undefined) {
         const today = dayjs().startOf('day');
-        cHV.created = today;
-        cHV.lastUpdated = today;
+        chv.created = today;
+        chv.lastUpdated = today;
       }
 
-      this.updateForm(cHV);
+      this.updateForm(chv);
 
       this.loadRelationshipsOptions();
     });
@@ -73,11 +73,11 @@ export class CHVUpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
-    const cHV = this.createFromForm();
-    if (cHV.id !== undefined) {
-      this.subscribeToSaveResponse(this.cHVService.update(cHV));
+    const chv = this.createFromForm();
+    if (chv.id !== undefined) {
+      this.subscribeToSaveResponse(this.chvService.update(chv));
     } else {
-      this.subscribeToSaveResponse(this.cHVService.create(cHV));
+      this.subscribeToSaveResponse(this.chvService.create(chv));
     }
   }
 
@@ -93,7 +93,7 @@ export class CHVUpdateComponent implements OnInit {
     return item.id!;
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<ICHV>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IChv>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
       () => this.onSaveSuccess(),
       () => this.onSaveError()
@@ -112,34 +112,34 @@ export class CHVUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(cHV: ICHV): void {
+  protected updateForm(chv: IChv): void {
     this.editForm.patchValue({
-      id: cHV.id,
-      uid: cHV.uid,
-      code: cHV.code,
-      description: cHV.description,
-      created: cHV.created ? cHV.created.format(DATE_TIME_FORMAT) : null,
-      lastUpdated: cHV.lastUpdated ? cHV.lastUpdated.format(DATE_TIME_FORMAT) : null,
-      mobile: cHV.mobile,
-      person: cHV.person,
-      district: cHV.district,
-      homeSubvillage: cHV.homeSubvillage,
-      managedByHf: cHV.managedByHf,
-      createdBy: cHV.createdBy,
-      lastUpdatedBy: cHV.lastUpdatedBy,
+      id: chv.id,
+      uid: chv.uid,
+      code: chv.code,
+      description: chv.description,
+      created: chv.created ? chv.created.format(DATE_TIME_FORMAT) : null,
+      lastUpdated: chv.lastUpdated ? chv.lastUpdated.format(DATE_TIME_FORMAT) : null,
+      mobile: chv.mobile,
+      person: chv.person,
+      district: chv.district,
+      homeSubvillage: chv.homeSubvillage,
+      managedByHf: chv.managedByHf,
+      createdBy: chv.createdBy,
+      lastUpdatedBy: chv.lastUpdatedBy,
     });
 
-    this.peopleCollection = this.personService.addPersonToCollectionIfMissing(this.peopleCollection, cHV.person);
+    this.peopleCollection = this.personService.addPersonToCollectionIfMissing(this.peopleCollection, chv.person);
     this.organisationUnitsSharedCollection = this.organisationUnitService.addOrganisationUnitToCollectionIfMissing(
       this.organisationUnitsSharedCollection,
-      cHV.district,
-      cHV.homeSubvillage,
-      cHV.managedByHf
+      chv.district,
+      chv.homeSubvillage,
+      chv.managedByHf
     );
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      cHV.createdBy,
-      cHV.lastUpdatedBy
+      chv.createdBy,
+      chv.lastUpdatedBy
     );
   }
 
@@ -180,9 +180,9 @@ export class CHVUpdateComponent implements OnInit {
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
   }
 
-  protected createFromForm(): ICHV {
+  protected createFromForm(): IChv {
     return {
-      ...new CHV(),
+      ...new Chv(),
       id: this.editForm.get(['id'])!.value,
       uid: this.editForm.get(['uid'])!.value,
       code: this.editForm.get(['code'])!.value,

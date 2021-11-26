@@ -4,20 +4,20 @@ import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { ILLINSVillageReport, LLINSVillageReport } from '../llins-village-report.model';
-import { LLINSVillageReportService } from '../service/llins-village-report.service';
+import { ILlinsVillageReport, LlinsVillageReport } from '../llins-village-report.model';
+import { LlinsVillageReportService } from '../service/llins-village-report.service';
 
 @Injectable({ providedIn: 'root' })
-export class LLINSVillageReportRoutingResolveService implements Resolve<ILLINSVillageReport> {
-  constructor(protected service: LLINSVillageReportService, protected router: Router) {}
+export class LlinsVillageReportRoutingResolveService implements Resolve<ILlinsVillageReport> {
+  constructor(protected service: LlinsVillageReportService, protected router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<ILLINSVillageReport> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot): Observable<ILlinsVillageReport> | Observable<never> {
     const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
-        mergeMap((lLINSVillageReport: HttpResponse<LLINSVillageReport>) => {
-          if (lLINSVillageReport.body) {
-            return of(lLINSVillageReport.body);
+        mergeMap((llinsVillageReport: HttpResponse<LlinsVillageReport>) => {
+          if (llinsVillageReport.body) {
+            return of(llinsVillageReport.body);
           } else {
             this.router.navigate(['404']);
             return EMPTY;
@@ -25,6 +25,6 @@ export class LLINSVillageReportRoutingResolveService implements Resolve<ILLINSVi
         })
       );
     }
-    return of(new LLINSVillageReport());
+    return of(new LlinsVillageReport());
   }
 }

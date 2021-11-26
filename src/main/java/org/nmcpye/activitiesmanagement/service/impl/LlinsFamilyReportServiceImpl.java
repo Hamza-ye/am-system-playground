@@ -1,6 +1,5 @@
 package org.nmcpye.activitiesmanagement.service.impl;
 
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.domain.LlinsFamilyReport;
 import org.nmcpye.activitiesmanagement.repository.LlinsFamilyReportRepository;
 import org.nmcpye.activitiesmanagement.service.LlinsFamilyReportService;
@@ -11,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 /**
  * Service Implementation for managing {@link LlinsFamilyReport}.
  */
@@ -20,86 +21,86 @@ public class LlinsFamilyReportServiceImpl implements LlinsFamilyReportService {
 
     private final Logger log = LoggerFactory.getLogger(LlinsFamilyReportServiceImpl.class);
 
-    private final LlinsFamilyReportRepository lLINSFamilyReportRepository;
+    private final LlinsFamilyReportRepository llinsFamilyReportRepository;
 
-    public LlinsFamilyReportServiceImpl(LlinsFamilyReportRepository lLINSFamilyReportRepository) {
-        this.lLINSFamilyReportRepository = lLINSFamilyReportRepository;
+    public LlinsFamilyReportServiceImpl(LlinsFamilyReportRepository llinsFamilyReportRepository) {
+        this.llinsFamilyReportRepository = llinsFamilyReportRepository;
     }
 
     @Override
-    public LlinsFamilyReport save(LlinsFamilyReport lLINSFamilyReport) {
-        log.debug("Request to save LlinsFamilyReport : {}", lLINSFamilyReport);
-        return lLINSFamilyReportRepository.save(lLINSFamilyReport);
+    public LlinsFamilyReport save(LlinsFamilyReport llinsFamilyReport) {
+        log.debug("Request to save LlinsFamilyReport : {}", llinsFamilyReport);
+        return llinsFamilyReportRepository.save(llinsFamilyReport);
     }
 
     @Override
-    public Optional<LlinsFamilyReport> partialUpdate(LlinsFamilyReport lLINSFamilyReport) {
-        log.debug("Request to partially update LlinsFamilyReport : {}", lLINSFamilyReport);
+    public Optional<LlinsFamilyReport> partialUpdate(LlinsFamilyReport llinsFamilyReport) {
+        log.debug("Request to partially update LlinsFamilyReport : {}", llinsFamilyReport);
 
-        return lLINSFamilyReportRepository
-            .findById(lLINSFamilyReport.getId())
+        return llinsFamilyReportRepository
+            .findById(llinsFamilyReport.getId())
             .map(
-                existingLLINSFamilyReport -> {
-                    if (lLINSFamilyReport.getUid() != null) {
-                        existingLLINSFamilyReport.setUid(lLINSFamilyReport.getUid());
+                existingLlinsFamilyReport -> {
+                    if (llinsFamilyReport.getUid() != null) {
+                        existingLlinsFamilyReport.setUid(llinsFamilyReport.getUid());
                     }
-                    if (lLINSFamilyReport.getCreated() != null) {
-                        existingLLINSFamilyReport.setCreated(lLINSFamilyReport.getCreated());
+                    if (llinsFamilyReport.getCreated() != null) {
+                        existingLlinsFamilyReport.setCreated(llinsFamilyReport.getCreated());
                     }
-                    if (lLINSFamilyReport.getLastUpdated() != null) {
-                        existingLLINSFamilyReport.setLastUpdated(lLINSFamilyReport.getLastUpdated());
+                    if (llinsFamilyReport.getLastUpdated() != null) {
+                        existingLlinsFamilyReport.setLastUpdated(llinsFamilyReport.getLastUpdated());
                     }
-                    if (lLINSFamilyReport.getCheckNo() != null) {
-                        existingLLINSFamilyReport.setCheckNo(lLINSFamilyReport.getCheckNo());
+                    if (llinsFamilyReport.getCheckNo() != null) {
+                        existingLlinsFamilyReport.setCheckNo(llinsFamilyReport.getCheckNo());
                     }
-                    if (lLINSFamilyReport.getMaleIndividuals() != null) {
-                        existingLLINSFamilyReport.setMaleIndividuals(lLINSFamilyReport.getMaleIndividuals());
+                    if (llinsFamilyReport.getMaleIndividuals() != null) {
+                        existingLlinsFamilyReport.setMaleIndividuals(llinsFamilyReport.getMaleIndividuals());
                     }
-                    if (lLINSFamilyReport.getFemaleIndividuals() != null) {
-                        existingLLINSFamilyReport.setFemaleIndividuals(lLINSFamilyReport.getFemaleIndividuals());
+                    if (llinsFamilyReport.getFemaleIndividuals() != null) {
+                        existingLlinsFamilyReport.setFemaleIndividuals(llinsFamilyReport.getFemaleIndividuals());
                     }
-                    if (lLINSFamilyReport.getLessThan5Males() != null) {
-                        existingLLINSFamilyReport.setLessThan5Males(lLINSFamilyReport.getLessThan5Males());
+                    if (llinsFamilyReport.getLessThan5Males() != null) {
+                        existingLlinsFamilyReport.setLessThan5Males(llinsFamilyReport.getLessThan5Males());
                     }
-                    if (lLINSFamilyReport.getLessThan5Females() != null) {
-                        existingLLINSFamilyReport.setLessThan5Females(lLINSFamilyReport.getLessThan5Females());
+                    if (llinsFamilyReport.getLessThan5Females() != null) {
+                        existingLlinsFamilyReport.setLessThan5Females(llinsFamilyReport.getLessThan5Females());
                     }
-                    if (lLINSFamilyReport.getPregnantWomen() != null) {
-                        existingLLINSFamilyReport.setPregnantWomen(lLINSFamilyReport.getPregnantWomen());
+                    if (llinsFamilyReport.getPregnantWomen() != null) {
+                        existingLlinsFamilyReport.setPregnantWomen(llinsFamilyReport.getPregnantWomen());
                     }
-                    if (lLINSFamilyReport.getQuantityReceived() != null) {
-                        existingLLINSFamilyReport.setQuantityReceived(lLINSFamilyReport.getQuantityReceived());
+                    if (llinsFamilyReport.getQuantityReceived() != null) {
+                        existingLlinsFamilyReport.setQuantityReceived(llinsFamilyReport.getQuantityReceived());
                     }
-                    if (lLINSFamilyReport.getFamilyType() != null) {
-                        existingLLINSFamilyReport.setFamilyType(lLINSFamilyReport.getFamilyType());
+                    if (llinsFamilyReport.getFamilyType() != null) {
+                        existingLlinsFamilyReport.setFamilyType(llinsFamilyReport.getFamilyType());
                     }
-                    if (lLINSFamilyReport.getComment() != null) {
-                        existingLLINSFamilyReport.setComment(lLINSFamilyReport.getComment());
+                    if (llinsFamilyReport.getComment() != null) {
+                        existingLlinsFamilyReport.setComment(llinsFamilyReport.getComment());
                     }
 
-                    return existingLLINSFamilyReport;
+                    return existingLlinsFamilyReport;
                 }
             )
-            .map(lLINSFamilyReportRepository::save);
+            .map(llinsFamilyReportRepository::save);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Page<LlinsFamilyReport> findAll(Pageable pageable) {
-        log.debug("Request to get all LLINSFamilyReports");
-        return lLINSFamilyReportRepository.findAll(pageable);
+        log.debug("Request to get all LlinsFamilyReports");
+        return llinsFamilyReportRepository.findAll(pageable);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<LlinsFamilyReport> findOne(Long id) {
         log.debug("Request to get LlinsFamilyReport : {}", id);
-        return lLINSFamilyReportRepository.findById(id);
+        return llinsFamilyReportRepository.findById(id);
     }
 
     @Override
     public void delete(Long id) {
         log.debug("Request to delete LlinsFamilyReport : {}", id);
-        lLINSFamilyReportRepository.deleteById(id);
+        llinsFamilyReportRepository.deleteById(id);
     }
 }

@@ -1,16 +1,5 @@
 package org.nmcpye.activitiesmanagement.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
-import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.nmcpye.activitiesmanagement.IntegrationTest;
@@ -24,6 +13,18 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link LlinsVillageReportHistoryResource} REST controller.
@@ -76,15 +77,15 @@ class LlinsVillageReportHistoryResourceIT {
     private static AtomicLong count = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
-    private LlinsVillageReportHistoryRepository lLINSVillageReportHistoryRepository;
+    private LlinsVillageReportHistoryRepository llinsVillageReportHistoryRepository;
 
     @Autowired
     private EntityManager em;
 
     @Autowired
-    private MockMvc restLLINSVillageReportHistoryMockMvc;
+    private MockMvc restLlinsVillageReportHistoryMockMvc;
 
-    private LlinsVillageReportHistory lLINSVillageReportHistory;
+    private LlinsVillageReportHistory llinsVillageReportHistory;
 
     /**
      * Create an entity for this test.
@@ -93,7 +94,7 @@ class LlinsVillageReportHistoryResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static LlinsVillageReportHistory createEntity(EntityManager em) {
-        LlinsVillageReportHistory lLINSVillageReportHistory = new LlinsVillageReportHistory()
+        LlinsVillageReportHistory llinsVillageReportHistory = new LlinsVillageReportHistory()
             .uid(DEFAULT_UID)
             .created(DEFAULT_CREATED)
             .lastUpdated(DEFAULT_LAST_UPDATED)
@@ -115,18 +116,18 @@ class LlinsVillageReportHistoryResourceIT {
         } else {
             workingDay = TestUtil.findAll(em, WorkingDay.class).get(0);
         }
-        lLINSVillageReportHistory.setDayReached(workingDay);
+        llinsVillageReportHistory.setDayReached(workingDay);
         // Add required entity
-        LlinsVillageReport lLINSVillageReport;
+        LlinsVillageReport llinsVillageReport;
         if (TestUtil.findAll(em, LlinsVillageReport.class).isEmpty()) {
-            lLINSVillageReport = LlinsVillageReportResourceIT.createEntity(em);
-            em.persist(lLINSVillageReport);
+            llinsVillageReport = LlinsVillageReportResourceIT.createEntity(em);
+            em.persist(llinsVillageReport);
             em.flush();
         } else {
-            lLINSVillageReport = TestUtil.findAll(em, LlinsVillageReport.class).get(0);
+            llinsVillageReport = TestUtil.findAll(em, LlinsVillageReport.class).get(0);
         }
-        lLINSVillageReportHistory.setLlinsVillageReport(lLINSVillageReport);
-        return lLINSVillageReportHistory;
+        llinsVillageReportHistory.setLlinsVillageReport(llinsVillageReport);
+        return llinsVillageReportHistory;
     }
 
     /**
@@ -136,7 +137,7 @@ class LlinsVillageReportHistoryResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static LlinsVillageReportHistory createUpdatedEntity(EntityManager em) {
-        LlinsVillageReportHistory lLINSVillageReportHistory = new LlinsVillageReportHistory()
+        LlinsVillageReportHistory llinsVillageReportHistory = new LlinsVillageReportHistory()
             .uid(UPDATED_UID)
             .created(UPDATED_CREATED)
             .lastUpdated(UPDATED_LAST_UPDATED)
@@ -158,43 +159,43 @@ class LlinsVillageReportHistoryResourceIT {
         } else {
             workingDay = TestUtil.findAll(em, WorkingDay.class).get(0);
         }
-        lLINSVillageReportHistory.setDayReached(workingDay);
+        llinsVillageReportHistory.setDayReached(workingDay);
         // Add required entity
-        LlinsVillageReport lLINSVillageReport;
+        LlinsVillageReport llinsVillageReport;
         if (TestUtil.findAll(em, LlinsVillageReport.class).isEmpty()) {
-            lLINSVillageReport = LlinsVillageReportResourceIT.createUpdatedEntity(em);
-            em.persist(lLINSVillageReport);
+            llinsVillageReport = LlinsVillageReportResourceIT.createUpdatedEntity(em);
+            em.persist(llinsVillageReport);
             em.flush();
         } else {
-            lLINSVillageReport = TestUtil.findAll(em, LlinsVillageReport.class).get(0);
+            llinsVillageReport = TestUtil.findAll(em, LlinsVillageReport.class).get(0);
         }
-        lLINSVillageReportHistory.setLlinsVillageReport(lLINSVillageReport);
-        return lLINSVillageReportHistory;
+        llinsVillageReportHistory.setLlinsVillageReport(llinsVillageReport);
+        return llinsVillageReportHistory;
     }
 
     @BeforeEach
     public void initTest() {
-        lLINSVillageReportHistory = createEntity(em);
+        llinsVillageReportHistory = createEntity(em);
     }
 
     @Test
     @Transactional
-    void createLLINSVillageReportHistory() throws Exception {
-        int databaseSizeBeforeCreate = lLINSVillageReportHistoryRepository.findAll().size();
+    void createLlinsVillageReportHistory() throws Exception {
+        int databaseSizeBeforeCreate = llinsVillageReportHistoryRepository.findAll().size();
         // Create the LlinsVillageReportHistory
-        restLLINSVillageReportHistoryMockMvc
+        restLlinsVillageReportHistoryMockMvc
             .perform(
                 post(ENTITY_API_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSVillageReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsVillageReportHistory))
             )
             .andExpect(status().isCreated());
 
         // Validate the LlinsVillageReportHistory in the database
-        List<LlinsVillageReportHistory> lLINSVillageReportHistoryList = lLINSVillageReportHistoryRepository.findAll();
-        assertThat(lLINSVillageReportHistoryList).hasSize(databaseSizeBeforeCreate + 1);
-        LlinsVillageReportHistory testLlinsVillageReportHistory = lLINSVillageReportHistoryList.get(
-            lLINSVillageReportHistoryList.size() - 1
+        List<LlinsVillageReportHistory> llinsVillageReportHistoryList = llinsVillageReportHistoryRepository.findAll();
+        assertThat(llinsVillageReportHistoryList).hasSize(databaseSizeBeforeCreate + 1);
+        LlinsVillageReportHistory testLlinsVillageReportHistory = llinsVillageReportHistoryList.get(
+            llinsVillageReportHistoryList.size() - 1
         );
         assertThat(testLlinsVillageReportHistory.getUid()).isEqualTo(DEFAULT_UID);
         assertThat(testLlinsVillageReportHistory.getCreated()).isEqualTo(DEFAULT_CREATED);
@@ -212,143 +213,143 @@ class LlinsVillageReportHistoryResourceIT {
 
     @Test
     @Transactional
-    void createLLINSVillageReportHistoryWithExistingId() throws Exception {
+    void createLlinsVillageReportHistoryWithExistingId() throws Exception {
         // Create the LlinsVillageReportHistory with an existing ID
-        lLINSVillageReportHistory.setId(1L);
+        llinsVillageReportHistory.setId(1L);
 
-        int databaseSizeBeforeCreate = lLINSVillageReportHistoryRepository.findAll().size();
+        int databaseSizeBeforeCreate = llinsVillageReportHistoryRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restLLINSVillageReportHistoryMockMvc
+        restLlinsVillageReportHistoryMockMvc
             .perform(
                 post(ENTITY_API_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSVillageReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsVillageReportHistory))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsVillageReportHistory in the database
-        List<LlinsVillageReportHistory> lLINSVillageReportHistoryList = lLINSVillageReportHistoryRepository.findAll();
-        assertThat(lLINSVillageReportHistoryList).hasSize(databaseSizeBeforeCreate);
+        List<LlinsVillageReportHistory> llinsVillageReportHistoryList = llinsVillageReportHistoryRepository.findAll();
+        assertThat(llinsVillageReportHistoryList).hasSize(databaseSizeBeforeCreate);
     }
 
     @Test
     @Transactional
     void checkUidIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSVillageReportHistoryRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsVillageReportHistoryRepository.findAll().size();
         // set the field null
-        lLINSVillageReportHistory.setUid(null);
+        llinsVillageReportHistory.setUid(null);
 
         // Create the LlinsVillageReportHistory, which fails.
 
-        restLLINSVillageReportHistoryMockMvc
+        restLlinsVillageReportHistoryMockMvc
             .perform(
                 post(ENTITY_API_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSVillageReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsVillageReportHistory))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsVillageReportHistory> lLINSVillageReportHistoryList = lLINSVillageReportHistoryRepository.findAll();
-        assertThat(lLINSVillageReportHistoryList).hasSize(databaseSizeBeforeTest);
+        List<LlinsVillageReportHistory> llinsVillageReportHistoryList = llinsVillageReportHistoryRepository.findAll();
+        assertThat(llinsVillageReportHistoryList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
     void checkHousesIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSVillageReportHistoryRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsVillageReportHistoryRepository.findAll().size();
         // set the field null
-        lLINSVillageReportHistory.setHouses(null);
+        llinsVillageReportHistory.setHouses(null);
 
         // Create the LlinsVillageReportHistory, which fails.
 
-        restLLINSVillageReportHistoryMockMvc
+        restLlinsVillageReportHistoryMockMvc
             .perform(
                 post(ENTITY_API_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSVillageReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsVillageReportHistory))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsVillageReportHistory> lLINSVillageReportHistoryList = lLINSVillageReportHistoryRepository.findAll();
-        assertThat(lLINSVillageReportHistoryList).hasSize(databaseSizeBeforeTest);
+        List<LlinsVillageReportHistory> llinsVillageReportHistoryList = llinsVillageReportHistoryRepository.findAll();
+        assertThat(llinsVillageReportHistoryList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
     void checkResidentHouseholdIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSVillageReportHistoryRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsVillageReportHistoryRepository.findAll().size();
         // set the field null
-        lLINSVillageReportHistory.setResidentHousehold(null);
+        llinsVillageReportHistory.setResidentHousehold(null);
 
         // Create the LlinsVillageReportHistory, which fails.
 
-        restLLINSVillageReportHistoryMockMvc
+        restLlinsVillageReportHistoryMockMvc
             .perform(
                 post(ENTITY_API_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSVillageReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsVillageReportHistory))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsVillageReportHistory> lLINSVillageReportHistoryList = lLINSVillageReportHistoryRepository.findAll();
-        assertThat(lLINSVillageReportHistoryList).hasSize(databaseSizeBeforeTest);
+        List<LlinsVillageReportHistory> llinsVillageReportHistoryList = llinsVillageReportHistoryRepository.findAll();
+        assertThat(llinsVillageReportHistoryList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
     void checkIdpsHouseholdIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSVillageReportHistoryRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsVillageReportHistoryRepository.findAll().size();
         // set the field null
-        lLINSVillageReportHistory.setIdpsHousehold(null);
+        llinsVillageReportHistory.setIdpsHousehold(null);
 
         // Create the LlinsVillageReportHistory, which fails.
 
-        restLLINSVillageReportHistoryMockMvc
+        restLlinsVillageReportHistoryMockMvc
             .perform(
                 post(ENTITY_API_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSVillageReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsVillageReportHistory))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsVillageReportHistory> lLINSVillageReportHistoryList = lLINSVillageReportHistoryRepository.findAll();
-        assertThat(lLINSVillageReportHistoryList).hasSize(databaseSizeBeforeTest);
+        List<LlinsVillageReportHistory> llinsVillageReportHistoryList = llinsVillageReportHistoryRepository.findAll();
+        assertThat(llinsVillageReportHistoryList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
     void checkQuantityReceivedIsRequired() throws Exception {
-        int databaseSizeBeforeTest = lLINSVillageReportHistoryRepository.findAll().size();
+        int databaseSizeBeforeTest = llinsVillageReportHistoryRepository.findAll().size();
         // set the field null
-        lLINSVillageReportHistory.setQuantityReceived(null);
+        llinsVillageReportHistory.setQuantityReceived(null);
 
         // Create the LlinsVillageReportHistory, which fails.
 
-        restLLINSVillageReportHistoryMockMvc
+        restLlinsVillageReportHistoryMockMvc
             .perform(
                 post(ENTITY_API_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSVillageReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsVillageReportHistory))
             )
             .andExpect(status().isBadRequest());
 
-        List<LlinsVillageReportHistory> lLINSVillageReportHistoryList = lLINSVillageReportHistoryRepository.findAll();
-        assertThat(lLINSVillageReportHistoryList).hasSize(databaseSizeBeforeTest);
+        List<LlinsVillageReportHistory> llinsVillageReportHistoryList = llinsVillageReportHistoryRepository.findAll();
+        assertThat(llinsVillageReportHistoryList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
-    void getAllLLINSVillageReportHistories() throws Exception {
+    void getAllLlinsVillageReportHistories() throws Exception {
         // Initialize the database
-        lLINSVillageReportHistoryRepository.saveAndFlush(lLINSVillageReportHistory);
+        llinsVillageReportHistoryRepository.saveAndFlush(llinsVillageReportHistory);
 
-        // Get all the lLINSVillageReportHistoryList
-        restLLINSVillageReportHistoryMockMvc
+        // Get all the llinsVillageReportHistoryList
+        restLlinsVillageReportHistoryMockMvc
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(lLINSVillageReportHistory.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(llinsVillageReportHistory.getId().intValue())))
             .andExpect(jsonPath("$.[*].uid").value(hasItem(DEFAULT_UID)))
             .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
             .andExpect(jsonPath("$.[*].lastUpdated").value(hasItem(DEFAULT_LAST_UPDATED.toString())))
@@ -365,16 +366,16 @@ class LlinsVillageReportHistoryResourceIT {
 
     @Test
     @Transactional
-    void getLLINSVillageReportHistory() throws Exception {
+    void getLlinsVillageReportHistory() throws Exception {
         // Initialize the database
-        lLINSVillageReportHistoryRepository.saveAndFlush(lLINSVillageReportHistory);
+        llinsVillageReportHistoryRepository.saveAndFlush(llinsVillageReportHistory);
 
-        // Get the lLINSVillageReportHistory
-        restLLINSVillageReportHistoryMockMvc
-            .perform(get(ENTITY_API_URL_ID, lLINSVillageReportHistory.getId()))
+        // Get the llinsVillageReportHistory
+        restLlinsVillageReportHistoryMockMvc
+            .perform(get(ENTITY_API_URL_ID, llinsVillageReportHistory.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(lLINSVillageReportHistory.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(llinsVillageReportHistory.getId().intValue()))
             .andExpect(jsonPath("$.uid").value(DEFAULT_UID))
             .andExpect(jsonPath("$.created").value(DEFAULT_CREATED.toString()))
             .andExpect(jsonPath("$.lastUpdated").value(DEFAULT_LAST_UPDATED.toString()))
@@ -391,22 +392,22 @@ class LlinsVillageReportHistoryResourceIT {
 
     @Test
     @Transactional
-    void getNonExistingLLINSVillageReportHistory() throws Exception {
-        // Get the lLINSVillageReportHistory
-        restLLINSVillageReportHistoryMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
+    void getNonExistingLlinsVillageReportHistory() throws Exception {
+        // Get the llinsVillageReportHistory
+        restLlinsVillageReportHistoryMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
     @Test
     @Transactional
-    void putNewLLINSVillageReportHistory() throws Exception {
+    void putNewLlinsVillageReportHistory() throws Exception {
         // Initialize the database
-        lLINSVillageReportHistoryRepository.saveAndFlush(lLINSVillageReportHistory);
+        llinsVillageReportHistoryRepository.saveAndFlush(llinsVillageReportHistory);
 
-        int databaseSizeBeforeUpdate = lLINSVillageReportHistoryRepository.findAll().size();
+        int databaseSizeBeforeUpdate = llinsVillageReportHistoryRepository.findAll().size();
 
-        // Update the lLINSVillageReportHistory
-        LlinsVillageReportHistory updatedLlinsVillageReportHistory = lLINSVillageReportHistoryRepository
-            .findById(lLINSVillageReportHistory.getId())
+        // Update the llinsVillageReportHistory
+        LlinsVillageReportHistory updatedLlinsVillageReportHistory = llinsVillageReportHistoryRepository
+            .findById(llinsVillageReportHistory.getId())
             .get();
         // Disconnect from session so that the updates on updatedLlinsVillageReportHistory are not directly saved in db
         em.detach(updatedLlinsVillageReportHistory);
@@ -424,7 +425,7 @@ class LlinsVillageReportHistoryResourceIT {
             .pregnantWomen(UPDATED_PREGNANT_WOMEN)
             .quantityReceived(UPDATED_QUANTITY_RECEIVED);
 
-        restLLINSVillageReportHistoryMockMvc
+        restLlinsVillageReportHistoryMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, updatedLlinsVillageReportHistory.getId())
                     .contentType(MediaType.APPLICATION_JSON)
@@ -433,10 +434,10 @@ class LlinsVillageReportHistoryResourceIT {
             .andExpect(status().isOk());
 
         // Validate the LlinsVillageReportHistory in the database
-        List<LlinsVillageReportHistory> lLINSVillageReportHistoryList = lLINSVillageReportHistoryRepository.findAll();
-        assertThat(lLINSVillageReportHistoryList).hasSize(databaseSizeBeforeUpdate);
-        LlinsVillageReportHistory testLlinsVillageReportHistory = lLINSVillageReportHistoryList.get(
-            lLINSVillageReportHistoryList.size() - 1
+        List<LlinsVillageReportHistory> llinsVillageReportHistoryList = llinsVillageReportHistoryRepository.findAll();
+        assertThat(llinsVillageReportHistoryList).hasSize(databaseSizeBeforeUpdate);
+        LlinsVillageReportHistory testLlinsVillageReportHistory = llinsVillageReportHistoryList.get(
+            llinsVillageReportHistoryList.size() - 1
         );
         assertThat(testLlinsVillageReportHistory.getUid()).isEqualTo(UPDATED_UID);
         assertThat(testLlinsVillageReportHistory.getCreated()).isEqualTo(UPDATED_CREATED);
@@ -454,86 +455,82 @@ class LlinsVillageReportHistoryResourceIT {
 
     @Test
     @Transactional
-    void putNonExistingLLINSVillageReportHistory() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSVillageReportHistoryRepository.findAll().size();
-        lLINSVillageReportHistory.setId(count.incrementAndGet());
+    void putNonExistingLlinsVillageReportHistory() throws Exception {
+        int databaseSizeBeforeUpdate = llinsVillageReportHistoryRepository.findAll().size();
+        llinsVillageReportHistory.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restLLINSVillageReportHistoryMockMvc
+        restLlinsVillageReportHistoryMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, lLINSVillageReportHistory.getId())
+                put(ENTITY_API_URL_ID, llinsVillageReportHistory.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSVillageReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsVillageReportHistory))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsVillageReportHistory in the database
-        List<LlinsVillageReportHistory> lLINSVillageReportHistoryList = lLINSVillageReportHistoryRepository.findAll();
-        assertThat(lLINSVillageReportHistoryList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsVillageReportHistory> llinsVillageReportHistoryList = llinsVillageReportHistoryRepository.findAll();
+        assertThat(llinsVillageReportHistoryList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void putWithIdMismatchLLINSVillageReportHistory() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSVillageReportHistoryRepository.findAll().size();
-        lLINSVillageReportHistory.setId(count.incrementAndGet());
+    void putWithIdMismatchLlinsVillageReportHistory() throws Exception {
+        int databaseSizeBeforeUpdate = llinsVillageReportHistoryRepository.findAll().size();
+        llinsVillageReportHistory.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restLLINSVillageReportHistoryMockMvc
+        restLlinsVillageReportHistoryMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSVillageReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsVillageReportHistory))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsVillageReportHistory in the database
-        List<LlinsVillageReportHistory> lLINSVillageReportHistoryList = lLINSVillageReportHistoryRepository.findAll();
-        assertThat(lLINSVillageReportHistoryList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsVillageReportHistory> llinsVillageReportHistoryList = llinsVillageReportHistoryRepository.findAll();
+        assertThat(llinsVillageReportHistoryList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void putWithMissingIdPathParamLLINSVillageReportHistory() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSVillageReportHistoryRepository.findAll().size();
-        lLINSVillageReportHistory.setId(count.incrementAndGet());
+    void putWithMissingIdPathParamLlinsVillageReportHistory() throws Exception {
+        int databaseSizeBeforeUpdate = llinsVillageReportHistoryRepository.findAll().size();
+        llinsVillageReportHistory.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restLLINSVillageReportHistoryMockMvc
+        restLlinsVillageReportHistoryMockMvc
             .perform(
                 put(ENTITY_API_URL)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSVillageReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsVillageReportHistory))
             )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the LlinsVillageReportHistory in the database
-        List<LlinsVillageReportHistory> lLINSVillageReportHistoryList = lLINSVillageReportHistoryRepository.findAll();
-        assertThat(lLINSVillageReportHistoryList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsVillageReportHistory> llinsVillageReportHistoryList = llinsVillageReportHistoryRepository.findAll();
+        assertThat(llinsVillageReportHistoryList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void partialUpdateLLINSVillageReportHistoryWithPatch() throws Exception {
+    void partialUpdateLlinsVillageReportHistoryWithPatch() throws Exception {
         // Initialize the database
-        lLINSVillageReportHistoryRepository.saveAndFlush(lLINSVillageReportHistory);
+        llinsVillageReportHistoryRepository.saveAndFlush(llinsVillageReportHistory);
 
-        int databaseSizeBeforeUpdate = lLINSVillageReportHistoryRepository.findAll().size();
+        int databaseSizeBeforeUpdate = llinsVillageReportHistoryRepository.findAll().size();
 
-        // Update the lLINSVillageReportHistory using partial update
+        // Update the llinsVillageReportHistory using partial update
         LlinsVillageReportHistory partialUpdatedLlinsVillageReportHistory = new LlinsVillageReportHistory();
-        partialUpdatedLlinsVillageReportHistory.setId(lLINSVillageReportHistory.getId());
+        partialUpdatedLlinsVillageReportHistory.setId(llinsVillageReportHistory.getId());
 
         partialUpdatedLlinsVillageReportHistory
-            .uid(UPDATED_UID)
             .created(UPDATED_CREATED)
-            .houses(UPDATED_HOUSES)
-            .femaleIndividuals(UPDATED_FEMALE_INDIVIDUALS)
-            .lessThan5Males(UPDATED_LESS_THAN_5_MALES)
-            .lessThan5Females(UPDATED_LESS_THAN_5_FEMALES)
-            .quantityReceived(UPDATED_QUANTITY_RECEIVED);
+            .lastUpdated(UPDATED_LAST_UPDATED)
+            .idpsHousehold(UPDATED_IDPS_HOUSEHOLD);
 
-        restLLINSVillageReportHistoryMockMvc
+        restLlinsVillageReportHistoryMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedLlinsVillageReportHistory.getId())
                     .contentType("application/merge-patch+json")
@@ -542,36 +539,36 @@ class LlinsVillageReportHistoryResourceIT {
             .andExpect(status().isOk());
 
         // Validate the LlinsVillageReportHistory in the database
-        List<LlinsVillageReportHistory> lLINSVillageReportHistoryList = lLINSVillageReportHistoryRepository.findAll();
-        assertThat(lLINSVillageReportHistoryList).hasSize(databaseSizeBeforeUpdate);
-        LlinsVillageReportHistory testLlinsVillageReportHistory = lLINSVillageReportHistoryList.get(
-            lLINSVillageReportHistoryList.size() - 1
+        List<LlinsVillageReportHistory> llinsVillageReportHistoryList = llinsVillageReportHistoryRepository.findAll();
+        assertThat(llinsVillageReportHistoryList).hasSize(databaseSizeBeforeUpdate);
+        LlinsVillageReportHistory testLlinsVillageReportHistory = llinsVillageReportHistoryList.get(
+            llinsVillageReportHistoryList.size() - 1
         );
-        assertThat(testLlinsVillageReportHistory.getUid()).isEqualTo(UPDATED_UID);
+        assertThat(testLlinsVillageReportHistory.getUid()).isEqualTo(DEFAULT_UID);
         assertThat(testLlinsVillageReportHistory.getCreated()).isEqualTo(UPDATED_CREATED);
-        assertThat(testLlinsVillageReportHistory.getLastUpdated()).isEqualTo(DEFAULT_LAST_UPDATED);
-        assertThat(testLlinsVillageReportHistory.getHouses()).isEqualTo(UPDATED_HOUSES);
+        assertThat(testLlinsVillageReportHistory.getLastUpdated()).isEqualTo(UPDATED_LAST_UPDATED);
+        assertThat(testLlinsVillageReportHistory.getHouses()).isEqualTo(DEFAULT_HOUSES);
         assertThat(testLlinsVillageReportHistory.getResidentHousehold()).isEqualTo(DEFAULT_RESIDENT_HOUSEHOLD);
-        assertThat(testLlinsVillageReportHistory.getIdpsHousehold()).isEqualTo(DEFAULT_IDPS_HOUSEHOLD);
+        assertThat(testLlinsVillageReportHistory.getIdpsHousehold()).isEqualTo(UPDATED_IDPS_HOUSEHOLD);
         assertThat(testLlinsVillageReportHistory.getMaleIndividuals()).isEqualTo(DEFAULT_MALE_INDIVIDUALS);
-        assertThat(testLlinsVillageReportHistory.getFemaleIndividuals()).isEqualTo(UPDATED_FEMALE_INDIVIDUALS);
-        assertThat(testLlinsVillageReportHistory.getLessThan5Males()).isEqualTo(UPDATED_LESS_THAN_5_MALES);
-        assertThat(testLlinsVillageReportHistory.getLessThan5Females()).isEqualTo(UPDATED_LESS_THAN_5_FEMALES);
+        assertThat(testLlinsVillageReportHistory.getFemaleIndividuals()).isEqualTo(DEFAULT_FEMALE_INDIVIDUALS);
+        assertThat(testLlinsVillageReportHistory.getLessThan5Males()).isEqualTo(DEFAULT_LESS_THAN_5_MALES);
+        assertThat(testLlinsVillageReportHistory.getLessThan5Females()).isEqualTo(DEFAULT_LESS_THAN_5_FEMALES);
         assertThat(testLlinsVillageReportHistory.getPregnantWomen()).isEqualTo(DEFAULT_PREGNANT_WOMEN);
-        assertThat(testLlinsVillageReportHistory.getQuantityReceived()).isEqualTo(UPDATED_QUANTITY_RECEIVED);
+        assertThat(testLlinsVillageReportHistory.getQuantityReceived()).isEqualTo(DEFAULT_QUANTITY_RECEIVED);
     }
 
     @Test
     @Transactional
-    void fullUpdateLLINSVillageReportHistoryWithPatch() throws Exception {
+    void fullUpdateLlinsVillageReportHistoryWithPatch() throws Exception {
         // Initialize the database
-        lLINSVillageReportHistoryRepository.saveAndFlush(lLINSVillageReportHistory);
+        llinsVillageReportHistoryRepository.saveAndFlush(llinsVillageReportHistory);
 
-        int databaseSizeBeforeUpdate = lLINSVillageReportHistoryRepository.findAll().size();
+        int databaseSizeBeforeUpdate = llinsVillageReportHistoryRepository.findAll().size();
 
-        // Update the lLINSVillageReportHistory using partial update
+        // Update the llinsVillageReportHistory using partial update
         LlinsVillageReportHistory partialUpdatedLlinsVillageReportHistory = new LlinsVillageReportHistory();
-        partialUpdatedLlinsVillageReportHistory.setId(lLINSVillageReportHistory.getId());
+        partialUpdatedLlinsVillageReportHistory.setId(llinsVillageReportHistory.getId());
 
         partialUpdatedLlinsVillageReportHistory
             .uid(UPDATED_UID)
@@ -587,7 +584,7 @@ class LlinsVillageReportHistoryResourceIT {
             .pregnantWomen(UPDATED_PREGNANT_WOMEN)
             .quantityReceived(UPDATED_QUANTITY_RECEIVED);
 
-        restLLINSVillageReportHistoryMockMvc
+        restLlinsVillageReportHistoryMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedLlinsVillageReportHistory.getId())
                     .contentType("application/merge-patch+json")
@@ -596,10 +593,10 @@ class LlinsVillageReportHistoryResourceIT {
             .andExpect(status().isOk());
 
         // Validate the LlinsVillageReportHistory in the database
-        List<LlinsVillageReportHistory> lLINSVillageReportHistoryList = lLINSVillageReportHistoryRepository.findAll();
-        assertThat(lLINSVillageReportHistoryList).hasSize(databaseSizeBeforeUpdate);
-        LlinsVillageReportHistory testLlinsVillageReportHistory = lLINSVillageReportHistoryList.get(
-            lLINSVillageReportHistoryList.size() - 1
+        List<LlinsVillageReportHistory> llinsVillageReportHistoryList = llinsVillageReportHistoryRepository.findAll();
+        assertThat(llinsVillageReportHistoryList).hasSize(databaseSizeBeforeUpdate);
+        LlinsVillageReportHistory testLlinsVillageReportHistory = llinsVillageReportHistoryList.get(
+            llinsVillageReportHistoryList.size() - 1
         );
         assertThat(testLlinsVillageReportHistory.getUid()).isEqualTo(UPDATED_UID);
         assertThat(testLlinsVillageReportHistory.getCreated()).isEqualTo(UPDATED_CREATED);
@@ -617,79 +614,79 @@ class LlinsVillageReportHistoryResourceIT {
 
     @Test
     @Transactional
-    void patchNonExistingLLINSVillageReportHistory() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSVillageReportHistoryRepository.findAll().size();
-        lLINSVillageReportHistory.setId(count.incrementAndGet());
+    void patchNonExistingLlinsVillageReportHistory() throws Exception {
+        int databaseSizeBeforeUpdate = llinsVillageReportHistoryRepository.findAll().size();
+        llinsVillageReportHistory.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restLLINSVillageReportHistoryMockMvc
+        restLlinsVillageReportHistoryMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, lLINSVillageReportHistory.getId())
+                patch(ENTITY_API_URL_ID, llinsVillageReportHistory.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSVillageReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsVillageReportHistory))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsVillageReportHistory in the database
-        List<LlinsVillageReportHistory> lLINSVillageReportHistoryList = lLINSVillageReportHistoryRepository.findAll();
-        assertThat(lLINSVillageReportHistoryList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsVillageReportHistory> llinsVillageReportHistoryList = llinsVillageReportHistoryRepository.findAll();
+        assertThat(llinsVillageReportHistoryList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void patchWithIdMismatchLLINSVillageReportHistory() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSVillageReportHistoryRepository.findAll().size();
-        lLINSVillageReportHistory.setId(count.incrementAndGet());
+    void patchWithIdMismatchLlinsVillageReportHistory() throws Exception {
+        int databaseSizeBeforeUpdate = llinsVillageReportHistoryRepository.findAll().size();
+        llinsVillageReportHistory.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restLLINSVillageReportHistoryMockMvc
+        restLlinsVillageReportHistoryMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSVillageReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsVillageReportHistory))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the LlinsVillageReportHistory in the database
-        List<LlinsVillageReportHistory> lLINSVillageReportHistoryList = lLINSVillageReportHistoryRepository.findAll();
-        assertThat(lLINSVillageReportHistoryList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsVillageReportHistory> llinsVillageReportHistoryList = llinsVillageReportHistoryRepository.findAll();
+        assertThat(llinsVillageReportHistoryList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void patchWithMissingIdPathParamLLINSVillageReportHistory() throws Exception {
-        int databaseSizeBeforeUpdate = lLINSVillageReportHistoryRepository.findAll().size();
-        lLINSVillageReportHistory.setId(count.incrementAndGet());
+    void patchWithMissingIdPathParamLlinsVillageReportHistory() throws Exception {
+        int databaseSizeBeforeUpdate = llinsVillageReportHistoryRepository.findAll().size();
+        llinsVillageReportHistory.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restLLINSVillageReportHistoryMockMvc
+        restLlinsVillageReportHistoryMockMvc
             .perform(
                 patch(ENTITY_API_URL)
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(lLINSVillageReportHistory))
+                    .content(TestUtil.convertObjectToJsonBytes(llinsVillageReportHistory))
             )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the LlinsVillageReportHistory in the database
-        List<LlinsVillageReportHistory> lLINSVillageReportHistoryList = lLINSVillageReportHistoryRepository.findAll();
-        assertThat(lLINSVillageReportHistoryList).hasSize(databaseSizeBeforeUpdate);
+        List<LlinsVillageReportHistory> llinsVillageReportHistoryList = llinsVillageReportHistoryRepository.findAll();
+        assertThat(llinsVillageReportHistoryList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void deleteLLINSVillageReportHistory() throws Exception {
+    void deleteLlinsVillageReportHistory() throws Exception {
         // Initialize the database
-        lLINSVillageReportHistoryRepository.saveAndFlush(lLINSVillageReportHistory);
+        llinsVillageReportHistoryRepository.saveAndFlush(llinsVillageReportHistory);
 
-        int databaseSizeBeforeDelete = lLINSVillageReportHistoryRepository.findAll().size();
+        int databaseSizeBeforeDelete = llinsVillageReportHistoryRepository.findAll().size();
 
-        // Delete the lLINSVillageReportHistory
-        restLLINSVillageReportHistoryMockMvc
-            .perform(delete(ENTITY_API_URL_ID, lLINSVillageReportHistory.getId()).accept(MediaType.APPLICATION_JSON))
+        // Delete the llinsVillageReportHistory
+        restLlinsVillageReportHistoryMockMvc
+            .perform(delete(ENTITY_API_URL_ID, llinsVillageReportHistory.getId()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item
-        List<LlinsVillageReportHistory> lLINSVillageReportHistoryList = lLINSVillageReportHistoryRepository.findAll();
-        assertThat(lLINSVillageReportHistoryList).hasSize(databaseSizeBeforeDelete - 1);
+        List<LlinsVillageReportHistory> llinsVillageReportHistoryList = llinsVillageReportHistoryRepository.findAll();
+        assertThat(llinsVillageReportHistoryList).hasSize(databaseSizeBeforeDelete - 1);
     }
 }

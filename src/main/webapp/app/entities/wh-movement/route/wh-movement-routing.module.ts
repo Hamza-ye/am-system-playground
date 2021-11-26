@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { WHMovementComponent } from '../list/wh-movement.component';
-import { WHMovementDetailComponent } from '../detail/wh-movement-detail.component';
-import { WHMovementUpdateComponent } from '../update/wh-movement-update.component';
-import { WHMovementRoutingResolveService } from './wh-movement-routing-resolve.service';
+import { WhMovementComponent } from '../list/wh-movement.component';
+import { WhMovementDetailComponent } from '../detail/wh-movement-detail.component';
+import { WhMovementUpdateComponent } from '../update/wh-movement-update.component';
+import { WhMovementRoutingResolveService } from './wh-movement-routing-resolve.service';
 
-const wHMovementRoute: Routes = [
+const whMovementRoute: Routes = [
   {
     path: '',
-    component: WHMovementComponent,
+    component: WhMovementComponent,
     data: {
       defaultSort: 'id,asc',
     },
@@ -18,32 +18,32 @@ const wHMovementRoute: Routes = [
   },
   {
     path: ':id/view',
-    component: WHMovementDetailComponent,
+    component: WhMovementDetailComponent,
     resolve: {
-      wHMovement: WHMovementRoutingResolveService,
+      whMovement: WhMovementRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
-    component: WHMovementUpdateComponent,
+    component: WhMovementUpdateComponent,
     resolve: {
-      wHMovement: WHMovementRoutingResolveService,
+      whMovement: WhMovementRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
-    component: WHMovementUpdateComponent,
+    component: WhMovementUpdateComponent,
     resolve: {
-      wHMovement: WHMovementRoutingResolveService,
+      whMovement: WhMovementRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(wHMovementRoute)],
+  imports: [RouterModule.forChild(whMovementRoute)],
   exports: [RouterModule],
 })
-export class WHMovementRoutingModule {}
+export class WhMovementRoutingModule {}

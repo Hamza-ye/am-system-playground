@@ -5,8 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
-import { IWHMovement, WHMovement } from '../wh-movement.model';
-import { WHMovementService } from '../service/wh-movement.service';
+import { IWhMovement, WhMovement } from '../wh-movement.model';
+import { WhMovementService } from '../service/wh-movement.service';
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 import { IWorkingDay } from 'app/entities/working-day/working-day.model';
@@ -20,7 +20,7 @@ import { TeamService } from 'app/entities/team/service/team.service';
   selector: 'app-wh-movement-update',
   templateUrl: './wh-movement-update.component.html',
 })
-export class WHMovementUpdateComponent implements OnInit {
+export class WhMovementUpdateComponent implements OnInit {
   isSaving = false;
 
   usersSharedCollection: IUser[] = [];
@@ -39,13 +39,13 @@ export class WHMovementUpdateComponent implements OnInit {
     createdBy: [],
     lastUpdatedBy: [],
     day: [null, Validators.required],
-    initiatedWH: [null, Validators.required],
-    theOtherSideWH: [],
+    initiatedWh: [null, Validators.required],
+    theOtherSideWh: [],
     team: [],
   });
 
   constructor(
-    protected wHMovementService: WHMovementService,
+    protected whMovementService: WhMovementService,
     protected userService: UserService,
     protected workingDayService: WorkingDayService,
     protected warehouseService: WarehouseService,
@@ -55,8 +55,8 @@ export class WHMovementUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ wHMovement }) => {
-      this.updateForm(wHMovement);
+    this.activatedRoute.data.subscribe(({ whMovement }) => {
+      this.updateForm(whMovement);
 
       this.loadRelationshipsOptions();
     });
@@ -68,11 +68,11 @@ export class WHMovementUpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
-    const wHMovement = this.createFromForm();
-    if (wHMovement.id !== undefined) {
-      this.subscribeToSaveResponse(this.wHMovementService.update(wHMovement));
+    const whMovement = this.createFromForm();
+    if (whMovement.id !== undefined) {
+      this.subscribeToSaveResponse(this.whMovementService.update(whMovement));
     } else {
-      this.subscribeToSaveResponse(this.wHMovementService.create(wHMovement));
+      this.subscribeToSaveResponse(this.whMovementService.create(whMovement));
     }
   }
 
@@ -92,7 +92,7 @@ export class WHMovementUpdateComponent implements OnInit {
     return item.id!;
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IWHMovement>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IWhMovement>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
       () => this.onSaveSuccess(),
       () => this.onSaveError()
@@ -111,38 +111,38 @@ export class WHMovementUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(wHMovement: IWHMovement): void {
+  protected updateForm(whMovement: IWhMovement): void {
     this.editForm.patchValue({
-      id: wHMovement.id,
-      movementType: wHMovement.movementType,
-      quantity: wHMovement.quantity,
-      reconciliationSource: wHMovement.reconciliationSource,
-      reconciliationDestination: wHMovement.reconciliationDestination,
-      confirmedByOtherSide: wHMovement.confirmedByOtherSide,
-      comment: wHMovement.comment,
-      createdBy: wHMovement.createdBy,
-      lastUpdatedBy: wHMovement.lastUpdatedBy,
-      day: wHMovement.day,
-      initiatedWH: wHMovement.initiatedWH,
-      theOtherSideWH: wHMovement.theOtherSideWH,
-      team: wHMovement.team,
+      id: whMovement.id,
+      movementType: whMovement.movementType,
+      quantity: whMovement.quantity,
+      reconciliationSource: whMovement.reconciliationSource,
+      reconciliationDestination: whMovement.reconciliationDestination,
+      confirmedByOtherSide: whMovement.confirmedByOtherSide,
+      comment: whMovement.comment,
+      createdBy: whMovement.createdBy,
+      lastUpdatedBy: whMovement.lastUpdatedBy,
+      day: whMovement.day,
+      initiatedWh: whMovement.initiatedWh,
+      theOtherSideWh: whMovement.theOtherSideWh,
+      team: whMovement.team,
     });
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
-      wHMovement.createdBy,
-      wHMovement.lastUpdatedBy
+      whMovement.createdBy,
+      whMovement.lastUpdatedBy
     );
     this.workingDaysSharedCollection = this.workingDayService.addWorkingDayToCollectionIfMissing(
       this.workingDaysSharedCollection,
-      wHMovement.day
+      whMovement.day
     );
     this.warehousesSharedCollection = this.warehouseService.addWarehouseToCollectionIfMissing(
       this.warehousesSharedCollection,
-      wHMovement.initiatedWH,
-      wHMovement.theOtherSideWH
+      whMovement.initiatedWh,
+      whMovement.theOtherSideWh
     );
-    this.teamsSharedCollection = this.teamService.addTeamToCollectionIfMissing(this.teamsSharedCollection, wHMovement.team);
+    this.teamsSharedCollection = this.teamService.addTeamToCollectionIfMissing(this.teamsSharedCollection, whMovement.team);
   }
 
   protected loadRelationshipsOptions(): void {
@@ -177,8 +177,8 @@ export class WHMovementUpdateComponent implements OnInit {
         map((warehouses: IWarehouse[]) =>
           this.warehouseService.addWarehouseToCollectionIfMissing(
             warehouses,
-            this.editForm.get('initiatedWH')!.value,
-            this.editForm.get('theOtherSideWH')!.value
+            this.editForm.get('initiatedWh')!.value,
+            this.editForm.get('theOtherSideWh')!.value
           )
         )
       )
@@ -191,9 +191,9 @@ export class WHMovementUpdateComponent implements OnInit {
       .subscribe((teams: ITeam[]) => (this.teamsSharedCollection = teams));
   }
 
-  protected createFromForm(): IWHMovement {
+  protected createFromForm(): IWhMovement {
     return {
-      ...new WHMovement(),
+      ...new WhMovement(),
       id: this.editForm.get(['id'])!.value,
       movementType: this.editForm.get(['movementType'])!.value,
       quantity: this.editForm.get(['quantity'])!.value,
@@ -204,8 +204,8 @@ export class WHMovementUpdateComponent implements OnInit {
       createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       day: this.editForm.get(['day'])!.value,
-      initiatedWH: this.editForm.get(['initiatedWH'])!.value,
-      theOtherSideWH: this.editForm.get(['theOtherSideWH'])!.value,
+      initiatedWh: this.editForm.get(['initiatedWh'])!.value,
+      theOtherSideWh: this.editForm.get(['theOtherSideWh'])!.value,
       team: this.editForm.get(['team'])!.value,
     };
   }

@@ -2,36 +2,36 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
-import { LLINSFamilyReportHistoryDetailComponent } from './llins-family-report-history-detail.component';
+import { LlinsFamilyReportHistoryDetailComponent } from './llins-family-report-history-detail.component';
 
 describe('Component Tests', () => {
   describe('LlinsFamilyReportHistory Management Detail Component', () => {
-    let comp: LLINSFamilyReportHistoryDetailComponent;
-    let fixture: ComponentFixture<LLINSFamilyReportHistoryDetailComponent>;
+    let comp: LlinsFamilyReportHistoryDetailComponent;
+    let fixture: ComponentFixture<LlinsFamilyReportHistoryDetailComponent>;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        declarations: [LLINSFamilyReportHistoryDetailComponent],
+        declarations: [LlinsFamilyReportHistoryDetailComponent],
         providers: [
           {
             provide: ActivatedRoute,
-            useValue: { data: of({ lLINSFamilyReportHistory: { id: 123 } }) },
+            useValue: { data: of({ llinsFamilyReportHistory: { id: 123 } }) },
           },
         ],
       })
-        .overrideTemplate(LLINSFamilyReportHistoryDetailComponent, '')
+        .overrideTemplate(LlinsFamilyReportHistoryDetailComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(LLINSFamilyReportHistoryDetailComponent);
+      fixture = TestBed.createComponent(LlinsFamilyReportHistoryDetailComponent);
       comp = fixture.componentInstance;
     });
 
     describe('OnInit', () => {
-      it('Should load lLINSFamilyReportHistory on init', () => {
+      it('Should load llinsFamilyReportHistory on init', () => {
         // WHEN
         comp.ngOnInit();
 
         // THEN
-        expect(comp.lLINSFamilyReportHistory).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.llinsFamilyReportHistory).toEqual(expect.objectContaining({ id: 123 }));
       });
     });
   });

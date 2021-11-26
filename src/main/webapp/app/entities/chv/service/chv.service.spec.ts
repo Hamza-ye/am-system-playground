@@ -3,16 +3,16 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import * as dayjs from 'dayjs';
 
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
-import { ICHV, CHV } from '../chv.model';
+import { IChv, Chv } from '../chv.model';
 
-import { CHVService } from './chv.service';
+import { ChvService } from './chv.service';
 
 describe('Service Tests', () => {
   describe('Chv Service', () => {
-    let service: CHVService;
+    let service: ChvService;
     let httpMock: HttpTestingController;
-    let elemDefault: ICHV;
-    let expectedResult: ICHV | ICHV[] | boolean | null;
+    let elemDefault: IChv;
+    let expectedResult: IChv | IChv[] | boolean | null;
     let currentDate: dayjs.Dayjs;
 
     beforeEach(() => {
@@ -20,7 +20,7 @@ describe('Service Tests', () => {
         imports: [HttpClientTestingModule],
       });
       expectedResult = null;
-      service = TestBed.inject(CHVService);
+      service = TestBed.inject(ChvService);
       httpMock = TestBed.inject(HttpTestingController);
       currentDate = dayjs();
 
@@ -70,7 +70,7 @@ describe('Service Tests', () => {
           returnedFromService
         );
 
-        service.create(new CHV()).subscribe(resp => (expectedResult = resp.body));
+        service.create(new Chv()).subscribe(resp => (expectedResult = resp.body));
 
         const req = httpMock.expectOne({ method: 'POST' });
         req.flush(returnedFromService);
@@ -109,10 +109,12 @@ describe('Service Tests', () => {
       it('should partial update a Chv', () => {
         const patchObject = Object.assign(
           {
-            description: 'BBBBBB',
+            uid: 'BBBBBB',
+            code: 'BBBBBB',
+            created: currentDate.format(DATE_TIME_FORMAT),
             lastUpdated: currentDate.format(DATE_TIME_FORMAT),
           },
-          new CHV()
+          new Chv()
         );
 
         const returnedFromService = Object.assign(patchObject, elemDefault);
@@ -170,61 +172,61 @@ describe('Service Tests', () => {
         expect(expectedResult);
       });
 
-      describe('addCHVToCollectionIfMissing', () => {
+      describe('addChvToCollectionIfMissing', () => {
         it('should add a Chv to an empty array', () => {
-          const cHV: ICHV = { id: 123 };
-          expectedResult = service.addCHVToCollectionIfMissing([], cHV);
+          const chv: IChv = { id: 123 };
+          expectedResult = service.addChvToCollectionIfMissing([], chv);
           expect(expectedResult).toHaveLength(1);
-          expect(expectedResult).toContain(cHV);
+          expect(expectedResult).toContain(chv);
         });
 
         it('should not add a Chv to an array that contains it', () => {
-          const cHV: ICHV = { id: 123 };
-          const cHVCollection: ICHV[] = [
+          const chv: IChv = { id: 123 };
+          const chvCollection: IChv[] = [
             {
-              ...cHV,
+              ...chv,
             },
             { id: 456 },
           ];
-          expectedResult = service.addCHVToCollectionIfMissing(cHVCollection, cHV);
+          expectedResult = service.addChvToCollectionIfMissing(chvCollection, chv);
           expect(expectedResult).toHaveLength(2);
         });
 
         it("should add a Chv to an array that doesn't contain it", () => {
-          const cHV: ICHV = { id: 123 };
-          const cHVCollection: ICHV[] = [{ id: 456 }];
-          expectedResult = service.addCHVToCollectionIfMissing(cHVCollection, cHV);
+          const chv: IChv = { id: 123 };
+          const chvCollection: IChv[] = [{ id: 456 }];
+          expectedResult = service.addChvToCollectionIfMissing(chvCollection, chv);
           expect(expectedResult).toHaveLength(2);
-          expect(expectedResult).toContain(cHV);
+          expect(expectedResult).toContain(chv);
         });
 
         it('should add only unique Chv to an array', () => {
-          const cHVArray: ICHV[] = [{ id: 123 }, { id: 456 }, { id: 50901 }];
-          const cHVCollection: ICHV[] = [{ id: 123 }];
-          expectedResult = service.addCHVToCollectionIfMissing(cHVCollection, ...cHVArray);
+          const chvArray: IChv[] = [{ id: 123 }, { id: 456 }, { id: 25780 }];
+          const chvCollection: IChv[] = [{ id: 123 }];
+          expectedResult = service.addChvToCollectionIfMissing(chvCollection, ...chvArray);
           expect(expectedResult).toHaveLength(3);
         });
 
         it('should accept varargs', () => {
-          const cHV: ICHV = { id: 123 };
-          const cHV2: ICHV = { id: 456 };
-          expectedResult = service.addCHVToCollectionIfMissing([], cHV, cHV2);
+          const chv: IChv = { id: 123 };
+          const chv2: IChv = { id: 456 };
+          expectedResult = service.addChvToCollectionIfMissing([], chv, chv2);
           expect(expectedResult).toHaveLength(2);
-          expect(expectedResult).toContain(cHV);
-          expect(expectedResult).toContain(cHV2);
+          expect(expectedResult).toContain(chv);
+          expect(expectedResult).toContain(chv2);
         });
 
         it('should accept null and undefined values', () => {
-          const cHV: ICHV = { id: 123 };
-          expectedResult = service.addCHVToCollectionIfMissing([], null, cHV, undefined);
+          const chv: IChv = { id: 123 };
+          expectedResult = service.addChvToCollectionIfMissing([], null, chv, undefined);
           expect(expectedResult).toHaveLength(1);
-          expect(expectedResult).toContain(cHV);
+          expect(expectedResult).toContain(chv);
         });
 
         it('should return initial array if no Chv is added', () => {
-          const cHVCollection: ICHV[] = [{ id: 123 }];
-          expectedResult = service.addCHVToCollectionIfMissing(cHVCollection, undefined, null);
-          expect(expectedResult).toEqual(cHVCollection);
+          const chvCollection: IChv[] = [{ id: 123 }];
+          expectedResult = service.addChvToCollectionIfMissing(chvCollection, undefined, null);
+          expect(expectedResult).toEqual(chvCollection);
         });
       });
     });

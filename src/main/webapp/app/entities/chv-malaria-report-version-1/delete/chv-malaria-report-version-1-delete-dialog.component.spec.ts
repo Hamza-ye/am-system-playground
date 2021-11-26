@@ -6,28 +6,28 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { CHVMalariaReportVersion1Service } from '../service/chv-malaria-report-version-1.service';
+import { ChvMalariaReportVersion1Service } from '../service/chv-malaria-report-version-1.service';
 
-import { CHVMalariaReportVersion1DeleteDialogComponent } from './chv-malaria-report-version-1-delete-dialog.component';
+import { ChvMalariaReportVersion1DeleteDialogComponent } from './chv-malaria-report-version-1-delete-dialog.component';
 
 describe('Component Tests', () => {
   describe('ChvMalariaReportVersion1 Management Delete Component', () => {
-    let comp: CHVMalariaReportVersion1DeleteDialogComponent;
-    let fixture: ComponentFixture<CHVMalariaReportVersion1DeleteDialogComponent>;
-    let service: CHVMalariaReportVersion1Service;
+    let comp: ChvMalariaReportVersion1DeleteDialogComponent;
+    let fixture: ComponentFixture<ChvMalariaReportVersion1DeleteDialogComponent>;
+    let service: ChvMalariaReportVersion1Service;
     let mockActiveModal: NgbActiveModal;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [CHVMalariaReportVersion1DeleteDialogComponent],
+        declarations: [ChvMalariaReportVersion1DeleteDialogComponent],
         providers: [NgbActiveModal],
       })
-        .overrideTemplate(CHVMalariaReportVersion1DeleteDialogComponent, '')
+        .overrideTemplate(ChvMalariaReportVersion1DeleteDialogComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(CHVMalariaReportVersion1DeleteDialogComponent);
+      fixture = TestBed.createComponent(ChvMalariaReportVersion1DeleteDialogComponent);
       comp = fixture.componentInstance;
-      service = TestBed.inject(CHVMalariaReportVersion1Service);
+      service = TestBed.inject(ChvMalariaReportVersion1Service);
       mockActiveModal = TestBed.inject(NgbActiveModal);
     });
 

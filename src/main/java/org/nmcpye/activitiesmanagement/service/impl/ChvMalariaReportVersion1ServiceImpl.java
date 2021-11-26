@@ -1,7 +1,5 @@
 package org.nmcpye.activitiesmanagement.service.impl;
 
-import java.util.List;
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.domain.ChvMalariaReportVersion1;
 import org.nmcpye.activitiesmanagement.repository.ChvMalariaReportVersion1Repository;
 import org.nmcpye.activitiesmanagement.service.ChvMalariaReportVersion1Service;
@@ -9,6 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Service Implementation for managing {@link ChvMalariaReportVersion1}.
@@ -19,110 +20,110 @@ public class ChvMalariaReportVersion1ServiceImpl implements ChvMalariaReportVers
 
     private final Logger log = LoggerFactory.getLogger(ChvMalariaReportVersion1ServiceImpl.class);
 
-    private final ChvMalariaReportVersion1Repository cHVMalariaReportVersion1Repository;
+    private final ChvMalariaReportVersion1Repository chvMalariaReportVersion1Repository;
 
-    public ChvMalariaReportVersion1ServiceImpl(ChvMalariaReportVersion1Repository cHVMalariaReportVersion1Repository) {
-        this.cHVMalariaReportVersion1Repository = cHVMalariaReportVersion1Repository;
+    public ChvMalariaReportVersion1ServiceImpl(ChvMalariaReportVersion1Repository chvMalariaReportVersion1Repository) {
+        this.chvMalariaReportVersion1Repository = chvMalariaReportVersion1Repository;
     }
 
     @Override
-    public ChvMalariaReportVersion1 save(ChvMalariaReportVersion1 cHVMalariaReportVersion1) {
-        log.debug("Request to save ChvMalariaReportVersion1 : {}", cHVMalariaReportVersion1);
-        return cHVMalariaReportVersion1Repository.save(cHVMalariaReportVersion1);
+    public ChvMalariaReportVersion1 save(ChvMalariaReportVersion1 chvMalariaReportVersion1) {
+        log.debug("Request to save ChvMalariaReportVersion1 : {}", chvMalariaReportVersion1);
+        return chvMalariaReportVersion1Repository.save(chvMalariaReportVersion1);
     }
 
     @Override
-    public Optional<ChvMalariaReportVersion1> partialUpdate(ChvMalariaReportVersion1 cHVMalariaReportVersion1) {
-        log.debug("Request to partially update ChvMalariaReportVersion1 : {}", cHVMalariaReportVersion1);
+    public Optional<ChvMalariaReportVersion1> partialUpdate(ChvMalariaReportVersion1 chvMalariaReportVersion1) {
+        log.debug("Request to partially update ChvMalariaReportVersion1 : {}", chvMalariaReportVersion1);
 
-        return cHVMalariaReportVersion1Repository
-            .findById(cHVMalariaReportVersion1.getId())
+        return chvMalariaReportVersion1Repository
+            .findById(chvMalariaReportVersion1.getId())
             .map(
-                existingCHVMalariaReportVersion1 -> {
-                    if (cHVMalariaReportVersion1.getUid() != null) {
-                        existingCHVMalariaReportVersion1.setUid(cHVMalariaReportVersion1.getUid());
+                existingChvMalariaReportVersion1 -> {
+                    if (chvMalariaReportVersion1.getUid() != null) {
+                        existingChvMalariaReportVersion1.setUid(chvMalariaReportVersion1.getUid());
                     }
-                    if (cHVMalariaReportVersion1.getCreated() != null) {
-                        existingCHVMalariaReportVersion1.setCreated(cHVMalariaReportVersion1.getCreated());
+                    if (chvMalariaReportVersion1.getCreated() != null) {
+                        existingChvMalariaReportVersion1.setCreated(chvMalariaReportVersion1.getCreated());
                     }
-                    if (cHVMalariaReportVersion1.getLastUpdated() != null) {
-                        existingCHVMalariaReportVersion1.setLastUpdated(cHVMalariaReportVersion1.getLastUpdated());
+                    if (chvMalariaReportVersion1.getLastUpdated() != null) {
+                        existingChvMalariaReportVersion1.setLastUpdated(chvMalariaReportVersion1.getLastUpdated());
                     }
-                    if (cHVMalariaReportVersion1.getTested() != null) {
-                        existingCHVMalariaReportVersion1.setTested(cHVMalariaReportVersion1.getTested());
+                    if (chvMalariaReportVersion1.getTested() != null) {
+                        existingChvMalariaReportVersion1.setTested(chvMalariaReportVersion1.getTested());
                     }
-                    if (cHVMalariaReportVersion1.getPositive() != null) {
-                        existingCHVMalariaReportVersion1.setPositive(cHVMalariaReportVersion1.getPositive());
+                    if (chvMalariaReportVersion1.getPositive() != null) {
+                        existingChvMalariaReportVersion1.setPositive(chvMalariaReportVersion1.getPositive());
                     }
-                    if (cHVMalariaReportVersion1.getDrugsGiven() != null) {
-                        existingCHVMalariaReportVersion1.setDrugsGiven(cHVMalariaReportVersion1.getDrugsGiven());
+                    if (chvMalariaReportVersion1.getDrugsGiven() != null) {
+                        existingChvMalariaReportVersion1.setDrugsGiven(chvMalariaReportVersion1.getDrugsGiven());
                     }
-                    if (cHVMalariaReportVersion1.getSuppsGiven() != null) {
-                        existingCHVMalariaReportVersion1.setSuppsGiven(cHVMalariaReportVersion1.getSuppsGiven());
+                    if (chvMalariaReportVersion1.getSuppsGiven() != null) {
+                        existingChvMalariaReportVersion1.setSuppsGiven(chvMalariaReportVersion1.getSuppsGiven());
                     }
-                    if (cHVMalariaReportVersion1.getRdtBalance() != null) {
-                        existingCHVMalariaReportVersion1.setRdtBalance(cHVMalariaReportVersion1.getRdtBalance());
+                    if (chvMalariaReportVersion1.getRdtBalance() != null) {
+                        existingChvMalariaReportVersion1.setRdtBalance(chvMalariaReportVersion1.getRdtBalance());
                     }
-                    if (cHVMalariaReportVersion1.getRdtReceived() != null) {
-                        existingCHVMalariaReportVersion1.setRdtReceived(cHVMalariaReportVersion1.getRdtReceived());
+                    if (chvMalariaReportVersion1.getRdtReceived() != null) {
+                        existingChvMalariaReportVersion1.setRdtReceived(chvMalariaReportVersion1.getRdtReceived());
                     }
-                    if (cHVMalariaReportVersion1.getRdtUsed() != null) {
-                        existingCHVMalariaReportVersion1.setRdtUsed(cHVMalariaReportVersion1.getRdtUsed());
+                    if (chvMalariaReportVersion1.getRdtUsed() != null) {
+                        existingChvMalariaReportVersion1.setRdtUsed(chvMalariaReportVersion1.getRdtUsed());
                     }
-                    if (cHVMalariaReportVersion1.getRdtDamagedLost() != null) {
-                        existingCHVMalariaReportVersion1.setRdtDamagedLost(cHVMalariaReportVersion1.getRdtDamagedLost());
+                    if (chvMalariaReportVersion1.getRdtDamagedLost() != null) {
+                        existingChvMalariaReportVersion1.setRdtDamagedLost(chvMalariaReportVersion1.getRdtDamagedLost());
                     }
-                    if (cHVMalariaReportVersion1.getDrugsBalance() != null) {
-                        existingCHVMalariaReportVersion1.setDrugsBalance(cHVMalariaReportVersion1.getDrugsBalance());
+                    if (chvMalariaReportVersion1.getDrugsBalance() != null) {
+                        existingChvMalariaReportVersion1.setDrugsBalance(chvMalariaReportVersion1.getDrugsBalance());
                     }
-                    if (cHVMalariaReportVersion1.getDrugsReceived() != null) {
-                        existingCHVMalariaReportVersion1.setDrugsReceived(cHVMalariaReportVersion1.getDrugsReceived());
+                    if (chvMalariaReportVersion1.getDrugsReceived() != null) {
+                        existingChvMalariaReportVersion1.setDrugsReceived(chvMalariaReportVersion1.getDrugsReceived());
                     }
-                    if (cHVMalariaReportVersion1.getDrugsUsed() != null) {
-                        existingCHVMalariaReportVersion1.setDrugsUsed(cHVMalariaReportVersion1.getDrugsUsed());
+                    if (chvMalariaReportVersion1.getDrugsUsed() != null) {
+                        existingChvMalariaReportVersion1.setDrugsUsed(chvMalariaReportVersion1.getDrugsUsed());
                     }
-                    if (cHVMalariaReportVersion1.getDrugsDamagedLost() != null) {
-                        existingCHVMalariaReportVersion1.setDrugsDamagedLost(cHVMalariaReportVersion1.getDrugsDamagedLost());
+                    if (chvMalariaReportVersion1.getDrugsDamagedLost() != null) {
+                        existingChvMalariaReportVersion1.setDrugsDamagedLost(chvMalariaReportVersion1.getDrugsDamagedLost());
                     }
-                    if (cHVMalariaReportVersion1.getSuppsBalance() != null) {
-                        existingCHVMalariaReportVersion1.setSuppsBalance(cHVMalariaReportVersion1.getSuppsBalance());
+                    if (chvMalariaReportVersion1.getSuppsBalance() != null) {
+                        existingChvMalariaReportVersion1.setSuppsBalance(chvMalariaReportVersion1.getSuppsBalance());
                     }
-                    if (cHVMalariaReportVersion1.getSuppsReceived() != null) {
-                        existingCHVMalariaReportVersion1.setSuppsReceived(cHVMalariaReportVersion1.getSuppsReceived());
+                    if (chvMalariaReportVersion1.getSuppsReceived() != null) {
+                        existingChvMalariaReportVersion1.setSuppsReceived(chvMalariaReportVersion1.getSuppsReceived());
                     }
-                    if (cHVMalariaReportVersion1.getSuppsUsed() != null) {
-                        existingCHVMalariaReportVersion1.setSuppsUsed(cHVMalariaReportVersion1.getSuppsUsed());
+                    if (chvMalariaReportVersion1.getSuppsUsed() != null) {
+                        existingChvMalariaReportVersion1.setSuppsUsed(chvMalariaReportVersion1.getSuppsUsed());
                     }
-                    if (cHVMalariaReportVersion1.getSuppsDamagedLost() != null) {
-                        existingCHVMalariaReportVersion1.setSuppsDamagedLost(cHVMalariaReportVersion1.getSuppsDamagedLost());
+                    if (chvMalariaReportVersion1.getSuppsDamagedLost() != null) {
+                        existingChvMalariaReportVersion1.setSuppsDamagedLost(chvMalariaReportVersion1.getSuppsDamagedLost());
                     }
-                    if (cHVMalariaReportVersion1.getComment() != null) {
-                        existingCHVMalariaReportVersion1.setComment(cHVMalariaReportVersion1.getComment());
+                    if (chvMalariaReportVersion1.getComment() != null) {
+                        existingChvMalariaReportVersion1.setComment(chvMalariaReportVersion1.getComment());
                     }
 
-                    return existingCHVMalariaReportVersion1;
+                    return existingChvMalariaReportVersion1;
                 }
             )
-            .map(cHVMalariaReportVersion1Repository::save);
+            .map(chvMalariaReportVersion1Repository::save);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<ChvMalariaReportVersion1> findAll() {
-        log.debug("Request to get all CHVMalariaReportVersion1s");
-        return cHVMalariaReportVersion1Repository.findAll();
+        log.debug("Request to get all ChvMalariaReportVersion1s");
+        return chvMalariaReportVersion1Repository.findAll();
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<ChvMalariaReportVersion1> findOne(Long id) {
         log.debug("Request to get ChvMalariaReportVersion1 : {}", id);
-        return cHVMalariaReportVersion1Repository.findById(id);
+        return chvMalariaReportVersion1Repository.findById(id);
     }
 
     @Override
     public void delete(Long id) {
         log.debug("Request to delete ChvMalariaReportVersion1 : {}", id);
-        cHVMalariaReportVersion1Repository.deleteById(id);
+        chvMalariaReportVersion1Repository.deleteById(id);
     }
 }

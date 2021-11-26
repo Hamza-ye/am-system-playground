@@ -6,20 +6,20 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 
-import { LLINSVillageTargetService } from '../service/llins-village-target.service';
+import { LlinsVillageTargetService } from '../service/llins-village-target.service';
 
-import { LLINSVillageTargetComponent } from './llins-village-target.component';
+import { LlinsVillageTargetComponent } from './llins-village-target.component';
 
 describe('Component Tests', () => {
   describe('LlinsVillageTarget Management Component', () => {
-    let comp: LLINSVillageTargetComponent;
-    let fixture: ComponentFixture<LLINSVillageTargetComponent>;
-    let service: LLINSVillageTargetService;
+    let comp: LlinsVillageTargetComponent;
+    let fixture: ComponentFixture<LlinsVillageTargetComponent>;
+    let service: LlinsVillageTargetService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [LLINSVillageTargetComponent],
+        declarations: [LlinsVillageTargetComponent],
         providers: [
           Router,
           {
@@ -39,12 +39,12 @@ describe('Component Tests', () => {
           },
         ],
       })
-        .overrideTemplate(LLINSVillageTargetComponent, '')
+        .overrideTemplate(LlinsVillageTargetComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(LLINSVillageTargetComponent);
+      fixture = TestBed.createComponent(LlinsVillageTargetComponent);
       comp = fixture.componentInstance;
-      service = TestBed.inject(LLINSVillageTargetService);
+      service = TestBed.inject(LlinsVillageTargetService);
 
       const headers = new HttpHeaders().append('link', 'link;link');
       jest.spyOn(service, 'query').mockReturnValue(
@@ -63,7 +63,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.lLINSVillageTargets?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+      expect(comp.llinsVillageTargets?.[0]).toEqual(expect.objectContaining({ id: 123 }));
     });
 
     it('should load a page', () => {
@@ -72,7 +72,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.lLINSVillageTargets?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+      expect(comp.llinsVillageTargets?.[0]).toEqual(expect.objectContaining({ id: 123 }));
     });
 
     it('should calculate the sort attribute for an id', () => {

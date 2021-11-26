@@ -1,9 +1,11 @@
 package org.nmcpye.activitiesmanagement.repository;
 
-import java.util.List;
 import org.nmcpye.activitiesmanagement.domain.WhMovement;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Spring Data SQL repository for the WhMovement entity.
@@ -11,9 +13,9 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface WhMovementRepository extends JpaRepository<WhMovement, Long> {
-    @Query("select wHMovement from WhMovement wHMovement where wHMovement.createdBy.login = ?#{principal.username}")
-    List<WhMovement> findByUserIsCurrentUser();
+    @Query("select whMovement from WhMovement whMovement where whMovement.createdBy.login = ?#{principal.username}")
+    List<WhMovement> findByCreatedByIsCurrentUser();
 
-    @Query("select wHMovement from WhMovement wHMovement where wHMovement.lastUpdatedBy.login = ?#{principal.username}")
+    @Query("select whMovement from WhMovement whMovement where whMovement.lastUpdatedBy.login = ?#{principal.username}")
     List<WhMovement> findByLastUpdatedByIsCurrentUser();
 }

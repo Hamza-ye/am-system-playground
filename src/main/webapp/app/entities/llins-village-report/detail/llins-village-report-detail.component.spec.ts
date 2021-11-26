@@ -2,36 +2,36 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
-import { LLINSVillageReportDetailComponent } from './llins-village-report-detail.component';
+import { LlinsVillageReportDetailComponent } from './llins-village-report-detail.component';
 
 describe('Component Tests', () => {
   describe('LlinsVillageReport Management Detail Component', () => {
-    let comp: LLINSVillageReportDetailComponent;
-    let fixture: ComponentFixture<LLINSVillageReportDetailComponent>;
+    let comp: LlinsVillageReportDetailComponent;
+    let fixture: ComponentFixture<LlinsVillageReportDetailComponent>;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        declarations: [LLINSVillageReportDetailComponent],
+        declarations: [LlinsVillageReportDetailComponent],
         providers: [
           {
             provide: ActivatedRoute,
-            useValue: { data: of({ lLINSVillageReport: { id: 123 } }) },
+            useValue: { data: of({ llinsVillageReport: { id: 123 } }) },
           },
         ],
       })
-        .overrideTemplate(LLINSVillageReportDetailComponent, '')
+        .overrideTemplate(LlinsVillageReportDetailComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(LLINSVillageReportDetailComponent);
+      fixture = TestBed.createComponent(LlinsVillageReportDetailComponent);
       comp = fixture.componentInstance;
     });
 
     describe('OnInit', () => {
-      it('Should load lLINSVillageReport on init', () => {
+      it('Should load llinsVillageReport on init', () => {
         // WHEN
         comp.ngOnInit();
 
         // THEN
-        expect(comp.lLINSVillageReport).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.llinsVillageReport).toEqual(expect.objectContaining({ id: 123 }));
       });
     });
   });

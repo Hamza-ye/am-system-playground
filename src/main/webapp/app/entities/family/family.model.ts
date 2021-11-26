@@ -2,7 +2,7 @@ import * as dayjs from 'dayjs';
 import { IFamilyHead } from 'app/entities/family-head/family-head.model';
 import { IDataProvider } from 'app/entities/data-provider/data-provider.model';
 import { IFingerprint } from 'app/entities/fingerprint/fingerprint.model';
-import { ILLINSFamilyTarget } from 'app/entities/llins-family-target/llins-family-target.model';
+import { ILlinsFamilyTarget } from 'app/entities/llins-family-target/llins-family-target.model';
 import { IOrganisationUnit } from 'app/entities/organisation-unit/organisation-unit.model';
 import { IUser } from 'app/entities/user/user.model';
 
@@ -18,7 +18,7 @@ export interface IFamily {
   familyHeads?: IFamilyHead[] | null;
   dataProviders?: IDataProvider[] | null;
   fingerprints?: IFingerprint[] | null;
-  llinsFamilyTargets?: ILLINSFamilyTarget[] | null;
+  llinsFamilyTargets?: ILlinsFamilyTarget[] | null;
   organisationUnit?: IOrganisationUnit;
   createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
@@ -37,7 +37,7 @@ export class Family implements IFamily {
     public familyHeads?: IFamilyHead[] | null,
     public dataProviders?: IDataProvider[] | null,
     public fingerprints?: IFingerprint[] | null,
-    public llinsFamilyTargets?: ILLINSFamilyTarget[] | null,
+    public llinsFamilyTargets?: ILlinsFamilyTarget[] | null,
     public organisationUnit?: IOrganisationUnit,
     public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null

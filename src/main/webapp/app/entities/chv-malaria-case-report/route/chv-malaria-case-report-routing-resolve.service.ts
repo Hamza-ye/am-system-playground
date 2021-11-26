@@ -4,20 +4,20 @@ import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { ICHVMalariaCaseReport, CHVMalariaCaseReport } from '../chv-malaria-case-report.model';
-import { CHVMalariaCaseReportService } from '../service/chv-malaria-case-report.service';
+import { IChvMalariaCaseReport, ChvMalariaCaseReport } from '../chv-malaria-case-report.model';
+import { ChvMalariaCaseReportService } from '../service/chv-malaria-case-report.service';
 
 @Injectable({ providedIn: 'root' })
-export class CHVMalariaCaseReportRoutingResolveService implements Resolve<ICHVMalariaCaseReport> {
-  constructor(protected service: CHVMalariaCaseReportService, protected router: Router) {}
+export class ChvMalariaCaseReportRoutingResolveService implements Resolve<IChvMalariaCaseReport> {
+  constructor(protected service: ChvMalariaCaseReportService, protected router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<ICHVMalariaCaseReport> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot): Observable<IChvMalariaCaseReport> | Observable<never> {
     const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
-        mergeMap((cHVMalariaCaseReport: HttpResponse<CHVMalariaCaseReport>) => {
-          if (cHVMalariaCaseReport.body) {
-            return of(cHVMalariaCaseReport.body);
+        mergeMap((chvMalariaCaseReport: HttpResponse<ChvMalariaCaseReport>) => {
+          if (chvMalariaCaseReport.body) {
+            return of(chvMalariaCaseReport.body);
           } else {
             this.router.navigate(['404']);
             return EMPTY;
@@ -25,6 +25,6 @@ export class CHVMalariaCaseReportRoutingResolveService implements Resolve<ICHVMa
         })
       );
     }
-    return of(new CHVMalariaCaseReport());
+    return of(new ChvMalariaCaseReport());
   }
 }

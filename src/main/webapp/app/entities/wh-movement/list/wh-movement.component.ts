@@ -4,18 +4,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IWHMovement } from '../wh-movement.model';
+import { IWhMovement } from '../wh-movement.model';
 
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
-import { WHMovementService } from '../service/wh-movement.service';
-import { WHMovementDeleteDialogComponent } from '../delete/wh-movement-delete-dialog.component';
+import { WhMovementService } from '../service/wh-movement.service';
+import { WhMovementDeleteDialogComponent } from '../delete/wh-movement-delete-dialog.component';
 
 @Component({
   selector: 'app-wh-movement',
   templateUrl: './wh-movement.component.html',
 })
-export class WHMovementComponent implements OnInit {
-  wHMovements?: IWHMovement[];
+export class WhMovementComponent implements OnInit {
+  whMovements?: IWhMovement[];
   isLoading = false;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -25,7 +25,7 @@ export class WHMovementComponent implements OnInit {
   ngbPaginationPage = 1;
 
   constructor(
-    protected wHMovementService: WHMovementService,
+    protected whMovementService: WhMovementService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected modalService: NgbModal
@@ -35,14 +35,14 @@ export class WHMovementComponent implements OnInit {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
 
-    this.wHMovementService
+    this.whMovementService
       .query({
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),
       })
       .subscribe(
-        (res: HttpResponse<IWHMovement[]>) => {
+        (res: HttpResponse<IWhMovement[]>) => {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
         },
@@ -57,13 +57,13 @@ export class WHMovementComponent implements OnInit {
     this.handleNavigation();
   }
 
-  trackId(index: number, item: IWHMovement): number {
+  trackId(index: number, item: IWhMovement): number {
     return item.id!;
   }
 
-  delete(wHMovement: IWHMovement): void {
-    const modalRef = this.modalService.open(WHMovementDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.wHMovement = wHMovement;
+  delete(whMovement: IWhMovement): void {
+    const modalRef = this.modalService.open(WhMovementDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.whMovement = whMovement;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {
@@ -95,7 +95,7 @@ export class WHMovementComponent implements OnInit {
     });
   }
 
-  protected onSuccess(data: IWHMovement[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
+  protected onSuccess(data: IWhMovement[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
     if (navigate) {
@@ -107,7 +107,7 @@ export class WHMovementComponent implements OnInit {
         },
       });
     }
-    this.wHMovements = data ?? [];
+    this.whMovements = data ?? [];
     this.ngbPaginationPage = this.page;
   }
 

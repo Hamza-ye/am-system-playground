@@ -55,7 +55,7 @@
     },
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "lLINSFamilyTarget",
+      "otherEntityName": "llinsFamilyTarget",
       "otherEntityRelationshipName": "family",
       "relationshipName": "llinsFamilyTarget"
     },

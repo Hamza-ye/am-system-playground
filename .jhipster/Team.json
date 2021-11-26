@@ -40,31 +40,31 @@
   "relationships": [
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "wHMovement",
+      "otherEntityName": "whMovement",
       "otherEntityRelationshipName": "team",
       "relationshipName": "whMovement"
     },
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "lLINSVillageTarget",
+      "otherEntityName": "llinsVillageTarget",
       "otherEntityRelationshipName": "teamAssigned",
       "relationshipName": "llinsVillageTarget"
     },
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "lLINSVillageReport",
+      "otherEntityName": "llinsVillageReport",
       "otherEntityRelationshipName": "executingTeam",
       "relationshipName": "llinsVillageReport"
     },
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "lLINSFamilyTarget",
+      "otherEntityName": "llinsFamilyTarget",
       "otherEntityRelationshipName": "teamAssigned",
       "relationshipName": "llinsFamilyTarget"
     },
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "lLINSFamilyReport",
+      "otherEntityName": "llinsFamilyReport",
       "otherEntityRelationshipName": "executingTeam",
       "relationshipName": "llinsFamilyReport"
     },

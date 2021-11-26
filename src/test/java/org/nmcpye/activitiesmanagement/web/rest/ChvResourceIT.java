@@ -1,17 +1,5 @@
 package org.nmcpye.activitiesmanagement.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
-import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.nmcpye.activitiesmanagement.IntegrationTest;
@@ -24,6 +12,19 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link ChvResource} REST controller.
@@ -58,15 +59,15 @@ class ChvResourceIT {
     private static AtomicLong count = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
-    private ChvRepository cHVRepository;
+    private ChvRepository chvRepository;
 
     @Autowired
     private EntityManager em;
 
     @Autowired
-    private MockMvc restCHVMockMvc;
+    private MockMvc restChvMockMvc;
 
-    private Chv cHV;
+    private Chv chv;
 
     /**
      * Create an entity for this test.
@@ -75,7 +76,7 @@ class ChvResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Chv createEntity(EntityManager em) {
-        Chv cHV = new Chv()
+        Chv chv = new Chv()
             .uid(DEFAULT_UID)
             .code(DEFAULT_CODE)
             .description(DEFAULT_DESCRIPTION)
@@ -91,8 +92,8 @@ class ChvResourceIT {
         } else {
             organisationUnit = TestUtil.findAll(em, OrganisationUnit.class).get(0);
         }
-        cHV.setDistrict(organisationUnit);
-        return cHV;
+        chv.setDistrict(organisationUnit);
+        return chv;
     }
 
     /**
@@ -102,7 +103,7 @@ class ChvResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Chv createUpdatedEntity(EntityManager em) {
-        Chv cHV = new Chv()
+        Chv chv = new Chv()
             .uid(UPDATED_UID)
             .code(UPDATED_CODE)
             .description(UPDATED_DESCRIPTION)
@@ -118,28 +119,28 @@ class ChvResourceIT {
         } else {
             organisationUnit = TestUtil.findAll(em, OrganisationUnit.class).get(0);
         }
-        cHV.setDistrict(organisationUnit);
-        return cHV;
+        chv.setDistrict(organisationUnit);
+        return chv;
     }
 
     @BeforeEach
     public void initTest() {
-        cHV = createEntity(em);
+        chv = createEntity(em);
     }
 
     @Test
     @Transactional
-    void createCHV() throws Exception {
-        int databaseSizeBeforeCreate = cHVRepository.findAll().size();
+    void createChv() throws Exception {
+        int databaseSizeBeforeCreate = chvRepository.findAll().size();
         // Create the Chv
-        restCHVMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cHV)))
+        restChvMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(chv)))
             .andExpect(status().isCreated());
 
         // Validate the Chv in the database
-        List<Chv> cHVList = cHVRepository.findAll();
-        assertThat(cHVList).hasSize(databaseSizeBeforeCreate + 1);
-        Chv testChv = cHVList.get(cHVList.size() - 1);
+        List<Chv> chvList = chvRepository.findAll();
+        assertThat(chvList).hasSize(databaseSizeBeforeCreate + 1);
+        Chv testChv = chvList.get(chvList.size() - 1);
         assertThat(testChv.getUid()).isEqualTo(DEFAULT_UID);
         assertThat(testChv.getCode()).isEqualTo(DEFAULT_CODE);
         assertThat(testChv.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
@@ -150,51 +151,51 @@ class ChvResourceIT {
 
     @Test
     @Transactional
-    void createCHVWithExistingId() throws Exception {
+    void createChvWithExistingId() throws Exception {
         // Create the Chv with an existing ID
-        cHV.setId(1L);
+        chv.setId(1L);
 
-        int databaseSizeBeforeCreate = cHVRepository.findAll().size();
+        int databaseSizeBeforeCreate = chvRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restCHVMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cHV)))
+        restChvMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(chv)))
             .andExpect(status().isBadRequest());
 
         // Validate the Chv in the database
-        List<Chv> cHVList = cHVRepository.findAll();
-        assertThat(cHVList).hasSize(databaseSizeBeforeCreate);
+        List<Chv> chvList = chvRepository.findAll();
+        assertThat(chvList).hasSize(databaseSizeBeforeCreate);
     }
 
     @Test
     @Transactional
     void checkUidIsRequired() throws Exception {
-        int databaseSizeBeforeTest = cHVRepository.findAll().size();
+        int databaseSizeBeforeTest = chvRepository.findAll().size();
         // set the field null
-        cHV.setUid(null);
+        chv.setUid(null);
 
         // Create the Chv, which fails.
 
-        restCHVMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cHV)))
+        restChvMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(chv)))
             .andExpect(status().isBadRequest());
 
-        List<Chv> cHVList = cHVRepository.findAll();
-        assertThat(cHVList).hasSize(databaseSizeBeforeTest);
+        List<Chv> chvList = chvRepository.findAll();
+        assertThat(chvList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
-    void getAllCHVS() throws Exception {
+    void getAllChvs() throws Exception {
         // Initialize the database
-        cHVRepository.saveAndFlush(cHV);
+        chvRepository.saveAndFlush(chv);
 
-        // Get all the cHVList
-        restCHVMockMvc
+        // Get all the chvList
+        restChvMockMvc
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(cHV.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(chv.getId().intValue())))
             .andExpect(jsonPath("$.[*].uid").value(hasItem(DEFAULT_UID)))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
@@ -205,16 +206,16 @@ class ChvResourceIT {
 
     @Test
     @Transactional
-    void getCHV() throws Exception {
+    void getChv() throws Exception {
         // Initialize the database
-        cHVRepository.saveAndFlush(cHV);
+        chvRepository.saveAndFlush(chv);
 
-        // Get the cHV
-        restCHVMockMvc
-            .perform(get(ENTITY_API_URL_ID, cHV.getId()))
+        // Get the chv
+        restChvMockMvc
+            .perform(get(ENTITY_API_URL_ID, chv.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(cHV.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(chv.getId().intValue()))
             .andExpect(jsonPath("$.uid").value(DEFAULT_UID))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
@@ -225,21 +226,21 @@ class ChvResourceIT {
 
     @Test
     @Transactional
-    void getNonExistingCHV() throws Exception {
-        // Get the cHV
-        restCHVMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
+    void getNonExistingChv() throws Exception {
+        // Get the chv
+        restChvMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
     @Test
     @Transactional
-    void putNewCHV() throws Exception {
+    void putNewChv() throws Exception {
         // Initialize the database
-        cHVRepository.saveAndFlush(cHV);
+        chvRepository.saveAndFlush(chv);
 
-        int databaseSizeBeforeUpdate = cHVRepository.findAll().size();
+        int databaseSizeBeforeUpdate = chvRepository.findAll().size();
 
-        // Update the cHV
-        Chv updatedChv = cHVRepository.findById(cHV.getId()).get();
+        // Update the chv
+        Chv updatedChv = chvRepository.findById(chv.getId()).get();
         // Disconnect from session so that the updates on updatedChv are not directly saved in db
         em.detach(updatedChv);
         updatedChv
@@ -250,7 +251,7 @@ class ChvResourceIT {
             .lastUpdated(UPDATED_LAST_UPDATED)
             .mobile(UPDATED_MOBILE);
 
-        restCHVMockMvc
+        restChvMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, updatedChv.getId())
                     .contentType(MediaType.APPLICATION_JSON)
@@ -259,9 +260,9 @@ class ChvResourceIT {
             .andExpect(status().isOk());
 
         // Validate the Chv in the database
-        List<Chv> cHVList = cHVRepository.findAll();
-        assertThat(cHVList).hasSize(databaseSizeBeforeUpdate);
-        Chv testChv = cHVList.get(cHVList.size() - 1);
+        List<Chv> chvList = chvRepository.findAll();
+        assertThat(chvList).hasSize(databaseSizeBeforeUpdate);
+        Chv testChv = chvList.get(chvList.size() - 1);
         assertThat(testChv.getUid()).isEqualTo(UPDATED_UID);
         assertThat(testChv.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testChv.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
@@ -272,71 +273,73 @@ class ChvResourceIT {
 
     @Test
     @Transactional
-    void putNonExistingCHV() throws Exception {
-        int databaseSizeBeforeUpdate = cHVRepository.findAll().size();
-        cHV.setId(count.incrementAndGet());
+    void putNonExistingChv() throws Exception {
+        int databaseSizeBeforeUpdate = chvRepository.findAll().size();
+        chv.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restCHVMockMvc
+        restChvMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, cHV.getId()).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cHV))
+                put(ENTITY_API_URL_ID, chv.getId()).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(chv))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the Chv in the database
-        List<Chv> cHVList = cHVRepository.findAll();
-        assertThat(cHVList).hasSize(databaseSizeBeforeUpdate);
+        List<Chv> chvList = chvRepository.findAll();
+        assertThat(chvList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void putWithIdMismatchCHV() throws Exception {
-        int databaseSizeBeforeUpdate = cHVRepository.findAll().size();
-        cHV.setId(count.incrementAndGet());
+    void putWithIdMismatchChv() throws Exception {
+        int databaseSizeBeforeUpdate = chvRepository.findAll().size();
+        chv.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restCHVMockMvc
+        restChvMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(cHV))
+                    .content(TestUtil.convertObjectToJsonBytes(chv))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the Chv in the database
-        List<Chv> cHVList = cHVRepository.findAll();
-        assertThat(cHVList).hasSize(databaseSizeBeforeUpdate);
+        List<Chv> chvList = chvRepository.findAll();
+        assertThat(chvList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void putWithMissingIdPathParamCHV() throws Exception {
-        int databaseSizeBeforeUpdate = cHVRepository.findAll().size();
-        cHV.setId(count.incrementAndGet());
+    void putWithMissingIdPathParamChv() throws Exception {
+        int databaseSizeBeforeUpdate = chvRepository.findAll().size();
+        chv.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restCHVMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(cHV)))
+        restChvMockMvc
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(chv)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Chv in the database
-        List<Chv> cHVList = cHVRepository.findAll();
-        assertThat(cHVList).hasSize(databaseSizeBeforeUpdate);
+        List<Chv> chvList = chvRepository.findAll();
+        assertThat(chvList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void partialUpdateCHVWithPatch() throws Exception {
+    void partialUpdateChvWithPatch() throws Exception {
         // Initialize the database
-        cHVRepository.saveAndFlush(cHV);
+        chvRepository.saveAndFlush(chv);
 
-        int databaseSizeBeforeUpdate = cHVRepository.findAll().size();
+        int databaseSizeBeforeUpdate = chvRepository.findAll().size();
 
-        // Update the cHV using partial update
+        // Update the chv using partial update
         Chv partialUpdatedChv = new Chv();
-        partialUpdatedChv.setId(cHV.getId());
+        partialUpdatedChv.setId(chv.getId());
 
-        restCHVMockMvc
+        partialUpdatedChv.uid(UPDATED_UID);
+
+        restChvMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedChv.getId())
                     .contentType("application/merge-patch+json")
@@ -345,10 +348,10 @@ class ChvResourceIT {
             .andExpect(status().isOk());
 
         // Validate the Chv in the database
-        List<Chv> cHVList = cHVRepository.findAll();
-        assertThat(cHVList).hasSize(databaseSizeBeforeUpdate);
-        Chv testChv = cHVList.get(cHVList.size() - 1);
-        assertThat(testChv.getUid()).isEqualTo(DEFAULT_UID);
+        List<Chv> chvList = chvRepository.findAll();
+        assertThat(chvList).hasSize(databaseSizeBeforeUpdate);
+        Chv testChv = chvList.get(chvList.size() - 1);
+        assertThat(testChv.getUid()).isEqualTo(UPDATED_UID);
         assertThat(testChv.getCode()).isEqualTo(DEFAULT_CODE);
         assertThat(testChv.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testChv.getCreated()).isEqualTo(DEFAULT_CREATED);
@@ -358,15 +361,15 @@ class ChvResourceIT {
 
     @Test
     @Transactional
-    void fullUpdateCHVWithPatch() throws Exception {
+    void fullUpdateChvWithPatch() throws Exception {
         // Initialize the database
-        cHVRepository.saveAndFlush(cHV);
+        chvRepository.saveAndFlush(chv);
 
-        int databaseSizeBeforeUpdate = cHVRepository.findAll().size();
+        int databaseSizeBeforeUpdate = chvRepository.findAll().size();
 
-        // Update the cHV using partial update
+        // Update the chv using partial update
         Chv partialUpdatedChv = new Chv();
-        partialUpdatedChv.setId(cHV.getId());
+        partialUpdatedChv.setId(chv.getId());
 
         partialUpdatedChv
             .uid(UPDATED_UID)
@@ -376,7 +379,7 @@ class ChvResourceIT {
             .lastUpdated(UPDATED_LAST_UPDATED)
             .mobile(UPDATED_MOBILE);
 
-        restCHVMockMvc
+        restChvMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedChv.getId())
                     .contentType("application/merge-patch+json")
@@ -385,9 +388,9 @@ class ChvResourceIT {
             .andExpect(status().isOk());
 
         // Validate the Chv in the database
-        List<Chv> cHVList = cHVRepository.findAll();
-        assertThat(cHVList).hasSize(databaseSizeBeforeUpdate);
-        Chv testChv = cHVList.get(cHVList.size() - 1);
+        List<Chv> chvList = chvRepository.findAll();
+        assertThat(chvList).hasSize(databaseSizeBeforeUpdate);
+        Chv testChv = chvList.get(chvList.size() - 1);
         assertThat(testChv.getUid()).isEqualTo(UPDATED_UID);
         assertThat(testChv.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testChv.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
@@ -398,73 +401,73 @@ class ChvResourceIT {
 
     @Test
     @Transactional
-    void patchNonExistingCHV() throws Exception {
-        int databaseSizeBeforeUpdate = cHVRepository.findAll().size();
-        cHV.setId(count.incrementAndGet());
+    void patchNonExistingChv() throws Exception {
+        int databaseSizeBeforeUpdate = chvRepository.findAll().size();
+        chv.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restCHVMockMvc
+        restChvMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, cHV.getId())
+                patch(ENTITY_API_URL_ID, chv.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(cHV))
+                    .content(TestUtil.convertObjectToJsonBytes(chv))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the Chv in the database
-        List<Chv> cHVList = cHVRepository.findAll();
-        assertThat(cHVList).hasSize(databaseSizeBeforeUpdate);
+        List<Chv> chvList = chvRepository.findAll();
+        assertThat(chvList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void patchWithIdMismatchCHV() throws Exception {
-        int databaseSizeBeforeUpdate = cHVRepository.findAll().size();
-        cHV.setId(count.incrementAndGet());
+    void patchWithIdMismatchChv() throws Exception {
+        int databaseSizeBeforeUpdate = chvRepository.findAll().size();
+        chv.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restCHVMockMvc
+        restChvMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(cHV))
+                    .content(TestUtil.convertObjectToJsonBytes(chv))
             )
             .andExpect(status().isBadRequest());
 
         // Validate the Chv in the database
-        List<Chv> cHVList = cHVRepository.findAll();
-        assertThat(cHVList).hasSize(databaseSizeBeforeUpdate);
+        List<Chv> chvList = chvRepository.findAll();
+        assertThat(chvList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void patchWithMissingIdPathParamCHV() throws Exception {
-        int databaseSizeBeforeUpdate = cHVRepository.findAll().size();
-        cHV.setId(count.incrementAndGet());
+    void patchWithMissingIdPathParamChv() throws Exception {
+        int databaseSizeBeforeUpdate = chvRepository.findAll().size();
+        chv.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
-        restCHVMockMvc
-            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(cHV)))
+        restChvMockMvc
+            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(chv)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Chv in the database
-        List<Chv> cHVList = cHVRepository.findAll();
-        assertThat(cHVList).hasSize(databaseSizeBeforeUpdate);
+        List<Chv> chvList = chvRepository.findAll();
+        assertThat(chvList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
     @Transactional
-    void deleteCHV() throws Exception {
+    void deleteChv() throws Exception {
         // Initialize the database
-        cHVRepository.saveAndFlush(cHV);
+        chvRepository.saveAndFlush(chv);
 
-        int databaseSizeBeforeDelete = cHVRepository.findAll().size();
+        int databaseSizeBeforeDelete = chvRepository.findAll().size();
 
-        // Delete the cHV
-        restCHVMockMvc.perform(delete(ENTITY_API_URL_ID, cHV.getId()).accept(MediaType.APPLICATION_JSON)).andExpect(status().isNoContent());
+        // Delete the chv
+        restChvMockMvc.perform(delete(ENTITY_API_URL_ID, chv.getId()).accept(MediaType.APPLICATION_JSON)).andExpect(status().isNoContent());
 
         // Validate the database contains one less item
-        List<Chv> cHVList = cHVRepository.findAll();
-        assertThat(cHVList).hasSize(databaseSizeBeforeDelete - 1);
+        List<Chv> chvList = chvRepository.findAll();
+        assertThat(chvList).hasSize(databaseSizeBeforeDelete - 1);
     }
 }

@@ -6,28 +6,28 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { CHVMalariaCaseReportService } from '../service/chv-malaria-case-report.service';
+import { ChvMalariaCaseReportService } from '../service/chv-malaria-case-report.service';
 
-import { CHVMalariaCaseReportDeleteDialogComponent } from './chv-malaria-case-report-delete-dialog.component';
+import { ChvMalariaCaseReportDeleteDialogComponent } from './chv-malaria-case-report-delete-dialog.component';
 
 describe('Component Tests', () => {
   describe('ChvMalariaCaseReport Management Delete Component', () => {
-    let comp: CHVMalariaCaseReportDeleteDialogComponent;
-    let fixture: ComponentFixture<CHVMalariaCaseReportDeleteDialogComponent>;
-    let service: CHVMalariaCaseReportService;
+    let comp: ChvMalariaCaseReportDeleteDialogComponent;
+    let fixture: ComponentFixture<ChvMalariaCaseReportDeleteDialogComponent>;
+    let service: ChvMalariaCaseReportService;
     let mockActiveModal: NgbActiveModal;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        declarations: [CHVMalariaCaseReportDeleteDialogComponent],
+        declarations: [ChvMalariaCaseReportDeleteDialogComponent],
         providers: [NgbActiveModal],
       })
-        .overrideTemplate(CHVMalariaCaseReportDeleteDialogComponent, '')
+        .overrideTemplate(ChvMalariaCaseReportDeleteDialogComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(CHVMalariaCaseReportDeleteDialogComponent);
+      fixture = TestBed.createComponent(ChvMalariaCaseReportDeleteDialogComponent);
       comp = fixture.componentInstance;
-      service = TestBed.inject(CHVMalariaCaseReportService);
+      service = TestBed.inject(ChvMalariaCaseReportService);
       mockActiveModal = TestBed.inject(NgbActiveModal);
     });
 

@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'app/shared/shared.module';
-import { LLINSVillageTargetComponent } from './list/llins-village-target.component';
-import { LLINSVillageTargetDetailComponent } from './detail/llins-village-target-detail.component';
-import { LLINSVillageTargetUpdateComponent } from './update/llins-village-target-update.component';
-import { LLINSVillageTargetDeleteDialogComponent } from './delete/llins-village-target-delete-dialog.component';
-import { LLINSVillageTargetRoutingModule } from './route/llins-village-target-routing.module';
+import { LlinsVillageTargetComponent } from './list/llins-village-target.component';
+import { LlinsVillageTargetDetailComponent } from './detail/llins-village-target-detail.component';
+import { LlinsVillageTargetUpdateComponent } from './update/llins-village-target-update.component';
+import { LlinsVillageTargetDeleteDialogComponent } from './delete/llins-village-target-delete-dialog.component';
+import { LlinsVillageTargetRoutingModule } from './route/llins-village-target-routing.module';
 
 @NgModule({
-  imports: [SharedModule, LLINSVillageTargetRoutingModule],
+  imports: [SharedModule, LlinsVillageTargetRoutingModule],
   declarations: [
-    LLINSVillageTargetComponent,
-    LLINSVillageTargetDetailComponent,
-    LLINSVillageTargetUpdateComponent,
-    LLINSVillageTargetDeleteDialogComponent,
+    LlinsVillageTargetComponent,
+    LlinsVillageTargetDetailComponent,
+    LlinsVillageTargetUpdateComponent,
+    LlinsVillageTargetDeleteDialogComponent,
   ],
-  entryComponents: [LLINSVillageTargetDeleteDialogComponent],
+  entryComponents: [LlinsVillageTargetDeleteDialogComponent],
 })
-export class LLINSVillageTargetModule {}
+export class LlinsVillageTargetModule {}

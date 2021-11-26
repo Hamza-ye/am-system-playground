@@ -7,37 +7,37 @@ import * as dayjs from 'dayjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { ILLINSVillageReport, getLLINSVillageReportIdentifier } from '../llins-village-report.model';
+import { ILlinsVillageReport, getLlinsVillageReportIdentifier } from '../llins-village-report.model';
 
-export type EntityResponseType = HttpResponse<ILLINSVillageReport>;
-export type EntityArrayResponseType = HttpResponse<ILLINSVillageReport[]>;
+export type EntityResponseType = HttpResponse<ILlinsVillageReport>;
+export type EntityArrayResponseType = HttpResponse<ILlinsVillageReport[]>;
 
 @Injectable({ providedIn: 'root' })
-export class LLINSVillageReportService {
+export class LlinsVillageReportService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/llins-village-reports');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  create(lLINSVillageReport: ILLINSVillageReport): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(lLINSVillageReport);
+  create(llinsVillageReport: ILlinsVillageReport): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(llinsVillageReport);
     return this.http
-      .post<ILLINSVillageReport>(this.resourceUrl, copy, { observe: 'response' })
+      .post<ILlinsVillageReport>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  update(lLINSVillageReport: ILLINSVillageReport): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(lLINSVillageReport);
+  update(llinsVillageReport: ILlinsVillageReport): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(llinsVillageReport);
     return this.http
-      .put<ILLINSVillageReport>(`${this.resourceUrl}/${getLLINSVillageReportIdentifier(lLINSVillageReport) as number}`, copy, {
+      .put<ILlinsVillageReport>(`${this.resourceUrl}/${getLlinsVillageReportIdentifier(llinsVillageReport) as number}`, copy, {
         observe: 'response',
       })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  partialUpdate(lLINSVillageReport: ILLINSVillageReport): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(lLINSVillageReport);
+  partialUpdate(llinsVillageReport: ILlinsVillageReport): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(llinsVillageReport);
     return this.http
-      .patch<ILLINSVillageReport>(`${this.resourceUrl}/${getLLINSVillageReportIdentifier(lLINSVillageReport) as number}`, copy, {
+      .patch<ILlinsVillageReport>(`${this.resourceUrl}/${getLlinsVillageReportIdentifier(llinsVillageReport) as number}`, copy, {
         observe: 'response',
       })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
@@ -45,14 +45,14 @@ export class LLINSVillageReportService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<ILLINSVillageReport>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .get<ILlinsVillageReport>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
-      .get<ILLINSVillageReport[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .get<ILlinsVillageReport[]>(this.resourceUrl, { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
@@ -60,32 +60,32 @@ export class LLINSVillageReportService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  addLLINSVillageReportToCollectionIfMissing(
-    lLINSVillageReportCollection: ILLINSVillageReport[],
-    ...lLINSVillageReportsToCheck: (ILLINSVillageReport | null | undefined)[]
-  ): ILLINSVillageReport[] {
-    const lLINSVillageReports: ILLINSVillageReport[] = lLINSVillageReportsToCheck.filter(isPresent);
-    if (lLINSVillageReports.length > 0) {
-      const lLINSVillageReportCollectionIdentifiers = lLINSVillageReportCollection.map(
-        lLINSVillageReportItem => getLLINSVillageReportIdentifier(lLINSVillageReportItem)!
+  addLlinsVillageReportToCollectionIfMissing(
+    llinsVillageReportCollection: ILlinsVillageReport[],
+    ...llinsVillageReportsToCheck: (ILlinsVillageReport | null | undefined)[]
+  ): ILlinsVillageReport[] {
+    const llinsVillageReports: ILlinsVillageReport[] = llinsVillageReportsToCheck.filter(isPresent);
+    if (llinsVillageReports.length > 0) {
+      const llinsVillageReportCollectionIdentifiers = llinsVillageReportCollection.map(
+        llinsVillageReportItem => getLlinsVillageReportIdentifier(llinsVillageReportItem)!
       );
-      const lLINSVillageReportsToAdd = lLINSVillageReports.filter(lLINSVillageReportItem => {
-        const lLINSVillageReportIdentifier = getLLINSVillageReportIdentifier(lLINSVillageReportItem);
-        if (lLINSVillageReportIdentifier == null || lLINSVillageReportCollectionIdentifiers.includes(lLINSVillageReportIdentifier)) {
+      const llinsVillageReportsToAdd = llinsVillageReports.filter(llinsVillageReportItem => {
+        const llinsVillageReportIdentifier = getLlinsVillageReportIdentifier(llinsVillageReportItem);
+        if (llinsVillageReportIdentifier == null || llinsVillageReportCollectionIdentifiers.includes(llinsVillageReportIdentifier)) {
           return false;
         }
-        lLINSVillageReportCollectionIdentifiers.push(lLINSVillageReportIdentifier);
+        llinsVillageReportCollectionIdentifiers.push(llinsVillageReportIdentifier);
         return true;
       });
-      return [...lLINSVillageReportsToAdd, ...lLINSVillageReportCollection];
+      return [...llinsVillageReportsToAdd, ...llinsVillageReportCollection];
     }
-    return lLINSVillageReportCollection;
+    return llinsVillageReportCollection;
   }
 
-  protected convertDateFromClient(lLINSVillageReport: ILLINSVillageReport): ILLINSVillageReport {
-    return Object.assign({}, lLINSVillageReport, {
-      created: lLINSVillageReport.created?.isValid() ? lLINSVillageReport.created.toJSON() : undefined,
-      lastUpdated: lLINSVillageReport.lastUpdated?.isValid() ? lLINSVillageReport.lastUpdated.toJSON() : undefined,
+  protected convertDateFromClient(llinsVillageReport: ILlinsVillageReport): ILlinsVillageReport {
+    return Object.assign({}, llinsVillageReport, {
+      created: llinsVillageReport.created?.isValid() ? llinsVillageReport.created.toJSON() : undefined,
+      lastUpdated: llinsVillageReport.lastUpdated?.isValid() ? llinsVillageReport.lastUpdated.toJSON() : undefined,
     });
   }
 
@@ -99,9 +99,9 @@ export class LLINSVillageReportService {
 
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
-      res.body.forEach((lLINSVillageReport: ILLINSVillageReport) => {
-        lLINSVillageReport.created = lLINSVillageReport.created ? dayjs(lLINSVillageReport.created) : undefined;
-        lLINSVillageReport.lastUpdated = lLINSVillageReport.lastUpdated ? dayjs(lLINSVillageReport.lastUpdated) : undefined;
+      res.body.forEach((llinsVillageReport: ILlinsVillageReport) => {
+        llinsVillageReport.created = llinsVillageReport.created ? dayjs(llinsVillageReport.created) : undefined;
+        llinsVillageReport.lastUpdated = llinsVillageReport.lastUpdated ? dayjs(llinsVillageReport.lastUpdated) : undefined;
       });
     }
     return res;

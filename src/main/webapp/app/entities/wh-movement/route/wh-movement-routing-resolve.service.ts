@@ -4,20 +4,20 @@ import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { IWHMovement, WHMovement } from '../wh-movement.model';
-import { WHMovementService } from '../service/wh-movement.service';
+import { IWhMovement, WhMovement } from '../wh-movement.model';
+import { WhMovementService } from '../service/wh-movement.service';
 
 @Injectable({ providedIn: 'root' })
-export class WHMovementRoutingResolveService implements Resolve<IWHMovement> {
-  constructor(protected service: WHMovementService, protected router: Router) {}
+export class WhMovementRoutingResolveService implements Resolve<IWhMovement> {
+  constructor(protected service: WhMovementService, protected router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<IWHMovement> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot): Observable<IWhMovement> | Observable<never> {
     const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
-        mergeMap((wHMovement: HttpResponse<WHMovement>) => {
-          if (wHMovement.body) {
-            return of(wHMovement.body);
+        mergeMap((whMovement: HttpResponse<WhMovement>) => {
+          if (whMovement.body) {
+            return of(whMovement.body);
           } else {
             this.router.navigate(['404']);
             return EMPTY;
@@ -25,6 +25,6 @@ export class WHMovementRoutingResolveService implements Resolve<IWHMovement> {
         })
       );
     }
-    return of(new WHMovement());
+    return of(new WhMovement());
   }
 }
