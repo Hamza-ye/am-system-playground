@@ -8,7 +8,7 @@ import { ICHV, CHV } from '../chv.model';
 import { CHVService } from './chv.service';
 
 describe('Service Tests', () => {
-  describe('CHV Service', () => {
+  describe('Chv Service', () => {
     let service: CHVService;
     let httpMock: HttpTestingController;
     let elemDefault: ICHV;
@@ -52,7 +52,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(elemDefault);
       });
 
-      it('should create a CHV', () => {
+      it('should create a Chv', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
@@ -77,7 +77,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should update a CHV', () => {
+      it('should update a Chv', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
@@ -106,7 +106,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should partial update a CHV', () => {
+      it('should partial update a Chv', () => {
         const patchObject = Object.assign(
           {
             description: 'BBBBBB',
@@ -132,7 +132,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should return a list of CHV', () => {
+      it('should return a list of Chv', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
@@ -162,7 +162,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toContainEqual(expected);
       });
 
-      it('should delete a CHV', () => {
+      it('should delete a Chv', () => {
         service.delete(123).subscribe(resp => (expectedResult = resp.ok));
 
         const req = httpMock.expectOne({ method: 'DELETE' });
@@ -171,14 +171,14 @@ describe('Service Tests', () => {
       });
 
       describe('addCHVToCollectionIfMissing', () => {
-        it('should add a CHV to an empty array', () => {
+        it('should add a Chv to an empty array', () => {
           const cHV: ICHV = { id: 123 };
           expectedResult = service.addCHVToCollectionIfMissing([], cHV);
           expect(expectedResult).toHaveLength(1);
           expect(expectedResult).toContain(cHV);
         });
 
-        it('should not add a CHV to an array that contains it', () => {
+        it('should not add a Chv to an array that contains it', () => {
           const cHV: ICHV = { id: 123 };
           const cHVCollection: ICHV[] = [
             {
@@ -190,7 +190,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toHaveLength(2);
         });
 
-        it("should add a CHV to an array that doesn't contain it", () => {
+        it("should add a Chv to an array that doesn't contain it", () => {
           const cHV: ICHV = { id: 123 };
           const cHVCollection: ICHV[] = [{ id: 456 }];
           expectedResult = service.addCHVToCollectionIfMissing(cHVCollection, cHV);
@@ -198,7 +198,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toContain(cHV);
         });
 
-        it('should add only unique CHV to an array', () => {
+        it('should add only unique Chv to an array', () => {
           const cHVArray: ICHV[] = [{ id: 123 }, { id: 456 }, { id: 50901 }];
           const cHVCollection: ICHV[] = [{ id: 123 }];
           expectedResult = service.addCHVToCollectionIfMissing(cHVCollection, ...cHVArray);
@@ -221,7 +221,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toContain(cHV);
         });
 
-        it('should return initial array if no CHV is added', () => {
+        it('should return initial array if no Chv is added', () => {
           const cHVCollection: ICHV[] = [{ id: 123 }];
           expectedResult = service.addCHVToCollectionIfMissing(cHVCollection, undefined, null);
           expect(expectedResult).toEqual(cHVCollection);

@@ -20,7 +20,7 @@ import { CHVService } from 'app/entities/chv/service/chv.service';
 import { CHVTeamUpdateComponent } from './chv-team-update.component';
 
 describe('Component Tests', () => {
-  describe('CHVTeam Management Update Component', () => {
+  describe('ChvTeam Management Update Component', () => {
     let comp: CHVTeamUpdateComponent;
     let fixture: ComponentFixture<CHVTeamUpdateComponent>;
     let activatedRoute: ActivatedRoute;
@@ -89,7 +89,7 @@ describe('Component Tests', () => {
         expect(comp.peopleSharedCollection).toEqual(expectedCollection);
       });
 
-      it('Should call CHV query and add missing value', () => {
+      it('Should call Chv query and add missing value', () => {
         const cHVTeam: ICHVTeam = { id: 456 };
         const responsibleForChvs: ICHV[] = [{ id: 67602 }];
         cHVTeam.responsibleForChvs = responsibleForChvs;
@@ -212,7 +212,7 @@ describe('Component Tests', () => {
       });
 
       describe('trackCHVById', () => {
-        it('Should return tracked CHV primary key', () => {
+        it('Should return tracked Chv primary key', () => {
           const entity = { id: 123 };
           const trackResult = comp.trackCHVById(0, entity);
           expect(trackResult).toEqual(entity.id);
@@ -222,13 +222,13 @@ describe('Component Tests', () => {
 
     describe('Getting selected relationships', () => {
       describe('getSelectedCHV', () => {
-        it('Should return option if no CHV is selected', () => {
+        it('Should return option if no Chv is selected', () => {
           const option = { id: 123 };
           const result = comp.getSelectedCHV(option);
           expect(result === option).toEqual(true);
         });
 
-        it('Should return selected CHV for according option', () => {
+        it('Should return selected Chv for according option', () => {
           const option = { id: 123 };
           const selected = { id: 123 };
           const selected2 = { id: 456 };
@@ -238,7 +238,7 @@ describe('Component Tests', () => {
           expect(result === option).toEqual(false);
         });
 
-        it('Should return option if this CHV is not selected', () => {
+        it('Should return option if this Chv is not selected', () => {
           const option = { id: 123 };
           const selected = { id: 456 };
           const result = comp.getSelectedCHV(option, [selected]);

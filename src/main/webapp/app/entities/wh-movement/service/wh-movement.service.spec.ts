@@ -7,7 +7,7 @@ import { IWHMovement, WHMovement } from '../wh-movement.model';
 import { WHMovementService } from './wh-movement.service';
 
 describe('Service Tests', () => {
-  describe('WHMovement Service', () => {
+  describe('WhMovement Service', () => {
     let service: WHMovementService;
     let httpMock: HttpTestingController;
     let elemDefault: IWHMovement;
@@ -43,7 +43,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(elemDefault);
       });
 
-      it('should create a WHMovement', () => {
+      it('should create a WhMovement', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
@@ -60,7 +60,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should update a WHMovement', () => {
+      it('should update a WhMovement', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
@@ -83,7 +83,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should partial update a WHMovement', () => {
+      it('should partial update a WhMovement', () => {
         const patchObject = Object.assign(
           {
             movementType: 'BBBBBB',
@@ -105,7 +105,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should return a list of WHMovement', () => {
+      it('should return a list of WhMovement', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
@@ -129,7 +129,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toContainEqual(expected);
       });
 
-      it('should delete a WHMovement', () => {
+      it('should delete a WhMovement', () => {
         service.delete(123).subscribe(resp => (expectedResult = resp.ok));
 
         const req = httpMock.expectOne({ method: 'DELETE' });
@@ -138,14 +138,14 @@ describe('Service Tests', () => {
       });
 
       describe('addWHMovementToCollectionIfMissing', () => {
-        it('should add a WHMovement to an empty array', () => {
+        it('should add a WhMovement to an empty array', () => {
           const wHMovement: IWHMovement = { id: 123 };
           expectedResult = service.addWHMovementToCollectionIfMissing([], wHMovement);
           expect(expectedResult).toHaveLength(1);
           expect(expectedResult).toContain(wHMovement);
         });
 
-        it('should not add a WHMovement to an array that contains it', () => {
+        it('should not add a WhMovement to an array that contains it', () => {
           const wHMovement: IWHMovement = { id: 123 };
           const wHMovementCollection: IWHMovement[] = [
             {
@@ -157,7 +157,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toHaveLength(2);
         });
 
-        it("should add a WHMovement to an array that doesn't contain it", () => {
+        it("should add a WhMovement to an array that doesn't contain it", () => {
           const wHMovement: IWHMovement = { id: 123 };
           const wHMovementCollection: IWHMovement[] = [{ id: 456 }];
           expectedResult = service.addWHMovementToCollectionIfMissing(wHMovementCollection, wHMovement);
@@ -165,7 +165,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toContain(wHMovement);
         });
 
-        it('should add only unique WHMovement to an array', () => {
+        it('should add only unique WhMovement to an array', () => {
           const wHMovementArray: IWHMovement[] = [{ id: 123 }, { id: 456 }, { id: 88047 }];
           const wHMovementCollection: IWHMovement[] = [{ id: 123 }];
           expectedResult = service.addWHMovementToCollectionIfMissing(wHMovementCollection, ...wHMovementArray);
@@ -188,7 +188,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toContain(wHMovement);
         });
 
-        it('should return initial array if no WHMovement is added', () => {
+        it('should return initial array if no WhMovement is added', () => {
           const wHMovementCollection: IWHMovement[] = [{ id: 123 }];
           expectedResult = service.addWHMovementToCollectionIfMissing(wHMovementCollection, undefined, null);
           expect(expectedResult).toEqual(wHMovementCollection);

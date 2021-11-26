@@ -1,7 +1,7 @@
 package org.nmcpye.activitiesmanagement.extended.chv;
 
 import org.nmcpye.activitiesmanagement.domain.User;
-import org.nmcpye.activitiesmanagement.domain.chv.CHV;
+import org.nmcpye.activitiesmanagement.domain.chv.Chv;
 import org.nmcpye.activitiesmanagement.extended.chv.pagingrepository.ChvPagingRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,58 +19,58 @@ public class DefaultChvService implements ChvServiceExt {
     }
 
     @Override
-    public Long addCHV(CHV chv) {
+    public Long addCHV(Chv chv) {
         chvPagingRepository.saveObject(chv);
         return chv.getId();
     }
 
     @Override
-    public void updateCHV(CHV chv) {
+    public void updateCHV(Chv chv) {
         chvPagingRepository.update(chv);
     }
 
     @Override
-    public void deleteCHV(CHV chv) {
+    public void deleteCHV(Chv chv) {
         chvPagingRepository.delete(chv);
     }
 
     @Override
-    public CHV getCHV(Long id) {
+    public Chv getCHV(Long id) {
         return chvPagingRepository.get(id);
     }
 
     @Override
-    public CHV getCHV(String uid) {
+    public Chv getCHV(String uid) {
         return chvPagingRepository.getByUid(uid);
     }
 
     @Override
-    public CHV getCHVNoAcl(String uid) {
+    public Chv getCHVNoAcl(String uid) {
         return chvPagingRepository.getByUidNoAcl(uid);
     }
 
     @Override
-    public List<CHV> getAllCHVs() {
+    public List<Chv> getAllCHVs() {
         return chvPagingRepository.getAll();
     }
 
     @Override
-    public List<CHV> getAllDataRead() {
+    public List<Chv> getAllDataRead() {
         return chvPagingRepository.getDataReadAll();
     }
 
     @Override
-    public List<CHV> getUserDataRead(User user) {
+    public List<Chv> getUserDataRead(User user) {
         return chvPagingRepository.getDataReadAll(user);
     }
 
     @Override
-    public List<CHV> getAllDataWrite() {
+    public List<Chv> getAllDataWrite() {
         return chvPagingRepository.getDataWriteAll();
     }
 
     @Override
-    public List<CHV> getUserDataWrite(User user) {
+    public List<Chv> getUserDataWrite(User user) {
         return chvPagingRepository.getDataWriteAll(user);
     }
 }

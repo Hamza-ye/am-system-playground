@@ -61,15 +61,15 @@ public class Warehouse implements Serializable {
     @Column(name = "initial_balance_actual", precision = 21, scale = 2, nullable = false)
     private BigDecimal initialBalanceActual;
 
-    @OneToMany(mappedBy = "initiatedWH")
+    @OneToMany(mappedBy = "initiatedWh")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "day", "initiatedWH", "theOtherSideWH", "team" }, allowSetters = true)
-    private Set<WHMovement> initiatedMovements = new HashSet<>();
+    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "day", "initiatedWh", "theOtherSideWh", "team" }, allowSetters = true)
+    private Set<WhMovement> initiatedMovements = new HashSet<>();
 
-    @OneToMany(mappedBy = "theOtherSideWH")
+    @OneToMany(mappedBy = "theOtherSideWh")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "day", "initiatedWH", "theOtherSideWH", "team" }, allowSetters = true)
-    private Set<WHMovement> notInitiatedMovements = new HashSet<>();
+    @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "day", "initiatedWh", "theOtherSideWh", "team" }, allowSetters = true)
+    private Set<WhMovement> notInitiatedMovements = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "created_by")
@@ -231,65 +231,65 @@ public class Warehouse implements Serializable {
     }
 
     @JsonProperty
-    public Set<WHMovement> getInitiatedMovements() {
+    public Set<WhMovement> getInitiatedMovements() {
         return this.initiatedMovements;
     }
 
-    public Warehouse initiatedMovements(Set<WHMovement> wHMovements) {
+    public Warehouse initiatedMovements(Set<WhMovement> wHMovements) {
         this.setInitiatedMovements(wHMovements);
         return this;
     }
 
-    public Warehouse addInitiatedMovement(WHMovement wHMovement) {
+    public Warehouse addInitiatedMovement(WhMovement wHMovement) {
         this.initiatedMovements.add(wHMovement);
-        wHMovement.setInitiatedWH(this);
+        wHMovement.setInitiatedWh(this);
         return this;
     }
 
-    public Warehouse removeInitiatedMovement(WHMovement wHMovement) {
+    public Warehouse removeInitiatedMovement(WhMovement wHMovement) {
         this.initiatedMovements.remove(wHMovement);
-        wHMovement.setInitiatedWH(null);
+        wHMovement.setInitiatedWh(null);
         return this;
     }
 
-    public void setInitiatedMovements(Set<WHMovement> wHMovements) {
+    public void setInitiatedMovements(Set<WhMovement> wHMovements) {
         if (this.initiatedMovements != null) {
-            this.initiatedMovements.forEach(i -> i.setInitiatedWH(null));
+            this.initiatedMovements.forEach(i -> i.setInitiatedWh(null));
         }
         if (wHMovements != null) {
-            wHMovements.forEach(i -> i.setInitiatedWH(this));
+            wHMovements.forEach(i -> i.setInitiatedWh(this));
         }
         this.initiatedMovements = wHMovements;
     }
 
     @JsonProperty
-    public Set<WHMovement> getNotInitiatedMovements() {
+    public Set<WhMovement> getNotInitiatedMovements() {
         return this.notInitiatedMovements;
     }
 
-    public Warehouse notInitiatedMovements(Set<WHMovement> wHMovements) {
+    public Warehouse notInitiatedMovements(Set<WhMovement> wHMovements) {
         this.setNotInitiatedMovements(wHMovements);
         return this;
     }
 
-    public Warehouse addNotInitiatedMovement(WHMovement wHMovement) {
+    public Warehouse addNotInitiatedMovement(WhMovement wHMovement) {
         this.notInitiatedMovements.add(wHMovement);
-        wHMovement.setTheOtherSideWH(this);
+        wHMovement.setTheOtherSideWh(this);
         return this;
     }
 
-    public Warehouse removeNotInitiatedMovement(WHMovement wHMovement) {
+    public Warehouse removeNotInitiatedMovement(WhMovement wHMovement) {
         this.notInitiatedMovements.remove(wHMovement);
-        wHMovement.setTheOtherSideWH(null);
+        wHMovement.setTheOtherSideWh(null);
         return this;
     }
 
-    public void setNotInitiatedMovements(Set<WHMovement> wHMovements) {
+    public void setNotInitiatedMovements(Set<WhMovement> wHMovements) {
         if (this.notInitiatedMovements != null) {
-            this.notInitiatedMovements.forEach(i -> i.setTheOtherSideWH(null));
+            this.notInitiatedMovements.forEach(i -> i.setTheOtherSideWh(null));
         }
         if (wHMovements != null) {
-            wHMovements.forEach(i -> i.setTheOtherSideWH(this));
+            wHMovements.forEach(i -> i.setTheOtherSideWh(this));
         }
         this.notInitiatedMovements = wHMovements;
     }

@@ -7,7 +7,7 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <!--
-        Added the entity CHV.
+        Added the entity Chv.
     -->
     <changeSet id="20211031234340-1" author="jhipster">
         <createTable tableName="chv">

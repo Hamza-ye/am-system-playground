@@ -22,7 +22,7 @@ import { TeamService } from 'app/entities/team/service/team.service';
 import { LLINSFamilyTargetUpdateComponent } from './llins-family-target-update.component';
 
 describe('Component Tests', () => {
-  describe('LLINSFamilyTarget Management Update Component', () => {
+  describe('LlinsFamilyTarget Management Update Component', () => {
     let comp: LLINSFamilyTargetUpdateComponent;
     let fixture: ComponentFixture<LLINSFamilyTargetUpdateComponent>;
     let activatedRoute: ActivatedRoute;

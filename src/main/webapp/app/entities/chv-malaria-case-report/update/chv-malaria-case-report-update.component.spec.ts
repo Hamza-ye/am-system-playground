@@ -22,7 +22,7 @@ import { CasesReportClassService } from 'app/entities/cases-report-class/service
 import { CHVMalariaCaseReportUpdateComponent } from './chv-malaria-case-report-update.component';
 
 describe('Component Tests', () => {
-  describe('CHVMalariaCaseReport Management Update Component', () => {
+  describe('ChvMalariaCaseReport Management Update Component', () => {
     let comp: CHVMalariaCaseReportUpdateComponent;
     let fixture: ComponentFixture<CHVMalariaCaseReportUpdateComponent>;
     let activatedRoute: ActivatedRoute;
@@ -96,7 +96,7 @@ describe('Component Tests', () => {
         expect(comp.usersSharedCollection).toEqual(expectedCollection);
       });
 
-      it('Should call CHV query and add missing value', () => {
+      it('Should call Chv query and add missing value', () => {
         const cHVMalariaCaseReport: ICHVMalariaCaseReport = { id: 456 };
         const chv: ICHV = { id: 2960 };
         cHVMalariaCaseReport.chv = chv;
@@ -244,7 +244,7 @@ describe('Component Tests', () => {
       });
 
       describe('trackCHVById', () => {
-        it('Should return tracked CHV primary key', () => {
+        it('Should return tracked Chv primary key', () => {
           const entity = { id: 123 };
           const trackResult = comp.trackCHVById(0, entity);
           expect(trackResult).toEqual(entity.id);

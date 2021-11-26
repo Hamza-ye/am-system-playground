@@ -75,7 +75,7 @@ public class Family implements Serializable {
         value = { "llinsFamilyReports", "user", "createdBy", "lastUpdatedBy", "dayPlanned", "family", "teamAssigned" },
         allowSetters = true
     )
-    private Set<LLINSFamilyTarget> llinsFamilyTargets = new HashSet<>();
+    private Set<LlinsFamilyTarget> llinsFamilyTargets = new HashSet<>();
 
     @ManyToOne(optional = false)
     @NotNull
@@ -330,28 +330,28 @@ public class Family implements Serializable {
 
     @JsonProperty
 //    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
-    public Set<LLINSFamilyTarget> getLlinsFamilyTargets() {
+    public Set<LlinsFamilyTarget> getLlinsFamilyTargets() {
         return this.llinsFamilyTargets;
     }
 
-    public Family llinsFamilyTargets(Set<LLINSFamilyTarget> lLINSFamilyTargets) {
+    public Family llinsFamilyTargets(Set<LlinsFamilyTarget> lLINSFamilyTargets) {
         this.setLlinsFamilyTargets(lLINSFamilyTargets);
         return this;
     }
 
-    public Family addLlinsFamilyTarget(LLINSFamilyTarget lLINSFamilyTarget) {
+    public Family addLlinsFamilyTarget(LlinsFamilyTarget lLINSFamilyTarget) {
         this.llinsFamilyTargets.add(lLINSFamilyTarget);
         lLINSFamilyTarget.setFamily(this);
         return this;
     }
 
-    public Family removeLlinsFamilyTarget(LLINSFamilyTarget lLINSFamilyTarget) {
+    public Family removeLlinsFamilyTarget(LlinsFamilyTarget lLINSFamilyTarget) {
         this.llinsFamilyTargets.remove(lLINSFamilyTarget);
         lLINSFamilyTarget.setFamily(null);
         return this;
     }
 
-    public void setLlinsFamilyTargets(Set<LLINSFamilyTarget> lLINSFamilyTargets) {
+    public void setLlinsFamilyTargets(Set<LlinsFamilyTarget> lLINSFamilyTargets) {
         if (this.llinsFamilyTargets != null) {
             this.llinsFamilyTargets.forEach(i -> i.setFamily(null));
         }

@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
     <!--
-        Added the constraints for entity WHMovement.
+        Added the constraints for entity WhMovement.
     -->
     <changeSet id="20211031234320-2" author="jhipster">
 
@@ -26,13 +26,13 @@
                                  referencedColumnNames="id"
                                  referencedTableName="working_day"/>
 
-        <addForeignKeyConstraint baseColumnNames="initiatedwh_id"
+        <addForeignKeyConstraint baseColumnNames="initiated_wh_id"
                                  baseTableName="wh_movement"
                                  constraintName="fk_wh_movement__initiatedwh_id"
                                  referencedColumnNames="id"
                                  referencedTableName="warehouse"/>
 
-        <addForeignKeyConstraint baseColumnNames="the_other_sidewh_id"
+        <addForeignKeyConstraint baseColumnNames="the_other_side_wh_id"
                                  baseTableName="wh_movement"
                                  constraintName="fk_wh_movement__the_other_sidewh_id"
                                  referencedColumnNames="id"

@@ -12,7 +12,7 @@ import { CHVMalariaReportVersion1Service } from '../service/chv-malaria-report-v
 import { CHVMalariaReportVersion1RoutingResolveService } from './chv-malaria-report-version-1-routing-resolve.service';
 
 describe('Service Tests', () => {
-  describe('CHVMalariaReportVersion1 routing resolve service', () => {
+  describe('ChvMalariaReportVersion1 routing resolve service', () => {
     let mockRouter: Router;
     let mockActivatedRouteSnapshot: ActivatedRouteSnapshot;
     let routingResolveService: CHVMalariaReportVersion1RoutingResolveService;

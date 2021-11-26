@@ -60,8 +60,8 @@ public class Team implements Serializable {
 
     @OneToMany(mappedBy = "team")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = {"user", "createdBy", "lastUpdatedBy", "day", "initiatedWH", "theOtherSideWH", "team"}, allowSetters = true)
-    private Set<WHMovement> whMovements = new HashSet<>();
+    @JsonIgnoreProperties(value = {"user", "createdBy", "lastUpdatedBy", "day", "initiatedWh", "theOtherSideWh", "team"}, allowSetters = true)
+    private Set<WhMovement> whMovements = new HashSet<>();
 
     @OneToMany(mappedBy = "teamAssigned")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -69,7 +69,7 @@ public class Team implements Serializable {
         value = {"llinsVillageReports", "organisationUnit", "user", "createdBy", "lastUpdatedBy", "dayPlanned", "statusOfCoverage", "teamAssigned"},
         allowSetters = true
     )
-    private Set<LLINSVillageTarget> llinsVillageTargets = new HashSet<>();
+    private Set<LlinsVillageTarget> llinsVillageTargets = new HashSet<>();
 
     @OneToMany(mappedBy = "executingTeam")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -77,7 +77,7 @@ public class Team implements Serializable {
         value = {"llinsVillageReportHistories", "user", "createdBy", "lastUpdatedBy", "dayReached", "targetDetails", "executingTeam"},
         allowSetters = true
     )
-    private Set<LLINSVillageReport> llinsVillageReports = new HashSet<>();
+    private Set<LlinsVillageReport> llinsVillageReports = new HashSet<>();
 
     @OneToMany(mappedBy = "teamAssigned")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -85,7 +85,7 @@ public class Team implements Serializable {
         value = {"llinsFamilyReports", "user", "createdBy", "lastUpdatedBy", "dayPlanned", "family", "teamAssigned"},
         allowSetters = true
     )
-    private Set<LLINSFamilyTarget> llinsFamilyTargets = new HashSet<>();
+    private Set<LlinsFamilyTarget> llinsFamilyTargets = new HashSet<>();
 
     @OneToMany(mappedBy = "executingTeam")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -93,7 +93,7 @@ public class Team implements Serializable {
         value = {"llinsFamilyReportHistories", "user", "createdBy", "lastUpdatedBy", "dayReached", "targetDetails", "executingTeam"},
         allowSetters = true
     )
-    private Set<LLINSFamilyReport> llinsFamilyReports = new HashSet<>();
+    private Set<LlinsFamilyReport> llinsFamilyReports = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "created_by")
@@ -239,28 +239,28 @@ public class Team implements Serializable {
     }
 
     @JsonProperty
-    public Set<WHMovement> getWhMovements() {
+    public Set<WhMovement> getWhMovements() {
         return this.whMovements;
     }
 
-    public Team whMovements(Set<WHMovement> wHMovements) {
+    public Team whMovements(Set<WhMovement> wHMovements) {
         this.setWhMovements(wHMovements);
         return this;
     }
 
-    public Team addWhMovement(WHMovement wHMovement) {
+    public Team addWhMovement(WhMovement wHMovement) {
         this.whMovements.add(wHMovement);
         wHMovement.setTeam(this);
         return this;
     }
 
-    public Team removeWhMovement(WHMovement wHMovement) {
+    public Team removeWhMovement(WhMovement wHMovement) {
         this.whMovements.remove(wHMovement);
         wHMovement.setTeam(null);
         return this;
     }
 
-    public void setWhMovements(Set<WHMovement> wHMovements) {
+    public void setWhMovements(Set<WhMovement> wHMovements) {
         if (this.whMovements != null) {
             this.whMovements.forEach(i -> i.setTeam(null));
         }
@@ -270,28 +270,28 @@ public class Team implements Serializable {
         this.whMovements = wHMovements;
     }
 
-    public Set<LLINSVillageTarget> getLlinsVillageTargets() {
+    public Set<LlinsVillageTarget> getLlinsVillageTargets() {
         return this.llinsVillageTargets;
     }
 
-    public Team llinsVillageTargets(Set<LLINSVillageTarget> lLINSVillageTargets) {
+    public Team llinsVillageTargets(Set<LlinsVillageTarget> lLINSVillageTargets) {
         this.setLlinsVillageTargets(lLINSVillageTargets);
         return this;
     }
 
-    public Team addLlinsVillageTarget(LLINSVillageTarget lLINSVillageTarget) {
+    public Team addLlinsVillageTarget(LlinsVillageTarget lLINSVillageTarget) {
         this.llinsVillageTargets.add(lLINSVillageTarget);
         lLINSVillageTarget.setTeamAssigned(this);
         return this;
     }
 
-    public Team removeLlinsVillageTarget(LLINSVillageTarget lLINSVillageTarget) {
+    public Team removeLlinsVillageTarget(LlinsVillageTarget lLINSVillageTarget) {
         this.llinsVillageTargets.remove(lLINSVillageTarget);
         lLINSVillageTarget.setTeamAssigned(null);
         return this;
     }
 
-    public void setLlinsVillageTargets(Set<LLINSVillageTarget> lLINSVillageTargets) {
+    public void setLlinsVillageTargets(Set<LlinsVillageTarget> lLINSVillageTargets) {
         if (this.llinsVillageTargets != null) {
             this.llinsVillageTargets.forEach(i -> i.setTeamAssigned(null));
         }
@@ -301,28 +301,28 @@ public class Team implements Serializable {
         this.llinsVillageTargets = lLINSVillageTargets;
     }
 
-    public Set<LLINSVillageReport> getLlinsVillageReports() {
+    public Set<LlinsVillageReport> getLlinsVillageReports() {
         return this.llinsVillageReports;
     }
 
-    public Team llinsVillageReports(Set<LLINSVillageReport> lLINSVillageReports) {
+    public Team llinsVillageReports(Set<LlinsVillageReport> lLINSVillageReports) {
         this.setLlinsVillageReports(lLINSVillageReports);
         return this;
     }
 
-    public Team addLlinsVillageReport(LLINSVillageReport lLINSVillageReport) {
+    public Team addLlinsVillageReport(LlinsVillageReport lLINSVillageReport) {
         this.llinsVillageReports.add(lLINSVillageReport);
         lLINSVillageReport.setExecutingTeam(this);
         return this;
     }
 
-    public Team removeLlinsVillageReport(LLINSVillageReport lLINSVillageReport) {
+    public Team removeLlinsVillageReport(LlinsVillageReport lLINSVillageReport) {
         this.llinsVillageReports.remove(lLINSVillageReport);
         lLINSVillageReport.setExecutingTeam(null);
         return this;
     }
 
-    public void setLlinsVillageReports(Set<LLINSVillageReport> lLINSVillageReports) {
+    public void setLlinsVillageReports(Set<LlinsVillageReport> lLINSVillageReports) {
         if (this.llinsVillageReports != null) {
             this.llinsVillageReports.forEach(i -> i.setExecutingTeam(null));
         }
@@ -332,28 +332,28 @@ public class Team implements Serializable {
         this.llinsVillageReports = lLINSVillageReports;
     }
 
-    public Set<LLINSFamilyTarget> getLlinsFamilyTargets() {
+    public Set<LlinsFamilyTarget> getLlinsFamilyTargets() {
         return this.llinsFamilyTargets;
     }
 
-    public Team llinsFamilyTargets(Set<LLINSFamilyTarget> lLINSFamilyTargets) {
+    public Team llinsFamilyTargets(Set<LlinsFamilyTarget> lLINSFamilyTargets) {
         this.setLlinsFamilyTargets(lLINSFamilyTargets);
         return this;
     }
 
-    public Team addLlinsFamilyTarget(LLINSFamilyTarget lLINSFamilyTarget) {
+    public Team addLlinsFamilyTarget(LlinsFamilyTarget lLINSFamilyTarget) {
         this.llinsFamilyTargets.add(lLINSFamilyTarget);
         lLINSFamilyTarget.setTeamAssigned(this);
         return this;
     }
 
-    public Team removeLlinsFamilyTarget(LLINSFamilyTarget lLINSFamilyTarget) {
+    public Team removeLlinsFamilyTarget(LlinsFamilyTarget lLINSFamilyTarget) {
         this.llinsFamilyTargets.remove(lLINSFamilyTarget);
         lLINSFamilyTarget.setTeamAssigned(null);
         return this;
     }
 
-    public void setLlinsFamilyTargets(Set<LLINSFamilyTarget> lLINSFamilyTargets) {
+    public void setLlinsFamilyTargets(Set<LlinsFamilyTarget> lLINSFamilyTargets) {
         if (this.llinsFamilyTargets != null) {
             this.llinsFamilyTargets.forEach(i -> i.setTeamAssigned(null));
         }
@@ -363,28 +363,28 @@ public class Team implements Serializable {
         this.llinsFamilyTargets = lLINSFamilyTargets;
     }
 
-    public Set<LLINSFamilyReport> getLlinsFamilyReports() {
+    public Set<LlinsFamilyReport> getLlinsFamilyReports() {
         return this.llinsFamilyReports;
     }
 
-    public Team llinsFamilyReports(Set<LLINSFamilyReport> lLINSFamilyReports) {
+    public Team llinsFamilyReports(Set<LlinsFamilyReport> lLINSFamilyReports) {
         this.setLlinsFamilyReports(lLINSFamilyReports);
         return this;
     }
 
-    public Team addLlinsFamilyReport(LLINSFamilyReport lLINSFamilyReport) {
+    public Team addLlinsFamilyReport(LlinsFamilyReport lLINSFamilyReport) {
         this.llinsFamilyReports.add(lLINSFamilyReport);
         lLINSFamilyReport.setExecutingTeam(this);
         return this;
     }
 
-    public Team removeLlinsFamilyReport(LLINSFamilyReport lLINSFamilyReport) {
+    public Team removeLlinsFamilyReport(LlinsFamilyReport lLINSFamilyReport) {
         this.llinsFamilyReports.remove(lLINSFamilyReport);
         lLINSFamilyReport.setExecutingTeam(null);
         return this;
     }
 
-    public void setLlinsFamilyReports(Set<LLINSFamilyReport> lLINSFamilyReports) {
+    public void setLlinsFamilyReports(Set<LlinsFamilyReport> lLINSFamilyReports) {
         if (this.llinsFamilyReports != null) {
             this.llinsFamilyReports.forEach(i -> i.setExecutingTeam(null));
         }

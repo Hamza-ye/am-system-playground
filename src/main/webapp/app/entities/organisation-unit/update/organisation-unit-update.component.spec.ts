@@ -144,7 +144,7 @@ describe('Component Tests', () => {
         expect(comp.malariaUnitsSharedCollection).toEqual(expectedCollection);
       });
 
-      it('Should call CHV query and add missing value', () => {
+      it('Should call Chv query and add missing value', () => {
         const organisationUnit: IOrganisationUnit = { id: 456 };
         const assignedChv: ICHV = { id: 76826 };
         organisationUnit.assignedChv = assignedChv;
@@ -295,7 +295,7 @@ describe('Component Tests', () => {
       });
 
       describe('trackCHVById', () => {
-        it('Should return tracked CHV primary key', () => {
+        it('Should return tracked Chv primary key', () => {
           const entity = { id: 123 };
           const trackResult = comp.trackCHVById(0, entity);
           expect(trackResult).toEqual(entity.id);

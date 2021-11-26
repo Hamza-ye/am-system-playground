@@ -7,7 +7,7 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <!--
-        Added the entity LLINSVillageReportHistory.
+        Added the entity LlinsVillageReportHistory.
     -->
     <changeSet id="20211031234331-1" author="jhipster">
         <createTable tableName="llins_village_report_history">

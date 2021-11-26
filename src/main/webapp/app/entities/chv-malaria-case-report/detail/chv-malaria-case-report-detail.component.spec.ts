@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { CHVMalariaCaseReportDetailComponent } from './chv-malaria-case-report-detail.component';
 
 describe('Component Tests', () => {
-  describe('CHVMalariaCaseReport Management Detail Component', () => {
+  describe('ChvMalariaCaseReport Management Detail Component', () => {
     let comp: CHVMalariaCaseReportDetailComponent;
     let fixture: ComponentFixture<CHVMalariaCaseReportDetailComponent>;
 

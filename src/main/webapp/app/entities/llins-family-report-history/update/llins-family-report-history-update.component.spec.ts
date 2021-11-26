@@ -20,7 +20,7 @@ import { LLINSFamilyReportService } from 'app/entities/llins-family-report/servi
 import { LLINSFamilyReportHistoryUpdateComponent } from './llins-family-report-history-update.component';
 
 describe('Component Tests', () => {
-  describe('LLINSFamilyReportHistory Management Update Component', () => {
+  describe('LlinsFamilyReportHistory Management Update Component', () => {
     let comp: LLINSFamilyReportHistoryUpdateComponent;
     let fixture: ComponentFixture<LLINSFamilyReportHistoryUpdateComponent>;
     let activatedRoute: ActivatedRoute;
@@ -89,7 +89,7 @@ describe('Component Tests', () => {
         expect(comp.workingDaysSharedCollection).toEqual(expectedCollection);
       });
 
-      it('Should call LLINSFamilyReport query and add missing value', () => {
+      it('Should call LlinsFamilyReport query and add missing value', () => {
         const lLINSFamilyReportHistory: ILLINSFamilyReportHistory = { id: 456 };
         const llinsFamilyReport: ILLINSFamilyReport = { id: 34861 };
         lLINSFamilyReportHistory.llinsFamilyReport = llinsFamilyReport;
@@ -215,7 +215,7 @@ describe('Component Tests', () => {
       });
 
       describe('trackLLINSFamilyReportById', () => {
-        it('Should return tracked LLINSFamilyReport primary key', () => {
+        it('Should return tracked LlinsFamilyReport primary key', () => {
           const entity = { id: 123 };
           const trackResult = comp.trackLLINSFamilyReportById(0, entity);
           expect(trackResult).toEqual(entity.id);

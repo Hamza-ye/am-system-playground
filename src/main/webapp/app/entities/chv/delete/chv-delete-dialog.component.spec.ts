@@ -11,7 +11,7 @@ import { CHVService } from '../service/chv.service';
 import { CHVDeleteDialogComponent } from './chv-delete-dialog.component';
 
 describe('Component Tests', () => {
-  describe('CHV Management Delete Component', () => {
+  describe('Chv Management Delete Component', () => {
     let comp: CHVDeleteDialogComponent;
     let fixture: ComponentFixture<CHVDeleteDialogComponent>;
     let service: CHVService;

@@ -10,7 +10,7 @@ import { ICHVMalariaCaseReport, CHVMalariaCaseReport } from '../chv-malaria-case
 import { CHVMalariaCaseReportService } from './chv-malaria-case-report.service';
 
 describe('Service Tests', () => {
-  describe('CHVMalariaCaseReport Service', () => {
+  describe('ChvMalariaCaseReport Service', () => {
     let service: CHVMalariaCaseReportService;
     let httpMock: HttpTestingController;
     let elemDefault: ICHVMalariaCaseReport;
@@ -62,7 +62,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(elemDefault);
       });
 
-      it('should create a CHVMalariaCaseReport', () => {
+      it('should create a ChvMalariaCaseReport', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
@@ -89,7 +89,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should update a CHVMalariaCaseReport', () => {
+      it('should update a ChvMalariaCaseReport', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
@@ -126,7 +126,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should partial update a CHVMalariaCaseReport', () => {
+      it('should partial update a ChvMalariaCaseReport', () => {
         const patchObject = Object.assign(
           {
             date: currentDate.format(DATE_FORMAT),
@@ -158,7 +158,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should return a list of CHVMalariaCaseReport', () => {
+      it('should return a list of ChvMalariaCaseReport', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
@@ -196,7 +196,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toContainEqual(expected);
       });
 
-      it('should delete a CHVMalariaCaseReport', () => {
+      it('should delete a ChvMalariaCaseReport', () => {
         service.delete(123).subscribe(resp => (expectedResult = resp.ok));
 
         const req = httpMock.expectOne({ method: 'DELETE' });
@@ -205,14 +205,14 @@ describe('Service Tests', () => {
       });
 
       describe('addCHVMalariaCaseReportToCollectionIfMissing', () => {
-        it('should add a CHVMalariaCaseReport to an empty array', () => {
+        it('should add a ChvMalariaCaseReport to an empty array', () => {
           const cHVMalariaCaseReport: ICHVMalariaCaseReport = { id: 123 };
           expectedResult = service.addCHVMalariaCaseReportToCollectionIfMissing([], cHVMalariaCaseReport);
           expect(expectedResult).toHaveLength(1);
           expect(expectedResult).toContain(cHVMalariaCaseReport);
         });
 
-        it('should not add a CHVMalariaCaseReport to an array that contains it', () => {
+        it('should not add a ChvMalariaCaseReport to an array that contains it', () => {
           const cHVMalariaCaseReport: ICHVMalariaCaseReport = { id: 123 };
           const cHVMalariaCaseReportCollection: ICHVMalariaCaseReport[] = [
             {
@@ -224,7 +224,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toHaveLength(2);
         });
 
-        it("should add a CHVMalariaCaseReport to an array that doesn't contain it", () => {
+        it("should add a ChvMalariaCaseReport to an array that doesn't contain it", () => {
           const cHVMalariaCaseReport: ICHVMalariaCaseReport = { id: 123 };
           const cHVMalariaCaseReportCollection: ICHVMalariaCaseReport[] = [{ id: 456 }];
           expectedResult = service.addCHVMalariaCaseReportToCollectionIfMissing(cHVMalariaCaseReportCollection, cHVMalariaCaseReport);
@@ -232,7 +232,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toContain(cHVMalariaCaseReport);
         });
 
-        it('should add only unique CHVMalariaCaseReport to an array', () => {
+        it('should add only unique ChvMalariaCaseReport to an array', () => {
           const cHVMalariaCaseReportArray: ICHVMalariaCaseReport[] = [{ id: 123 }, { id: 456 }, { id: 91831 }];
           const cHVMalariaCaseReportCollection: ICHVMalariaCaseReport[] = [{ id: 123 }];
           expectedResult = service.addCHVMalariaCaseReportToCollectionIfMissing(
@@ -258,7 +258,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toContain(cHVMalariaCaseReport);
         });
 
-        it('should return initial array if no CHVMalariaCaseReport is added', () => {
+        it('should return initial array if no ChvMalariaCaseReport is added', () => {
           const cHVMalariaCaseReportCollection: ICHVMalariaCaseReport[] = [{ id: 123 }];
           expectedResult = service.addCHVMalariaCaseReportToCollectionIfMissing(cHVMalariaCaseReportCollection, undefined, null);
           expect(expectedResult).toEqual(cHVMalariaCaseReportCollection);

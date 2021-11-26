@@ -11,7 +11,7 @@ import { WHMovementService } from '../service/wh-movement.service';
 import { WHMovementComponent } from './wh-movement.component';
 
 describe('Component Tests', () => {
-  describe('WHMovement Management Component', () => {
+  describe('WhMovement Management Component', () => {
     let comp: WHMovementComponent;
     let fixture: ComponentFixture<WHMovementComponent>;
     let service: WHMovementService;

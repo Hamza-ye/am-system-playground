@@ -21,6 +21,6 @@ public enum DimensionItemType {
 //    ACTIVITY,
 //    TEAM,
 //    MALARIA_UNIT,
-//    CHV,
+//    Chv,
 //    CHV_TEAM
 }

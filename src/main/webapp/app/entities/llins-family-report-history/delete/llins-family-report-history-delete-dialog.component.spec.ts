@@ -11,7 +11,7 @@ import { LLINSFamilyReportHistoryService } from '../service/llins-family-report-
 import { LLINSFamilyReportHistoryDeleteDialogComponent } from './llins-family-report-history-delete-dialog.component';
 
 describe('Component Tests', () => {
-  describe('LLINSFamilyReportHistory Management Delete Component', () => {
+  describe('LlinsFamilyReportHistory Management Delete Component', () => {
     let comp: LLINSFamilyReportHistoryDeleteDialogComponent;
     let fixture: ComponentFixture<LLINSFamilyReportHistoryDeleteDialogComponent>;
     let service: LLINSFamilyReportHistoryService;

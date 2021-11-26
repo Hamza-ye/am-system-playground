@@ -8,7 +8,7 @@ import { LLINSVillageReportService } from '../service/llins-village-report.servi
 import { LLINSVillageReportComponent } from './llins-village-report.component';
 
 describe('Component Tests', () => {
-  describe('LLINSVillageReport Management Component', () => {
+  describe('LlinsVillageReport Management Component', () => {
     let comp: LLINSVillageReportComponent;
     let fixture: ComponentFixture<LLINSVillageReportComponent>;
     let service: LLINSVillageReportService;

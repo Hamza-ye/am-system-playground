@@ -11,7 +11,7 @@ import { WHMovementService } from '../service/wh-movement.service';
 import { WHMovementDeleteDialogComponent } from './wh-movement-delete-dialog.component';
 
 describe('Component Tests', () => {
-  describe('WHMovement Management Delete Component', () => {
+  describe('WhMovement Management Delete Component', () => {
     let comp: WHMovementDeleteDialogComponent;
     let fixture: ComponentFixture<WHMovementDeleteDialogComponent>;
     let service: WHMovementService;

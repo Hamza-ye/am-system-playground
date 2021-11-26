@@ -9,7 +9,7 @@ import { ILLINSFamilyReportHistory, LLINSFamilyReportHistory } from '../llins-fa
 import { LLINSFamilyReportHistoryService } from './llins-family-report-history.service';
 
 describe('Service Tests', () => {
-  describe('LLINSFamilyReportHistory Service', () => {
+  describe('LlinsFamilyReportHistory Service', () => {
     let service: LLINSFamilyReportHistoryService;
     let httpMock: HttpTestingController;
     let elemDefault: ILLINSFamilyReportHistory;
@@ -58,7 +58,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(elemDefault);
       });
 
-      it('should create a LLINSFamilyReportHistory', () => {
+      it('should create a LlinsFamilyReportHistory', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
@@ -83,7 +83,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should update a LLINSFamilyReportHistory', () => {
+      it('should update a LlinsFamilyReportHistory', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
@@ -117,7 +117,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should partial update a LLINSFamilyReportHistory', () => {
+      it('should partial update a LlinsFamilyReportHistory', () => {
         const patchObject = Object.assign(
           {
             uid: 'BBBBBB',
@@ -149,7 +149,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should return a list of LLINSFamilyReportHistory', () => {
+      it('should return a list of LlinsFamilyReportHistory', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
@@ -184,7 +184,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toContainEqual(expected);
       });
 
-      it('should delete a LLINSFamilyReportHistory', () => {
+      it('should delete a LlinsFamilyReportHistory', () => {
         service.delete(123).subscribe(resp => (expectedResult = resp.ok));
 
         const req = httpMock.expectOne({ method: 'DELETE' });
@@ -193,14 +193,14 @@ describe('Service Tests', () => {
       });
 
       describe('addLLINSFamilyReportHistoryToCollectionIfMissing', () => {
-        it('should add a LLINSFamilyReportHistory to an empty array', () => {
+        it('should add a LlinsFamilyReportHistory to an empty array', () => {
           const lLINSFamilyReportHistory: ILLINSFamilyReportHistory = { id: 123 };
           expectedResult = service.addLLINSFamilyReportHistoryToCollectionIfMissing([], lLINSFamilyReportHistory);
           expect(expectedResult).toHaveLength(1);
           expect(expectedResult).toContain(lLINSFamilyReportHistory);
         });
 
-        it('should not add a LLINSFamilyReportHistory to an array that contains it', () => {
+        it('should not add a LlinsFamilyReportHistory to an array that contains it', () => {
           const lLINSFamilyReportHistory: ILLINSFamilyReportHistory = { id: 123 };
           const lLINSFamilyReportHistoryCollection: ILLINSFamilyReportHistory[] = [
             {
@@ -215,7 +215,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toHaveLength(2);
         });
 
-        it("should add a LLINSFamilyReportHistory to an array that doesn't contain it", () => {
+        it("should add a LlinsFamilyReportHistory to an array that doesn't contain it", () => {
           const lLINSFamilyReportHistory: ILLINSFamilyReportHistory = { id: 123 };
           const lLINSFamilyReportHistoryCollection: ILLINSFamilyReportHistory[] = [{ id: 456 }];
           expectedResult = service.addLLINSFamilyReportHistoryToCollectionIfMissing(
@@ -226,7 +226,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toContain(lLINSFamilyReportHistory);
         });
 
-        it('should add only unique LLINSFamilyReportHistory to an array', () => {
+        it('should add only unique LlinsFamilyReportHistory to an array', () => {
           const lLINSFamilyReportHistoryArray: ILLINSFamilyReportHistory[] = [{ id: 123 }, { id: 456 }, { id: 48232 }];
           const lLINSFamilyReportHistoryCollection: ILLINSFamilyReportHistory[] = [{ id: 123 }];
           expectedResult = service.addLLINSFamilyReportHistoryToCollectionIfMissing(
@@ -256,7 +256,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toContain(lLINSFamilyReportHistory);
         });
 
-        it('should return initial array if no LLINSFamilyReportHistory is added', () => {
+        it('should return initial array if no LlinsFamilyReportHistory is added', () => {
           const lLINSFamilyReportHistoryCollection: ILLINSFamilyReportHistory[] = [{ id: 123 }];
           expectedResult = service.addLLINSFamilyReportHistoryToCollectionIfMissing(lLINSFamilyReportHistoryCollection, undefined, null);
           expect(expectedResult).toEqual(lLINSFamilyReportHistoryCollection);

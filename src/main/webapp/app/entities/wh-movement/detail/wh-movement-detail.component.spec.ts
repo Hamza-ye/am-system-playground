@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { WHMovementDetailComponent } from './wh-movement-detail.component';
 
 describe('Component Tests', () => {
-  describe('WHMovement Management Detail Component', () => {
+  describe('WhMovement Management Detail Component', () => {
     let comp: WHMovementDetailComponent;
     let fixture: ComponentFixture<WHMovementDetailComponent>;
 

@@ -1,4 +1,4 @@
-id;movement_type;quantity;reconciliation_source;reconciliation_destination;confirmed_by_other_side;comment;day_id;initiatedwh_id
+id;movement_type;quantity;reconciliation_source;reconciliation_destination;confirmed_by_other_side;comment;day_id;initiated_wh_id
 1;IN;14059;Keyboard Bridge;Sharable up;true;content-based engage Michigan;1;1
 2;RECONCILIATION_OUT;88367;Fresh New IB;Fresh connecting;false;Director;2;2
 3;RECONCILIATION_OUT;22739;Fish Tactics killer;connect Green;true;compress Chips;3;3

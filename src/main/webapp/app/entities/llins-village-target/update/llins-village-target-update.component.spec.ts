@@ -24,7 +24,7 @@ import { TeamService } from 'app/entities/team/service/team.service';
 import { LLINSVillageTargetUpdateComponent } from './llins-village-target-update.component';
 
 describe('Component Tests', () => {
-  describe('LLINSVillageTarget Management Update Component', () => {
+  describe('LlinsVillageTarget Management Update Component', () => {
     let comp: LLINSVillageTargetUpdateComponent;
     let fixture: ComponentFixture<LLINSVillageTargetUpdateComponent>;
     let activatedRoute: ActivatedRoute;

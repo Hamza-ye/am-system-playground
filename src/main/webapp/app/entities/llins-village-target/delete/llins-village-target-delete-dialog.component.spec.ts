@@ -11,7 +11,7 @@ import { LLINSVillageTargetService } from '../service/llins-village-target.servi
 import { LLINSVillageTargetDeleteDialogComponent } from './llins-village-target-delete-dialog.component';
 
 describe('Component Tests', () => {
-  describe('LLINSVillageTarget Management Delete Component', () => {
+  describe('LlinsVillageTarget Management Delete Component', () => {
     let comp: LLINSVillageTargetDeleteDialogComponent;
     let fixture: ComponentFixture<LLINSVillageTargetDeleteDialogComponent>;
     let service: LLINSVillageTargetService;

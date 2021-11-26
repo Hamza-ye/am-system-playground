@@ -7,7 +7,7 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <!--
-        Added the entity LLINSFamilyTarget.
+        Added the entity LlinsFamilyTarget.
     -->
     <changeSet id="20211031234327-1" author="jhipster">
         <createTable tableName="llins_family_target">

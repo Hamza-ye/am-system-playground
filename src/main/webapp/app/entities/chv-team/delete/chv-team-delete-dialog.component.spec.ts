@@ -11,7 +11,7 @@ import { CHVTeamService } from '../service/chv-team.service';
 import { CHVTeamDeleteDialogComponent } from './chv-team-delete-dialog.component';
 
 describe('Component Tests', () => {
-  describe('CHVTeam Management Delete Component', () => {
+  describe('ChvTeam Management Delete Component', () => {
     let comp: CHVTeamDeleteDialogComponent;
     let fixture: ComponentFixture<CHVTeamDeleteDialogComponent>;
     let service: CHVTeamService;

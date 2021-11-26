@@ -15,7 +15,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.MalariaUnit;
 import org.nmcpye.activitiesmanagement.domain.User;
-import org.nmcpye.activitiesmanagement.domain.chv.CHV;
+import org.nmcpye.activitiesmanagement.domain.chv.Chv;
 import org.nmcpye.activitiesmanagement.domain.dataset.DataSet;
 import org.nmcpye.activitiesmanagement.domain.dataset.DengueCasesReport;
 import org.nmcpye.activitiesmanagement.domain.dataset.MalariaCasesReport;
@@ -229,7 +229,7 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
         },
         allowSetters = true
     )
-    private CHV assignedChv;
+    private Chv assignedChv;
 
     @OneToMany(mappedBy = "organisationUnit")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -1325,16 +1325,16 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
 
     @JsonProperty
     @JsonSerialize(contentAs = BaseIdentifiableObject.class)
-    public CHV getAssignedChv() {
+    public Chv getAssignedChv() {
         return this.assignedChv;
     }
 
-    public OrganisationUnit assignedChv(CHV cHV) {
+    public OrganisationUnit assignedChv(Chv cHV) {
         this.setAssignedChv(cHV);
         return this;
     }
 
-    public void setAssignedChv(CHV cHV) {
+    public void setAssignedChv(Chv cHV) {
         this.assignedChv = cHV;
     }
 

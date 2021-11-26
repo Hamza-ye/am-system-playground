@@ -12,7 +12,7 @@ import { LLINSVillageTargetService } from '../service/llins-village-target.servi
 import { LLINSVillageTargetRoutingResolveService } from './llins-village-target-routing-resolve.service';
 
 describe('Service Tests', () => {
-  describe('LLINSVillageTarget routing resolve service', () => {
+  describe('LlinsVillageTarget routing resolve service', () => {
     let mockRouter: Router;
     let mockActivatedRouteSnapshot: ActivatedRouteSnapshot;
     let routingResolveService: LLINSVillageTargetRoutingResolveService;

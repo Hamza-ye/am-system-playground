@@ -11,7 +11,7 @@ import { LLINSFamilyTargetService } from '../service/llins-family-target.service
 import { LLINSFamilyTargetComponent } from './llins-family-target.component';
 
 describe('Component Tests', () => {
-  describe('LLINSFamilyTarget Management Component', () => {
+  describe('LlinsFamilyTarget Management Component', () => {
     let comp: LLINSFamilyTargetComponent;
     let fixture: ComponentFixture<LLINSFamilyTargetComponent>;
     let service: LLINSFamilyTargetService;

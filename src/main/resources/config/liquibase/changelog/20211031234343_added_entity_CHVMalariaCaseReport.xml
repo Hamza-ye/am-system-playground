@@ -7,7 +7,7 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <!--
-        Added the entity CHVMalariaCaseReport.
+        Added the entity ChvMalariaCaseReport.
     -->
     <changeSet id="20211031234343-1" author="jhipster">
         <createTable tableName="chv_malaria_case_report">

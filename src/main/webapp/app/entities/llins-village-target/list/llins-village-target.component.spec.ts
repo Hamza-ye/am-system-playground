@@ -11,7 +11,7 @@ import { LLINSVillageTargetService } from '../service/llins-village-target.servi
 import { LLINSVillageTargetComponent } from './llins-village-target.component';
 
 describe('Component Tests', () => {
-  describe('LLINSVillageTarget Management Component', () => {
+  describe('LlinsVillageTarget Management Component', () => {
     let comp: LLINSVillageTargetComponent;
     let fixture: ComponentFixture<LLINSVillageTargetComponent>;
     let service: LLINSVillageTargetService;

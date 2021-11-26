@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { CHVTeamDetailComponent } from './chv-team-detail.component';
 
 describe('Component Tests', () => {
-  describe('CHVTeam Management Detail Component', () => {
+  describe('ChvTeam Management Detail Component', () => {
     let comp: CHVTeamDetailComponent;
     let fixture: ComponentFixture<CHVTeamDetailComponent>;
 

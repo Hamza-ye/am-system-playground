@@ -8,7 +8,7 @@ import { CHVService } from '../service/chv.service';
 import { CHVComponent } from './chv.component';
 
 describe('Component Tests', () => {
-  describe('CHV Management Component', () => {
+  describe('Chv Management Component', () => {
     let comp: CHVComponent;
     let fixture: ComponentFixture<CHVComponent>;
     let service: CHVService;

@@ -11,7 +11,7 @@ import { LLINSFamilyReportService } from '../service/llins-family-report.service
 import { LLINSFamilyReportComponent } from './llins-family-report.component';
 
 describe('Component Tests', () => {
-  describe('LLINSFamilyReport Management Component', () => {
+  describe('LlinsFamilyReport Management Component', () => {
     let comp: LLINSFamilyReportComponent;
     let fixture: ComponentFixture<LLINSFamilyReportComponent>;
     let service: LLINSFamilyReportService;

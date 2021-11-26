@@ -9,7 +9,7 @@ import { ICHVTeam, CHVTeam } from '../chv-team.model';
 import { CHVTeamService } from './chv-team.service';
 
 describe('Service Tests', () => {
-  describe('CHVTeam Service', () => {
+  describe('ChvTeam Service', () => {
     let service: CHVTeamService;
     let httpMock: HttpTestingController;
     let elemDefault: ICHVTeam;
@@ -55,7 +55,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(elemDefault);
       });
 
-      it('should create a CHVTeam', () => {
+      it('should create a ChvTeam', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
@@ -80,7 +80,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should update a CHVTeam', () => {
+      it('should update a ChvTeam', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
@@ -111,7 +111,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should partial update a CHVTeam', () => {
+      it('should partial update a ChvTeam', () => {
         const patchObject = Object.assign(
           {
             uid: 'BBBBBB',
@@ -141,7 +141,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should return a list of CHVTeam', () => {
+      it('should return a list of ChvTeam', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
@@ -173,7 +173,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toContainEqual(expected);
       });
 
-      it('should delete a CHVTeam', () => {
+      it('should delete a ChvTeam', () => {
         service.delete(123).subscribe(resp => (expectedResult = resp.ok));
 
         const req = httpMock.expectOne({ method: 'DELETE' });
@@ -182,14 +182,14 @@ describe('Service Tests', () => {
       });
 
       describe('addCHVTeamToCollectionIfMissing', () => {
-        it('should add a CHVTeam to an empty array', () => {
+        it('should add a ChvTeam to an empty array', () => {
           const cHVTeam: ICHVTeam = { id: 123 };
           expectedResult = service.addCHVTeamToCollectionIfMissing([], cHVTeam);
           expect(expectedResult).toHaveLength(1);
           expect(expectedResult).toContain(cHVTeam);
         });
 
-        it('should not add a CHVTeam to an array that contains it', () => {
+        it('should not add a ChvTeam to an array that contains it', () => {
           const cHVTeam: ICHVTeam = { id: 123 };
           const cHVTeamCollection: ICHVTeam[] = [
             {
@@ -201,7 +201,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toHaveLength(2);
         });
 
-        it("should add a CHVTeam to an array that doesn't contain it", () => {
+        it("should add a ChvTeam to an array that doesn't contain it", () => {
           const cHVTeam: ICHVTeam = { id: 123 };
           const cHVTeamCollection: ICHVTeam[] = [{ id: 456 }];
           expectedResult = service.addCHVTeamToCollectionIfMissing(cHVTeamCollection, cHVTeam);
@@ -209,7 +209,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toContain(cHVTeam);
         });
 
-        it('should add only unique CHVTeam to an array', () => {
+        it('should add only unique ChvTeam to an array', () => {
           const cHVTeamArray: ICHVTeam[] = [{ id: 123 }, { id: 456 }, { id: 76600 }];
           const cHVTeamCollection: ICHVTeam[] = [{ id: 123 }];
           expectedResult = service.addCHVTeamToCollectionIfMissing(cHVTeamCollection, ...cHVTeamArray);
@@ -232,7 +232,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toContain(cHVTeam);
         });
 
-        it('should return initial array if no CHVTeam is added', () => {
+        it('should return initial array if no ChvTeam is added', () => {
           const cHVTeamCollection: ICHVTeam[] = [{ id: 123 }];
           expectedResult = service.addCHVTeamToCollectionIfMissing(cHVTeamCollection, undefined, null);
           expect(expectedResult).toEqual(cHVTeamCollection);

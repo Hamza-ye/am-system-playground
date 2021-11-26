@@ -12,7 +12,7 @@ import { LLINSFamilyReportService } from '../service/llins-family-report.service
 import { LLINSFamilyReportRoutingResolveService } from './llins-family-report-routing-resolve.service';
 
 describe('Service Tests', () => {
-  describe('LLINSFamilyReport routing resolve service', () => {
+  describe('LlinsFamilyReport routing resolve service', () => {
     let mockRouter: Router;
     let mockActivatedRouteSnapshot: ActivatedRouteSnapshot;
     let routingResolveService: LLINSFamilyReportRoutingResolveService;

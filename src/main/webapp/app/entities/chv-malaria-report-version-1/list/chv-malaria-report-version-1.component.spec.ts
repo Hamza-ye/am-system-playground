@@ -8,7 +8,7 @@ import { CHVMalariaReportVersion1Service } from '../service/chv-malaria-report-v
 import { CHVMalariaReportVersion1Component } from './chv-malaria-report-version-1.component';
 
 describe('Component Tests', () => {
-  describe('CHVMalariaReportVersion1 Management Component', () => {
+  describe('ChvMalariaReportVersion1 Management Component', () => {
     let comp: CHVMalariaReportVersion1Component;
     let fixture: ComponentFixture<CHVMalariaReportVersion1Component>;
     let service: CHVMalariaReportVersion1Service;

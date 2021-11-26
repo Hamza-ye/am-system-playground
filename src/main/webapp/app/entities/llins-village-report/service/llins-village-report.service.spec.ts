@@ -8,7 +8,7 @@ import { ILLINSVillageReport, LLINSVillageReport } from '../llins-village-report
 import { LLINSVillageReportService } from './llins-village-report.service';
 
 describe('Service Tests', () => {
-  describe('LLINSVillageReport Service', () => {
+  describe('LlinsVillageReport Service', () => {
     let service: LLINSVillageReportService;
     let httpMock: HttpTestingController;
     let elemDefault: ILLINSVillageReport;
@@ -59,7 +59,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(elemDefault);
       });
 
-      it('should create a LLINSVillageReport', () => {
+      it('should create a LlinsVillageReport', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
@@ -84,7 +84,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should update a LLINSVillageReport', () => {
+      it('should update a LlinsVillageReport', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
@@ -120,7 +120,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should partial update a LLINSVillageReport', () => {
+      it('should partial update a LlinsVillageReport', () => {
         const patchObject = Object.assign(
           {
             uid: 'BBBBBB',
@@ -150,7 +150,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should return a list of LLINSVillageReport', () => {
+      it('should return a list of LlinsVillageReport', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
@@ -187,7 +187,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toContainEqual(expected);
       });
 
-      it('should delete a LLINSVillageReport', () => {
+      it('should delete a LlinsVillageReport', () => {
         service.delete(123).subscribe(resp => (expectedResult = resp.ok));
 
         const req = httpMock.expectOne({ method: 'DELETE' });
@@ -196,14 +196,14 @@ describe('Service Tests', () => {
       });
 
       describe('addLLINSVillageReportToCollectionIfMissing', () => {
-        it('should add a LLINSVillageReport to an empty array', () => {
+        it('should add a LlinsVillageReport to an empty array', () => {
           const lLINSVillageReport: ILLINSVillageReport = { id: 123 };
           expectedResult = service.addLLINSVillageReportToCollectionIfMissing([], lLINSVillageReport);
           expect(expectedResult).toHaveLength(1);
           expect(expectedResult).toContain(lLINSVillageReport);
         });
 
-        it('should not add a LLINSVillageReport to an array that contains it', () => {
+        it('should not add a LlinsVillageReport to an array that contains it', () => {
           const lLINSVillageReport: ILLINSVillageReport = { id: 123 };
           const lLINSVillageReportCollection: ILLINSVillageReport[] = [
             {
@@ -215,7 +215,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toHaveLength(2);
         });
 
-        it("should add a LLINSVillageReport to an array that doesn't contain it", () => {
+        it("should add a LlinsVillageReport to an array that doesn't contain it", () => {
           const lLINSVillageReport: ILLINSVillageReport = { id: 123 };
           const lLINSVillageReportCollection: ILLINSVillageReport[] = [{ id: 456 }];
           expectedResult = service.addLLINSVillageReportToCollectionIfMissing(lLINSVillageReportCollection, lLINSVillageReport);
@@ -223,7 +223,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toContain(lLINSVillageReport);
         });
 
-        it('should add only unique LLINSVillageReport to an array', () => {
+        it('should add only unique LlinsVillageReport to an array', () => {
           const lLINSVillageReportArray: ILLINSVillageReport[] = [{ id: 123 }, { id: 456 }, { id: 80783 }];
           const lLINSVillageReportCollection: ILLINSVillageReport[] = [{ id: 123 }];
           expectedResult = service.addLLINSVillageReportToCollectionIfMissing(lLINSVillageReportCollection, ...lLINSVillageReportArray);
@@ -246,7 +246,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toContain(lLINSVillageReport);
         });
 
-        it('should return initial array if no LLINSVillageReport is added', () => {
+        it('should return initial array if no LlinsVillageReport is added', () => {
           const lLINSVillageReportCollection: ILLINSVillageReport[] = [{ id: 123 }];
           expectedResult = service.addLLINSVillageReportToCollectionIfMissing(lLINSVillageReportCollection, undefined, null);
           expect(expectedResult).toEqual(lLINSVillageReportCollection);

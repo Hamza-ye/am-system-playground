@@ -9,7 +9,7 @@ import { ILLINSFamilyReport, LLINSFamilyReport } from '../llins-family-report.mo
 import { LLINSFamilyReportService } from './llins-family-report.service';
 
 describe('Service Tests', () => {
-  describe('LLINSFamilyReport Service', () => {
+  describe('LlinsFamilyReport Service', () => {
     let service: LLINSFamilyReportService;
     let httpMock: HttpTestingController;
     let elemDefault: ILLINSFamilyReport;
@@ -59,7 +59,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(elemDefault);
       });
 
-      it('should create a LLINSFamilyReport', () => {
+      it('should create a LlinsFamilyReport', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
@@ -84,7 +84,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should update a LLINSFamilyReport', () => {
+      it('should update a LlinsFamilyReport', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
@@ -119,7 +119,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should partial update a LLINSFamilyReport', () => {
+      it('should partial update a LlinsFamilyReport', () => {
         const patchObject = Object.assign(
           {
             checkNo: 1,
@@ -149,7 +149,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should return a list of LLINSFamilyReport', () => {
+      it('should return a list of LlinsFamilyReport', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
@@ -185,7 +185,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toContainEqual(expected);
       });
 
-      it('should delete a LLINSFamilyReport', () => {
+      it('should delete a LlinsFamilyReport', () => {
         service.delete(123).subscribe(resp => (expectedResult = resp.ok));
 
         const req = httpMock.expectOne({ method: 'DELETE' });
@@ -194,14 +194,14 @@ describe('Service Tests', () => {
       });
 
       describe('addLLINSFamilyReportToCollectionIfMissing', () => {
-        it('should add a LLINSFamilyReport to an empty array', () => {
+        it('should add a LlinsFamilyReport to an empty array', () => {
           const lLINSFamilyReport: ILLINSFamilyReport = { id: 123 };
           expectedResult = service.addLLINSFamilyReportToCollectionIfMissing([], lLINSFamilyReport);
           expect(expectedResult).toHaveLength(1);
           expect(expectedResult).toContain(lLINSFamilyReport);
         });
 
-        it('should not add a LLINSFamilyReport to an array that contains it', () => {
+        it('should not add a LlinsFamilyReport to an array that contains it', () => {
           const lLINSFamilyReport: ILLINSFamilyReport = { id: 123 };
           const lLINSFamilyReportCollection: ILLINSFamilyReport[] = [
             {
@@ -213,7 +213,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toHaveLength(2);
         });
 
-        it("should add a LLINSFamilyReport to an array that doesn't contain it", () => {
+        it("should add a LlinsFamilyReport to an array that doesn't contain it", () => {
           const lLINSFamilyReport: ILLINSFamilyReport = { id: 123 };
           const lLINSFamilyReportCollection: ILLINSFamilyReport[] = [{ id: 456 }];
           expectedResult = service.addLLINSFamilyReportToCollectionIfMissing(lLINSFamilyReportCollection, lLINSFamilyReport);
@@ -221,7 +221,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toContain(lLINSFamilyReport);
         });
 
-        it('should add only unique LLINSFamilyReport to an array', () => {
+        it('should add only unique LlinsFamilyReport to an array', () => {
           const lLINSFamilyReportArray: ILLINSFamilyReport[] = [{ id: 123 }, { id: 456 }, { id: 44267 }];
           const lLINSFamilyReportCollection: ILLINSFamilyReport[] = [{ id: 123 }];
           expectedResult = service.addLLINSFamilyReportToCollectionIfMissing(lLINSFamilyReportCollection, ...lLINSFamilyReportArray);
@@ -244,7 +244,7 @@ describe('Service Tests', () => {
           expect(expectedResult).toContain(lLINSFamilyReport);
         });
 
-        it('should return initial array if no LLINSFamilyReport is added', () => {
+        it('should return initial array if no LlinsFamilyReport is added', () => {
           const lLINSFamilyReportCollection: ILLINSFamilyReport[] = [{ id: 123 }];
           expectedResult = service.addLLINSFamilyReportToCollectionIfMissing(lLINSFamilyReportCollection, undefined, null);
           expect(expectedResult).toEqual(lLINSFamilyReportCollection);

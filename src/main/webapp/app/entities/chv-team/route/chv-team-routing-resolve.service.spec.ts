@@ -12,7 +12,7 @@ import { CHVTeamService } from '../service/chv-team.service';
 import { CHVTeamRoutingResolveService } from './chv-team-routing-resolve.service';
 
 describe('Service Tests', () => {
-  describe('CHVTeam routing resolve service', () => {
+  describe('ChvTeam routing resolve service', () => {
     let mockRouter: Router;
     let mockActivatedRouteSnapshot: ActivatedRouteSnapshot;
     let routingResolveService: CHVTeamRoutingResolveService;

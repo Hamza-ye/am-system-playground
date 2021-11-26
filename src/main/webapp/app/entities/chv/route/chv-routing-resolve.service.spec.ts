@@ -12,7 +12,7 @@ import { CHVService } from '../service/chv.service';
 import { CHVRoutingResolveService } from './chv-routing-resolve.service';
 
 describe('Service Tests', () => {
-  describe('CHV routing resolve service', () => {
+  describe('Chv routing resolve service', () => {
     let mockRouter: Router;
     let mockActivatedRouteSnapshot: ActivatedRouteSnapshot;
     let routingResolveService: CHVRoutingResolveService;

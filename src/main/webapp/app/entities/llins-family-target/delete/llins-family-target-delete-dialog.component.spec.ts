@@ -11,7 +11,7 @@ import { LLINSFamilyTargetService } from '../service/llins-family-target.service
 import { LLINSFamilyTargetDeleteDialogComponent } from './llins-family-target-delete-dialog.component';
 
 describe('Component Tests', () => {
-  describe('LLINSFamilyTarget Management Delete Component', () => {
+  describe('LlinsFamilyTarget Management Delete Component', () => {
     let comp: LLINSFamilyTargetDeleteDialogComponent;
     let fixture: ComponentFixture<LLINSFamilyTargetDeleteDialogComponent>;
     let service: LLINSFamilyTargetService;

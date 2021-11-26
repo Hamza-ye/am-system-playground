@@ -22,7 +22,7 @@ import { TeamService } from 'app/entities/team/service/team.service';
 import { LLINSVillageReportUpdateComponent } from './llins-village-report-update.component';
 
 describe('Component Tests', () => {
-  describe('LLINSVillageReport Management Update Component', () => {
+  describe('LlinsVillageReport Management Update Component', () => {
     let comp: LLINSVillageReportUpdateComponent;
     let fixture: ComponentFixture<LLINSVillageReportUpdateComponent>;
     let activatedRoute: ActivatedRoute;
@@ -93,7 +93,7 @@ describe('Component Tests', () => {
         expect(comp.workingDaysSharedCollection).toEqual(expectedCollection);
       });
 
-      it('Should call LLINSVillageTarget query and add missing value', () => {
+      it('Should call LlinsVillageTarget query and add missing value', () => {
         const lLINSVillageReport: ILLINSVillageReport = { id: 456 };
         const targetDetails: ILLINSVillageTarget = { id: 81474 };
         lLINSVillageReport.targetDetails = targetDetails;
@@ -241,7 +241,7 @@ describe('Component Tests', () => {
       });
 
       describe('trackLLINSVillageTargetById', () => {
-        it('Should return tracked LLINSVillageTarget primary key', () => {
+        it('Should return tracked LlinsVillageTarget primary key', () => {
           const entity = { id: 123 };
           const trackResult = comp.trackLLINSVillageTargetById(0, entity);
           expect(trackResult).toEqual(entity.id);

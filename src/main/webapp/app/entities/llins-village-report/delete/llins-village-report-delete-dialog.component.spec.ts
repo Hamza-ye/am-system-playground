@@ -11,7 +11,7 @@ import { LLINSVillageReportService } from '../service/llins-village-report.servi
 import { LLINSVillageReportDeleteDialogComponent } from './llins-village-report-delete-dialog.component';
 
 describe('Component Tests', () => {
-  describe('LLINSVillageReport Management Delete Component', () => {
+  describe('LlinsVillageReport Management Delete Component', () => {
     let comp: LLINSVillageReportDeleteDialogComponent;
     let fixture: ComponentFixture<LLINSVillageReportDeleteDialogComponent>;
     let service: LLINSVillageReportService;

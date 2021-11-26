@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { LLINSFamilyReportDetailComponent } from './llins-family-report-detail.component';
 
 describe('Component Tests', () => {
-  describe('LLINSFamilyReport Management Detail Component', () => {
+  describe('LlinsFamilyReport Management Detail Component', () => {
     let comp: LLINSFamilyReportDetailComponent;
     let fixture: ComponentFixture<LLINSFamilyReportDetailComponent>;
 

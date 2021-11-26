@@ -8,7 +8,7 @@ import { CHVMalariaCaseReportService } from '../service/chv-malaria-case-report.
 import { CHVMalariaCaseReportComponent } from './chv-malaria-case-report.component';
 
 describe('Component Tests', () => {
-  describe('CHVMalariaCaseReport Management Component', () => {
+  describe('ChvMalariaCaseReport Management Component', () => {
     let comp: CHVMalariaCaseReportComponent;
     let fixture: ComponentFixture<CHVMalariaCaseReportComponent>;
     let service: CHVMalariaCaseReportService;

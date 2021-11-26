@@ -1,7 +1,7 @@
 package org.nmcpye.activitiesmanagement.extended.chv;
 
 import org.nmcpye.activitiesmanagement.domain.User;
-import org.nmcpye.activitiesmanagement.domain.chv.CHV;
+import org.nmcpye.activitiesmanagement.domain.chv.Chv;
 
 import java.util.List;
 
@@ -13,67 +13,67 @@ public interface ChvServiceExt {
     String ID = ChvServiceExt.class.getName();
 
     // -------------------------------------------------------------------------
-    // CHV
+    // Chv
     // -------------------------------------------------------------------------
 
     /**
-     * Adds a CHV.
+     * Adds a Chv.
      *
-     * @param chv The CHV to add.
-     * @return The generated unique identifier for this CHV.
+     * @param chv The Chv to add.
+     * @return The generated unique identifier for this Chv.
      */
-    Long addCHV(CHV chv);
+    Long addCHV(Chv chv);
 
     /**
-     * Updates a CHV.
+     * Updates a Chv.
      *
-     * @param chv The CHV to update.
+     * @param chv The Chv to update.
      */
-    void updateCHV(CHV chv);
+    void updateCHV(Chv chv);
 
     /**
-     * Deletes a CHV.
+     * Deletes a Chv.
      *
-     * @param chv The CHV to delete.
+     * @param chv The Chv to delete.
      */
-    void deleteCHV(CHV chv);
+    void deleteCHV(Chv chv);
 
     /**
-     * Get a CHV
+     * Get a Chv
      *
-     * @param id The unique identifier for the CHV to get.
-     * @return The CHV with the given id or null if it does not exist.
+     * @param id The unique identifier for the Chv to get.
+     * @return The Chv with the given id or null if it does not exist.
      */
-    CHV getCHV(Long id);
+    Chv getCHV(Long id);
 
     /**
-     * Returns the CHV with the given UID.
+     * Returns the Chv with the given UID.
      *
      * @param uid the UID.
-     * @return the CHV with the given UID, or null if no match.
+     * @return the Chv with the given UID, or null if no match.
      */
-    CHV getCHV(String uid);
+    Chv getCHV(String uid);
 
     /**
-     * Returns the CHV with the given UID. Bypasses the ACL system.
+     * Returns the Chv with the given UID. Bypasses the ACL system.
      *
      * @param uid the UID.
-     * @return the CHV with the given UID, or null if no match.
+     * @return the Chv with the given UID, or null if no match.
      */
-    CHV getCHVNoAcl(String uid);
+    Chv getCHVNoAcl(String uid);
 
     /**
      * Get all CHVs.
      *
      * @return A list containing all CHVs.
      */
-    List<CHV> getAllCHVs();
+    List<Chv> getAllCHVs();
 
     /**
      * Returns the Chvs which current user have READ access. If the current
      * user has the ALL authority then all Chvs are returned.
      */
-    List<CHV> getAllDataRead();
+    List<Chv> getAllDataRead();
 
     /**
      * Returns the Chvs which given user have READ access. If the current
@@ -82,13 +82,13 @@ public interface ChvServiceExt {
      * @param user the user to query for data set list.
      * @return a list of Chvs which the given user has data read access to.
      */
-    List<CHV> getUserDataRead(User user);
+    List<Chv> getUserDataRead(User user);
 
     /**
      * Returns the Chvs which current user have WRITE access. If the
      * current user has the ALL authority then all Chvs are returned.
      */
-    List<CHV> getAllDataWrite();
+    List<Chv> getAllDataWrite();
 
     /**
      * Returns the Chvs which current user have WRITE access. If the
@@ -97,6 +97,6 @@ public interface ChvServiceExt {
      * @param user the user to query for data set list.
      * @return a list of Chvs which given user has data write access to.
      */
-    List<CHV> getUserDataWrite(User user);
+    List<Chv> getUserDataWrite(User user);
 
 }

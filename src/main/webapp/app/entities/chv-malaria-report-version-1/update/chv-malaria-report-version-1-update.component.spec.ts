@@ -20,7 +20,7 @@ import { PeriodService } from 'app/entities/period/service/period.service';
 import { CHVMalariaReportVersion1UpdateComponent } from './chv-malaria-report-version-1-update.component';
 
 describe('Component Tests', () => {
-  describe('CHVMalariaReportVersion1 Management Update Component', () => {
+  describe('ChvMalariaReportVersion1 Management Update Component', () => {
     let comp: CHVMalariaReportVersion1UpdateComponent;
     let fixture: ComponentFixture<CHVMalariaReportVersion1UpdateComponent>;
     let activatedRoute: ActivatedRoute;
@@ -70,7 +70,7 @@ describe('Component Tests', () => {
         expect(comp.usersSharedCollection).toEqual(expectedCollection);
       });
 
-      it('Should call CHV query and add missing value', () => {
+      it('Should call Chv query and add missing value', () => {
         const cHVMalariaReportVersion1: ICHVMalariaReportVersion1 = { id: 456 };
         const chv: ICHV = { id: 45406 };
         cHVMalariaReportVersion1.chv = chv;
@@ -204,7 +204,7 @@ describe('Component Tests', () => {
       });
 
       describe('trackCHVById', () => {
-        it('Should return tracked CHV primary key', () => {
+        it('Should return tracked Chv primary key', () => {
           const entity = { id: 123 };
           const trackResult = comp.trackCHVById(0, entity);
           expect(trackResult).toEqual(entity.id);

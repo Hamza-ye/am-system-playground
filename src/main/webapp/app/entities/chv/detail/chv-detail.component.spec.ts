@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { CHVDetailComponent } from './chv-detail.component';
 
 describe('Component Tests', () => {
-  describe('CHV Management Detail Component', () => {
+  describe('Chv Management Detail Component', () => {
     let comp: CHVDetailComponent;
     let fixture: ComponentFixture<CHVDetailComponent>;
 

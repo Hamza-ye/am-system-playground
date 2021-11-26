@@ -12,7 +12,7 @@ import { WHMovementService } from '../service/wh-movement.service';
 import { WHMovementRoutingResolveService } from './wh-movement-routing-resolve.service';
 
 describe('Service Tests', () => {
-  describe('WHMovement routing resolve service', () => {
+  describe('WhMovement routing resolve service', () => {
     let mockRouter: Router;
     let mockActivatedRouteSnapshot: ActivatedRouteSnapshot;
     let routingResolveService: WHMovementRoutingResolveService;

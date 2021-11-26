@@ -22,7 +22,7 @@ import { TeamService } from 'app/entities/team/service/team.service';
 import { WHMovementUpdateComponent } from './wh-movement-update.component';
 
 describe('Component Tests', () => {
-  describe('WHMovement Management Update Component', () => {
+  describe('WhMovement Management Update Component', () => {
     let comp: WHMovementUpdateComponent;
     let fixture: ComponentFixture<WHMovementUpdateComponent>;
     let activatedRoute: ActivatedRoute;

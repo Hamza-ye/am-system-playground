@@ -12,7 +12,7 @@ import { CHVMalariaCaseReportService } from '../service/chv-malaria-case-report.
 import { CHVMalariaCaseReportRoutingResolveService } from './chv-malaria-case-report-routing-resolve.service';
 
 describe('Service Tests', () => {
-  describe('CHVMalariaCaseReport routing resolve service', () => {
+  describe('ChvMalariaCaseReport routing resolve service', () => {
     let mockRouter: Router;
     let mockActivatedRouteSnapshot: ActivatedRouteSnapshot;
     let routingResolveService: CHVMalariaCaseReportRoutingResolveService;

@@ -20,7 +20,7 @@ import { UserService } from 'app/entities/user/user.service';
 import { CHVUpdateComponent } from './chv-update.component';
 
 describe('Component Tests', () => {
-  describe('CHV Management Update Component', () => {
+  describe('Chv Management Update Component', () => {
     let comp: CHVUpdateComponent;
     let fixture: ComponentFixture<CHVUpdateComponent>;
     let activatedRoute: ActivatedRoute;

@@ -11,7 +11,7 @@ import { CHVMalariaCaseReportService } from '../service/chv-malaria-case-report.
 import { CHVMalariaCaseReportDeleteDialogComponent } from './chv-malaria-case-report-delete-dialog.component';
 
 describe('Component Tests', () => {
-  describe('CHVMalariaCaseReport Management Delete Component', () => {
+  describe('ChvMalariaCaseReport Management Delete Component', () => {
     let comp: CHVMalariaCaseReportDeleteDialogComponent;
     let fixture: ComponentFixture<CHVMalariaCaseReportDeleteDialogComponent>;
     let service: CHVMalariaCaseReportService;

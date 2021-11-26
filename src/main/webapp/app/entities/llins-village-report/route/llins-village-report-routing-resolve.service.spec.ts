@@ -12,7 +12,7 @@ import { LLINSVillageReportService } from '../service/llins-village-report.servi
 import { LLINSVillageReportRoutingResolveService } from './llins-village-report-routing-resolve.service';
 
 describe('Service Tests', () => {
-  describe('LLINSVillageReport routing resolve service', () => {
+  describe('LlinsVillageReport routing resolve service', () => {
     let mockRouter: Router;
     let mockActivatedRouteSnapshot: ActivatedRouteSnapshot;
     let routingResolveService: LLINSVillageReportRoutingResolveService;
