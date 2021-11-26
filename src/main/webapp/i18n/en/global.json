@@ -5,6 +5,16 @@
     "menu": {
       "home": "Home",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
+      "projects": {
+        "main": "Malaria",
+        "surveillance" : "Cases and Surveillance",
+        "supply": "Drugs and Supply",
+        "llinsDistribution": "LLINs Distribution",
+        "irs": "Indoor Residual Spraying",
+        "chvs": "Community Health Volunteers",
+        "other": "Other Activities"
+      },
+      "dengue": "Dengue",
       "entities": {
         "main": "Entities",
         "project": "Project",
@@ -73,7 +83,7 @@
         "database": "Database",
         "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
       },
-      "language": "Language"
+      "language": "اللغة"
     },
     "form": {
       "username.label": "Username",

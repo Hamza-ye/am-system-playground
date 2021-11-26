@@ -5,6 +5,16 @@
     "menu": {
       "home": "الصفحة الرئيسية",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
+      "projects": {
+        "main": "الملاريا",
+        "surveillance" : "الترصد والحالات",
+        "supply": "أدوية و إمداد",
+        "llinsDistribution": "توزيع ناموسيات",
+        "irs": "رش مبيد أثر باقي",
+        "chvs": "متطوعات صحة المجتمع",
+        "other": "أنشطة اخرى"
+      },
+      "dengue": "حمى الضنك",
       "entities": {
         "main": "الكيانات",
         "project": "Project",
@@ -73,7 +83,7 @@
         "database": "قاعدة البيانات",
         "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
       },
-      "language": "اللغة"
+      "language": "Language"
     },
     "form": {
       "username.label": "اسم المستخدم",

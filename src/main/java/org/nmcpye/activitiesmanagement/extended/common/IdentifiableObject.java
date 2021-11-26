@@ -2,9 +2,11 @@ package org.nmcpye.activitiesmanagement.extended.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.nmcpye.activitiesmanagement.domain.User;
+import org.nmcpye.activitiesmanagement.extended.translation.Translation;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 public interface IdentifiableObject
     extends PrimaryKeyObject, LinkableObject, Comparable<IdentifiableObject>, Serializable {
@@ -47,6 +49,7 @@ public interface IdentifiableObject
     @Deprecated
     void setUser( User user );
 
+//    Set<Translation> getTranslations();
     //-----------------------------------------------------------------------------
     // Utility methods
     //-----------------------------------------------------------------------------

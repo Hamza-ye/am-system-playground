@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.apache.commons.lang3.StringUtils;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.extended.common.annotation.Description;
 import org.nmcpye.activitiesmanagement.extended.schema.PropertyType;
@@ -14,13 +15,15 @@ import org.nmcpye.activitiesmanagement.extended.schema.annotation.Property;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyRange;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyTransformer;
 import org.nmcpye.activitiesmanagement.extended.schema.transformer.UserPropertyTransformer;
+import org.nmcpye.activitiesmanagement.extended.translation.Translation;
+import org.nmcpye.activitiesmanagement.extended.user.UserSettingKey;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.util.*;
 
 //@MappedSuperclass
-@JsonRootName( value = "identifiableObject", namespace = DxfNamespaces.DXF_2_0 )
+@JsonRootName(value = "identifiableObject", namespace = DxfNamespaces.DXF_2_0)
 public class BaseIdentifiableObject
     extends BaseLinkableObject implements IdentifiableObject {
 
@@ -84,11 +87,22 @@ public class BaseIdentifiableObject
     @JoinColumn(name = "last_updated_by")
     protected User lastUpdatedBy;
 
+//    /**
+//     * Set of available object translation, normally filtered by locale.
+//     */
+//    protected Set<Translation> translations = new HashSet<>();
+//
+//    /**
+//     * Cache for object translations, where the cache key is a combination of
+//     * locale and translation property, and value is the translated value.
+//     */
+//    protected Map<String, String> translationCache = new HashMap<>();
     // -------------------------------------------------------------------------
     // Constructors
     // -------------------------------------------------------------------------
 
-    public BaseIdentifiableObject() {}
+    public BaseIdentifiableObject() {
+    }
 
     public BaseIdentifiableObject(Long id, String uid, String name) {
         this.id = id;
@@ -145,7 +159,7 @@ public class BaseIdentifiableObject
     @Override
 //    @JsonProperty(value = "id")
     @JsonProperty(value = "uid")
-    @Description( "The Unique Identifier for this Object." )
+    @Description("The Unique Identifier for this Object.")
     @Property(value = PropertyType.IDENTIFIER, required = Property.Value.FALSE)
     @PropertyRange(min = 11, max = 11)
     public String getUid() {
@@ -158,7 +172,7 @@ public class BaseIdentifiableObject
 
     @Override
     @JsonProperty
-    @Description( "The unique code for this Object." )
+    @Description("The unique code for this Object.")
     @Property(PropertyType.IDENTIFIER)
     public String getCode() {
         return code;
@@ -170,7 +184,7 @@ public class BaseIdentifiableObject
 
     @Override
     @JsonProperty
-    @Description( "The name of this Object. Required." )
+    @Description("The name of this Object. Required.")
     @PropertyRange(min = 1)
     public String getName() {
         return name;
@@ -230,13 +244,12 @@ public class BaseIdentifiableObject
     }
 
     @Override
-    @Gist( included = Include.FALSE )
+    @Gist(included = Include.FALSE)
     @JsonProperty
-    @JsonSerialize( using = UserPropertyTransformer.JacksonSerialize.class )
-    @JsonDeserialize( using = UserPropertyTransformer.JacksonDeserialize.class )
-    @PropertyTransformer( UserPropertyTransformer.class )
-    public User getCreatedBy()
-    {
+    @JsonSerialize(using = UserPropertyTransformer.JacksonSerialize.class)
+    @JsonDeserialize(using = UserPropertyTransformer.JacksonDeserialize.class)
+    @PropertyTransformer(UserPropertyTransformer.class)
+    public User getCreatedBy() {
         return createdBy;
     }
 
@@ -250,13 +263,12 @@ public class BaseIdentifiableObject
     }
 
     @Override
-    public void setCreatedBy( User createdBy )
-    {
+    public void setCreatedBy(User createdBy) {
         this.createdBy = createdBy;
     }
 
     public void setUser(User user) {
-        setCreatedBy( createdBy == null ? user : createdBy );
+        setCreatedBy(createdBy == null ? user : createdBy);
     }
 
     // -------------------------------------------------------------------------
@@ -376,32 +388,91 @@ public class BaseIdentifiableObject
         return null;
     }
 
+//    @Gist(included = Include.FALSE)
+//    @Override
+//    @JsonProperty
+//    public Set<Translation> getTranslations() {
+//        if (translations == null) {
+//            translations = new HashSet<>();
+//        }
+//
+//        return translations;
+//    }
+//
+//    /**
+//     * Clears out cache when setting translations.
+//     */
+//    public void setTranslations(Set<Translation> translations) {
+//        this.translationCache.clear();
+//        this.translations = translations;
+//    }
+//
+//    /**
+//     * Returns a translated value for this object for the given property. The
+//     * current locale is read from the user context.
+//     *
+//     * @param translationKey the translation key.
+//     * @param defaultValue   the value to use if there are no translations.
+//     * @return a translated value.
+//     */
+//    protected String getTranslation(String translationKey, String defaultValue) {
+//        Locale locale = UserContext.getUserSetting(UserSettingKey.DB_LOCALE);
+//
+//        defaultValue = defaultValue != null ? defaultValue.trim() : null;
+//
+//        if (locale == null || translationKey == null) {
+//            return defaultValue;
+//        }
+//
+//        loadTranslationsCacheIfEmpty();
+//
+//        String cacheKey = Translation.getCacheKey(locale.toString(), translationKey);
+//
+//        return translationCache.getOrDefault(cacheKey, defaultValue);
+//    }
+//
+//    /**
+//     * Populates the translationsCache map unless it is already populated.
+//     */
+//    private void loadTranslationsCacheIfEmpty() {
+//        if (translationCache.isEmpty() && translations != null) {
+//            for (Translation translation : translations) {
+//                if (translation.getLocale() != null && translation.getProperty() != null
+//                    && !StringUtils.isEmpty(translation.getValue())) {
+//                    String key = Translation.getCacheKey(translation.getLocale(),
+//                        translation.getProperty());
+//                    translationCache.put(key, translation.getValue());
+//                }
+//            }
+//        }
+//    }
+
     @Override
     public String toString() {
         return (
             "{" +
-            "\"class\":\"" +
-            getClass() +
-            "\", " +
-            "\"id\":\"" +
-            getId() +
-            "\", " +
-            "\"uid\":\"" +
-            getUid() +
-            "\", " +
-            "\"code\":\"" +
-            getCode() +
-            "\", " +
-            "\"name\":\"" +
-            getName() +
-            "\", " +
-            "\"created\":\"" +
-            getCreated() +
-            "\", " +
-            "\"lastUpdated\":\"" +
-            getLastUpdated() +
-            "\" " +
-            "}"
+                "\"class\":\"" +
+                getClass() +
+                "\", " +
+                "\"id\":\"" +
+                getId() +
+                "\", " +
+                "\"uid\":\"" +
+                getUid() +
+                "\", " +
+                "\"code\":\"" +
+                getCode() +
+                "\", " +
+                "\"name\":\"" +
+                getName() +
+                "\", " +
+                "\"created\":\"" +
+                getCreated() +
+                "\", " +
+                "\"lastUpdated\":\"" +
+                getLastUpdated() +
+                "\" " +
+                "}"
         );
     }
 }
