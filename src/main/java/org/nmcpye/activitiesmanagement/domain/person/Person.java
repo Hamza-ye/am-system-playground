@@ -807,7 +807,7 @@ public class Person extends BaseIdentifiableObject implements UserDetails, Metad
         this.userInfo = user;
     }
 
-    @JsonProperty("peopleGroups")
+    @JsonProperty//("peopleGroups")
     @JsonSerialize(contentAs = BaseIdentifiableObject.class)
     public Set<PeopleGroup> getGroups() {
         return groups;

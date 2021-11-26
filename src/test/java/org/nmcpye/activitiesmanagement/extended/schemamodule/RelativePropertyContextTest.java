@@ -28,20 +28,20 @@ public class RelativePropertyContextTest extends AMTest {
 
     @Test
     public void testResolve_DirectProperty() {
-        assertPropertyDoesExist(PeopleGroup.class, "people", Person.class);
+        assertPropertyDoesExist(PeopleGroup.class, "members", Person.class);
         assertPropertyDoesExist(PeopleGroup.class, "managedGroups", PeopleGroup.class);
         assertPropertyDoesExist(OrganisationUnit.class, "ancestors", OrganisationUnit.class);
         assertPropertyDoesExist(OrganisationUnit.class, "level", Integer.class);
 
-        assertPropertyDoesNotExist(PeopleGroup.class, "members");
+        assertPropertyDoesNotExist(PeopleGroup.class, "people");
         assertPropertyDoesNotExist(User.class, "password");
     }
 
     @Test
     public void testResolve_ChildProperty() {
-        assertPropertyDoesExist(PeopleGroup.class, "people.peopleGroups", PeopleGroup.class);
-        assertPropertyDoesExist(PeopleGroup.class, "people.organisationUnits", OrganisationUnit.class);
-        assertPropertyDoesExist(PeopleGroup.class, "people.mobile", String.class);
+        assertPropertyDoesExist(PeopleGroup.class, "members.groups", PeopleGroup.class);
+        assertPropertyDoesExist(PeopleGroup.class, "members.organisationUnits", OrganisationUnit.class);
+        assertPropertyDoesExist(PeopleGroup.class, "members.mobile", String.class);
 
         assertPropertyDoesNotExist(OrganisationUnit.class, "ancestors.pony");
         assertPropertyDoesNotExist(OrganisationUnit.class, "pony.ancestors");
@@ -49,9 +49,9 @@ public class RelativePropertyContextTest extends AMTest {
 
     @Test
     public void testResolve_GrantChildProperty() {
-        assertPropertyDoesExist(PeopleGroup.class, "people.peopleGroups.people", Person.class);
-        assertPropertyDoesExist(PeopleGroup.class, "people.organisationUnits.level", Integer.class);
-        assertPropertyDoesExist(PeopleGroup.class, "people.dataViewOrganisationUnits.ancestors", OrganisationUnit.class);
+        assertPropertyDoesExist(PeopleGroup.class, "members.groups.members", Person.class);
+        assertPropertyDoesExist(PeopleGroup.class, "members.organisationUnits.level", Integer.class);
+        assertPropertyDoesExist(PeopleGroup.class, "members.dataViewOrganisationUnits.ancestors", OrganisationUnit.class);
 
         assertPropertyDoesNotExist(OrganisationUnit.class, "ancestors.ancestors.pony");
         assertPropertyDoesNotExist(OrganisationUnit.class, "pony.ancestors.ancestors");
