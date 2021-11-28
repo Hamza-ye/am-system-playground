@@ -136,10 +136,11 @@ public class ContentPageResource {
     /**
      * {@code GET  /content-pages} : get all the contentPages.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of contentPages in body.
      */
     @GetMapping("/content-pages")
-    public List<ContentPage> getAllContentPages() {
+    public List<ContentPage> getAllContentPages(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all ContentPages");
         return contentPageService.findAll();
     }

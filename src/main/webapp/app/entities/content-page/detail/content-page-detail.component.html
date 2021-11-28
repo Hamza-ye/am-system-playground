@@ -68,6 +68,13 @@
         <dd>
           <span>{{ contentPage.lastUpdatedBy?.login }}</span>
         </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.contentPage.relatedLink">Related Link</span></dt>
+        <dd>
+          <span *ngFor="let relatedLink of contentPage.relatedLinks; let last = last">
+            <a [routerLink]="['/related-link', relatedLink?.id, 'view']">{{ relatedLink.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

@@ -234,6 +234,11 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'amSystemPlaygroundApp.imageAlbum.home.title' },
         loadChildren: () => import('./image-album/image-album.module').then(m => m.ImageAlbumModule),
       },
+      {
+        path: 'related-link',
+        data: { pageTitle: 'amSystemPlaygroundApp.relatedLink.home.title' },
+        loadChildren: () => import('./related-link/related-link.module').then(m => m.RelatedLinkModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

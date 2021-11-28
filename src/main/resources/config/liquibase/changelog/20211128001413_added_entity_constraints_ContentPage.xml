@@ -26,4 +26,17 @@
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
     </changeSet>
+    <changeSet id="33336669843w" author="Hamza">
+        <addForeignKeyConstraint baseColumnNames="content_page_id"
+                                 baseTableName="content_page_related_link"
+                                 constraintName="fk_content_page__related_link__content_page_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="content_page"/>
+
+        <addForeignKeyConstraint baseColumnNames="related_link_id"
+                                 baseTableName="content_page_related_link"
+                                 constraintName="fk_content_page__related_link__related_link_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="related_link"/>
+    </changeSet>
 </databaseChangeLog>

@@ -1,6 +1,8 @@
 package org.nmcpye.activitiesmanagement.service;
 
 import org.nmcpye.activitiesmanagement.domain.ContentPage;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +33,14 @@ public interface ContentPageService {
      * @return the list of entities.
      */
     List<ContentPage> findAll();
+
+    /**
+     * Get all the contentPages with eager load of many-to-many relationships.
+     *
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    Page<ContentPage> findAllWithEagerRelationships(Pageable pageable);
 
     /**
      * Get the "id" contentPage.

@@ -174,6 +174,25 @@
             </option>
           </select>
         </div>
+
+        <div class="form-group">
+          <label appTranslate="amSystemPlaygroundApp.contentPage.relatedLink" for="field_relatedLinks">Related Link</label>
+          <select
+            class="form-control"
+            id="field_relatedLinks"
+            data-cy="relatedLink"
+            multiple
+            name="relatedLinks"
+            formControlName="relatedLinks"
+          >
+            <option
+              [ngValue]="getSelectedRelatedLink(relatedLinkOption, editForm.get('relatedLinks')!.value)"
+              *ngFor="let relatedLinkOption of relatedLinksSharedCollection; trackBy: trackRelatedLinkById"
+            >
+              {{ relatedLinkOption.id }}
+            </option>
+          </select>
+        </div>
       </div>
 
       <div>

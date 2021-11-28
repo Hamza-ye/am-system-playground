@@ -1,0 +1,29 @@
+{
+  "amSystemPlaygroundApp": {
+    "relatedLink": {
+      "home": {
+        "title": "Related Links",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Related Link",
+        "createOrEditLabel": "Create or edit a Related Link",
+        "notFound": "No Related Links found"
+      },
+      "created": "A new Related Link is created with identifier {{ param }}",
+      "updated": "A Related Link is updated with identifier {{ param }}",
+      "deleted": "A Related Link is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Related Link {{ id }}?"
+      },
+      "detail": {
+        "title": "Related Link"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "name": "Name",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "url": "Url",
+      "contentPage": "Content Page"
+    }
+  }
+}

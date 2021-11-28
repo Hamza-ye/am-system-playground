@@ -14,6 +14,8 @@ import { IImageAlbum } from 'app/entities/image-album/image-album.model';
 import { ImageAlbumService } from 'app/entities/image-album/service/image-album.service';
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
+import { IRelatedLink } from 'app/entities/related-link/related-link.model';
+import { RelatedLinkService } from 'app/entities/related-link/service/related-link.service';
 
 @Component({
   selector: 'app-content-page-update',
@@ -24,6 +26,7 @@ export class ContentPageUpdateComponent implements OnInit {
 
   imageAlbumsCollection: IImageAlbum[] = [];
   usersSharedCollection: IUser[] = [];
+  relatedLinksSharedCollection: IRelatedLink[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -40,12 +43,14 @@ export class ContentPageUpdateComponent implements OnInit {
     imageAlbum: [],
     createdBy: [],
     lastUpdatedBy: [],
+    relatedLinks: [],
   });
 
   constructor(
     protected contentPageService: ContentPageService,
     protected imageAlbumService: ImageAlbumService,
     protected userService: UserService,
+    protected relatedLinkService: RelatedLinkService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -86,6 +91,21 @@ export class ContentPageUpdateComponent implements OnInit {
     return item.id!;
   }
 
+  trackRelatedLinkById(index: number, item: IRelatedLink): number {
+    return item.id!;
+  }
+
+  getSelectedRelatedLink(option: IRelatedLink, selectedVals?: IRelatedLink[]): IRelatedLink {
+    if (selectedVals) {
+      for (const selectedVal of selectedVals) {
+        if (option.id === selectedVal.id) {
+          return selectedVal;
+        }
+      }
+    }
+    return option;
+  }
+
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IContentPage>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
       () => this.onSaveSuccess(),
@@ -121,6 +141,7 @@ export class ContentPageUpdateComponent implements OnInit {
       imageAlbum: contentPage.imageAlbum,
       createdBy: contentPage.createdBy,
       lastUpdatedBy: contentPage.lastUpdatedBy,
+      relatedLinks: contentPage.relatedLinks,
     });
 
     this.imageAlbumsCollection = this.imageAlbumService.addImageAlbumToCollectionIfMissing(
@@ -131,6 +152,10 @@ export class ContentPageUpdateComponent implements OnInit {
       this.usersSharedCollection,
       contentPage.createdBy,
       contentPage.lastUpdatedBy
+    );
+    this.relatedLinksSharedCollection = this.relatedLinkService.addRelatedLinkToCollectionIfMissing(
+      this.relatedLinksSharedCollection,
+      ...(contentPage.relatedLinks ?? [])
     );
   }
 
@@ -158,6 +183,16 @@ export class ContentPageUpdateComponent implements OnInit {
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
+
+    this.relatedLinkService
+      .query()
+      .pipe(map((res: HttpResponse<IRelatedLink[]>) => res.body ?? []))
+      .pipe(
+        map((relatedLinks: IRelatedLink[]) =>
+          this.relatedLinkService.addRelatedLinkToCollectionIfMissing(relatedLinks, ...(this.editForm.get('relatedLinks')!.value ?? []))
+        )
+      )
+      .subscribe((relatedLinks: IRelatedLink[]) => (this.relatedLinksSharedCollection = relatedLinks));
   }
 
   protected createFromForm(): IContentPage {
@@ -179,6 +214,7 @@ export class ContentPageUpdateComponent implements OnInit {
       imageAlbum: this.editForm.get(['imageAlbum'])!.value,
       createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
+      relatedLinks: this.editForm.get(['relatedLinks'])!.value,
     };
   }
 }

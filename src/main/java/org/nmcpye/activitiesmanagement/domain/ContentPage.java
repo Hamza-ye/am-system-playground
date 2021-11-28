@@ -2,6 +2,7 @@ package org.nmcpye.activitiesmanagement.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
@@ -57,16 +58,6 @@ public class ContentPage extends BaseIdentifiableObject {
     @JoinColumn(name = "last_updated_by")
     protected User lastUpdatedBy;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-//    @JoinTable(
-//        name = "content_page_related_link",
-//        joinColumns = @JoinColumn(name = "content_page_id"),
-//        inverseJoinColumns = @JoinColumn(name = "related_link_id")
-//    )
-//    @JsonIgnoreProperties(value = { "contenPages" }, allowSetters = true)
-//    private Set<RelatedLink> relatedLinks = new HashSet<>();
-
     @Column(name = "title")
     private String title;
 
@@ -87,6 +78,16 @@ public class ContentPage extends BaseIdentifiableObject {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(unique = true)
     private ImageAlbum imageAlbum;
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JoinTable(
+        name = "content_page_related_link",
+        joinColumns = @JoinColumn(name = "content_page_id"),
+        inverseJoinColumns = @JoinColumn(name = "related_link_id")
+    )
+    @JsonIgnoreProperties(value = { "contentPages" }, allowSetters = true)
+    private Set<RelatedLink> relatedLinks = new HashSet<>();
 
     @Override
     public Long getId() {
@@ -280,5 +281,32 @@ public class ContentPage extends BaseIdentifiableObject {
     @Override
     public void setLastUpdatedBy(User lastUpdatedBy) {
         this.lastUpdatedBy = lastUpdatedBy;
+    }
+
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
+    public Set<RelatedLink> getRelatedLinks() {
+        return this.relatedLinks;
+    }
+
+    public ContentPage relatedLinks(Set<RelatedLink> relatedLinks) {
+        this.setRelatedLinks(relatedLinks);
+        return this;
+    }
+
+    public ContentPage addRelatedLink(RelatedLink relatedLink) {
+        this.relatedLinks.add(relatedLink);
+        relatedLink.getContentPages().add(this);
+        return this;
+    }
+
+    public ContentPage removeRelatedLink(RelatedLink relatedLink) {
+        this.relatedLinks.remove(relatedLink);
+        relatedLink.getContentPages().remove(this);
+        return this;
+    }
+
+    public void setRelatedLinks(Set<RelatedLink> relatedLinks) {
+        this.relatedLinks = relatedLinks;
     }
 }

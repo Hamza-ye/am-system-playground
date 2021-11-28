@@ -7,7 +7,7 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "projects": {
         "main": "الملاريا",
-        "surveillance" : "الترصد والحالات",
+        "surveillance": "الترصد والحالات",
         "supply": "الإمداد والأدوية",
         "llinsDistribution": "توزيع الناموسيات",
         "irs": "رش مبيد الأثر الباقي",
@@ -63,6 +63,7 @@
         "document": "Document",
         "contentPage": "Content Page",
         "imageAlbum": "Image Album",
+        "relatedLink": "Related Link",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

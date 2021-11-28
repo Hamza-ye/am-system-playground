@@ -30,7 +30,8 @@
       "visitedCount": "Visited Count",
       "imageAlbum": "Image Album",
       "createdBy": "Created By",
-      "lastUpdatedBy": "Last Updated By"
+      "lastUpdatedBy": "Last Updated By",
+      "relatedLink": "Related Link"
     }
   }
 }

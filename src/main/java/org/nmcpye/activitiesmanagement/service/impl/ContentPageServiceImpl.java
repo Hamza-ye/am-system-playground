@@ -5,6 +5,8 @@ import org.nmcpye.activitiesmanagement.repository.ContentPageRepository;
 import org.nmcpye.activitiesmanagement.service.ContentPageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -81,14 +83,18 @@ public class ContentPageServiceImpl implements ContentPageService {
     @Transactional(readOnly = true)
     public List<ContentPage> findAll() {
         log.debug("Request to get all ContentPages");
-        return contentPageRepository.findAll();
+        return contentPageRepository.findAllWithEagerRelationships();
+    }
+
+    public Page<ContentPage> findAllWithEagerRelationships(Pageable pageable) {
+        return contentPageRepository.findAllWithEagerRelationships(pageable);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<ContentPage> findOne(Long id) {
         log.debug("Request to get ContentPage : {}", id);
-        return contentPageRepository.findById(id);
+        return contentPageRepository.findOneWithEagerRelationships(id);
     }
 
     @Override

@@ -58,6 +58,7 @@
     <include file="config/liquibase/changelog/20211031234351_added_entity_DataInputPeriod.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20211031234352_added_entity_RelativePeriods.xml" relativeToChangelogFile="false"/>
 
+    <include file="config/liquibase/changelog/20211128192831_added_entity_RelatedLink.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20211128001414_added_entity_ImageAlbum.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20211128001413_added_entity_ContentPage.xml" relativeToChangelogFile="false"/>
 

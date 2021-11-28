@@ -59,6 +59,19 @@
         <dropDefaultValue tableName="content_page" columnName="last_updated" columnDataType="${datetimeType}"/>
     </changeSet>
 
+    <changeSet id="20211128001413-1-relations" author="jhipster">
+
+        <createTable tableName="content_page_related_link">
+            <column name="related_link_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content_page_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="content_page_id, related_link_id" tableName="content_page_related_link"/>
+    </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
     <!--

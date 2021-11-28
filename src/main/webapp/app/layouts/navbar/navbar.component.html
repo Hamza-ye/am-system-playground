@@ -679,6 +679,18 @@
               <span appTranslate="global.menu.entities.imageAlbum">Image Album</span>
             </a>
           </li>
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="related-link"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="collapseNavbar()"
+            >
+              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <span appTranslate="global.menu.entities.relatedLink">Related Link</span>
+            </a>
+          </li>
           <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
         </ul>
       </li>

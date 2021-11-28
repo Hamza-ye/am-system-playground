@@ -1,0 +1,86 @@
+<div>
+  <h2 id="page-heading" data-cy="RelatedLinkHeading">
+    <span appTranslate="amSystemPlaygroundApp.relatedLink.home.title">Related Links</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.relatedLink.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-related-link"
+        [routerLink]="['/related-link/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.relatedLink.home.createLabel"> Create a new Related Link </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="relatedLinks?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.relatedLink.home.notFound">No relatedLinks found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="relatedLinks && relatedLinks.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.relatedLink.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.relatedLink.name">Name</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.relatedLink.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.relatedLink.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.relatedLink.url">Url</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let relatedLink of relatedLinks; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/related-link', relatedLink.id, 'view']">{{ relatedLink.id }}</a>
+          </td>
+          <td>{{ relatedLink.uid }}</td>
+          <td>{{ relatedLink.name }}</td>
+          <td>{{ relatedLink.created | formatMediumDatetime }}</td>
+          <td>{{ relatedLink.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ relatedLink.url }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/related-link', relatedLink.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/related-link', relatedLink.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(relatedLink)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 import * as dayjs from 'dayjs';
 import { IImageAlbum } from 'app/entities/image-album/image-album.model';
 import { IUser } from 'app/entities/user/user.model';
+import { IRelatedLink } from 'app/entities/related-link/related-link.model';
 
 export interface IContentPage {
   id?: number;
@@ -17,6 +18,7 @@ export interface IContentPage {
   imageAlbum?: IImageAlbum | null;
   createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
+  relatedLinks?: IRelatedLink[] | null;
 }
 
 export class ContentPage implements IContentPage {
@@ -34,7 +36,8 @@ export class ContentPage implements IContentPage {
     public visitedCount?: number | null,
     public imageAlbum?: IImageAlbum | null,
     public createdBy?: IUser | null,
-    public lastUpdatedBy?: IUser | null
+    public lastUpdatedBy?: IUser | null,
+    public relatedLinks?: IRelatedLink[] | null
   ) {
     this.active = this.active ?? false;
   }
