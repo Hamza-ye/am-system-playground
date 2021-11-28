@@ -7,6 +7,7 @@ import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.extended.common.*;
 import org.nmcpye.activitiesmanagement.extended.common.exception.InvalidIdentifierReferenceException;
+import org.nmcpye.activitiesmanagement.extended.translation.Translation;
 import org.nmcpye.activitiesmanagement.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.ReflectionUtils.getRealClass;
@@ -28,7 +30,6 @@ import static org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.
  * Note that it is required for nameable object stores to have concrete implementation
  * classes, not rely on the HibernateIdentifiableObjectStore class, in order to
  * be injected as nameable object stores.
- *
  */
 @Component("org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectManager")
 public class DefaultIdentifiableObjectManager implements IdentifiableObjectManager {
@@ -119,6 +120,24 @@ public class DefaultIdentifiableObjectManager implements IdentifiableObjectManag
         for (IdentifiableObject object : objects) {
             update(object, user);
         }
+    }
+
+    @Override
+    @Transactional
+    public void updateTranslations(IdentifiableObject persistedObject, Set<Translation> translations) {
+        Session session = entityManager.unwrap(Session.class);
+
+        BaseIdentifiableObject translatedObject = (BaseIdentifiableObject) persistedObject;
+
+        translatedObject.setTranslations(
+            translations.stream()
+                .filter(t -> !StringUtils.isEmpty(t.getValue()))
+                .collect(Collectors.toSet()));
+
+        translatedObject.setLastUpdated(new Date());
+        translatedObject.setLastUpdatedBy(userService.getUserWithAuthorities().orElse(null));
+
+        session.update(translatedObject);
     }
 
     @Override

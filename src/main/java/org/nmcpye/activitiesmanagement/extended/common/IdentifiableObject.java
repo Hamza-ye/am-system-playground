@@ -49,7 +49,7 @@ public interface IdentifiableObject
     @Deprecated
     void setUser( User user );
 
-//    Set<Translation> getTranslations();
+    Set<Translation> getTranslations();
     //-----------------------------------------------------------------------------
     // Utility methods
     //-----------------------------------------------------------------------------

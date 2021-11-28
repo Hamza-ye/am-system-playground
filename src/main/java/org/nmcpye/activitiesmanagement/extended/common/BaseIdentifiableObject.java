@@ -25,7 +25,7 @@ import java.util.*;
 //@MappedSuperclass
 @JsonRootName(value = "identifiableObject", namespace = DxfNamespaces.DXF_2_0)
 public class BaseIdentifiableObject
-    extends BaseLinkableObject implements IdentifiableObject {
+    extends TranslatableObject implements IdentifiableObject {
 
     /**
      * The database internal identifier for this Object.
@@ -87,16 +87,6 @@ public class BaseIdentifiableObject
     @JoinColumn(name = "last_updated_by")
     protected User lastUpdatedBy;
 
-//    /**
-//     * Set of available object translation, normally filtered by locale.
-//     */
-//    protected Set<Translation> translations = new HashSet<>();
-//
-//    /**
-//     * Cache for object translations, where the cache key is a combination of
-//     * locale and translation property, and value is the translated value.
-//     */
-//    protected Map<String, String> translationCache = new HashMap<>();
     // -------------------------------------------------------------------------
     // Constructors
     // -------------------------------------------------------------------------
@@ -387,65 +377,6 @@ public class BaseIdentifiableObject
 
         return null;
     }
-
-//    @Gist(included = Include.FALSE)
-//    @Override
-//    @JsonProperty
-//    public Set<Translation> getTranslations() {
-//        if (translations == null) {
-//            translations = new HashSet<>();
-//        }
-//
-//        return translations;
-//    }
-//
-//    /**
-//     * Clears out cache when setting translations.
-//     */
-//    public void setTranslations(Set<Translation> translations) {
-//        this.translationCache.clear();
-//        this.translations = translations;
-//    }
-//
-//    /**
-//     * Returns a translated value for this object for the given property. The
-//     * current locale is read from the user context.
-//     *
-//     * @param translationKey the translation key.
-//     * @param defaultValue   the value to use if there are no translations.
-//     * @return a translated value.
-//     */
-//    protected String getTranslation(String translationKey, String defaultValue) {
-//        Locale locale = UserContext.getUserSetting(UserSettingKey.DB_LOCALE);
-//
-//        defaultValue = defaultValue != null ? defaultValue.trim() : null;
-//
-//        if (locale == null || translationKey == null) {
-//            return defaultValue;
-//        }
-//
-//        loadTranslationsCacheIfEmpty();
-//
-//        String cacheKey = Translation.getCacheKey(locale.toString(), translationKey);
-//
-//        return translationCache.getOrDefault(cacheKey, defaultValue);
-//    }
-//
-//    /**
-//     * Populates the translationsCache map unless it is already populated.
-//     */
-//    private void loadTranslationsCacheIfEmpty() {
-//        if (translationCache.isEmpty() && translations != null) {
-//            for (Translation translation : translations) {
-//                if (translation.getLocale() != null && translation.getProperty() != null
-//                    && !StringUtils.isEmpty(translation.getValue())) {
-//                    String key = Translation.getCacheKey(translation.getLocale(),
-//                        translation.getProperty());
-//                    translationCache.put(key, translation.getValue());
-//                }
-//            }
-//        }
-//    }
 
     @Override
     public String toString() {

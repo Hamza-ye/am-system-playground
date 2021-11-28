@@ -1,6 +1,7 @@
 package org.nmcpye.activitiesmanagement.extended.common;
 
 import org.nmcpye.activitiesmanagement.domain.User;
+import org.nmcpye.activitiesmanagement.extended.translation.Translation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -22,6 +23,8 @@ public interface IdentifiableObjectManager {
     void update(List<IdentifiableObject> objects);
 
     void update(List<IdentifiableObject> objects, User user);
+
+    void updateTranslations( IdentifiableObject persistedObject, Set<Translation> translations );
 
     void delete(IdentifiableObject object);
 
