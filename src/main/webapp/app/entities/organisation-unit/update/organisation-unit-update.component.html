@@ -253,19 +253,6 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.organisationUnit.image" for="field_image">Image</label>
-          <select class="form-control" id="field_image" data-cy="image" name="image" formControlName="image">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="fileResourceOption.id === editForm.get('image')!.value?.id ? editForm.get('image')!.value : fileResourceOption"
-              *ngFor="let fileResourceOption of fileResourcesSharedCollection; trackBy: trackFileResourceById"
-            >
-              {{ fileResourceOption.name }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group">
           <label class="form-control-label" appTranslate="amSystemPlaygroundApp.organisationUnit.parent" for="field_parent">Parent</label>
           <select class="form-control" id="field_parent" data-cy="parent" name="parent" formControlName="parent">
             <option [ngValue]="null"></option>
@@ -323,6 +310,19 @@
               *ngFor="let organisationUnitOption of organisationUnitsSharedCollection; trackBy: trackOrganisationUnitById"
             >
               {{ organisationUnitOption.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.organisationUnit.image" for="field_image">Image</label>
+          <select class="form-control" id="field_image" data-cy="image" name="image" formControlName="image">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="fileResourceOption.id === editForm.get('image')!.value?.id ? editForm.get('image')!.value : fileResourceOption"
+              *ngFor="let fileResourceOption of fileResourcesSharedCollection; trackBy: trackFileResourceById"
+            >
+              {{ fileResourceOption.name }}
             </option>
           </select>
         </div>

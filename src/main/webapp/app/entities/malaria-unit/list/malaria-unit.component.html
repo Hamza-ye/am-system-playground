@@ -40,6 +40,7 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.description">Description</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.created">Created</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.contentPage">Content Page</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.malariaUnit.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"></th>
@@ -57,6 +58,11 @@
           <td>{{ malariaUnit.description }}</td>
           <td>{{ malariaUnit.created | formatMediumDatetime }}</td>
           <td>{{ malariaUnit.lastUpdated | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="malariaUnit.contentPage">
+              <a [routerLink]="['/content-page', malariaUnit.contentPage?.id, 'view']">{{ malariaUnit.contentPage?.name }}</a>
+            </div>
+          </td>
           <td>
             {{ malariaUnit.createdBy?.login }}
           </td>

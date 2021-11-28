@@ -1,5 +1,6 @@
 import * as dayjs from 'dayjs';
 import { IUser } from 'app/entities/user/user.model';
+import { IImageAlbum } from 'app/entities/image-album/image-album.model';
 import { FileResourceDomain } from 'app/entities/enumerations/file-resource-domain.model';
 
 export interface IFileResource {
@@ -18,6 +19,7 @@ export interface IFileResource {
   hasMultipleStorageFiles?: boolean | null;
   createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
+  imageAlbums?: IImageAlbum[] | null;
 }
 
 export class FileResource implements IFileResource {
@@ -36,7 +38,8 @@ export class FileResource implements IFileResource {
     public domain?: FileResourceDomain | null,
     public hasMultipleStorageFiles?: boolean | null,
     public createdBy?: IUser | null,
-    public lastUpdatedBy?: IUser | null
+    public lastUpdatedBy?: IUser | null,
+    public imageAlbums?: IImageAlbum[] | null
   ) {
     this.assigned = this.assigned ?? false;
     this.hasMultipleStorageFiles = this.hasMultipleStorageFiles ?? false;

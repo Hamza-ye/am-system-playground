@@ -10,6 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A ContentPage.
@@ -54,6 +56,16 @@ public class ContentPage extends BaseIdentifiableObject {
     @ManyToOne
     @JoinColumn(name = "last_updated_by")
     protected User lastUpdatedBy;
+
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//    @JoinTable(
+//        name = "content_page_related_link",
+//        joinColumns = @JoinColumn(name = "content_page_id"),
+//        inverseJoinColumns = @JoinColumn(name = "related_link_id")
+//    )
+//    @JsonIgnoreProperties(value = { "contenPages" }, allowSetters = true)
+//    private Set<RelatedLink> relatedLinks = new HashSet<>();
 
     @Column(name = "title")
     private String title;

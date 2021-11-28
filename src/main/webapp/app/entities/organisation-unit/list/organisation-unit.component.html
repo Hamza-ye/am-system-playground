@@ -52,10 +52,10 @@
           <th scope="col">
             <span appTranslate="amSystemPlaygroundApp.organisationUnit.organisationUnitType">Organisation Unit Type</span>
           </th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.image">Image</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.parent">Parent</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.hfHomeSubVillage">Hf Home Sub Village</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.coveredByHf">Covered By Hf</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.image">Image</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.malariaUnit">Malaria Unit</span></th>
@@ -88,11 +88,6 @@
             {{ organisationUnit.organisationUnitType }}
           </td>
           <td>
-            <div *ngIf="organisationUnit.image">
-              <a [routerLink]="['/file-resource', organisationUnit.image?.id, 'view']">{{ organisationUnit.image?.name }}</a>
-            </div>
-          </td>
-          <td>
             <div *ngIf="organisationUnit.parent">
               <a [routerLink]="['/organisation-unit', organisationUnit.parent?.id, 'view']">{{ organisationUnit.parent?.name }}</a>
             </div>
@@ -109,6 +104,11 @@
               <a [routerLink]="['/organisation-unit', organisationUnit.coveredByHf?.id, 'view']">{{
                 organisationUnit.coveredByHf?.name
               }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="organisationUnit.image">
+              <a [routerLink]="['/file-resource', organisationUnit.image?.id, 'view']">{{ organisationUnit.image?.name }}</a>
             </div>
           </td>
           <td>

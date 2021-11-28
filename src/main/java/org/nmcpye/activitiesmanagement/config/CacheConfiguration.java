@@ -138,6 +138,9 @@ public class CacheConfiguration {
             createCache(cm, org.nmcpye.activitiesmanagement.domain.dataset.DataSet.class.getName() + ".sources");
             createCache(cm, org.nmcpye.activitiesmanagement.domain.DataInputPeriod.class.getName());
             createCache(cm, org.nmcpye.activitiesmanagement.domain.period.RelativePeriods.class.getName());
+            createCache(cm, org.nmcpye.activitiesmanagement.domain.ContentPage.class.getName());
+            createCache(cm, org.nmcpye.activitiesmanagement.domain.ImageAlbum.class.getName());
+            createCache(cm, org.nmcpye.activitiesmanagement.domain.ImageAlbum.class.getName() + ".images");
             // jhipster-needle-ehcache-add-entry
         };
     }

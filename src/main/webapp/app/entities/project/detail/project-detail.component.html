@@ -38,6 +38,12 @@
         <dd>
           <span>{{ project.displayed }}</span>
         </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.project.contentPage">Content Page</span></dt>
+        <dd>
+          <div *ngIf="project.contentPage">
+            <a [routerLink]="['/content-page', project.contentPage?.id, 'view']">{{ project.contentPage?.name }}</a>
+          </div>
+        </dd>
         <dt><span appTranslate="amSystemPlaygroundApp.project.createdBy">Created By</span></dt>
         <dd>
           <span>{{ project.createdBy?.login }}</span>

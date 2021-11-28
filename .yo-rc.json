@@ -86,7 +86,9 @@
       "RelativePeriods",
       "FileResource",
       "ExternalFileResource",
-      "Document"
+      "Document",
+      "ContentPage",
+      "ImageAlbum"
     ],
     "lastLiquibaseTimestamp": 1635723832000
   }

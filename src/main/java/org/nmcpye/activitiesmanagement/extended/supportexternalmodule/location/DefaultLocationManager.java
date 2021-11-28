@@ -19,7 +19,7 @@ public class DefaultLocationManager extends LogOnceLogger
     implements LocationManager {
     private final Logger log = LoggerFactory.getLogger(DefaultLocationManager.class);
 
-    private static final String DEFAULT_DHIS2_HOME = "/opt/amSystem";
+    private static final String DEFAULT_AM_SYSTEM_HOME = "/opt/amSystem";
 
     private static final String DEFAULT_ENV_VAR = "AM_HOME";
 
@@ -120,12 +120,12 @@ public class DefaultLocationManager extends LogOnceLogger
     }
 
     private String getPathDefault() {
-        String path = DEFAULT_DHIS2_HOME;
+        String path = DEFAULT_AM_SYSTEM_HOME;
         if (directoryIsValid(new File(path))) {
-            log(log, Level.INFO, "Home directory set to " + DEFAULT_DHIS2_HOME);
+            log(log, Level.INFO, "Home directory set to " + DEFAULT_AM_SYSTEM_HOME);
             return path;
         } else {
-            log(log, Level.ERROR, "No Home directory set, and " + DEFAULT_DHIS2_HOME + " is not a directory");
+            log(log, Level.ERROR, "No Home directory set, and " + DEFAULT_AM_SYSTEM_HOME + " is not a directory");
             return null;
         }
     }

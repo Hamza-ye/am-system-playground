@@ -42,6 +42,12 @@
         <dd>
           <span>{{ malariaUnit.lastUpdated | formatMediumDatetime }}</span>
         </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.malariaUnit.contentPage">Content Page</span></dt>
+        <dd>
+          <div *ngIf="malariaUnit.contentPage">
+            <a [routerLink]="['/content-page', malariaUnit.contentPage?.id, 'view']">{{ malariaUnit.contentPage?.name }}</a>
+          </div>
+        </dd>
         <dt><span appTranslate="amSystemPlaygroundApp.malariaUnit.createdBy">Created By</span></dt>
         <dd>
           <span>{{ malariaUnit.createdBy?.login }}</span>

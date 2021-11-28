@@ -60,6 +60,9 @@
           <th scope="col" appSortBy="displayed">
             <span appTranslate="amSystemPlaygroundApp.activity.displayed">Displayed</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" appSortBy="contentPage.name">
+            <span appTranslate="amSystemPlaygroundApp.activity.contentPage">Content Page</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" appSortBy="createdBy.login">
             <span appTranslate="amSystemPlaygroundApp.activity.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
@@ -86,6 +89,11 @@
           <td>{{ activity.endDate | formatMediumDate }}</td>
           <td>{{ activity.active }}</td>
           <td>{{ activity.displayed }}</td>
+          <td>
+            <div *ngIf="activity.contentPage">
+              <a [routerLink]="['/content-page', activity.contentPage?.id, 'view']">{{ activity.contentPage?.name }}</a>
+            </div>
+          </td>
           <td>
             {{ activity.createdBy?.login }}
           </td>

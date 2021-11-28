@@ -9,6 +9,8 @@ import { of, Subject } from 'rxjs';
 
 import { MalariaUnitService } from '../service/malaria-unit.service';
 import { IMalariaUnit, MalariaUnit } from '../malaria-unit.model';
+import { IContentPage } from 'app/entities/content-page/content-page.model';
+import { ContentPageService } from 'app/entities/content-page/service/content-page.service';
 
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
@@ -21,6 +23,7 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<MalariaUnitUpdateComponent>;
     let activatedRoute: ActivatedRoute;
     let malariaUnitService: MalariaUnitService;
+    let contentPageService: ContentPageService;
     let userService: UserService;
 
     beforeEach(() => {
@@ -35,12 +38,31 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(MalariaUnitUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
       malariaUnitService = TestBed.inject(MalariaUnitService);
+      contentPageService = TestBed.inject(ContentPageService);
       userService = TestBed.inject(UserService);
 
       comp = fixture.componentInstance;
     });
 
     describe('ngOnInit', () => {
+      it('Should call contentPage query and add missing value', () => {
+        const malariaUnit: IMalariaUnit = { id: 456 };
+        const contentPage: IContentPage = { id: 44631 };
+        malariaUnit.contentPage = contentPage;
+
+        const contentPageCollection: IContentPage[] = [{ id: 59079 }];
+        jest.spyOn(contentPageService, 'query').mockReturnValue(of(new HttpResponse({ body: contentPageCollection })));
+        const expectedCollection: IContentPage[] = [contentPage, ...contentPageCollection];
+        jest.spyOn(contentPageService, 'addContentPageToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+        activatedRoute.data = of({ malariaUnit });
+        comp.ngOnInit();
+
+        expect(contentPageService.query).toHaveBeenCalled();
+        expect(contentPageService.addContentPageToCollectionIfMissing).toHaveBeenCalledWith(contentPageCollection, contentPage);
+        expect(comp.contentPagesCollection).toEqual(expectedCollection);
+      });
+
       it('Should call User query and add missing value', () => {
         const malariaUnit: IMalariaUnit = { id: 456 };
         const createdBy: IUser = { id: 27356 };
@@ -64,6 +86,8 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const malariaUnit: IMalariaUnit = { id: 456 };
+        const contentPage: IContentPage = { id: 82664 };
+        malariaUnit.contentPage = contentPage;
         const createdBy: IUser = { id: 75757 };
         malariaUnit.createdBy = createdBy;
         const lastUpdatedBy: IUser = { id: 1503 };
@@ -73,6 +97,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(malariaUnit));
+        expect(comp.contentPagesCollection).toContain(contentPage);
         expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
       });
@@ -143,6 +168,14 @@ describe('Component Tests', () => {
     });
 
     describe('Tracking relationships identifiers', () => {
+      describe('trackContentPageById', () => {
+        it('Should return tracked ContentPage primary key', () => {
+          const entity = { id: 123 };
+          const trackResult = comp.trackContentPageById(0, entity);
+          expect(trackResult).toEqual(entity.id);
+        });
+      });
+
       describe('trackUserById', () => {
         it('Should return tracked User primary key', () => {
           const entity = { id: 123 };

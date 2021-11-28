@@ -10,6 +10,8 @@ import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
 import { IProject, Project } from '../project.model';
 import { ProjectService } from '../service/project.service';
+import { IContentPage } from 'app/entities/content-page/content-page.model';
+import { ContentPageService } from 'app/entities/content-page/service/content-page.service';
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 
@@ -20,6 +22,7 @@ import { UserService } from 'app/entities/user/user.service';
 export class ProjectUpdateComponent implements OnInit {
   isSaving = false;
 
+  contentPagesCollection: IContentPage[] = [];
   usersSharedCollection: IUser[] = [];
 
   editForm = this.fb.group({
@@ -30,12 +33,14 @@ export class ProjectUpdateComponent implements OnInit {
     created: [],
     lastUpdated: [],
     displayed: [],
+    contentPage: [],
     createdBy: [],
     lastUpdatedBy: [],
   });
 
   constructor(
     protected projectService: ProjectService,
+    protected contentPageService: ContentPageService,
     protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
@@ -67,6 +72,10 @@ export class ProjectUpdateComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.projectService.create(project));
     }
+  }
+
+  trackContentPageById(index: number, item: IContentPage): number {
+    return item.id!;
   }
 
   trackUserById(index: number, item: IUser): number {
@@ -101,10 +110,15 @@ export class ProjectUpdateComponent implements OnInit {
       created: project.created ? project.created.format(DATE_TIME_FORMAT) : null,
       lastUpdated: project.lastUpdated ? project.lastUpdated.format(DATE_TIME_FORMAT) : null,
       displayed: project.displayed,
+      contentPage: project.contentPage,
       createdBy: project.createdBy,
       lastUpdatedBy: project.lastUpdatedBy,
     });
 
+    this.contentPagesCollection = this.contentPageService.addContentPageToCollectionIfMissing(
+      this.contentPagesCollection,
+      project.contentPage
+    );
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
       project.createdBy,
@@ -113,6 +127,16 @@ export class ProjectUpdateComponent implements OnInit {
   }
 
   protected loadRelationshipsOptions(): void {
+    this.contentPageService
+      .query({ filter: 'project-is-null' })
+      .pipe(map((res: HttpResponse<IContentPage[]>) => res.body ?? []))
+      .pipe(
+        map((contentPages: IContentPage[]) =>
+          this.contentPageService.addContentPageToCollectionIfMissing(contentPages, this.editForm.get('contentPage')!.value)
+        )
+      )
+      .subscribe((contentPages: IContentPage[]) => (this.contentPagesCollection = contentPages));
+
     this.userService
       .query()
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
@@ -140,6 +164,7 @@ export class ProjectUpdateComponent implements OnInit {
         ? dayjs(this.editForm.get(['lastUpdated'])!.value, DATE_TIME_FORMAT)
         : undefined,
       displayed: this.editForm.get(['displayed'])!.value,
+      contentPage: this.editForm.get(['contentPage'])!.value,
       createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
     };

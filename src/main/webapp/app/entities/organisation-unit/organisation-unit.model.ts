@@ -32,10 +32,10 @@ export interface IOrganisationUnit {
   organisationUnitType?: OrganisationUnitType;
   malariaReports?: IMalariaCasesReport[] | null;
   dengueReports?: IDengueCasesReport[] | null;
-  image?: IFileResource | null;
   parent?: IOrganisationUnit | null;
   hfHomeSubVillage?: IOrganisationUnit | null;
   coveredByHf?: IOrganisationUnit | null;
+  image?: IFileResource | null;
   createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   malariaUnit?: IMalariaUnit | null;
@@ -70,10 +70,10 @@ export class OrganisationUnit implements IOrganisationUnit {
     public organisationUnitType?: OrganisationUnitType,
     public malariaReports?: IMalariaCasesReport[] | null,
     public dengueReports?: IDengueCasesReport[] | null,
-    public image?: IFileResource | null,
     public parent?: IOrganisationUnit | null,
     public hfHomeSubVillage?: IOrganisationUnit | null,
     public coveredByHf?: IOrganisationUnit | null,
+    public image?: IFileResource | null,
     public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
     public malariaUnit?: IMalariaUnit | null,

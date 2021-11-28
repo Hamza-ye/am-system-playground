@@ -10,6 +10,8 @@ import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
 import { IActivity, Activity } from '../activity.model';
 import { ActivityService } from '../service/activity.service';
+import { IContentPage } from 'app/entities/content-page/content-page.model';
+import { ContentPageService } from 'app/entities/content-page/service/content-page.service';
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 import { IProject } from 'app/entities/project/project.model';
@@ -22,6 +24,7 @@ import { ProjectService } from 'app/entities/project/service/project.service';
 export class ActivityUpdateComponent implements OnInit {
   isSaving = false;
 
+  contentPagesCollection: IContentPage[] = [];
   usersSharedCollection: IUser[] = [];
   projectsSharedCollection: IProject[] = [];
 
@@ -36,6 +39,7 @@ export class ActivityUpdateComponent implements OnInit {
     endDate: [null, [Validators.required]],
     active: [],
     displayed: [],
+    contentPage: [],
     createdBy: [],
     lastUpdatedBy: [],
     project: [null, Validators.required],
@@ -43,6 +47,7 @@ export class ActivityUpdateComponent implements OnInit {
 
   constructor(
     protected activityService: ActivityService,
+    protected contentPageService: ContentPageService,
     protected userService: UserService,
     protected projectService: ProjectService,
     protected activatedRoute: ActivatedRoute,
@@ -75,6 +80,10 @@ export class ActivityUpdateComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.activityService.create(activity));
     }
+  }
+
+  trackContentPageById(index: number, item: IContentPage): number {
+    return item.id!;
   }
 
   trackUserById(index: number, item: IUser): number {
@@ -116,11 +125,16 @@ export class ActivityUpdateComponent implements OnInit {
       endDate: activity.endDate,
       active: activity.active,
       displayed: activity.displayed,
+      contentPage: activity.contentPage,
       createdBy: activity.createdBy,
       lastUpdatedBy: activity.lastUpdatedBy,
       project: activity.project,
     });
 
+    this.contentPagesCollection = this.contentPageService.addContentPageToCollectionIfMissing(
+      this.contentPagesCollection,
+      activity.contentPage
+    );
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
       activity.createdBy,
@@ -130,6 +144,16 @@ export class ActivityUpdateComponent implements OnInit {
   }
 
   protected loadRelationshipsOptions(): void {
+    this.contentPageService
+      .query({ filter: 'activity-is-null' })
+      .pipe(map((res: HttpResponse<IContentPage[]>) => res.body ?? []))
+      .pipe(
+        map((contentPages: IContentPage[]) =>
+          this.contentPageService.addContentPageToCollectionIfMissing(contentPages, this.editForm.get('contentPage')!.value)
+        )
+      )
+      .subscribe((contentPages: IContentPage[]) => (this.contentPagesCollection = contentPages));
+
     this.userService
       .query()
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
@@ -168,6 +192,7 @@ export class ActivityUpdateComponent implements OnInit {
       endDate: this.editForm.get(['endDate'])!.value,
       active: this.editForm.get(['active'])!.value,
       displayed: this.editForm.get(['displayed'])!.value,
+      contentPage: this.editForm.get(['contentPage'])!.value,
       createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       project: this.editForm.get(['project'])!.value,

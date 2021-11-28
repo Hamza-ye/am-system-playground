@@ -45,6 +45,14 @@
   ],
   "relationships": [
     {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "contentPage",
+      "otherEntityRelationshipName": "activity",
+      "relationshipName": "contentPage",
+      "otherEntityField": "name",
+      "ownerSide": true
+    },
+    {
       "relationshipType": "one-to-many",
       "otherEntityName": "warehouse",
       "otherEntityRelationshipName": "activity",

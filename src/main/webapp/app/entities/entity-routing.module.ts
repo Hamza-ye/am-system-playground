@@ -224,6 +224,16 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'amSystemPlaygroundApp.document.home.title' },
         loadChildren: () => import('./document/document.module').then(m => m.DocumentModule),
       },
+      {
+        path: 'content-page',
+        data: { pageTitle: 'amSystemPlaygroundApp.contentPage.home.title' },
+        loadChildren: () => import('./content-page/content-page.module').then(m => m.ContentPageModule),
+      },
+      {
+        path: 'image-album',
+        data: { pageTitle: 'amSystemPlaygroundApp.imageAlbum.home.title' },
+        loadChildren: () => import('./image-album/image-album.module').then(m => m.ImageAlbumModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

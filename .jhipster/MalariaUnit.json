@@ -37,6 +37,14 @@
   ],
   "relationships": [
     {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "contentPage",
+      "otherEntityRelationshipName": "malariaUnit",
+      "relationshipName": "contentPage",
+      "otherEntityField": "name",
+      "ownerSide": true
+    },
+    {
       "relationshipType": "one-to-many",
       "otherEntityName": "organisationUnit",
       "otherEntityRelationshipName": "malariaUnit",

@@ -76,7 +76,7 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
 
         private String displayName;
 
-        private String username;
+        private String login;
 
         public UserDto(UserDtoBuilder userDtoBuilder) {
             this.id = userDtoBuilder.id;
@@ -84,7 +84,7 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
             this.code = userDtoBuilder.code;
             this.name = userDtoBuilder.name;
             this.displayName = userDtoBuilder.displayName;
-            this.username = userDtoBuilder.username;
+            this.login = userDtoBuilder.login;
         }
 
         public static UserDtoBuilder builder() {
@@ -117,8 +117,8 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
         }
 
         @JsonProperty
-        public String getUsername() {
-            return username;
+        public String getLogin() {
+            return login;
         }
 
         @Override
@@ -134,7 +134,7 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
             if (name != null ? !name.equals(userDto.name) : userDto.name != null) return false;
             if (displayName != null ? !displayName.equals(userDto.displayName) : userDto.displayName != null)
                 return false;
-            return username != null ? username.equals(userDto.username) : userDto.username == null;
+            return login != null ? login.equals(userDto.login) : userDto.login == null;
         }
 
         @Override
@@ -144,7 +144,7 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
             result = 31 * result + (code != null ? code.hashCode() : 0);
             result = 31 * result + (name != null ? name.hashCode() : 0);
             result = 31 * result + (displayName != null ? displayName.hashCode() : 0);
-            result = 31 * result + (username != null ? username.hashCode() : 0);
+            result = 31 * result + (login != null ? login.hashCode() : 0);
             return result;
         }
 
@@ -167,8 +167,8 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
                     ", displayName='" +
                     displayName +
                     '\'' +
-                    ", username='" +
-                    username +
+                    ", login='" +
+                    login +
                     '\'' +
                     '}'
             );
@@ -185,7 +185,7 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
 
             private String displayName;
 
-            private String username;
+            private String login;
 
             public UserDtoBuilder id(Long id) {
                 this.id = id;
@@ -213,7 +213,7 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
             }
 
             public UserDtoBuilder username(String username) {
-                this.username = username;
+                this.login = username;
                 return this;
             }
 
@@ -247,9 +247,10 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
             gen.writeStringField("code", user.getCode());
             gen.writeStringField("name", user.getName());
             gen.writeStringField("displayName", user.getDisplayName());
+//            gen.writeObject(user.getAuthorities());
 
             if (userCredentials != null) {
-                gen.writeStringField("username", userCredentials.getUsername());
+                gen.writeStringField("login", userCredentials.getLogin());
             }
 
             gen.writeEndObject();

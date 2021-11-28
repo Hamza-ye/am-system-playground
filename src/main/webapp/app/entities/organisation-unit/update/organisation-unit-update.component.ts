@@ -26,8 +26,8 @@ import { ChvService } from 'app/entities/chv/service/chv.service';
 export class OrganisationUnitUpdateComponent implements OnInit {
   isSaving = false;
 
-  fileResourcesSharedCollection: IFileResource[] = [];
   organisationUnitsSharedCollection: IOrganisationUnit[] = [];
+  fileResourcesSharedCollection: IFileResource[] = [];
   usersSharedCollection: IUser[] = [];
   malariaUnitsSharedCollection: IMalariaUnit[] = [];
   chvsSharedCollection: IChv[] = [];
@@ -51,10 +51,10 @@ export class OrganisationUnitUpdateComponent implements OnInit {
     email: [],
     phoneNumber: [],
     organisationUnitType: [null, [Validators.required]],
-    image: [],
     parent: [],
     hfHomeSubVillage: [],
     coveredByHf: [],
+    image: [],
     createdBy: [],
     lastUpdatedBy: [],
     malariaUnit: [],
@@ -99,11 +99,11 @@ export class OrganisationUnitUpdateComponent implements OnInit {
     }
   }
 
-  trackFileResourceById(index: number, item: IFileResource): number {
+  trackOrganisationUnitById(index: number, item: IOrganisationUnit): number {
     return item.id!;
   }
 
-  trackOrganisationUnitById(index: number, item: IOrganisationUnit): number {
+  trackFileResourceById(index: number, item: IFileResource): number {
     return item.id!;
   }
 
@@ -158,25 +158,25 @@ export class OrganisationUnitUpdateComponent implements OnInit {
       email: organisationUnit.email,
       phoneNumber: organisationUnit.phoneNumber,
       organisationUnitType: organisationUnit.organisationUnitType,
-      image: organisationUnit.image,
       parent: organisationUnit.parent,
       hfHomeSubVillage: organisationUnit.hfHomeSubVillage,
       coveredByHf: organisationUnit.coveredByHf,
+      image: organisationUnit.image,
       createdBy: organisationUnit.createdBy,
       lastUpdatedBy: organisationUnit.lastUpdatedBy,
       malariaUnit: organisationUnit.malariaUnit,
       assignedChv: organisationUnit.assignedChv,
     });
 
-    this.fileResourcesSharedCollection = this.fileResourceService.addFileResourceToCollectionIfMissing(
-      this.fileResourcesSharedCollection,
-      organisationUnit.image
-    );
     this.organisationUnitsSharedCollection = this.organisationUnitService.addOrganisationUnitToCollectionIfMissing(
       this.organisationUnitsSharedCollection,
       organisationUnit.parent,
       organisationUnit.hfHomeSubVillage,
       organisationUnit.coveredByHf
+    );
+    this.fileResourcesSharedCollection = this.fileResourceService.addFileResourceToCollectionIfMissing(
+      this.fileResourcesSharedCollection,
+      organisationUnit.image
     );
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(
       this.usersSharedCollection,
@@ -191,16 +191,6 @@ export class OrganisationUnitUpdateComponent implements OnInit {
   }
 
   protected loadRelationshipsOptions(): void {
-    this.fileResourceService
-      .query()
-      .pipe(map((res: HttpResponse<IFileResource[]>) => res.body ?? []))
-      .pipe(
-        map((fileResources: IFileResource[]) =>
-          this.fileResourceService.addFileResourceToCollectionIfMissing(fileResources, this.editForm.get('image')!.value)
-        )
-      )
-      .subscribe((fileResources: IFileResource[]) => (this.fileResourcesSharedCollection = fileResources));
-
     this.organisationUnitService
       .query()
       .pipe(map((res: HttpResponse<IOrganisationUnit[]>) => res.body ?? []))
@@ -215,6 +205,16 @@ export class OrganisationUnitUpdateComponent implements OnInit {
         )
       )
       .subscribe((organisationUnits: IOrganisationUnit[]) => (this.organisationUnitsSharedCollection = organisationUnits));
+
+    this.fileResourceService
+      .query()
+      .pipe(map((res: HttpResponse<IFileResource[]>) => res.body ?? []))
+      .pipe(
+        map((fileResources: IFileResource[]) =>
+          this.fileResourceService.addFileResourceToCollectionIfMissing(fileResources, this.editForm.get('image')!.value)
+        )
+      )
+      .subscribe((fileResources: IFileResource[]) => (this.fileResourcesSharedCollection = fileResources));
 
     this.userService
       .query()
@@ -270,10 +270,10 @@ export class OrganisationUnitUpdateComponent implements OnInit {
       email: this.editForm.get(['email'])!.value,
       phoneNumber: this.editForm.get(['phoneNumber'])!.value,
       organisationUnitType: this.editForm.get(['organisationUnitType'])!.value,
-      image: this.editForm.get(['image'])!.value,
       parent: this.editForm.get(['parent'])!.value,
       hfHomeSubVillage: this.editForm.get(['hfHomeSubVillage'])!.value,
       coveredByHf: this.editForm.get(['coveredByHf'])!.value,
+      image: this.editForm.get(['image'])!.value,
       createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       malariaUnit: this.editForm.get(['malariaUnit'])!.value,

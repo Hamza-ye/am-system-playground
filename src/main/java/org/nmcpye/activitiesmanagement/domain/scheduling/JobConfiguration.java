@@ -43,7 +43,7 @@ import static org.nmcpye.activitiesmanagement.extended.schema.annotation.Propert
 @Entity
 @Table(name = "job_configuration")
 @TypeDef(
-    name = "jsonb",
+    name = "jbJobParameters",
     typeClass = JsonJobParametersType.class,
     parameters = { @Parameter(name = "clazz", value = "org.nmcpye.activitiesmanagement.extended.scheduling.JobParameters") }
 )
@@ -118,7 +118,7 @@ public class JobConfiguration extends BaseIdentifiableObject implements Secondar
     /**
      * Parameters of the job. Jobs can use their own implementation of the {@link JobParameters} class.
      */
-    @Type(type = "jsonb")
+    @Type(type = "jbJobParameters")
     @Column(name = "job_parameters", columnDefinition = "jsonb")
     private JobParameters jobParameters;
 

@@ -1,4 +1,5 @@
 import * as dayjs from 'dayjs';
+import { IContentPage } from 'app/entities/content-page/content-page.model';
 import { IWarehouse } from 'app/entities/warehouse/warehouse.model';
 import { IUser } from 'app/entities/user/user.model';
 import { IProject } from 'app/entities/project/project.model';
@@ -14,6 +15,7 @@ export interface IActivity {
   endDate?: dayjs.Dayjs;
   active?: boolean | null;
   displayed?: boolean | null;
+  contentPage?: IContentPage | null;
   warehouses?: IWarehouse[] | null;
   createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
@@ -32,6 +34,7 @@ export class Activity implements IActivity {
     public endDate?: dayjs.Dayjs,
     public active?: boolean | null,
     public displayed?: boolean | null,
+    public contentPage?: IContentPage | null,
     public warehouses?: IWarehouse[] | null,
     public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,

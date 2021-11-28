@@ -793,7 +793,7 @@ public class Person extends BaseIdentifiableObject implements UserDetails, Metad
     @JsonSerialize( as = BaseIdentifiableObject.class )
 //    @JsonSerialize(contentUsing = UserPropertyTransformer.JacksonSerialize.class)
 //    @JsonDeserialize(contentUsing = UserPropertyTransformer.JacksonDeserialize.class)
-//    @PropertyTransformer(UserPropertyTransformer.class)
+    @PropertyTransformer(UserPropertyTransformer.class)
     public User getUserInfo() {
         return this.userInfo;
     }

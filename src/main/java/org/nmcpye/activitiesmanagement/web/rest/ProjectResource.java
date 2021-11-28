@@ -1,13 +1,7 @@
 package org.nmcpye.activitiesmanagement.web.rest;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.nmcpye.activitiesmanagement.domain.project.Project;
+import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectManager;
 import org.nmcpye.activitiesmanagement.repository.ProjectRepository;
 import org.nmcpye.activitiesmanagement.service.ProjectService;
 import org.nmcpye.activitiesmanagement.web.rest.errors.BadRequestAlertException;
@@ -23,6 +17,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * REST controller for managing {@link Project}.
@@ -42,9 +44,12 @@ public class ProjectResource {
 
     private final ProjectRepository projectRepository;
 
-    public ProjectResource(ProjectService projectService, ProjectRepository projectRepository) {
+    protected final IdentifiableObjectManager manager;
+
+    public ProjectResource(ProjectService projectService, ProjectRepository projectRepository, IdentifiableObjectManager manager) {
         this.projectService = projectService;
         this.projectRepository = projectRepository;
+        this.manager = manager;
     }
 
     /**
@@ -94,11 +99,16 @@ public class ProjectResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Project result = projectService.save(project);
+//        Project result = projectService.save(project);
+//        return ResponseEntity
+//            .ok()
+//            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, project.getId().toString()))
+//            .body(result);
+        manager.update(project);
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, project.getId().toString()))
-            .body(result);
+            .body(project);
     }
 
     /**

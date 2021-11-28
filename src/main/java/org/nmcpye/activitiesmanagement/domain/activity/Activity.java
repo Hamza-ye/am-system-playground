@@ -86,10 +86,6 @@ public class Activity extends BaseIdentifiableObject implements MetadataObject {
     @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
 
-//    @Min(value = 0)
-//    @Column(name = "no_of_days")
-//    private Integer noOfDays;
-
     @Column(name = "active")
     private Boolean active;
 
