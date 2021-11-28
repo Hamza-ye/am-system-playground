@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * Created by Hamza on 17-11-2021.
  */
+// TODO move to ContentServiceEx
 public interface RelatedLinkServiceExt {
 
     String ID = RelatedLinkServiceExt.class.getName();

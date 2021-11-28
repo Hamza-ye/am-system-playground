@@ -23,14 +23,18 @@ public interface ContentPageRepository extends JpaRepository<ContentPage, Long> 
     List<ContentPage> findByLastUpdatedByIsCurrentUser();
 
     @Query(
-        value = "select distinct contentPage from ContentPage contentPage left join fetch contentPage.relatedLinks",
+        value = "select distinct contentPage from ContentPage contentPage left join fetch contentPage.relatedLinks left join fetch contentPage.attachments",
         countQuery = "select count(distinct contentPage) from ContentPage contentPage"
     )
     Page<ContentPage> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query("select distinct contentPage from ContentPage contentPage left join fetch contentPage.relatedLinks")
+    @Query(
+        "select distinct contentPage from ContentPage contentPage left join fetch contentPage.relatedLinks left join fetch contentPage.attachments"
+    )
     List<ContentPage> findAllWithEagerRelationships();
 
-    @Query("select contentPage from ContentPage contentPage left join fetch contentPage.relatedLinks where contentPage.id =:id")
+    @Query(
+        "select contentPage from ContentPage contentPage left join fetch contentPage.relatedLinks left join fetch contentPage.attachments where contentPage.id =:id"
+    )
     Optional<ContentPage> findOneWithEagerRelationships(@Param("id") Long id);
 }

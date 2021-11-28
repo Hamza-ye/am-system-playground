@@ -140,7 +140,12 @@ public class CacheConfiguration {
             createCache(cm, org.nmcpye.activitiesmanagement.domain.period.RelativePeriods.class.getName());
             createCache(cm, org.nmcpye.activitiesmanagement.domain.ContentPage.class.getName());
             createCache(cm, org.nmcpye.activitiesmanagement.domain.ImageAlbum.class.getName());
+
             createCache(cm, org.nmcpye.activitiesmanagement.domain.ImageAlbum.class.getName() + ".images");
+            createCache(cm, org.nmcpye.activitiesmanagement.domain.ContentPage.class.getName() + ".attachments");
+            createCache(cm, org.nmcpye.activitiesmanagement.domain.ContentPage.class.getName() + ".relatedLinks");
+            createCache(cm, org.nmcpye.activitiesmanagement.domain.RelatedLink.class.getName());
+            createCache(cm, org.nmcpye.activitiesmanagement.domain.RelatedLink.class.getName() + ".contentPages");
             // jhipster-needle-ehcache-add-entry
         };
     }

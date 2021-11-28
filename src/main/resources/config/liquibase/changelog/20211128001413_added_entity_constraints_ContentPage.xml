@@ -39,4 +39,18 @@
                                  referencedColumnNames="id"
                                  referencedTableName="related_link"/>
     </changeSet>
+
+    <changeSet id="20288828000-2-relations" author="Hamza">
+        <addForeignKeyConstraint baseColumnNames="content_page_id"
+                                 baseTableName="content_page_attachment"
+                                 constraintName="fk_content_page_attachment__content_page_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="content_page"/>
+
+        <addForeignKeyConstraint baseColumnNames="attachment_id"
+                                 baseTableName="content_page_attachment"
+                                 constraintName="fk_content_page_attachment__attachment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"/>
+    </changeSet>
 </databaseChangeLog>

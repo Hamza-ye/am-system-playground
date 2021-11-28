@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.nmcpye.activitiesmanagement.domain.document.Document;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
 
 import javax.persistence.*;
@@ -79,7 +82,8 @@ public class ContentPage extends BaseIdentifiableObject {
     @JoinColumn(unique = true)
     private ImageAlbum imageAlbum;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(
         name = "content_page_related_link",
@@ -88,6 +92,17 @@ public class ContentPage extends BaseIdentifiableObject {
     )
     @JsonIgnoreProperties(value = { "contentPages" }, allowSetters = true)
     private Set<RelatedLink> relatedLinks = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JoinTable(
+        name = "content_page_attachment",
+        joinColumns = @JoinColumn(name = "content_page_id"),
+        inverseJoinColumns = @JoinColumn(name = "attachment_id")
+    )
+    @JsonIgnoreProperties(value = { "fileResource", "createdBy", "lastUpdatedBy", "contentPages" }, allowSetters = true)
+    private Set<Document> attachments = new HashSet<>();
 
     @Override
     public Long getId() {
@@ -313,5 +328,37 @@ public class ContentPage extends BaseIdentifiableObject {
     @JsonProperty
     public Boolean hasRelatedLinks() {
         return relatedLinks != null || !relatedLinks.isEmpty();
+    }
+
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
+    public Set<Document> getAttachments() {
+        return this.attachments;
+    }
+
+    public ContentPage attachments(Set<Document> documents) {
+        this.setAttachments(documents);
+        return this;
+    }
+
+    public ContentPage addAttachment(Document document) {
+        this.attachments.add(document);
+//        document.getContentPages().add(this);
+        return this;
+    }
+
+    public ContentPage removeAttachment(Document document) {
+        this.attachments.remove(document);
+//        document.getContentPages().remove(this);
+        return this;
+    }
+
+    public void setAttachments(Set<Document> documents) {
+        this.attachments = documents;
+    }
+
+    @JsonProperty
+    public Boolean hasAttachments() {
+        return attachments != null || !attachments.isEmpty();
     }
 }

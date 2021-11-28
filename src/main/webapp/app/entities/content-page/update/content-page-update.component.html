@@ -189,7 +189,26 @@
               [ngValue]="getSelectedRelatedLink(relatedLinkOption, editForm.get('relatedLinks')!.value)"
               *ngFor="let relatedLinkOption of relatedLinksSharedCollection; trackBy: trackRelatedLinkById"
             >
-              {{ relatedLinkOption.id }}
+              {{ relatedLinkOption.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label appTranslate="amSystemPlaygroundApp.contentPage.attachment" for="field_attachments">Attachment</label>
+          <select
+            class="form-control"
+            id="field_attachments"
+            data-cy="attachment"
+            multiple
+            name="attachments"
+            formControlName="attachments"
+          >
+            <option
+              [ngValue]="getSelectedDocument(documentOption, editForm.get('attachments')!.value)"
+              *ngFor="let documentOption of documentsSharedCollection; trackBy: trackDocumentById"
+            >
+              {{ documentOption.name }}
             </option>
           </select>
         </div>

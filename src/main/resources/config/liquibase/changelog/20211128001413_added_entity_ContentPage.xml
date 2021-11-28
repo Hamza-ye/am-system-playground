@@ -72,6 +72,19 @@
 
         <addPrimaryKey columnNames="content_page_id, related_link_id" tableName="content_page_related_link"/>
     </changeSet>
+
+    <changeSet id="20211128000-1-relations" author="Hamza">
+        <createTable tableName="content_page_attachment">
+            <column name="attachment_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content_page_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="content_page_id, attachment_id" tableName="content_page_attachment"/>
+    </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
     <!--

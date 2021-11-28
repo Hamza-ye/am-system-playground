@@ -16,6 +16,8 @@ import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 import { IRelatedLink } from 'app/entities/related-link/related-link.model';
 import { RelatedLinkService } from 'app/entities/related-link/service/related-link.service';
+import { IDocument } from 'app/entities/document/document.model';
+import { DocumentService } from 'app/entities/document/service/document.service';
 
 import { ContentPageUpdateComponent } from './content-page-update.component';
 
@@ -28,6 +30,7 @@ describe('Component Tests', () => {
     let imageAlbumService: ImageAlbumService;
     let userService: UserService;
     let relatedLinkService: RelatedLinkService;
+    let documentService: DocumentService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -44,6 +47,7 @@ describe('Component Tests', () => {
       imageAlbumService = TestBed.inject(ImageAlbumService);
       userService = TestBed.inject(UserService);
       relatedLinkService = TestBed.inject(RelatedLinkService);
+      documentService = TestBed.inject(DocumentService);
 
       comp = fixture.componentInstance;
     });
@@ -110,6 +114,25 @@ describe('Component Tests', () => {
         expect(comp.relatedLinksSharedCollection).toEqual(expectedCollection);
       });
 
+      it('Should call Document query and add missing value', () => {
+        const contentPage: IContentPage = { id: 456 };
+        const attachments: IDocument[] = [{ id: 90896 }];
+        contentPage.attachments = attachments;
+
+        const documentCollection: IDocument[] = [{ id: 34251 }];
+        jest.spyOn(documentService, 'query').mockReturnValue(of(new HttpResponse({ body: documentCollection })));
+        const additionalDocuments = [...attachments];
+        const expectedCollection: IDocument[] = [...additionalDocuments, ...documentCollection];
+        jest.spyOn(documentService, 'addDocumentToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+        activatedRoute.data = of({ contentPage });
+        comp.ngOnInit();
+
+        expect(documentService.query).toHaveBeenCalled();
+        expect(documentService.addDocumentToCollectionIfMissing).toHaveBeenCalledWith(documentCollection, ...additionalDocuments);
+        expect(comp.documentsSharedCollection).toEqual(expectedCollection);
+      });
+
       it('Should update editForm', () => {
         const contentPage: IContentPage = { id: 456 };
         const imageAlbum: IImageAlbum = { id: 76406 };
@@ -120,6 +143,8 @@ describe('Component Tests', () => {
         contentPage.lastUpdatedBy = lastUpdatedBy;
         const relatedLinks: IRelatedLink = { id: 75818 };
         contentPage.relatedLinks = [relatedLinks];
+        const attachments: IDocument = { id: 99393 };
+        contentPage.attachments = [attachments];
 
         activatedRoute.data = of({ contentPage });
         comp.ngOnInit();
@@ -129,6 +154,7 @@ describe('Component Tests', () => {
         expect(comp.usersSharedCollection).toContain(createdBy);
         expect(comp.usersSharedCollection).toContain(lastUpdatedBy);
         expect(comp.relatedLinksSharedCollection).toContain(relatedLinks);
+        expect(comp.documentsSharedCollection).toContain(attachments);
       });
     });
 
@@ -220,6 +246,14 @@ describe('Component Tests', () => {
           expect(trackResult).toEqual(entity.id);
         });
       });
+
+      describe('trackDocumentById', () => {
+        it('Should return tracked Document primary key', () => {
+          const entity = { id: 123 };
+          const trackResult = comp.trackDocumentById(0, entity);
+          expect(trackResult).toEqual(entity.id);
+        });
+      });
     });
 
     describe('Getting selected relationships', () => {
@@ -244,6 +278,32 @@ describe('Component Tests', () => {
           const option = { id: 123 };
           const selected = { id: 456 };
           const result = comp.getSelectedRelatedLink(option, [selected]);
+          expect(result === option).toEqual(true);
+          expect(result === selected).toEqual(false);
+        });
+      });
+
+      describe('getSelectedDocument', () => {
+        it('Should return option if no Document is selected', () => {
+          const option = { id: 123 };
+          const result = comp.getSelectedDocument(option);
+          expect(result === option).toEqual(true);
+        });
+
+        it('Should return selected Document for according option', () => {
+          const option = { id: 123 };
+          const selected = { id: 123 };
+          const selected2 = { id: 456 };
+          const result = comp.getSelectedDocument(option, [selected2, selected]);
+          expect(result === selected).toEqual(true);
+          expect(result === selected2).toEqual(false);
+          expect(result === option).toEqual(false);
+        });
+
+        it('Should return option if this Document is not selected', () => {
+          const option = { id: 123 };
+          const selected = { id: 456 };
+          const result = comp.getSelectedDocument(option, [selected]);
           expect(result === option).toEqual(true);
           expect(result === selected).toEqual(false);
         });

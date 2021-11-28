@@ -16,6 +16,8 @@ import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 import { IRelatedLink } from 'app/entities/related-link/related-link.model';
 import { RelatedLinkService } from 'app/entities/related-link/service/related-link.service';
+import { IDocument } from 'app/entities/document/document.model';
+import { DocumentService } from 'app/entities/document/service/document.service';
 
 @Component({
   selector: 'app-content-page-update',
@@ -27,6 +29,7 @@ export class ContentPageUpdateComponent implements OnInit {
   imageAlbumsCollection: IImageAlbum[] = [];
   usersSharedCollection: IUser[] = [];
   relatedLinksSharedCollection: IRelatedLink[] = [];
+  documentsSharedCollection: IDocument[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -44,6 +47,7 @@ export class ContentPageUpdateComponent implements OnInit {
     createdBy: [],
     lastUpdatedBy: [],
     relatedLinks: [],
+    attachments: [],
   });
 
   constructor(
@@ -51,6 +55,7 @@ export class ContentPageUpdateComponent implements OnInit {
     protected imageAlbumService: ImageAlbumService,
     protected userService: UserService,
     protected relatedLinkService: RelatedLinkService,
+    protected documentService: DocumentService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -95,7 +100,22 @@ export class ContentPageUpdateComponent implements OnInit {
     return item.id!;
   }
 
+  trackDocumentById(index: number, item: IDocument): number {
+    return item.id!;
+  }
+
   getSelectedRelatedLink(option: IRelatedLink, selectedVals?: IRelatedLink[]): IRelatedLink {
+    if (selectedVals) {
+      for (const selectedVal of selectedVals) {
+        if (option.id === selectedVal.id) {
+          return selectedVal;
+        }
+      }
+    }
+    return option;
+  }
+
+  getSelectedDocument(option: IDocument, selectedVals?: IDocument[]): IDocument {
     if (selectedVals) {
       for (const selectedVal of selectedVals) {
         if (option.id === selectedVal.id) {
@@ -142,6 +162,7 @@ export class ContentPageUpdateComponent implements OnInit {
       createdBy: contentPage.createdBy,
       lastUpdatedBy: contentPage.lastUpdatedBy,
       relatedLinks: contentPage.relatedLinks,
+      attachments: contentPage.attachments,
     });
 
     this.imageAlbumsCollection = this.imageAlbumService.addImageAlbumToCollectionIfMissing(
@@ -156,6 +177,10 @@ export class ContentPageUpdateComponent implements OnInit {
     this.relatedLinksSharedCollection = this.relatedLinkService.addRelatedLinkToCollectionIfMissing(
       this.relatedLinksSharedCollection,
       ...(contentPage.relatedLinks ?? [])
+    );
+    this.documentsSharedCollection = this.documentService.addDocumentToCollectionIfMissing(
+      this.documentsSharedCollection,
+      ...(contentPage.attachments ?? [])
     );
   }
 
@@ -193,6 +218,16 @@ export class ContentPageUpdateComponent implements OnInit {
         )
       )
       .subscribe((relatedLinks: IRelatedLink[]) => (this.relatedLinksSharedCollection = relatedLinks));
+
+    this.documentService
+      .query()
+      .pipe(map((res: HttpResponse<IDocument[]>) => res.body ?? []))
+      .pipe(
+        map((documents: IDocument[]) =>
+          this.documentService.addDocumentToCollectionIfMissing(documents, ...(this.editForm.get('attachments')!.value ?? []))
+        )
+      )
+      .subscribe((documents: IDocument[]) => (this.documentsSharedCollection = documents));
   }
 
   protected createFromForm(): IContentPage {
@@ -215,6 +250,7 @@ export class ContentPageUpdateComponent implements OnInit {
       createdBy: this.editForm.get(['createdBy'])!.value,
       lastUpdatedBy: this.editForm.get(['lastUpdatedBy'])!.value,
       relatedLinks: this.editForm.get(['relatedLinks'])!.value,
+      attachments: this.editForm.get(['attachments'])!.value,
     };
   }
 }

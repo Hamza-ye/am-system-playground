@@ -71,7 +71,14 @@
         <dt><span appTranslate="amSystemPlaygroundApp.contentPage.relatedLink">Related Link</span></dt>
         <dd>
           <span *ngFor="let relatedLink of contentPage.relatedLinks; let last = last">
-            <a [routerLink]="['/related-link', relatedLink?.id, 'view']">{{ relatedLink.id }}</a
+            <a [routerLink]="['/related-link', relatedLink?.id, 'view']">{{ relatedLink.name }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.contentPage.attachment">Attachment</span></dt>
+        <dd>
+          <span *ngFor="let attachment of contentPage.attachments; let last = last">
+            <a [routerLink]="['/document', attachment?.id, 'view']">{{ attachment.name }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>

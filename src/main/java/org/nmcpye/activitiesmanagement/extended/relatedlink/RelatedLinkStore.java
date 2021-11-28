@@ -6,6 +6,7 @@ import org.nmcpye.activitiesmanagement.extended.common.IdentifiableObjectStore;
 /**
  * Created by Hamza on 17-11-2021.
  */
+// TODO Move to ContentStore
 public interface RelatedLinkStore extends IdentifiableObjectStore<RelatedLink> {
     String ID = RelatedLinkStore.class.getName();
 }

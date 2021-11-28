@@ -2,6 +2,7 @@ import * as dayjs from 'dayjs';
 import { IImageAlbum } from 'app/entities/image-album/image-album.model';
 import { IUser } from 'app/entities/user/user.model';
 import { IRelatedLink } from 'app/entities/related-link/related-link.model';
+import { IDocument } from 'app/entities/document/document.model';
 
 export interface IContentPage {
   id?: number;
@@ -19,6 +20,7 @@ export interface IContentPage {
   createdBy?: IUser | null;
   lastUpdatedBy?: IUser | null;
   relatedLinks?: IRelatedLink[] | null;
+  attachments?: IDocument[] | null;
 }
 
 export class ContentPage implements IContentPage {
@@ -37,7 +39,8 @@ export class ContentPage implements IContentPage {
     public imageAlbum?: IImageAlbum | null,
     public createdBy?: IUser | null,
     public lastUpdatedBy?: IUser | null,
-    public relatedLinks?: IRelatedLink[] | null
+    public relatedLinks?: IRelatedLink[] | null,
+    public attachments?: IDocument[] | null
   ) {
     this.active = this.active ?? false;
   }

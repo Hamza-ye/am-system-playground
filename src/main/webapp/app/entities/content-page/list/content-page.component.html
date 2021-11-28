@@ -47,6 +47,7 @@
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.contentPage.createdBy">Created By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.contentPage.lastUpdatedBy">Last Updated By</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.contentPage.relatedLink">Related Link</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.contentPage.attachment">Attachment</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -78,7 +79,13 @@
           </td>
           <td>
             <span *ngFor="let relatedLink of contentPage.relatedLinks; let last = last">
-              <a class="form-control-static" [routerLink]="['/related-link', relatedLink.id, 'view']">{{ relatedLink.id }}</a
+              <a class="form-control-static" [routerLink]="['/related-link', relatedLink.id, 'view']">{{ relatedLink.name }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <span *ngFor="let attachment of contentPage.attachments; let last = last">
+              <a class="form-control-static" [routerLink]="['/document', attachment.id, 'view']">{{ attachment.name }}</a
               >{{ last ? '' : ', ' }}
             </span>
           </td>

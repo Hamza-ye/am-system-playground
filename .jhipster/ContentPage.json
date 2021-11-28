@@ -75,6 +75,15 @@
       "otherEntityName": "relatedLink",
       "otherEntityRelationshipName": "contentPage",
       "relationshipName": "relatedLink",
+      "otherEntityField": "name",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "document",
+      "otherEntityRelationshipName": "contentPage",
+      "relationshipName": "attachment",
+      "otherEntityField": "name",
       "ownerSide": true
     }
   ],

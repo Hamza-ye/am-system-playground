@@ -31,7 +31,8 @@
       "imageAlbum": "Image Album",
       "createdBy": "Created By",
       "lastUpdatedBy": "Last Updated By",
-      "relatedLink": "Related Link"
+      "relatedLink": "Related Link",
+      "attachment": "Attachment"
     }
   }
 }
