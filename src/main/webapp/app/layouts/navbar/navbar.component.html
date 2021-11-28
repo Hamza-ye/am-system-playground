@@ -655,6 +655,30 @@
               <span appTranslate="global.menu.entities.document">Document</span>
             </a>
           </li>
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="content-page"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="collapseNavbar()"
+            >
+              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <span appTranslate="global.menu.entities.contentPage">Content Page</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="image-album"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (click)="collapseNavbar()"
+            >
+              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <span appTranslate="global.menu.entities.imageAlbum">Image Album</span>
+            </a>
+          </li>
           <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
         </ul>
       </li>
