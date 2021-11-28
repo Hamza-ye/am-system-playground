@@ -55,6 +55,27 @@
       "relationshipName": "imageAlbum",
       "otherEntityField": "name",
       "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "contentPage",
+      "relationshipName": "createdBy",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "contentPage",
+      "relationshipName": "lastUpdatedBy",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "relatedLink",
+      "otherEntityRelationshipName": "contentPage",
+      "relationshipName": "relatedLink",
+      "ownerSide": true
     }
   ],
   "entityTableName": "content_page",

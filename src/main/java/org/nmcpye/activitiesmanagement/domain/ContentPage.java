@@ -309,4 +309,9 @@ public class ContentPage extends BaseIdentifiableObject {
     public void setRelatedLinks(Set<RelatedLink> relatedLinks) {
         this.relatedLinks = relatedLinks;
     }
+
+    @JsonProperty
+    public Boolean hasRelatedLinks() {
+        return relatedLinks != null || !relatedLinks.isEmpty();
+    }
 }

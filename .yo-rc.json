@@ -88,7 +88,8 @@
       "ExternalFileResource",
       "Document",
       "ContentPage",
-      "ImageAlbum"
+      "ImageAlbum",
+      "RelatedLink"
     ],
     "lastLiquibaseTimestamp": 1635723832000
   }
