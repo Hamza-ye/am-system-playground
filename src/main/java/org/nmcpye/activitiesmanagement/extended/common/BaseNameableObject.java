@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyRange;
+import org.nmcpye.activitiesmanagement.extended.translation.Translatable;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Size;
@@ -185,9 +186,10 @@ public class BaseNameableObject extends BaseIdentifiableObject implements Nameab
 
     @Override
     @JsonProperty
-    public String getDisplayShortName() {
-        //        displayShortName = getTranslation( TranslationProperty.SHORT_NAME, displayShortName );
-        return displayShortName != null ? displayShortName : getShortName();
+    @Translatable( propertyName = "shortName", key = "SHORT_NAME" )
+    public String getDisplayShortName()
+    {
+        return getTranslation( "SHORT_NAME", getShortName() );
     }
 
     public void setDisplayShortName(String displayShortName) {
@@ -207,9 +209,10 @@ public class BaseNameableObject extends BaseIdentifiableObject implements Nameab
 
     @Override
     @JsonProperty
-    public String getDisplayDescription() {
-        //        displayDescription = getTranslation( TranslationProperty.DESCRIPTION, displayDescription );
-        return displayDescription != null ? displayDescription : getDescription();
+    @Translatable( propertyName = "description", key = "DESCRIPTION" )
+    public String getDisplayDescription()
+    {
+        return getTranslation( "DESCRIPTION", getDescription() );
     }
 
     public void setDisplayDescription(String displayDescription) {

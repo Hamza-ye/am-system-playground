@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import org.apache.commons.lang3.StringUtils;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.extended.common.annotation.Description;
 import org.nmcpye.activitiesmanagement.extended.schema.PropertyType;
@@ -15,12 +14,11 @@ import org.nmcpye.activitiesmanagement.extended.schema.annotation.Property;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyRange;
 import org.nmcpye.activitiesmanagement.extended.schema.annotation.PropertyTransformer;
 import org.nmcpye.activitiesmanagement.extended.schema.transformer.UserPropertyTransformer;
-import org.nmcpye.activitiesmanagement.extended.translation.Translation;
-import org.nmcpye.activitiesmanagement.extended.user.UserSettingKey;
+import org.nmcpye.activitiesmanagement.extended.translation.Translatable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.*;
+import java.util.Date;
 
 //@MappedSuperclass
 @JsonRootName(value = "identifiableObject", namespace = DxfNamespaces.DXF_2_0)
@@ -184,11 +182,18 @@ public class BaseIdentifiableObject
         this.name = name;
     }
 
+//    @Override
+//    @JsonProperty
+//    public String getDisplayName() {
+//                displayName = getTranslation( TranslationProperty.NAME, displayName );
+//        return displayName != null ? displayName : getName();
+//    }
+
     @Override
     @JsonProperty
+    @Translatable(propertyName = "name", key = "NAME")
     public String getDisplayName() {
-        //        displayName = getTranslation( TranslationProperty.NAME, displayName );
-        return displayName != null ? displayName : getName();
+        return getTranslation("NAME", getName());
     }
 
     @JsonIgnore
