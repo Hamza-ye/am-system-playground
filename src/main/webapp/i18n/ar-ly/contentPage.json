@@ -1,0 +1,36 @@
+{
+  "amSystemPlaygroundApp": {
+    "contentPage": {
+      "home": {
+        "title": "Content Pages",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Content Page",
+        "createOrEditLabel": "Create or edit a Content Page",
+        "notFound": "No Content Pages found"
+      },
+      "created": "A new Content Page is created with identifier {{ param }}",
+      "updated": "A Content Page is updated with identifier {{ param }}",
+      "deleted": "A Content Page is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Content Page {{ id }}?"
+      },
+      "detail": {
+        "title": "Content Page"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "name": "Name",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "title": "Title",
+      "subtitle": "Subtitle",
+      "content": "Content",
+      "active": "Active",
+      "visitedCount": "Visited Count",
+      "imageAlbum": "Image Album",
+      "createdBy": "Created By",
+      "lastUpdatedBy": "Last Updated By"
+    }
+  }
+}

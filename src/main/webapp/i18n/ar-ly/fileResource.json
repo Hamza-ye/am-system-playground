@@ -31,7 +31,8 @@
       "domain": "Domain",
       "hasMultipleStorageFiles": "Has Multiple Storage Files",
       "createdBy": "Created By",
-      "lastUpdatedBy": "Last Updated By"
+      "lastUpdatedBy": "Last Updated By",
+      "imageAlbum": "Image Album"
     }
   }
 }

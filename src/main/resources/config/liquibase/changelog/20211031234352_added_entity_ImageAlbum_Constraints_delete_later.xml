@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <changeSet author="Hamza (generated)" id="1638054081692-43">
+        <addForeignKeyConstraint
+            baseColumnNames="image_album_id"
+            baseTableName="image_album_images"
+            constraintName="FK_image_album_images_image_album_id"
+            deferrable="false" initiallyDeferred="false"
+            referencedColumnNames="id"
+            referencedTableName="image_album"
+            validate="true"/>
+
+        <addForeignKeyConstraint baseColumnNames="file_resource_id"
+                                 baseTableName="image_album_images"
+                                 constraintName="FK_image_album_images_file_resource_id"
+                                 deferrable="false" initiallyDeferred="false"
+                                 referencedColumnNames="id"
+                                 referencedTableName="file_resource"
+                                 validate="true"/>
+
+    </changeSet>
+
+    <changeSet author="Hamza (generated)" id="1638054081692-40">
+        <addUniqueConstraint
+            columnNames="file_resource_id"
+            constraintName="UK_image_album_images_file_resource_id"
+            tableName="image_album_images"/>
+    </changeSet>
+
+</databaseChangeLog>

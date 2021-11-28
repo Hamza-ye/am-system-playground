@@ -92,6 +92,11 @@ public class MalariaUnit implements Serializable {
     @JoinColumn(name = "last_updated_by")
     private User lastUpdatedBy;
 
+    @JsonIgnoreProperties(value = { "imagesAlbum" }, allowSetters = true)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(unique = true)
+    private ContentPage contentPage;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     @JsonProperty
     public Long getId() {
@@ -307,7 +312,19 @@ public class MalariaUnit implements Serializable {
         this.lastUpdatedBy = user;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    @JsonProperty
+    public ContentPage getContentPage() {
+        return contentPage;
+    }
+
+    public void setContentPage(ContentPage contentPage) {
+        this.contentPage = contentPage;
+    }
+
+    @JsonProperty
+    public Boolean hasContentPage() {
+        return contentPage != null;
+    }
 
     @Override
     public boolean equals(Object o) {

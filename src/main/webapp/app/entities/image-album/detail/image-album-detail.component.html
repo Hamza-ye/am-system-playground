@@ -1,0 +1,75 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="imageAlbum">
+      <h2 data-cy="imageAlbumDetailsHeading"><span appTranslate="amSystemPlaygroundApp.imageAlbum.detail.title">Image Album</span></h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ imageAlbum.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.imageAlbum.uid">Uid</span></dt>
+        <dd>
+          <span>{{ imageAlbum.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.imageAlbum.code">Code</span></dt>
+        <dd>
+          <span>{{ imageAlbum.code }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.imageAlbum.name">Name</span></dt>
+        <dd>
+          <span>{{ imageAlbum.name }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.imageAlbum.created">Created</span></dt>
+        <dd>
+          <span>{{ imageAlbum.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.imageAlbum.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ imageAlbum.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.imageAlbum.title">Title</span></dt>
+        <dd>
+          <span>{{ imageAlbum.title }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.imageAlbum.coverImageUid">Cover Image Uid</span></dt>
+        <dd>
+          <span>{{ imageAlbum.coverImageUid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.imageAlbum.subtitle">Subtitle</span></dt>
+        <dd>
+          <span>{{ imageAlbum.subtitle }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.imageAlbum.createdBy">Created By</span></dt>
+        <dd>
+          <span>{{ imageAlbum.createdBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.imageAlbum.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ imageAlbum.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.imageAlbum.image">Image</span></dt>
+        <dd>
+          <span *ngFor="let image of imageAlbum.images; let last = last">
+            <a [routerLink]="['/file-resource', image?.id, 'view']">{{ image.name }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/image-album', imageAlbum.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

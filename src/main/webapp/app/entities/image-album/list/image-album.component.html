@@ -1,0 +1,107 @@
+<div>
+  <h2 id="page-heading" data-cy="ImageAlbumHeading">
+    <span appTranslate="amSystemPlaygroundApp.imageAlbum.home.title">Image Albums</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.imageAlbum.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-image-album"
+        [routerLink]="['/image-album/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.imageAlbum.home.createLabel"> Create a new Image Album </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="imageAlbums?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.imageAlbum.home.notFound">No imageAlbums found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="imageAlbums && imageAlbums.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.imageAlbum.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.imageAlbum.code">Code</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.imageAlbum.name">Name</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.imageAlbum.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.imageAlbum.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.imageAlbum.title">Title</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.imageAlbum.coverImageUid">Cover Image Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.imageAlbum.subtitle">Subtitle</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.imageAlbum.createdBy">Created By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.imageAlbum.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.imageAlbum.image">Image</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let imageAlbum of imageAlbums; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/image-album', imageAlbum.id, 'view']">{{ imageAlbum.id }}</a>
+          </td>
+          <td>{{ imageAlbum.uid }}</td>
+          <td>{{ imageAlbum.code }}</td>
+          <td>{{ imageAlbum.name }}</td>
+          <td>{{ imageAlbum.created | formatMediumDatetime }}</td>
+          <td>{{ imageAlbum.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ imageAlbum.title }}</td>
+          <td>{{ imageAlbum.coverImageUid }}</td>
+          <td>{{ imageAlbum.subtitle }}</td>
+          <td>
+            {{ imageAlbum.createdBy?.login }}
+          </td>
+          <td>
+            {{ imageAlbum.lastUpdatedBy?.login }}
+          </td>
+          <td>
+            <span *ngFor="let image of imageAlbum.images; let last = last">
+              <a class="form-control-static" [routerLink]="['/file-resource', image.id, 'view']">{{ image.name }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/image-album', imageAlbum.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/image-album', imageAlbum.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(imageAlbum)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

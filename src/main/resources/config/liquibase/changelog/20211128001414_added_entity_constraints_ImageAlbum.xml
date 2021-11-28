@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity ImageAlbum.
+    -->
+    <changeSet id="20211128001414-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="image_album_id"
+                                 baseTableName="image_album_images"
+                                 constraintName="fk_rel_image_album__image__image_album_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="image_album"/>
+
+        <addForeignKeyConstraint baseColumnNames="image_id"
+                                 baseTableName="image_album_images"
+                                 constraintName="fk_rel_image_album__image__image_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="file_resource"/>
+
+        <addForeignKeyConstraint baseColumnNames="created_by"
+                                 baseTableName="image_album"
+                                 constraintName="fk_image_album_created_by"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="last_updated_by"
+                                 baseTableName="image_album"
+                                 constraintName="fk_image_album__last_updated_by"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+    </changeSet>
+</databaseChangeLog>

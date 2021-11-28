@@ -1,0 +1,110 @@
+<div>
+  <h2 id="page-heading" data-cy="ContentPageHeading">
+    <span appTranslate="amSystemPlaygroundApp.contentPage.home.title">Content Pages</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.contentPage.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-content-page"
+        [routerLink]="['/content-page/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="amSystemPlaygroundApp.contentPage.home.createLabel"> Create a new Content Page </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="contentPages?.length === 0">
+    <span appTranslate="amSystemPlaygroundApp.contentPage.home.notFound">No contentPages found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="contentPages && contentPages.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.contentPage.uid">Uid</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.contentPage.code">Code</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.contentPage.name">Name</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.contentPage.created">Created</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.contentPage.lastUpdated">Last Updated</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.contentPage.title">Title</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.contentPage.subtitle">Subtitle</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.contentPage.content">Content</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.contentPage.active">Active</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.contentPage.visitedCount">Visited Count</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.contentPage.imageAlbum">Image Album</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.contentPage.createdBy">Created By</span></th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.contentPage.lastUpdatedBy">Last Updated By</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contentPage of contentPages; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/content-page', contentPage.id, 'view']">{{ contentPage.id }}</a>
+          </td>
+          <td>{{ contentPage.uid }}</td>
+          <td>{{ contentPage.code }}</td>
+          <td>{{ contentPage.name }}</td>
+          <td>{{ contentPage.created | formatMediumDatetime }}</td>
+          <td>{{ contentPage.lastUpdated | formatMediumDatetime }}</td>
+          <td>{{ contentPage.title }}</td>
+          <td>{{ contentPage.subtitle }}</td>
+          <td>{{ contentPage.content }}</td>
+          <td>{{ contentPage.active }}</td>
+          <td>{{ contentPage.visitedCount }}</td>
+          <td>
+            <div *ngIf="contentPage.imageAlbum">
+              <a [routerLink]="['/image-album', contentPage.imageAlbum?.id, 'view']">{{ contentPage.imageAlbum?.name }}</a>
+            </div>
+          </td>
+          <td>
+            {{ contentPage.createdBy?.login }}
+          </td>
+          <td>
+            {{ contentPage.lastUpdatedBy?.login }}
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/content-page', contentPage.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/content-page', contentPage.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(contentPage)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

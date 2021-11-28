@@ -16,6 +16,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.activity.Activity;
+import org.nmcpye.activitiesmanagement.domain.ContentPage;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 import org.nmcpye.activitiesmanagement.extended.common.MetadataObject;
@@ -84,6 +85,11 @@ public class Project extends BaseIdentifiableObject implements MetadataObject {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "warehouses", "user", "createdBy", "lastUpdatedBy", "project" }, allowSetters = true)
     private Set<Activity> activities = new HashSet<>();
+
+    @JsonIgnoreProperties(value = { "imagesAlbum" }, allowSetters = true)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(unique = true)
+    private ContentPage contentPage;
 
     public Project id(Long id) {
         this.id = id;
@@ -160,6 +166,21 @@ public class Project extends BaseIdentifiableObject implements MetadataObject {
             activities.forEach(i -> i.setProject(this));
         }
         this.activities = activities;
+    }
+
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
+    public ContentPage getContentPage() {
+        return contentPage;
+    }
+
+    public void setContentPage(ContentPage contentPage) {
+        this.contentPage = contentPage;
+    }
+
+    @JsonProperty
+    public Boolean hasContentPage() {
+        return contentPage != null;
     }
 
     public Project user(User user) {

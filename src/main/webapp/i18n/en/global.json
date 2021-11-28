@@ -15,6 +15,7 @@
         "other": "Other Activities"
       },
       "dengue": "Dengue",
+      "language": "اللغة",
       "entities": {
         "main": "Entities",
         "project": "Project",
@@ -60,6 +61,8 @@
         "fileResource": "File Resource",
         "externalFileResource": "External File Resource",
         "document": "Document",
+        "contentPage": "Content Page",
+        "imageAlbum": "Image Album",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -82,8 +85,7 @@
         "apidocs": "API",
         "database": "Database",
         "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
-      },
-      "language": "اللغة"
+      }
     },
     "form": {
       "username.label": "Username",

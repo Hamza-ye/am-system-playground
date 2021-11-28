@@ -58,6 +58,9 @@
     <include file="config/liquibase/changelog/20211031234351_added_entity_DataInputPeriod.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20211031234352_added_entity_RelativePeriods.xml" relativeToChangelogFile="false"/>
 
+    <include file="config/liquibase/changelog/20211128001414_added_entity_ImageAlbum.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211128001413_added_entity_ContentPage.xml" relativeToChangelogFile="false"/>
+
     <!--<include file="config/liquibase/changelog/extended_added_entity_PersonAuthorityGroup_relations.xml" relativeToChangelogFile="false"/>-->
     <include file="config/liquibase/changelog/extended_added_entity_jobConfiguration.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/extended_added_entity_DataSet_DataInputPeriods_relationship.xml" relativeToChangelogFile="false"/>
@@ -106,6 +109,12 @@
     <include file="config/liquibase/changelog/20211114172514_Document_constraints.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/extended_added_entity_User_constraints.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/Extended_person_authority_group_authorities_string_collection.xml" relativeToChangelogFile="false"/>
+
+    <include file="config/liquibase/changelog/20211128001414_added_entity_constraints_ImageAlbum.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211128001413_added_entity_constraints_ContentPage.xml" relativeToChangelogFile="false"/>
+
+    <include file="config/liquibase/changelog/20211127225837_add_contentPageId_to_entities.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211127225837_add_translations_field_to_entities.xml" relativeToChangelogFile="false"/>
 
     <!--<include file="config/liquibase/changelog/20211120201546_changelog.xml" relativeToChangelogFile="false"/>-->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->

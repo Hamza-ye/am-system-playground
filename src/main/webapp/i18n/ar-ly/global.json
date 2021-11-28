@@ -8,13 +8,14 @@
       "projects": {
         "main": "الملاريا",
         "surveillance" : "الترصد والحالات",
-        "supply": "أدوية و إمداد",
-        "llinsDistribution": "توزيع ناموسيات",
-        "irs": "رش مبيد أثر باقي",
+        "supply": "الإمداد والأدوية",
+        "llinsDistribution": "توزيع الناموسيات",
+        "irs": "رش مبيد الأثر الباقي",
         "chvs": "متطوعات صحة المجتمع",
         "other": "أنشطة اخرى"
       },
       "dengue": "حمى الضنك",
+      "language": "Language",
       "entities": {
         "main": "الكيانات",
         "project": "Project",
@@ -60,6 +61,8 @@
         "fileResource": "File Resource",
         "externalFileResource": "External File Resource",
         "document": "Document",
+        "contentPage": "Content Page",
+        "imageAlbum": "Image Album",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -82,8 +85,7 @@
         "apidocs": "API",
         "database": "قاعدة البيانات",
         "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
-      },
-      "language": "Language"
+      }
     },
     "form": {
       "username.label": "اسم المستخدم",

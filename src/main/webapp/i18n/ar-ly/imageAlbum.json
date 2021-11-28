@@ -1,0 +1,34 @@
+{
+  "amSystemPlaygroundApp": {
+    "imageAlbum": {
+      "home": {
+        "title": "Image Albums",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Image Album",
+        "createOrEditLabel": "Create or edit a Image Album",
+        "notFound": "No Image Albums found"
+      },
+      "created": "A new Image Album is created with identifier {{ param }}",
+      "updated": "A Image Album is updated with identifier {{ param }}",
+      "deleted": "A Image Album is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Image Album {{ id }}?"
+      },
+      "detail": {
+        "title": "Image Album"
+      },
+      "id": "ID",
+      "uid": "Uid",
+      "code": "Code",
+      "name": "Name",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "title": "Title",
+      "coverImageUid": "Cover Image Uid",
+      "subtitle": "Subtitle",
+      "createdBy": "Created By",
+      "lastUpdatedBy": "Last Updated By",
+      "image": "Image"
+    }
+  }
+}

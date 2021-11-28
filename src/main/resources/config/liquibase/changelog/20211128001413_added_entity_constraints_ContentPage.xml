@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity ContentPage.
+    -->
+    <changeSet id="20211128001413-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="image_album_id"
+                                 baseTableName="content_page"
+                                 constraintName="fk_content_page__image_album_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="image_album"/>
+
+        <addForeignKeyConstraint baseColumnNames="created_by"
+                                 baseTableName="content_page"
+                                 constraintName="fk_content_page_created_by"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="last_updated_by"
+                                 baseTableName="content_page"
+                                 constraintName="fk_content_page__last_updated_by"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+    </changeSet>
+</databaseChangeLog>

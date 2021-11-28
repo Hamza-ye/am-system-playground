@@ -25,6 +25,7 @@
       "description": "Description",
       "created": "Created",
       "lastUpdated": "Last Updated",
+      "contentPage": "Content Page",
       "organisationUnit": "Organisation Unit",
       "malariaUnitStaffMember": "Malaria Unit Staff Member",
       "createdBy": "Created By",

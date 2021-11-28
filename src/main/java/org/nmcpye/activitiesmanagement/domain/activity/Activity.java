@@ -8,6 +8,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.Warehouse;
+import org.nmcpye.activitiesmanagement.domain.ContentPage;
 import org.nmcpye.activitiesmanagement.domain.project.Project;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
 import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
@@ -108,6 +109,11 @@ public class Activity extends BaseIdentifiableObject implements MetadataObject {
     @JsonIgnoreProperties(value = {"activities", "user", "createdBy", "lastUpdatedBy"}, allowSetters = true)
     private Project project;
 
+    @JsonIgnoreProperties(value = { "imagesAlbum" }, allowSetters = true)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(unique = true)
+    private ContentPage contentPage;
+
     public Activity id(Long id) {
         this.id = id;
         return this;
@@ -165,20 +171,6 @@ public class Activity extends BaseIdentifiableObject implements MetadataObject {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
-//
-//    @JsonProperty
-//    public Integer getNoOfDays() {
-//        return this.noOfDays;
-//    }
-//
-//    public Activity noOfDays(Integer noOfDays) {
-//        this.noOfDays = noOfDays;
-//        return this;
-//    }
-//
-//    public void setNoOfDays(Integer noOfDays) {
-//        this.noOfDays = noOfDays;
-//    }
 
     @JsonProperty
     public Boolean getActive() {
@@ -262,6 +254,21 @@ public class Activity extends BaseIdentifiableObject implements MetadataObject {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
+    public ContentPage getContentPage() {
+        return contentPage;
+    }
+
+    public void setContentPage(ContentPage contentPage) {
+        this.contentPage = contentPage;
+    }
+
+    @JsonProperty
+    public Boolean hasContentPage() {
+        return contentPage != null;
     }
 
     @Override

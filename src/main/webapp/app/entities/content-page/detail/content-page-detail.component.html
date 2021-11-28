@@ -1,0 +1,82 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="contentPage">
+      <h2 data-cy="contentPageDetailsHeading"><span appTranslate="amSystemPlaygroundApp.contentPage.detail.title">Content Page</span></h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ contentPage.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.contentPage.uid">Uid</span></dt>
+        <dd>
+          <span>{{ contentPage.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.contentPage.code">Code</span></dt>
+        <dd>
+          <span>{{ contentPage.code }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.contentPage.name">Name</span></dt>
+        <dd>
+          <span>{{ contentPage.name }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.contentPage.created">Created</span></dt>
+        <dd>
+          <span>{{ contentPage.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.contentPage.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ contentPage.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.contentPage.title">Title</span></dt>
+        <dd>
+          <span>{{ contentPage.title }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.contentPage.subtitle">Subtitle</span></dt>
+        <dd>
+          <span>{{ contentPage.subtitle }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.contentPage.content">Content</span></dt>
+        <dd>
+          <span>{{ contentPage.content }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.contentPage.active">Active</span></dt>
+        <dd>
+          <span>{{ contentPage.active }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.contentPage.visitedCount">Visited Count</span></dt>
+        <dd>
+          <span>{{ contentPage.visitedCount }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.contentPage.imageAlbum">Image Album</span></dt>
+        <dd>
+          <div *ngIf="contentPage.imageAlbum">
+            <a [routerLink]="['/image-album', contentPage.imageAlbum?.id, 'view']">{{ contentPage.imageAlbum?.name }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.contentPage.createdBy">Created By</span></dt>
+        <dd>
+          <span>{{ contentPage.createdBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.contentPage.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ contentPage.lastUpdatedBy?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/content-page', contentPage.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
