@@ -1,6 +1,7 @@
 package org.nmcpye.activitiesmanagement.extended.common;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.vladmihalcea.hibernate.type.json.JsonType;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Parameter;
@@ -30,7 +31,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @MappedSuperclass
 @TypeDef(
     name = "jblTranslations",
-    typeClass = JsonSetBinaryType.class,
+    typeClass = JsonType.class, //JsonSetBinaryType.class,
     parameters = {@Parameter(name = "clazz",
         value = "org.nmcpye.activitiesmanagement.extended.translation.Translation")}
 )
