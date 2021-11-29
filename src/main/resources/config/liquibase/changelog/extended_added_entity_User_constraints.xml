@@ -4,31 +4,40 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 
-    <!--<changeSet id="00_add_last_updated_column" author="Hamza">-->
-        <!--<addColumn tableName="app_user">-->
-            <!--<column name="last_updated" type="timestamp">-->
-                <!--<constraints nullable="true"/>-->
-            <!--</column>-->
-        <!--</addColumn>-->
-    <!--</changeSet>-->
+    <changeSet id="0000_add_avatar_column" author="Hamza">
+        <addColumn tableName="app_user">
+            <column name="avatar_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="UC_USER_AVATAR_UNIQUE"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="0111_add_avatar_column" author="Hamza">
+        <addForeignKeyConstraint baseColumnNames="avatar_id"
+                                 baseTableName="app_user"
+                                 constraintName="fk_user_avatar_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="file_resource"/>
+    </changeSet>
+
     <changeSet id="extend-app_user-constraints" author="Hamza">
         <!--<addForeignKeyConstraint baseColumnNames="person_id"-->
-                                 <!--baseTableName="app_user"-->
-                                 <!--constraintName="fk_app_user_person_id"-->
-                                 <!--referencedColumnNames="id"-->
-                                 <!--referencedTableName="person"/>-->
+        <!--baseTableName="app_user"-->
+        <!--constraintName="fk_app_user_person_id"-->
+        <!--referencedColumnNames="id"-->
+        <!--referencedTableName="person"/>-->
 
         <!--<addForeignKeyConstraint baseColumnNames="last_updated_by"-->
-                                 <!--baseTableName="app_user"-->
-                                 <!--constraintName="fk_app_user__last_updated_by"-->
-                                 <!--referencedColumnNames="id"-->
-                                 <!--referencedTableName="app_user"/>-->
+        <!--baseTableName="app_user"-->
+        <!--constraintName="fk_app_user__last_updated_by"-->
+        <!--referencedColumnNames="id"-->
+        <!--referencedTableName="app_user"/>-->
 
         <!--<addForeignKeyConstraint baseColumnNames="created_by"-->
-                                 <!--baseTableName="app_user"-->
-                                 <!--constraintName="fk_app_user__created_by"-->
-                                 <!--referencedColumnNames="id"-->
-                                 <!--referencedTableName="app_user"/>-->
+        <!--baseTableName="app_user"-->
+        <!--constraintName="fk_app_user__created_by"-->
+        <!--referencedColumnNames="id"-->
+        <!--referencedTableName="app_user"/>-->
     </changeSet>
 
 </databaseChangeLog>

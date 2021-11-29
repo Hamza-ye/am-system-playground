@@ -10,6 +10,7 @@ import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
 import org.nmcpye.activitiesmanagement.config.Constants;
 import org.nmcpye.activitiesmanagement.domain.enumeration.Gender;
+import org.nmcpye.activitiesmanagement.domain.fileresource.FileResource;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
@@ -164,6 +165,10 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
     @Fetch(FetchMode.JOIN)
 //    @JoinColumn(unique = true)
     Person person;
+
+    @OneToOne
+    @JoinColumn(name = "avatar_id",unique = true)
+    private FileResource avatar;
 
     /**
      * Returns the concatenated first name and surname.
@@ -558,5 +563,13 @@ public class User extends BaseIdentifiableObject implements MetadataObject {
     @Override
     public void setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
+    }
+
+    public FileResource getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(FileResource avatar) {
+        this.avatar = avatar;
     }
 }
