@@ -1,0 +1,84 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="activity">
+      <h2 data-cy="activityDetailsHeading"><span appTranslate="amSystemPlaygroundApp.activity.detail.title">Activity</span></h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ activity.id }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.activity.uid">Uid</span></dt>
+        <dd>
+          <span>{{ activity.uid }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.activity.code">Code</span></dt>
+        <dd>
+          <span>{{ activity.code }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.activity.name">Name</span></dt>
+        <dd>
+          <span>{{ activity.name }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.activity.created">Created</span></dt>
+        <dd>
+          <span>{{ activity.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.activity.lastUpdated">Last Updated</span></dt>
+        <dd>
+          <span>{{ activity.lastUpdated | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.activity.startDate">Start Date</span></dt>
+        <dd>
+          <span>{{ activity.startDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.activity.endDate">End Date</span></dt>
+        <dd>
+          <span>{{ activity.endDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.activity.active">Active</span></dt>
+        <dd>
+          <span>{{ activity.active }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.activity.displayed">Displayed</span></dt>
+        <dd>
+          <span>{{ activity.displayed }}</span>
+        </dd>
+        <!--<dt><span appTranslate="amSystemPlaygroundApp.activity.contentPage">Content Page</span></dt>-->
+        <!--<dd>-->
+          <!--<div *ngIf="activity.contentPage">-->
+            <!--<a [routerLink]="['/content-page', activity.contentPage?.id, 'view']">{{ activity.contentPage?.name }}</a>-->
+          <!--</div>-->
+        <!--</dd>-->
+        <dt><span appTranslate="amSystemPlaygroundApp.activity.createdBy">Created By</span></dt>
+        <dd>
+          <span>{{ activity.createdBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.activity.lastUpdatedBy">Last Updated By</span></dt>
+        <dd>
+          <span>{{ activity.lastUpdatedBy?.login }}</span>
+        </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.activity.project">Project</span></dt>
+        <dd>
+          <div *ngIf="activity.project">
+            <a [routerLink]="['/project', activity.project?.id, 'view']">{{ activity.project?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/activity', activity.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
