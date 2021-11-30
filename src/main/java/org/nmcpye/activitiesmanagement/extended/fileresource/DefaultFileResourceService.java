@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service
-public class DefaultFileResourceServiceExt
+public class DefaultFileResourceService
     implements FileResourceServiceExt {
     private static final Duration IS_ORPHAN_TIME_DELTA = Hours.TWO.toStandardDuration();
 
@@ -52,10 +52,10 @@ public class DefaultFileResourceServiceExt
 
     private final ApplicationEventPublisher fileEventPublisher;
 
-    public DefaultFileResourceServiceExt(FileResourceStore fileResourceStore,
-                                         FileResourceContentStore fileResourceContentStore,
-                                         ImageProcessingService imageProcessingService,
-                                         ApplicationEventPublisher fileEventPublisher) {
+    public DefaultFileResourceService(FileResourceStore fileResourceStore,
+                                      FileResourceContentStore fileResourceContentStore,
+                                      ImageProcessingService imageProcessingService,
+                                      ApplicationEventPublisher fileEventPublisher) {
         checkNotNull(fileResourceStore);
         checkNotNull(fileResourceContentStore);
         checkNotNull(imageProcessingService);

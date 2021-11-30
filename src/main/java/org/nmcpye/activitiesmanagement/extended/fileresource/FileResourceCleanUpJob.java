@@ -52,11 +52,12 @@ public class FileResourceCleanUpJob implements Job {
         List<Pair<String, String>> deletedAuditFiles = new ArrayList<>();
 
         // Delete expired FRs
-        if (!FileResourceRetentionStrategy.FOREVER.equals(retentionStrategy)) {
-            List<FileResource> expired = fileResourceServiceExt.getExpiredFileResources(retentionStrategy);
-            expired.forEach(this::safeDelete);
-            expired.forEach(fr -> deletedAuditFiles.add(ImmutablePair.of(fr.getName(), fr.getUid())));
-        }
+        // TODO extend fix the query that brings the expired files
+//        if (!FileResourceRetentionStrategy.FOREVER.equals(retentionStrategy)) {
+//            List<FileResource> expired = fileResourceServiceExt.getExpiredFileResources(retentionStrategy);
+//            expired.forEach(this::safeDelete);
+//            expired.forEach(fr -> deletedAuditFiles.add(ImmutablePair.of(fr.getName(), fr.getUid())));
+//        }
 
         // Delete failed uploads
         fileResourceServiceExt.getOrphanedFileResources().stream()

@@ -34,7 +34,7 @@ public class HibernateFileResourceStore
     public List<FileResource> getExpiredFileResources(DateTime expires) {
         List<FileResource> results = getSession()
             .createNativeQuery("select fr.* " +
-                "from fileresource fr " +
+                "from file_resource fr " +
                 "inner join (select dva.value " +
                 "from datavalueaudit dva " +
                 "where dva.created < :date " +

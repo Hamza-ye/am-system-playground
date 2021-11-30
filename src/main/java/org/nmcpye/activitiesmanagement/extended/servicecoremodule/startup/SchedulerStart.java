@@ -15,6 +15,7 @@ import java.util.Optional;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.nmcpye.activitiesmanagement.extended.scheduling.JobStatus.FAILED;
 import static org.nmcpye.activitiesmanagement.extended.scheduling.JobStatus.SCHEDULED;
+import static org.nmcpye.activitiesmanagement.extended.scheduling.JobType.FILE_RESOURCE_CLEANUP;
 
 /**
  * Reschedule old jobs and execute jobs which were scheduled when the server was
@@ -129,17 +130,17 @@ public class SchedulerStart extends AbstractStartupRoutine {
 
     private void addDefaultJobs(List<JobConfiguration> jobConfigurations) {
         log.info("Setting up default jobs.");
-//        if (verifyNoJobExist(DEFAULT_FILE_RESOURCE_CLEANUP, jobConfigurations)) {
-//            JobConfiguration fileResourceCleanUp = new JobConfiguration(
-//                DEFAULT_FILE_RESOURCE_CLEANUP,
-//                FILE_RESOURCE_CLEANUP,
-//                CRON_DAILY_2AM,
-//                null
-//            );
-//            fileResourceCleanUp.setUid(DEFAULT_FILE_RESOURCE_CLEANUP_UID);
-//            fileResourceCleanUp.setLeaderOnlyJob(true);
-//            addAndScheduleJob(fileResourceCleanUp);
-//        }
+        if (verifyNoJobExist(DEFAULT_FILE_RESOURCE_CLEANUP, jobConfigurations)) {
+            JobConfiguration fileResourceCleanUp = new JobConfiguration(
+                DEFAULT_FILE_RESOURCE_CLEANUP,
+                FILE_RESOURCE_CLEANUP,
+                CRON_DAILY_2AM,
+                null
+            );
+            fileResourceCleanUp.setUid(DEFAULT_FILE_RESOURCE_CLEANUP_UID);
+            fileResourceCleanUp.setLeaderOnlyJob(true);
+            addAndScheduleJob(fileResourceCleanUp);
+        }
 
         //        if ( verifyNoJobExist( DEFAULT_DATA_STATISTICS, jobConfigurations ) )
         //        {
