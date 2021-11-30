@@ -68,7 +68,8 @@ public class ImageAlbum extends BaseIdentifiableObject {
     @Column(name = "subtitle")
     private String subtitle;
 
-    @OneToMany(cascade = CascadeType.ALL)//(mappedBy = "imagesAlbum")
+    @OneToMany(cascade =
+        {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})//(mappedBy = "imagesAlbum")
     @JoinTable(name = "image_album_images", joinColumns = @JoinColumn(name = "image_album_id"),
         inverseJoinColumns = @JoinColumn(name = "image_id"))
     @Fetch(FetchMode.JOIN)
