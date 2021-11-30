@@ -58,7 +58,7 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
         UserDto.UserDtoBuilder builder = UserDto.builder().id(user.getId()).uid(user.getUid()).code(user.getCode()).displayName(user.getDisplayName());
 
         if (userCredentials != null) {
-            builder.username(userCredentials.getUsername());
+            builder.login(userCredentials.getUsername());
         }
 
         return builder.build();
@@ -212,7 +212,7 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
                 return this;
             }
 
-            public UserDtoBuilder username(String username) {
+            public UserDtoBuilder login(String username) {
                 this.login = username;
                 return this;
             }
@@ -247,11 +247,12 @@ public class UserPropertyTransformer extends AbstractPropertyTransformer<User> {
             gen.writeStringField("code", user.getCode());
             gen.writeStringField("name", user.getName());
             gen.writeStringField("displayName", user.getDisplayName());
+            gen.writeStringField("login", user.getLogin());
 //            gen.writeObject(user.getAuthorities());
 
-            if (userCredentials != null) {
-                gen.writeStringField("login", userCredentials.getLogin());
-            }
+//            if (userCredentials != null) {
+//                gen.writeStringField("login", userCredentials.getLogin());
+//            }
 
             gen.writeEndObject();
         }

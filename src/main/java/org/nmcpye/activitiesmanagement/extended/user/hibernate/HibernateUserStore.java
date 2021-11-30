@@ -129,7 +129,7 @@ public class HibernateUserStore extends HibernateIdentifiableObjectStore<User> i
                     "lower(u.firstName) like :key " +
                     "or lower(u.surname) like :key " +
                     "or lower(u.email) like :key " +
-                    "or lower(uc.username) like :key) ";
+                    "or lower(uc.login) like :key) ";
         }
 
         if (params.getMobile() != null) {

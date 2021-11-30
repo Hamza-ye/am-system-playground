@@ -28,12 +28,18 @@ import static java.util.Collections.*;
  */
 public class DefaultGistAccessControl implements GistAccessControl {
 
+//    private static final Set<String> PUBLIC_USER_PROPERTY_PATHS = unmodifiableSet(
+//        new HashSet<>(
+//            asList("id", "code", "displayName", "name", "surname", "firstName", "userCredentials.username")));
+//
+//    private static final Set<String> PUBLIC_USER_CREDENTIALS_PROPERTY_PATHS = singleton("username");
+    // Extend, Replace userCredentials with person, and username with login
     private static final Set<String> PUBLIC_USER_PROPERTY_PATHS = unmodifiableSet(
         new HashSet<>(
-            asList("id", "code", "displayName", "name", "surname", "firstName", "userCredentials.username")));
+            asList("id", "code", "displayName", "name", "surname", "firstName", "person.login")));
 
-    private static final Set<String> PUBLIC_USER_CREDENTIALS_PROPERTY_PATHS = singleton("username");
-
+    private static final Set<String> PUBLIC_USER_CREDENTIALS_PROPERTY_PATHS = singleton("login");
+    //
     private static final Set<String> PUBLIC_PROPERTY_PATHS = unmodifiableSet(
         new HashSet<>(asList("sharing", "access", "translations")));
 
