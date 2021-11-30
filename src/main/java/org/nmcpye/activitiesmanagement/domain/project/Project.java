@@ -14,6 +14,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.activity.Activity;
 import org.nmcpye.activitiesmanagement.domain.ContentPage;
@@ -82,6 +84,7 @@ public class Project extends BaseIdentifiableObject implements MetadataObject {
     private Boolean displayed;
 
     @OneToMany(mappedBy = "project")
+    @Fetch(FetchMode.JOIN)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "warehouses", "user", "createdBy", "lastUpdatedBy", "project" }, allowSetters = true)
     private Set<Activity> activities = new HashSet<>();
