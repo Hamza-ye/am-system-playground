@@ -1,5 +1,6 @@
 package org.nmcpye.activitiesmanagement.domain.organisationunit;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -13,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.geotools.geojson.geom.GeometryJSON;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.nmcpye.activitiesmanagement.domain.ContentPage;
 import org.nmcpye.activitiesmanagement.domain.MalariaUnit;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.chv.Chv;
@@ -246,16 +248,6 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
     )
     private Set<Person> people = new HashSet<>();
 
-//    @ManyToMany(mappedBy = "dataViewOrganisationUnits")
-//    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-//    @JsonIgnoreProperties(
-//        value = {
-//            "userInfo", "user", "createdBy", "lastUpdatedBy", "organisationUnits", "dataViewOrganisationUnits", "personAuthorityGroups", "groups",
-//        },
-//        allowSetters = true
-//    )
-//    private Set<Person> dataViewPeople = new HashSet<>();
-
     @ManyToMany(mappedBy = "sources")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
@@ -273,6 +265,11 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
     @ManyToOne
     @JoinColumn(name = "image")
     private FileResource image;
+
+    @JsonIgnoreProperties(value = { "imageAlbum", "createdBy", "lastUpdatedBy", "relatedLinks", "attachments" }, allowSetters = true)
+    @OneToOne
+    @JoinColumn(unique = true)
+    private ContentPage contentPage;
 
     private transient boolean currentParent;
 
@@ -769,6 +766,7 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
         return set;
     }
 
+    @Property( persistedAs = "hierarchyLevel" )
     @JsonProperty(value = "level", access = JsonProperty.Access.READ_ONLY)
     public int getLevel() {
         return StringUtils.countMatches(path, PATH_SEP);
@@ -926,7 +924,8 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
     }
 
     @JsonProperty
-    @JsonSerialize(contentUsing = JacksonOrganisationUnitChildrenSerializer.class)
+//    @JsonSerialize(contentUsing = JacksonOrganisationUnitChildrenSerializer.class)
+    @JsonSerialize( contentAs = BaseIdentifiableObject.class )
     public Set<OrganisationUnit> getChildren() {
         return children;
     }
@@ -1528,5 +1527,21 @@ public class OrganisationUnit extends BaseDimensionalItemObject implements Metad
 
     public void setImage(FileResource image) {
         this.image = image;
+    }
+
+//    @JsonProperty
+    @JsonIgnore
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
+    public ContentPage getContentPage() {
+        return contentPage;
+    }
+
+    public void setContentPage(ContentPage contentPage) {
+        this.contentPage = contentPage;
+    }
+
+    public OrganisationUnit contentPage(ContentPage contentPage) {
+        this.setContentPage(contentPage);
+        return this;
     }
 }

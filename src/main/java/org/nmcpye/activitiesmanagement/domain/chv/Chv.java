@@ -1,7 +1,9 @@
 package org.nmcpye.activitiesmanagement.domain.chv;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
@@ -12,6 +14,7 @@ import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.domain.ChvTeam;
+import org.nmcpye.activitiesmanagement.domain.ContentPage;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
@@ -209,6 +212,11 @@ public class Chv extends BaseIdentifiableObject implements MetadataObject {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "user", "createdBy", "lastUpdatedBy", "person", "responsibleForChvs" }, allowSetters = true)
     private Set<ChvTeam> supervisionTeams = new HashSet<>();
+
+    @JsonIgnoreProperties(value = { "imageAlbum", "createdBy", "lastUpdatedBy", "relatedLinks", "attachments" }, allowSetters = true)
+    @OneToOne
+    @JoinColumn(unique = true)
+    private ContentPage contentPage;
 
     public Chv id(Long id) {
         this.id = id;
@@ -464,4 +472,20 @@ public class Chv extends BaseIdentifiableObject implements MetadataObject {
     public void setLastUpdatedBy(User lastUpdatedBy) {
         this.lastUpdatedBy = lastUpdatedBy;
     }
+
+    @JsonProperty
+    @JsonSerialize(contentAs = BaseIdentifiableObject.class)
+    public ContentPage getContentPage() {
+        return contentPage;
+    }
+
+    public void setContentPage(ContentPage contentPage) {
+        this.contentPage = contentPage;
+    }
+
+    public Chv contentPage(ContentPage contentPage) {
+        this.setContentPage(contentPage);
+        return this;
+    }
+
 }

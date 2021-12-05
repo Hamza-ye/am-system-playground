@@ -83,8 +83,8 @@ public class Project extends BaseIdentifiableObject implements MetadataObject {
     @Column(name = "displayed")
     private Boolean displayed;
 
-    @OneToMany(mappedBy = "project")
-    @Fetch(FetchMode.JOIN)
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+//    @Fetch(FetchMode.JOIN)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "warehouses", "user", "createdBy", "lastUpdatedBy", "project" }, allowSetters = true)
     private Set<Activity> activities = new HashSet<>();
