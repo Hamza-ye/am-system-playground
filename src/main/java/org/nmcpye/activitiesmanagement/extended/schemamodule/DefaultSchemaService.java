@@ -1,9 +1,11 @@
 package org.nmcpye.activitiesmanagement.extended.schemamodule;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.MappingException;
 import org.hibernate.SessionFactory;
 import org.hibernate.metamodel.spi.MetamodelImplementor;
@@ -13,6 +15,7 @@ import org.nmcpye.activitiesmanagement.extended.common.*;
 import org.nmcpye.activitiesmanagement.extended.common.util.TextUtils;
 import org.nmcpye.activitiesmanagement.extended.schema.Property;
 import org.nmcpye.activitiesmanagement.extended.schemamodule.descriptors.*;
+import org.nmcpye.activitiesmanagement.extended.systemmodule.system.util.AnnotationUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -197,7 +200,6 @@ public class DefaultSchemaService
 
             SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
             MetamodelImplementor metamodelImplementor = (MetamodelImplementor) sessionFactory.getMetamodel();
-//            MetamodelImplementor metamodelImplementor = (MetamodelImplementor) sessionFactory.getMetamodel();
             try {
                 EntityPersister entityPersister = metamodelImplementor.entityPersister(schema.getKlass());
 
@@ -303,15 +305,13 @@ public class DefaultSchemaService
     }
 
     private String getName(Class<?> klass) {
-//        if ( AnnotationUtils.isAnnotationPresent( klass, JacksonXmlRootElement.class ) )
-//        {
-//            JacksonXmlRootElement rootElement = AnnotationUtils.getAnnotation( klass, JacksonXmlRootElement.class );
-//
-//            if ( !StringUtils.isEmpty( rootElement.localName() ) )
-//            {
-//                return rootElement.localName();
-//            }
-//        }
+        if (AnnotationUtils.isAnnotationPresent(klass, JsonRootName.class)) {
+            JsonRootName rootElement = AnnotationUtils.getAnnotation(klass, JsonRootName.class);
+
+            if (!StringUtils.isEmpty(rootElement.value())) {
+                return rootElement.value();
+            }
+        }
 
         return CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, klass.getSimpleName());
     }
