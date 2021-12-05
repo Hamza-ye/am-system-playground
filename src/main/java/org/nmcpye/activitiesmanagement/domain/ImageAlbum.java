@@ -1,12 +1,14 @@
 package org.nmcpye.activitiesmanagement.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.nmcpye.activitiesmanagement.domain.fileresource.FileResource;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -21,6 +23,7 @@ import java.util.Set;
 @Entity
 @Table(name = "image_album")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonRootName(value = "imageAlbum", namespace = DxfNamespaces.DXF_2_0)
 public class ImageAlbum extends BaseIdentifiableObject {
 
     @Id
