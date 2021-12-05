@@ -1,12 +1,5 @@
 package org.nmcpye.activitiesmanagement.web.rest;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.nmcpye.activitiesmanagement.domain.dataset.DengueCasesReport;
 import org.nmcpye.activitiesmanagement.repository.DengueCasesReportRepository;
 import org.nmcpye.activitiesmanagement.service.DengueCasesReportService;
@@ -14,13 +7,26 @@ import org.nmcpye.activitiesmanagement.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
+import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 /**
- * REST controller for managing {@link DengueCasesReport}.
+ * REST controller for managing {@link org.nmcpye.activitiesmanagement.domain.dataset.DengueCasesReport}.
  */
 @RestController
 @RequestMapping("/api")
@@ -139,12 +145,15 @@ public class DengueCasesReportResource {
     /**
      * {@code GET  /dengue-cases-reports} : get all the dengueCasesReports.
      *
+     * @param pageable the pagination information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of dengueCasesReports in body.
      */
     @GetMapping("/dengue-cases-reports")
-    public List<DengueCasesReport> getAllDengueCasesReports() {
-        log.debug("REST request to get all DengueCasesReports");
-        return dengueCasesReportService.findAll();
+    public ResponseEntity<List<DengueCasesReport>> getAllDengueCasesReports(Pageable pageable) {
+        log.debug("REST request to get a page of DengueCasesReports");
+        Page<DengueCasesReport> page = dengueCasesReportService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**

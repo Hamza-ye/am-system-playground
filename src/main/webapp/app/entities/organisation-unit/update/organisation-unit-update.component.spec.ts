@@ -9,6 +9,8 @@ import { of, Subject } from 'rxjs';
 
 import { OrganisationUnitService } from '../service/organisation-unit.service';
 import { IOrganisationUnit, OrganisationUnit } from '../organisation-unit.model';
+import { IContentPage } from 'app/entities/content-page/content-page.model';
+import { ContentPageService } from 'app/entities/content-page/service/content-page.service';
 import { IFileResource } from 'app/entities/file-resource/file-resource.model';
 import { FileResourceService } from 'app/entities/file-resource/service/file-resource.service';
 
@@ -27,6 +29,7 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<OrganisationUnitUpdateComponent>;
     let activatedRoute: ActivatedRoute;
     let organisationUnitService: OrganisationUnitService;
+    let contentPageService: ContentPageService;
     let fileResourceService: FileResourceService;
     let userService: UserService;
     let malariaUnitService: MalariaUnitService;
@@ -44,6 +47,7 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(OrganisationUnitUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
       organisationUnitService = TestBed.inject(OrganisationUnitService);
+      contentPageService = TestBed.inject(ContentPageService);
       fileResourceService = TestBed.inject(FileResourceService);
       userService = TestBed.inject(UserService);
       malariaUnitService = TestBed.inject(MalariaUnitService);
@@ -53,6 +57,24 @@ describe('Component Tests', () => {
     });
 
     describe('ngOnInit', () => {
+      it('Should call contentPage query and add missing value', () => {
+        const organisationUnit: IOrganisationUnit = { id: 456 };
+        const contentPage: IContentPage = { id: 12847 };
+        organisationUnit.contentPage = contentPage;
+
+        const contentPageCollection: IContentPage[] = [{ id: 48963 }];
+        jest.spyOn(contentPageService, 'query').mockReturnValue(of(new HttpResponse({ body: contentPageCollection })));
+        const expectedCollection: IContentPage[] = [contentPage, ...contentPageCollection];
+        jest.spyOn(contentPageService, 'addContentPageToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+        activatedRoute.data = of({ organisationUnit });
+        comp.ngOnInit();
+
+        expect(contentPageService.query).toHaveBeenCalled();
+        expect(contentPageService.addContentPageToCollectionIfMissing).toHaveBeenCalledWith(contentPageCollection, contentPage);
+        expect(comp.contentPagesCollection).toEqual(expectedCollection);
+      });
+
       it('Should call OrganisationUnit query and add missing value', () => {
         const organisationUnit: IOrganisationUnit = { id: 456 };
         const parent: IOrganisationUnit = { id: 71497 };
@@ -165,6 +187,8 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const organisationUnit: IOrganisationUnit = { id: 456 };
+        const contentPage: IContentPage = { id: 35301 };
+        organisationUnit.contentPage = contentPage;
         const parent: IOrganisationUnit = { id: 86550 };
         organisationUnit.parent = parent;
         const hfHomeSubVillage: IOrganisationUnit = { id: 67176 };
@@ -186,6 +210,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(organisationUnit));
+        expect(comp.contentPagesCollection).toContain(contentPage);
         expect(comp.organisationUnitsSharedCollection).toContain(parent);
         expect(comp.organisationUnitsSharedCollection).toContain(hfHomeSubVillage);
         expect(comp.organisationUnitsSharedCollection).toContain(coveredByHf);
@@ -262,6 +287,14 @@ describe('Component Tests', () => {
     });
 
     describe('Tracking relationships identifiers', () => {
+      describe('trackContentPageById', () => {
+        it('Should return tracked ContentPage primary key', () => {
+          const entity = { id: 123 };
+          const trackResult = comp.trackContentPageById(0, entity);
+          expect(trackResult).toEqual(entity.id);
+        });
+      });
+
       describe('trackOrganisationUnitById', () => {
         it('Should return tracked OrganisationUnit primary key', () => {
           const entity = { id: 123 };

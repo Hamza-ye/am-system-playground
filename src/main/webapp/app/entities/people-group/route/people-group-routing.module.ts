@@ -11,6 +11,9 @@ const peopleGroupRoute: Routes = [
   {
     path: '',
     component: PeopleGroupComponent,
+    data: {
+      defaultSort: 'id,asc',
+    },
     canActivate: [UserRouteAccessService],
   },
   {

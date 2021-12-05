@@ -1,8 +1,9 @@
 package org.nmcpye.activitiesmanagement.service;
 
 import org.nmcpye.activitiesmanagement.domain.ChvMalariaCaseReport;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -28,9 +29,10 @@ public interface ChvMalariaCaseReportService {
     /**
      * Get all the chvMalariaCaseReports.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    List<ChvMalariaCaseReport> findAll();
+    Page<ChvMalariaCaseReport> findAll(Pageable pageable);
 
     /**
      * Get the "id" chvMalariaCaseReport.

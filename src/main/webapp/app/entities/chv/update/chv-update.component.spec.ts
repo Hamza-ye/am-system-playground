@@ -11,6 +11,8 @@ import { ChvService } from '../service/chv.service';
 import { IChv, Chv } from '../chv.model';
 import { IPerson } from 'app/entities/person/person.model';
 import { PersonService } from 'app/entities/person/service/person.service';
+import { IContentPage } from 'app/entities/content-page/content-page.model';
+import { ContentPageService } from 'app/entities/content-page/service/content-page.service';
 import { IOrganisationUnit } from 'app/entities/organisation-unit/organisation-unit.model';
 import { OrganisationUnitService } from 'app/entities/organisation-unit/service/organisation-unit.service';
 
@@ -26,6 +28,7 @@ describe('Component Tests', () => {
     let activatedRoute: ActivatedRoute;
     let chvService: ChvService;
     let personService: PersonService;
+    let contentPageService: ContentPageService;
     let organisationUnitService: OrganisationUnitService;
     let userService: UserService;
 
@@ -42,6 +45,7 @@ describe('Component Tests', () => {
       activatedRoute = TestBed.inject(ActivatedRoute);
       chvService = TestBed.inject(ChvService);
       personService = TestBed.inject(PersonService);
+      contentPageService = TestBed.inject(ContentPageService);
       organisationUnitService = TestBed.inject(OrganisationUnitService);
       userService = TestBed.inject(UserService);
 
@@ -65,6 +69,24 @@ describe('Component Tests', () => {
         expect(personService.query).toHaveBeenCalled();
         expect(personService.addPersonToCollectionIfMissing).toHaveBeenCalledWith(personCollection, person);
         expect(comp.peopleCollection).toEqual(expectedCollection);
+      });
+
+      it('Should call contentPage query and add missing value', () => {
+        const chv: IChv = { id: 456 };
+        const contentPage: IContentPage = { id: 29413 };
+        chv.contentPage = contentPage;
+
+        const contentPageCollection: IContentPage[] = [{ id: 84070 }];
+        jest.spyOn(contentPageService, 'query').mockReturnValue(of(new HttpResponse({ body: contentPageCollection })));
+        const expectedCollection: IContentPage[] = [contentPage, ...contentPageCollection];
+        jest.spyOn(contentPageService, 'addContentPageToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+        activatedRoute.data = of({ chv });
+        comp.ngOnInit();
+
+        expect(contentPageService.query).toHaveBeenCalled();
+        expect(contentPageService.addContentPageToCollectionIfMissing).toHaveBeenCalledWith(contentPageCollection, contentPage);
+        expect(comp.contentPagesCollection).toEqual(expectedCollection);
       });
 
       it('Should call OrganisationUnit query and add missing value', () => {
@@ -118,6 +140,8 @@ describe('Component Tests', () => {
         const chv: IChv = { id: 456 };
         const person: IPerson = { id: 54958 };
         chv.person = person;
+        const contentPage: IContentPage = { id: 65936 };
+        chv.contentPage = contentPage;
         const district: IOrganisationUnit = { id: 17822 };
         chv.district = district;
         const homeSubvillage: IOrganisationUnit = { id: 55557 };
@@ -134,6 +158,7 @@ describe('Component Tests', () => {
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(chv));
         expect(comp.peopleCollection).toContain(person);
+        expect(comp.contentPagesCollection).toContain(contentPage);
         expect(comp.organisationUnitsSharedCollection).toContain(district);
         expect(comp.organisationUnitsSharedCollection).toContain(homeSubvillage);
         expect(comp.organisationUnitsSharedCollection).toContain(managedByHf);
@@ -211,6 +236,14 @@ describe('Component Tests', () => {
         it('Should return tracked Person primary key', () => {
           const entity = { id: 123 };
           const trackResult = comp.trackPersonById(0, entity);
+          expect(trackResult).toEqual(entity.id);
+        });
+      });
+
+      describe('trackContentPageById', () => {
+        it('Should return tracked ContentPage primary key', () => {
+          const entity = { id: 123 };
+          const trackResult = comp.trackContentPageById(0, entity);
           expect(trackResult).toEqual(entity.id);
         });
       });

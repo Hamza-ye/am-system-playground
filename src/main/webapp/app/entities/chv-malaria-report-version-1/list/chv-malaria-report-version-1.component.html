@@ -3,7 +3,7 @@
     <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.home.title">Chv Malaria Report Version 1 S</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.home.refreshListLabel">Refresh List</span>
       </button>
@@ -33,36 +33,93 @@
   <div class="table-responsive" id="entities" *ngIf="chvMalariaReportVersion1s && chvMalariaReportVersion1s.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
-        <tr>
-          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.uid">Uid</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.created">Created</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.lastUpdated">Last Updated</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.tested">Tested</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.positive">Positive</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.drugsGiven">Drugs Given</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.suppsGiven">Supps Given</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.rdtBalance">Rdt Balance</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.rdtReceived">Rdt Received</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.rdtUsed">Rdt Used</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.rdtDamagedLost">Rdt Damaged Lost</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.drugsBalance">Drugs Balance</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.drugsReceived">Drugs Received</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.drugsUsed">Drugs Used</span></th>
-          <th scope="col">
+        <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" appSortBy="uid">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.uid">Uid</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="created">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.created">Created</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdated">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.lastUpdated">Last Updated</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="tested">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.tested">Tested</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="positive">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.positive">Positive</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="drugsGiven">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.drugsGiven">Drugs Given</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="suppsGiven">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.suppsGiven">Supps Given</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="rdtBalance">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.rdtBalance">Rdt Balance</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="rdtReceived">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.rdtReceived">Rdt Received</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="rdtUsed">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.rdtUsed">Rdt Used</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="rdtDamagedLost">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.rdtDamagedLost">Rdt Damaged Lost</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="drugsBalance">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.drugsBalance">Drugs Balance</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="drugsReceived">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.drugsReceived">Drugs Received</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="drugsUsed">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.drugsUsed">Drugs Used</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="drugsDamagedLost">
             <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.drugsDamagedLost">Drugs Damaged Lost</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.suppsBalance">Supps Balance</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.suppsReceived">Supps Received</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.suppsUsed">Supps Used</span></th>
-          <th scope="col">
+          <th scope="col" appSortBy="suppsBalance">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.suppsBalance">Supps Balance</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="suppsReceived">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.suppsReceived">Supps Received</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="suppsUsed">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.suppsUsed">Supps Used</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="suppsDamagedLost">
             <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.suppsDamagedLost">Supps Damaged Lost</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.comment">Comment</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.createdBy">Created By</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.lastUpdatedBy">Last Updated By</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.chv">Chv</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.period">Period</span></th>
+          <th scope="col" appSortBy="comment">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.comment">Comment</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="createdBy.login">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdatedBy.login">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.lastUpdatedBy">Last Updated By</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="chv.code">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.chv">Chv</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="period.name">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaReportVersion1.period">Period</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -138,5 +195,23 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div *ngIf="chvMalariaReportVersion1s && chvMalariaReportVersion1s.length > 0">
+    <div class="row justify-content-center">
+      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
   </div>
 </div>

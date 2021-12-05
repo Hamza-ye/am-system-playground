@@ -253,6 +253,23 @@
         </div>
 
         <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.organisationUnit.contentPage" for="field_contentPage"
+            >Content Page</label
+          >
+          <select class="form-control" id="field_contentPage" data-cy="contentPage" name="contentPage" formControlName="contentPage">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                contentPageOption.id === editForm.get('contentPage')!.value?.id ? editForm.get('contentPage')!.value : contentPageOption
+              "
+              *ngFor="let contentPageOption of contentPagesCollection; trackBy: trackContentPageById"
+            >
+              {{ contentPageOption.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
           <label class="form-control-label" appTranslate="amSystemPlaygroundApp.organisationUnit.parent" for="field_parent">Parent</label>
           <select class="form-control" id="field_parent" data-cy="parent" name="parent" formControlName="parent">
             <option [ngValue]="null"></option>

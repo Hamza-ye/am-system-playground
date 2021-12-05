@@ -4,7 +4,6 @@ import org.nmcpye.activitiesmanagement.domain.ChvTeam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -30,9 +29,10 @@ public interface ChvTeamService {
     /**
      * Get all the chvTeams.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    List<ChvTeam> findAll();
+    Page<ChvTeam> findAll(Pageable pageable);
 
     /**
      * Get all the chvTeams with eager load of many-to-many relationships.

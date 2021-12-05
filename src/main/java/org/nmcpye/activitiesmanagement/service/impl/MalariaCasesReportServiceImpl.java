@@ -1,14 +1,16 @@
 package org.nmcpye.activitiesmanagement.service.impl;
 
-import java.util.List;
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.domain.dataset.MalariaCasesReport;
 import org.nmcpye.activitiesmanagement.repository.MalariaCasesReportRepository;
 import org.nmcpye.activitiesmanagement.service.MalariaCasesReportService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 /**
  * Service Implementation for managing {@link MalariaCasesReport}.
@@ -111,9 +113,9 @@ public class MalariaCasesReportServiceImpl implements MalariaCasesReportService 
 
     @Override
     @Transactional(readOnly = true)
-    public List<MalariaCasesReport> findAll() {
+    public Page<MalariaCasesReport> findAll(Pageable pageable) {
         log.debug("Request to get all MalariaCasesReports");
-        return malariaCasesReportRepository.findAll();
+        return malariaCasesReportRepository.findAll(pageable);
     }
 
     @Override

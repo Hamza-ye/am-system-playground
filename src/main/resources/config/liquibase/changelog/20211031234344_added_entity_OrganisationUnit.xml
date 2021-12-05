@@ -110,6 +110,21 @@
         <dropDefaultValue tableName="organisation_unit" columnName="last_updated" columnDataType="${datetimeType}"/>
     </changeSet>
 
+    <changeSet id="01-add-OrgUnit-content-page" author="Hamza">
+        <addColumn tableName="organisation_unit">
+            <column name="content_page_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_organisation_unit__content_page_id" />
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="01-add-OrgUnit-content-page-foreign-key" author="Hamza">
+        <addForeignKeyConstraint baseColumnNames="content_page_id"
+                                 baseTableName="organisation_unit"
+                                 constraintName="fk_organisation_unit__content_page_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="content_page"/>
+    </changeSet>
+
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
     <!--

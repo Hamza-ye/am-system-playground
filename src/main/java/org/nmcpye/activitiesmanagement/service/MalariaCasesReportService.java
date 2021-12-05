@@ -1,8 +1,10 @@
 package org.nmcpye.activitiesmanagement.service;
 
-import java.util.List;
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.domain.dataset.MalariaCasesReport;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.util.Optional;
 
 /**
  * Service Interface for managing {@link MalariaCasesReport}.
@@ -27,9 +29,10 @@ public interface MalariaCasesReportService {
     /**
      * Get all the malariaCasesReports.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    List<MalariaCasesReport> findAll();
+    Page<MalariaCasesReport> findAll(Pageable pageable);
 
     /**
      * Get the "id" malariaCasesReport.

@@ -86,6 +86,12 @@
             organisationUnit.organisationUnitType
           }}</span>
         </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.contentPage">Content Page</span></dt>
+        <dd>
+          <div *ngIf="organisationUnit.contentPage">
+            <a [routerLink]="['/content-page', organisationUnit.contentPage?.id, 'view']">{{ organisationUnit.contentPage?.name }}</a>
+          </div>
+        </dd>
         <dt><span appTranslate="amSystemPlaygroundApp.organisationUnit.parent">Parent</span></dt>
         <dd>
           <div *ngIf="organisationUnit.parent">

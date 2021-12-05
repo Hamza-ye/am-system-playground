@@ -3,7 +3,7 @@
     <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.home.title">Chv Malaria Case Reports</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.home.refreshListLabel">Refresh List</span>
       </button>
@@ -31,26 +31,65 @@
   <div class="table-responsive" id="entities" *ngIf="chvMalariaCaseReports && chvMalariaCaseReports.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
-        <tr>
-          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.uid">Uid</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.created">Created</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.lastUpdated">Last Updated</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.date">Date</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.individualName">Individual Name</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.gender">Gender</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.isPregnant">Is Pregnant</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.malariaTestResult">Malaria Test Result</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.drugsGiven">Drugs Given</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.suppsGiven">Supps Given</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.referral">Referral</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.barImageUrl">Bar Image Url</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.comment">Comment</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.subVillage">Sub Village</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.createdBy">Created By</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.lastUpdatedBy">Last Updated By</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.chv">Chv</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.reportClass">Report Class</span></th>
+        <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" appSortBy="uid">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.uid">Uid</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="created">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.created">Created</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdated">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.lastUpdated">Last Updated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="date">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.date">Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="individualName">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.individualName">Individual Name</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="gender">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.gender">Gender</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="isPregnant">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.isPregnant">Is Pregnant</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="malariaTestResult">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.malariaTestResult">Malaria Test Result</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="drugsGiven">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.drugsGiven">Drugs Given</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="suppsGiven">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.suppsGiven">Supps Given</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="referral">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.referral">Referral</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="barImageUrl">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.barImageUrl">Bar Image Url</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="comment">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.comment">Comment</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="subVillage.name">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.subVillage">Sub Village</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="createdBy.login">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdatedBy.login">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.lastUpdatedBy">Last Updated By</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="chv.code">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.chv">Chv</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="reportClass.name">
+            <span appTranslate="amSystemPlaygroundApp.chvMalariaCaseReport.reportClass">Report Class</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -130,5 +169,23 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div *ngIf="chvMalariaCaseReports && chvMalariaCaseReports.length > 0">
+    <div class="row justify-content-center">
+      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
   </div>
 </div>

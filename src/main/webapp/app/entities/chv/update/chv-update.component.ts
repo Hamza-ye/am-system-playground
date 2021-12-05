@@ -12,6 +12,8 @@ import { IChv, Chv } from '../chv.model';
 import { ChvService } from '../service/chv.service';
 import { IPerson } from 'app/entities/person/person.model';
 import { PersonService } from 'app/entities/person/service/person.service';
+import { IContentPage } from 'app/entities/content-page/content-page.model';
+import { ContentPageService } from 'app/entities/content-page/service/content-page.service';
 import { IOrganisationUnit } from 'app/entities/organisation-unit/organisation-unit.model';
 import { OrganisationUnitService } from 'app/entities/organisation-unit/service/organisation-unit.service';
 import { IUser } from 'app/entities/user/user.model';
@@ -25,6 +27,7 @@ export class ChvUpdateComponent implements OnInit {
   isSaving = false;
 
   peopleCollection: IPerson[] = [];
+  contentPagesCollection: IContentPage[] = [];
   organisationUnitsSharedCollection: IOrganisationUnit[] = [];
   usersSharedCollection: IUser[] = [];
 
@@ -37,6 +40,7 @@ export class ChvUpdateComponent implements OnInit {
     lastUpdated: [],
     mobile: [],
     person: [],
+    contentPage: [],
     district: [null, Validators.required],
     homeSubvillage: [],
     managedByHf: [],
@@ -47,6 +51,7 @@ export class ChvUpdateComponent implements OnInit {
   constructor(
     protected chvService: ChvService,
     protected personService: PersonService,
+    protected contentPageService: ContentPageService,
     protected organisationUnitService: OrganisationUnitService,
     protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
@@ -82,6 +87,10 @@ export class ChvUpdateComponent implements OnInit {
   }
 
   trackPersonById(index: number, item: IPerson): number {
+    return item.id!;
+  }
+
+  trackContentPageById(index: number, item: IContentPage): number {
     return item.id!;
   }
 
@@ -122,6 +131,7 @@ export class ChvUpdateComponent implements OnInit {
       lastUpdated: chv.lastUpdated ? chv.lastUpdated.format(DATE_TIME_FORMAT) : null,
       mobile: chv.mobile,
       person: chv.person,
+      contentPage: chv.contentPage,
       district: chv.district,
       homeSubvillage: chv.homeSubvillage,
       managedByHf: chv.managedByHf,
@@ -130,6 +140,7 @@ export class ChvUpdateComponent implements OnInit {
     });
 
     this.peopleCollection = this.personService.addPersonToCollectionIfMissing(this.peopleCollection, chv.person);
+    this.contentPagesCollection = this.contentPageService.addContentPageToCollectionIfMissing(this.contentPagesCollection, chv.contentPage);
     this.organisationUnitsSharedCollection = this.organisationUnitService.addOrganisationUnitToCollectionIfMissing(
       this.organisationUnitsSharedCollection,
       chv.district,
@@ -149,6 +160,16 @@ export class ChvUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IPerson[]>) => res.body ?? []))
       .pipe(map((people: IPerson[]) => this.personService.addPersonToCollectionIfMissing(people, this.editForm.get('person')!.value)))
       .subscribe((people: IPerson[]) => (this.peopleCollection = people));
+
+    this.contentPageService
+      .query({ filter: 'chv-is-null' })
+      .pipe(map((res: HttpResponse<IContentPage[]>) => res.body ?? []))
+      .pipe(
+        map((contentPages: IContentPage[]) =>
+          this.contentPageService.addContentPageToCollectionIfMissing(contentPages, this.editForm.get('contentPage')!.value)
+        )
+      )
+      .subscribe((contentPages: IContentPage[]) => (this.contentPagesCollection = contentPages));
 
     this.organisationUnitService
       .query()
@@ -193,6 +214,7 @@ export class ChvUpdateComponent implements OnInit {
         : undefined,
       mobile: this.editForm.get(['mobile'])!.value,
       person: this.editForm.get(['person'])!.value,
+      contentPage: this.editForm.get(['contentPage'])!.value,
       district: this.editForm.get(['district'])!.value,
       homeSubvillage: this.editForm.get(['homeSubvillage'])!.value,
       managedByHf: this.editForm.get(['managedByHf'])!.value,

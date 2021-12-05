@@ -3,133 +3,133 @@
 
     <changeSet author="Hamza (generated)" id="36278154081692-8">
         <addColumn tableName="related_link">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1738054081692-8">
         <addColumn tableName="content_page">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1788054081692-8">
         <addColumn tableName="image_album">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
 
     <changeSet author="Hamza (generated)" id="1638054081692-8">
         <addColumn tableName="activity">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-9">
         <addColumn tableName="app_user">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-10">
         <addColumn tableName="cases_report_class">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-11">
         <addColumn tableName="chv">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-12">
         <addColumn tableName="data_set">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-13">
         <addColumn tableName="demographic_data">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-14">
         <addColumn tableName="demographic_data_source">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-15">
         <addColumn tableName="dengue_cases_report">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-16">
         <addColumn tableName="document">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-17">
         <addColumn tableName="external_file_resource">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-18">
         <addColumn tableName="file_resource">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-19">
         <addColumn tableName="job_configuration">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-20">
         <addColumn tableName="malaria_cases_report">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-21">
         <addColumn tableName="organisation_unit">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-22">
         <addColumn tableName="orgunit_group">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-23">
         <addColumn tableName="orgunit_groupset">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-24">
         <addColumn tableName="orgunit_level">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-25">
         <addColumn tableName="people_group">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-26">
         <addColumn tableName="period">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-27">
         <addColumn tableName="person">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-28">
         <addColumn tableName="person_authority_group">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-29">
         <addColumn tableName="project">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
     <changeSet author="Hamza (generated)" id="1638054081692-30">
         <addColumn tableName="sql_view">
-            <column name="translations" type="jsonb"/>
+            <column name="translations" type="JSON"/>
         </addColumn>
     </changeSet>
 

@@ -1,8 +1,10 @@
 package org.nmcpye.activitiesmanagement.service;
 
-import java.util.List;
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.domain.dataset.DengueCasesReport;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.util.Optional;
 
 /**
  * Service Interface for managing {@link DengueCasesReport}.
@@ -27,9 +29,10 @@ public interface DengueCasesReportService {
     /**
      * Get all the dengueCasesReports.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    List<DengueCasesReport> findAll();
+    Page<DengueCasesReport> findAll(Pageable pageable);
 
     /**
      * Get the "id" dengueCasesReport.

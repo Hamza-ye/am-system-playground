@@ -3,7 +3,7 @@
     <span appTranslate="amSystemPlaygroundApp.chvTeam.home.title">Chv Teams</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span appTranslate="amSystemPlaygroundApp.chvTeam.home.refreshListLabel">Refresh List</span>
       </button>
@@ -31,20 +31,41 @@
   <div class="table-responsive" id="entities" *ngIf="chvTeams && chvTeams.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
-        <tr>
-          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.uid">Uid</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.code">Code</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.name">Name</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.description">Description</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.created">Created</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.lastUpdated">Last Updated</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.teamNo">Team No</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.teamType">Team Type</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.createdBy">Created By</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.lastUpdatedBy">Last Updated By</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.person">Person</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chvTeam.responsibleForChv">Responsible For Chv</span></th>
+        <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" appSortBy="uid">
+            <span appTranslate="amSystemPlaygroundApp.chvTeam.uid">Uid</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="code">
+            <span appTranslate="amSystemPlaygroundApp.chvTeam.code">Code</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="name">
+            <span appTranslate="amSystemPlaygroundApp.chvTeam.name">Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="description">
+            <span appTranslate="amSystemPlaygroundApp.chvTeam.description">Description</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="created">
+            <span appTranslate="amSystemPlaygroundApp.chvTeam.created">Created</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdated">
+            <span appTranslate="amSystemPlaygroundApp.chvTeam.lastUpdated">Last Updated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="teamNo">
+            <span appTranslate="amSystemPlaygroundApp.chvTeam.teamNo">Team No</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="teamType">
+            <span appTranslate="amSystemPlaygroundApp.chvTeam.teamType">Team Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="createdBy.login">
+            <span appTranslate="amSystemPlaygroundApp.chvTeam.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdatedBy.login">
+            <span appTranslate="amSystemPlaygroundApp.chvTeam.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="person.name">
+            <span appTranslate="amSystemPlaygroundApp.chvTeam.person">Person</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -71,12 +92,6 @@
             <div *ngIf="chvTeam.person">
               <a [routerLink]="['/person', chvTeam.person?.id, 'view']">{{ chvTeam.person?.name }}</a>
             </div>
-          </td>
-          <td>
-            <span *ngFor="let responsibleForChv of chvTeam.responsibleForChvs; let last = last">
-              <a class="form-control-static" [routerLink]="['/chv', responsibleForChv.id, 'view']">{{ responsibleForChv.code }}</a
-              >{{ last ? '' : ', ' }}
-            </span>
           </td>
           <td class="text-right">
             <div class="btn-group">
@@ -109,5 +124,23 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div *ngIf="chvTeams && chvTeams.length > 0">
+    <div class="row justify-content-center">
+      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
   </div>
 </div>

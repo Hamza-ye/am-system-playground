@@ -5,10 +5,11 @@ import org.nmcpye.activitiesmanagement.repository.ChvMalariaReportVersion1Reposi
 import org.nmcpye.activitiesmanagement.service.ChvMalariaReportVersion1Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -109,9 +110,9 @@ public class ChvMalariaReportVersion1ServiceImpl implements ChvMalariaReportVers
 
     @Override
     @Transactional(readOnly = true)
-    public List<ChvMalariaReportVersion1> findAll() {
+    public Page<ChvMalariaReportVersion1> findAll(Pageable pageable) {
         log.debug("Request to get all ChvMalariaReportVersion1s");
-        return chvMalariaReportVersion1Repository.findAll();
+        return chvMalariaReportVersion1Repository.findAll(pageable);
     }
 
     @Override

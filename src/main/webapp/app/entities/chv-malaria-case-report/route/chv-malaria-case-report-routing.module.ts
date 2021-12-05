@@ -11,6 +11,9 @@ const chvMalariaCaseReportRoute: Routes = [
   {
     path: '',
     component: ChvMalariaCaseReportComponent,
+    data: {
+      defaultSort: 'id,asc',
+    },
     canActivate: [UserRouteAccessService],
   },
   {

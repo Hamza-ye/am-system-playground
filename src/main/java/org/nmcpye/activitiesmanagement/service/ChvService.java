@@ -1,8 +1,9 @@
 package org.nmcpye.activitiesmanagement.service;
 
 import org.nmcpye.activitiesmanagement.domain.chv.Chv;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -28,9 +29,10 @@ public interface ChvService {
     /**
      * Get all the chvs.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    List<Chv> findAll();
+    Page<Chv> findAll(Pageable pageable);
 
     /**
      * Get the "id" chv.

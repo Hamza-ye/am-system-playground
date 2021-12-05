@@ -67,7 +67,7 @@
         <dt><span appTranslate="amSystemPlaygroundApp.activity.project">Project</span></dt>
         <dd>
           <div *ngIf="activity.project">
-            <a [routerLink]="['/project', activity.project?.id, 'view']">{{ activity.project?.name }}</a>
+            <a [routerLink]="['/project-page', activity.project?.id, 'view']">{{ activity.project?.name }}</a>
           </div>
         </dd>
       </dl>

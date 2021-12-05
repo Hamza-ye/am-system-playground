@@ -3,7 +3,7 @@
     <span appTranslate="amSystemPlaygroundApp.peopleGroup.home.title">People Groups</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span appTranslate="amSystemPlaygroundApp.peopleGroup.home.refreshListLabel">Refresh List</span>
       </button>
@@ -31,18 +31,32 @@
   <div class="table-responsive" id="entities" *ngIf="peopleGroups && peopleGroups.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
-        <tr>
-          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.uid">Uid</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.code">Code</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.name">Name</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.created">Created</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.lastUpdated">Last Updated</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.uuid">Uuid</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.createdBy">Created By</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.lastUpdatedBy">Last Updated By</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.member">Member</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.peopleGroup.managedGroup">Managed Group</span></th>
+        <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" appSortBy="uid">
+            <span appTranslate="amSystemPlaygroundApp.peopleGroup.uid">Uid</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="code">
+            <span appTranslate="amSystemPlaygroundApp.peopleGroup.code">Code</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="name">
+            <span appTranslate="amSystemPlaygroundApp.peopleGroup.name">Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="created">
+            <span appTranslate="amSystemPlaygroundApp.peopleGroup.created">Created</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdated">
+            <span appTranslate="amSystemPlaygroundApp.peopleGroup.lastUpdated">Last Updated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="uuid">
+            <span appTranslate="amSystemPlaygroundApp.peopleGroup.uuid">Uuid</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="createdBy.login">
+            <span appTranslate="amSystemPlaygroundApp.peopleGroup.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdatedBy.login">
+            <span appTranslate="amSystemPlaygroundApp.peopleGroup.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -62,18 +76,6 @@
           </td>
           <td>
             {{ peopleGroup.lastUpdatedBy?.login }}
-          </td>
-          <td>
-            <span *ngFor="let member of peopleGroup.members; let last = last">
-              <a class="form-control-static" [routerLink]="['/person', member.id, 'view']">{{ member.name }}</a
-              >{{ last ? '' : ', ' }}
-            </span>
-          </td>
-          <td>
-            <span *ngFor="let managedGroup of peopleGroup.managedGroups; let last = last">
-              <a class="form-control-static" [routerLink]="['/people-group', managedGroup.id, 'view']">{{ managedGroup.name }}</a
-              >{{ last ? '' : ', ' }}
-            </span>
           </td>
           <td class="text-right">
             <div class="btn-group">
@@ -106,5 +108,23 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div *ngIf="peopleGroups && peopleGroups.length > 0">
+    <div class="row justify-content-center">
+      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
   </div>
 </div>

@@ -3,7 +3,7 @@
     <span appTranslate="amSystemPlaygroundApp.chv.home.title">Chvs</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span appTranslate="amSystemPlaygroundApp.chv.home.refreshListLabel">Refresh List</span>
       </button>
@@ -31,20 +31,45 @@
   <div class="table-responsive" id="entities" *ngIf="chvs && chvs.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
-        <tr>
-          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.uid">Uid</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.code">Code</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.description">Description</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.created">Created</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.lastUpdated">Last Updated</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.mobile">Mobile</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.person">Person</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.district">District</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.homeSubvillage">Home Subvillage</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.managedByHf">Managed By Hf</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.createdBy">Created By</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.chv.lastUpdatedBy">Last Updated By</span></th>
+        <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" appSortBy="uid"><span appTranslate="amSystemPlaygroundApp.chv.uid">Uid</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" appSortBy="code">
+            <span appTranslate="amSystemPlaygroundApp.chv.code">Code</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="description">
+            <span appTranslate="amSystemPlaygroundApp.chv.description">Description</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="created">
+            <span appTranslate="amSystemPlaygroundApp.chv.created">Created</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdated">
+            <span appTranslate="amSystemPlaygroundApp.chv.lastUpdated">Last Updated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="mobile">
+            <span appTranslate="amSystemPlaygroundApp.chv.mobile">Mobile</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="person.name">
+            <span appTranslate="amSystemPlaygroundApp.chv.person">Person</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="contentPage.name">
+            <span appTranslate="amSystemPlaygroundApp.chv.contentPage">Content Page</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="district.name">
+            <span appTranslate="amSystemPlaygroundApp.chv.district">District</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="homeSubvillage.name">
+            <span appTranslate="amSystemPlaygroundApp.chv.homeSubvillage">Home Subvillage</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="managedByHf.name">
+            <span appTranslate="amSystemPlaygroundApp.chv.managedByHf">Managed By Hf</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="createdBy.login">
+            <span appTranslate="amSystemPlaygroundApp.chv.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdatedBy.login">
+            <span appTranslate="amSystemPlaygroundApp.chv.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -62,6 +87,11 @@
           <td>
             <div *ngIf="chv.person">
               <a [routerLink]="['/person', chv.person?.id, 'view']">{{ chv.person?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="chv.contentPage">
+              <a [routerLink]="['/content-page', chv.contentPage?.id, 'view']">{{ chv.contentPage?.name }}</a>
             </div>
           </td>
           <td>
@@ -106,5 +136,23 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div *ngIf="chvs && chvs.length > 0">
+    <div class="row justify-content-center">
+      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
   </div>
 </div>

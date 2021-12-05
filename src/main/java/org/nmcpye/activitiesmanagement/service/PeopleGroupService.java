@@ -1,10 +1,10 @@
 package org.nmcpye.activitiesmanagement.service;
 
-import java.util.List;
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.Optional;
 
 /**
  * Service Interface for managing {@link PeopleGroup}.
@@ -29,9 +29,10 @@ public interface PeopleGroupService {
     /**
      * Get all the peopleGroups.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    List<PeopleGroup> findAll();
+    Page<PeopleGroup> findAll(Pageable pageable);
 
     /**
      * Get all the peopleGroups with eager load of many-to-many relationships.

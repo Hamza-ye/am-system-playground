@@ -52,6 +52,7 @@
           <th scope="col">
             <span appTranslate="amSystemPlaygroundApp.organisationUnit.organisationUnitType">Organisation Unit Type</span>
           </th>
+          <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.contentPage">Content Page</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.parent">Parent</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.hfHomeSubVillage">Hf Home Sub Village</span></th>
           <th scope="col"><span appTranslate="amSystemPlaygroundApp.organisationUnit.coveredByHf">Covered By Hf</span></th>
@@ -86,6 +87,11 @@
           <td>{{ organisationUnit.phoneNumber }}</td>
           <td appTranslate="{{ 'amSystemPlaygroundApp.OrganisationUnitType.' + organisationUnit.organisationUnitType }}">
             {{ organisationUnit.organisationUnitType }}
+          </td>
+          <td>
+            <div *ngIf="organisationUnit.contentPage">
+              <a [routerLink]="['/content-page', organisationUnit.contentPage?.id, 'view']">{{ organisationUnit.contentPage?.name }}</a>
+            </div>
           </td>
           <td>
             <div *ngIf="organisationUnit.parent">

@@ -7,9 +7,14 @@ import org.nmcpye.activitiesmanagement.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
+import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 import javax.validation.Valid;
@@ -66,7 +71,7 @@ public class ChvResource {
     /**
      * {@code PUT  /chvs/:id} : Updates an existing chv.
      *
-     * @param id  the id of the chv to save.
+     * @param id the id of the chv to save.
      * @param chv the chv to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated chv,
      * or with status {@code 400 (Bad Request)} if the chv is not valid,
@@ -98,7 +103,7 @@ public class ChvResource {
     /**
      * {@code PATCH  /chvs/:id} : Partial updates given fields of an existing chv, field will ignore if it is null
      *
-     * @param id  the id of the chv to save.
+     * @param id the id of the chv to save.
      * @param chv the chv to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated chv,
      * or with status {@code 400 (Bad Request)} if the chv is not valid,
@@ -132,12 +137,15 @@ public class ChvResource {
     /**
      * {@code GET  /chvs} : get all the chvs.
      *
+     * @param pageable the pagination information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of chvs in body.
      */
     @GetMapping("/chvs")
-    public List<Chv> getAllChvs() {
-        log.debug("REST request to get all Chvs");
-        return chvService.findAll();
+    public ResponseEntity<List<Chv>> getAllChvs(Pageable pageable) {
+        log.debug("REST request to get a page of Chvs");
+        Page<Chv> page = chvService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**

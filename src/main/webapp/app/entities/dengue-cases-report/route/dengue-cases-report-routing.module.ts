@@ -11,6 +11,9 @@ const dengueCasesReportRoute: Routes = [
   {
     path: '',
     component: DengueCasesReportComponent,
+    data: {
+      defaultSort: 'id,asc',
+    },
     canActivate: [UserRouteAccessService],
   },
   {

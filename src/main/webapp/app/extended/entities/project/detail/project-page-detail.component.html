@@ -1,66 +1,162 @@
-<div class="row justify-content-center">
-  <div class="col-8">
+<div class="container py-4">
+  <div class="col-12">
     <div *ngIf="project">
-      <h2 data-cy="projectDetailsHeading"><span appTranslate="amSystemPlaygroundApp.project.detail.title">Project</span></h2>
-
-      <hr />
-
+      <header class="pb-3 mb-4 border-bottom">
+        <!--<a href="/" class="d-flex align-items-center">-->
+        <h3 data-cy="projectPageDetailsHeading"><span>{{project.name}}</span></h3>
+        <!--</a>-->
+      </header>
       <app-alert-error></app-alert-error>
 
       <app-alert></app-alert>
+      <div *ngIf="project.contentPage">
 
-      <dl class="row-md jh-entity-details">
-        <dt><span appTranslate="global.field.id">ID</span></dt>
-        <dd>
-          <span>{{ project.id }}</span>
-        </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.project.uid">Uid</span></dt>
-        <dd>
-          <span>{{ project.uid }}</span>
-        </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.project.code">Code</span></dt>
-        <dd>
-          <span>{{ project.code }}</span>
-        </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.project.name">Name</span></dt>
-        <dd>
-          <span>{{ project.name }}</span>
-        </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.project.created">Created</span></dt>
-        <dd>
-          <span>{{ project.created | formatMediumDatetime }}</span>
-        </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.project.lastUpdated">Last Updated</span></dt>
-        <dd>
-          <span>{{ project.lastUpdated | formatMediumDatetime }}</span>
-        </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.project.displayed">Displayed</span></dt>
-        <dd>
-          <span>{{ project.displayed }}</span>
-        </dd>
-        <!--<dt><span appTranslate="amSystemPlaygroundApp.project.contentPage">Content Page</span></dt>-->
-        <!--<dd>-->
+
+        <div class="mb-4 rounded-3">
+          <div class="container-fluid py-3">
+            <!--<h1 class="display-5 fw-bold">{{project.contentPage.subtitle}}</h1>-->
+            <p class="col-md-10 fs-4">{{project.contentPage.content}}</p>
+            <button class="btn btn-primary btn-lg" type="button">Example button</button>
+          </div>
+        </div>
+
+      </div>
+      <div *ngIf="!project.contentPage">
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ project.id }}</span>
+          </dd>
+          <dt><span appTranslate="amSystemPlaygroundApp.project.uid">Uid</span></dt>
+          <dd>
+            <span>{{ project.uid }}</span>
+          </dd>
+          <dt><span appTranslate="amSystemPlaygroundApp.project.code">Code</span></dt>
+          <dd>
+            <span>{{ project.code }}</span>
+          </dd>
+          <dt><span appTranslate="amSystemPlaygroundApp.project.name">Name</span></dt>
+          <dd>
+            <span>{{ project.name }}</span>
+          </dd>
+          <dt><span appTranslate="amSystemPlaygroundApp.project.created">Created</span></dt>
+          <dd>
+            <span>{{ project.created | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="amSystemPlaygroundApp.project.lastUpdated">Last Updated</span></dt>
+          <dd>
+            <span>{{ project.lastUpdated | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="amSystemPlaygroundApp.project.displayed">Displayed</span></dt>
+          <dd>
+            <span>{{ project.displayed }}</span>
+          </dd>
+          <!--<dt><span appTranslate="amSystemPlaygroundApp.project.contentPage">Content Page</span></dt>-->
+          <!--<dd>-->
           <!--<div *ngIf="project.contentPage">-->
-            <!--<a [routerLink]="['/content-page', project.contentPage?.id, 'view']">{{ project.contentPage?.name }}</a>-->
+          <!--<a [routerLink]="['/content-page', project.contentPage?.id, 'view']">{{ project.contentPage?.name }}</a>-->
           <!--</div>-->
-        <!--</dd>-->
-        <dt><span appTranslate="amSystemPlaygroundApp.project.createdBy">Created By</span></dt>
-        <dd>
-          <span>{{ project.createdBy?.login }}</span>
-        </dd>
-        <dt><span appTranslate="amSystemPlaygroundApp.project.lastUpdatedBy">Last Updated By</span></dt>
-        <dd>
-          <span>{{ project.lastUpdatedBy?.login }}</span>
-        </dd>
-      </dl>
+          <!--</dd>-->
+          <dt><span appTranslate="amSystemPlaygroundApp.project.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ project.createdBy?.login }}</span>
+          </dd>
+          <dt><span appTranslate="amSystemPlaygroundApp.project.lastUpdatedBy">Last Updated By</span></dt>
+          <dd>
+            <span>{{ project.lastUpdatedBy?.login }}</span>
+          </dd>
+        </dl>
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+        </button>
+      </div>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
-      </button>
+      <div class="alert alert-warning" id="no-result" *ngIf="project?.activities?.length === 0">
+        <span
+          appTranslate="amSystemPlaygroundApp.project.home.notFound">No Activities related to this project found</span>
+      </div>
 
-      <!--<button type="button" [routerLink]="['/project', project.id, 'edit']" class="btn btn-primary">-->
-        <!--<fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>-->
-      <!--</button>-->
+      <!--Activities List-->
+      <br/>
+      <h4 class="page-heading py-3"><span>Activities related to {{ project.name }}</span></h4>
+
+      <div class="table-responsive" id="entities" *ngIf="project?.activities?.length != 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+          <thead>
+          <tr>
+            <!--<th scope="col"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>-->
+            <!--<th scope="col" appSortBy="uid">-->
+            <!--<span appTranslate="amSystemPlaygroundApp.project.uid">Uid</span> <fa-icon icon="sort"></fa-icon>-->
+            <!--</th>-->
+            <!--<th scope="col" appSortBy="code">-->
+            <!--<span appTranslate="amSystemPlaygroundApp.project.code">Code</span> <fa-icon icon="sort"></fa-icon>-->
+            <!--</th>-->
+            <th scope="col">
+              <span appTranslate="amSystemPlaygroundApp.project.name">Name</span>
+              <fa-icon icon="sort"></fa-icon>
+            </th>
+            <!--<th scope="col">-->
+            <!--<span appTranslate="amSystemPlaygroundApp.project.created">Created</span> <fa-icon icon="sort"></fa-icon>-->
+            <!--</th>-->
+            <!--<th scope="col">-->
+            <!--<span appTranslate="amSystemPlaygroundApp.project.lastUpdated">Last Updated</span> <fa-icon icon="sort"></fa-icon>-->
+            <!--</th>-->
+            <!--<th scope="col" appSortBy="displayed">-->
+            <!--<span appTranslate="amSystemPlaygroundApp.project.displayed">Displayed</span> <fa-icon icon="sort"></fa-icon>-->
+            <!--</th>-->
+            <!--<th scope="col" appSortBy="contentPage.name">-->
+            <!--<span appTranslate="amSystemPlaygroundApp.project.contentPage">Content Page</span> <fa-icon icon="sort"></fa-icon>-->
+            <!--</th>-->
+            <!--<th scope="col">-->
+            <!--<span appTranslate="amSystemPlaygroundApp.project.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>-->
+            <!--</th>-->
+            <!--<th scope="col">-->
+            <!--<span appTranslate="amSystemPlaygroundApp.project.lastUpdatedBy">Last Updated By</span> <fa-icon icon="sort"></fa-icon>-->
+            <!--</th>-->
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <!--<tr *ngFor="let activity of project.activities; trackBy: trackId" data-cy="entityTable">-->
+          <tr *ngFor="let activity of project.activities; trackBy: trackId" data-cy="entityTable">
+            <!--<td>-->
+            <!--<a [routerLink]="['/activity-page', activity.id, 'view']">{{ activity.id }}</a>-->
+            <!--</td>-->
+            <!--<td>{{ project.uid }}</td>-->
+            <!--<td>{{ project.code }}</td>-->
+            <td><a [routerLink]="['/activity-page', activity.id, 'view']">{{ activity.name }}</a></td>
+            <!--<td>{{ activity.created | formatMediumDatetime }}</td>-->
+            <!--<td>{{ activity.lastUpdated | formatMediumDatetime }}</td>-->
+            <!--<td>{{ project.displayed }}</td>-->
+            <!--<td>-->
+            <!--<div *ngIf="project.contentPage">-->
+            <!--<a [routerLink]="['/content-page', project.contentPage?.id, 'view']">{{ project.contentPage?.name }}</a>-->
+            <!--</div>-->
+            <!--</td>-->
+            <!--<td>-->
+            <!--{{ activity.createdBy?.login }}-->
+            <!--</td>-->
+            <!--<td>-->
+            <!--{{ activity.lastUpdatedBy?.login }}-->
+            <!--</td>-->
+            <!--<td class="text-right">-->
+            <!--<div class="btn-group">-->
+            <!--<button-->
+            <!--type="submit"-->
+            <!--[routerLink]="['/activity-page', activity.id, 'view']"-->
+            <!--class="btn btn-info btn-sm"-->
+            <!--data-cy="entityDetailsButton"-->
+            <!--&gt;-->
+            <!--<fa-icon icon="eye"></fa-icon>-->
+            <!--<span class="d-none d-md-inline" appTranslate="entity.action.view">View</span>-->
+            <!--</button>-->
+            <!--</div>-->
+            <!--</td>-->
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </div>
 </div>

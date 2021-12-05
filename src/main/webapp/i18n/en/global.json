@@ -10,9 +10,9 @@
         "surveillance": "Cases and Surveillance",
         "supply": "Drugs and Supply",
         "llinsDistribution": "LLINs Distribution",
-        "irs": "Indoor Residual Spraying",
-        "chvs": "Community Health Volunteers",
-        "other": "Other Activities"
+        "irs": "Indoor Residual Spraying (IRS)",
+        "chvs": "Community Health Volunteers (CHVs)",
+        "other": "Other Projects ..."
       },
       "dengue": "Dengue",
       "language": "اللغة",

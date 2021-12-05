@@ -11,6 +11,9 @@ const malariaCasesReportRoute: Routes = [
   {
     path: '',
     component: MalariaCasesReportComponent,
+    data: {
+      defaultSort: 'id,asc',
+    },
     canActivate: [UserRouteAccessService],
   },
   {

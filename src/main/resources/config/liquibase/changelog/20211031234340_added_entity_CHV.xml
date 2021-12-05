@@ -59,6 +59,20 @@
         <dropDefaultValue tableName="chv" columnName="last_updated" columnDataType="${datetimeType}"/>
     </changeSet>
 
+    <changeSet id="00-add-chv-content-page" author="Hamza">
+        <addColumn tableName="chv">
+            <column name="content_page_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_chv__content_page_id" />
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="00-add-chv-content-page-foreign-key" author="Hamza">
+        <addForeignKeyConstraint baseColumnNames="content_page_id"
+                                 baseTableName="chv"
+                                 constraintName="fk_chv__content_page_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="content_page"/>
+    </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
     <!--

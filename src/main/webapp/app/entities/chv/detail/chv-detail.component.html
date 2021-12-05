@@ -44,6 +44,12 @@
             <a [routerLink]="['/person', chv.person?.id, 'view']">{{ chv.person?.name }}</a>
           </div>
         </dd>
+        <dt><span appTranslate="amSystemPlaygroundApp.chv.contentPage">Content Page</span></dt>
+        <dd>
+          <div *ngIf="chv.contentPage">
+            <a [routerLink]="['/content-page', chv.contentPage?.id, 'view']">{{ chv.contentPage?.name }}</a>
+          </div>
+        </dd>
         <dt><span appTranslate="amSystemPlaygroundApp.chv.district">District</span></dt>
         <dd>
           <div *ngIf="chv.district">

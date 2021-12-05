@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -75,9 +74,9 @@ public class ChvTeamServiceImpl implements ChvTeamService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ChvTeam> findAll() {
+    public Page<ChvTeam> findAll(Pageable pageable) {
         log.debug("Request to get all ChvTeams");
-        return chvTeamRepository.findAllWithEagerRelationships();
+        return chvTeamRepository.findAll(pageable);
     }
 
     public Page<ChvTeam> findAllWithEagerRelationships(Pageable pageable) {

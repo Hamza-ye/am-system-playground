@@ -1,7 +1,5 @@
 package org.nmcpye.activitiesmanagement.service.impl;
 
-import java.util.List;
-import java.util.Optional;
 import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
 import org.nmcpye.activitiesmanagement.repository.PeopleGroupRepository;
 import org.nmcpye.activitiesmanagement.service.PeopleGroupService;
@@ -11,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 /**
  * Service Implementation for managing {@link PeopleGroup}.
@@ -68,9 +68,9 @@ public class PeopleGroupServiceImpl implements PeopleGroupService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<PeopleGroup> findAll() {
+    public Page<PeopleGroup> findAll(Pageable pageable) {
         log.debug("Request to get all PeopleGroups");
-        return peopleGroupRepository.findAllWithEagerRelationships();
+        return peopleGroupRepository.findAll(pageable);
     }
 
     public Page<PeopleGroup> findAllWithEagerRelationships(Pageable pageable) {

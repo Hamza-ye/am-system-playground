@@ -50,7 +50,7 @@ public class WebConfigurer implements ServletContextInitializer, WebServerFactor
 
         // Extend add StartupListener to execute startup populators
         // TODO Enable Later
-//        servletContext.addListener(new StartupListener());
+        servletContext.addListener(new StartupListener());
     }
 
     /**

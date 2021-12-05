@@ -3,18 +3,27 @@ package org.nmcpye.activitiesmanagement;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.vividsolutions.jts.geom.Geometry;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.joda.time.DateTime;
 import org.nmcpye.activitiesmanagement.domain.Authority;
 import org.nmcpye.activitiesmanagement.domain.User;
 import org.nmcpye.activitiesmanagement.domain.enumeration.OrganisationUnitType;
+import org.nmcpye.activitiesmanagement.domain.fileresource.ExternalFileResource;
+import org.nmcpye.activitiesmanagement.domain.fileresource.FileResource;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnit;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroup;
 import org.nmcpye.activitiesmanagement.domain.organisationunit.OrganisationUnitGroupSet;
+import org.nmcpye.activitiesmanagement.domain.period.MonthlyPeriodType;
+import org.nmcpye.activitiesmanagement.domain.period.Period;
+import org.nmcpye.activitiesmanagement.domain.period.PeriodType;
 import org.nmcpye.activitiesmanagement.domain.person.PeopleGroup;
 import org.nmcpye.activitiesmanagement.domain.person.Person;
 import org.nmcpye.activitiesmanagement.domain.person.PersonAuthorityGroup;
+import org.nmcpye.activitiesmanagement.domain.sqlview.SqlView;
 import org.nmcpye.activitiesmanagement.extended.common.CodeGenerator;
+import org.nmcpye.activitiesmanagement.extended.fileresource.FileResourceDomain;
 import org.nmcpye.activitiesmanagement.extended.person.PersonServiceExt;
+import org.nmcpye.activitiesmanagement.extended.sqlview.SqlViewType;
 import org.nmcpye.activitiesmanagement.extended.user.UserServiceExt;
 import org.nmcpye.activitiesmanagement.security.AuthoritiesConstants;
 import org.slf4j.Logger;
@@ -27,6 +36,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
+import org.springframework.util.MimeTypeUtils;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -624,5 +634,116 @@ public abstract class AMConvenienceTest {
         userServiceExt.addUser( user );
         userServiceExt.addUserCredentials( credentials );
         return user;
+    }
+
+    /**
+     * @param uniqueChar A unique character to identify the object.
+     * @param content    The content of the file
+     * @return a fileResource object
+     */
+    public static FileResource createFileResource( char uniqueChar, byte[] content )
+    {
+        String filename = "filename" + uniqueChar;
+        String contentMd5 = DigestUtils.md5( content ).toString();
+        String contentType = MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE;
+
+        FileResource fileResource = new FileResource( filename, contentType, content.length, contentMd5,
+            FileResourceDomain.DATA_VALUE );
+        fileResource.setAssigned( false );
+        fileResource.setCreated( new Date() );
+        fileResource.setAutoFields();
+
+        return fileResource;
+    }
+
+    /**
+     * @param uniqueChar A unique character to identify the object.
+     * @param content    The content of the file
+     * @return an externalFileResource object
+     */
+    public static ExternalFileResource createExternalFileResource(char uniqueChar, byte[] content )
+    {
+        FileResource fileResource = createFileResource( uniqueChar, content );
+        ExternalFileResource externalFileResource = new ExternalFileResource();
+
+        externalFileResource.setFileResource( fileResource );
+        fileResource.setAssigned( true );
+        externalFileResource.setAccessToken( String.valueOf( uniqueChar ) );
+        return externalFileResource;
+    }
+
+    /**
+     * @param uniqueCharacter A unique character to identify the object.
+     * @param sql             A query statement to retreive record/data from database.
+     * @return a sqlView instance
+     */
+    public static SqlView createSqlView( char uniqueCharacter, String sql )
+    {
+        SqlView sqlView = new SqlView();
+        sqlView.setAutoFields();
+
+        sqlView.setName( "SqlView" + uniqueCharacter );
+        sqlView.setDescription( "Description" + uniqueCharacter );
+        sqlView.setSqlQuery( sql );
+        sqlView.setType( SqlViewType.VIEW );
+//        sqlView.setCacheStrategy( CacheStrategy.RESPECT_SYSTEM_SETTING );
+
+        return sqlView;
+    }
+
+    /**
+     * @param type      The PeriodType.
+     * @param startDate The start date.
+     */
+    public static Period createPeriod( PeriodType type, Date startDate )
+    {
+        Period period = new Period();
+        period.setAutoFields();
+
+        period.setPeriodType( type );
+        period.setStartDate( startDate );
+
+        return period;
+    }
+
+    /**
+     * @param type      The PeriodType.
+     * @param startDate The start date.
+     * @param endDate   The end date.
+     */
+    public static Period createPeriod( PeriodType type, Date startDate, Date endDate )
+    {
+        Period period = new Period();
+        period.setAutoFields();
+
+        period.setPeriodType( type );
+        period.setStartDate( startDate );
+        period.setEndDate( endDate );
+
+        return period;
+    }
+
+    /**
+     * @param isoPeriod the ISO period string.
+     */
+    public static Period createPeriod( String isoPeriod )
+    {
+        return PeriodType.getPeriodFromIsoString( isoPeriod );
+    }
+
+    /**
+     * @param startDate The start date.
+     * @param endDate   The end date.
+     */
+    public static Period createPeriod( Date startDate, Date endDate )
+    {
+        Period period = new Period();
+        period.setAutoFields();
+
+        period.setPeriodType( new MonthlyPeriodType() );
+        period.setStartDate( startDate );
+        period.setEndDate( endDate );
+
+        return period;
     }
 }

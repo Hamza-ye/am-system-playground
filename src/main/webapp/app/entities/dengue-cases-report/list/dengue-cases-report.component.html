@@ -3,7 +3,7 @@
     <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.home.title">Dengue Cases Reports</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.home.refreshListLabel">Refresh List</span>
       </button>
@@ -31,25 +31,63 @@
   <div class="table-responsive" id="entities" *ngIf="dengueCasesReports && dengueCasesReports.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
-        <tr>
-          <th scope="col"><span appTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.uid">Uid</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.created">Created</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.lastUpdated">Last Updated</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.rdtTested">Rdt Tested</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.rdtPositive">Rdt Positive</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.probableCases">Probable Cases</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.inpatientCases">Inpatient Cases</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.deathCases">Death Cases</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.treated">Treated</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.suspectedCases">Suspected Cases</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.comment">Comment</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.createdBy">Created By</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.lastUpdatedBy">Last Updated By</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.reportClass">Report Class</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.period">Period</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.dataSet">Data Set</span></th>
-          <th scope="col"><span appTranslate="amSystemPlaygroundApp.dengueCasesReport.organisationUnit">Organisation Unit</span></th>
+        <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" appSortBy="uid">
+            <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.uid">Uid</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="created">
+            <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.created">Created</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdated">
+            <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.lastUpdated">Last Updated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="rdtTested">
+            <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.rdtTested">Rdt Tested</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="rdtPositive">
+            <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.rdtPositive">Rdt Positive</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="probableCases">
+            <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.probableCases">Probable Cases</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="inpatientCases">
+            <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.inpatientCases">Inpatient Cases</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="deathCases">
+            <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.deathCases">Death Cases</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="treated">
+            <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.treated">Treated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="suspectedCases">
+            <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.suspectedCases">Suspected Cases</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="comment">
+            <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.comment">Comment</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="createdBy.login">
+            <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="lastUpdatedBy.login">
+            <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.lastUpdatedBy">Last Updated By</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="reportClass.name">
+            <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.reportClass">Report Class</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="period.name">
+            <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.period">Period</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="dataSet.name">
+            <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.dataSet">Data Set</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="organisationUnit.name">
+            <span appTranslate="amSystemPlaygroundApp.dengueCasesReport.organisationUnit">Organisation Unit</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -130,5 +168,23 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div *ngIf="dengueCasesReports && dengueCasesReports.length > 0">
+    <div class="row justify-content-center">
+      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
   </div>
 </div>

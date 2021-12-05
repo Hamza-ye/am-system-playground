@@ -10,6 +10,8 @@ import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
 import { IOrganisationUnit, OrganisationUnit } from '../organisation-unit.model';
 import { OrganisationUnitService } from '../service/organisation-unit.service';
+import { IContentPage } from 'app/entities/content-page/content-page.model';
+import { ContentPageService } from 'app/entities/content-page/service/content-page.service';
 import { IFileResource } from 'app/entities/file-resource/file-resource.model';
 import { FileResourceService } from 'app/entities/file-resource/service/file-resource.service';
 import { IUser } from 'app/entities/user/user.model';
@@ -26,6 +28,7 @@ import { ChvService } from 'app/entities/chv/service/chv.service';
 export class OrganisationUnitUpdateComponent implements OnInit {
   isSaving = false;
 
+  contentPagesCollection: IContentPage[] = [];
   organisationUnitsSharedCollection: IOrganisationUnit[] = [];
   fileResourcesSharedCollection: IFileResource[] = [];
   usersSharedCollection: IUser[] = [];
@@ -51,6 +54,7 @@ export class OrganisationUnitUpdateComponent implements OnInit {
     email: [],
     phoneNumber: [],
     organisationUnitType: [null, [Validators.required]],
+    contentPage: [],
     parent: [],
     hfHomeSubVillage: [],
     coveredByHf: [],
@@ -63,6 +67,7 @@ export class OrganisationUnitUpdateComponent implements OnInit {
 
   constructor(
     protected organisationUnitService: OrganisationUnitService,
+    protected contentPageService: ContentPageService,
     protected fileResourceService: FileResourceService,
     protected userService: UserService,
     protected malariaUnitService: MalariaUnitService,
@@ -97,6 +102,10 @@ export class OrganisationUnitUpdateComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.organisationUnitService.create(organisationUnit));
     }
+  }
+
+  trackContentPageById(index: number, item: IContentPage): number {
+    return item.id!;
   }
 
   trackOrganisationUnitById(index: number, item: IOrganisationUnit): number {
@@ -158,6 +167,7 @@ export class OrganisationUnitUpdateComponent implements OnInit {
       email: organisationUnit.email,
       phoneNumber: organisationUnit.phoneNumber,
       organisationUnitType: organisationUnit.organisationUnitType,
+      contentPage: organisationUnit.contentPage,
       parent: organisationUnit.parent,
       hfHomeSubVillage: organisationUnit.hfHomeSubVillage,
       coveredByHf: organisationUnit.coveredByHf,
@@ -168,6 +178,10 @@ export class OrganisationUnitUpdateComponent implements OnInit {
       assignedChv: organisationUnit.assignedChv,
     });
 
+    this.contentPagesCollection = this.contentPageService.addContentPageToCollectionIfMissing(
+      this.contentPagesCollection,
+      organisationUnit.contentPage
+    );
     this.organisationUnitsSharedCollection = this.organisationUnitService.addOrganisationUnitToCollectionIfMissing(
       this.organisationUnitsSharedCollection,
       organisationUnit.parent,
@@ -191,6 +205,16 @@ export class OrganisationUnitUpdateComponent implements OnInit {
   }
 
   protected loadRelationshipsOptions(): void {
+    this.contentPageService
+      .query({ filter: 'organisationunit-is-null' })
+      .pipe(map((res: HttpResponse<IContentPage[]>) => res.body ?? []))
+      .pipe(
+        map((contentPages: IContentPage[]) =>
+          this.contentPageService.addContentPageToCollectionIfMissing(contentPages, this.editForm.get('contentPage')!.value)
+        )
+      )
+      .subscribe((contentPages: IContentPage[]) => (this.contentPagesCollection = contentPages));
+
     this.organisationUnitService
       .query()
       .pipe(map((res: HttpResponse<IOrganisationUnit[]>) => res.body ?? []))
@@ -270,6 +294,7 @@ export class OrganisationUnitUpdateComponent implements OnInit {
       email: this.editForm.get(['email'])!.value,
       phoneNumber: this.editForm.get(['phoneNumber'])!.value,
       organisationUnitType: this.editForm.get(['organisationUnitType'])!.value,
+      contentPage: this.editForm.get(['contentPage'])!.value,
       parent: this.editForm.get(['parent'])!.value,
       hfHomeSubVillage: this.editForm.get(['hfHomeSubVillage'])!.value,
       coveredByHf: this.editForm.get(['coveredByHf'])!.value,

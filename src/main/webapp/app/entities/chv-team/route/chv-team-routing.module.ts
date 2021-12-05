@@ -11,6 +11,9 @@ const chvTeamRoute: Routes = [
   {
     path: '',
     component: ChvTeamComponent,
+    data: {
+      defaultSort: 'id,asc',
+    },
     canActivate: [UserRouteAccessService],
   },
   {

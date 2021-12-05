@@ -100,6 +100,23 @@
         </div>
 
         <div class="form-group">
+          <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chv.contentPage" for="field_contentPage"
+            >Content Page</label
+          >
+          <select class="form-control" id="field_contentPage" data-cy="contentPage" name="contentPage" formControlName="contentPage">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                contentPageOption.id === editForm.get('contentPage')!.value?.id ? editForm.get('contentPage')!.value : contentPageOption
+              "
+              *ngFor="let contentPageOption of contentPagesCollection; trackBy: trackContentPageById"
+            >
+              {{ contentPageOption.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
           <label class="form-control-label" appTranslate="amSystemPlaygroundApp.chv.district" for="field_district">District</label>
           <select class="form-control" id="field_district" data-cy="district" name="district" formControlName="district">
             <option *ngIf="!editForm.get('district')!.value" [ngValue]="null" selected></option>

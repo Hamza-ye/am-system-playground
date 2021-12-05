@@ -1,4 +1,5 @@
 import * as dayjs from 'dayjs';
+import { IContentPage } from 'app/entities/content-page/content-page.model';
 import { IMalariaCasesReport } from 'app/entities/malaria-cases-report/malaria-cases-report.model';
 import { IDengueCasesReport } from 'app/entities/dengue-cases-report/dengue-cases-report.model';
 import { IFileResource } from 'app/entities/file-resource/file-resource.model';
@@ -30,6 +31,7 @@ export interface IOrganisationUnit {
   email?: string | null;
   phoneNumber?: string | null;
   organisationUnitType?: OrganisationUnitType;
+  contentPage?: IContentPage | null;
   malariaReports?: IMalariaCasesReport[] | null;
   dengueReports?: IDengueCasesReport[] | null;
   parent?: IOrganisationUnit | null;
@@ -68,6 +70,7 @@ export class OrganisationUnit implements IOrganisationUnit {
     public email?: string | null,
     public phoneNumber?: string | null,
     public organisationUnitType?: OrganisationUnitType,
+    public contentPage?: IContentPage | null,
     public malariaReports?: IMalariaCasesReport[] | null,
     public dengueReports?: IDengueCasesReport[] | null,
     public parent?: IOrganisationUnit | null,

@@ -35,6 +35,7 @@
       "email": "Email",
       "phoneNumber": "Phone Number",
       "organisationUnitType": "Organisation Unit Type",
+      "contentPage": "Content Page",
       "malariaReport": "Malaria Report",
       "dengueReport": "Dengue Report",
       "parent": "Parent",
