@@ -2,10 +2,12 @@ package org.nmcpye.activitiesmanagement.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.nmcpye.activitiesmanagement.extended.common.BaseIdentifiableObject;
+import org.nmcpye.activitiesmanagement.extended.common.DxfNamespaces;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -22,6 +24,7 @@ import java.util.Set;
 @Entity
 @Table(name = "related_link")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonRootName(value = "relatedLink", namespace = DxfNamespaces.DXF_2_0)
 public class RelatedLink extends BaseIdentifiableObject {
 
     @Id
