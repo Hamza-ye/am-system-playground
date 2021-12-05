@@ -14,6 +14,7 @@ import org.nmcpye.activitiesmanagement.extended.schemamodule.RelativePropertyCon
 import org.nmcpye.activitiesmanagement.extended.schemamodule.Schema;
 import org.nmcpye.activitiesmanagement.extended.serviceaclmodule.security.acl.AclService;
 import org.nmcpye.activitiesmanagement.extended.servicecoremodule.query.JpaQueryUtils;
+import org.nmcpye.activitiesmanagement.extended.translation.Translation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -235,26 +236,26 @@ final class GistBuilder {
 
     private Object translate( Object value, String property, Object translations )
     {
-//        @SuppressWarnings( "unchecked" )
-//        Set<Translation> list = (Set<Translation>) translations;
-//        if ( list == null || list.isEmpty() )
-//        {
-//            return value;
-//        }
-//        String locale = query.getTranslationLocale().toString();
-//        for ( Translation t : list )
-//        {
-//            if ( t.getLocale().equalsIgnoreCase( locale ) && t.getProperty().equalsIgnoreCase( property )
-//                && !t.getValue().isEmpty() )
-//                return t.getValue();
-//        }
-//        String lang = query.getTranslationLocale().getLanguage();
-//        for ( Translation t : list )
-//        {
-//            if ( t.getLocale().startsWith( lang ) && t.getProperty().equalsIgnoreCase( property )
-//                && !t.getValue().isEmpty() )
-//                return t.getValue();
-//        }
+        @SuppressWarnings( "unchecked" )
+        Set<Translation> list = (Set<Translation>) translations;
+        if ( list == null || list.isEmpty() )
+        {
+            return value;
+        }
+        String locale = query.getTranslationLocale().toString();
+        for ( Translation t : list )
+        {
+            if ( t.getLocale().equalsIgnoreCase( locale ) && t.getProperty().equalsIgnoreCase( property )
+                && !t.getValue().isEmpty() )
+                return t.getValue();
+        }
+        String lang = query.getTranslationLocale().getLanguage();
+        for ( Translation t : list )
+        {
+            if ( t.getLocale().startsWith( lang ) && t.getProperty().equalsIgnoreCase( property )
+                && !t.getValue().isEmpty() )
+                return t.getValue();
+        }
         return value;
     }
 
